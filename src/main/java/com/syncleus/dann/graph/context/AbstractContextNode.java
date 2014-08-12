@@ -21,6 +21,7 @@ package com.syncleus.dann.graph.context;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+
 import com.syncleus.dann.graph.Edge;
 import com.syncleus.dann.graph.Graph;
 
@@ -40,7 +41,7 @@ public abstract class AbstractContextNode<N, E extends Edge<N>, G extends Graph<
 		if(super.joiningGraph(graph))
 		{
 			//notify all context edges that this node has joined a graph
-			for(ContextEdge<N, E, G> contextEdge : contextEdges)
+			for(final ContextEdge<N, E, G> contextEdge : contextEdges)
 				contextEdge.nodeJoiningGraph(graph, (N) this);
 			return true;
 		}
@@ -53,7 +54,7 @@ public abstract class AbstractContextNode<N, E extends Edge<N>, G extends Graph<
 		if( super.leavingGraph(graph) )
 		{
 			//notify all context edges that this node is leaving a graph
-			for(ContextEdge<N, E, G> contextEdge : contextEdges)
+			for(final ContextEdge<N, E, G> contextEdge : contextEdges)
 				contextEdge.nodeLeavingGraph(graph, (N) this);
 			return true;
 		}

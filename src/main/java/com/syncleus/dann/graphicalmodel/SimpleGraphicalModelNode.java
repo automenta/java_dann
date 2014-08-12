@@ -18,7 +18,16 @@
  ******************************************************************************/
 package com.syncleus.dann.graphicalmodel;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
+
 import com.syncleus.dann.graph.BidirectedEdge;
 import com.syncleus.dann.graph.context.AbstractContextNode;
 import com.syncleus.dann.graphicalmodel.xml.GraphicalModelNodeXml;
@@ -108,7 +117,7 @@ public class SimpleGraphicalModelNode<S> extends AbstractContextNode<GraphicalMo
 	}
 
 	@Override
-	public double stateProbability(Set<? extends GraphicalModelNode> ignoredInfluences)
+	public double stateProbability(final Set<? extends GraphicalModelNode> ignoredInfluences)
 	{
 		final Set<GraphicalModelNode> influences = new HashSet<GraphicalModelNode>(this.getInfluencingNodes());
 		influences.removeAll(ignoredInfluences);
@@ -120,7 +129,7 @@ public class SimpleGraphicalModelNode<S> extends AbstractContextNode<GraphicalMo
 		for(final Map.Entry<Map<GraphicalModelNode, Object>, StateEvidence<S>> evidenceEntry : this.evidence.entrySet())
 		{
 			final Map<GraphicalModelNode, Object> influencingEvidence = evidenceEntry.getKey();
-			for(GraphicalModelNode influence : influences)
+			for(final GraphicalModelNode influence : influences)
 			{
 				final Object influencingEvidenceState = influencingEvidence.get(influence);
 				if( (influencingEvidenceState == null)||(!influencingEvidenceState.equals(influence.getState())) )
@@ -153,9 +162,9 @@ public class SimpleGraphicalModelNode<S> extends AbstractContextNode<GraphicalMo
 		for(final BidirectedEdge<GraphicalModelNode<S>> inEdge : inEdges)
 		{
 			//if it is traversable to this node it is an influence
-			List<GraphicalModelNode<S>> otherNodes = new ArrayList<GraphicalModelNode<S>>(inEdge.getNodes());
+			final List<GraphicalModelNode<S>> otherNodes = new ArrayList<GraphicalModelNode<S>>(inEdge.getNodes());
 			otherNodes.remove(this);
-			GraphicalModelNode<S> otherNode = otherNodes.get(0);
+			final GraphicalModelNode<S> otherNode = otherNodes.get(0);
 			if( inEdge.isTraversable(otherNode) )
 				inStates.put(otherNode, otherNode.getState());
 		}
@@ -174,9 +183,9 @@ public class SimpleGraphicalModelNode<S> extends AbstractContextNode<GraphicalMo
 		for(final BidirectedEdge<GraphicalModelNode<S>> inEdge : inEdges)
 		{
 			//if it is traversable to this node it is an influence
-			List<GraphicalModelNode<S>> otherNodes = new ArrayList<GraphicalModelNode<S>>(inEdge.getNodes());
+			final List<GraphicalModelNode<S>> otherNodes = new ArrayList<GraphicalModelNode<S>>(inEdge.getNodes());
 			otherNodes.remove(this);
-			GraphicalModelNode<S> otherNode = otherNodes.get(0);
+			final GraphicalModelNode<S> otherNode = otherNodes.get(0);
 			if( inEdge.isTraversable(otherNode) )
 				inNodes.add(otherNode);
 		}
@@ -210,7 +219,7 @@ public class SimpleGraphicalModelNode<S> extends AbstractContextNode<GraphicalMo
 
 		xml.setStateInstances(new SimpleGraphicalModelNodeElementXml.StateInstances());
 		final Set<S> writtenStates = new HashSet<S>();
-		for (S learnedState : this.learnedStates)
+		for (final S learnedState : this.learnedStates)
 		{
 			if (writtenStates.add(learnedState))
 			{
@@ -269,7 +278,7 @@ public class SimpleGraphicalModelNode<S> extends AbstractContextNode<GraphicalMo
 		{
 			jaxbObject.setLearnedStates(new SimpleGraphicalModelNodeXml.LearnedStates());
 		}
-		for (S learnedState : learnedStates)
+		for (final S learnedState : learnedStates)
 		{
 			final NameXml stateXml = new NameXml();
 			stateXml.setName(namer.getNameOrCreate(learnedState));

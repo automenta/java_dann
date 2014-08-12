@@ -18,16 +18,19 @@
  ******************************************************************************/
 package com.syncleus.dann.genetics.wavelets;
 
-import com.syncleus.dann.UnexpectedDannError;
-import com.syncleus.dann.math.wave.WaveMultidimensionalFunction;
-import com.syncleus.dann.math.wave.wavelet.CombinedWaveletFunction;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
-import org.apache.log4j.Logger;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import com.syncleus.dann.UnexpectedDannError;
+import com.syncleus.dann.math.wave.WaveMultidimensionalFunction;
+import com.syncleus.dann.math.wave.wavelet.CombinedWaveletFunction;
 
 public class ExpressionFunction implements Cloneable
 {
@@ -35,7 +38,7 @@ public class ExpressionFunction implements Cloneable
 	private Set<ReceptorKey> receptors;
 	private List<WaveMultidimensionalFunction> waves;
 	private CombinedWaveletFunction wavelet;
-	private static final Logger LOGGER = Logger.getLogger(ExpressionFunction.class);
+	private static final Logger LOGGER = LogManager.getLogger(ExpressionFunction.class);
 	private static final int PERCENT_TO_INT = 100;
 	private static final int PHASE_ADJUSTMENT = 10;
 
@@ -151,7 +154,7 @@ public class ExpressionFunction implements Cloneable
 			copy.wavelet = this.wavelet.clone();
 			return copy;
 		}
-		catch(CloneNotSupportedException caught)
+		catch(final CloneNotSupportedException caught)
 		{
 			LOGGER.error("CloneNotSupportedException caught but not expected!", caught);
 			throw new UnexpectedDannError("CloneNotSupportedException caught but not expected", caught);

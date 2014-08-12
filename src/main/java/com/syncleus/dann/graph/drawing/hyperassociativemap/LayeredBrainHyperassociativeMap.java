@@ -22,6 +22,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ExecutorService;
+
 import com.syncleus.dann.neural.Synapse;
 import com.syncleus.dann.neural.backprop.BackpropNeuron;
 import com.syncleus.dann.neural.backprop.BackpropStaticNeuron;

@@ -19,6 +19,7 @@
 package com.syncleus.dann.graph.cycle;
 
 import java.util.Set;
+
 import com.syncleus.dann.graph.Cycle;
 import com.syncleus.dann.graph.Edge;
 import com.syncleus.dann.graph.Graph;

@@ -26,6 +26,10 @@ import java.util.Set;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.syncleus.dann.UnexpectedDannError;
 import com.syncleus.dann.UnexpectedInterruptedException;
 import com.syncleus.dann.neural.AbstractLocalBrain;
@@ -34,14 +38,13 @@ import com.syncleus.dann.neural.Synapse;
 import com.syncleus.dann.neural.backprop.BackpropNeuron;
 import com.syncleus.dann.neural.backprop.InputBackpropNeuron;
 import com.syncleus.dann.neural.backprop.OutputBackpropNeuron;
-import org.apache.log4j.Logger;
 
 public abstract class AbstractFeedforwardBrain<IN extends InputBackpropNeuron, ON extends OutputBackpropNeuron, N extends BackpropNeuron, S extends Synapse<N>> extends AbstractLocalBrain<IN, ON, N, S> implements FeedforwardBackpropBrain<IN, ON, N, S>
 {
 	private boolean initialized = false;
 	private final List<NeuronGroup<N>> neuronLayers = new ArrayList<NeuronGroup<N>>();
 	private int layerCount;
-	private static final Logger LOGGER = Logger.getLogger(AbstractFeedforwardBrain.class);
+	private static final Logger LOGGER = LogManager.getLogger(AbstractFeedforwardBrain.class);
 
 	private static class Propagate implements Runnable
 	{
@@ -185,12 +188,12 @@ public abstract class AbstractFeedforwardBrain<IN extends InputBackpropNeuron, O
 					for(final java.util.concurrent.Future future : futures)
 						future.get();
 				}
-				catch(InterruptedException caught)
+				catch(final InterruptedException caught)
 				{
 					LOGGER.warn("Propagate was unexpectidy interupted", caught);
 					throw new com.syncleus.dann.UnexpectedInterruptedException("Unexpected interuption. Get should block indefinately", caught);
 				}
-				catch(java.util.concurrent.ExecutionException caught)
+				catch(final java.util.concurrent.ExecutionException caught)
 				{
 					LOGGER.error("Propagate had an unexcepted problem executing.", caught);
 					throw new com.syncleus.dann.UnexpectedDannError("Unexpected execution exception. Get should block indefinately", caught);
@@ -229,12 +232,12 @@ public abstract class AbstractFeedforwardBrain<IN extends InputBackpropNeuron, O
 					for(final Future future : futures)
 						future.get();
 				}
-				catch(InterruptedException caught)
+				catch(final InterruptedException caught)
 				{
 					LOGGER.warn("BackPropagate was unexpectidy interupted", caught);
 					throw new UnexpectedInterruptedException("Unexpected interuption. Get should block indefinately", caught);
 				}
-				catch(ExecutionException caught)
+				catch(final ExecutionException caught)
 				{
 					LOGGER.error("BackPropagate had an unexcepted problem executing.", caught);
 					throw new UnexpectedDannError("Unexpected execution exception. Get should block indefinately", caught);

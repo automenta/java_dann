@@ -18,7 +18,8 @@
  ******************************************************************************/
 package com.syncleus.dann.math.counting;
 
-import org.junit.*;
+import org.junit.Assert;
+import org.junit.Test;
 
 public class TestJohnsonTrotterPermutationCounter
 {

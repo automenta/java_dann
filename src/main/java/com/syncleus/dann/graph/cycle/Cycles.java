@@ -41,7 +41,7 @@ public final class Cycles
 			{
 				return ((CycleOptimizedGraph)graph).getCycleCount();
 			}
-			catch(UnsupportedOperationException caught)
+			catch(final UnsupportedOperationException caught)
 			{
 				//if its not supported lets handle it as if its not optimized
 			}
@@ -58,7 +58,7 @@ public final class Cycles
 			{
 				return ((CycleOptimizedGraph)graph).isPancyclic();
 			}
-			catch(UnsupportedOperationException caught)
+			catch(final UnsupportedOperationException caught)
 			{
 				//if its not supported lets handle it as if its not optimized
 			}
@@ -75,7 +75,7 @@ public final class Cycles
 			{
 				return ((CycleOptimizedGraph)graph).isUnicyclic();
 			}
-			catch(UnsupportedOperationException caught)
+			catch(final UnsupportedOperationException caught)
 			{
 				//if its not supported lets handle it as if its not optimized
 			}
@@ -92,7 +92,7 @@ public final class Cycles
 			{
 				return ((CycleOptimizedGraph)graph).isAcyclic();
 			}
-			catch(UnsupportedOperationException caught)
+			catch(final UnsupportedOperationException caught)
 			{
 				//if its not supported lets handle it as if its not optimized
 			}
@@ -109,7 +109,7 @@ public final class Cycles
 			{
 				return ((CycleOptimizedGraph)graph).getGirth();
 			}
-			catch(UnsupportedOperationException caught)
+			catch(final UnsupportedOperationException caught)
 			{
 				//if its not supported lets handle it as if its not optimized
 			}
@@ -126,7 +126,7 @@ public final class Cycles
 			{
 				return ((CycleOptimizedGraph)graph).getCircumference();
 			}
-			catch(UnsupportedOperationException caught)
+			catch(final UnsupportedOperationException caught)
 			{
 				//if its not supported lets handle it as if its not optimized
 			}

@@ -24,11 +24,13 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
 import com.syncleus.dann.graph.Edge;
 import com.syncleus.dann.graph.Graph;
 
 public class ColoredDepthFirstSearchDetector implements CycleDetector
 {
+	@Override
 	public <N, E extends Edge<N>> boolean hasCycle(final Graph<N, E> graph)
 	{
 		//A map of the current Node colors. Key is the node, value is null for

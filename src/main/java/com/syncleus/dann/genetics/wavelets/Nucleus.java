@@ -23,8 +23,11 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.syncleus.dann.UnexpectedDannError;
-import org.apache.log4j.Logger;
 
 /**
  * A Nucleus is a collection of Chromosomes with a known mutability.
@@ -33,7 +36,7 @@ import org.apache.log4j.Logger;
 public class Nucleus implements Cloneable
 {
 	private List<Chromosome> chromosomes;
-	private static final Logger LOGGER = Logger.getLogger(Nucleus.class);
+	private static final Logger LOGGER = LogManager.getLogger(Nucleus.class);
 	private static final double MUTABILITY_ADJUSTMENT = 10.0;
 
 	/**
@@ -109,7 +112,7 @@ public class Nucleus implements Cloneable
 				copy.chromosomes.add(chromosome.clone());
 			return copy;
 		}
-		catch(CloneNotSupportedException caught)
+		catch(final CloneNotSupportedException caught)
 		{
 			LOGGER.error("CloneNotSupportedException caught but not expected!", caught);
 			throw new UnexpectedDannError("CloneNotSupportedException caught but not expected", caught);

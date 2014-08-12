@@ -148,6 +148,7 @@ public class WaveMultidimensionalFunction extends AbstractFunction
 		return this.getParameter(this.getParameterNameIndex("form"));
 	}
 
+	@Override
 	public double calculate()
 	{
 		if( this.constantMode )
@@ -196,6 +197,7 @@ public class WaveMultidimensionalFunction extends AbstractFunction
 		return this.wave.toString(equation, centerName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return this.toString("center");

@@ -18,13 +18,18 @@
  ******************************************************************************/
 package com.syncleus.dann.math.counting;
 
-import java.util.*;
-import org.apache.log4j.Logger;
-import org.junit.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.junit.Assert;
+import org.junit.Test;
 
 public class TestCounters
 {
-	private static final Logger LOGGER = Logger.getLogger(TestCounters.class);
+	private static final Logger LOGGER = LogManager.getLogger(TestCounters.class);
 	private static final String SUPER_SET = "1234";
 	private static final int COMBINATION_COUNT = 15;
 

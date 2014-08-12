@@ -20,6 +20,7 @@ package com.syncleus.dann.neural;
 
 import java.util.List;
 import java.util.Random;
+
 import com.syncleus.dann.graph.AbstractDirectedEdge;
 
 public abstract class AbstractSynapse<N> extends AbstractDirectedEdge<N> implements Synapse<N>

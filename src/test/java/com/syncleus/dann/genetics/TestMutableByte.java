@@ -18,7 +18,8 @@
  ******************************************************************************/
 package com.syncleus.dann.genetics;
 
-import org.junit.*;
+import org.junit.Assert;
+import org.junit.Test;
 
 public class TestMutableByte
 {
@@ -26,11 +27,11 @@ public class TestMutableByte
 	public void testConstructors()
 	{
 		MutableByte test = new MutableByte((byte) 123);
-		Assert.assertTrue("value constructor failed", test.getNumber() == (int) 123);
+		Assert.assertTrue("value constructor failed", test.getNumber() == 123);
 		test = new MutableByte("57");
-		Assert.assertTrue("string value constructor failed", test.getNumber() == (int) 57);
+		Assert.assertTrue("string value constructor failed", test.getNumber() == 57);
 		test = new MutableByte((byte) 83);
-		Assert.assertTrue("Number value constructor failed", test.getNumber() == (int) 83);
+		Assert.assertTrue("Number value constructor failed", test.getNumber() == 83);
 	}
 
 	@Test

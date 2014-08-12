@@ -29,19 +29,19 @@ public final class Averages
 		ComplexNumber rootSum = ComplexNumber.ZERO;
 		for(final ComplexNumber value : values)
 			rootSum = rootSum.add(value.multiply(value));
-		return rootSum.divide((double) values.length);
+		return rootSum.divide(values.length);
 	}
 
 	public static ComplexNumber mean(final ComplexNumber... values)
 	{
 		final ComplexNumber complexSum = ComplexNumber.sum(values);
-		return complexSum.divide((double) values.length);
+		return complexSum.divide(values.length);
 	}
 
 	public static ComplexNumber geometricMean(final ComplexNumber... values)
 	{
 		final ComplexNumber complexProduct = ComplexNumber.multiply(values);
-		return complexProduct.pow(1.0 / ((double) values.length));
+		return complexProduct.pow(1.0 / (values.length));
 	}
 
 	public static double rms(final double... values)
@@ -49,7 +49,7 @@ public final class Averages
 		double rootSum = 0.0;
 		for(final double value : values)
 			rootSum += value * value;
-		return rootSum / ((double) values.length);
+		return rootSum / (values.length);
 	}
 
 	public static double mean(final double... values)
@@ -57,7 +57,7 @@ public final class Averages
 		double meanSum = 0.0;
 		for(final double value : values)
 			meanSum += value;
-		return meanSum / ((double) values.length);
+		return meanSum / (values.length);
 	}
 
 	public static double geometricMean(final double... values)
@@ -65,6 +65,6 @@ public final class Averages
 		double geometricProduct = 1.0;
 		for(final double value : values)
 			geometricProduct *= value;
-		return Math.pow(geometricProduct, (1.0 / ((double) values.length)));
+		return Math.pow(geometricProduct, (1.0 / (values.length)));
 	}
 }

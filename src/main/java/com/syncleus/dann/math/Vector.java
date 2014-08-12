@@ -274,7 +274,7 @@ public class Vector implements Serializable
 		double poweredSum = 0.0;
 		for(final double coordinate : this.coordinates)
 			poweredSum += Math.pow(Math.abs(coordinate), order);
-		return Math.pow(poweredSum, 1.0 / ((double) order));
+		return Math.pow(poweredSum, 1.0 / (order));
 	}
 
 	public double getNorm()

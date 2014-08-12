@@ -19,6 +19,7 @@
 package com.syncleus.dann.graph.drawing;
 
 import java.util.Map;
+
 import com.syncleus.dann.graph.Graph;
 import com.syncleus.dann.math.Vector;
 

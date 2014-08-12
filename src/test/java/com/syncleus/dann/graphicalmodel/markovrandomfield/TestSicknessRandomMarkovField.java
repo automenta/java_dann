@@ -18,17 +18,24 @@
  ******************************************************************************/
 package com.syncleus.dann.graphicalmodel.markovrandomfield;
 
-import javax.xml.bind.*;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.io.StringReader;
 import java.io.StringWriter;
-import java.util.*;
+import java.util.HashSet;
+import java.util.Random;
+import java.util.Set;
+
+import javax.xml.bind.JAXB;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.annotation.XmlRootElement;
+
+import org.junit.Assert;
+import org.junit.Test;
+
 import com.syncleus.dann.graph.ImmutableUndirectedEdge;
 import com.syncleus.dann.graphicalmodel.GraphicalModelNode;
 import com.syncleus.dann.graphicalmodel.SimpleGraphicalModelNode;
 import com.syncleus.dann.graphicalmodel.xml.GraphicalModelXml;
-import org.junit.Assert;
-import org.junit.Test;
 
 public class TestSicknessRandomMarkovField
 {
@@ -72,15 +79,15 @@ public class TestSicknessRandomMarkovField
 		testOverall();
 
 		//mashall it
-		JAXBContext context = JAXBContext.newInstance(GraphicalModelXml.class, TestSicknessRandomMarkovField.FeverState.class, TestSicknessRandomMarkovField.AgeState.class, TestSicknessRandomMarkovField.BooleanState.class, TestSicknessRandomMarkovField.SeasonState.class);
-		Marshaller marshal = context.createMarshaller();
+		final JAXBContext context = JAXBContext.newInstance(GraphicalModelXml.class, TestSicknessRandomMarkovField.FeverState.class, TestSicknessRandomMarkovField.AgeState.class, TestSicknessRandomMarkovField.BooleanState.class, TestSicknessRandomMarkovField.SeasonState.class);
+		final Marshaller marshal = context.createMarshaller();
 
-		StringWriter writer = new StringWriter();
+		final StringWriter writer = new StringWriter();
 		marshal.marshal(network.toXml(), writer);
 
 		//unmarshall it
-		StringReader reader = new StringReader(writer.toString());
-		GraphicalModelXml xml = JAXB.unmarshal(reader, GraphicalModelXml.class);
+		final StringReader reader = new StringReader(writer.toString());
+		final GraphicalModelXml xml = JAXB.unmarshal(reader, GraphicalModelXml.class);
 
 		Assert.assertTrue("could not unmarshal object!", xml != null);
 		Assert.assertTrue("Wrong number of edges after unmarshaling: " + xml.getEdges().getEdges().size(), xml.getEdges().getEdges().size() == 14);

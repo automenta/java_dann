@@ -18,12 +18,14 @@
  ******************************************************************************/
 package com.syncleus.dann.neural.activation;
 
-import org.apache.log4j.Logger;
-import org.junit.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.junit.Assert;
+import org.junit.Test;
 
 public class TestActivationValues
 {
-	private static final Logger LOGGER = Logger.getLogger(TestActivationValues.class);
+	private static final Logger LOGGER = LogManager.getLogger(TestActivationValues.class);
 	private static final ActivationFunction GAUSIAN_ACTIVATION_FUNCTION = new GausianActivationFunction();
 	private static final double[] GAUSIAN_ACTIVITY = {-10000.0,
 			-100.0,

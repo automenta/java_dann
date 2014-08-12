@@ -19,6 +19,7 @@
 package com.syncleus.dann.graph.topological;
 
 import java.util.Set;
+
 import com.syncleus.dann.graph.Edge;
 import com.syncleus.dann.graph.Graph;
 

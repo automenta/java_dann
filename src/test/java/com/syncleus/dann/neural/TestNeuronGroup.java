@@ -18,8 +18,10 @@
  ******************************************************************************/
 package com.syncleus.dann.neural;
 
+import org.junit.Assert;
+import org.junit.Test;
+
 import com.syncleus.dann.neural.backprop.SimpleBackpropNeuron;
-import org.junit.*;
 
 public class TestNeuronGroup
 {

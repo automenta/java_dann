@@ -18,8 +18,11 @@
  ******************************************************************************/
 package com.syncleus.dann.neural.activation;
 
-import java.util.*;
-import org.junit.*;
+import java.util.ArrayList;
+import java.util.Random;
+
+import org.junit.Assert;
+import org.junit.Test;
 
 public class TestActivationBounds
 {

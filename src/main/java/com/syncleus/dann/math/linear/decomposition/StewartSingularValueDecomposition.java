@@ -25,6 +25,7 @@ package com.syncleus.dann.math.linear.decomposition;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
 import com.syncleus.dann.math.RealNumber;
 import com.syncleus.dann.math.linear.RealMatrix;
 import com.syncleus.dann.math.linear.SimpleRealMatrix;

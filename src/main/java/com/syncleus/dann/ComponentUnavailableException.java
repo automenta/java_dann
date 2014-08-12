@@ -19,6 +19,7 @@
 package com.syncleus.dann;
 
 import java.awt.BorderLayout;
+
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;

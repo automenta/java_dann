@@ -18,8 +18,10 @@
  ******************************************************************************/
 package com.syncleus.dann.genetics;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.syncleus.dann.UnexpectedDannError;
-import org.apache.log4j.Logger;
 
 /**
  * Represents a Gene which can mutate and expresses constant activity. The
@@ -33,7 +35,7 @@ import org.apache.log4j.Logger;
 public abstract class AbstractValueGene<N extends MutableNumber> implements ValueGene<N>
 {
 	private N value;
-	private static final Logger LOGGER = Logger.getLogger(AbstractValueGene.class);
+	private static final Logger LOGGER = LogManager.getLogger(AbstractValueGene.class);
 
 	/**
 	 * Initializes a new instance of this class backed by the specified
@@ -65,6 +67,7 @@ public abstract class AbstractValueGene<N extends MutableNumber> implements Valu
 	 * @return The number backing this object.
 	 * @since 2.0
 	 */
+	@Override
 	public final N getValue()
 	{
 		return this.value;
@@ -78,6 +81,7 @@ public abstract class AbstractValueGene<N extends MutableNumber> implements Valu
 	 * @return The current expression activity.
 	 * @since 2.0
 	 */
+	@Override
 	public final double expressionActivity()
 	{
 		return this.value.doubleValue();
@@ -113,7 +117,7 @@ public abstract class AbstractValueGene<N extends MutableNumber> implements Valu
 		{
 			return (AbstractValueGene) super.clone();
 		}
-		catch(CloneNotSupportedException caught)
+		catch(final CloneNotSupportedException caught)
 		{
 			LOGGER.error("CloneNotSupportedException caught but not expected!", caught);
 			throw new UnexpectedDannError("CloneNotSupportedException caught but not expected", caught);
@@ -130,5 +134,6 @@ public abstract class AbstractValueGene<N extends MutableNumber> implements Valu
 	 * @return A copy of the current object with potential mutations.
 	 * @since 2.0
 	 */
+	@Override
 	public abstract AbstractValueGene<N> mutate(double deviation);
 }

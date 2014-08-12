@@ -68,7 +68,7 @@ public abstract class AbstractAttributePool<T> implements AttributePool<T>
 	public final boolean removeListener(final AttributeChangeListener<?> listener)
 	{
 		boolean removed = false;
-		for(Map.Entry<Attribute<?, ? extends T>, Set<AttributeChangeListener<?>>> listenerEntry : this.listeners.entrySet())
+		for(final Map.Entry<Attribute<?, ? extends T>, Set<AttributeChangeListener<?>>> listenerEntry : this.listeners.entrySet())
 		{
 			assert (listenerEntry.getValue() != null) && (listenerEntry.getValue().size() > 0);
 
@@ -116,18 +116,20 @@ public abstract class AbstractAttributePool<T> implements AttributePool<T>
 		final Set<AttributeChangeListener<?>> attributeListeners = this.listeners.get(attribute);
 
 		//lets notify everyone who is subscribed
-		for( AttributeChangeListener listener : attributeListeners )
+		for( final AttributeChangeListener listener : attributeListeners )
 		{
 			listener.attributeChanged(attribute, attributeValue);
 		}
 
 		//now lets handle global listeners
-		for( AttributeChangeListener<T> listener : this.globalListeners )
+		for( final AttributeChangeListener<T> listener : this.globalListeners )
 		{
 			listener.attributeChanged(attribute, attributeValue);
 		}
 	}
 
+	@Override
 	public abstract <I extends T> I getAttributeValue(Attribute<?, I> attribute);
+	@Override
 	public abstract <C extends T> C setAttributeValue(Attribute<?, C> attribute, C value);
 }

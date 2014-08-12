@@ -18,11 +18,22 @@
  ******************************************************************************/
 package com.syncleus.dann.graph.drawing.hyperassociativemap;
 
-import java.util.concurrent.*;
-import com.syncleus.dann.neural.*;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+
+import org.junit.Assert;
+import org.junit.Test;
+
+import com.syncleus.dann.neural.AbstractLocalBrain;
+import com.syncleus.dann.neural.InputNeuron;
+import com.syncleus.dann.neural.InvalidConnectionTypeDannException;
+import com.syncleus.dann.neural.Neuron;
+import com.syncleus.dann.neural.OutputNeuron;
+import com.syncleus.dann.neural.SimpleSynapse;
+import com.syncleus.dann.neural.Synapse;
 import com.syncleus.dann.neural.backprop.BackpropNeuron;
 import com.syncleus.dann.neural.backprop.SimpleBackpropNeuron;
-import org.junit.*;
 
 public class TestHyperassociativeMap
 {
@@ -62,7 +73,7 @@ public class TestHyperassociativeMap
 		testBrain.add(neuron1);
 		testBrain.add(neuron2);
 
-		Synapse<BackpropNeuron> synapse = new SimpleSynapse<BackpropNeuron>(neuron1, neuron2);
+		final Synapse<BackpropNeuron> synapse = new SimpleSynapse<BackpropNeuron>(neuron1, neuron2);
 		testBrain.connect(synapse, true);
 
 		final TestMap testMap;

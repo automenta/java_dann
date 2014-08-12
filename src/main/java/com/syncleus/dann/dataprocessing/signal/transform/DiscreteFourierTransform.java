@@ -22,6 +22,7 @@ import java.util.Collections;
 import java.util.NavigableMap;
 import java.util.SortedMap;
 import java.util.TreeMap;
+
 import com.syncleus.dann.math.Averages;
 import com.syncleus.dann.math.ComplexNumber;
 
@@ -42,12 +43,12 @@ public class DiscreteFourierTransform
 	 */
 	public DiscreteFourierTransform(final ComplexNumber[] ourFrequencies, final int bitrate)
 	{
-		final double frequencySize = ((double) ourFrequencies.length) / 2.0;
+		final double frequencySize = (ourFrequencies.length) / 2.0;
 		final double frequencyStep = frequencyResolution(ourFrequencies.length, bitrate);
 		final NavigableMap<Double, ComplexNumber> newFrequencies = new TreeMap<Double, ComplexNumber>();
 		for(int index = 0; index <= (int) frequencySize; index++)
 		{
-			final Double currentFrequency = ((double) index) * frequencyStep;
+			final Double currentFrequency = (index) * frequencyStep;
 			newFrequencies.put(currentFrequency, ourFrequencies[index]);
 		}
 		this.frequencies = newFrequencies;
@@ -61,7 +62,7 @@ public class DiscreteFourierTransform
 	 */
 	public static double upperFrequency(final int bitrate)
 	{
-		return ((double) bitrate) / 2.0;
+		return (bitrate) / 2.0;
 	}
 
 	/**
@@ -72,7 +73,7 @@ public class DiscreteFourierTransform
 	 */
 	public static double frequencyResolution(final int blockSize, final int bitrate)
 	{
-		return upperFrequency(bitrate) / (((double) blockSize) / 2.0);
+		return upperFrequency(bitrate) / ((blockSize) / 2.0);
 	}
 
 	/**

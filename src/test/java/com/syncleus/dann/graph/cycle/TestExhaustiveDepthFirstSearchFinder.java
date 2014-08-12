@@ -18,14 +18,26 @@
  ******************************************************************************/
 package com.syncleus.dann.graph.cycle;
 
-import java.util.*;
-import com.syncleus.dann.graph.*;
-import org.apache.log4j.Logger;
-import org.junit.*;
+import java.util.HashSet;
+import java.util.Set;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.junit.Assert;
+import org.junit.Test;
+
+import com.syncleus.dann.graph.BidirectedEdge;
+import com.syncleus.dann.graph.BidirectedGraph;
+import com.syncleus.dann.graph.DirectedEdge;
+import com.syncleus.dann.graph.Graph;
+import com.syncleus.dann.graph.ImmutableAdjacencyGraph;
+import com.syncleus.dann.graph.ImmutableDirectedAdjacencyGraph;
+import com.syncleus.dann.graph.ImmutableDirectedEdge;
+import com.syncleus.dann.graph.ImmutableUndirectedEdge;
 
 public class TestExhaustiveDepthFirstSearchFinder
 {
-	private static final Logger LOGGER = Logger.getLogger(TestExhaustiveDepthFirstSearchFinder.class);
+	private static final Logger LOGGER = LogManager.getLogger(TestExhaustiveDepthFirstSearchFinder.class);
 
 	@Test
 	public void testDirectedNoCycles()

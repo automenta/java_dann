@@ -19,8 +19,11 @@
 package com.syncleus.dann.dataprocessing.signal.transform;
 
 import java.util.Random;
+
+import org.junit.Assert;
+import org.junit.Test;
+
 import com.syncleus.dann.math.ComplexNumber;
-import org.junit.*;
 
 public class TestDiscreteFourierTransform
 {

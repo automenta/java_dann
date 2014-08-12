@@ -19,6 +19,7 @@
 package com.syncleus.dann.graphicalmodel.bayesian;
 
 import java.util.Set;
+
 import com.syncleus.dann.graph.DirectedEdge;
 import com.syncleus.dann.graph.Graph;
 import com.syncleus.dann.graphicalmodel.AbstractGraphicalModelAdjacencyGraph;

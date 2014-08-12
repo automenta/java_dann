@@ -19,6 +19,7 @@
 package com.syncleus.dann.attributes.hat;
 
 import java.util.Set;
+
 import com.syncleus.dann.graph.DirectedEdge;
 import com.syncleus.dann.graph.MutableTreeAdjacencyGraph;
 

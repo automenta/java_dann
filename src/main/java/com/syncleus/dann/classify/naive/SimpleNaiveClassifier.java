@@ -18,7 +18,10 @@
  ******************************************************************************/
 package com.syncleus.dann.classify.naive;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * A SimpleNaiveClassifier is a simple implementation of a TrainableNaiveClassifier.

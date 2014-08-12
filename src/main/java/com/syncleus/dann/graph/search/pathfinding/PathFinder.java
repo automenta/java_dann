@@ -19,6 +19,7 @@
 package com.syncleus.dann.graph.search.pathfinding;
 
 import java.util.List;
+
 import com.syncleus.dann.graph.Edge;
 
 // TODO implement optimizer approach

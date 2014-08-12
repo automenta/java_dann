@@ -18,7 +18,6 @@
  ******************************************************************************/
 package com.syncleus.dann.classify.naive;
 
-import java.util.*;
 import com.syncleus.dann.classify.Classifier;
 
 /**

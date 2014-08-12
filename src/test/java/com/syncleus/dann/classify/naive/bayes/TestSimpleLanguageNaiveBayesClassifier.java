@@ -18,7 +18,8 @@
  ******************************************************************************/
 package com.syncleus.dann.classify.naive.bayes;
 
-import org.junit.*;
+import org.junit.Assert;
+import org.junit.Test;
 
 public class TestSimpleLanguageNaiveBayesClassifier
 {

@@ -19,6 +19,7 @@
 package com.syncleus.dann.math.linear.decomposition;
 
 import java.util.List;
+
 import com.syncleus.dann.math.RealNumber;
 import com.syncleus.dann.math.linear.RealMatrix;
 

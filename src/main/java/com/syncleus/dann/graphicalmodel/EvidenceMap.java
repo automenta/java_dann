@@ -18,10 +18,17 @@
  ******************************************************************************/
 package com.syncleus.dann.graphicalmodel;
 
-import java.util.*;
 import com.syncleus.dann.graphicalmodel.xml.EvidenceMapElementXml;
 import com.syncleus.dann.graphicalmodel.xml.EvidenceMapXml;
-import com.syncleus.dann.xml.*;
+import com.syncleus.dann.xml.NamedValueXml;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+
+import com.syncleus.dann.xml.Namer;
+import com.syncleus.dann.xml.XmlSerializable;
 
 public class EvidenceMap<S> extends HashMap<Map<GraphicalModelNode, Object>, StateEvidence<S>> implements XmlSerializable<EvidenceMapXml, Object>
 {
@@ -151,13 +158,13 @@ public class EvidenceMap<S> extends HashMap<Map<GraphicalModelNode, Object>, Sta
 
 		xml.setNodeInstances(new EvidenceMapElementXml.NodeInstances());
 		xml.setStateInstances(new EvidenceMapElementXml.StateInstances());
-		for (Map.Entry<Map<GraphicalModelNode, Object>, StateEvidence<S>> entry : this.entrySet())
+		for (final Map.Entry<Map<GraphicalModelNode, Object>, StateEvidence<S>> entry : this.entrySet())
 		{
 			final Map<GraphicalModelNode, Object> influences = entry.getKey();
 			final StateEvidence<S> evidence = entry.getValue();
 
 			//add instances for all the nodes and states from the influences
-			for (Map.Entry<GraphicalModelNode, Object> influenceEntry : influences.entrySet())
+			for (final Map.Entry<GraphicalModelNode, Object> influenceEntry : influences.entrySet())
 			{
 				final GraphicalModelNode node = influenceEntry.getKey();
 				final Object state = influenceEntry.getValue();
@@ -192,7 +199,7 @@ public class EvidenceMap<S> extends HashMap<Map<GraphicalModelNode, Object>, Sta
 			}
 
 			//add instances for all states from the evidence
-			for (S state : evidence.keySet())
+			for (final S state : evidence.keySet())
 			{
 				if (seenStates.add(state))
 				{
@@ -247,13 +254,13 @@ public class EvidenceMap<S> extends HashMap<Map<GraphicalModelNode, Object>, Sta
 		{
 			jaxbObject.setInfluencedEvidences(new EvidenceMapXml.InfluencedEvidences());
 		}
-		for (Map.Entry<Map<GraphicalModelNode, Object>, StateEvidence<S>> entry : this.entrySet())
+		for (final Map.Entry<Map<GraphicalModelNode, Object>, StateEvidence<S>> entry : this.entrySet())
 		{
 			final EvidenceMapXml.InfluencedEvidences.InfluencedEvidence influencedEvidence = new EvidenceMapXml.InfluencedEvidences.InfluencedEvidence();
 
 			//add the influences to the xml
 			influencedEvidence.setInfluences(new EvidenceMapXml.InfluencedEvidences.InfluencedEvidence.Influences());
-			for (Map.Entry<GraphicalModelNode, Object> influenceEntry : entry.getKey().entrySet())
+			for (final Map.Entry<GraphicalModelNode, Object> influenceEntry : entry.getKey().entrySet())
 			{
 				final EvidenceMapXml.InfluencedEvidences.InfluencedEvidence.Influences.Influence influenceXml = new EvidenceMapXml.InfluencedEvidences.InfluencedEvidence.Influences.Influence();
 				influenceXml.setNode(namer.getNameOrCreate(influenceEntry.getKey()));

@@ -18,11 +18,12 @@
  ******************************************************************************/
 package com.syncleus.dann.dataprocessing.signal.transform;
 
-import com.syncleus.dann.UnexpectedDannError;
-import com.syncleus.dann.dataprocessing.signal.SignalOutputStream;
 import java.io.IOException;
 import java.io.PipedInputStream;
 import java.io.PipedOutputStream;
+
+import com.syncleus.dann.UnexpectedDannError;
+import com.syncleus.dann.dataprocessing.signal.SignalOutputStream;
 
 /**
  * An utility class that provides the StreamPair class, to convert from a
@@ -107,7 +108,7 @@ public final class Transforms
 
 			return new StreamPair(fftInStream, signalOutStream);
 		}
-		catch (IOException caughtException)
+		catch (final IOException caughtException)
 		{
 			throw new UnexpectedDannError(caughtException);
 		}

@@ -23,17 +23,20 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.syncleus.dann.UnexpectedDannError;
 import com.syncleus.dann.genetics.Gene;
 import com.syncleus.dann.math.AbstractFunction;
-import org.apache.log4j.Logger;
 
 public abstract class AbstractWaveletGene implements Gene
 {
 	private double currentActivity;
 	private double pendingActivity;
 	private double mutability;
-	private static final Logger LOGGER = Logger.getLogger(AbstractWaveletGene.class);
+	private static final Logger LOGGER = LogManager.getLogger(AbstractWaveletGene.class);
 	private ExpressionFunction expressionFunction;
 	private Set<SignalKeyConcentration> receivingConcentrations;
 	protected static final Random RANDOM = Mutations.getRandom();
@@ -150,7 +153,7 @@ public abstract class AbstractWaveletGene implements Gene
 
 			return copy;
 		}
-		catch(CloneNotSupportedException caught)
+		catch(final CloneNotSupportedException caught)
 		{
 			LOGGER.error("CloneNotSupportedException caught but not expected!", caught);
 			throw new UnexpectedDannError("CloneNotSupportedException caught but not expected", caught);

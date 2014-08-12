@@ -24,6 +24,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
 import com.syncleus.dann.graph.BidirectedGraph;
 import com.syncleus.dann.graph.DirectedEdge;
 
@@ -69,7 +70,7 @@ public class SimpleTopologicalRanker<N> implements TopologicalRanker<N>
 				return null;
 
 			//now lets delete all the nodes we found
-			for(N node : currentRootNodes)
+			for(final N node : currentRootNodes)
 			{
 				final Set<DirectedEdge<? extends N>> neighbors = remainingNeighborEdges.get(node);
 				for(final DirectedEdge<? extends N> neighbor : neighbors)
@@ -102,7 +103,7 @@ public class SimpleTopologicalRanker<N> implements TopologicalRanker<N>
 
 		//convert ranked nodes into sorted nodes
 		final List<N> sortedNodes = new ArrayList<N>(graph.getNodes().size());
-		for(Set<N> levelNodes : rankedNodes)
+		for(final Set<N> levelNodes : rankedNodes)
 			sortedNodes.addAll(levelNodes);
 
 		return sortedNodes;

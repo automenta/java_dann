@@ -19,6 +19,7 @@
 package com.syncleus.dann.neural.som.brain;
 
 import java.util.concurrent.ExecutorService;
+
 import com.syncleus.dann.neural.Synapse;
 import com.syncleus.dann.neural.som.SomInputNeuron;
 import com.syncleus.dann.neural.som.SomNeuron;

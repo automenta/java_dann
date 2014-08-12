@@ -19,6 +19,7 @@
 package com.syncleus.dann.neural;
 
 import java.util.Set;
+
 import com.syncleus.dann.graph.DirectedGraph;
 
 /**

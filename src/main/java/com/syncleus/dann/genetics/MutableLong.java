@@ -88,6 +88,7 @@ public class MutableLong extends MutableNumber<Long> implements Comparable<Mutab
 	 * @return A copy of the current object with potential mutations.
 	 * @since 2.0
 	 */
+	@Override
 	public MutableLong mutate(final double deviation)
 	{
 		final double doubleDistributed = MutableNumber.getDistributedRandom(deviation);
@@ -113,6 +114,7 @@ public class MutableLong extends MutableNumber<Long> implements Comparable<Mutab
 	 * @return the natural ordering of the backed number.
 	 * @since 2.0
 	 */
+	@Override
 	public int compareTo(final MutableLong compareWith)
 	{
 		return this.getNumber().compareTo(compareWith.getNumber());

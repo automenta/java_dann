@@ -19,9 +19,12 @@
 package com.syncleus.dann.genetics;
 
 import java.util.Random;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.syncleus.dann.UnexpectedDannError;
 import com.syncleus.dann.genetics.wavelets.Mutations;
-import org.apache.log4j.Logger;
 
 /**
  * An abstract class representing a gene which expresses a constant value which
@@ -35,7 +38,7 @@ public abstract class MutableNumber<N extends Number> extends Number implements 
 {
 	private static final Random RANDOM = Mutations.getRandom();
 	private N number;
-	private static final Logger LOGGER = Logger.getLogger(MutableNumber.class);
+	private static final Logger LOGGER = LogManager.getLogger(MutableNumber.class);
 
 	/**
 	 * Initializes a new MutableNumber backed by the specified backingNumber.
@@ -85,6 +88,7 @@ public abstract class MutableNumber<N extends Number> extends Number implements 
 	 * @return double representation of the value.
 	 * @since 2.0
 	 */
+	@Override
 	public final double doubleValue()
 	{
 		return this.number.doubleValue();
@@ -96,6 +100,7 @@ public abstract class MutableNumber<N extends Number> extends Number implements 
 	 * @return float representation of the value.
 	 * @since 2.0
 	 */
+	@Override
 	public final float floatValue()
 	{
 		return this.number.floatValue();
@@ -210,7 +215,7 @@ public abstract class MutableNumber<N extends Number> extends Number implements 
 			copy.number = this.number;
 			return copy;
 		}
-		catch(CloneNotSupportedException caught)
+		catch(final CloneNotSupportedException caught)
 		{
 			LOGGER.error("CloneNotSupportedException caught but not expected!", caught);
 			throw new UnexpectedDannError("CloneNotSupportedException caught but not expected", caught);

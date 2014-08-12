@@ -20,6 +20,7 @@ package com.syncleus.dann.graph.tree;
 
 import java.util.List;
 import java.util.Set;
+
 import com.syncleus.dann.graph.BidirectedEdge;
 import com.syncleus.dann.graph.BidirectedGraph;
 import com.syncleus.dann.graph.DirectedEdge;
@@ -29,7 +30,8 @@ import com.syncleus.dann.graph.Graph;
 import com.syncleus.dann.graph.ImmutableDirectedAdjacencyGraph;
 import com.syncleus.dann.graph.cycle.Cycles;
 import com.syncleus.dann.graph.topological.Topography;
-import com.syncleus.dann.graph.topological.sorter.*;
+import com.syncleus.dann.graph.topological.sorter.SimpleTopologicalRanker;
+import com.syncleus.dann.graph.topological.sorter.TopologicalRanker;
 
 public final class Trees
 {
@@ -49,7 +51,7 @@ public final class Trees
 			{
 				return ((TreeOptimizedGraph)graph).isSpanningTree(subGraph);
 			}
-			catch(UnsupportedOperationException caught)
+			catch(final UnsupportedOperationException caught)
 			{
 				// if it is not supported, lets handle it as if it was not
 				// optimized
@@ -71,7 +73,7 @@ public final class Trees
 			{
 				return ((TreeOptimizedGraph)graph).isTree();
 			}
-			catch(UnsupportedOperationException caught)
+			catch(final UnsupportedOperationException caught)
 			{
 				// if it is not supported, lets handle it as if it was not
 				// optimized
@@ -89,7 +91,7 @@ public final class Trees
 			{
 				return ((TreeOptimizedGraph)graph).isForest();
 			}
-			catch(UnsupportedOperationException caught)
+			catch(final UnsupportedOperationException caught)
 			{
 				// if it is not supported, lets handle it as if it was not
 				// optimized
@@ -107,7 +109,7 @@ public final class Trees
 			{
 				return ((TreeOptimizedBidirectedGraph)graph).isPolytree();
 			}
-			catch(UnsupportedOperationException caught)
+			catch(final UnsupportedOperationException caught)
 			{
 				// if it is not supported, lets handle it as if it was not
 				// optimized
@@ -126,7 +128,7 @@ public final class Trees
 			{
 				return ((TreeOptimizedDirectedGraph)graph).isRootedTree();
 			}
-			catch(UnsupportedOperationException caught)
+			catch(final UnsupportedOperationException caught)
 			{
 				// if it is not supported, lets handle it as if it was not
 				// optimized
@@ -154,7 +156,7 @@ public final class Trees
 			{
 				return ((TreeOptimizedDirectedGraph)graph).isRootedForest();
 			}
-			catch(UnsupportedOperationException caught)
+			catch(final UnsupportedOperationException caught)
 			{
 				// if it is not supported, lets handle it as if it was not
 				// optimized
@@ -163,7 +165,7 @@ public final class Trees
 
 		// TODO make this more efficient
 		final Set<Graph<N, E>> components = Topography.getMaximallyConnectedComponents(graph);
-		for (Graph<N, E> component : components)
+		for (final Graph<N, E> component : components)
 		{
 			final DirectedGraph<N, E> directedComponent = new ImmutableDirectedAdjacencyGraph<N, E>(component);
 			if (!Trees.isRootedTree(directedComponent))

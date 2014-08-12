@@ -18,7 +18,8 @@
  ******************************************************************************/
 package com.syncleus.dann.genetics;
 
-import org.junit.*;
+import org.junit.Assert;
+import org.junit.Test;
 
 public class TestMutableDouble
 {
@@ -29,7 +30,7 @@ public class TestMutableDouble
 		Assert.assertTrue("value constructor failed", Math.abs(test.getNumber() - 123.0) < 0.000001);
 		test = new MutableDouble("456");
 		Assert.assertTrue("string value constructor failed", Math.abs(test.getNumber() - 456.0) < 0.000001);
-		test = new MutableDouble((double) 789);
+		test = new MutableDouble(789);
 		Assert.assertTrue("Number value constructor failed", Math.abs(test.getNumber() - 789.0) < 0.000001);
 	}
 

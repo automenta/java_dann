@@ -19,11 +19,14 @@
 package com.syncleus.dann.graphicalmodel.bayesian;
 
 import java.util.HashSet;
+
+import org.junit.Assert;
+import org.junit.Test;
+
 import com.syncleus.dann.graph.DirectedEdge;
 import com.syncleus.dann.graph.ImmutableDirectedEdge;
 import com.syncleus.dann.graphicalmodel.GraphicalModelNode;
 import com.syncleus.dann.graphicalmodel.SimpleGraphicalModelNode;
-import org.junit.*;
 
 /**
  * tests SimpleBooleanNetwork (extending MarkovRandomField)

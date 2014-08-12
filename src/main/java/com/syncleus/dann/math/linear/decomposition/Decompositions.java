@@ -19,7 +19,8 @@
 package com.syncleus.dann.math.linear.decomposition;
 
 import com.syncleus.dann.math.OrderedAlgebraic;
-import com.syncleus.dann.math.linear.*;
+import com.syncleus.dann.math.linear.Matrix;
+import com.syncleus.dann.math.linear.RealMatrix;
 
 public final class Decompositions
 {

@@ -1,14 +1,20 @@
 package com.syncleus.dann;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.jar.*;
-import org.apache.log4j.Logger;
+import java.util.jar.JarEntry;
+import java.util.jar.JarInputStream;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public abstract class PackageUtility
 {
-	private static final Logger LOGGER = Logger.getLogger(PackageUtility.class);
+	private static final Logger LOGGER = LogManager.getLogger(PackageUtility.class);
 
 	public static Class[] getClasses(final String pkgName) throws ClassNotFoundException
 	{
@@ -26,7 +32,7 @@ public abstract class PackageUtility
 				throw new ClassNotFoundException("No resource for " + pkgPath);
 			directory = new File(resource.getFile());
 		}
-		catch(NullPointerException x)
+		catch(final NullPointerException x)
 		{
 			throw new ClassNotFoundException(pkgName + " (" + directory + ") does not appear to be a valid package");
 		}
@@ -52,12 +58,12 @@ public abstract class PackageUtility
 			{
 				return PackageUtility.getClasses(jarPath, pkgName);
 			}
-			catch(FileNotFoundException caughtException)
+			catch(final FileNotFoundException caughtException)
 			{
 				LOGGER.error("Can not figure out the location of the jar: " + jarPath + ' ' + pkgName, caughtException);
 				throw new DannError("Can not figure out the location of the jar: " + jarPath + ' ' + pkgName, caughtException);
 			}
-			catch(IOException caughtException)
+			catch(final IOException caughtException)
 			{
 				LOGGER.error("IO error when opening jar: " + jarPath + ' ' + pkgName, caughtException);
 				throw new DannError("IO error when opening jar: " + jarPath + ' ' + pkgName, caughtException);
@@ -86,7 +92,7 @@ public abstract class PackageUtility
 				{
 					classes.add(Class.forName(classFileName.substring(0, classFileName.length() - 6)));
 				}
-				catch(ClassNotFoundException caughtException)
+				catch(final ClassNotFoundException caughtException)
 				{
 					throw new FileNotFoundException("class not found, do you have the right jar file?");
 				}

@@ -21,6 +21,7 @@ package com.syncleus.dann.math.statistics;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
 import com.syncleus.dann.math.linear.RealMatrix;
 
 public interface MarkovChain<S>

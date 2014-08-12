@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
 import com.syncleus.dann.graph.context.ContextGraphElement;
 
 public class MutableDirectedAdjacencyGraph<N, E extends DirectedEdge<N>> extends AbstractDirectedAdjacencyGraph<N, E> implements MutableDirectedGraph<N, E>
@@ -171,7 +172,7 @@ public class MutableDirectedAdjacencyGraph<N, E extends DirectedEdge<N>> extends
 		boolean removedSomething = false;
 
 		//first lets remove all the edges
-		for(E edge : this.getEdges())
+		for(final E edge : this.getEdges())
 		{
 			//lets just make sure we arent some how getting an we dont actually own, this shouldnt be possible so its
 			//an assert. This ensures that if remove() comes back false it must be because the context didnt allow it.
@@ -184,7 +185,7 @@ public class MutableDirectedAdjacencyGraph<N, E extends DirectedEdge<N>> extends
 		}
 
 		//now lets remove all the nodes
-		for(N node : this.getNodes())
+		for(final N node : this.getNodes())
 		{
 			//lets just make sure we arent some how getting an we dont actually own, this shouldnt be possible so its
 			//an assert. This ensures that if remove() comes back false it must be because the context didnt allow it.

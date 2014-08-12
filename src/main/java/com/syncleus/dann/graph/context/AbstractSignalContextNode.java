@@ -20,6 +20,7 @@ package com.syncleus.dann.graph.context;
 
 import java.util.HashSet;
 import java.util.Set;
+
 import com.syncleus.dann.graph.Edge;
 import com.syncleus.dann.graph.Graph;
 
@@ -75,7 +76,7 @@ public abstract class AbstractSignalContextNode<N, E extends Edge<N>, S> extends
 		this.state = state;
 
 		//lets notify all edges
-		for(SignalingContextEdge edge : this.contextEdges)
+		for(final SignalingContextEdge edge : this.contextEdges)
 		{
 			if( edge.isTraversable(this) )
 				edge.nodeStateChanged(this, state);

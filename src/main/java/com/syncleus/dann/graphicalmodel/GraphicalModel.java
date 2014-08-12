@@ -19,6 +19,7 @@
 package com.syncleus.dann.graphicalmodel;
 
 import java.util.Set;
+
 import com.syncleus.dann.graph.BidirectedEdge;
 import com.syncleus.dann.graph.Graph;
 

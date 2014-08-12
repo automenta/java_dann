@@ -26,7 +26,9 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 import java.util.TreeMap;
-import org.apache.log4j.Logger;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -37,7 +39,7 @@ public class TestSimpleMarkovChain
 		RAINY, SUNNY
 	}
 
-	private static final Logger LOGGER = Logger.getLogger(TestSimpleMarkovChain.class);
+	private static final Logger LOGGER = LogManager.getLogger(TestSimpleMarkovChain.class);
 	private final static Random RANDOM = new Random(1);
 
 	@Test

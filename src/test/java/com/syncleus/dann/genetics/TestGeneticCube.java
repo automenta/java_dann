@@ -18,8 +18,12 @@
  ******************************************************************************/
 package com.syncleus.dann.genetics;
 
-import java.util.*;
-import org.junit.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import org.junit.Assert;
+import org.junit.Test;
 
 public class TestGeneticCube
 {
@@ -37,6 +41,7 @@ public class TestGeneticCube
 				throw new IllegalArgumentException("Chromosome must have atleast 3 genes");
 		}
 
+		@Override
 		public void process()
 		{
 			final List<AbstractValueGene> genes = this.getChromosome().getGenes();
@@ -58,6 +63,7 @@ public class TestGeneticCube
 			return this.error;
 		}
 
+		@Override
 		public int compareTo(final AbstractGeneticAlgorithmFitnessFunction baseCompareWith)
 		{
 			if( !(baseCompareWith instanceof VolumeAreaCubeFitness) )
@@ -80,6 +86,7 @@ public class TestGeneticCube
 			this.addAll(initialChromosomes);
 		}
 
+		@Override
 		protected AbstractGeneticAlgorithmFitnessFunction packageChromosome(final GeneticAlgorithmChromosome chromosome)
 		{
 			return new VolumeAreaCubeFitness(chromosome);

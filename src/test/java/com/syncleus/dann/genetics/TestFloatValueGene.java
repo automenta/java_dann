@@ -18,7 +18,8 @@
  ******************************************************************************/
 package com.syncleus.dann.genetics;
 
-import org.junit.*;
+import org.junit.Assert;
+import org.junit.Test;
 
 public class TestFloatValueGene
 {

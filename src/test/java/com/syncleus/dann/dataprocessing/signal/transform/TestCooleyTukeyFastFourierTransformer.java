@@ -20,8 +20,11 @@ package com.syncleus.dann.dataprocessing.signal.transform;
 
 import java.util.Map.Entry;
 import java.util.Random;
+
+import org.junit.Assert;
+import org.junit.Test;
+
 import com.syncleus.dann.math.ComplexNumber;
-import org.junit.*;
 
 public class TestCooleyTukeyFastFourierTransformer
 {
@@ -33,7 +36,7 @@ public class TestCooleyTukeyFastFourierTransformer
 		final double[] dataPoints = new double[signalSize];
 		for(int dataPointsIndex = 0; dataPointsIndex < signalSize; dataPointsIndex++)
 		{
-			dataPoints[dataPointsIndex] = Math.cos(((double) dataPointsIndex) * ((Math.PI * 2.0) * (frequency / ((double) signalSize))));
+			dataPoints[dataPointsIndex] = Math.cos((dataPointsIndex) * ((Math.PI * 2.0) * (frequency / (signalSize))));
 		}
 		return dataPoints;
 	}
@@ -93,7 +96,7 @@ public class TestCooleyTukeyFastFourierTransformer
 		for(int testIndex = 0; testIndex < 50; testIndex++)
 		{
 			//(0.025-0.075, 0.125-0.175, 0.225-0.275... 0.925-0.975
-			double frequency = ((random.nextDouble() * 0.05) + 0.025) + (((double) random.nextInt(10) / 10.0));
+			double frequency = ((random.nextDouble() * 0.05) + 0.025) + ((random.nextInt(10) / 10.0));
 			//scale from 0-1 to 0-512
 			frequency *= 512.0;
 			Assert.assertTrue("unexpected RANDOM dominant frequency range: " + frequency + '!', checkFrequencyRange(frequency));
@@ -118,7 +121,7 @@ public class TestCooleyTukeyFastFourierTransformer
 		for(int testIndex = 0; testIndex < 50; testIndex++)
 		{
 			//(0.0-0.09, 0.1-0.19, 0.2-0.29... 0.9-0.99
-			double frequency = (random.nextDouble() * 0.09) + (((double) random.nextInt(10) / 10.0));
+			double frequency = (random.nextDouble() * 0.09) + ((random.nextInt(10) / 10.0));
 			//scale to 0 - 512
 			frequency *= 512.0;
 			Assert.assertTrue("unexpected RANDOM dominant frequency: " + frequency + '!', checkSingleFrequency(frequency));

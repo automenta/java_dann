@@ -19,6 +19,7 @@
 package com.syncleus.dann.graph;
 
 import java.util.Set;
+
 import com.syncleus.dann.graph.topological.Topography;
 import com.syncleus.dann.graph.tree.TreeOptimizedGraph;
 import com.syncleus.dann.graph.tree.Trees;

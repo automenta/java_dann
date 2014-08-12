@@ -19,6 +19,7 @@
 package com.syncleus.dann.graph;
 
 import java.util.Set;
+
 import com.syncleus.dann.graph.topological.sorter.SimpleTopologicalRanker;
 import com.syncleus.dann.graph.topological.sorter.TopologicalSorter;
 import com.syncleus.dann.graph.tree.TreeOptimizedDirectedGraph;

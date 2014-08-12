@@ -18,11 +18,14 @@
  ******************************************************************************/
 package com.syncleus.dann.graphicalmodel;
 
-import java.util.HashMap;
-import java.util.Map;
 import com.syncleus.dann.graphicalmodel.xml.StateEvidenceElementXml;
 import com.syncleus.dann.graphicalmodel.xml.StateEvidenceXml;
-import com.syncleus.dann.xml.*;
+import com.syncleus.dann.xml.NamedValueXml;
+import java.util.HashMap;
+import java.util.Map;
+
+import com.syncleus.dann.xml.Namer;
+import com.syncleus.dann.xml.XmlSerializable;
 
 public class StateEvidence<S> extends HashMap<S, Integer> implements XmlSerializable<StateEvidenceXml, Object>
 {
@@ -40,7 +43,7 @@ public class StateEvidence<S> extends HashMap<S, Integer> implements XmlSerializ
 		if( stateEvidence == null )
 			return 0.0;
 		else
-			return this.get(key).doubleValue() / ((double) this.totalEvidence);
+			return this.get(key).doubleValue() / (this.totalEvidence);
 	}
 
 	@Override
@@ -76,7 +79,7 @@ public class StateEvidence<S> extends HashMap<S, Integer> implements XmlSerializ
 		final Namer<Object> namer = new Namer<Object>();
 
 		xml.setStates(new StateEvidenceXml.States());
-		for (S state : this.keySet())
+		for (final S state : this.keySet())
 		{
 			final String name = namer.getNameOrCreate(state);
 
@@ -130,7 +133,7 @@ public class StateEvidence<S> extends HashMap<S, Integer> implements XmlSerializ
 		{
 			jaxbObject.setStates(new StateEvidenceXml.States());
 		}
-		for (Map.Entry<S, Integer> entry : this.entrySet())
+		for (final Map.Entry<S, Integer> entry : this.entrySet())
 		{
 			final StateEvidenceXml.States.State stateXml = new StateEvidenceXml.States.State();
 			stateXml.setName(namer.getNameOrCreate(entry.getKey()));

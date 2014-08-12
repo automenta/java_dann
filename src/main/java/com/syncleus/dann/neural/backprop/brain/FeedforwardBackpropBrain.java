@@ -20,6 +20,7 @@ package com.syncleus.dann.neural.backprop.brain;
 
 import java.util.List;
 import java.util.Set;
+
 import com.syncleus.dann.neural.Synapse;
 import com.syncleus.dann.neural.backprop.BackpropNeuron;
 import com.syncleus.dann.neural.backprop.InputBackpropNeuron;

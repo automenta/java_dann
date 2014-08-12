@@ -18,8 +18,18 @@
  ******************************************************************************/
 package com.syncleus.dann.graphicalmodel;
 
-import java.util.*;
-import com.syncleus.dann.graph.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import com.syncleus.dann.graph.AbstractBidirectedAdjacencyGraph;
+import com.syncleus.dann.graph.BidirectedEdge;
+import com.syncleus.dann.graph.Graph;
 import com.syncleus.dann.graphicalmodel.xml.GraphicalModelElementXml;
 import com.syncleus.dann.graphicalmodel.xml.GraphicalModelXml;
 import com.syncleus.dann.xml.NamedValueXml;
@@ -62,8 +72,8 @@ public abstract class AbstractGraphicalModelAdjacencyGraph<N extends GraphicalMo
 	{
 		//first we need to preserve a map of all the starting states so we can reset the network back to its starting
 		//point when we are done
-		Map<N, Object> startingStates = new HashMap<N, Object>();
-		for(N node : this.getNodes())
+		final Map<N, Object> startingStates = new HashMap<N, Object>();
+		for(final N node : this.getNodes())
 		{
 			//we wont be changing influences nodes, so we can skip those
 			if( !influences.contains(node) )
@@ -102,7 +112,7 @@ public abstract class AbstractGraphicalModelAdjacencyGraph<N extends GraphicalMo
 		finally
 		{
 			//restore the initial states when we are done
-			for(Map.Entry<N,Object> nodeState : startingStates.entrySet())
+			for(final Map.Entry<N,Object> nodeState : startingStates.entrySet())
 				nodeState.getKey().setState(nodeState.getValue());
 		}
 	}
@@ -190,7 +200,7 @@ public abstract class AbstractGraphicalModelAdjacencyGraph<N extends GraphicalMo
 		networkXml.setNodeInstances(new GraphicalModelElementXml.NodeInstances());
 		networkXml.setStateInstances(new GraphicalModelElementXml.StateInstances());
 		final Set<Object> writtenStates = new HashSet<Object>();
-		for (N node : this.getNodes())
+		for (final N node : this.getNodes())
 		{
 			//add the node
 			final NamedValueXml nodeXml = new NamedValueXml();
@@ -199,7 +209,7 @@ public abstract class AbstractGraphicalModelAdjacencyGraph<N extends GraphicalMo
 			networkXml.getNodeInstances().getNodes().add(nodeXml);
 
 			//add all the node's learned states
-			for (Object learnedState : node.getLearnedStates())
+			for (final Object learnedState : node.getLearnedStates())
 			{
 				//only add the learnedState if it hasnt yet been added
 				if (writtenStates.add(learnedState))

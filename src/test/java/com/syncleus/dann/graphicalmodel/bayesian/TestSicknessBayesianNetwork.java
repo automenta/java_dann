@@ -20,14 +20,22 @@ package com.syncleus.dann.graphicalmodel.bayesian;
 
 import java.io.StringReader;
 import java.io.StringWriter;
-import java.util.*;
+import java.util.HashSet;
+import java.util.Random;
+import java.util.Set;
+
+import javax.xml.bind.JAXB;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.annotation.XmlRootElement;
+
+import org.junit.Assert;
+import org.junit.Test;
+
 import com.syncleus.dann.graph.ImmutableDirectedEdge;
 import com.syncleus.dann.graphicalmodel.GraphicalModelNode;
 import com.syncleus.dann.graphicalmodel.SimpleGraphicalModelNode;
 import com.syncleus.dann.graphicalmodel.bayesian.xml.BayesianNetworkXml;
-import org.junit.*;
-import javax.xml.bind.*;
-import javax.xml.bind.annotation.XmlRootElement;
 
 public class TestSicknessBayesianNetwork
 {
@@ -71,15 +79,15 @@ public class TestSicknessBayesianNetwork
 		testOverall();
 
 		//mashall it
-		JAXBContext context = JAXBContext.newInstance(BayesianNetworkXml.class, TestSicknessBayesianNetwork.FeverState.class, TestSicknessBayesianNetwork.AgeState.class, TestSicknessBayesianNetwork.BooleanState.class, TestSicknessBayesianNetwork.SeasonState.class);
-		Marshaller marshal = context.createMarshaller();
+		final JAXBContext context = JAXBContext.newInstance(BayesianNetworkXml.class, TestSicknessBayesianNetwork.FeverState.class, TestSicknessBayesianNetwork.AgeState.class, TestSicknessBayesianNetwork.BooleanState.class, TestSicknessBayesianNetwork.SeasonState.class);
+		final Marshaller marshal = context.createMarshaller();
 
-		StringWriter writer = new StringWriter();
+		final StringWriter writer = new StringWriter();
 		marshal.marshal(network.toXml(), writer);
 
 		//unmarshall it
-		StringReader reader = new StringReader(writer.toString());
-		BayesianNetworkXml xml = JAXB.unmarshal(reader, BayesianNetworkXml.class);
+		final StringReader reader = new StringReader(writer.toString());
+		final BayesianNetworkXml xml = JAXB.unmarshal(reader, BayesianNetworkXml.class);
 
 		Assert.assertTrue("could not unmarshal object!", xml != null);
 		Assert.assertTrue("Wrong number of edges after unmarshaling: " + xml.getEdges().getEdges().size(), xml.getEdges().getEdges().size() == 14);

@@ -18,18 +18,19 @@
  ******************************************************************************/
 package com.syncleus.dann.genetics;
 
-import org.junit.*;
+import org.junit.Assert;
+import org.junit.Test;
 
 public class TestIntegerValueGene
 {
 	@Test
 	public void testConstructors()
 	{
-		ValueGene test = new IntegerValueGene((int) 4765);
+		ValueGene test = new IntegerValueGene(4765);
 		Assert.assertTrue("value constructor failed", test.getValue().getNumber().intValue() == 4765);
-		test = new IntegerValueGene(new MutableInteger((int) 5700));
+		test = new IntegerValueGene(new MutableInteger(5700));
 		Assert.assertTrue("MutableInteger value constructor failed", test.getValue().getNumber().intValue() == 5700);
-		test = new IntegerValueGene((int) 8300);
+		test = new IntegerValueGene(8300);
 		Assert.assertTrue("Number value constructor failed", test.getValue().getNumber().intValue() == 8300);
 		test = new IntegerValueGene();
 		Assert.assertTrue("default constructor failed", test.getValue().getNumber().intValue() == 0);

@@ -18,21 +18,24 @@
  ******************************************************************************/
 package com.syncleus.dann.genetics.wavelets;
 
-import com.syncleus.dann.UnexpectedDannError;
-import com.syncleus.dann.genetics.MutableInteger;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 import java.util.SortedSet;
 import java.util.TreeSet;
-import org.apache.log4j.Logger;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import com.syncleus.dann.UnexpectedDannError;
+import com.syncleus.dann.genetics.MutableInteger;
 
 public abstract class AbstractKey implements Cloneable
 {
 	private Map<Integer, Boolean> points;
 	private static final Random RANDOM = Mutations.getRandom();
-	private static final Logger LOGGER = Logger.getLogger(AbstractKey.class);
+	private static final Logger LOGGER = LogManager.getLogger(AbstractKey.class);
 
 	protected AbstractKey()
 	{
@@ -136,7 +139,7 @@ public abstract class AbstractKey implements Cloneable
 			copy.points = this.points;
 			return copy;
 		}
-		catch(CloneNotSupportedException caught)
+		catch(final CloneNotSupportedException caught)
 		{
 			LOGGER.error("CloneNotSupportedException caught but not expected!", caught);
 			throw new UnexpectedDannError("CloneNotSupportedException caught but not expected", caught);

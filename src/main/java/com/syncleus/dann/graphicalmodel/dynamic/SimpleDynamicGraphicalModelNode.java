@@ -18,9 +18,16 @@
  ******************************************************************************/
 package com.syncleus.dann.graphicalmodel.dynamic;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import com.syncleus.dann.graph.BidirectedEdge;
-import com.syncleus.dann.graphicalmodel.*;
+import com.syncleus.dann.graphicalmodel.GraphicalModel;
+import com.syncleus.dann.graphicalmodel.GraphicalModelNode;
+import com.syncleus.dann.graphicalmodel.SimpleGraphicalModelNode;
 
 public class SimpleDynamicGraphicalModelNode<S> extends SimpleGraphicalModelNode<S> implements DynamicGraphicalModelNode<S>
 {
@@ -64,7 +71,7 @@ public class SimpleDynamicGraphicalModelNode<S> extends SimpleGraphicalModelNode
 		if( super.joiningGraph(graph) )
 		{
 			//let all our historical nodes also know were leaves
-			for(SimpleGraphicalModelNode<S> historicalNode : this.historicalNodes)
+			for(final SimpleGraphicalModelNode<S> historicalNode : this.historicalNodes)
 				if( !historicalNode.joiningGraph(graph))
 					throw new IllegalStateException("historical node will not attach to graph when its parent will");
 			return true;
@@ -82,7 +89,7 @@ public class SimpleDynamicGraphicalModelNode<S> extends SimpleGraphicalModelNode
 		if( super.leavingGraph(graph) )
 		{
 			//let all our historical nodes also know were leaves
-			for(SimpleGraphicalModelNode<S> historicalNode : this.historicalNodes)
+			for(final SimpleGraphicalModelNode<S> historicalNode : this.historicalNodes)
 				if( !historicalNode.leavingGraph(graph))
 					throw new IllegalStateException("historical node will not detach from graph when its parent will");
 			return true;

@@ -18,22 +18,36 @@
  ******************************************************************************/
 package com.syncleus.dann;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.Serializable;
 import java.lang.annotation.Annotation;
-import java.lang.reflect.*;
-import java.util.*;
-import org.apache.log4j.*;
-import org.junit.runner.*;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Properties;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.TreeSet;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.junit.runner.JUnitCore;
+import org.junit.runner.Request;
+import org.junit.runner.Result;
 
 public class InteractiveTests
 {
 	private static final Class<? extends Annotation> TEST_ANNOTATION = org.junit.Test.class;
-	private static final Logger LOGGER = Logger.getLogger(InteractiveTests.class);
+	private static final Logger LOGGER = LogManager.getLogger(InteractiveTests.class);
 
 	private static class ClassComparator implements Comparator<Class>, Serializable
 	{
 		private static final long serialVersionUID = -5688218293882769266L;
 
+		@Override
 		public int compare(final Class first, final Class second)
 		{
 			return first.toString().compareTo(second.toString());
@@ -56,6 +70,7 @@ public class InteractiveTests
 	{
 		private static final long serialVersionUID = 493385418023700863L;
 
+		@Override
 		public int compare(final Method first, final Method second)
 		{
 			return first.toString().compareTo(second.toString());
@@ -90,7 +105,7 @@ public class InteractiveTests
 		{
 			classes = PackageUtility.getClasses("com.syncleus.dann");
 		}
-		catch(ClassNotFoundException caughtException)
+		catch(final ClassNotFoundException caughtException)
 		{
 			throw new AssertionError("com.syncleus.dann can not be searched!");
 		}
@@ -164,7 +179,7 @@ public class InteractiveTests
 			logProperties.setProperty("log4j.appender.console.Target", "System.out");
 			logProperties.setProperty("log4j.appender.console.layout", "org.apache.log4j.PatternLayout");
 			logProperties.setProperty("log4j.appender.console.Threshold", "all");
-			PropertyConfigurator.configure(logProperties);
+			//PropertyConfigurator.configure(logProperties);
 
 			final Map<Class, Set<Method>> tests = InteractiveTests.getTestPoints();
 			final Method test = InteractiveTests.selectTest(tests);
@@ -179,9 +194,9 @@ public class InteractiveTests
 				System.out.print("Successful: ");
 			else
 				System.out.print("Failure: ");
-			System.out.println(((double) testResult.getRunTime()) / 1000.0 + " sec");
+			System.out.println((testResult.getRunTime()) / 1000.0 + " sec");
 		}
-		catch(Throwable caughtException)
+		catch(final Throwable caughtException)
 		{
 			caughtException.printStackTrace();
 			System.exit(0);

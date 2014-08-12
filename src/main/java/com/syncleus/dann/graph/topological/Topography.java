@@ -28,6 +28,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
+
 import com.syncleus.dann.graph.BidirectedEdge;
 import com.syncleus.dann.graph.BidirectedGraph;
 import com.syncleus.dann.graph.Edge;
@@ -64,7 +65,7 @@ public final class Topography
 			{
 				return ((ConnectionismOptimizedGraph)graph).getDegree(node);
 			}
-			catch(UnsupportedOperationException caught)
+			catch(final UnsupportedOperationException caught)
 			{
 				// if it is not supported, lets handle it as if it was not
 				// optimized
@@ -111,7 +112,7 @@ public final class Topography
 			{
 				return ((StrongConnectivityOptimizedGraph)graph).isStronglyConnected();
 			}
-			catch(UnsupportedOperationException caught)
+			catch(final UnsupportedOperationException caught)
 			{
 				// if it is not supported, lets handle it as if it was not
 				// optimized
@@ -140,7 +141,7 @@ public final class Topography
 			{
 				return ((WeakConnectivityOptimizedGraph)graph).isWeaklyConnected();
 			}
-			catch(UnsupportedOperationException caught)
+			catch(final UnsupportedOperationException caught)
 			{
 				// if it is not supported, lets handle it as if it was not
 				// optimized
@@ -178,7 +179,7 @@ public final class Topography
 			{
 				return ((WeakConnectivityOptimizedGraph)graph).isWeaklyConnected(leftNode, rightNode);
 			}
-			catch(UnsupportedOperationException caught)
+			catch(final UnsupportedOperationException caught)
 			{
 				// if it is not supported, lets handle it as if it was not
 				// optimized
@@ -226,7 +227,7 @@ public final class Topography
 			{
 				return ((StrongConnectivityOptimizedGraph)graph).isStronglyConnected(leftNode, rightNode);
 			}
-			catch(UnsupportedOperationException caught)
+			catch(final UnsupportedOperationException caught)
 			{
 				// if it is not supported, lets handle it as if it was not
 				// optimized
@@ -265,7 +266,7 @@ public final class Topography
 			{
 				return ((WeakConnectivityOptimizedGraph)graph).getMaximallyConnectedComponents();
 			}
-			catch(UnsupportedOperationException caught)
+			catch(final UnsupportedOperationException caught)
 			{
 				// if it is not supported, lets handle it as if it was not
 				// optimized
@@ -293,7 +294,7 @@ public final class Topography
 			{
 				return ((WeakConnectivityOptimizedGraph)graph).isMaximalSubgraph(subGraph);
 			}
-			catch(UnsupportedOperationException caught)
+			catch(final UnsupportedOperationException caught)
 			{
 				// if it is not supported, lets handle it as if it was not
 				// optimized
@@ -326,7 +327,7 @@ public final class Topography
 			{
 				return ((WeakConnectivityOptimizedGraph)graph).isCut(cutNodes, cutEdges);
 			}
-			catch(UnsupportedOperationException caught)
+			catch(final UnsupportedOperationException caught)
 			{
 				// if it is not supported, lets handle it as if it was not
 				// optimized
@@ -344,7 +345,7 @@ public final class Topography
 			{
 				return ((WeakConnectivityOptimizedGraph)graph).isCut(cutNodes, cutEdges, begin, end);
 			}
-			catch(UnsupportedOperationException caught)
+			catch(final UnsupportedOperationException caught)
 			{
 				// if it is not supported, lets handle it as if it was not
 				// optimized
@@ -362,7 +363,7 @@ public final class Topography
 			{
 				return ((WeakConnectivityOptimizedGraph)graph).isCut(cutEdges);
 			}
-			catch(UnsupportedOperationException caught)
+			catch(final UnsupportedOperationException caught)
 			{
 				// if it is not supported, lets handle it as if it was not
 				// optimized
@@ -380,7 +381,7 @@ public final class Topography
 			{
 				return ((WeakConnectivityOptimizedGraph)graph).isCut(node);
 			}
-			catch(UnsupportedOperationException caught)
+			catch(final UnsupportedOperationException caught)
 			{
 				// if it is not supported, lets handle it as if it was not
 				// optimized
@@ -398,7 +399,7 @@ public final class Topography
 			{
 				return ((WeakConnectivityOptimizedGraph)graph).isCut(edge);
 			}
-			catch(UnsupportedOperationException caught)
+			catch(final UnsupportedOperationException caught)
 			{
 				// if it is not supported, lets handle it as if it was not
 				// optimized
@@ -416,7 +417,7 @@ public final class Topography
 			{
 				return ((WeakConnectivityOptimizedGraph)graph).isCut(cutEdges, begin, end);
 			}
-			catch(UnsupportedOperationException caught)
+			catch(final UnsupportedOperationException caught)
 			{
 				// if it is not supported, lets handle it as if it was not
 				// optimized
@@ -434,7 +435,7 @@ public final class Topography
 			{
 				return ((WeakConnectivityOptimizedGraph)graph).isCut(node, begin, end);
 			}
-			catch(UnsupportedOperationException caught)
+			catch(final UnsupportedOperationException caught)
 			{
 				// if it is not supported, lets handle it as if it was not
 				// optimized
@@ -452,7 +453,7 @@ public final class Topography
 			{
 				return ((WeakConnectivityOptimizedGraph)graph).isCut(edge, begin, end);
 			}
-			catch(UnsupportedOperationException caught)
+			catch(final UnsupportedOperationException caught)
 			{
 				// if it is not supported, lets handle it as if it was not
 				// optimized
@@ -470,7 +471,7 @@ public final class Topography
 			{
 				return ((WeakConnectivityOptimizedGraph)graph).getNodeConnectivity();
 			}
-			catch(UnsupportedOperationException caught)
+			catch(final UnsupportedOperationException caught)
 			{
 				// if it is not supported, lets handle it as if it was not
 				// optimized
@@ -494,7 +495,7 @@ public final class Topography
 			{
 				return ((WeakConnectivityOptimizedGraph)graph).getEdgeConnectivity();
 			}
-			catch(UnsupportedOperationException caught)
+			catch(final UnsupportedOperationException caught)
 			{
 				// if it is not supported, lets handle it as if it was not
 				// optimized
@@ -518,7 +519,7 @@ public final class Topography
 			{
 				return ((WeakConnectivityOptimizedGraph)graph).getNodeConnectivity(begin, end);
 			}
-			catch(UnsupportedOperationException caught)
+			catch(final UnsupportedOperationException caught)
 			{
 				// if it is not supported, lets handle it as if it was not
 				// optimized
@@ -542,7 +543,7 @@ public final class Topography
 			{
 				return ((WeakConnectivityOptimizedGraph)graph).getEdgeConnectivity(begin, end);
 			}
-			catch(UnsupportedOperationException caught)
+			catch(final UnsupportedOperationException caught)
 			{
 				// if it is not supported, lets handle it as if it was not
 				// optimized
@@ -566,7 +567,7 @@ public final class Topography
 			{
 				return ((WeakConnectivityOptimizedGraph)graph).isComplete();
 			}
-			catch(UnsupportedOperationException caught)
+			catch(final UnsupportedOperationException caught)
 			{
 				// if it is not supported, lets handle it as if it was not
 				// optimized
@@ -595,7 +596,7 @@ public final class Topography
 			{
 				return ((ConnectionismOptimizedGraph)graph).getOrder();
 			}
-			catch(UnsupportedOperationException caught)
+			catch(final UnsupportedOperationException caught)
 			{
 				// if it is not supported, lets handle it as if it was not
 				// optimized
@@ -613,7 +614,7 @@ public final class Topography
 			{
 				return ((StructureOptimizedGraph)graph).isSubGraph(subgraph);
 			}
-			catch(UnsupportedOperationException caught)
+			catch(final UnsupportedOperationException caught)
 			{
 				// if it is not supported, lets handle it as if it was not
 				// optimized
@@ -640,7 +641,7 @@ public final class Topography
 			{
 				return ((ConnectionismOptimizedGraph)graph).getMinimumDegree();
 			}
-			catch(UnsupportedOperationException caught)
+			catch(final UnsupportedOperationException caught)
 			{
 				// if it is not supported, lets handle it as if it was not
 				// optimized
@@ -664,7 +665,7 @@ public final class Topography
 			{
 				return ((ConnectionismOptimizedGraph)graph).isMultigraph();
 			}
-			catch(UnsupportedOperationException caught)
+			catch(final UnsupportedOperationException caught)
 			{
 				// if it is not supported, lets handle it as if it was not
 				// optimized
@@ -693,7 +694,7 @@ public final class Topography
 			{
 				return ((StructureOptimizedGraph)graph).isIsomorphic(isomorphicGraph);
 			}
-			catch(UnsupportedOperationException caught)
+			catch(final UnsupportedOperationException caught)
 			{
 				// if it is not supported, lets handle it as if it was not
 				// optimized
@@ -711,7 +712,7 @@ public final class Topography
 			{
 				return ((StructureOptimizedGraph)graph).isHomomorphic(homomorphicGraph);
 			}
-			catch(UnsupportedOperationException caught)
+			catch(final UnsupportedOperationException caught)
 			{
 				// if it is not supported, lets handle it as if it was not
 				// optimized
@@ -762,7 +763,7 @@ public final class Topography
 			{
 				return ((ConnectionismOptimizedGraph)graph).isSimple();
 			}
-			catch(UnsupportedOperationException caught)
+			catch(final UnsupportedOperationException caught)
 			{
 				// if it is not supported, lets handle it as if it was not
 				// optimized
@@ -796,7 +797,7 @@ public final class Topography
 			{
 				return ((ConnectionismOptimizedGraph)graph).isRegular();
 			}
-			catch(UnsupportedOperationException caught)
+			catch(final UnsupportedOperationException caught)
 			{
 				// if it is not supported, lets handle it as if it was not
 				// optimized
@@ -828,7 +829,7 @@ public final class Topography
 			{
 				return ((ConnectionismOptimizedGraph)graph).getRegularDegree();
 			}
-			catch(UnsupportedOperationException caught)
+			catch(final UnsupportedOperationException caught)
 			{
 				// if it is not supported, lets handle it as if it was not
 				// optimized
@@ -866,7 +867,7 @@ public final class Topography
 			{
 				return ((ConnectionismOptimizedGraph)graph).getMultiplicity();
 			}
-			catch(UnsupportedOperationException caught)
+			catch(final UnsupportedOperationException caught)
 			{
 				// if it is not supported, lets handle it as if it was not
 				// optimized
@@ -903,7 +904,7 @@ public final class Topography
 			{
 				return ((ConnectionismOptimizedGraph)graph).getMultiplicity(edge);
 			}
-			catch(UnsupportedOperationException caught)
+			catch(final UnsupportedOperationException caught)
 			{
 				// if it is not supported, lets handle it as if it was not
 				// optimized
@@ -949,7 +950,7 @@ public final class Topography
 			{
 				return ((ConnectionismOptimizedGraph)graph).isMultiple(edge);
 			}
-			catch(UnsupportedOperationException caught)
+			catch(final UnsupportedOperationException caught)
 			{
 				// if it is not supported, lets handle it as if it was not
 				// optimized
@@ -997,7 +998,7 @@ public final class Topography
 			{
 				return ((KnotOptimizedGraph)graph).isKnot(knotedNodes);
 			}
-			catch(UnsupportedOperationException caught)
+			catch(final UnsupportedOperationException caught)
 			{
 				// if it is not supported, lets handle it as if it was not
 				// optimized
@@ -1016,7 +1017,7 @@ public final class Topography
 			{
 				return ((KnotOptimizedGraph)graph).isKnot(knotedNodes, knotedEdges);
 			}
-			catch(UnsupportedOperationException caught)
+			catch(final UnsupportedOperationException caught)
 			{
 				// if it is not supported, lets handle it as if it was not
 				// optimized
@@ -1036,7 +1037,7 @@ public final class Topography
 			{
 				return ((ConnectionismOptimizedBidirectedGraph)graph).getIndegree(node);
 			}
-			catch(UnsupportedOperationException caught)
+			catch(final UnsupportedOperationException caught)
 			{
 				// if it is not supported, lets handle it as if it was not
 				// optimized
@@ -1054,7 +1055,7 @@ public final class Topography
 			{
 				return ((ConnectionismOptimizedBidirectedGraph)graph).getOutdegree(node);
 			}
-			catch(UnsupportedOperationException caught)
+			catch(final UnsupportedOperationException caught)
 			{
 				// if it is not supported, lets handle it as if it was not
 				// optimized
@@ -1072,7 +1073,7 @@ public final class Topography
 			{
 				return ((ConnectionismOptimizedHyperGraph)graph).getRank();
 			}
-			catch(UnsupportedOperationException caught)
+			catch(final UnsupportedOperationException caught)
 			{
 				// if it is not supported, lets handle it as if it was not
 				// optimized
@@ -1091,7 +1092,7 @@ public final class Topography
 			{
 				return ((StructureOptimizedHyperGraph)graph).getPrimal();
 			}
-			catch(UnsupportedOperationException caught)
+			catch(final UnsupportedOperationException caught)
 			{
 				// if it is not supported, lets handle it as if it was not
 				// optimized
@@ -1110,7 +1111,7 @@ public final class Topography
 			{
 				return ((StructureOptimizedHyperGraph)graph).isPartial(partialGraph);
 			}
-			catch(UnsupportedOperationException caught)
+			catch(final UnsupportedOperationException caught)
 			{
 				// if it is not supported, lets handle it as if it was not
 				// optimized
@@ -1129,7 +1130,7 @@ public final class Topography
 			{
 				return ((StructureOptimizedHyperGraph)graph).isHost(hostGraph);
 			}
-			catch(UnsupportedOperationException caught)
+			catch(final UnsupportedOperationException caught)
 			{
 				// if it is not supported, lets handle it as if it was not
 				// optimized
@@ -1148,7 +1149,7 @@ public final class Topography
 			{
 				return ((StructureOptimizedHyperGraph)graph).isUniform();
 			}
-			catch(UnsupportedOperationException caught)
+			catch(final UnsupportedOperationException caught)
 			{
 				// if it is not supported, lets handle it as if it was not
 				// optimized

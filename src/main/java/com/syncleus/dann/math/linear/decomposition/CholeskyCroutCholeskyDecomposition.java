@@ -94,6 +94,7 @@ public class CholeskyCroutCholeskyDecomposition<M extends Matrix<M, F>, F extend
 	 *
 	 * @return true if A is symmetric and positive definite.
 	 */
+	@Override
 	public boolean isSpd()
 	{
 		return this.isSpd;
@@ -104,6 +105,7 @@ public class CholeskyCroutCholeskyDecomposition<M extends Matrix<M, F>, F extend
 	 *
 	 * @return L
 	 */
+	@Override
 	public M getMatrix()
 	{
 		return this.matrix;
@@ -118,6 +120,7 @@ public class CholeskyCroutCholeskyDecomposition<M extends Matrix<M, F>, F extend
 	 * @throws IllegalArgumentException SimpleRealMatrix row dimensions must agree
 	 * or SimpleRealMatrix is not symmetric positive definite.
 	 */
+	@Override
 	public M solve(final M matrixToSolve)
 	{
 		M solutionMatrix = matrixToSolve;

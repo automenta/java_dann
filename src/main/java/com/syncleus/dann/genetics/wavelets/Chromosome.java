@@ -18,15 +18,18 @@
  ******************************************************************************/
 package com.syncleus.dann.genetics.wavelets;
 
-import com.syncleus.dann.UnexpectedDannError;
-import com.syncleus.dann.genetics.MutableDouble;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
-import org.apache.log4j.Logger;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import com.syncleus.dann.UnexpectedDannError;
+import com.syncleus.dann.genetics.MutableDouble;
 
 /**
  * A Chromosome is a mutable collection of Chromatids for use in a genetic algorithm.
@@ -36,7 +39,7 @@ public class Chromosome implements Cloneable
 	private WaveletChromatid leftChromatid;
 	private WaveletChromatid rightChromatid;
 	private static final Random RANDOM = Mutations.getRandom();
-	private static final Logger LOGGER = Logger.getLogger(Chromosome.class);
+	private static final Logger LOGGER = LogManager.getLogger(Chromosome.class);
 	private double mutability;
 
 	/**
@@ -240,7 +243,7 @@ public class Chromosome implements Cloneable
 			copy.mutability = this.mutability;
 			return copy;
 		}
-		catch(CloneNotSupportedException caught)
+		catch(final CloneNotSupportedException caught)
 		{
 			final String userMessage = "CloneNotSupportedException caught but not expected!";
 			LOGGER.error(userMessage, caught);

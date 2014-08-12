@@ -26,10 +26,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.syncleus.dann.UnexpectedDannError;
 import com.syncleus.dann.genetics.Chromatid;
 import com.syncleus.dann.genetics.MutableInteger;
-import org.apache.log4j.Logger;
 
 public class WaveletChromatid implements Chromatid<AbstractWaveletGene>, Cloneable
 {
@@ -42,7 +45,7 @@ public class WaveletChromatid implements Chromatid<AbstractWaveletGene>, Cloneab
 	//contains al the external signal genes in an arbitrary order.
 	private List<ExternalSignalGene> externalSignalGenes;
 	//Logger used to log debugging information.
-	private static final Logger LOGGER = Logger.getLogger(WaveletChromatid.class);
+	private static final Logger LOGGER = LogManager.getLogger(WaveletChromatid.class);
 	//Random used for all RANDOM values.
 	private static final Random RANDOM = Mutations.getRandom();
 	//Position of the gene's centromere. This is the origin where chromatid
@@ -172,6 +175,7 @@ public class WaveletChromatid implements Chromatid<AbstractWaveletGene>, Cloneab
 		return this.centromerePosition;
 	}
 
+	@Override
 	public List<AbstractWaveletGene> getGenes()
 	{
 		return Collections.unmodifiableList(this.sequencedGenes);
@@ -192,6 +196,7 @@ public class WaveletChromatid implements Chromatid<AbstractWaveletGene>, Cloneab
 		return Collections.unmodifiableList(this.externalSignalGenes);
 	}
 
+	@Override
 	public List<AbstractWaveletGene> crossover(final int point)
 	{
 		final int index = point + this.centromerePosition;
@@ -289,7 +294,7 @@ public class WaveletChromatid implements Chromatid<AbstractWaveletGene>, Cloneab
 
 			return copy;
 		}
-		catch(CloneNotSupportedException caught)
+		catch(final CloneNotSupportedException caught)
 		{
 			LOGGER.error("CloneNotSupportedException caught but not expected!", caught);
 			throw new UnexpectedDannError("CloneNotSupportedException caught but not expected", caught);

@@ -18,20 +18,29 @@
  ******************************************************************************/
 package com.syncleus.dann.graph.drawing.hyperassociativemap;
 
-import java.util.Map.Entry;
-import java.util.concurrent.*;
-import com.syncleus.dann.*;
-import com.syncleus.dann.graph.*;
-import com.syncleus.dann.graph.drawing.GraphDrawer;
-import com.syncleus.dann.graph.topological.Topography;
-import com.syncleus.dann.math.Vector;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Random;
-import org.apache.log4j.Logger;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Future;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import com.syncleus.dann.UnexpectedDannError;
+import com.syncleus.dann.UnexpectedInterruptedException;
+import com.syncleus.dann.graph.Edge;
+import com.syncleus.dann.graph.Graph;
+import com.syncleus.dann.graph.Weighted;
+import com.syncleus.dann.graph.drawing.GraphDrawer;
+import com.syncleus.dann.graph.topological.Topography;
+import com.syncleus.dann.math.Vector;
 
 /**
  * A Hyperassociative Map is a new type of algorithm that organizes an arbitrary
@@ -61,7 +70,7 @@ public class HyperassociativeMap<G extends Graph<N, ?>, N> implements GraphDrawe
 	private final G graph;
 	private final int dimensions;
 	private final ExecutorService threadExecutor;
-	private static final Logger LOGGER = Logger.getLogger(HyperassociativeMap.class);
+	private static final Logger LOGGER = LogManager.getLogger(HyperassociativeMap.class);
 	private Map<N, Vector> coordinates = Collections.synchronizedMap(new HashMap<N, Vector>());
 	private static final Random RANDOM = new Random();
 	private final boolean useWeights;
@@ -215,7 +224,7 @@ public class HyperassociativeMap<G extends Graph<N, ?>, N> implements GraphDrawe
 			{
 				center = waitAndProcessFutures(futures);
 			}
-			catch (InterruptedException caught)
+			catch (final InterruptedException caught)
 			{
 				LOGGER.warn("waitAndProcessFutures was unexpectedly interrupted", caught);
 				throw new UnexpectedInterruptedException("Unexpected interruption. Get should block indefinitely", caught);
@@ -443,7 +452,7 @@ public class HyperassociativeMap<G extends Graph<N, ?>, N> implements GraphDrawe
 				}
 			}
 		}
-		catch (ExecutionException caught)
+		catch (final ExecutionException caught)
 		{
 			LOGGER.error("Align had an unexpected problem executing.", caught);
 			throw new UnexpectedDannError("Unexpected execution exception. Get should block indefinitely", caught);

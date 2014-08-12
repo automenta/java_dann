@@ -18,9 +18,13 @@
  ******************************************************************************/
 package com.syncleus.dann.graphicalmodel;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.Set;
+
+import org.junit.Assert;
+import org.junit.Test;
+
 import com.syncleus.dann.graphicalmodel.bayesian.MutableBayesianAdjacencyNetwork;
-import org.junit.*;
 
 public class TestEvidenceMap
 {

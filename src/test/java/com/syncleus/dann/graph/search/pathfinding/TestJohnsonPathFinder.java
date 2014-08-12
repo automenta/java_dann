@@ -19,9 +19,14 @@
 package com.syncleus.dann.graph.search.pathfinding;
 
 import java.util.List;
-import com.syncleus.dann.graph.*;
-import com.syncleus.dann.graph.search.*;
-import org.junit.*;
+
+import org.junit.Assert;
+import org.junit.Test;
+
+import com.syncleus.dann.graph.BidirectedEdge;
+import com.syncleus.dann.graph.WeightedDirectedEdge;
+import com.syncleus.dann.graph.search.GridNode;
+import com.syncleus.dann.graph.search.WeightedDirectedGrid;
 
 public class TestJohnsonPathFinder
 {

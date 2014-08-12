@@ -19,8 +19,9 @@
 package com.syncleus.dann.graphicalmodel;
 
 import com.syncleus.dann.graphicalmodel.xml.GraphicalModelNodeXml;
-import com.syncleus.dann.xml.XmlSerializable;
 import java.util.Set;
+
+import com.syncleus.dann.xml.XmlSerializable;
 
 public interface GraphicalModelNode<S> extends XmlSerializable<GraphicalModelNodeXml, Object>
 {

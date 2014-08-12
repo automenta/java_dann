@@ -87,6 +87,7 @@ public class SimpleCycle<N, E extends Edge<N>> extends SimpleWalk<N, E> implemen
 		return newNodeSteps;
 	}
 
+	@Override
 	public boolean isOddCycle()
 	{
 		return AbstractCycle.isOddCycle(this);

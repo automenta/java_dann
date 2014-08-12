@@ -25,10 +25,13 @@ import java.util.Random;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.syncleus.dann.UnexpectedDannError;
 import com.syncleus.dann.math.wave.WaveMultidimensionalFunction;
 import com.syncleus.dann.math.wave.wavelet.CombinedWaveletFunction;
-import org.apache.log4j.Logger;
 
 public class SignalProcessingWavelet implements Comparable<SignalProcessingWavelet>, Cloneable
 {
@@ -121,7 +124,7 @@ public class SignalProcessingWavelet implements Comparable<SignalProcessingWavel
 	private Set<SignalConcentration> signals = new HashSet<SignalConcentration>();
 	private List<WaveMultidimensionalFunction> waves = new ArrayList<WaveMultidimensionalFunction>();
 	private CombinedWaveletFunction wavelet;
-	private static final Logger LOGGER = Logger.getLogger(SignalProcessingWavelet.class);
+	private static final Logger LOGGER = LogManager.getLogger(SignalProcessingWavelet.class);
 
 	public SignalProcessingWavelet(final SignalConcentration initialInput, final SignalConcentration initialOutput)
 	{
@@ -208,7 +211,7 @@ public class SignalProcessingWavelet implements Comparable<SignalProcessingWavel
 			copy.wavelet = (this.wavelet == null ? null : this.wavelet.clone());
 			return copy;
 		}
-		catch(CloneNotSupportedException caught)
+		catch(final CloneNotSupportedException caught)
 		{
 			LOGGER.error("CloneNotSupportedException caught but not expected!", caught);
 			throw new UnexpectedDannError("CloneNotSupportedException caught but not expected", caught);

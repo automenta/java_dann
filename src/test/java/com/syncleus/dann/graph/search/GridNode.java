@@ -28,10 +28,11 @@ public class GridNode extends Vector implements Weighted
 
 	public GridNode(final int x, final int y, final double weight)
 	{
-		super((double) x, (double) y);
+		super(x, y);
 		this.weight = weight;
 	}
 
+	@Override
 	public double getWeight()
 	{
 		return this.weight;

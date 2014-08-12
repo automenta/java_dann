@@ -19,6 +19,7 @@
 package com.syncleus.dann.genetics.wavelets;
 
 import java.util.Random;
+
 import com.syncleus.dann.genetics.MutableDouble;
 
 public final class Mutations

@@ -19,6 +19,7 @@
 package com.syncleus.dann.graph.context;
 
 import java.util.Set;
+
 import com.syncleus.dann.graph.Graph;
 
 public interface ContextGraphElement<G extends Graph<?, ?>>

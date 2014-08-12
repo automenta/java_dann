@@ -28,6 +28,7 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 import java.util.concurrent.ExecutorService;
+
 import com.syncleus.dann.UnexpectedDannError;
 import com.syncleus.dann.graph.AbstractBidirectedAdjacencyGraph;
 import com.syncleus.dann.graph.topological.StrongConnectivityOptimizedGraph;
@@ -54,7 +55,7 @@ public abstract class AbstractLocalBrain<IN extends InputNeuron, ON extends Outp
 		{
 			if( !(keyObject instanceof Neuron) )
 				throw new UnexpectedDannError("keyObject was not a Neuron");
-			Set<S> edges = super.get((N) keyObject);
+			Set<S> edges = super.get(keyObject);
 			if( edges == null )
 			{
 				edges = new HashSet<S>();

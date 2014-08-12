@@ -18,9 +18,7 @@
  ******************************************************************************/
 package com.syncleus.dann.graph;
 
-import com.syncleus.dann.xml.Namer;
 import com.syncleus.dann.graph.xml.GraphXml;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -29,6 +27,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+
+import com.syncleus.dann.xml.Namer;
 
 public class ImmutableAdjacencyGraph<N, E extends Edge<N>> extends AbstractAdjacencyGraph<N, E>
 {

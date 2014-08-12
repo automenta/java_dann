@@ -27,6 +27,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
 import com.syncleus.dann.math.OrderedAlgebraic;
 import com.syncleus.dann.math.linear.Matrix;
 
@@ -65,7 +66,7 @@ public class HouseholderQrDecomposition<M extends Matrix<M, F>, F extends Ordere
 	{
 		// Initialize.
 		M myMatrix = matrixToDecompose;
-		List<F> myRDiagonal = new ArrayList<F>(myMatrix.getWidth());
+		final List<F> myRDiagonal = new ArrayList<F>(myMatrix.getWidth());
 		myRDiagonal.addAll(Collections.nCopies(myMatrix.getWidth(), myMatrix.getElementField().getZero()));
 
 		// Main loop.

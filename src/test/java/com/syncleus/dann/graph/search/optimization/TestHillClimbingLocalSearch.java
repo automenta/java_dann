@@ -18,8 +18,11 @@
  ******************************************************************************/
 package com.syncleus.dann.graph.search.optimization;
 
-import com.syncleus.dann.graph.search.*;
-import org.junit.*;
+import org.junit.Assert;
+import org.junit.Test;
+
+import com.syncleus.dann.graph.search.Grid;
+import com.syncleus.dann.graph.search.GridNode;
 
 public class TestHillClimbingLocalSearch
 {

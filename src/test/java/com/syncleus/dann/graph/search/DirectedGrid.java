@@ -18,8 +18,17 @@
  ******************************************************************************/
 package com.syncleus.dann.graph.search;
 
-import java.util.*;
-import com.syncleus.dann.graph.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import com.syncleus.dann.graph.AbstractBidirectedAdjacencyGraph;
+import com.syncleus.dann.graph.DirectedEdge;
+import com.syncleus.dann.graph.ImmutableDirectedEdge;
 
 public class DirectedGrid extends AbstractBidirectedAdjacencyGraph<GridNode, DirectedEdge<GridNode>>
 {
@@ -92,6 +101,7 @@ public class DirectedGrid extends AbstractBidirectedAdjacencyGraph<GridNode, Dir
 		return this.nodes[y][x];
 	}
 
+	@Override
 	public Set<GridNode> getNodes()
 	{
 		return Collections.unmodifiableSet(this.nodeSet);
@@ -103,6 +113,7 @@ public class DirectedGrid extends AbstractBidirectedAdjacencyGraph<GridNode, Dir
 		return Collections.unmodifiableSet(this.edges);
 	}
 
+	@Override
 	public Set<DirectedEdge<GridNode>> getAdjacentEdges(final GridNode node)
 	{
 		final Set<DirectedEdge<GridNode>> newEdges = new HashSet<DirectedEdge<GridNode>>(this.inNeighborEdges.get(node));
@@ -110,6 +121,7 @@ public class DirectedGrid extends AbstractBidirectedAdjacencyGraph<GridNode, Dir
 		return Collections.unmodifiableSet(newEdges);
 	}
 
+	@Override
 	public Set<DirectedEdge<GridNode>> getTraversableEdges(final GridNode node)
 	{
 		final Set<DirectedEdge<GridNode>> newEdges = new HashSet<DirectedEdge<GridNode>>(this.outNeighborEdges.get(node));
@@ -121,6 +133,7 @@ public class DirectedGrid extends AbstractBidirectedAdjacencyGraph<GridNode, Dir
 		return this.getTraversableEdges(node);
 	}
 
+	@Override
 	public Set<DirectedEdge<GridNode>> getInEdges(final GridNode node)
 	{
 		final Set<DirectedEdge<GridNode>> newEdges = new HashSet<DirectedEdge<GridNode>>(this.inNeighborEdges.get(node));
@@ -142,6 +155,7 @@ public class DirectedGrid extends AbstractBidirectedAdjacencyGraph<GridNode, Dir
 		return this.getAdjacentNodes(leftNode).contains(rightNode);
 	}
 
+	@Override
 	public List<GridNode> getAdjacentNodes(final GridNode node)
 	{
 		final ArrayList<GridNode> newNeighbors = new ArrayList<GridNode>(this.inNeighborNodes.get(node));
@@ -149,6 +163,7 @@ public class DirectedGrid extends AbstractBidirectedAdjacencyGraph<GridNode, Dir
 		return Collections.unmodifiableList(newNeighbors);
 	}
 
+	@Override
 	public List<GridNode> getTraversableNodes(final GridNode node)
 	{
 		final ArrayList<GridNode> newNeighbors = new ArrayList<GridNode>(this.outNeighborNodes.get(node));

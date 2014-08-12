@@ -175,7 +175,7 @@ public class RealNumber extends Number implements OrderedTrigonometricAlgebraic<
 	public List<RealNumber> root(final int number)
 	{
 		final List<RealNumber> roots = new ArrayList<RealNumber>();
-		final double positiveRoot = Math.pow(this.value, 1.0 / ((double) number));
+		final double positiveRoot = Math.pow(this.value, 1.0 / (number));
 		roots.add(new RealNumber(positiveRoot));
 		if( number % 2 == 0 )
 			roots.add(new RealNumber(-positiveRoot));

@@ -19,11 +19,14 @@
 package com.syncleus.dann.graphicalmodel.markovrandomfield;
 
 import java.util.HashSet;
-import com.syncleus.dann.graph.*;
-import com.syncleus.dann.graphicalmodel.GraphicalModelNode;
-import com.syncleus.dann.graphicalmodel.SimpleGraphicalModelNode;
+
 import org.junit.Assert;
 import org.junit.Test;
+
+import com.syncleus.dann.graph.ImmutableUndirectedEdge;
+import com.syncleus.dann.graph.UndirectedEdge;
+import com.syncleus.dann.graphicalmodel.GraphicalModelNode;
+import com.syncleus.dann.graphicalmodel.SimpleGraphicalModelNode;
 
 /**
  * tests SimpleBooleanNetwork (extending MarkovRandomField)

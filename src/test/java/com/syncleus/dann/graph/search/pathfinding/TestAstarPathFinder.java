@@ -19,9 +19,13 @@
 package com.syncleus.dann.graph.search.pathfinding;
 
 import java.util.List;
+
+import org.junit.Assert;
+import org.junit.Test;
+
 import com.syncleus.dann.graph.BidirectedEdge;
-import com.syncleus.dann.graph.search.*;
-import org.junit.*;
+import com.syncleus.dann.graph.search.Grid;
+import com.syncleus.dann.graph.search.GridNode;
 
 public class TestAstarPathFinder
 {
@@ -67,16 +71,19 @@ public class TestAstarPathFinder
 
 	private static class DistanceHeuristic implements HeuristicPathCost<GridNode>
 	{
+		@Override
 		public double getHeuristicPathCost(final GridNode begin, final GridNode end)
 		{
 			return begin.calculateRelativeTo(end).getDistance();
 		}
 
+		@Override
 		public boolean isOptimistic()
 		{
 			return true;
 		}
 
+		@Override
 		public boolean isConsistent()
 		{
 			return true;

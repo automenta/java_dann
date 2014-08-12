@@ -18,7 +18,9 @@
  ******************************************************************************/
 package com.syncleus.dann.classify.naive.bayes.fisher;
 
-import java.util.*;
+import java.util.Locale;
+import java.util.Set;
+
 import com.syncleus.dann.classify.naive.FeatureExtractor;
 import com.syncleus.dann.dataprocessing.language.parsing.BasicWordParser;
 import com.syncleus.dann.dataprocessing.language.parsing.WordParser;
@@ -100,6 +102,7 @@ public class SimpleLanguageFisherClassifier<C> extends SimpleFisherClassifier<St
 		 * @param item The item
 		 * @return The words from a String
 		 */
+		@Override
 		public Set<String> getFeatures(final String item)
 		{
 			return PARSER.getUniqueWords(item);

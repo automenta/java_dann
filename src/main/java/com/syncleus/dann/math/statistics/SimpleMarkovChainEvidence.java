@@ -18,7 +18,6 @@
  ******************************************************************************/
 package com.syncleus.dann.math.statistics;
 
-import java.security.KeyStore;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -29,7 +28,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import com.syncleus.dann.neural.OutputNeuron;
 
 public class SimpleMarkovChainEvidence<S> implements MarkovChainEvidence<S>
 {
@@ -119,7 +117,7 @@ public class SimpleMarkovChainEvidence<S> implements MarkovChainEvidence<S>
 	public MarkovChain<S> getMarkovChain()
 	{
 		final Map<List<S>, Map<S, Double>> transitionProbabilities = new LinkedHashMap<List<S>, Map<S, Double>>(this.evidence.size());
-		for(Map.Entry<List<S>, StateCounter<S>> countEntry : this.evidence.entrySet())
+		for(final Map.Entry<List<S>, StateCounter<S>> countEntry : this.evidence.entrySet())
 			transitionProbabilities.put(countEntry.getKey(), countEntry.getValue().probabilities());
 
 		return new SimpleMarkovChain<S>(transitionProbabilities, this.order, this.observedStates);
@@ -146,14 +144,14 @@ public class SimpleMarkovChainEvidence<S> implements MarkovChainEvidence<S>
 			Integer count = this.stateCount.get(state);
 			if(count == null)
 				count = 0;
-			return count.doubleValue() / ((double)totalEvidence);
+			return count.doubleValue() / (totalEvidence);
 		}
 
 		public Map<S, Double> probabilities()
 		{
 			final Map<S, Double> prob = new HashMap<S, Double>(this.stateCount.size());
-			for(Map.Entry<S, Integer> countEntry : this.stateCount.entrySet())
-				prob.put(countEntry.getKey(), countEntry.getValue().doubleValue() / ((double)this.totalEvidence));
+			for(final Map.Entry<S, Integer> countEntry : this.stateCount.entrySet())
+				prob.put(countEntry.getKey(), countEntry.getValue().doubleValue() / (this.totalEvidence));
 			return prob;
 		}
 	}

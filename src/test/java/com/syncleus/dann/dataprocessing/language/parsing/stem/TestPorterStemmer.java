@@ -18,7 +18,8 @@
  ******************************************************************************/
 package com.syncleus.dann.dataprocessing.language.parsing.stem;
 
-import org.junit.*;
+import org.junit.Assert;
+import org.junit.Test;
 
 public class TestPorterStemmer
 {

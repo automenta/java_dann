@@ -19,6 +19,7 @@
 package com.syncleus.dann.neural.som.brain;
 
 import java.util.concurrent.ExecutorService;
+
 import com.syncleus.dann.neural.Synapse;
 import com.syncleus.dann.neural.som.SomInputNeuron;
 import com.syncleus.dann.neural.som.SomNeuron;
@@ -57,7 +58,7 @@ public abstract class AbstractExponentialDecaySomBrain<IN extends SomInputNeuron
 
 	private double getTimeConstant()
 	{
-		return ((double) this.iterationsToConverge) / Math.log(this.getIntialRadius());
+		return (this.iterationsToConverge) / Math.log(this.getIntialRadius());
 	}
 
 	/**

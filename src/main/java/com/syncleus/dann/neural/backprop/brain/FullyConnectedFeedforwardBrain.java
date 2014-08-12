@@ -19,6 +19,7 @@
 package com.syncleus.dann.neural.backprop.brain;
 
 import java.util.concurrent.ExecutorService;
+
 import com.syncleus.dann.neural.Synapse;
 import com.syncleus.dann.neural.activation.ActivationFunction;
 import com.syncleus.dann.neural.backprop.BackpropNeuron;

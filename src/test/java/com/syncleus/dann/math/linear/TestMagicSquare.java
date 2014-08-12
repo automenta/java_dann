@@ -24,9 +24,17 @@
 package com.syncleus.dann.math.linear;
 
 import java.util.List;
+
+import org.junit.Assert;
+import org.junit.Test;
+
 import com.syncleus.dann.math.RealNumber;
-import com.syncleus.dann.math.linear.decomposition.*;
-import org.junit.*;
+import com.syncleus.dann.math.linear.decomposition.Decompositions;
+import com.syncleus.dann.math.linear.decomposition.DoolittleLuDecomposition;
+import com.syncleus.dann.math.linear.decomposition.EigenvalueDecomposition;
+import com.syncleus.dann.math.linear.decomposition.HouseholderQrDecomposition;
+import com.syncleus.dann.math.linear.decomposition.LuDecomposition;
+import com.syncleus.dann.math.linear.decomposition.QrDecomposition;
 
 public class TestMagicSquare
 {

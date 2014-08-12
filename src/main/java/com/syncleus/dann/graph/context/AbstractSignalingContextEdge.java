@@ -41,7 +41,7 @@ public abstract class AbstractSignalingContextEdge<N, S> extends AbstractContext
 		if( !this.getNodes().contains(node) )
 			throw new IllegalArgumentException("node is not an endpoint of this edge");
 
-		for(N traversableNode : this.getTraversableNodes(node))
+		for(final N traversableNode : this.getTraversableNodes(node))
 		{
 			if( traversableNode instanceof SignalContextNode)
 				((SignalContextNode)traversableNode).neighborNodeStateChanged(this, node, newState);

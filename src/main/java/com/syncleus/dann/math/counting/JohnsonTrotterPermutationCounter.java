@@ -76,6 +76,7 @@ public class JohnsonTrotterPermutationCounter extends AbstractPermutationCounter
 		return -1;
 	}
 
+	@Override
 	protected boolean next()
 	{
 		final int[] perm = this.getPermutation();

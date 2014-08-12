@@ -32,9 +32,12 @@ import java.util.concurrent.Future;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.syncleus.dann.UnexpectedDannError;
 import com.syncleus.dann.UnexpectedInterruptedException;
-import org.apache.log4j.Logger;
 
 /**
  * Represents a population governed by Genetic Algorithm parameters. This class
@@ -53,7 +56,7 @@ public abstract class AbstractGeneticAlgorithmPopulation
 	private final double dieOffPercentage;
 	private int generations;
 	private final ThreadPoolExecutor threadExecutor;
-	private static final Logger LOGGER = Logger.getLogger(AbstractGeneticAlgorithmPopulation.class);
+	private static final Logger LOGGER = LogManager.getLogger(AbstractGeneticAlgorithmPopulation.class);
 	private static final int MAX_THREADS_PER_PROCESSOR = 5;
 	private static final int KEEP_ALIVE_TIME = 20;
 	private static final int MINIMUM_POPULATION_SIZE = 4;
@@ -147,12 +150,12 @@ public abstract class AbstractGeneticAlgorithmPopulation
 			for(final Future future : futures)
 				future.get();
 		}
-		catch(InterruptedException caught)
+		catch(final InterruptedException caught)
 		{
 			LOGGER.warn("Unexpected execution exception thrown from within Process(fitnessFunction)", caught);
 			throw new UnexpectedInterruptedException("Unexpected execution exception. Get should block indefinately", caught);
 		}
-		catch(ExecutionException caught)
+		catch(final ExecutionException caught)
 		{
 			LOGGER.error("Unexpected execution exception thrown from within Process(fitnessFunction)", caught);
 			throw new UnexpectedDannError("Unexpected execution exception. Get should block indefinately", caught);
@@ -234,7 +237,7 @@ public abstract class AbstractGeneticAlgorithmPopulation
 		this.generations++;
 		//calculate population sizes
 		final int populationSize = this.population.size();
-		int lostPopulation = (int) ((double) populationSize * this.dieOffPercentage);
+		int lostPopulation = (int) (populationSize * this.dieOffPercentage);
 		//ensure the population to kill off is even.
 		if( lostPopulation % 2 != 0 )
 			lostPopulation--;

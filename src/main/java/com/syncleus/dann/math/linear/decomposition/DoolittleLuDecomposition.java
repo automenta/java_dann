@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+
 import com.syncleus.dann.math.OrderedAlgebraic;
 import com.syncleus.dann.math.linear.Matrix;
 

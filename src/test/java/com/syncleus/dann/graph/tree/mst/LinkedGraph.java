@@ -18,8 +18,17 @@
  ******************************************************************************/
 package com.syncleus.dann.graph.tree.mst;
 
-import java.util.*;
-import com.syncleus.dann.graph.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import com.syncleus.dann.graph.AbstractAdjacencyGraph;
+import com.syncleus.dann.graph.Edge;
+import com.syncleus.dann.graph.Graph;
 
 public class LinkedGraph<N, E extends Edge<N>> extends AbstractAdjacencyGraph<N, E>
 {
@@ -72,6 +81,7 @@ public class LinkedGraph<N, E extends Edge<N>> extends AbstractAdjacencyGraph<N,
 		}
 	}
 
+	@Override
 	public Set<N> getNodes()
 	{
 		return Collections.unmodifiableSet(this.nodes);
@@ -83,6 +93,7 @@ public class LinkedGraph<N, E extends Edge<N>> extends AbstractAdjacencyGraph<N,
 		return Collections.unmodifiableSet(this.edges);
 	}
 
+	@Override
 	public Set<E> getAdjacentEdges(final N node)
 	{
 		if( this.neighborEdges.containsKey(node) )
@@ -91,6 +102,7 @@ public class LinkedGraph<N, E extends Edge<N>> extends AbstractAdjacencyGraph<N,
 			return Collections.<E>emptySet();
 	}
 
+	@Override
 	public List<N> getAdjacentNodes(final N node)
 	{
 		return Collections.unmodifiableList(new ArrayList<N>(this.neighborNodes.get(node)));

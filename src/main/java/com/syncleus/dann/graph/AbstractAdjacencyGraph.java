@@ -25,15 +25,21 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.syncleus.dann.UnexpectedDannError;
 import com.syncleus.dann.graph.context.ContextGraphElement;
-import com.syncleus.dann.graph.xml.*;
+import com.syncleus.dann.graph.xml.EdgeXml;
+import com.syncleus.dann.graph.xml.GraphElementXml;
+import com.syncleus.dann.graph.xml.GraphXml;
 import com.syncleus.dann.xml.NameXml;
 import com.syncleus.dann.xml.NamedValueXml;
 import com.syncleus.dann.xml.Namer;
 import com.syncleus.dann.xml.XmlSerializable;
-import org.apache.log4j.Logger;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
  * An AbstractAdjacencyGraph is a Graph implemented using adjacency lists.
@@ -45,7 +51,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 @XmlJavaTypeAdapter( com.syncleus.dann.xml.XmlSerializableAdapter.class )
 public abstract class AbstractAdjacencyGraph<N, E extends Edge<N>> implements Graph<N, E>
 {
-	private static final Logger LOGGER = Logger.getLogger(AbstractAdjacencyGraph.class);
+	private static final Logger LOGGER = LogManager.getLogger(AbstractAdjacencyGraph.class);
 	private Set<E> edges;
 	private Map<N, Set<E>> adjacentEdges = new HashMap<N, Set<E>>();
 	private Map<N, List<N>> adjacentNodes = new HashMap<N, List<N>>();
@@ -118,7 +124,7 @@ public abstract class AbstractAdjacencyGraph<N, E extends Edge<N>> implements Gr
 		if(attemptEdges == null)
 			throw new IllegalArgumentException("attemptEdges can not be null");
 		//make sure all the edges only connect to contained nodes
-		for( E attemptEdge : attemptEdges )
+		for( final E attemptEdge : attemptEdges )
 			if( !attemptNodes.containsAll(attemptEdge.getNodes()) )
 			    throw new IllegalArgumentException("A node that is an end point in one of the attemptEdges was not in the nodes list");
 
@@ -141,7 +147,7 @@ public abstract class AbstractAdjacencyGraph<N, E extends Edge<N>> implements Gr
 		if( this.contextEnabled )
 		{
 			this.edges = new HashSet<E>(attemptEdges.size());
-			for(E attemptEdge : attemptEdges)
+			for(final E attemptEdge : attemptEdges)
 			{
 				// lets see if this ContextEdge will allow itself to join the graph
 				if(this.contextEnabled
@@ -152,10 +158,10 @@ public abstract class AbstractAdjacencyGraph<N, E extends Edge<N>> implements Gr
 
 				this.edges.add(attemptEdge);
 				//populate adjacency maps
-				for(N currentNode : attemptEdge.getNodes())
+				for(final N currentNode : attemptEdge.getNodes())
 				{
 					boolean passedCurrent = false;
-					for(N neighborNode : attemptEdge.getNodes())
+					for(final N neighborNode : attemptEdge.getNodes())
 					{
 						if( !passedCurrent && (neighborNode == currentNode))
 						{
@@ -393,7 +399,7 @@ public abstract class AbstractAdjacencyGraph<N, E extends Edge<N>> implements Gr
 			cloneGraph.adjacentNodes = new HashMap<N, List<N>>();
 
 			//add all the nodes before we worry about edges. check for NodeContext
-			for(N attemptNode : this.getNodes())
+			for(final N attemptNode : this.getNodes())
 			{
 				// lets see if this ContextEdge will allow itself to join the graph
 				if(this.contextEnabled
@@ -409,7 +415,7 @@ public abstract class AbstractAdjacencyGraph<N, E extends Edge<N>> implements Gr
 			if( this.contextEnabled )
 			{
 				cloneGraph.edges = new HashSet<E>(this.getEdges().size());
-				for(E attemptEdge : this.getEdges())
+				for(final E attemptEdge : this.getEdges())
 				{
 					// lets see if this ContextEdge will allow itself to join the graph
 					if(this.contextEnabled
@@ -419,10 +425,10 @@ public abstract class AbstractAdjacencyGraph<N, E extends Edge<N>> implements Gr
 
 					cloneGraph.edges.add(attemptEdge);
 					//populate adjacency maps
-					for(N currentNode : attemptEdge.getNodes())
+					for(final N currentNode : attemptEdge.getNodes())
 					{
 						boolean passedCurrent = false;
-						for(N neighborNode : attemptEdge.getNodes())
+						for(final N neighborNode : attemptEdge.getNodes())
 						{
 							if( !passedCurrent && (neighborNode == currentNode))
 							{
@@ -451,7 +457,7 @@ public abstract class AbstractAdjacencyGraph<N, E extends Edge<N>> implements Gr
 
 			return cloneGraph;
 		}
-		catch(CloneNotSupportedException caught)
+		catch(final CloneNotSupportedException caught)
 		{
 			LOGGER.error("Unexpectedly could not clone Graph.", caught);
 			throw new UnexpectedDannError("Unexpectedly could not clone graph", caught);
@@ -469,7 +475,7 @@ public abstract class AbstractAdjacencyGraph<N, E extends Edge<N>> implements Gr
 		final Namer<Object> namer = new Namer<Object>();
 
 		xml.setNodeInstances(new GraphElementXml.NodeInstances());
-		for(N node : this.adjacentEdges.keySet())
+		for(final N node : this.adjacentEdges.keySet())
 		{
 			final String nodeName = namer.getNameOrCreate(node);
 
@@ -521,7 +527,7 @@ public abstract class AbstractAdjacencyGraph<N, E extends Edge<N>> implements Gr
 		if(jaxbObject == null)
 			throw new IllegalArgumentException("jaxbObject can not be null");
 
-		for(N node : this.adjacentEdges.keySet())
+		for(final N node : this.adjacentEdges.keySet())
 		{
 			final String nodeName = namer.getNameOrCreate(node);
 
@@ -541,7 +547,7 @@ public abstract class AbstractAdjacencyGraph<N, E extends Edge<N>> implements Gr
 			jaxbObject.getNodes().getNodes().add(encapsulation);
 		}
 
-		for(E edge : this.edges)
+		for(final E edge : this.edges)
 		{
 			final EdgeXml edgeXml = edge.toXml(namer);
 

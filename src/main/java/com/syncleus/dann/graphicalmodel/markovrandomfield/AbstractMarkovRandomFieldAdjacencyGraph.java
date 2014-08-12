@@ -18,8 +18,11 @@
  ******************************************************************************/
 package com.syncleus.dann.graphicalmodel.markovrandomfield;
 
-import java.util.*;
-import com.syncleus.dann.graph.*;
+import java.util.HashSet;
+import java.util.Set;
+
+import com.syncleus.dann.graph.Graph;
+import com.syncleus.dann.graph.UndirectedEdge;
 import com.syncleus.dann.graphicalmodel.AbstractGraphicalModelAdjacencyGraph;
 import com.syncleus.dann.graphicalmodel.GraphicalModelNode;
 

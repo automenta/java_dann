@@ -18,7 +18,9 @@
  ******************************************************************************/
 package com.syncleus.dann.classify.naive;
 
-import java.util.*;
+import java.util.Locale;
+import java.util.Set;
+
 import com.syncleus.dann.dataprocessing.language.parsing.stem.StemmingWordParser;
 
 /**

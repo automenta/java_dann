@@ -19,10 +19,15 @@
 package com.syncleus.dann.neural.som;
 
 import java.util.Random;
-import java.util.concurrent.*;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+
+import org.junit.Assert;
+import org.junit.Test;
+
 import com.syncleus.dann.math.Vector;
 import com.syncleus.dann.neural.som.brain.ExponentialDecaySomBrain;
-import org.junit.*;
 
 public class TestColor
 {

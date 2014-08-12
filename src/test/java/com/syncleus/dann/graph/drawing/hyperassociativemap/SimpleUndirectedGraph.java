@@ -18,8 +18,17 @@
  ******************************************************************************/
 package com.syncleus.dann.graph.drawing.hyperassociativemap;
 
-import java.util.*;
-import com.syncleus.dann.graph.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import com.syncleus.dann.graph.AbstractBidirectedAdjacencyGraph;
+import com.syncleus.dann.graph.BidirectedEdge;
+import com.syncleus.dann.graph.ImmutableUndirectedEdge;
 
 public class SimpleUndirectedGraph extends AbstractBidirectedAdjacencyGraph<SimpleNode, BidirectedEdge<SimpleNode>>
 {
@@ -73,6 +82,7 @@ public class SimpleUndirectedGraph extends AbstractBidirectedAdjacencyGraph<Simp
 		return this.nodes[layer][index];
 	}
 
+	@Override
 	public Set<SimpleNode> getNodes()
 	{
 		return Collections.unmodifiableSet(this.nodeSet);
@@ -84,11 +94,13 @@ public class SimpleUndirectedGraph extends AbstractBidirectedAdjacencyGraph<Simp
 		return Collections.unmodifiableSet(this.edges);
 	}
 
+	@Override
 	public Set<BidirectedEdge<SimpleNode>> getAdjacentEdges(final SimpleNode node)
 	{
 		return Collections.unmodifiableSet(this.neighborEdges.get(node));
 	}
 
+	@Override
 	public Set<BidirectedEdge<SimpleNode>> getInEdges(final SimpleNode node)
 	{
 		return this.getAdjacentEdges(node);
@@ -104,6 +116,7 @@ public class SimpleUndirectedGraph extends AbstractBidirectedAdjacencyGraph<Simp
 		return this.getTraversableEdges(node).size();
 	}
 
+	@Override
 	public List<SimpleNode> getAdjacentNodes(final SimpleNode node)
 	{
 		return Collections.unmodifiableList(this.neighborNodes.get(node));

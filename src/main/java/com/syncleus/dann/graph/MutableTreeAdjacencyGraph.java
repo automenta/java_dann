@@ -18,12 +18,13 @@
  ******************************************************************************/
 package com.syncleus.dann.graph;
 
-import com.syncleus.dann.graph.context.ContextGraphElement;
-import com.syncleus.dann.graph.tree.Trees;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import com.syncleus.dann.graph.context.ContextGraphElement;
+import com.syncleus.dann.graph.tree.Trees;
 
 public class MutableTreeAdjacencyGraph<N, E extends BidirectedEdge<N>> extends AbstractTreeAdjacencyGraph<N, E> implements MutableTreeGraph<N, E>
 {
@@ -180,7 +181,7 @@ public class MutableTreeAdjacencyGraph<N, E extends BidirectedEdge<N>> extends A
 		boolean removedSomething = false;
 
 		//first lets remove all the edges
-		for(E edge : this.getEdges())
+		for(final E edge : this.getEdges())
 		{
 			//lets just make sure we arent some how getting an we dont actually own, this shouldnt be possible so its
 			//an assert. This ensures that if remove() comes back false it must be because the context didnt allow it.
@@ -193,7 +194,7 @@ public class MutableTreeAdjacencyGraph<N, E extends BidirectedEdge<N>> extends A
 		}
 
 		//now lets remove all the nodes
-		for(N node : this.getNodes())
+		for(final N node : this.getNodes())
 		{
 			//lets just make sure we arent some how getting an we dont actually own, this shouldnt be possible so its
 			//an assert. This ensures that if remove() comes back false it must be because the context didnt allow it.

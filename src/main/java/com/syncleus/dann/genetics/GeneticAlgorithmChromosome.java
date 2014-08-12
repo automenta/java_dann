@@ -22,9 +22,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.syncleus.dann.UnexpectedDannError;
 import com.syncleus.dann.genetics.wavelets.Mutations;
-import org.apache.log4j.Logger;
 
 /**
  * A Genetic Algorithm based Chromosome. While technically a Chromatid in
@@ -38,7 +41,7 @@ public class GeneticAlgorithmChromosome implements Chromatid<AbstractValueGene>,
 {
 	private List<AbstractValueGene> alleles;
 	private static final Random RANDOM = Mutations.getRandom();
-	private static final Logger LOGGER = Logger.getLogger(GeneticAlgorithmChromosome.class);
+	private static final Logger LOGGER = LogManager.getLogger(GeneticAlgorithmChromosome.class);
 
 	private GeneticAlgorithmChromosome()
 	{
@@ -99,6 +102,7 @@ public class GeneticAlgorithmChromosome implements Chromatid<AbstractValueGene>,
 	 * @return An unmodifiable List of all genes in the chromatid
 	 * @since 2.0
 	 */
+	@Override
 	public final List<AbstractValueGene> getGenes()
 	{
 		return Collections.unmodifiableList(this.alleles);
@@ -113,6 +117,7 @@ public class GeneticAlgorithmChromosome implements Chromatid<AbstractValueGene>,
 	 * point
 	 * @return A List of the genetic segment crossing over.
 	 */
+	@Override
 	public List<AbstractValueGene> crossover(final int point)
 	{
 		if( point <= 0 )
@@ -132,6 +137,7 @@ public class GeneticAlgorithmChromosome implements Chromatid<AbstractValueGene>,
 	 * @see com.syncleus.dann.genetics.Chromatid#crossover(int)
 	 * @since 2.0
 	 */
+	@Override
 	public void crossover(final List<AbstractValueGene> geneticSegment, final int point)
 	{
 		if( point <= 0 )
@@ -161,7 +167,7 @@ public class GeneticAlgorithmChromosome implements Chromatid<AbstractValueGene>,
 			copy.alleles = new ArrayList<AbstractValueGene>(this.alleles);
 			return copy;
 		}
-		catch(CloneNotSupportedException caught)
+		catch(final CloneNotSupportedException caught)
 		{
 			LOGGER.error("CloneNotSupportedException caught but not expected!", caught);
 			throw new UnexpectedDannError("CloneNotSupportedException caught but not expected", caught);

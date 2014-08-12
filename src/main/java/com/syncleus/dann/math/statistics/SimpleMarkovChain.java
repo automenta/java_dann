@@ -21,7 +21,6 @@ package com.syncleus.dann.math.statistics;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -29,6 +28,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
 import java.util.Set;
+
 import com.syncleus.dann.math.linear.RealMatrix;
 import com.syncleus.dann.math.linear.SimpleRealMatrix;
 
@@ -59,7 +59,7 @@ public class SimpleMarkovChain<S> extends AbstractMarkovChain<S>
 		this.columnMapping = new ArrayList<S>(this.states);
 
 
-		Set<List<S>> rowHeadersLeft = new HashSet<List<S>>(transitionProbabilities.keySet());
+		final Set<List<S>> rowHeadersLeft = new HashSet<List<S>>(transitionProbabilities.keySet());
 
         //if there is an empty set, representing an undefined starting point, then it is always the first row
 		if(rowHeadersLeft.remove(Collections.<S>emptyList()))
@@ -68,9 +68,9 @@ public class SimpleMarkovChain<S> extends AbstractMarkovChain<S>
 		}
 
 		//first put the rows in order to match the columns
-		for(S currentColumn : this.columnMapping)
+		for(final S currentColumn : this.columnMapping)
 		{
-			List<S> columnAsHeader = Collections.singletonList(currentColumn);
+			final List<S> columnAsHeader = Collections.singletonList(currentColumn);
 
 			assert rowHeadersLeft.contains(columnAsHeader);
 
@@ -118,7 +118,7 @@ public class SimpleMarkovChain<S> extends AbstractMarkovChain<S>
 	private static <S> Map<List<S>, Map<S, Double>> packTransitions(final Map<S, Map<S, Double>> transitions)
 	{
 		final Map<List<S>, Map<S, Double>> pack = new LinkedHashMap<List<S>, Map<S, Double>>(transitions.size());
-		for(Map.Entry<S, Map<S, Double>> transitionEntry : transitions.entrySet())
+		for(final Map.Entry<S, Map<S, Double>> transitionEntry : transitions.entrySet())
 			if(transitionEntry.getKey() == null)
 				pack.put(Collections.<S>emptyList(), transitionEntry.getValue());
 			else

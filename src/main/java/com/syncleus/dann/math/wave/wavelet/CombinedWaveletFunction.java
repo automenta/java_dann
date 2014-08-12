@@ -24,6 +24,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
+
 import com.syncleus.dann.math.AbstractFunction;
 import com.syncleus.dann.math.wave.WaveMultidimensionalFunction;
 

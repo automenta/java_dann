@@ -21,15 +21,18 @@ package com.syncleus.dann.math;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.syncleus.dann.UnexpectedDannError;
-import org.apache.log4j.Logger;
 
 public abstract class AbstractFunction implements Cloneable, Function
 {
 	private double[] parameters;
 	private final String[] parameterNames;
 	private final Map<String, Integer> indexNames;
-	private static final Logger LOGGER = Logger.getLogger(AbstractFunction.class);
+	private static final Logger LOGGER = LogManager.getLogger(AbstractFunction.class);
 
 	protected AbstractFunction(final AbstractFunction copy)
 	{
@@ -65,6 +68,7 @@ public abstract class AbstractFunction implements Cloneable, Function
 		return result;
 	}
 
+	@Override
 	public final void setParameter(final int parameterIndex, final double value)
 	{
 		if( parameterIndex >= parameters.length || parameterIndex < 0 )
@@ -72,11 +76,13 @@ public abstract class AbstractFunction implements Cloneable, Function
 		this.parameters[parameterIndex] = value;
 	}
 
+	@Override
 	public final void setParameter(final String parameterName, final double value)
 	{
 		this.setParameter(this.getParameterNameIndex(parameterName), value);
 	}
 
+	@Override
 	public final double getParameter(final int parameterIndex)
 	{
 		if( parameterIndex >= parameters.length || parameterIndex < 0 )
@@ -84,11 +90,13 @@ public abstract class AbstractFunction implements Cloneable, Function
 		return this.parameters[parameterIndex];
 	}
 
+	@Override
 	public final double getParameter(final String parameterName)
 	{
 		return this.getParameter(this.getParameterNameIndex(parameterName));
 	}
 
+	@Override
 	public final String getParameterName(final int parameterIndex)
 	{
 		if( parameterIndex >= this.parameterNames.length || parameterIndex < 0 )
@@ -96,6 +104,7 @@ public abstract class AbstractFunction implements Cloneable, Function
 		return this.parameterNames[parameterIndex];
 	}
 
+	@Override
 	public final int getParameterNameIndex(final String parameterName)
 	{
 		if( !this.indexNames.containsKey(parameterName) )
@@ -103,6 +112,7 @@ public abstract class AbstractFunction implements Cloneable, Function
 		return this.indexNames.get(parameterName);
 	}
 
+	@Override
 	public final int getParameterCount()
 	{
 		return this.parameters.length;
@@ -118,13 +128,14 @@ public abstract class AbstractFunction implements Cloneable, Function
 			copy.parameters = this.parameters.clone();
 			return copy;
 		}
-		catch(CloneNotSupportedException caught)
+		catch(final CloneNotSupportedException caught)
 		{
 			LOGGER.error("CloneNotSupportedException caught but not expected!", caught);
 			throw new UnexpectedDannError("CloneNotSupportedException caught but not expected", caught);
 		}
 	}
 
+	@Override
 	public abstract double calculate();
 
 	@Override

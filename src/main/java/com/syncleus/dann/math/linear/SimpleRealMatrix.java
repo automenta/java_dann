@@ -25,12 +25,15 @@ package com.syncleus.dann.math.linear;
 
 import java.io.Serializable;
 import java.util.Arrays;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.syncleus.dann.UnexpectedDannError;
 import com.syncleus.dann.math.RealNumber;
 import com.syncleus.dann.math.linear.decomposition.DoolittleLuDecomposition;
 import com.syncleus.dann.math.linear.decomposition.HouseholderQrDecomposition;
 import com.syncleus.dann.math.linear.decomposition.StewartSingularValueDecomposition;
-import org.apache.log4j.Logger;
 
 /**
  * The Java SimpleRealMatrix Class provides the fundamental operations of
@@ -57,7 +60,7 @@ import org.apache.log4j.Logger;
 public class SimpleRealMatrix implements Cloneable, Serializable, RealMatrix
 {
 	private static final long serialVersionUID = 7930693107191691804L;
-	private static final Logger LOGGER = Logger.getLogger(SimpleRealMatrix.class);
+	private static final Logger LOGGER = LogManager.getLogger(SimpleRealMatrix.class);
 	/**
 	 * Array for internal storage of elements.
 	 */
@@ -192,7 +195,7 @@ public class SimpleRealMatrix implements Cloneable, Serializable, RealMatrix
 				copy.matrixElements[heightIndex] = this.matrixElements[heightIndex].clone();
 			return copy;
 		}
-		catch(CloneNotSupportedException caught)
+		catch(final CloneNotSupportedException caught)
 		{
 			LOGGER.error("could not clone SimpleRealMatrix!", caught);
 			throw new UnexpectedDannError("could not clone!", caught);

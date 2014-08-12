@@ -19,7 +19,9 @@
 package com.syncleus.dann.math;
 
 import java.util.ArrayList;
-import org.junit.*;
+
+import org.junit.Assert;
+import org.junit.Test;
 
 public class TestHyperpoint
 {

@@ -19,7 +19,9 @@
 package com.syncleus.dann.math.statistics;
 
 import java.util.Random;
-import org.apache.log4j.Logger;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -31,7 +33,7 @@ public class TestSimpleMarkovChainEvidence
 	}
 
 	private final static Random RANDOM = new Random();
-	private static final Logger LOGGER = Logger.getLogger(TestSimpleMarkovChainEvidence.class);
+	private static final Logger LOGGER = LogManager.getLogger(TestSimpleMarkovChainEvidence.class);
 
 	@Test
 	public void testSimpleChain()

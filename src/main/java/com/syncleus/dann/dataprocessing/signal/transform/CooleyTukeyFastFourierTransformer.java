@@ -24,6 +24,7 @@
 package com.syncleus.dann.dataprocessing.signal.transform;
 
 import java.util.Arrays;
+
 import com.syncleus.dann.math.ComplexNumber;
 
 /**
@@ -245,7 +246,7 @@ public class CooleyTukeyFastFourierTransformer implements FastFourierTransformer
 		for(int signalIndex = 0; signalIndex < transformSize; signalIndex++)
 			signal[signalIndex] = signal[signalIndex].conjugate();
 		for(int signalIndex = 0; signalIndex < transformSize; signalIndex++)
-			signal[signalIndex] = signal[signalIndex].multiply(1.0 / ((double) transformSize));
+			signal[signalIndex] = signal[signalIndex].multiply(1.0 / (transformSize));
 		return signal;
 	}
 

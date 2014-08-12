@@ -18,12 +18,15 @@
  ******************************************************************************/
 package com.syncleus.dann.graph;
 
+import com.syncleus.dann.graph.xml.BidirectedEdgeElementXml;
+import com.syncleus.dann.graph.xml.BidirectedEdgeXml;
+import com.syncleus.dann.graph.xml.EdgeXml;
+import com.syncleus.dann.xml.NamedValueXml;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import com.syncleus.dann.graph.xml.*;
-import com.syncleus.dann.xml.NamedValueXml;
+
 import com.syncleus.dann.xml.Namer;
 import com.syncleus.dann.xml.XmlSerializable;
 
@@ -191,7 +194,7 @@ public abstract class AbstractBidirectedEdge<N> extends AbstractEdge<N> implemen
 
 		xml.setNodeInstances(new BidirectedEdgeElementXml.NodeInstances());
 		final Set<N> writtenNodes = new HashSet<N>();
-		for (N node : this.getNodes())
+		for (final N node : this.getNodes())
 		{
 			if (writtenNodes.add(node))
 			{

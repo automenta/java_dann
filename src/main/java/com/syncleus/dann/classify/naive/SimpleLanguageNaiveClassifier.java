@@ -18,7 +18,9 @@
  ******************************************************************************/
 package com.syncleus.dann.classify.naive;
 
-import java.util.*;
+import java.util.Locale;
+import java.util.Set;
+
 import com.syncleus.dann.dataprocessing.language.parsing.BasicWordParser;
 import com.syncleus.dann.dataprocessing.language.parsing.WordParser;
 
@@ -79,6 +81,7 @@ public class SimpleLanguageNaiveClassifier<C> extends SimpleNaiveClassifier<Stri
 	 * Gets the current locale.
 	 * @return The current locale
 	 */
+	@Override
 	public Locale getLocale()
 	{
 		return this.locale;

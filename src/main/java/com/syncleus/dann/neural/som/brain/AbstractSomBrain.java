@@ -30,6 +30,10 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.syncleus.dann.UnexpectedDannError;
 import com.syncleus.dann.UnexpectedInterruptedException;
 import com.syncleus.dann.math.Vector;
@@ -42,7 +46,8 @@ import com.syncleus.dann.neural.som.SimpleSomNeuron;
 import com.syncleus.dann.neural.som.SomInputNeuron;
 import com.syncleus.dann.neural.som.SomNeuron;
 import com.syncleus.dann.neural.som.SomOutputNeuron;
-import org.apache.log4j.Logger;
+
+
 
 /**
  * A SomBrain acts as the parent class for all brains that use traditional SOM
@@ -60,7 +65,8 @@ public abstract class AbstractSomBrain<IN extends SomInputNeuron, ON extends Som
 	private Vector lowerBounds;
 	private final List<IN> inputs;
 	private final Map<Vector, ON> outputs = new HashMap<Vector, ON>();
-	private static final Logger LOGGER = Logger.getLogger(AbstractSomBrain.class);
+	private static final Logger LOGGER = LogManager.getLogger(AbstractSomBrain.class);
+
 
 	private class PropagateOutput implements Callable<Double>
 	{
@@ -308,12 +314,12 @@ public abstract class AbstractSomBrain<IN extends SomInputNeuron, ON extends Som
 				{
 					output = futureOutput.get(entry.getKey()).get();
 				}
-				catch(InterruptedException caught)
+				catch(final InterruptedException caught)
 				{
 					LOGGER.warn("PropagateOutput was unexpectedly interrupted", caught);
 					throw new UnexpectedInterruptedException("Unexpected interrupted. Get should block indefinitely", caught);
 				}
-				catch(ExecutionException caught)
+				catch(final ExecutionException caught)
 				{
 					LOGGER.error("PropagateOutput was had an unexpected problem executing.", caught);
 					throw new UnexpectedDannError("Unexpected execution exception. Get should block indefinitely", caught);
@@ -364,12 +370,12 @@ public abstract class AbstractSomBrain<IN extends SomInputNeuron, ON extends Som
 				for(final Future future : futures)
 					future.get();
 			}
-			catch(InterruptedException caught)
+			catch(final InterruptedException caught)
 			{
 				LOGGER.warn("PropagateOutput was unexpectedly interrupted", caught);
 				throw new UnexpectedInterruptedException("Unexpected interrupted. Get should block indefinitely", caught);
 			}
-			catch(ExecutionException caught)
+			catch(final ExecutionException caught)
 			{
 				LOGGER.error("PropagateOutput was had an unexpected problem executing.", caught);
 				throw new UnexpectedDannError("Unexpected execution exception. Get should block indefinitely", caught);
@@ -475,7 +481,7 @@ public abstract class AbstractSomBrain<IN extends SomInputNeuron, ON extends Som
 			for(final S source : this.getInEdges((N)currentNeuron))
 			{
 				assert (source.getSourceNode() instanceof InputNeuron);
-				final int sourceIndex = this.inputs.indexOf((InputNeuron) source.getSourceNode());
+				final int sourceIndex = this.inputs.indexOf(source.getSourceNode());
 				weightVector[sourceIndex] = source.getWeight();
 			}
 			// add the current weight vector to the map

@@ -18,7 +18,9 @@
  ******************************************************************************/
 package com.syncleus.dann.classify.naive;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Represents a field of classification probabilities possible from a given category. This represents the relative

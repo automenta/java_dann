@@ -27,6 +27,7 @@ import java.util.Set;
 import java.util.SortedSet;
 import java.util.Stack;
 import java.util.TreeSet;
+
 import com.syncleus.dann.graph.Cycle;
 import com.syncleus.dann.graph.Edge;
 import com.syncleus.dann.graph.Graph;
@@ -63,16 +64,19 @@ public class ExhaustiveDepthFirstSearchCycleFinder<N, E extends Edge<N>> extends
 		return false;
 	}
 
+	@Override
 	public boolean isUnicyclic(final Graph<N, E> graph)
 	{
 		return ((this.findCycles(graph).size() == 1) && (Topography.isSimple(graph)));
 	}
 
+	@Override
 	public int cycleCount(final Graph<N, E> graph)
 	{
 		return this.findCycles(graph).size();
 	}
 
+	@Override
 	public int girth(final Graph<N, E> graph)
 	{
 		final Set<Cycle<N, E>> cycles = this.findCycles(graph);
@@ -81,6 +85,7 @@ public class ExhaustiveDepthFirstSearchCycleFinder<N, E extends Edge<N>> extends
 		return sortedCycles.first().getLength();
 	}
 
+	@Override
 	public int circumference(final Graph<N, E> graph)
 	{
 		final Set<Cycle<N, E>> cycles = this.findCycles(graph);
@@ -89,6 +94,7 @@ public class ExhaustiveDepthFirstSearchCycleFinder<N, E extends Edge<N>> extends
 		return sortedCycles.last().getLength();
 	}
 
+	@Override
 	public Set<Cycle<N, E>> findCycles(final Graph<N, E> graph)
 	{
 		final Set<N> untouchedNodes = new HashSet<N>(graph.getNodes());
@@ -177,6 +183,7 @@ public class ExhaustiveDepthFirstSearchCycleFinder<N, E extends Edge<N>> extends
 	{
 		private static final long serialVersionUID = 5175815460016788908L;
 
+		@Override
 		public int compare(final Cycle<N, E> first, final Cycle<N, E> second)
 		{
 			if( first.getLength() < second.getLength() )

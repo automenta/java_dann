@@ -18,11 +18,17 @@
  ******************************************************************************/
 package com.syncleus.dann.genetics.wavelets;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Random;
+import java.util.TreeMap;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.junit.Assert;
+import org.junit.Test;
+
 import com.syncleus.dann.genetics.wavelets.SignalProcessingWavelet.GlobalSignalConcentration;
 import com.syncleus.dann.math.Function;
-import org.apache.log4j.Logger;
-import org.junit.*;
 
 public class TestSignalProcessingWavelet
 {
@@ -33,7 +39,7 @@ public class TestSignalProcessingWavelet
 	private static final double XOR_MUTABILITY = 100.0;
 	private static final int TEST_MUTATIONS_REPEATS = 1000;
 	private static final int TEST_XOR_REPEATS = 50;
-	private static final Logger LOGGER = Logger.getLogger(TestSignalProcessingWavelet.class);
+	private static final Logger LOGGER = LogManager.getLogger(TestSignalProcessingWavelet.class);
 
 	@Test
 	public void testMutations() throws CloneNotSupportedException
@@ -164,8 +170,8 @@ public class TestSignalProcessingWavelet
 
 		//calculates the decimal portion of the fitness , should be >= 0 and < 1
 		final double fitnessFine = 1.0 - Math.tanh(waveCount);
-		final double fitnessSuperFine = Math.abs((double) xorAttempt.hashCode()) / ((double) Integer.MAX_VALUE);
+		final double fitnessSuperFine = Math.abs((double) xorAttempt.hashCode()) / (Integer.MAX_VALUE);
 
-		return ((double) fitnessWhole) + (fitnessFine * 0.99999) + (fitnessSuperFine * 0.00001);
+		return (fitnessWhole) + (fitnessFine * 0.99999) + (fitnessSuperFine * 0.00001);
 	}
 }

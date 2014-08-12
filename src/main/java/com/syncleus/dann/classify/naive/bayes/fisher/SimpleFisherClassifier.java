@@ -18,8 +18,11 @@
  ******************************************************************************/
 package com.syncleus.dann.classify.naive.bayes.fisher;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
+
 import com.syncleus.dann.classify.naive.FeatureExtractor;
 import com.syncleus.dann.classify.naive.bayes.SimpleNaiveBayesClassifier;
 

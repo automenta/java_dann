@@ -24,6 +24,10 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.syncleus.dann.UnexpectedDannError;
 import com.syncleus.dann.graph.context.AbstractContextGraphElement;
 import com.syncleus.dann.graph.context.ContextNode;
@@ -33,11 +37,10 @@ import com.syncleus.dann.xml.NameXml;
 import com.syncleus.dann.xml.NamedValueXml;
 import com.syncleus.dann.xml.Namer;
 import com.syncleus.dann.xml.XmlSerializable;
-import org.apache.log4j.Logger;
 
 public abstract class AbstractEdge<N> extends AbstractContextGraphElement<Graph<N, ?>> implements Edge<N>
 {
-	private static final Logger LOGGER = Logger.getLogger(AbstractEdge.class);
+	private static final Logger LOGGER = LogManager.getLogger(AbstractEdge.class);
 	private final boolean contextEnabled;
 	private List<N> nodes;
 
@@ -66,7 +69,7 @@ public abstract class AbstractEdge<N> extends AbstractContextGraphElement<Graph<
 		if(contextEnabled)
 		{
 			final List<N> nodesCopy = new ArrayList<N>(ourNodes.size());
-			for(N ourNode : ourNodes)
+			for(final N ourNode : ourNodes)
 			{
 				if( this.contextEnabled && ( ourNode instanceof ContextNode ) && ( !((ContextNode)ourNode).connectingEdge(this) ))
 					continue;
@@ -153,7 +156,7 @@ public abstract class AbstractEdge<N> extends AbstractContextGraphElement<Graph<
 			final AbstractEdge<N> clonedEdge = (AbstractEdge<N>) super.clone();
 			final List<N> clonedNodes = new ArrayList<N>(this.nodes.size());
 			//add each node at a time to the clone considering context
-			for(N newNode : newNodes)
+			for(final N newNode : newNodes)
 			{
 				if( this.contextEnabled && (newNode instanceof ContextNode) && ( !((ContextNode)newNode).connectingEdge(clonedEdge) ) )
 					continue;
@@ -162,7 +165,7 @@ public abstract class AbstractEdge<N> extends AbstractContextGraphElement<Graph<
 			clonedEdge.nodes = Collections.unmodifiableList(clonedNodes);
 			return clonedEdge;
 		}
-		catch(CloneNotSupportedException caught)
+		catch(final CloneNotSupportedException caught)
 		{
 			LOGGER.error("Edge was unexpectidly not cloneable", caught);
 			throw new UnexpectedDannError("Edge was unexpectidly not cloneable", caught);
@@ -200,7 +203,7 @@ public abstract class AbstractEdge<N> extends AbstractContextGraphElement<Graph<
 			final AbstractEdge<N> clonedEdge = (AbstractEdge<N>) super.clone();
 			final List<N> clonedNodes = new ArrayList<N>(this.nodes.size());
 			//add each node at a time to the clone considering context
-			for(N node : this.nodes)
+			for(final N node : this.nodes)
 			{
 				if( this.contextEnabled && (node instanceof ContextNode) && ( !((ContextNode)node).connectingEdge(clonedEdge) ) )
 					continue;
@@ -209,7 +212,7 @@ public abstract class AbstractEdge<N> extends AbstractContextGraphElement<Graph<
 			clonedEdge.nodes = Collections.unmodifiableList(clonedNodes);
 			return clonedEdge;
 		}
-		catch(CloneNotSupportedException caught)
+		catch(final CloneNotSupportedException caught)
 		{
 			LOGGER.error("Edge was unexpectidly not cloneable", caught);
 			throw new UnexpectedDannError("Edge was unexpectidly not cloneable", caught);
@@ -224,7 +227,7 @@ public abstract class AbstractEdge<N> extends AbstractContextGraphElement<Graph<
 
 		xml.setNodeInstances(new EdgeElementXml.NodeInstances());
 		final Set<N> writtenNodes = new HashSet<N>();
-		for (N node : this.nodes)
+		for (final N node : this.nodes)
 		{
 			if (writtenNodes.add(node))
 			{
@@ -275,7 +278,7 @@ public abstract class AbstractEdge<N> extends AbstractContextGraphElement<Graph<
 		{
 			jaxbObject.setConnections(new EdgeXml.Connections());
 		}
-		for (N node : this.nodes)
+		for (final N node : this.nodes)
 		{
 			final NameXml connection = new NameXml();
 			connection.setName(nodeNames.getNameOrCreate(node));

@@ -18,9 +18,17 @@
  ******************************************************************************/
 package com.syncleus.dann.graph.topological.sorter;
 
-import java.util.*;
-import com.syncleus.dann.graph.*;
-import org.junit.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import org.junit.Assert;
+import org.junit.Test;
+
+import com.syncleus.dann.graph.BidirectedGraph;
+import com.syncleus.dann.graph.DirectedEdge;
+import com.syncleus.dann.graph.ImmutableDirectedAdjacencyGraph;
+import com.syncleus.dann.graph.ImmutableDirectedEdge;
 
 public class TestSimpleTopologialSort
 {
