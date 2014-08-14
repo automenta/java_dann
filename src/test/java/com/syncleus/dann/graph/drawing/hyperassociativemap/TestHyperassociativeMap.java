@@ -18,9 +18,7 @@
  ******************************************************************************/
 package com.syncleus.dann.graph.drawing.hyperassociativemap;
 
-import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -60,6 +58,10 @@ public class TestHyperassociativeMap
 		{
 			super(brain, dimensions, executor);
 		}
+		public TestMap(final AbstractLocalBrain brain, final int dimensions)
+		{
+			super(brain, dimensions);
+		}                
 	}
 
 	@Test
@@ -77,11 +79,13 @@ public class TestHyperassociativeMap
 		testBrain.connect(synapse, true);
 
 		final TestMap testMap;
-		final int cores = Runtime.getRuntime().availableProcessors();
-		final ThreadPoolExecutor executor = new ThreadPoolExecutor(cores + 1, cores * 2, 20, TimeUnit.SECONDS, new LinkedBlockingQueue());
+		//final int cores = Runtime.getRuntime().availableProcessors();
+		//final ThreadPoolExecutor executor = new ThreadPoolExecutor(cores + 1, cores * 2, 20, TimeUnit.SECONDS, new LinkedBlockingQueue());
 		try
 		{
-			testMap = new TestMap(testBrain, 3, executor);
+			//testMap = new TestMap(testBrain, 3, executor);
+                        testMap = new TestMap(testBrain, 3);
+                        
 			testMap.align();
 
 			Assert.assertTrue("neuron1 is not in the map", testMap.getGraph().getNodes().contains(neuron1));
@@ -92,7 +96,7 @@ public class TestHyperassociativeMap
 		}
 		finally
 		{
-			executor.shutdown();
+			//executor.shutdown();
 		}
 	}
 }

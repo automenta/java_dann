@@ -28,4 +28,8 @@ public class LayeredHyperassociativeMap extends HyperassociativeMap<SimpleUndire
 	{
 		super(new SimpleUndirectedGraph(layers, NODES_PER_LAYER), 3, executor);
 	}
+	LayeredHyperassociativeMap(final int layers)
+	{
+		super(new SimpleUndirectedGraph(layers, NODES_PER_LAYER), 3);
+	}
 }

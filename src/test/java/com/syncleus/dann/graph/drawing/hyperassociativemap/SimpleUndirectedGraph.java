@@ -29,6 +29,7 @@ import java.util.Set;
 import com.syncleus.dann.graph.AbstractBidirectedAdjacencyGraph;
 import com.syncleus.dann.graph.BidirectedEdge;
 import com.syncleus.dann.graph.ImmutableUndirectedEdge;
+import java.util.stream.Stream;
 
 public class SimpleUndirectedGraph extends AbstractBidirectedAdjacencyGraph<SimpleNode, BidirectedEdge<SimpleNode>>
 {
@@ -88,6 +89,16 @@ public class SimpleUndirectedGraph extends AbstractBidirectedAdjacencyGraph<Simp
 		return Collections.unmodifiableSet(this.nodeSet);
 	}
 
+        @Override
+        public Stream<BidirectedEdge<SimpleNode>> streamEdges() {
+            return this.edges.stream();
+        }
+        @Override
+        public Stream<SimpleNode> streamNodes() {
+            return this.nodeSet.stream();
+        }
+
+        
 	@Override
 	public Set<BidirectedEdge<SimpleNode>> getEdges()
 	{
