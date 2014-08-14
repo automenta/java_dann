@@ -20,35 +20,31 @@ package syncleus.dann.evolve.wavelets;
 
 import java.util.Set;
 
-public class ExternalSignalGene extends SignalGene
-{
+public class ExternalSignalGene extends SignalGene {
 	private boolean outward;
 
-	public ExternalSignalGene(final ReceptorKey initialReceptor, final SignalKey initialSignal, final boolean isOutward)
-	{
+	public ExternalSignalGene(final ReceptorKey initialReceptor,
+			final SignalKey initialSignal, final boolean isOutward) {
 		super(initialReceptor, initialSignal);
 
 		this.outward = isOutward;
 	}
 
-	public ExternalSignalGene(final ExternalSignalGene copy)
-	{
+	public ExternalSignalGene(final ExternalSignalGene copy) {
 		super(copy);
 	}
 
 	@Override
-	public boolean bind(final SignalKeyConcentration concentration, final boolean isExternal)
-	{
-		if( (this.outward && !isExternal) || (!this.outward && isExternal) )
-		{
-			if( this.getExpressionFunction().receives(concentration.getSignal()) )
-			{
+	public boolean bind(final SignalKeyConcentration concentration,
+			final boolean isExternal) {
+		if ((this.outward && !isExternal) || (!this.outward && isExternal)) {
+			if (this.getExpressionFunction()
+					.receives(concentration.getSignal())) {
 				this.getReceivingConcentrations().add(concentration);
 				return true;
 			}
-		}
-		else if( (this.outward && isExternal) || (!this.outward && !isExternal) )
-		{
+		} else if ((this.outward && isExternal)
+				|| (!this.outward && !isExternal)) {
 			this.setExpressingConcentration(concentration);
 			return true;
 		}
@@ -56,23 +52,20 @@ public class ExternalSignalGene extends SignalGene
 		return false;
 	}
 
-	public boolean isOutward()
-	{
+	public boolean isOutward() {
 		return this.outward;
 	}
 
 	@Override
-	public ExternalSignalGene clone()
-	{
+	public ExternalSignalGene clone() {
 		return (ExternalSignalGene) super.clone();
 	}
 
 	@Override
-	public void mutate(final Set<AbstractKey> keyPool)
-	{
+	public void mutate(final Set<AbstractKey> keyPool) {
 		super.mutate(keyPool);
 
-		if( RANDOM.nextDouble() < Math.tanh(this.getMutability()) )
+		if (RANDOM.nextDouble() < Math.tanh(this.getMutability()))
 			this.outward = !this.outward;
 	}
 }

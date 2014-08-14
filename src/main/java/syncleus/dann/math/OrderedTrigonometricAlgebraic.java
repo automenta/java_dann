@@ -18,6 +18,6 @@
  ******************************************************************************/
 package syncleus.dann.math;
 
-public interface OrderedTrigonometricAlgebraic<F extends OrderedTrigonometricAlgebraic<? extends F>> extends TrigonometricAlgebraic<F>, OrderedAlgebraic<F>
-{
+public interface OrderedTrigonometricAlgebraic<F extends OrderedTrigonometricAlgebraic<? extends F>>
+		extends TrigonometricAlgebraic<F>, OrderedAlgebraic<F> {
 }

@@ -20,85 +20,71 @@ package syncleus.dann.math.wave;
 
 import syncleus.dann.math.AbstractFunction;
 
-public class WaveFunction extends AbstractFunction
-{
-	public WaveFunction()
-	{
-		super(new String[]{"x", "frequency", "amplitude", "phase"});
+public class WaveFunction extends AbstractFunction {
+	public WaveFunction() {
+		super(new String[] { "x", "frequency", "amplitude", "phase" });
 	}
 
-	public WaveFunction(final WaveFunction copy)
-	{
+	public WaveFunction(final WaveFunction copy) {
 		super(copy);
 	}
 
-	protected WaveFunction(final String[] parameterNames)
-	{
-		super(
-				combineLabels(new String[]{"x", "frequency", "amplitude", "phase"}, parameterNames)
-		);
+	protected WaveFunction(final String[] parameterNames) {
+		super(combineLabels(new String[] { "x", "frequency", "amplitude",
+				"phase" }, parameterNames));
 	}
 
-	protected void setX(final double x)
-	{
+	protected void setX(final double x) {
 		this.setParameter(this.getParameterNameIndex("x"), x);
 	}
 
-	protected double getX()
-	{
+	protected double getX() {
 		return this.getParameter(this.getParameterNameIndex("x"));
 	}
 
-	public void setFrequency(final double frequency)
-	{
+	public void setFrequency(final double frequency) {
 		this.setParameter(this.getParameterNameIndex("frequency"), frequency);
 	}
 
-	public double getFrequency()
-	{
+	public double getFrequency() {
 		return this.getParameter(this.getParameterNameIndex("frequency"));
 	}
 
-	public void setAmplitude(final double amplitude)
-	{
+	public void setAmplitude(final double amplitude) {
 		this.setParameter(this.getParameterNameIndex("amplitude"), amplitude);
 	}
 
-	public double getAmplitude()
-	{
+	public double getAmplitude() {
 		return this.getParameter(this.getParameterNameIndex("amplitude"));
 	}
 
-	public void setPhase(final double phase)
-	{
+	public void setPhase(final double phase) {
 		this.setParameter(this.getParameterNameIndex("phase"), phase);
 	}
 
-	public double getPhase()
-	{
+	public double getPhase() {
 		return this.getParameter(this.getParameterNameIndex("phase"));
 	}
 
 	@Override
-	public double calculate()
-	{
-		return Math.sin((this.getX() + (this.getPhase() / 360)) * 2 * Math.PI * this.getFrequency()) * this.getAmplitude();
+	public double calculate() {
+		return Math.sin((this.getX() + (this.getPhase() / 360)) * 2 * Math.PI
+				* this.getFrequency())
+				* this.getAmplitude();
 	}
 
 	@Override
-	public WaveFunction clone()
-	{
+	public WaveFunction clone() {
 		return (WaveFunction) super.clone();
 	}
 
 	@Override
-	public String toString()
-	{
+	public String toString() {
 		return this.toString("x");
 	}
 
-	String toString(final String xName)
-	{
-		return "sin( (" + xName + "+(phase/360)) * 2pi * frequency) * amplitude";
+	String toString(final String xName) {
+		return "sin( (" + xName
+				+ "+(phase/360)) * 2pi * frequency) * amplitude";
 	}
 }

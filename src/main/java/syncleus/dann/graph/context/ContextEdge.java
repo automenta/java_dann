@@ -21,8 +21,9 @@ package syncleus.dann.graph.context;
 import syncleus.dann.graph.Edge;
 import syncleus.dann.graph.Graph;
 
-public interface ContextEdge<N, E extends Edge<N>, G extends Graph<N, E>> extends Edge<N>
-{
+public interface ContextEdge<N, E extends Edge<N>, G extends Graph<N, E>>
+		extends Edge<N> {
 	void nodeJoiningGraph(G graph, N node);
+
 	void nodeLeavingGraph(G graph, N node);
 }

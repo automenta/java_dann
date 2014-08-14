@@ -18,23 +18,17 @@
  ******************************************************************************/
 package syncleus.dann.neural;
 
-import syncleus.dann.neural.Neuron;
-import syncleus.dann.neural.AbstractLocalBrain;
-import syncleus.dann.neural.SimpleSynapse;
 import org.junit.Assert;
 import org.junit.Test;
 
 import syncleus.dann.neural.backprop.SimpleBackpropNeuron;
 
-public class TestSynapse
-{
-	private static class TestBrain extends AbstractLocalBrain
-	{
+public class TestSynapse {
+	private static class TestBrain extends AbstractLocalBrain {
 		private static final long serialVersionUID = -7579268135961655455L;
 
 		@Override
-		public boolean add(final Neuron newNeuron)
-		{
+		public boolean add(final Neuron newNeuron) {
 			return super.add(newNeuron);
 		}
 	}
@@ -44,14 +38,16 @@ public class TestSynapse
 	private static final double TEST_WEIGHT = 3.0;
 
 	@Test
-	public void testAccessors()
-	{
+	public void testAccessors() {
 		final TestBrain brain = new TestBrain();
 
-		final SimpleBackpropNeuron sourceNeuron = new SimpleBackpropNeuron(brain);
-		final SimpleBackpropNeuron destinationNeuron = new SimpleBackpropNeuron(brain);
+		final SimpleBackpropNeuron sourceNeuron = new SimpleBackpropNeuron(
+				brain);
+		final SimpleBackpropNeuron destinationNeuron = new SimpleBackpropNeuron(
+				brain);
 
-		final SimpleSynapse testSynapse = new SimpleSynapse(sourceNeuron, destinationNeuron, INITIAL_WEIGHT);
+		final SimpleSynapse testSynapse = new SimpleSynapse(sourceNeuron,
+				destinationNeuron, INITIAL_WEIGHT);
 
 		testSynapse.setInput(TEST_INPUT);
 		Assert.assertTrue(Math.abs(testSynapse.getInput() - TEST_INPUT) < 0.000001);

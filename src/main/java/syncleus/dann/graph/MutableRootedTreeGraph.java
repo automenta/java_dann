@@ -18,6 +18,6 @@
  ******************************************************************************/
 package syncleus.dann.graph;
 
-public interface MutableRootedTreeGraph<N, E extends DirectedEdge<N>> extends RootedTreeGraph<N, E>, MutableTreeGraph<N, E>
-{
+public interface MutableRootedTreeGraph<N, E extends DirectedEdge<N>> extends
+		RootedTreeGraph<N, E>, MutableTreeGraph<N, E> {
 }

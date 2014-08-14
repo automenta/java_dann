@@ -22,11 +22,14 @@ import java.util.Set;
 
 import syncleus.dann.graph.Graph;
 
-public interface ContextGraphElement<G extends Graph<?, ?>>
-{
+public interface ContextGraphElement<G extends Graph<?, ?>> {
 	boolean isAllowingMultipleGraphs();
+
 	boolean joiningGraph(G graph);
+
 	boolean leavingGraph(G graph);
+
 	boolean isGraphMember();
+
 	Set<G> getJoinedGraphs();
 }

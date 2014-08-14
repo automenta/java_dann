@@ -34,34 +34,34 @@ import syncleus.dann.UnexpectedDannError;
 import syncleus.dann.evolve.Chromatid;
 import syncleus.dann.evolve.MutableInteger;
 
-public class WaveletChromatid implements Chromatid<AbstractWaveletGene>, Cloneable
-{
-	//contains all the genes as their sequenced in the chromatid
+public class WaveletChromatid implements Chromatid<AbstractWaveletGene>,
+		Cloneable {
+	// contains all the genes as their sequenced in the chromatid
 	private List<AbstractWaveletGene> sequencedGenes;
-	//contains all the promoter genes in an arbitrary order
+	// contains all the promoter genes in an arbitrary order
 	private List<PromoterGene> promoters;
-	//contains just the local (non-external) signal genes in an arbitrary order.
+	// contains just the local (non-external) signal genes in an arbitrary
+	// order.
 	private List<SignalGene> localSignalGenes;
-	//contains al the external signal genes in an arbitrary order.
+	// contains al the external signal genes in an arbitrary order.
 	private List<ExternalSignalGene> externalSignalGenes;
-	//Logger used to log debugging information.
-	private static final Logger LOGGER = LogManager.getLogger(WaveletChromatid.class);
-	//Random used for all RANDOM values.
+	// Logger used to log debugging information.
+	private static final Logger LOGGER = LogManager
+			.getLogger(WaveletChromatid.class);
+	// Random used for all RANDOM values.
 	private static final Random RANDOM = Mutations.getRandom();
-	//Position of the gene's centromere. This is the origin where chromatid
-	//pairs are joined.
+	// Position of the gene's centromere. This is the origin where chromatid
+	// pairs are joined.
 	private int centromerePosition;
-	//This chomatids chance of mutating. This value itself will mutate.
+	// This chomatids chance of mutating. This value itself will mutate.
 	private double mutability;
 	private static final double MUTATION_FACTOR = 10.0;
 
-	private WaveletChromatid()
-	{
+	private WaveletChromatid() {
 		this.mutability = Mutations.getRandom().nextDouble() * MUTATION_FACTOR;
 	}
 
-	public WaveletChromatid(final WaveletChromatid copy)
-	{
+	public WaveletChromatid(final WaveletChromatid copy) {
 		this.centromerePosition = copy.centromerePosition;
 		this.mutability = copy.mutability;
 
@@ -70,47 +70,43 @@ public class WaveletChromatid implements Chromatid<AbstractWaveletGene>, Cloneab
 		this.localSignalGenes = new ArrayList<SignalGene>();
 		this.externalSignalGenes = new ArrayList<ExternalSignalGene>();
 
-		for(final AbstractWaveletGene currentGene : copy.sequencedGenes)
+		for (final AbstractWaveletGene currentGene : copy.sequencedGenes)
 			this.sequencedGenes.add(currentGene.clone());
-		for(final PromoterGene currentGene : copy.promoters)
+		for (final PromoterGene currentGene : copy.promoters)
 			this.promoters.add(currentGene.clone());
-		for(final SignalGene currentGene : copy.localSignalGenes)
+		for (final SignalGene currentGene : copy.localSignalGenes)
 			this.localSignalGenes.add(currentGene.clone());
-		for(final ExternalSignalGene currentGene : copy.externalSignalGenes)
+		for (final ExternalSignalGene currentGene : copy.externalSignalGenes)
 			this.externalSignalGenes.add(currentGene.clone());
 	}
 
-	public static WaveletChromatid newRandomWaveletChromatid()
-	{
+	public static WaveletChromatid newRandomWaveletChromatid() {
 		final WaveletChromatid newChromatid = new WaveletChromatid();
 
-		while( newChromatid.sequencedGenes.size() <= 0 )
+		while (newChromatid.sequencedGenes.size() <= 0)
 			newChromatid.mutate(null);
 
-		while( Mutations.mutationEvent(newChromatid.mutability) )
+		while (Mutations.mutationEvent(newChromatid.mutability))
 			newChromatid.mutate(null);
 
 		return newChromatid;
 	}
 
-	Set<SignalKey> getExpressedSignals(final boolean external)
-	{
-		//calculate the signal concentrations
+	Set<SignalKey> getExpressedSignals(final boolean external) {
+		// calculate the signal concentrations
 		final HashSet<SignalKey> allSignals = new HashSet<SignalKey>();
-		for(final AbstractWaveletGene waveletGene : this.sequencedGenes)
-		{
-			//if the current gene doesnt express a signal then skip it.
-			if( !(waveletGene instanceof SignalGene) )
+		for (final AbstractWaveletGene waveletGene : this.sequencedGenes) {
+			// if the current gene doesnt express a signal then skip it.
+			if (!(waveletGene instanceof SignalGene))
 				continue;
-			//convert the gene's type
+			// convert the gene's type
 			final SignalGene gene = (SignalGene) waveletGene;
 
-			//check if the gene's signal is internal or external. continue if
-			//it doesnt match
+			// check if the gene's signal is internal or external. continue if
+			// it doesnt match
 			final boolean outward = (gene instanceof ExternalSignalGene)
-						&& (((ExternalSignalGene) gene).isOutward());
-			if( external != outward )
-			{
+					&& (((ExternalSignalGene) gene).isOutward());
+			if (external != outward) {
 				// we want external signals and the gene is pointing inwards,
 				// or vise versa -> uninteresting gene -> skip it
 				continue;
@@ -122,157 +118,149 @@ public class WaveletChromatid implements Chromatid<AbstractWaveletGene>, Cloneab
 		return Collections.unmodifiableSet(allSignals);
 	}
 
-	public Set<AbstractKey> getKeys()
-	{
+	public Set<AbstractKey> getKeys() {
 		final HashSet<AbstractKey> allKeys = new HashSet<AbstractKey>();
-		for(final AbstractWaveletGene gene : this.sequencedGenes)
+		for (final AbstractWaveletGene gene : this.sequencedGenes)
 			allKeys.addAll(gene.getKeys());
 		return Collections.unmodifiableSet(allKeys);
 	}
 
-	public void preTick()
-	{
-		for(final AbstractWaveletGene gene : this.sequencedGenes)
+	public void preTick() {
+		for (final AbstractWaveletGene gene : this.sequencedGenes)
 			gene.preTick();
 	}
 
-	public void tick()
-	{
-		//first we need to calculate the promotion of each site
+	public void tick() {
+		// first we need to calculate the promotion of each site
 		final Map<Integer, Double> promotions = new HashMap<Integer, Double>();
-		for(final PromoterGene promoter : this.promoters)
-		{
+		for (final PromoterGene promoter : this.promoters) {
 			final int promoterIndex = this.sequencedGenes.indexOf(promoter);
-			final int promotedIndex = promoter.getTargetDistance() + promoterIndex;
-			if( promotedIndex < this.sequencedGenes.size() )
-			{
+			final int promotedIndex = promoter.getTargetDistance()
+					+ promoterIndex;
+			if (promotedIndex < this.sequencedGenes.size()) {
 				double promotion = 0.0;
-				if( promotions.containsKey(promotedIndex) )
+				if (promotions.containsKey(promotedIndex))
 					promotion = promotions.get(promotedIndex);
-				final double newPromotion = promotion + promoter.expressionActivity();
-				if( newPromotion != 0.0 )
+				final double newPromotion = promotion
+						+ promoter.expressionActivity();
+				if (newPromotion != 0.0)
 					promotions.put(promotedIndex, newPromotion);
 			}
 		}
 
-		for(int sequenceIndex = 0; sequenceIndex < this.sequencedGenes.size(); sequenceIndex++)
-		{
-			this.sequencedGenes.get(sequenceIndex).tick(promotions.get(sequenceIndex));
+		for (int sequenceIndex = 0; sequenceIndex < this.sequencedGenes.size(); sequenceIndex++) {
+			this.sequencedGenes.get(sequenceIndex).tick(
+					promotions.get(sequenceIndex));
 		}
 	}
 
-	public boolean bind(final SignalKeyConcentration concentration, final boolean isExternal)
-	{
+	public boolean bind(final SignalKeyConcentration concentration,
+			final boolean isExternal) {
 		boolean bound = false;
-		for(final AbstractWaveletGene gene : this.sequencedGenes)
-			if( gene.bind(concentration, isExternal) )
+		for (final AbstractWaveletGene gene : this.sequencedGenes)
+			if (gene.bind(concentration, isExternal))
 				bound = true;
 		return bound;
 	}
 
-	public int getCentromerePosition()
-	{
+	public int getCentromerePosition() {
 		return this.centromerePosition;
 	}
 
 	@Override
-	public List<AbstractWaveletGene> getGenes()
-	{
+	public List<AbstractWaveletGene> getGenes() {
 		return Collections.unmodifiableList(this.sequencedGenes);
 	}
 
-	public List<PromoterGene> getPromoterGenes()
-	{
+	public List<PromoterGene> getPromoterGenes() {
 		return Collections.unmodifiableList(this.promoters);
 	}
 
-	public List<SignalGene> getLocalSignalGenes()
-	{
+	public List<SignalGene> getLocalSignalGenes() {
 		return Collections.unmodifiableList(this.localSignalGenes);
 	}
 
-	public List<ExternalSignalGene> getExternalSignalGenes()
-	{
+	public List<ExternalSignalGene> getExternalSignalGenes() {
 		return Collections.unmodifiableList(this.externalSignalGenes);
 	}
 
 	@Override
-	public List<AbstractWaveletGene> crossover(final int point)
-	{
+	public List<AbstractWaveletGene> crossover(final int point) {
 		final int index = point + this.centromerePosition;
 
-		if( (index < 0) || (index > this.sequencedGenes.size()) )
+		if ((index < 0) || (index > this.sequencedGenes.size()))
 			return null;
-		if( (index == 0) || (index == this.sequencedGenes.size()) )
-			return Collections.unmodifiableList(new ArrayList<AbstractWaveletGene>());
+		if ((index == 0) || (index == this.sequencedGenes.size()))
+			return Collections
+					.unmodifiableList(new ArrayList<AbstractWaveletGene>());
 
-		if( point < 0 )
-			return Collections.unmodifiableList(this.sequencedGenes.subList(0, index));
+		if (point < 0)
+			return Collections.unmodifiableList(this.sequencedGenes.subList(0,
+					index));
 		else
-			return Collections.unmodifiableList(this.sequencedGenes.subList(index, this.sequencedGenes.size()));
+			return Collections.unmodifiableList(this.sequencedGenes.subList(
+					index, this.sequencedGenes.size()));
 	}
 
 	@Override
-	public void crossover(final List<AbstractWaveletGene> geneticSegment, final int point)
-	{
+	public void crossover(final List<AbstractWaveletGene> geneticSegment,
+			final int point) {
 		final int index = point + this.centromerePosition;
 
-		if( (index < 0) || (index > this.sequencedGenes.size()) )
-			throw new IllegalArgumentException("point is out of range for crossover");
+		if ((index < 0) || (index > this.sequencedGenes.size()))
+			throw new IllegalArgumentException(
+					"point is out of range for crossover");
 
-		//calculate new centromere position
-		final int newCentromerePostion = this.centromerePosition - (index - geneticSegment.size());
+		// calculate new centromere position
+		final int newCentromerePostion = this.centromerePosition
+				- (index - geneticSegment.size());
 
-		//create new sequence of genes after crossover
+		// create new sequence of genes after crossover
 		final ArrayList<AbstractWaveletGene> newGenes;
 		final List<AbstractWaveletGene> oldGenes;
-		if( point < 0 )
-		{
+		if (point < 0) {
 			newGenes = new ArrayList<AbstractWaveletGene>(geneticSegment);
-			newGenes.addAll(this.sequencedGenes.subList(index, this.sequencedGenes.size()));
+			newGenes.addAll(this.sequencedGenes.subList(index,
+					this.sequencedGenes.size()));
 
 			oldGenes = this.sequencedGenes.subList(0, index);
-		}
-		else
-		{
-			newGenes = new ArrayList<AbstractWaveletGene>(this.sequencedGenes.subList(0, index));
+		} else {
+			newGenes = new ArrayList<AbstractWaveletGene>(
+					this.sequencedGenes.subList(0, index));
 			newGenes.addAll(geneticSegment);
 
-			oldGenes = this.sequencedGenes.subList(index, this.sequencedGenes.size());
+			oldGenes = this.sequencedGenes.subList(index,
+					this.sequencedGenes.size());
 		}
 
-		//remove displaced genes from specific gene type lists
-		for(final AbstractWaveletGene oldGene : oldGenes)
-		{
-			if( oldGene instanceof PromoterGene )
+		// remove displaced genes from specific gene type lists
+		for (final AbstractWaveletGene oldGene : oldGenes) {
+			if (oldGene instanceof PromoterGene)
 				this.promoters.remove(oldGene);
-			else if( oldGene instanceof ExternalSignalGene )
+			else if (oldGene instanceof ExternalSignalGene)
 				this.externalSignalGenes.remove(oldGene);
-			else if( oldGene instanceof SignalGene )
+			else if (oldGene instanceof SignalGene)
 				this.localSignalGenes.remove(oldGene);
 		}
 
-		//add new genes to the specific gene type list
-		for(final AbstractWaveletGene newGene : geneticSegment)
-		{
-			if( newGene instanceof PromoterGene )
+		// add new genes to the specific gene type list
+		for (final AbstractWaveletGene newGene : geneticSegment) {
+			if (newGene instanceof PromoterGene)
 				this.promoters.add((PromoterGene) newGene);
-			else if( newGene instanceof ExternalSignalGene )
+			else if (newGene instanceof ExternalSignalGene)
 				this.externalSignalGenes.add((ExternalSignalGene) newGene);
-			else if( newGene instanceof SignalGene )
+			else if (newGene instanceof SignalGene)
 				this.localSignalGenes.add((SignalGene) newGene);
 		}
 
-		//update sequence genes to use the new genes
+		// update sequence genes to use the new genes
 		this.sequencedGenes = newGenes;
 		this.centromerePosition = newCentromerePostion;
 	}
 
 	@Override
-	public WaveletChromatid clone()
-	{
-		try
-		{
+	public WaveletChromatid clone() {
+		try {
 			final WaveletChromatid copy = (WaveletChromatid) super.clone();
 
 			copy.centromerePosition = this.centromerePosition;
@@ -283,39 +271,35 @@ public class WaveletChromatid implements Chromatid<AbstractWaveletGene>, Cloneab
 			copy.localSignalGenes = new ArrayList<SignalGene>();
 			copy.externalSignalGenes = new ArrayList<ExternalSignalGene>();
 
-			for(final AbstractWaveletGene currentGene : this.sequencedGenes)
+			for (final AbstractWaveletGene currentGene : this.sequencedGenes)
 				copy.sequencedGenes.add(currentGene.clone());
-			for(final PromoterGene currentGene : this.promoters)
+			for (final PromoterGene currentGene : this.promoters)
 				copy.promoters.add(currentGene.clone());
-			for(final SignalGene currentGene : this.localSignalGenes)
+			for (final SignalGene currentGene : this.localSignalGenes)
 				copy.localSignalGenes.add(currentGene.clone());
-			for(final ExternalSignalGene currentGene : this.externalSignalGenes)
+			for (final ExternalSignalGene currentGene : this.externalSignalGenes)
 				copy.externalSignalGenes.add(currentGene.clone());
 
 			return copy;
-		}
-		catch(final CloneNotSupportedException caught)
-		{
-			LOGGER.error("CloneNotSupportedException caught but not expected!", caught);
-			throw new UnexpectedDannError("CloneNotSupportedException caught but not expected", caught);
+		} catch (final CloneNotSupportedException caught) {
+			LOGGER.error("CloneNotSupportedException caught but not expected!",
+					caught);
+			throw new UnexpectedDannError(
+					"CloneNotSupportedException caught but not expected",
+					caught);
 		}
 	}
 
-	private static AbstractKey randomKey(final Set<AbstractKey> keyPool)
-	{
-		if( (keyPool != null) && (!keyPool.isEmpty()) )
-		{
-			//select a RANDOM key from the pool
+	private static AbstractKey randomKey(final Set<AbstractKey> keyPool) {
+		if ((keyPool != null) && (!keyPool.isEmpty())) {
+			// select a RANDOM key from the pool
 			AbstractKey randomKey = null;
 			int keyIndex = RANDOM.nextInt(keyPool.size());
-			for(final AbstractKey key : keyPool)
-			{
-				if( keyIndex <= 0 )
-				{
+			for (final AbstractKey key : keyPool) {
+				if (keyIndex <= 0) {
 					randomKey = key;
 					break;
-				}
-				else
+				} else
 					keyIndex--;
 			}
 			assert randomKey != null;
@@ -324,25 +308,24 @@ public class WaveletChromatid implements Chromatid<AbstractWaveletGene>, Cloneab
 		return new ReceptorKey();
 	}
 
-	public void mutate(final Set<AbstractKey> keyPool)
-	{
-		//there is a chance we will add a new gene to the chromatid
-		if( Mutations.mutationEvent(this.mutability) )
-		{
-			//generate the new receptorKey used in the new gene
+	public void mutate(final Set<AbstractKey> keyPool) {
+		// there is a chance we will add a new gene to the chromatid
+		if (Mutations.mutationEvent(this.mutability)) {
+			// generate the new receptorKey used in the new gene
 			ReceptorKey newReceptorKey = new ReceptorKey(randomKey(keyPool));
-			//mutate new receptorKey before using it
-			while( Mutations.mutationEvent(this.mutability) )
+			// mutate new receptorKey before using it
+			while (Mutations.mutationEvent(this.mutability))
 				newReceptorKey = newReceptorKey.mutate(this.mutability);
-			//create a new gene using the new receptor
+			// create a new gene using the new receptor
 			final AbstractWaveletGene newGene;
 			final SignalKey newSignalKey = new SignalKey(randomKey(keyPool));
 			final int numChoices = 3;
-			switch(RANDOM.nextInt(numChoices))
-			{
+			switch (RANDOM.nextInt(numChoices)) {
 			case 0:
-				final MutableInteger initialDistance = (new MutableInteger(0)).mutate(this.mutability);
-				newGene = new PromoterGene(newReceptorKey, initialDistance.intValue());
+				final MutableInteger initialDistance = (new MutableInteger(0))
+						.mutate(this.mutability);
+				newGene = new PromoterGene(newReceptorKey,
+						initialDistance.intValue());
 				this.promoters.add((PromoterGene) newGene);
 				break;
 			case 1:
@@ -350,21 +333,22 @@ public class WaveletChromatid implements Chromatid<AbstractWaveletGene>, Cloneab
 				this.localSignalGenes.add((SignalGene) newGene);
 				break;
 			default:
-				newGene = new ExternalSignalGene(newReceptorKey, newSignalKey, RANDOM.nextBoolean());
+				newGene = new ExternalSignalGene(newReceptorKey, newSignalKey,
+						RANDOM.nextBoolean());
 				this.externalSignalGenes.add((ExternalSignalGene) newGene);
 			}
-			//add the new gene to the sequence. there is an equal chance the
-			//gene will be added to the head and tail
-			if( RANDOM.nextBoolean() )
+			// add the new gene to the sequence. there is an equal chance the
+			// gene will be added to the head and tail
+			if (RANDOM.nextBoolean())
 				this.sequencedGenes.add(0, newGene);
 			else
 				this.sequencedGenes.add(newGene);
 		}
-		//mutate each gene (the gene itself will handle if it actually mutates)
-		for(final AbstractWaveletGene currentGene : this.sequencedGenes)
+		// mutate each gene (the gene itself will handle if it actually mutates)
+		for (final AbstractWaveletGene currentGene : this.sequencedGenes)
 			currentGene.mutate(keyPool);
-		//mutate the mutability factor.
-		if( Mutations.mutationEvent(this.mutability) )
+		// mutate the mutability factor.
+		if (Mutations.mutationEvent(this.mutability))
 			this.mutability = Mutations.mutabilityMutation(this.mutability);
 	}
 }

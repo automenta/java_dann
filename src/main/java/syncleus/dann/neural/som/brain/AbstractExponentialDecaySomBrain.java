@@ -25,39 +25,42 @@ import syncleus.dann.neural.som.SomInputNeuron;
 import syncleus.dann.neural.som.SomNeuron;
 import syncleus.dann.neural.som.SomOutputNeuron;
 
-public abstract class AbstractExponentialDecaySomBrain<IN extends SomInputNeuron, ON extends SomOutputNeuron, N extends SomNeuron, S extends Synapse<N>> extends AbstractSomBrain<IN, ON, N, S>
-{
+public abstract class AbstractExponentialDecaySomBrain<IN extends SomInputNeuron, ON extends SomOutputNeuron, N extends SomNeuron, S extends Synapse<N>>
+		extends AbstractSomBrain<IN, ON, N, S> {
 	private static final long serialVersionUID = 12374098245721L;
 	private final int iterationsToConverge;
 	private final double initialLearningRate;
 
-	protected AbstractExponentialDecaySomBrain(final int inputCount, final int dimentionality, final int iterationsToConverge, final double initialLearningRate, final ExecutorService executor)
-	{
+	protected AbstractExponentialDecaySomBrain(final int inputCount,
+			final int dimentionality, final int iterationsToConverge,
+			final double initialLearningRate, final ExecutorService executor) {
 		super(inputCount, dimentionality, executor);
 		this.iterationsToConverge = iterationsToConverge;
 		this.initialLearningRate = initialLearningRate;
 	}
 
-	protected AbstractExponentialDecaySomBrain(final int inputCount, final int dimentionality, final int iterationsToConverge, final double initialLearningRate)
-	{
-		this(inputCount, dimentionality, iterationsToConverge, initialLearningRate, null);
+	protected AbstractExponentialDecaySomBrain(final int inputCount,
+			final int dimentionality, final int iterationsToConverge,
+			final double initialLearningRate) {
+		this(inputCount, dimentionality, iterationsToConverge,
+				initialLearningRate, null);
 	}
 
-	private double getIntialRadius()
-	{
+	private double getIntialRadius() {
 		double maxCrossSection = 0.0;
-		for(int dimensionIndex = 1; dimensionIndex <= this.getUpperBounds().getDimensions(); dimensionIndex++)
-		{
-			final double crossSection = this.getUpperBounds().get(dimensionIndex) - this.getLowerBounds().get(dimensionIndex);
-			if( crossSection > maxCrossSection )
+		for (int dimensionIndex = 1; dimensionIndex <= this.getUpperBounds()
+				.getDimensions(); dimensionIndex++) {
+			final double crossSection = this.getUpperBounds().get(
+					dimensionIndex)
+					- this.getLowerBounds().get(dimensionIndex);
+			if (crossSection > maxCrossSection)
 				maxCrossSection = crossSection;
 		}
 
 		return maxCrossSection / 2.0;
 	}
 
-	private double getTimeConstant()
-	{
+	private double getTimeConstant() {
 		return (this.iterationsToConverge) / Math.log(this.getIntialRadius());
 	}
 
@@ -65,15 +68,16 @@ public abstract class AbstractExponentialDecaySomBrain<IN extends SomInputNeuron
 	 * Determines the neighborhood function based on the neurons distance from
 	 * the BMU.
 	 *
-	 * @param distanceFromBest The neuron's distance from the BMU.
+	 * @param distanceFromBest
+	 *            The neuron's distance from the BMU.
 	 * @return the decay effecting the learning of the specified neuron due to
-	 *   its distance from the BMU.
+	 *         its distance from the BMU.
 	 * @since 2.0
 	 */
 	@Override
-	protected double neighborhoodFunction(final double distanceFromBest)
-	{
-		return Math.exp(-1.0 * (Math.pow(distanceFromBest, 2.0)) / (2.0 * Math.pow(this.neighborhoodRadiusFunction(), 2.0)));
+	protected double neighborhoodFunction(final double distanceFromBest) {
+		return Math.exp(-1.0 * (Math.pow(distanceFromBest, 2.0))
+				/ (2.0 * Math.pow(this.neighborhoodRadiusFunction(), 2.0)));
 	}
 
 	/**
@@ -84,9 +88,10 @@ public abstract class AbstractExponentialDecaySomBrain<IN extends SomInputNeuron
 	 * @since 2.0
 	 */
 	@Override
-	protected double neighborhoodRadiusFunction()
-	{
-		return this.getIntialRadius() * Math.exp(-1.0 * this.getIterationsTrained() / this.getTimeConstant());
+	protected double neighborhoodRadiusFunction() {
+		return this.getIntialRadius()
+				* Math.exp(-1.0 * this.getIterationsTrained()
+						/ this.getTimeConstant());
 	}
 
 	/**
@@ -96,8 +101,9 @@ public abstract class AbstractExponentialDecaySomBrain<IN extends SomInputNeuron
 	 * @since 2.0
 	 */
 	@Override
-	protected double learningRateFunction()
-	{
-		return this.initialLearningRate * Math.exp(-1.0 * this.getIterationsTrained() / this.getTimeConstant());
+	protected double learningRateFunction() {
+		return this.initialLearningRate
+				* Math.exp(-1.0 * this.getIterationsTrained()
+						/ this.getTimeConstant());
 	}
 }

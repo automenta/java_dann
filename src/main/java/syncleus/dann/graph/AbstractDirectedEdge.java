@@ -21,108 +21,99 @@ package syncleus.dann.graph;
 import java.util.Collections;
 import java.util.List;
 
-public abstract class AbstractDirectedEdge<N> extends AbstractBidirectedEdge<N> implements DirectedEdge<N>
-{
+public abstract class AbstractDirectedEdge<N> extends AbstractBidirectedEdge<N>
+		implements DirectedEdge<N> {
 	private static final long serialVersionUID = -7589242369886611386L;
 
-	protected AbstractDirectedEdge(final N source, final N destination)
-	{
+	protected AbstractDirectedEdge(final N source, final N destination) {
 		super(source, EndState.INWARD, destination, EndState.OUTWARD);
 	}
 
-	protected AbstractDirectedEdge(final N source, final N destination, final boolean allowJoiningMultipleGraphs, final boolean contextEnabled)
-	{
-		super(source, EndState.INWARD, destination, EndState.OUTWARD, allowJoiningMultipleGraphs, contextEnabled);
+	protected AbstractDirectedEdge(final N source, final N destination,
+			final boolean allowJoiningMultipleGraphs,
+			final boolean contextEnabled) {
+		super(source, EndState.INWARD, destination, EndState.OUTWARD,
+				allowJoiningMultipleGraphs, contextEnabled);
 	}
 
 	@Override
-	public N getSourceNode()
-	{
+	public N getSourceNode() {
 		return this.getLeftNode();
 	}
 
 	@Override
-	public N getDestinationNode()
-	{
+	public N getDestinationNode() {
 		return this.getRightNode();
 	}
 
 	@Override
-	public List<N> getTraversableNodes(final N node)
-	{
-		if( this.getSourceNode().equals(node) )
+	public List<N> getTraversableNodes(final N node) {
+		if (this.getSourceNode().equals(node))
 			return Collections.singletonList(this.getDestinationNode());
-		else if( this.getDestinationNode().equals(node) )
+		else if (this.getDestinationNode().equals(node))
 			return Collections.emptyList();
 		else
-			throw new IllegalArgumentException("node is not one of the end points!");
+			throw new IllegalArgumentException(
+					"node is not one of the end points!");
 	}
 
 	@Override
-	public final boolean isIntroverted()
-	{
+	public final boolean isIntroverted() {
 		return false;
 	}
 
 	@Override
-	public final boolean isExtroverted()
-	{
+	public final boolean isExtroverted() {
 		return false;
 	}
 
 	@Override
-	public final boolean isDirected()
-	{
+	public final boolean isDirected() {
 		return true;
 	}
 
 	@Override
-	public final boolean isHalfEdge()
-	{
+	public final boolean isHalfEdge() {
 		return false;
 	}
 
 	@Override
-	public final boolean isLooseEdge()
-	{
+	public final boolean isLooseEdge() {
 		return false;
 	}
 
 	@Override
-	public final boolean isOrdinaryEdge()
-	{
+	public final boolean isOrdinaryEdge() {
 		return true;
 	}
 
 	@Override
-	public String toString()
-	{
+	public String toString() {
 		return this.getSourceNode() + "->" + this.getDestinationNode();
 	}
 
 	@Override
-	public AbstractDirectedEdge<N> disconnect(final N node)
-	{
-		if( node == null )
+	public AbstractDirectedEdge<N> disconnect(final N node) {
+		if (node == null)
 			throw new IllegalArgumentException("node can not be null");
-		if( !this.getNodes().contains(node) )
-			throw new IllegalArgumentException("node is not currently connected to");
+		if (!this.getNodes().contains(node))
+			throw new IllegalArgumentException(
+					"node is not currently connected to");
 		return (AbstractDirectedEdge<N>) this.remove(node);
 	}
 
 	@Override
-	public AbstractDirectedEdge<N> disconnect(final List<N> nodes)
-	{
-		if( nodes == null )
+	public AbstractDirectedEdge<N> disconnect(final List<N> nodes) {
+		if (nodes == null)
 			throw new IllegalArgumentException("node can not be null");
-		if( !this.getNodes().containsAll(nodes) )
-			throw new IllegalArgumentException("node is not currently connected to");
+		if (!this.getNodes().containsAll(nodes))
+			throw new IllegalArgumentException(
+					"node is not currently connected to");
 		return (AbstractDirectedEdge<N>) this.remove(nodes);
 	}
 
 	@Override
-	public AbstractDirectedEdge<N> clone()
-	{
+	public AbstractDirectedEdge<N> clone() {
 		return (AbstractDirectedEdge<N>) super.clone();
 	}
 }

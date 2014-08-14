@@ -32,17 +32,21 @@ import syncleus.dann.neural.som.SomOutputNeuron;
  * @author Jeffrey Phillips Freeman
  * @since 2.0
  */
-public final class ExponentialDecaySomBrain<IN extends SomInputNeuron, ON extends SomOutputNeuron, N extends SomNeuron, S extends Synapse<N>> extends AbstractExponentialDecaySomBrain<IN, ON, N, S>
-{
+public final class ExponentialDecaySomBrain<IN extends SomInputNeuron, ON extends SomOutputNeuron, N extends SomNeuron, S extends Synapse<N>>
+		extends AbstractExponentialDecaySomBrain<IN, ON, N, S> {
 	private static final long serialVersionUID = 4523396585666912034L;
 
-	public ExponentialDecaySomBrain(final int inputCount, final int dimentionality, final int iterationsToConverge, final double initialLearningRate, final ExecutorService executor)
-	{
-		super(inputCount, dimentionality, iterationsToConverge, initialLearningRate, executor);
+	public ExponentialDecaySomBrain(final int inputCount,
+			final int dimentionality, final int iterationsToConverge,
+			final double initialLearningRate, final ExecutorService executor) {
+		super(inputCount, dimentionality, iterationsToConverge,
+				initialLearningRate, executor);
 	}
 
-	public ExponentialDecaySomBrain(final int inputCount, final int dimentionality, final int iterationsToConverge, final double initialLearningRate)
-	{
-		this(inputCount, dimentionality, iterationsToConverge, initialLearningRate, null);
+	public ExponentialDecaySomBrain(final int inputCount,
+			final int dimentionality, final int iterationsToConverge,
+			final double initialLearningRate) {
+		this(inputCount, dimentionality, iterationsToConverge,
+				initialLearningRate, null);
 	}
 }

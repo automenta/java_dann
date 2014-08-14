@@ -25,8 +25,7 @@ package syncleus.dann.neural;
  * @author Jeffrey Phillips Freeman
  * @since 1.0
  */
-public interface OutputNeuron extends Neuron
-{
+public interface OutputNeuron extends Neuron {
 	/**
 	 * Obtains the current output for this neuron.
 	 *

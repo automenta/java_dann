@@ -18,32 +18,27 @@
  ******************************************************************************/
 package syncleus.dann.graph.drawing.hyperassociativemap;
 
-import syncleus.dann.graph.drawing.hyperassociativemap.NeighborNotFoundException;
 import org.junit.Test;
 
-public class TestNeighborNotFoundException
-{
+public class TestNeighborNotFoundException {
 	@Test(expected = NeighborNotFoundException.class)
-	public void testDefault() throws NeighborNotFoundException
-	{
+	public void testDefault() throws NeighborNotFoundException {
 		throw new NeighborNotFoundException();
 	}
 
 	@Test(expected = NeighborNotFoundException.class)
-	public void testString() throws NeighborNotFoundException
-	{
+	public void testString() throws NeighborNotFoundException {
 		throw new NeighborNotFoundException("This is just a test");
 	}
 
 	@Test(expected = NeighborNotFoundException.class)
-	public void testCause() throws NeighborNotFoundException
-	{
+	public void testCause() throws NeighborNotFoundException {
 		throw new NeighborNotFoundException(new Exception());
 	}
 
 	@Test(expected = NeighborNotFoundException.class)
-	public void testStringCause() throws NeighborNotFoundException
-	{
-		throw new NeighborNotFoundException("This is just a test", new Exception());
+	public void testStringCause() throws NeighborNotFoundException {
+		throw new NeighborNotFoundException("This is just a test",
+				new Exception());
 	}
 }

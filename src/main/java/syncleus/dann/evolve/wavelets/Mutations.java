@@ -22,36 +22,33 @@ import java.util.Random;
 
 import syncleus.dann.evolve.MutableDouble;
 
-public final class Mutations
-{
+public final class Mutations {
 	private static final Random RANDOM = new Random();
 
-	private Mutations()
-	{
+	private Mutations() {
 	}
 
-	public static double mutabilityMutation(final double mutability)
-	{
-		final double mutabilityMutation = new MutableDouble(0.0).mutate(mutability).doubleValue();
-		if( mutabilityMutation > 0 )
+	public static double mutabilityMutation(final double mutability) {
+		final double mutabilityMutation = new MutableDouble(0.0).mutate(
+				mutability).doubleValue();
+		if (mutabilityMutation > 0)
 			return mutability + mutabilityMutation;
-		else
-		{
-			double returnValue = mutability - (mutability * (1 - 1 / (Math.abs(mutabilityMutation) + 1)));
-			if( returnValue == 0.0 )
+		else {
+			double returnValue = mutability
+					- (mutability * (1 - 1 / (Math.abs(mutabilityMutation) + 1)));
+			if (returnValue == 0.0)
 				returnValue = Double.MIN_VALUE;
 
 			return returnValue;
 		}
 	}
 
-	public static Random getRandom()
-	{
+	public static Random getRandom() {
 		return RANDOM;
 	}
 
-	public static boolean mutationEvent(final double mutability)
-	{
-		return (Mutations.getRandom().nextDouble() < Math.tanh(Math.abs(mutability)));
+	public static boolean mutationEvent(final double mutability) {
+		return (Mutations.getRandom().nextDouble() < Math.tanh(Math
+				.abs(mutability)));
 	}
 }

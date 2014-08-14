@@ -18,7 +18,6 @@
  ******************************************************************************/
 package syncleus.dann.graph.drawing.hyperassociativemap;
 
-import syncleus.dann.graph.drawing.hyperassociativemap.HyperassociativeMap;
 import java.util.concurrent.ThreadPoolExecutor;
 
 import org.junit.Assert;
@@ -34,40 +33,36 @@ import syncleus.dann.neural.Synapse;
 import syncleus.dann.neural.backprop.BackpropNeuron;
 import syncleus.dann.neural.backprop.SimpleBackpropNeuron;
 
-public class TestHyperassociativeMap
-{
-	private static class TestBrain extends AbstractLocalBrain
-	{
+public class TestHyperassociativeMap {
+	private static class TestBrain extends AbstractLocalBrain {
 		private static final long serialVersionUID = 6640257805440602087L;
 
 		@Override
-		public boolean add(final Neuron newNeuron)
-		{
+		public boolean add(final Neuron newNeuron) {
 			return super.add(newNeuron);
 		}
 
 		@Override
-		public boolean connect(final Synapse synapse, final boolean initialize)
-		{
+		public boolean connect(final Synapse synapse, final boolean initialize) {
 			return super.connect(synapse, initialize);
 		}
 	}
 
-	private static class TestMap extends HyperassociativeMap<AbstractLocalBrain<InputNeuron, OutputNeuron, Neuron, Synapse<Neuron>>, Neuron>
-	{
-		public TestMap(final AbstractLocalBrain brain, final int dimensions, final ThreadPoolExecutor executor)
-		{
+	private static class TestMap
+			extends
+			HyperassociativeMap<AbstractLocalBrain<InputNeuron, OutputNeuron, Neuron, Synapse<Neuron>>, Neuron> {
+		public TestMap(final AbstractLocalBrain brain, final int dimensions,
+				final ThreadPoolExecutor executor) {
 			super(brain, dimensions, executor);
 		}
-		public TestMap(final AbstractLocalBrain brain, final int dimensions)
-		{
+
+		public TestMap(final AbstractLocalBrain brain, final int dimensions) {
 			super(brain, dimensions);
-		}                
+		}
 	}
 
 	@Test
-	public void testRefresh() throws InvalidConnectionTypeDannException
-	{
+	public void testRefresh() throws InvalidConnectionTypeDannException {
 		final TestBrain testBrain = new TestBrain();
 
 		final SimpleBackpropNeuron neuron1 = new SimpleBackpropNeuron(testBrain);
@@ -76,28 +71,31 @@ public class TestHyperassociativeMap
 		testBrain.add(neuron1);
 		testBrain.add(neuron2);
 
-		final Synapse<BackpropNeuron> synapse = new SimpleSynapse<BackpropNeuron>(neuron1, neuron2);
+		final Synapse<BackpropNeuron> synapse = new SimpleSynapse<BackpropNeuron>(
+				neuron1, neuron2);
 		testBrain.connect(synapse, true);
 
 		final TestMap testMap;
-		//final int cores = Runtime.getRuntime().availableProcessors();
-		//final ThreadPoolExecutor executor = new ThreadPoolExecutor(cores + 1, cores * 2, 20, TimeUnit.SECONDS, new LinkedBlockingQueue());
-		try
-		{
-			//testMap = new TestMap(testBrain, 3, executor);
-                        testMap = new TestMap(testBrain, 3);
-                        
+		// final int cores = Runtime.getRuntime().availableProcessors();
+		// final ThreadPoolExecutor executor = new ThreadPoolExecutor(cores + 1,
+		// cores * 2, 20, TimeUnit.SECONDS, new LinkedBlockingQueue());
+		try {
+			// testMap = new TestMap(testBrain, 3, executor);
+			testMap = new TestMap(testBrain, 3);
+
 			testMap.align();
 
-			Assert.assertTrue("neuron1 is not in the map", testMap.getGraph().getNodes().contains(neuron1));
-			Assert.assertTrue("neuron2 is not in the map", testMap.getGraph().getNodes().contains(neuron2));
+			Assert.assertTrue("neuron1 is not in the map", testMap.getGraph()
+					.getNodes().contains(neuron1));
+			Assert.assertTrue("neuron2 is not in the map", testMap.getGraph()
+					.getNodes().contains(neuron2));
 
-			Assert.assertTrue("neuron1 is not associated to neuron2", testMap.getGraph().getAdjacentNodes(neuron1).contains(neuron2));
-			Assert.assertTrue("neuron2 is not associated to neuron1", testMap.getGraph().getAdjacentNodes(neuron2).contains(neuron1));
-		}
-		finally
-		{
-			//executor.shutdown();
+			Assert.assertTrue("neuron1 is not associated to neuron2", testMap
+					.getGraph().getAdjacentNodes(neuron1).contains(neuron2));
+			Assert.assertTrue("neuron2 is not associated to neuron1", testMap
+					.getGraph().getAdjacentNodes(neuron2).contains(neuron1));
+		} finally {
+			// executor.shutdown();
 		}
 	}
 }

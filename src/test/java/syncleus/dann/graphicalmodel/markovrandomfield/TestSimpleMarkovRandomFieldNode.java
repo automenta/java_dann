@@ -18,59 +18,66 @@
  ******************************************************************************/
 package syncleus.dann.graphicalmodel.markovrandomfield;
 
-import syncleus.dann.graphmodel.markovrandomfield.MutableMarkovRandomFieldAdjacencyGraph;
 import org.junit.Assert;
 import org.junit.Test;
 
 import syncleus.dann.graph.ImmutableUndirectedEdge;
 import syncleus.dann.graph.UndirectedEdge;
-import syncleus.dann.graphmodel.GraphicalModelNode;
-import syncleus.dann.graphmodel.SimpleGraphicalModelNode;
+import syncleus.dann.learn.GraphicalModelNode;
+import syncleus.dann.learn.SimpleGraphicalModelNode;
+import syncleus.dann.learn.markovrandomfield.MutableMarkovRandomFieldAdjacencyGraph;
 
-public class TestSimpleMarkovRandomFieldNode
-{
-	private static enum SimpleEnum
-	{
+public class TestSimpleMarkovRandomFieldNode {
+	private static enum SimpleEnum {
 		TRUE, FALSE
 	}
 
 	@Test
-	public void testSingleNode()
-	{
+	public void testSingleNode() {
 		final MutableMarkovRandomFieldAdjacencyGraph network = new MutableMarkovRandomFieldAdjacencyGraph();
-		final GraphicalModelNode<SimpleEnum> testNode = new SimpleGraphicalModelNode<SimpleEnum>(SimpleEnum.TRUE);
+		final GraphicalModelNode<SimpleEnum> testNode = new SimpleGraphicalModelNode<SimpleEnum>(
+				SimpleEnum.TRUE);
 
 		network.add(testNode);
 
-		Assert.assertTrue("initial state not retained!", testNode.getState() == SimpleEnum.TRUE);
+		Assert.assertTrue("initial state not retained!",
+				testNode.getState() == SimpleEnum.TRUE);
 
 		testNode.setState(SimpleEnum.FALSE);
-		Assert.assertTrue("set state not retained!", testNode.getState() == SimpleEnum.FALSE);
+		Assert.assertTrue("set state not retained!",
+				testNode.getState() == SimpleEnum.FALSE);
 
 		testNode.learnState();
-		Assert.assertTrue("state not learned!", testNode.getLearnedStates().contains(SimpleEnum.FALSE));
-		Assert.assertTrue("state not learned!", !(testNode.getLearnedStates().contains(SimpleEnum.TRUE)));
+		Assert.assertTrue("state not learned!", testNode.getLearnedStates()
+				.contains(SimpleEnum.FALSE));
+		Assert.assertTrue("state not learned!",
+				!(testNode.getLearnedStates().contains(SimpleEnum.TRUE)));
 
 		testNode.learnState();
 		testNode.learnState();
 		testNode.setState(SimpleEnum.TRUE);
 		testNode.learnState();
-		Assert.assertTrue("state not learned!", testNode.getLearnedStates().contains(SimpleEnum.FALSE));
-		Assert.assertTrue("state not learned!", testNode.getLearnedStates().contains(SimpleEnum.TRUE));
-		Assert.assertTrue("bad state probability!", Math.abs(testNode.stateProbability() - 0.25) < 0.0001);
+		Assert.assertTrue("state not learned!", testNode.getLearnedStates()
+				.contains(SimpleEnum.FALSE));
+		Assert.assertTrue("state not learned!", testNode.getLearnedStates()
+				.contains(SimpleEnum.TRUE));
+		Assert.assertTrue("bad state probability!",
+				Math.abs(testNode.stateProbability() - 0.25) < 0.0001);
 	}
 
 	@Test
-	public void testDependentNode()
-	{
+	public void testDependentNode() {
 		final MutableMarkovRandomFieldAdjacencyGraph network = new MutableMarkovRandomFieldAdjacencyGraph();
-		final GraphicalModelNode<SimpleEnum> parentNode = new SimpleGraphicalModelNode<SimpleEnum>(SimpleEnum.TRUE);
-		final GraphicalModelNode<SimpleEnum> childNode = new SimpleGraphicalModelNode<SimpleEnum>(SimpleEnum.TRUE);
+		final GraphicalModelNode<SimpleEnum> parentNode = new SimpleGraphicalModelNode<SimpleEnum>(
+				SimpleEnum.TRUE);
+		final GraphicalModelNode<SimpleEnum> childNode = new SimpleGraphicalModelNode<SimpleEnum>(
+				SimpleEnum.TRUE);
 
 		network.add(parentNode);
 		network.add(childNode);
 
-		final UndirectedEdge<GraphicalModelNode<SimpleEnum>> testEdge = new ImmutableUndirectedEdge<GraphicalModelNode<SimpleEnum>>(parentNode, childNode);
+		final UndirectedEdge<GraphicalModelNode<SimpleEnum>> testEdge = new ImmutableUndirectedEdge<GraphicalModelNode<SimpleEnum>>(
+				parentNode, childNode);
 		network.add(testEdge);
 
 		parentNode.setState(SimpleEnum.TRUE);
@@ -91,18 +98,30 @@ public class TestSimpleMarkovRandomFieldNode
 
 		parentNode.setState(SimpleEnum.TRUE);
 		childNode.setState(SimpleEnum.TRUE);
-		Assert.assertTrue("bad state probability (TRUE,TRUE)! stateProbability: " + childNode.stateProbability(), Math.abs(childNode.stateProbability() - 0.25) < 0.0001);
+		Assert.assertTrue(
+				"bad state probability (TRUE,TRUE)! stateProbability: "
+						+ childNode.stateProbability(),
+				Math.abs(childNode.stateProbability() - 0.25) < 0.0001);
 
 		parentNode.setState(SimpleEnum.TRUE);
 		childNode.setState(SimpleEnum.FALSE);
-		Assert.assertTrue("bad state probability (TRUE,FALSE)!: " + childNode.stateProbability(), Math.abs(childNode.stateProbability() - 0.75) < 0.0001);
+		Assert.assertTrue(
+				"bad state probability (TRUE,FALSE)!: "
+						+ childNode.stateProbability(),
+				Math.abs(childNode.stateProbability() - 0.75) < 0.0001);
 
 		parentNode.setState(SimpleEnum.FALSE);
 		childNode.setState(SimpleEnum.TRUE);
-		Assert.assertTrue("bad state probability (FALSE,TRUE)!: " + childNode.stateProbability(), Math.abs(childNode.stateProbability() - 0.75) < 0.0001);
+		Assert.assertTrue(
+				"bad state probability (FALSE,TRUE)!: "
+						+ childNode.stateProbability(),
+				Math.abs(childNode.stateProbability() - 0.75) < 0.0001);
 
 		parentNode.setState(SimpleEnum.FALSE);
 		childNode.setState(SimpleEnum.FALSE);
-		Assert.assertTrue("bad state probability (FALSE,FALSE)!: " + childNode.stateProbability(), Math.abs(childNode.stateProbability() - 0.25) < 0.0001);
+		Assert.assertTrue(
+				"bad state probability (FALSE,FALSE)!: "
+						+ childNode.stateProbability(),
+				Math.abs(childNode.stateProbability() - 0.25) < 0.0001);
 	}
 }

@@ -47,8 +47,6 @@ import syncleus.dann.neural.som.SomInputNeuron;
 import syncleus.dann.neural.som.SomNeuron;
 import syncleus.dann.neural.som.SomOutputNeuron;
 
-
-
 /**
  * A SomBrain acts as the parent class for all brains that use traditional SOM
  * algorithms. It implements a standard SOM leaving only the methods handling
@@ -58,43 +56,41 @@ import syncleus.dann.neural.som.SomOutputNeuron;
  * @author Jeffrey Phillips Freeman
  * @since 2.0
  */
-public abstract class AbstractSomBrain<IN extends SomInputNeuron, ON extends SomOutputNeuron, N extends SomNeuron, S extends Synapse<N>> extends AbstractLocalBrain<IN, ON, N, S> implements SomBrain<IN, ON, N, S>
-{
+public abstract class AbstractSomBrain<IN extends SomInputNeuron, ON extends SomOutputNeuron, N extends SomNeuron, S extends Synapse<N>>
+		extends AbstractLocalBrain<IN, ON, N, S> implements
+		SomBrain<IN, ON, N, S> {
 	private int iterationsTrained;
 	private Vector upperBounds;
 	private Vector lowerBounds;
 	private final List<IN> inputs;
 	private final Map<Vector, ON> outputs = new HashMap<Vector, ON>();
-	private static final Logger LOGGER = LogManager.getLogger(AbstractSomBrain.class);
+	private static final Logger LOGGER = LogManager
+			.getLogger(AbstractSomBrain.class);
 
-
-	private class PropagateOutput implements Callable<Double>
-	{
+	private class PropagateOutput implements Callable<Double> {
 		private final ON neuron;
 
-		public PropagateOutput(final ON neuron)
-		{
+		public PropagateOutput(final ON neuron) {
 			this.neuron = neuron;
 		}
 
 		@Override
-		public Double call()
-		{
+		public Double call() {
 			this.neuron.tick();
 			return this.neuron.getOutput();
 		}
 	}
 
-	private class TrainNeuron implements Runnable
-	{
+	private class TrainNeuron implements Runnable {
 		private final ON neuron;
 		private final Vector neuronPoint;
 		private final Vector bestMatchPoint;
 		private final double neighborhoodRadius;
 		private final double learningRate;
 
-		public TrainNeuron(final ON neuron, final Vector neuronPoint, final Vector bestMatchPoint, final double neighborhoodRadius, final double learningRate)
-		{
+		public TrainNeuron(final ON neuron, final Vector neuronPoint,
+				final Vector bestMatchPoint, final double neighborhoodRadius,
+				final double learningRate) {
 			this.neuron = neuron;
 			this.neuronPoint = neuronPoint;
 			this.bestMatchPoint = bestMatchPoint;
@@ -103,11 +99,10 @@ public abstract class AbstractSomBrain<IN extends SomInputNeuron, ON extends Som
 		}
 
 		@Override
-		public void run()
-		{
-			final double currentDistance = this.neuronPoint.calculateRelativeTo(this.bestMatchPoint).getDistance();
-			if( currentDistance < this.neighborhoodRadius )
-			{
+		public void run() {
+			final double currentDistance = this.neuronPoint
+					.calculateRelativeTo(this.bestMatchPoint).getDistance();
+			if (currentDistance < this.neighborhoodRadius) {
 				final double neighborhoodAdjustment = neighborhoodFunction(currentDistance);
 				this.neuron.train(this.learningRate, neighborhoodAdjustment);
 			}
@@ -119,12 +114,13 @@ public abstract class AbstractSomBrain<IN extends SomInputNeuron, ON extends Som
 	 * number of inputs and with an output lattice of the given number of
 	 * dimensions.
 	 *
-	 * @param inputCount The number of inputs
-	 * @param dimentionality The number of dimensions of the output lattice
+	 * @param inputCount
+	 *            The number of inputs
+	 * @param dimentionality
+	 *            The number of dimensions of the output lattice
 	 * @since 2.0
 	 */
-	protected AbstractSomBrain(final int inputCount, final int dimentionality)
-	{
+	protected AbstractSomBrain(final int inputCount, final int dimentionality) {
 		this(inputCount, dimentionality, null);
 	}
 
@@ -133,63 +129,69 @@ public abstract class AbstractSomBrain<IN extends SomInputNeuron, ON extends Som
 	 * number of inputs and with an output lattice of the given number of
 	 * dimensions.
 	 *
-	 * @param inputCount The number of inputs
-	 * @param dimentionality The number of dimensions of the output lattice
-	 * @param executor ThreadPoolExecutor to use when executing parallel
-	 * functionality.
+	 * @param inputCount
+	 *            The number of inputs
+	 * @param dimentionality
+	 *            The number of dimensions of the output lattice
+	 * @param executor
+	 *            ThreadPoolExecutor to use when executing parallel
+	 *            functionality.
 	 * @since 2.0
 	 */
-	protected AbstractSomBrain(final int inputCount, final int dimentionality, final ExecutorService executor)
-	{
+	protected AbstractSomBrain(final int inputCount, final int dimentionality,
+			final ExecutorService executor) {
 		super(executor);
 
-		if( inputCount <= 0 )
-			throw new IllegalArgumentException("input count must be greater than 0");
-		if( dimentionality <= 0 )
-			throw new IllegalArgumentException("dimentionality must be greater than 0");
+		if (inputCount <= 0)
+			throw new IllegalArgumentException(
+					"input count must be greater than 0");
+		if (dimentionality <= 0)
+			throw new IllegalArgumentException(
+					"dimentionality must be greater than 0");
 
 		this.upperBounds = new Vector(dimentionality);
 		this.lowerBounds = new Vector(dimentionality);
 		final List<IN> newInputs = new ArrayList<IN>();
-		for(int inputIndex = 0; inputIndex < inputCount; inputIndex++)
-		{
+		for (int inputIndex = 0; inputIndex < inputCount; inputIndex++) {
 			// TODO fix typing
 			final SomInputNeuron safeNewNeuron = new SimpleSomInputNeuron(this);
 			final IN newNeuron = (IN) safeNewNeuron;
 			newInputs.add(newNeuron);
 			// TODO fix typing
-			super.add((N)newNeuron);
+			super.add((N) newNeuron);
 		}
 		this.inputs = Collections.unmodifiableList(newInputs);
 	}
 
-	private void updateBounds(final Vector position)
-	{
-		//make sure we have the proper dimentionality
-		if( position.getDimensions() != this.upperBounds.getDimensions() )
+	private void updateBounds(final Vector position) {
+		// make sure we have the proper dimentionality
+		if (position.getDimensions() != this.upperBounds.getDimensions())
 			throw new IllegalArgumentException("Dimentionality mismatch");
 
-		for(int dimensionIndex = 1; dimensionIndex <= position.getDimensions(); dimensionIndex++)
-		{
-			if( this.upperBounds.get(dimensionIndex) < position.get(dimensionIndex) )
-				this.upperBounds = this.upperBounds.setNew(position.get(dimensionIndex), dimensionIndex);
-			if( this.lowerBounds.get(dimensionIndex) > position.get(dimensionIndex) )
-				this.lowerBounds = this.lowerBounds.setNew(position.get(dimensionIndex), dimensionIndex);
+		for (int dimensionIndex = 1; dimensionIndex <= position.getDimensions(); dimensionIndex++) {
+			if (this.upperBounds.get(dimensionIndex) < position
+					.get(dimensionIndex))
+				this.upperBounds = this.upperBounds.setNew(
+						position.get(dimensionIndex), dimensionIndex);
+			if (this.lowerBounds.get(dimensionIndex) > position
+					.get(dimensionIndex))
+				this.lowerBounds = this.lowerBounds.setNew(
+						position.get(dimensionIndex), dimensionIndex);
 		}
 	}
 
 	/**
-	 * Creates a new point in the output lattice at the given position. This will
-	 * automatically have all inputs connected to it.
+	 * Creates a new point in the output lattice at the given position. This
+	 * will automatically have all inputs connected to it.
 	 *
-	 * @param position The position of the new output in the lattice.
+	 * @param position
+	 *            The position of the new output in the lattice.
 	 * @since 2.0
 	 */
 	@Override
-	public void createOutput(final Vector position)
-	{
+	public void createOutput(final Vector position) {
 		// make sure we have the proper dimentionality
-		if( position.getDimensions() != this.upperBounds.getDimensions() )
+		if (position.getDimensions() != this.upperBounds.getDimensions())
 			throw new IllegalArgumentException("Dimentionality mismatch");
 
 		// increase the upper bounds if needed
@@ -198,16 +200,16 @@ public abstract class AbstractSomBrain<IN extends SomInputNeuron, ON extends Som
 		// create and add the new output neuron
 		final SimpleSomNeuron outputNeuron = new SimpleSomNeuron(this);
 		// TODO fix typing
-		this.outputs.put(position, (ON)outputNeuron);
+		this.outputs.put(position, (ON) outputNeuron);
 		// TODO fix typing
-		this.add((N)outputNeuron);
+		this.add((N) outputNeuron);
 
 		// connect all inputs to the new neuron
 		// TODO fix typing
-		for(final InputNeuron input : this.inputs)
-		{
-			final Synapse<N> synapse = new SimpleSynapse<N>((N)input, (N)outputNeuron);
-			this.connect((S)synapse, true);
+		for (final InputNeuron input : this.inputs) {
+			final Synapse<N> synapse = new SimpleSynapse<N>((N) input,
+					(N) outputNeuron);
+			this.connect((S) synapse, true);
 		}
 	}
 
@@ -218,31 +220,31 @@ public abstract class AbstractSomBrain<IN extends SomInputNeuron, ON extends Som
 	 * @since 2.0
 	 */
 	@Override
-	public final Set<Vector> getPositions()
-	{
+	public final Set<Vector> getPositions() {
 		final Set<Vector> positions = new HashSet<Vector>();
-		for(final Vector position : this.outputs.keySet())
+		for (final Vector position : this.outputs.keySet())
 			positions.add(new Vector(position));
 		return Collections.unmodifiableSet(positions);
 	}
 
 	/**
-	 * Gets the current output at the specified position in the output lattice if
-	 * the position does not have a SimpleSomNeuron associated with it then it throws
-	 * an exception.
+	 * Gets the current output at the specified position in the output lattice
+	 * if the position does not have a SimpleSomNeuron associated with it then
+	 * it throws an exception.
 	 *
-	 * @param position position in the output lattice of the output you wish to
-	 * retrieve.
+	 * @param position
+	 *            position in the output lattice of the output you wish to
+	 *            retrieve.
 	 * @return The value of the specified SimpleSomNeuron, or null if there is
-	 *   no SimpleSomNeuron associated with the given position.
-	 * @throws IllegalArgumentException if position does not exist.
+	 *         no SimpleSomNeuron associated with the given position.
+	 * @throws IllegalArgumentException
+	 *             if position does not exist.
 	 * @since 2.0
 	 */
 	@Override
-	public final double getOutput(final Vector position)
-	{
+	public final double getOutput(final Vector position) {
 		final ON outputNeuron = this.outputs.get(position);
-		if( outputNeuron == null )
+		if (outputNeuron == null)
 			throw new IllegalArgumentException("position does not exist");
 
 		outputNeuron.tick();
@@ -250,135 +252,130 @@ public abstract class AbstractSomBrain<IN extends SomInputNeuron, ON extends Som
 	}
 
 	/**
-	 * Obtains the BMU (Best Matching Unit) for the current input set.
-	 * This will also train against the current input.
+	 * Obtains the BMU (Best Matching Unit) for the current input set. This will
+	 * also train against the current input.
 	 *
 	 * @return the BMU for the current input set.
 	 */
 	@Override
-	public final Vector getBestMatchingUnit()
-	{
+	public final Vector getBestMatchingUnit() {
 		return getBestMatchingUnit(true);
 	}
 
 	/**
-	 * Obtains the BMU (Best Matching Unit) for the current input set.
-	 * This will also train against the current input when specified.
+	 * Obtains the BMU (Best Matching Unit) for the current input set. This will
+	 * also train against the current input when specified.
 	 *
-	 * @param train true to train against the input set, false if no training
-	 *   occurs.
+	 * @param train
+	 *            true to train against the input set, false if no training
+	 *            occurs.
 	 * @return the BMU for the current input set.
 	 * @since 2.0
 	 */
 	@Override
-	public final Vector getBestMatchingUnit(final boolean train)
-	{
-		//make sure we have at least one output
-		if( outputs.size() <= 0 )
+	public final Vector getBestMatchingUnit(final boolean train) {
+		// make sure we have at least one output
+		if (outputs.size() <= 0)
 			throw new IllegalStateException("Must have at least one output");
 
 		Vector bestMatchingUnit = null;
 		double bestMatch = Double.POSITIVE_INFINITY;
-		if( this.getThreadExecutor() == null )
-		{
-			for(final Entry<Vector, ON> entry : this.outputs.entrySet())
-			{
+		if (this.getThreadExecutor() == null) {
+			for (final Entry<Vector, ON> entry : this.outputs.entrySet()) {
 				final ON neuron = entry.getValue();
 				neuron.tick();
 				final double output = neuron.getOutput();
 
-				if( bestMatchingUnit == null )
+				if (bestMatchingUnit == null)
 					bestMatchingUnit = entry.getKey();
-				else if( output < bestMatch )
-				{
+				else if (output < bestMatch) {
 					bestMatchingUnit = entry.getKey();
 					bestMatch = output;
 				}
 			}
-		}
-		else
-		{
-			//stick all the neurons in the queue to propagate
+		} else {
+			// stick all the neurons in the queue to propagate
 			final Map<Vector, Future<Double>> futureOutput = new HashMap<Vector, Future<Double>>();
-			for(final Entry<Vector, ON> entry : this.outputs.entrySet())
-			{
-				final PropagateOutput callable = new PropagateOutput(entry.getValue());
-				futureOutput.put(entry.getKey(), this.getThreadExecutor().submit(callable));
+			for (final Entry<Vector, ON> entry : this.outputs.entrySet()) {
+				final PropagateOutput callable = new PropagateOutput(
+						entry.getValue());
+				futureOutput.put(entry.getKey(), this.getThreadExecutor()
+						.submit(callable));
 			}
 
-			//find the best matching unit
-			for(final Entry<Vector, ON> entry : this.outputs.entrySet())
-			{
+			// find the best matching unit
+			for (final Entry<Vector, ON> entry : this.outputs.entrySet()) {
 				final double output;
-				try
-				{
+				try {
 					output = futureOutput.get(entry.getKey()).get();
-				}
-				catch(final InterruptedException caught)
-				{
-					LOGGER.warn("PropagateOutput was unexpectedly interrupted", caught);
-					throw new UnexpectedInterruptedException("Unexpected interrupted. Get should block indefinitely", caught);
-				}
-				catch(final ExecutionException caught)
-				{
-					LOGGER.error("PropagateOutput was had an unexpected problem executing.", caught);
-					throw new UnexpectedDannError("Unexpected execution exception. Get should block indefinitely", caught);
+				} catch (final InterruptedException caught) {
+					LOGGER.warn("PropagateOutput was unexpectedly interrupted",
+							caught);
+					throw new UnexpectedInterruptedException(
+							"Unexpected interrupted. Get should block indefinitely",
+							caught);
+				} catch (final ExecutionException caught) {
+					LOGGER.error(
+							"PropagateOutput was had an unexpected problem executing.",
+							caught);
+					throw new UnexpectedDannError(
+							"Unexpected execution exception. Get should block indefinitely",
+							caught);
 				}
 
-				if( bestMatchingUnit == null )
+				if (bestMatchingUnit == null)
 					bestMatchingUnit = entry.getKey();
-				else if( output < bestMatch )
-				{
+				else if (output < bestMatch) {
 					bestMatchingUnit = entry.getKey();
 					bestMatch = output;
 				}
 			}
 		}
 
-		if( train )
+		if (train)
 			this.train(bestMatchingUnit);
 
 		return bestMatchingUnit;
 	}
 
-	private void train(final Vector bestMatchingUnit)
-	{
+	private void train(final Vector bestMatchingUnit) {
 		final double neighborhoodRadius = this.neighborhoodRadiusFunction();
 		final double learningRate = this.learningRateFunction();
 
-		if( this.getThreadExecutor() == null )
-		{
-			for(final Entry<Vector, ON> entry : this.outputs.entrySet())
-			{
-				final TrainNeuron runnable = new TrainNeuron(entry.getValue(), entry.getKey(), bestMatchingUnit, neighborhoodRadius, learningRate);
+		if (this.getThreadExecutor() == null) {
+			for (final Entry<Vector, ON> entry : this.outputs.entrySet()) {
+				final TrainNeuron runnable = new TrainNeuron(entry.getValue(),
+						entry.getKey(), bestMatchingUnit, neighborhoodRadius,
+						learningRate);
 				runnable.run();
 			}
-		}
-		else
-		{
-			//add all the neuron training events to the thread queue
+		} else {
+			// add all the neuron training events to the thread queue
 			final ArrayList<Future> futures = new ArrayList<Future>();
-			for(final Entry<Vector, ON> entry : this.outputs.entrySet())
-			{
-				final TrainNeuron runnable = new TrainNeuron(entry.getValue(), entry.getKey(), bestMatchingUnit, neighborhoodRadius, learningRate);
+			for (final Entry<Vector, ON> entry : this.outputs.entrySet()) {
+				final TrainNeuron runnable = new TrainNeuron(entry.getValue(),
+						entry.getKey(), bestMatchingUnit, neighborhoodRadius,
+						learningRate);
 				futures.add(this.getThreadExecutor().submit(runnable));
 			}
 
-			//wait until all neurons are trained
-			try
-			{
-				for(final Future future : futures)
+			// wait until all neurons are trained
+			try {
+				for (final Future future : futures)
 					future.get();
-			}
-			catch(final InterruptedException caught)
-			{
-				LOGGER.warn("PropagateOutput was unexpectedly interrupted", caught);
-				throw new UnexpectedInterruptedException("Unexpected interrupted. Get should block indefinitely", caught);
-			}
-			catch(final ExecutionException caught)
-			{
-				LOGGER.error("PropagateOutput was had an unexpected problem executing.", caught);
-				throw new UnexpectedDannError("Unexpected execution exception. Get should block indefinitely", caught);
+			} catch (final InterruptedException caught) {
+				LOGGER.warn("PropagateOutput was unexpectedly interrupted",
+						caught);
+				throw new UnexpectedInterruptedException(
+						"Unexpected interrupted. Get should block indefinitely",
+						caught);
+			} catch (final ExecutionException caught) {
+				LOGGER.error(
+						"PropagateOutput was had an unexpected problem executing.",
+						caught);
+				throw new UnexpectedDannError(
+						"Unexpected execution exception. Get should block indefinitely",
+						caught);
 			}
 		}
 
@@ -392,8 +389,7 @@ public abstract class AbstractSomBrain<IN extends SomInputNeuron, ON extends Som
 	 * @since 2.0
 	 */
 	@Override
-	public final int getIterationsTrained()
-	{
+	public final int getIterationsTrained() {
 		return this.iterationsTrained;
 	}
 
@@ -403,8 +399,7 @@ public abstract class AbstractSomBrain<IN extends SomInputNeuron, ON extends Som
 	 * @return the upperBounds
 	 * @since 2.0
 	 */
-	protected final Vector getUpperBounds()
-	{
+	protected final Vector getUpperBounds() {
 		return this.upperBounds;
 	}
 
@@ -414,8 +409,7 @@ public abstract class AbstractSomBrain<IN extends SomInputNeuron, ON extends Som
 	 * @return the lowerBounds
 	 * @since 2.0
 	 */
-	protected final Vector getLowerBounds()
-	{
+	protected final Vector getLowerBounds() {
 		return this.lowerBounds;
 	}
 
@@ -426,8 +420,7 @@ public abstract class AbstractSomBrain<IN extends SomInputNeuron, ON extends Som
 	 * @since 2.0
 	 */
 	@Override
-	public final int getInputCount()
-	{
+	public final int getInputCount() {
 		return this.inputs.size();
 	}
 
@@ -437,9 +430,8 @@ public abstract class AbstractSomBrain<IN extends SomInputNeuron, ON extends Som
 	 * @since 2.0
 	 */
 	@Override
-	public final void setInput(final int inputIndex, final double inputValue)
-	{
-		if( inputIndex >= this.getInputCount() )
+	public final void setInput(final int inputIndex, final double inputValue) {
+		if (inputIndex >= this.getInputCount())
 			throw new IllegalArgumentException("inputIndex is out of bounds");
 
 		final InputNeuron currentInput = this.inputs.get(inputIndex);
@@ -450,13 +442,13 @@ public abstract class AbstractSomBrain<IN extends SomInputNeuron, ON extends Som
 	/**
 	 * Gets the current input value at the specified index.
 	 *
-	 * @param index Index of the input to get.
+	 * @param index
+	 *            Index of the input to get.
 	 * @return The current value for the specified input.
 	 * @since 2.0
 	 */
 	@Override
-	public final double getInput(final int index)
-	{
+	public final double getInput(final int index) {
 		return this.inputs.get(index).getInput();
 	}
 
@@ -467,21 +459,19 @@ public abstract class AbstractSomBrain<IN extends SomInputNeuron, ON extends Som
 	 * @since 2.0
 	 */
 	@Override
-	public final Map<Vector, double[]> getOutputWeightVectors()
-	{
+	public final Map<Vector, double[]> getOutputWeightVectors() {
 		// iterate through the output lattice
 		final HashMap<Vector, double[]> weightVectors = new HashMap<Vector, double[]>();
-		for(final Entry<Vector, ON> output : this.outputs.entrySet())
-		{
+		for (final Entry<Vector, ON> output : this.outputs.entrySet()) {
 			final double[] weightVector = new double[this.inputs.size()];
 			final ON currentNeuron = output.getValue();
 			final Vector currentPoint = output.getKey();
 			// iterate through the weight vectors of the current neuron
 			// TODO fix typing
-			for(final S source : this.getInEdges((N)currentNeuron))
-			{
+			for (final S source : this.getInEdges((N) currentNeuron)) {
 				assert (source.getSourceNode() instanceof InputNeuron);
-				final int sourceIndex = this.inputs.indexOf(source.getSourceNode());
+				final int sourceIndex = this.inputs.indexOf(source
+						.getSourceNode());
 				weightVector[sourceIndex] = source.getWeight();
 			}
 			// add the current weight vector to the map
@@ -494,7 +484,8 @@ public abstract class AbstractSomBrain<IN extends SomInputNeuron, ON extends Som
 	 * Determines the neighborhood function based on the neurons distance from
 	 * the Best Matching Unit (BMU).
 	 *
-	 * @param distanceFromBest The neuron's distance from the BMU.
+	 * @param distanceFromBest
+	 *            The neuron's distance from the BMU.
 	 * @return the decay effecting the learning of the specified neuron due to
 	 *         its distance from the BMU.
 	 * @since 2.0

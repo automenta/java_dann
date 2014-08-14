@@ -20,6 +20,5 @@ package syncleus.dann.neural.som;
 
 import syncleus.dann.neural.InputNeuron;
 
-public interface SomInputNeuron extends InputNeuron, SomNeuron
-{
+public interface SomInputNeuron extends InputNeuron, SomNeuron {
 }

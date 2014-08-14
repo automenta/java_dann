@@ -25,18 +25,18 @@ package syncleus.dann.evolve;
  * @author Jeffrey Phillips Freeman
  * @since 2.0
  */
-public class MutableByte extends MutableNumber<Byte> implements Comparable<MutableByte>
-{
+public class MutableByte extends MutableNumber<Byte> implements
+		Comparable<MutableByte> {
 	private static final long serialVersionUID = 9080091896193186756L;
 
 	/**
 	 * Initializes a new instance of this class with the specified value.
 	 *
-	 * @param value The value of this number.
+	 * @param value
+	 *            The value of this number.
 	 * @since 2.0
 	 */
-	public MutableByte(final byte value)
-	{
+	public MutableByte(final byte value) {
 		super(value);
 	}
 
@@ -44,11 +44,11 @@ public class MutableByte extends MutableNumber<Byte> implements Comparable<Mutab
 	 * Initializes a new instance of this class from the value represented by
 	 * the specified string.
 	 *
-	 * @param str A string representing the value of this number.
+	 * @param str
+	 *            A string representing the value of this number.
 	 * @since 2.0
 	 */
-	public MutableByte(final String str)
-	{
+	public MutableByte(final String str) {
 		super(Byte.valueOf(str));
 	}
 
@@ -56,11 +56,11 @@ public class MutableByte extends MutableNumber<Byte> implements Comparable<Mutab
 	 * Initializes a new instance of this class as a copy of the specified
 	 * number.
 	 *
-	 * @param value The value to copy
+	 * @param value
+	 *            The value to copy
 	 * @since 2.0
 	 */
-	public MutableByte(final Byte value)
-	{
+	public MutableByte(final Byte value) {
 		super(value);
 	}
 
@@ -71,8 +71,7 @@ public class MutableByte extends MutableNumber<Byte> implements Comparable<Mutab
 	 * @since 2.0
 	 */
 	@Override
-	public MutableByte clone()
-	{
+	public MutableByte clone() {
 		return (MutableByte) super.clone();
 	}
 
@@ -82,41 +81,41 @@ public class MutableByte extends MutableNumber<Byte> implements Comparable<Mutab
 	 * past its largest or smallest representable number it will simply return
 	 * the max or min respectively.
 	 *
-	 * @param deviation A double indicating how extreme the mutation will be.
-	 *   The greater the deviation the more drastically the object will mutate.
-	 *   A deviation of 0 should cause no mutation.
+	 * @param deviation
+	 *            A double indicating how extreme the mutation will be. The
+	 *            greater the deviation the more drastically the object will
+	 *            mutate. A deviation of 0 should cause no mutation.
 	 * @return A copy of the current object with potential mutations.
 	 * @since 2.0
 	 */
 	@Override
-	public MutableByte mutate(final double deviation)
-	{
-		final double doubleDistributed = MutableNumber.getDistributedRandom(deviation);
+	public MutableByte mutate(final double deviation) {
+		final double doubleDistributed = MutableNumber
+				.getDistributedRandom(deviation);
 		byte distributedRand = (byte) doubleDistributed;
-		if( doubleDistributed > Byte.MAX_VALUE )
+		if (doubleDistributed > Byte.MAX_VALUE)
 			distributedRand = Byte.MAX_VALUE;
-		else if( doubleDistributed < Byte.MIN_VALUE )
+		else if (doubleDistributed < Byte.MIN_VALUE)
 			distributedRand = Byte.MIN_VALUE;
 		final byte result = (byte) (this.getNumber() + distributedRand);
-		if( (distributedRand > (byte) 0) && (result < this.getNumber()) )
+		if ((distributedRand > (byte) 0) && (result < this.getNumber()))
 			return new MutableByte(Byte.MAX_VALUE);
-		else if( (distributedRand < (byte) 0) && (result > this.getNumber()) )
+		else if ((distributedRand < (byte) 0) && (result > this.getNumber()))
 			return new MutableByte(Byte.MIN_VALUE);
 		return new MutableByte(result);
 	}
 
 	/**
 	 * Compares the value of this number against another object of the same
-	 * type.
-	 * The backing number handles the comparison.
+	 * type. The backing number handles the comparison.
 	 *
-	 * @param compareWith Number to compare against.
+	 * @param compareWith
+	 *            Number to compare against.
 	 * @return the natural ordering of the backed number.
 	 * @since 2.0
 	 */
 	@Override
-	public int compareTo(final MutableByte compareWith)
-	{
+	public int compareTo(final MutableByte compareWith) {
 		return this.getNumber().compareTo(compareWith.getNumber());
 	}
 }

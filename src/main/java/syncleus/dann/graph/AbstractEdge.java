@@ -30,68 +30,66 @@ import syncleus.dann.UnexpectedDannError;
 import syncleus.dann.graph.context.AbstractContextGraphElement;
 import syncleus.dann.graph.context.ContextNode;
 
-public abstract class AbstractEdge<N> extends AbstractContextGraphElement<Graph<N, ?>> implements Edge<N>
-{
-	private static final Logger LOGGER = LogManager.getLogger(AbstractEdge.class);
+public abstract class AbstractEdge<N> extends
+		AbstractContextGraphElement<Graph<N, ?>> implements Edge<N> {
+	private static final Logger LOGGER = LogManager
+			.getLogger(AbstractEdge.class);
 	private final boolean contextEnabled;
 	private List<N> nodes;
 
-	protected AbstractEdge()
-	{
+	protected AbstractEdge() {
 		this(true, true);
 	}
 
-	protected AbstractEdge(final boolean allowJoiningMultipleGraphs, final boolean contextEnabled)
-	{
+	protected AbstractEdge(final boolean allowJoiningMultipleGraphs,
+			final boolean contextEnabled) {
 		super(allowJoiningMultipleGraphs);
 		this.contextEnabled = contextEnabled;
 	}
 
-	protected AbstractEdge(final List<N> ourNodes)
-	{
+	protected AbstractEdge(final List<N> ourNodes) {
 		this(ourNodes, true, true);
 	}
 
-	protected AbstractEdge(final List<N> ourNodes, final boolean allowJoiningMultipleGraphs, final boolean contextEnabled)
-	{
+	protected AbstractEdge(final List<N> ourNodes,
+			final boolean allowJoiningMultipleGraphs,
+			final boolean contextEnabled) {
 		super(allowJoiningMultipleGraphs);
 		this.contextEnabled = contextEnabled;
 
-		//make sure each node with context allows us to connect to it
-		if(contextEnabled)
-		{
+		// make sure each node with context allows us to connect to it
+		if (contextEnabled) {
 			final List<N> nodesCopy = new ArrayList<N>(ourNodes.size());
-			for(final N ourNode : ourNodes)
-			{
-				if( this.contextEnabled && ( ourNode instanceof ContextNode ) && ( !((ContextNode)ourNode).connectingEdge(this) ))
+			for (final N ourNode : ourNodes) {
+				if (this.contextEnabled && (ourNode instanceof ContextNode)
+						&& (!((ContextNode) ourNode).connectingEdge(this)))
 					continue;
 				nodesCopy.add(ourNode);
 			}
-			this.nodes = Collections.unmodifiableList(new ArrayList<N>(nodesCopy));
-		}
-		else
-			this.nodes = Collections.unmodifiableList(new ArrayList<N>(ourNodes));
+			this.nodes = Collections.unmodifiableList(new ArrayList<N>(
+					nodesCopy));
+		} else
+			this.nodes = Collections
+					.unmodifiableList(new ArrayList<N>(ourNodes));
 	}
 
-	protected AbstractEdge(final N... ourNodes)
-	{
+	protected AbstractEdge(final N... ourNodes) {
 		this(true, true, ourNodes);
 	}
 
-	protected AbstractEdge(final boolean allowJoiningMultipleGraphs, final boolean contextEnabled, final N... ourNodes)
-	{
-		this(Arrays.asList(ourNodes), allowJoiningMultipleGraphs, contextEnabled);
+	protected AbstractEdge(final boolean allowJoiningMultipleGraphs,
+			final boolean contextEnabled, final N... ourNodes) {
+		this(Arrays.asList(ourNodes), allowJoiningMultipleGraphs,
+				contextEnabled);
 	}
 
 	@Override
-	public boolean isContextEnabled()
-	{
+	public boolean isContextEnabled() {
 		return this.contextEnabled;
 	}
 
-	protected AbstractEdge<N> add(final N node)
-	{
-		if( node == null )
+	protected AbstractEdge<N> add(final N node) {
+		if (node == null)
 			throw new IllegalArgumentException("node can not be null");
 
 		final List<N> newNodes = new ArrayList<N>(this.nodes);
@@ -100,9 +98,8 @@ public abstract class AbstractEdge<N> extends AbstractContextGraphElement<Graph<
 		return createDeepCopy(newNodes);
 	}
 
-	protected AbstractEdge<N> add(final List<N> addNodes)
-	{
-		if( addNodes == null )
+	protected AbstractEdge<N> add(final List<N> addNodes) {
+		if (addNodes == null)
 			throw new IllegalArgumentException("node can not be null");
 		final List<N> newNodes = new ArrayList<N>(this.nodes);
 		newNodes.addAll(addNodes);
@@ -110,11 +107,10 @@ public abstract class AbstractEdge<N> extends AbstractContextGraphElement<Graph<
 		return createDeepCopy(newNodes);
 	}
 
-	protected AbstractEdge<N> remove(final N node)
-	{
-		if( node == null )
+	protected AbstractEdge<N> remove(final N node) {
+		if (node == null)
 			throw new IllegalArgumentException("node can not be null");
-		if( !this.nodes.contains(node) )
+		if (!this.nodes.contains(node))
 			throw new IllegalArgumentException("is not an endpoint");
 
 		final List<N> newNodes = new ArrayList<N>(this.nodes);
@@ -123,14 +119,14 @@ public abstract class AbstractEdge<N> extends AbstractContextGraphElement<Graph<
 		return createDeepCopy(newNodes);
 	}
 
-	protected AbstractEdge<N> remove(final List<N> removeNodes)
-	{
-		if( removeNodes == null )
+	protected AbstractEdge<N> remove(final List<N> removeNodes) {
+		if (removeNodes == null)
 			throw new IllegalArgumentException("removeNodes can not be null");
-		if( !this.nodes.containsAll(removeNodes) )
-			throw new IllegalArgumentException("removeNodes do not contain all valid end points");
+		if (!this.nodes.containsAll(removeNodes))
+			throw new IllegalArgumentException(
+					"removeNodes do not contain all valid end points");
 		final List<N> newNodes = new ArrayList<N>(this.nodes);
-		for(final N node : removeNodes)
+		for (final N node : removeNodes)
 			newNodes.remove(node);
 
 		return createDeepCopy(newNodes);
@@ -138,79 +134,70 @@ public abstract class AbstractEdge<N> extends AbstractContextGraphElement<Graph<
 
 	/**
 	 * Create a deep copy of this edge, but with a new set of nodes.
-	 * @param newNodes the set of nodes to use instead of the current ones.
+	 *
+	 * @param newNodes
+	 *            the set of nodes to use instead of the current ones.
 	 * @return a deep copy of this edge, but with a new set of nodes.
 	 */
-	private AbstractEdge<N> createDeepCopy(final List<N> newNodes)
-	{
-		try
-		{
+	private AbstractEdge<N> createDeepCopy(final List<N> newNodes) {
+		try {
 			final AbstractEdge<N> clonedEdge = (AbstractEdge<N>) super.clone();
 			final List<N> clonedNodes = new ArrayList<N>(this.nodes.size());
-			//add each node at a time to the clone considering context
-			for(final N newNode : newNodes)
-			{
-				if( this.contextEnabled && (newNode instanceof ContextNode) && ( !((ContextNode)newNode).connectingEdge(clonedEdge) ) )
+			// add each node at a time to the clone considering context
+			for (final N newNode : newNodes) {
+				if (this.contextEnabled
+						&& (newNode instanceof ContextNode)
+						&& (!((ContextNode) newNode).connectingEdge(clonedEdge)))
 					continue;
 				clonedNodes.add(newNode);
 			}
 			clonedEdge.nodes = Collections.unmodifiableList(clonedNodes);
 			return clonedEdge;
-		}
-		catch(final CloneNotSupportedException caught)
-		{
+		} catch (final CloneNotSupportedException caught) {
 			LOGGER.error("Edge was unexpectidly not cloneable", caught);
-			throw new UnexpectedDannError("Edge was unexpectidly not cloneable", caught);
+			throw new UnexpectedDannError(
+					"Edge was unexpectidly not cloneable", caught);
 		}
 	}
 
 	@Override
-	public boolean isTraversable(final N node)
-	{
+	public boolean isTraversable(final N node) {
 		return (!this.getTraversableNodes(node).isEmpty());
 	}
 
-  
-        
-
 	@Override
-	public final List<N> getNodes()
-	{
+	public final List<N> getNodes() {
 		return this.nodes;
 	}
 
 	@Override
-	public String toString()
-	{
-		final StringBuilder outString = new StringBuilder(this.nodes.size() * 10);
-		for(final N node : this.nodes)
-		{
+	public String toString() {
+		final StringBuilder outString = new StringBuilder(
+				this.nodes.size() * 10);
+		for (final N node : this.nodes) {
 			outString.append(':').append(node);
 		}
 		return outString.toString();
 	}
 
 	@Override
-	public AbstractEdge<N> clone()
-	{
-		try
-		{
+	public AbstractEdge<N> clone() {
+		try {
 			final AbstractEdge<N> clonedEdge = (AbstractEdge<N>) super.clone();
 			final List<N> clonedNodes = new ArrayList<N>(this.nodes.size());
-			//add each node at a time to the clone considering context
-			for(final N node : this.nodes)
-			{
-				if( this.contextEnabled && (node instanceof ContextNode) && ( !((ContextNode)node).connectingEdge(clonedEdge) ) )
+			// add each node at a time to the clone considering context
+			for (final N node : this.nodes) {
+				if (this.contextEnabled && (node instanceof ContextNode)
+						&& (!((ContextNode) node).connectingEdge(clonedEdge)))
 					continue;
 				clonedNodes.add(node);
 			}
 			clonedEdge.nodes = Collections.unmodifiableList(clonedNodes);
 			return clonedEdge;
-		}
-		catch(final CloneNotSupportedException caught)
-		{
+		} catch (final CloneNotSupportedException caught) {
 			LOGGER.error("Edge was unexpectidly not cloneable", caught);
-			throw new UnexpectedDannError("Edge was unexpectidly not cloneable", caught);
+			throw new UnexpectedDannError(
+					"Edge was unexpectidly not cloneable", caught);
 		}
 	}
 

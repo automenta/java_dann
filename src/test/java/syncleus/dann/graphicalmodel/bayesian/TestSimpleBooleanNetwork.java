@@ -18,7 +18,6 @@
  ******************************************************************************/
 package syncleus.dann.graphicalmodel.bayesian;
 
-import syncleus.dann.graphmodel.bayesian.MutableBayesianAdjacencyNetwork;
 import java.util.HashSet;
 
 import org.junit.Assert;
@@ -26,89 +25,78 @@ import org.junit.Test;
 
 import syncleus.dann.graph.DirectedEdge;
 import syncleus.dann.graph.ImmutableDirectedEdge;
-import syncleus.dann.graphmodel.GraphicalModelNode;
-import syncleus.dann.graphmodel.SimpleGraphicalModelNode;
+import syncleus.dann.learn.GraphicalModelNode;
+import syncleus.dann.learn.SimpleGraphicalModelNode;
+import syncleus.dann.learn.bayesian.MutableBayesianAdjacencyNetwork;
 
 /**
  * tests SimpleBooleanNetwork (extending MarkovRandomField)
  */
-public class TestSimpleBooleanNetwork
-{
-	public static enum BooleanState
-	{
+public class TestSimpleBooleanNetwork {
+	public static enum BooleanState {
 		TRUE, FALSE
 	}
 
-	private static enum TwoState
-	{
+	private static enum TwoState {
 		A, B
 	}
 
-	private static enum ThreeState
-	{
+	private static enum ThreeState {
 		A, B, C
 	}
 
 	/**
 	 * a four-state profile
 	 */
-	private static enum FeverState
-	{
+	private static enum FeverState {
 		LOW, NONE, WARM, HOT
 	}
 
 	/**
 	 * boolean-goaled bayesian network
 	 */
-	private static class SimpleBooleanNetwork<I> extends MutableBayesianAdjacencyNetwork
-	{
+	private static class SimpleBooleanNetwork<I> extends
+			MutableBayesianAdjacencyNetwork {
 		private final HashSet<GraphicalModelNode> goals;
 		private final HashSet<GraphicalModelNode> influences;
-		//create nodes
+		// create nodes
 		private final GraphicalModelNode<I> influence;
 		private final GraphicalModelNode<BooleanState> goal;
 		private static final long serialVersionUID = -5435852374754248557L;
 
-		public SimpleBooleanNetwork(final I initialState)
-		{
+		public SimpleBooleanNetwork(final I initialState) {
 			super();
 			this.influence = new SimpleGraphicalModelNode<I>(initialState);
-			this.goal = new SimpleGraphicalModelNode<BooleanState>(BooleanState.FALSE);
+			this.goal = new SimpleGraphicalModelNode<BooleanState>(
+					BooleanState.FALSE);
 			this.goals = new HashSet<GraphicalModelNode>();
 			this.influences = new HashSet<GraphicalModelNode>();
-			//add nodes
+			// add nodes
 			add(this.influence);
 			add(this.goal);
-			//connect nodes
-			final DirectedEdge<GraphicalModelNode> testEdge = new ImmutableDirectedEdge<GraphicalModelNode>(this.influence, this.goal);
+			// connect nodes
+			final DirectedEdge<GraphicalModelNode> testEdge = new ImmutableDirectedEdge<GraphicalModelNode>(
+					this.influence, this.goal);
 			this.add(testEdge);
 			goals.add(this.goal);
 			influences.add(this.influence);
 		}
 
-		public GraphicalModelNode<BooleanState> getGoal()
-		{
+		public GraphicalModelNode<BooleanState> getGoal() {
 			return this.goal;
 		}
 
-		public GraphicalModelNode<I> getInfluence()
-		{
-			return this.influence;
-		}
-
-		public double getPercentage(final I influenceState)
-		{
+		public double getPercentage(final I influenceState) {
 			influence.setState(influenceState);
 			return this.conditionalProbability(this.goals, this.influences);
 		}
 
-		public void learn(final I influenceState, final boolean goalState)
-		{
-			learn(influenceState, goalState ? BooleanState.TRUE : BooleanState.FALSE);
+		public void learn(final I influenceState, final boolean goalState) {
+			learn(influenceState, goalState ? BooleanState.TRUE
+					: BooleanState.FALSE);
 		}
 
-		public void learn(final I influenceState, final BooleanState goalState)
-		{
+		public void learn(final I influenceState, final BooleanState goalState) {
 			influence.setState(influenceState);
 			goal.setState(goalState);
 			learnStates();
@@ -119,23 +107,26 @@ public class TestSimpleBooleanNetwork
 	 * tests two states with equal probability distribution
 	 */
 	@Test
-	public void testTwoState50()
-	{
-		final SimpleBooleanNetwork<TwoState> n = new SimpleBooleanNetwork<TwoState>(TwoState.B);
+	public void testTwoState50() {
+		final SimpleBooleanNetwork<TwoState> n = new SimpleBooleanNetwork<TwoState>(
+				TwoState.B);
 		n.learn(TwoState.A, true);
-		n.learn(TwoState.A, false);  //::
+		n.learn(TwoState.A, false); // ::
 		n.learn(TwoState.B, false);
-		n.learn(TwoState.B, true);  //::
+		n.learn(TwoState.B, true); // ::
 		n.getGoal().setState(BooleanState.TRUE);
 		final double truePercent = n.getPercentage(TwoState.A);
 		final double falsePercent = n.getPercentage(TwoState.B);
-		Assert.assertTrue("incorrect true/false distribution: " + truePercent + ':' + falsePercent, (Math.abs(truePercent - (1f / 2f)) < 0.000001) && (Math.abs(falsePercent - (1f / 2f)) < 0.000001));
+		Assert.assertTrue(
+				"incorrect true/false distribution: " + truePercent + ':'
+						+ falsePercent,
+				(Math.abs(truePercent - (1f / 2f)) < 0.000001)
+						&& (Math.abs(falsePercent - (1f / 2f)) < 0.000001));
 	}
 
 	@Test
-	public void testTwoState50Repeated()
-	{
-		for(int iteration = 0; iteration < 1000; iteration++)
+	public void testTwoState50Repeated() {
+		for (int iteration = 0; iteration < 1000; iteration++)
 			testTwoState50();
 	}
 
@@ -143,9 +134,9 @@ public class TestSimpleBooleanNetwork
 	 * three state balanced probability. A=100%, B=50%, C=0%
 	 */
 	@Test
-	public void testThreeStateBalanced()
-	{
-		final SimpleBooleanNetwork<ThreeState> n = new SimpleBooleanNetwork<ThreeState>(ThreeState.A);
+	public void testThreeStateBalanced() {
+		final SimpleBooleanNetwork<ThreeState> n = new SimpleBooleanNetwork<ThreeState>(
+				ThreeState.A);
 		n.learn(ThreeState.A, true);
 		n.learn(ThreeState.A, true);
 		n.learn(ThreeState.B, true);
@@ -156,14 +147,17 @@ public class TestSimpleBooleanNetwork
 		final double aPercent = n.getPercentage(ThreeState.A);
 		final double bPercent = n.getPercentage(ThreeState.B);
 		final double cPercent = n.getPercentage(ThreeState.C);
-		final boolean condition = ((Math.abs(aPercent - 1f) < 0.000001) && (Math.abs(bPercent - 0.5f) < 0.000001) && (Math.abs(cPercent) < 0.00000001));
-		Assert.assertTrue("incorrect a/b/c distribution" + aPercent + " == 1f && " + bPercent + " == 0.5f && " + cPercent + " == 0.0", condition);
+		final boolean condition = ((Math.abs(aPercent - 1f) < 0.000001)
+				&& (Math.abs(bPercent - 0.5f) < 0.000001) && (Math
+				.abs(cPercent) < 0.00000001));
+		Assert.assertTrue("incorrect a/b/c distribution" + aPercent
+				+ " == 1f && " + bPercent + " == 0.5f && " + cPercent
+				+ " == 0.0", condition);
 	}
 
 	@Test
-	public void testThreeStateBalancedRepeated()
-	{
-		for(int iteration = 0; iteration < 1000; iteration++)
+	public void testThreeStateBalancedRepeated() {
+		for (int iteration = 0; iteration < 1000; iteration++)
 			testThreeStateBalanced();
 	}
 
@@ -171,27 +165,30 @@ public class TestSimpleBooleanNetwork
 	 * tests two-state 3/4 balance
 	 */
 	@Test
-	public void testTwoState75()
-	{
-		final SimpleBooleanNetwork<TwoState> n = new SimpleBooleanNetwork<TwoState>(TwoState.B);
+	public void testTwoState75() {
+		final SimpleBooleanNetwork<TwoState> n = new SimpleBooleanNetwork<TwoState>(
+				TwoState.B);
 		n.learn(TwoState.A, true);
 		n.learn(TwoState.A, true);
 		n.learn(TwoState.A, true);
-		n.learn(TwoState.A, false);  //::
+		n.learn(TwoState.A, false); // ::
 		n.learn(TwoState.B, false);
 		n.learn(TwoState.B, false);
 		n.learn(TwoState.B, false);
-		n.learn(TwoState.B, true);  //::
+		n.learn(TwoState.B, true); // ::
 		n.getGoal().setState(BooleanState.TRUE);
 		final double truePercent = n.getPercentage(TwoState.A);
 		final double falsePercent = n.getPercentage(TwoState.B);
-		Assert.assertTrue("incorrect true/false distribution: " + truePercent + ':' + falsePercent, (Math.abs(truePercent - (3f / 4f)) < 0.000001) && (Math.abs(falsePercent - (1f / 4f)) < 0.000001));
+		Assert.assertTrue(
+				"incorrect true/false distribution: " + truePercent + ':'
+						+ falsePercent,
+				(Math.abs(truePercent - (3f / 4f)) < 0.000001)
+						&& (Math.abs(falsePercent - (1f / 4f)) < 0.000001));
 	}
 
 	@Test
-	public void testTwoState75Repeated()
-	{
-		for(int iteration = 0; iteration < 1000; iteration++)
+	public void testTwoState75Repeated() {
+		for (int iteration = 0; iteration < 1000; iteration++)
 			testTwoState75();
 	}
 
@@ -199,10 +196,10 @@ public class TestSimpleBooleanNetwork
 	 * tests four-state boolean bayesian network, mapping "fevers' -> sickness
 	 */
 	@Test
-	public void testFeverState()
-	{
+	public void testFeverState() {
 
-		final SimpleBooleanNetwork<FeverState> n = new SimpleBooleanNetwork<FeverState>(FeverState.HOT);
+		final SimpleBooleanNetwork<FeverState> n = new SimpleBooleanNetwork<FeverState>(
+				FeverState.HOT);
 		n.learn(FeverState.NONE, false);
 		n.learn(FeverState.NONE, false);
 		n.learn(FeverState.NONE, false);
@@ -234,21 +231,24 @@ public class TestSimpleBooleanNetwork
 
 		n.getGoal().setState(BooleanState.TRUE);
 
-		//check some probabilities
+		// check some probabilities
 		final double nonePercentage = n.getPercentage(FeverState.NONE);
 		final double lowPercentage = n.getPercentage(FeverState.LOW);
 		final double warmPercentage = n.getPercentage(FeverState.WARM);
 		final double hotPercentage = n.getPercentage(FeverState.HOT);
 
-		final boolean condition = (nonePercentage < lowPercentage) && (lowPercentage < warmPercentage) && (warmPercentage < hotPercentage);
+		final boolean condition = (nonePercentage < lowPercentage)
+				&& (lowPercentage < warmPercentage)
+				&& (warmPercentage < hotPercentage);
 
-		Assert.assertTrue("incorrect fever to sickness mapping! " + nonePercentage + " < " + lowPercentage + " < " + warmPercentage + " < " + hotPercentage, condition);
+		Assert.assertTrue("incorrect fever to sickness mapping! "
+				+ nonePercentage + " < " + lowPercentage + " < "
+				+ warmPercentage + " < " + hotPercentage, condition);
 	}
 
 	@Test
-	public void testFeverStateRepeated()
-	{
-		for(int iteration = 0; iteration < 1000; iteration++)
+	public void testFeverStateRepeated() {
+		for (int iteration = 0; iteration < 1000; iteration++)
 			testFeverState();
 	}
 }

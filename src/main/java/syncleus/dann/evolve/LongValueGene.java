@@ -26,48 +26,46 @@ package syncleus.dann.evolve;
  * @author Jeffrey Phillips Freeman
  * @since 2.0
  */
-public class LongValueGene extends AbstractValueGene<MutableLong>
-{
+public class LongValueGene extends AbstractValueGene<MutableLong> {
 	/**
 	 * Initializes a new instance of this class with a value of 0.
 	 *
 	 * @since 2.0
 	 */
-	public LongValueGene()
-	{
+	public LongValueGene() {
 		super(new MutableLong(0));
 	}
 
 	/**
 	 * Initializes a new instance of this class with the specified value.
 	 *
-	 * @param value The value for this gene.
+	 * @param value
+	 *            The value for this gene.
 	 * @since 2.0
 	 */
-	public LongValueGene(final long value)
-	{
+	public LongValueGene(final long value) {
 		super(new MutableLong(value));
 	}
 
 	/**
 	 * Initializes a new instance of this class with the specified value.
 	 *
-	 * @param value The value for this gene.
+	 * @param value
+	 *            The value for this gene.
 	 * @since 2.0
 	 */
-	public LongValueGene(final Long value)
-	{
+	public LongValueGene(final Long value) {
 		super(new MutableLong(value));
 	}
 
 	/**
 	 * Initializes a new instance of this class with the specified value.
 	 *
-	 * @param value The value for this gene.
+	 * @param value
+	 *            The value for this gene.
 	 * @since 2.0
 	 */
-	public LongValueGene(final MutableLong value)
-	{
+	public LongValueGene(final MutableLong value) {
 		super(value);
 	}
 
@@ -75,11 +73,11 @@ public class LongValueGene extends AbstractValueGene<MutableLong>
 	 * Initializes a new instance of this class that is a copy of the specified
 	 * value.
 	 *
-	 * @param copyGene The value to copy.
+	 * @param copyGene
+	 *            The value to copy.
 	 * @since 2.0
 	 */
-	public LongValueGene(final LongValueGene copyGene)
-	{
+	public LongValueGene(final LongValueGene copyGene) {
 		super(copyGene);
 	}
 
@@ -90,24 +88,23 @@ public class LongValueGene extends AbstractValueGene<MutableLong>
 	 * @since 2.0
 	 */
 	@Override
-	public LongValueGene clone()
-	{
+	public LongValueGene clone() {
 		return (LongValueGene) super.clone();
 	}
 
 	/**
-	 * This will make a copy of the object and mutate it. The mutation has a normal
-	 * distribution multiplied by the deviation.
+	 * This will make a copy of the object and mutate it. The mutation has a
+	 * normal distribution multiplied by the deviation.
 	 *
-	 * @param deviation A double indicating how extreme the mutation will be. The
-	 * greater the deviation the more drastically the object will mutate. A
-	 * deviation of 0 should cause no mutation.
+	 * @param deviation
+	 *            A double indicating how extreme the mutation will be. The
+	 *            greater the deviation the more drastically the object will
+	 *            mutate. A deviation of 0 should cause no mutation.
 	 * @return A copy of the current object with potential mutations.
 	 * @since 2.0
 	 */
 	@Override
-	public LongValueGene mutate(final double deviation)
-	{
+	public LongValueGene mutate(final double deviation) {
 		final LongValueGene copy = this.clone();
 		copy.internalMutate(deviation);
 

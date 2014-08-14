@@ -25,48 +25,46 @@ import java.util.Set;
 
 import syncleus.dann.graph.context.ContextGraphElement;
 
-public class MutableDirectedAdjacencyGraph<N, E extends DirectedEdge<N>> extends AbstractDirectedAdjacencyGraph<N, E> implements MutableDirectedGraph<N, E>
-{
+public class MutableDirectedAdjacencyGraph<N, E extends DirectedEdge<N>>
+		extends AbstractDirectedAdjacencyGraph<N, E> implements
+		MutableDirectedGraph<N, E> {
 	private static final long serialVersionUID = 8043216557844179053L;
 
-	public MutableDirectedAdjacencyGraph()
-	{
+	public MutableDirectedAdjacencyGraph() {
 		super();
 	}
 
-	public MutableDirectedAdjacencyGraph(final Graph<N, E> copyGraph)
-	{
+	public MutableDirectedAdjacencyGraph(final Graph<N, E> copyGraph) {
 		super(copyGraph);
 	}
 
-	public MutableDirectedAdjacencyGraph(final Set<N> nodes, final Set<E> edges)
-	{
+	public MutableDirectedAdjacencyGraph(final Set<N> nodes, final Set<E> edges) {
 		super(nodes, edges);
 	}
 
 	@Override
-	public boolean add(final E newEdge)
-	{
-		if( newEdge == null )
+	public boolean add(final E newEdge) {
+		if (newEdge == null)
 			throw new IllegalArgumentException("newEdge can not be null");
-		if( !this.getNodes().containsAll(newEdge.getNodes()) )
-			throw new IllegalArgumentException("newEdge has a node as an end point that is not part of the graph");
+		if (!this.getNodes().containsAll(newEdge.getNodes()))
+			throw new IllegalArgumentException(
+					"newEdge has a node as an end point that is not part of the graph");
 
 		// if context is enabled lets check if it can join
-		if( this.isContextEnabled() && (newEdge instanceof ContextGraphElement)
-				&& !((ContextGraphElement)newEdge).joiningGraph(this) )
+		if (this.isContextEnabled() && (newEdge instanceof ContextGraphElement)
+				&& !((ContextGraphElement) newEdge).joiningGraph(this))
 			return false;
 
-		if( this.getInternalEdges().add(newEdge) )
-		{
-			for(final N currentNode : newEdge.getNodes())
-			{
+		if (this.getInternalEdges().add(newEdge)) {
+			for (final N currentNode : newEdge.getNodes()) {
 				this.getInternalAdjacencyEdges().get(currentNode).add(newEdge);
 
-				final List<N> newAdjacentNodes = new ArrayList<N>(newEdge.getNodes());
+				final List<N> newAdjacentNodes = new ArrayList<N>(
+						newEdge.getNodes());
 				newAdjacentNodes.remove(currentNode);
-				for(final N newAdjacentNode : newAdjacentNodes)
-					this.getInternalAdjacencyNodes().get(currentNode).add(newAdjacentNode);
+				for (final N newAdjacentNode : newAdjacentNodes)
+					this.getInternalAdjacencyNodes().get(currentNode)
+							.add(newAdjacentNode);
 			}
 			return true;
 		}
@@ -75,17 +73,16 @@ public class MutableDirectedAdjacencyGraph<N, E extends DirectedEdge<N>> extends
 	}
 
 	@Override
-	public boolean add(final N newNode)
-	{
-		if( newNode == null )
+	public boolean add(final N newNode) {
+		if (newNode == null)
 			throw new IllegalArgumentException("newNode can not be null");
 
-		if( this.getInternalAdjacencyEdges().containsKey(newNode) )
+		if (this.getInternalAdjacencyEdges().containsKey(newNode))
 			return false;
 
 		// if context is enabled lets check if it can join
-		if( this.isContextEnabled() && (newNode instanceof ContextGraphElement)
-				&& !((ContextGraphElement)newNode).joiningGraph(this) )
+		if (this.isContextEnabled() && (newNode instanceof ContextGraphElement)
+				&& !((ContextGraphElement) newNode).joiningGraph(this))
 			return false;
 
 		this.getInternalAdjacencyEdges().put(newNode, new HashSet<E>());
@@ -94,72 +91,73 @@ public class MutableDirectedAdjacencyGraph<N, E extends DirectedEdge<N>> extends
 	}
 
 	@Override
-	public boolean remove(final E edgeToRemove)
-	{
-		if( edgeToRemove == null )
+	public boolean remove(final E edgeToRemove) {
+		if (edgeToRemove == null)
 			throw new IllegalArgumentException("removeSynapse can not be null");
 
-		if( !this.getInternalEdges().contains(edgeToRemove) )
+		if (!this.getInternalEdges().contains(edgeToRemove))
 			return false;
 
 		// if context is enabled lets check if it can join
-		if( this.isContextEnabled()
+		if (this.isContextEnabled()
 				&& (edgeToRemove instanceof ContextGraphElement)
-				&& !((ContextGraphElement)edgeToRemove).leavingGraph(this) )
+				&& !((ContextGraphElement) edgeToRemove).leavingGraph(this))
 			return false;
 
-		if( !this.getInternalEdges().remove(edgeToRemove) )
+		if (!this.getInternalEdges().remove(edgeToRemove))
 			return false;
 
-		for(final N removeNode : edgeToRemove.getNodes())
-		{
-			this.getInternalAdjacencyEdges().get(removeNode).remove(edgeToRemove);
+		for (final N removeNode : edgeToRemove.getNodes()) {
+			this.getInternalAdjacencyEdges().get(removeNode)
+					.remove(edgeToRemove);
 
-			final List<N> removeAdjacentNodes = new ArrayList<N>(edgeToRemove.getNodes());
+			final List<N> removeAdjacentNodes = new ArrayList<N>(
+					edgeToRemove.getNodes());
 			removeAdjacentNodes.remove(removeNode);
-			for(final N removeAdjacentNode : removeAdjacentNodes)
-				this.getInternalAdjacencyNodes().get(removeNode).remove(removeAdjacentNode);
+			for (final N removeAdjacentNode : removeAdjacentNodes)
+				this.getInternalAdjacencyNodes().get(removeNode)
+						.remove(removeAdjacentNode);
 		}
 		return true;
 	}
 
 	@Override
-	public boolean remove(final N nodeToRemove)
-	{
-		if( nodeToRemove == null )
+	public boolean remove(final N nodeToRemove) {
+		if (nodeToRemove == null)
 			throw new IllegalArgumentException("node can not be null");
 
-		if( !this.getInternalAdjacencyEdges().containsKey(nodeToRemove) )
+		if (!this.getInternalAdjacencyEdges().containsKey(nodeToRemove))
 			return false;
 
 		// if context is enabled lets check if it can join
-		if( this.isContextEnabled()
+		if (this.isContextEnabled()
 				&& (nodeToRemove instanceof ContextGraphElement)
-				&& !((ContextGraphElement)nodeToRemove).leavingGraph(this) )
+				&& !((ContextGraphElement) nodeToRemove).leavingGraph(this))
 			return false;
 
-		final Set<E> removeEdges = this.getInternalAdjacencyEdges().get(nodeToRemove);
+		final Set<E> removeEdges = this.getInternalAdjacencyEdges().get(
+				nodeToRemove);
 
-		//remove all the edges
-		for(final E removeEdge : removeEdges)
+		// remove all the edges
+		for (final E removeEdge : removeEdges)
 			this.remove(removeEdge);
 
-		//modify edges by removing the node to remove
+		// modify edges by removing the node to remove
 		final Set<E> newEdges = new HashSet<E>();
-		for(final E removeEdge : removeEdges)
-		{
+		for (final E removeEdge : removeEdges) {
 			E newEdge = (E) removeEdge.disconnect(nodeToRemove);
-			while( (newEdge != null) && (newEdge.getNodes().contains(nodeToRemove)) )
+			while ((newEdge != null)
+					&& (newEdge.getNodes().contains(nodeToRemove)))
 				newEdge = (E) removeEdge.disconnect(nodeToRemove);
-			if( newEdge != null )
+			if (newEdge != null)
 				newEdges.add(newEdge);
 		}
 
-		//add the modified edges
-		for(final E newEdge : newEdges)
+		// add the modified edges
+		for (final E newEdge : newEdges)
 			this.add(newEdge);
 
-		//remove the node itself
+		// remove the node itself
 		this.getInternalAdjacencyEdges().remove(nodeToRemove);
 		this.getInternalAdjacencyNodes().remove(nodeToRemove);
 
@@ -167,32 +165,35 @@ public class MutableDirectedAdjacencyGraph<N, E extends DirectedEdge<N>> extends
 	}
 
 	@Override
-	public boolean clear()
-	{
+	public boolean clear() {
 		boolean removedSomething = false;
 
-		//first lets remove all the edges
-		for(final E edge : this.getEdges())
-		{
-			//lets just make sure we arent some how getting an we dont actually own, this shouldnt be possible so its
-			//an assert. This ensures that if remove() comes back false it must be because the context didnt allow it.
+		// first lets remove all the edges
+		for (final E edge : this.getEdges()) {
+			// lets just make sure we arent some how getting an we dont actually
+			// own, this shouldnt be possible so its
+			// an assert. This ensures that if remove() comes back false it must
+			// be because the context didnt allow it.
 			assert this.getInternalEdges().contains(edge);
 
-			if( !this.remove(edge) )
-				throw new IllegalStateException("one of the edges will not allow itself to leave this graph");
+			if (!this.remove(edge))
+				throw new IllegalStateException(
+						"one of the edges will not allow itself to leave this graph");
 
 			removedSomething = true;
 		}
 
-		//now lets remove all the nodes
-		for(final N node : this.getNodes())
-		{
-			//lets just make sure we arent some how getting an we dont actually own, this shouldnt be possible so its
-			//an assert. This ensures that if remove() comes back false it must be because the context didnt allow it.
-			assert ( !this.getInternalAdjacencyEdges().containsKey(node) );
+		// now lets remove all the nodes
+		for (final N node : this.getNodes()) {
+			// lets just make sure we arent some how getting an we dont actually
+			// own, this shouldnt be possible so its
+			// an assert. This ensures that if remove() comes back false it must
+			// be because the context didnt allow it.
+			assert (!this.getInternalAdjacencyEdges().containsKey(node));
 
-			if( !this.remove(node) )
-				throw new IllegalStateException("one of the nodes will not allow itself to leave this graph");
+			if (!this.remove(node))
+				throw new IllegalStateException(
+						"one of the nodes will not allow itself to leave this graph");
 
 			removedSomething = true;
 		}
@@ -201,44 +202,43 @@ public class MutableDirectedAdjacencyGraph<N, E extends DirectedEdge<N>> extends
 	}
 
 	@Override
-	public MutableDirectedAdjacencyGraph<N, E> cloneAdd(final E newEdge)
-	{
+	public MutableDirectedAdjacencyGraph<N, E> cloneAdd(final E newEdge) {
 		return (MutableDirectedAdjacencyGraph<N, E>) super.cloneAdd(newEdge);
 	}
 
 	@Override
-	public MutableDirectedAdjacencyGraph<N, E> cloneAdd(final N newNode)
-	{
+	public MutableDirectedAdjacencyGraph<N, E> cloneAdd(final N newNode) {
 		return (MutableDirectedAdjacencyGraph<N, E>) super.cloneAdd(newNode);
 	}
 
 	@Override
-	public MutableDirectedAdjacencyGraph<N, E> cloneAdd(final Set<N> newNodes, final Set<E> newEdges)
-	{
-		return (MutableDirectedAdjacencyGraph<N, E>) super.cloneAdd(newNodes, newEdges);
+	public MutableDirectedAdjacencyGraph<N, E> cloneAdd(final Set<N> newNodes,
+			final Set<E> newEdges) {
+		return (MutableDirectedAdjacencyGraph<N, E>) super.cloneAdd(newNodes,
+				newEdges);
 	}
 
 	@Override
-	public MutableDirectedAdjacencyGraph<N, E> cloneRemove(final E edgeToRemove)
-	{
-		return (MutableDirectedAdjacencyGraph<N, E>) super.cloneRemove(edgeToRemove);
+	public MutableDirectedAdjacencyGraph<N, E> cloneRemove(final E edgeToRemove) {
+		return (MutableDirectedAdjacencyGraph<N, E>) super
+				.cloneRemove(edgeToRemove);
 	}
 
 	@Override
-	public MutableDirectedAdjacencyGraph<N, E> cloneRemove(final N nodeToRemove)
-	{
-		return (MutableDirectedAdjacencyGraph<N, E>) super.cloneRemove(nodeToRemove);
+	public MutableDirectedAdjacencyGraph<N, E> cloneRemove(final N nodeToRemove) {
+		return (MutableDirectedAdjacencyGraph<N, E>) super
+				.cloneRemove(nodeToRemove);
 	}
 
 	@Override
-	public MutableDirectedAdjacencyGraph<N, E> cloneRemove(final Set<N> deleteNodes, final Set<E> deleteEdges)
-	{
-		return (MutableDirectedAdjacencyGraph<N, E>) super.cloneRemove(deleteNodes, deleteEdges);
+	public MutableDirectedAdjacencyGraph<N, E> cloneRemove(
+			final Set<N> deleteNodes, final Set<E> deleteEdges) {
+		return (MutableDirectedAdjacencyGraph<N, E>) super.cloneRemove(
+				deleteNodes, deleteEdges);
 	}
 
 	@Override
-	public MutableDirectedAdjacencyGraph<N, E> clone()
-	{
+	public MutableDirectedAdjacencyGraph<N, E> clone() {
 		return (MutableDirectedAdjacencyGraph<N, E>) super.clone();
 	}
 }

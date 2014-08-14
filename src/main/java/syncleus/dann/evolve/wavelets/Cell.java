@@ -21,48 +21,44 @@ package syncleus.dann.evolve.wavelets;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Cell
-{
+public class Cell {
 	private final Set<SignalKeyConcentration> localConcentrations;
 	private final Nucleus nucleus;
 
-	public Cell(final Cell copy)
-	{
+	public Cell(final Cell copy) {
 		this.nucleus = new Nucleus(copy.nucleus);
-		this.localConcentrations = new HashSet<SignalKeyConcentration>(copy.localConcentrations);
+		this.localConcentrations = new HashSet<SignalKeyConcentration>(
+				copy.localConcentrations);
 	}
 
-	public Cell()
-	{
+	public Cell() {
 		this.nucleus = new Nucleus();
 		this.localConcentrations = new HashSet<SignalKeyConcentration>();
 
-		final Set<SignalKey> localSignals = this.nucleus.getExpressedSignals(false);
-		for(final SignalKey localSignal : localSignals)
-		{
-			final SignalKeyConcentration newConcentration = new SignalKeyConcentration(localSignal);
+		final Set<SignalKey> localSignals = this.nucleus
+				.getExpressedSignals(false);
+		for (final SignalKey localSignal : localSignals) {
+			final SignalKeyConcentration newConcentration = new SignalKeyConcentration(
+					localSignal);
 			this.localConcentrations.add(newConcentration);
 			this.nucleus.bind(newConcentration, false);
 		}
 	}
 
-	public static boolean bind(final SignalKeyConcentration concentration, final boolean isExternal)
-	{
+	public static boolean bind(final SignalKeyConcentration concentration,
+			final boolean isExternal) {
 		return false;
 	}
 
-	Set<SignalKey> getExpressedSignals()
-	{
+	Set<SignalKey> getExpressedSignals() {
 		return this.nucleus.getExpressedSignals(true);
 	}
 
-	public void preTick()
-	{
+	public void preTick() {
 		this.nucleus.preTick();
 	}
 
-	public void tick()
-	{
+	public void tick() {
 		this.nucleus.tick();
 	}
 }

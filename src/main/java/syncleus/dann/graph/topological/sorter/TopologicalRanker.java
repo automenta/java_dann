@@ -24,7 +24,7 @@ import java.util.Set;
 import syncleus.dann.graph.BidirectedGraph;
 import syncleus.dann.graph.DirectedEdge;
 
-public interface TopologicalRanker<N> extends TopologicalSorter<N>
-{
-	List<Set<N>> rank(BidirectedGraph<? extends N, ? extends DirectedEdge<? extends N>> graph);
+public interface TopologicalRanker<N> extends TopologicalSorter<N> {
+	List<Set<N>> rank(
+			BidirectedGraph<? extends N, ? extends DirectedEdge<? extends N>> graph);
 }

@@ -22,32 +22,28 @@ import java.util.Set;
 
 import syncleus.dann.evolve.MutableInteger;
 
-public class PromoterGene extends AbstractWaveletGene
-{
+public class PromoterGene extends AbstractWaveletGene {
 	private MutableInteger targetDistance;
 
-	public PromoterGene(final ReceptorKey initialReceptor, final int initialDistance)
-	{
+	public PromoterGene(final ReceptorKey initialReceptor,
+			final int initialDistance) {
 		super(initialReceptor);
 
 		this.targetDistance = new MutableInteger(initialDistance);
 	}
 
-	public PromoterGene(final PromoterGene copy)
-	{
+	public PromoterGene(final PromoterGene copy) {
 		super(copy);
 
 		this.targetDistance = copy.targetDistance;
 	}
 
-	public int getTargetDistance()
-	{
+	public int getTargetDistance() {
 		return this.targetDistance.intValue();
 	}
 
 	@Override
-	public PromoterGene clone()
-	{
+	public PromoterGene clone() {
 		final PromoterGene copy = (PromoterGene) super.clone();
 
 		copy.targetDistance = this.targetDistance.clone();
@@ -56,8 +52,7 @@ public class PromoterGene extends AbstractWaveletGene
 	}
 
 	@Override
-	public void mutate(final Set<AbstractKey> keyPool)
-	{
+	public void mutate(final Set<AbstractKey> keyPool) {
 		super.mutate(keyPool);
 
 		this.targetDistance = this.targetDistance.mutate(this.getMutability());

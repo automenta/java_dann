@@ -18,58 +18,70 @@
  ******************************************************************************/
 package syncleus.dann.math.counting;
 
-import syncleus.dann.math.counting.JohnsonTrotterPermutationCounter;
-import syncleus.dann.math.counting.Counter;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class TestJohnsonTrotterPermutationCounter
-{
+public class TestJohnsonTrotterPermutationCounter {
 	@Test
-	public void testPermutationCount()
-	{
+	public void testPermutationCount() {
 		Counter generator = new JohnsonTrotterPermutationCounter(3, 2);
-		Assert.assertTrue("Generator produced incorrect number of permutations, expected 6, received: " + generator.getTotal(), generator.getTotal().intValue() == 6);
+		Assert.assertTrue(
+				"Generator produced incorrect number of permutations, expected 6, received: "
+						+ generator.getTotal(),
+				generator.getTotal().intValue() == 6);
 		int count = 0;
-		while( generator.hasMore() )
-		{
+		while (generator.hasMore()) {
 			final int[] next = generator.getNext();
-			if( next != null )
+			if (next != null)
 				count++;
 		}
-		Assert.assertTrue("Generator produced incorrect number of permutations, expected 6, received: " + count, count == 6);
+		Assert.assertTrue(
+				"Generator produced incorrect number of permutations, expected 6, received: "
+						+ count, count == 6);
 
 		generator = new JohnsonTrotterPermutationCounter(3, 3);
-		Assert.assertTrue("Generator produced incorrect number of permutations, expected 6, received: " + generator.getTotal(), generator.getTotal().intValue() == 6);
+		Assert.assertTrue(
+				"Generator produced incorrect number of permutations, expected 6, received: "
+						+ generator.getTotal(),
+				generator.getTotal().intValue() == 6);
 		count = 0;
-		while( generator.hasMore() )
-		{
+		while (generator.hasMore()) {
 			final int[] next = generator.getNext();
-			if( next != null )
+			if (next != null)
 				count++;
 		}
-		Assert.assertTrue("Generator produced incorrect number of permutations, expected 6, received: " + count, count == 6);
+		Assert.assertTrue(
+				"Generator produced incorrect number of permutations, expected 6, received: "
+						+ count, count == 6);
 
 		generator = new JohnsonTrotterPermutationCounter(3, 0);
-		Assert.assertTrue("Generator produced incorrect number of permutations, expected 0, received: " + generator.getTotal(), generator.getTotal().intValue() == 0);
+		Assert.assertTrue(
+				"Generator produced incorrect number of permutations, expected 0, received: "
+						+ generator.getTotal(),
+				generator.getTotal().intValue() == 0);
 		count = 0;
-		while( generator.hasMore() )
-		{
+		while (generator.hasMore()) {
 			final int[] next = generator.getNext();
-			if( next != null )
+			if (next != null)
 				count++;
 		}
-		Assert.assertTrue("Generator produced incorrect number of permutations, expected 0, received: " + count, count == 0);
+		Assert.assertTrue(
+				"Generator produced incorrect number of permutations, expected 0, received: "
+						+ count, count == 0);
 
 		generator = new JohnsonTrotterPermutationCounter(0, 0);
-		Assert.assertTrue("Generator produced incorrect number of permutations, expected 0, received: " + generator.getTotal(), generator.getTotal().intValue() == 0);
+		Assert.assertTrue(
+				"Generator produced incorrect number of permutations, expected 0, received: "
+						+ generator.getTotal(),
+				generator.getTotal().intValue() == 0);
 		count = 0;
-		while( generator.hasMore() )
-		{
+		while (generator.hasMore()) {
 			final int[] next = generator.getNext();
-			if( next != null )
+			if (next != null)
 				count++;
 		}
-		Assert.assertTrue("Generator produced incorrect number of permutations, expected 0, received: " + count, count == 0);
+		Assert.assertTrue(
+				"Generator produced incorrect number of permutations, expected 0, received: "
+						+ count, count == 0);
 	}
 }

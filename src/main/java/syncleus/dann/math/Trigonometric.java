@@ -18,10 +18,11 @@
  ******************************************************************************/
 package syncleus.dann.math;
 
-public interface Trigonometric<F extends Trigonometric<? extends F>> extends FieldElement<F>
-{
+public interface Trigonometric<F extends Trigonometric<? extends F>> extends
+		FieldElement<F> {
 	/**
 	 * Returns the trigonometric sine of this value.
+	 *
 	 * @see Math#sin(double)
 	 * @return the trigonometric sine of this value.
 	 */
@@ -29,6 +30,7 @@ public interface Trigonometric<F extends Trigonometric<? extends F>> extends Fie
 
 	/**
 	 * Returns the arc sine of a value.
+	 *
 	 * @see Math#asin(double)
 	 * @return the trigonometric arc sine of this value.
 	 */
@@ -36,6 +38,7 @@ public interface Trigonometric<F extends Trigonometric<? extends F>> extends Fie
 
 	/**
 	 * Returns the hyperbolic sine of this value.
+	 *
 	 * @see Math#sinh(double)
 	 * @return the hyperbolic sine of this value.
 	 */
@@ -43,6 +46,7 @@ public interface Trigonometric<F extends Trigonometric<? extends F>> extends Fie
 
 	/**
 	 * Returns the trigonometric cosine of this value.
+	 *
 	 * @see Math#cos(double)
 	 * @return the trigonometric cosine of this value.
 	 */
@@ -50,6 +54,7 @@ public interface Trigonometric<F extends Trigonometric<? extends F>> extends Fie
 
 	/**
 	 * Returns the arc cosine of this value.
+	 *
 	 * @see Math#acos(double)
 	 * @return the arc cosine of this value.
 	 */
@@ -57,6 +62,7 @@ public interface Trigonometric<F extends Trigonometric<? extends F>> extends Fie
 
 	/**
 	 * Returns the hyperbolic cosine of this value.
+	 *
 	 * @see Math#cosh(double)
 	 * @return the hyperbolic cosine of this value.
 	 */
@@ -64,6 +70,7 @@ public interface Trigonometric<F extends Trigonometric<? extends F>> extends Fie
 
 	/**
 	 * Returns the trigonometric tangent of this value.
+	 *
 	 * @see Math#tan(double)
 	 * @return the trigonometric tangent of this value.
 	 */
@@ -71,6 +78,7 @@ public interface Trigonometric<F extends Trigonometric<? extends F>> extends Fie
 
 	/**
 	 * Returns the arc tangent of this value.
+	 *
 	 * @see Math#atan(double)
 	 * @return the arc tangent of this value.
 	 */
@@ -78,6 +86,7 @@ public interface Trigonometric<F extends Trigonometric<? extends F>> extends Fie
 
 	/**
 	 * Returns the hyperbolic tangent of this value.
+	 *
 	 * @see Math#tanh(double)
 	 * @return the hyperbolic tangent of this value.
 	 */

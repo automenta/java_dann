@@ -26,72 +26,86 @@ import syncleus.dann.dataprocess.language.parsing.BasicWordParser;
 import syncleus.dann.dataprocess.language.parsing.WordParser;
 
 /**
- * A SimpleLanguageFisherClassifier classifies words as a SimpleFisherClassifier.
- * @param <C> The classification to use
+ * A SimpleLanguageFisherClassifier classifies words as a
+ * SimpleFisherClassifier.
+ *
+ * @param <C>
+ *            The classification to use
  * @author Jeffrey Phillips Freeman
  */
-public class SimpleLanguageFisherClassifier<C> extends SimpleFisherClassifier<String, String, C> implements TrainableLanguageFisherClassifier<C>
-{
+public class SimpleLanguageFisherClassifier<C> extends
+		SimpleFisherClassifier<String, String, C> implements
+		TrainableLanguageFisherClassifier<C> {
 	private final Locale locale;
 
 	/**
 	 * Creates a new SimpleLanguageFisherClassifier using the default locale.
 	 */
-	public SimpleLanguageFisherClassifier()
-	{
+	public SimpleLanguageFisherClassifier() {
 		this(Locale.getDefault());
 	}
 
 	/**
 	 * Creates a new SimpleLanguageFisherClassifier using the provided locale.
-	 * @param ourLocale The locale to use
+	 *
+	 * @param ourLocale
+	 *            The locale to use
 	 */
-	public SimpleLanguageFisherClassifier(final Locale ourLocale)
-	{
+	public SimpleLanguageFisherClassifier(final Locale ourLocale) {
 		super(new WordExtractor());
 		this.locale = ourLocale;
 	}
 
 	/**
 	 * Gets the current locale in use.
+	 *
 	 * @return The locale in use
 	 */
 	@Override
-	public Locale getLocale()
-	{
+	public Locale getLocale() {
 		return this.locale;
 	}
 
 	/**
 	 * Gets the probability that the given feature is in the given category.
-	 * @param feature The feature to check
-	 * @param category The category to check
+	 *
+	 * @param feature
+	 *            The feature to check
+	 * @param category
+	 *            The category to check
 	 * @return The probability that a feature is in the given category
 	 */
 	@Override
-	public double featureClassificationProbability(final String feature, final C category)
-	{
-		return super.featureClassificationProbability(feature.toLowerCase(this.locale), category);
+	public double featureClassificationProbability(final String feature,
+			final C category) {
+		return super.featureClassificationProbability(
+				feature.toLowerCase(this.locale), category);
 	}
 
 	/**
-	 * Gets the weighted probability that the given feature is in the given category.
-	 * @param feature The feature to check
-	 * @param category The category to check
+	 * Gets the weighted probability that the given feature is in the given
+	 * category.
+	 *
+	 * @param feature
+	 *            The feature to check
+	 * @param category
+	 *            The category to check
 	 * @return The weighted probability that a feature is in the given category
-	 * @see com.syncleus.dann.classify.naive.bayes.fisher.SimpleLanguageFisherClassifier#featureClassificationProbability(String, Object)
+	 * @see com.syncleus.dann.classify.naive.bayes.fisher.SimpleLanguageFisherClassifier#featureClassificationProbability(String,
+	 *      Object)
 	 */
 	@Override
-	public double featureClassificationWeightedProbability(final String feature, final C category)
-	{
-		return super.featureClassificationWeightedProbability(feature.toLowerCase(this.locale), category);
+	public double featureClassificationWeightedProbability(
+			final String feature, final C category) {
+		return super.featureClassificationWeightedProbability(
+				feature.toLowerCase(this.locale), category);
 	}
 
 	/**
 	 * A WordExtractor to extract words from a String.
 	 */
-	private static class WordExtractor implements FeatureExtractor<String, String>
-	{
+	private static class WordExtractor implements
+			FeatureExtractor<String, String> {
 		/**
 		 * The parser to use to get unique words.
 		 */
@@ -99,12 +113,13 @@ public class SimpleLanguageFisherClassifier<C> extends SimpleFisherClassifier<St
 
 		/**
 		 * Gets the unique words in a String.
-		 * @param item The item
+		 *
+		 * @param item
+		 *            The item
 		 * @return The words from a String
 		 */
 		@Override
-		public Set<String> getFeatures(final String item)
-		{
+		public Set<String> getFeatures(final String item) {
 			return PARSER.getUniqueWords(item);
 		}
 	}

@@ -26,48 +26,46 @@ package syncleus.dann.evolve;
  * @author Jeffrey Phillips Freeman
  * @since 2.0
  */
-public class FloatValueGene extends AbstractValueGene<MutableFloat>
-{
+public class FloatValueGene extends AbstractValueGene<MutableFloat> {
 	/**
 	 * Initializes a new instance of this class with a value of 0.
 	 *
 	 * @since 2.0
 	 */
-	public FloatValueGene()
-	{
+	public FloatValueGene() {
 		super(new MutableFloat(0f));
 	}
 
 	/**
 	 * Initializes a new instance of this class with the specified value.
 	 *
-	 * @param value The value for this gene.
+	 * @param value
+	 *            The value for this gene.
 	 * @since 2.0
 	 */
-	public FloatValueGene(final float value)
-	{
+	public FloatValueGene(final float value) {
 		super(new MutableFloat(value));
 	}
 
 	/**
 	 * Initializes a new instance of this class with the specified value.
 	 *
-	 * @param value The value for this gene.
+	 * @param value
+	 *            The value for this gene.
 	 * @since 2.0
 	 */
-	public FloatValueGene(final Float value)
-	{
+	public FloatValueGene(final Float value) {
 		super(new MutableFloat(value));
 	}
 
 	/**
 	 * Initializes a new instance of this class with the specified value.
 	 *
-	 * @param value The value for this gene.
+	 * @param value
+	 *            The value for this gene.
 	 * @since 2.0
 	 */
-	public FloatValueGene(final MutableFloat value)
-	{
+	public FloatValueGene(final MutableFloat value) {
 		super(value);
 	}
 
@@ -75,11 +73,11 @@ public class FloatValueGene extends AbstractValueGene<MutableFloat>
 	 * Initializes a new instance of this class that is a copy of the specified
 	 * value.
 	 *
-	 * @param copyGene The value to copy.
+	 * @param copyGene
+	 *            The value to copy.
 	 * @since 2.0
 	 */
-	public FloatValueGene(final FloatValueGene copyGene)
-	{
+	public FloatValueGene(final FloatValueGene copyGene) {
 		super(copyGene);
 	}
 
@@ -90,24 +88,23 @@ public class FloatValueGene extends AbstractValueGene<MutableFloat>
 	 * @since 2.0
 	 */
 	@Override
-	public FloatValueGene clone()
-	{
+	public FloatValueGene clone() {
 		return (FloatValueGene) super.clone();
 	}
 
 	/**
-	 * This will make a copy of the object and mutate it. The mutation has a normal
-	 * distribution multiplied by the deviation.
+	 * This will make a copy of the object and mutate it. The mutation has a
+	 * normal distribution multiplied by the deviation.
 	 *
-	 * @param deviation A double indicating how extreme the mutation will be. The
-	 * greater the deviation the more drastically the object will mutate. A
-	 * deviation of 0 should cause no mutation.
+	 * @param deviation
+	 *            A double indicating how extreme the mutation will be. The
+	 *            greater the deviation the more drastically the object will
+	 *            mutate. A deviation of 0 should cause no mutation.
 	 * @return A copy of the current object with potential mutations.
 	 * @since 2.0
 	 */
 	@Override
-	public FloatValueGene mutate(final double deviation)
-	{
+	public FloatValueGene mutate(final double deviation) {
 		final FloatValueGene copy = this.clone();
 		copy.internalMutate(deviation);
 

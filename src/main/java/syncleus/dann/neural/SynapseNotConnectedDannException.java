@@ -26,8 +26,7 @@ import syncleus.dann.DannException;
  * @author Jeffrey Phillips Freeman
  * @since 1.0
  */
-public class SynapseNotConnectedDannException extends DannException
-{
+public class SynapseNotConnectedDannException extends DannException {
 	private static final long serialVersionUID = 6281989867214769559L;
 
 	/**
@@ -35,19 +34,18 @@ public class SynapseNotConnectedDannException extends DannException
 	 *
 	 * @since 1.0
 	 */
-	public SynapseNotConnectedDannException()
-	{
+	public SynapseNotConnectedDannException() {
 		super();
 	}
 
 	/**
 	 * Creates an exception with a message describing the cause.
 	 *
-	 * @param msg A string describing the cause of the exception
+	 * @param msg
+	 *            A string describing the cause of the exception
 	 * @since 1.0
 	 */
-	public SynapseNotConnectedDannException(final String msg)
-	{
+	public SynapseNotConnectedDannException(final String msg) {
 		super(msg);
 	}
 
@@ -55,12 +53,14 @@ public class SynapseNotConnectedDannException extends DannException
 	 * Creates an exception with a message describing the cause as well as the
 	 * throwable which caused this exception to be thrown.
 	 *
-	 * @param msg A string describing the cause of the exception
-	 * @param cause The throwable which caused this exception
+	 * @param msg
+	 *            A string describing the cause of the exception
+	 * @param cause
+	 *            The throwable which caused this exception
 	 * @since 1.0
 	 */
-	public SynapseNotConnectedDannException(final String msg, final Throwable cause)
-	{
+	public SynapseNotConnectedDannException(final String msg,
+			final Throwable cause) {
 		super(msg, cause);
 	}
 
@@ -68,11 +68,11 @@ public class SynapseNotConnectedDannException extends DannException
 	 * Creates an exception containing the throwable which caused this exception
 	 * to be thrown.
 	 *
-	 * @param cause The throwable which caused this exception
+	 * @param cause
+	 *            The throwable which caused this exception
 	 * @since 1.0
 	 */
-	public SynapseNotConnectedDannException(final Throwable cause)
-	{
+	public SynapseNotConnectedDannException(final Throwable cause) {
 		super(cause);
 	}
 }

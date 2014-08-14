@@ -18,29 +18,24 @@
  ******************************************************************************/
 package syncleus.dann.math.statistics;
 
-public abstract class AbstractMarkovChain<S> implements MarkovChain<S>
-{
+public abstract class AbstractMarkovChain<S> implements MarkovChain<S> {
 	@Override
-	public S generateTransition()
-	{
+	public S generateTransition() {
 		return this.generateTransition(true);
 	}
 
 	@Override
-	public S getCurrentState()
-	{
+	public S getCurrentState() {
 		return this.getStateHistory().get(0);
 	}
 
 	@Override
-	public double getProbability(final S futureState, final int steps)
-	{
+	public double getProbability(final S futureState, final int steps) {
 		return this.getProbability(steps).get(futureState);
 	}
 
 	@Override
-	public double getSteadyStateProbability(final S futureState)
-	{
+	public double getSteadyStateProbability(final S futureState) {
 		return this.getSteadyStateProbability().get(futureState);
 	}
 }

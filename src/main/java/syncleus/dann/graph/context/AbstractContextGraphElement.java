@@ -25,35 +25,32 @@ import java.util.Set;
 
 import syncleus.dann.graph.Graph;
 
-public abstract class AbstractContextGraphElement<G extends Graph<?, ?>> implements ContextGraphElement<G>, Serializable
-{
+public abstract class AbstractContextGraphElement<G extends Graph<?, ?>>
+		implements ContextGraphElement<G>, Serializable {
 	private final boolean allowJoiningMultipleGraphs;
 	private final Set<G> joinedGraphs = new HashSet<G>();
 
-	protected AbstractContextGraphElement(final boolean allowJoiningMultipleGraphs)
-	{
+	protected AbstractContextGraphElement(
+			final boolean allowJoiningMultipleGraphs) {
 		this.allowJoiningMultipleGraphs = allowJoiningMultipleGraphs;
 	}
 
 	@Override
-	public boolean isGraphMember()
-	{
+	public boolean isGraphMember() {
 		return (!this.joinedGraphs.isEmpty());
 	}
 
 	@Override
-	public Set<G> getJoinedGraphs()
-	{
+	public Set<G> getJoinedGraphs() {
 		return Collections.unmodifiableSet(this.joinedGraphs);
 	}
 
 	@Override
-	public boolean joiningGraph(final G graph)
-	{
-		if( graph == null )
+	public boolean joiningGraph(final G graph) {
+		if (graph == null)
 			throw new IllegalArgumentException("graph can not be null");
 
-		if( !this.allowJoiningMultipleGraphs && !joinedGraphs.isEmpty() )
+		if (!this.allowJoiningMultipleGraphs && !joinedGraphs.isEmpty())
 			return false;
 
 		this.joinedGraphs.add(graph);
@@ -61,11 +58,10 @@ public abstract class AbstractContextGraphElement<G extends Graph<?, ?>> impleme
 	}
 
 	@Override
-	public boolean leavingGraph(final G graph)
-	{
-		if( graph == null )
+	public boolean leavingGraph(final G graph) {
+		if (graph == null)
 			throw new IllegalArgumentException("graph can not be null");
-		if( !this.joinedGraphs.contains(graph) )
+		if (!this.joinedGraphs.contains(graph))
 			throw new IllegalArgumentException("graph was never joined");
 
 		this.joinedGraphs.remove(graph);
@@ -73,8 +69,7 @@ public abstract class AbstractContextGraphElement<G extends Graph<?, ?>> impleme
 	}
 
 	@Override
-	public boolean isAllowingMultipleGraphs()
-	{
+	public boolean isAllowingMultipleGraphs() {
 		return allowJoiningMultipleGraphs;
 	}
 }

@@ -25,8 +25,7 @@ package syncleus.dann;
  * @author Jeffrey Phillips Freeman
  * @since 1.0
  */
-public class DannException extends Exception
-{
+public class DannException extends Exception {
 	private static final long serialVersionUID = -2030134384547494280L;
 
 	/**
@@ -34,19 +33,18 @@ public class DannException extends Exception
 	 *
 	 * @since 1.0
 	 */
-	public DannException()
-	{
+	public DannException() {
 		super();
 	}
 
 	/**
 	 * Creates an exception with a message describing the cause.
 	 *
-	 * @param msg A string describing the cause of the exception
+	 * @param msg
+	 *            A string describing the cause of the exception
 	 * @since 1.0
 	 */
-	public DannException(final String msg)
-	{
+	public DannException(final String msg) {
 		super(msg);
 	}
 
@@ -54,24 +52,25 @@ public class DannException extends Exception
 	 * Creates an exception with a message describing the cause as well as the
 	 * throwable which caused this exception to be thrown.
 	 *
-	 * @param msg A string describing the cause of the exception
-	 * @param cause The throwable which caused this exception
+	 * @param msg
+	 *            A string describing the cause of the exception
+	 * @param cause
+	 *            The throwable which caused this exception
 	 * @since 1.0
 	 */
-	public DannException(final String msg, final Throwable cause)
-	{
+	public DannException(final String msg, final Throwable cause) {
 		super(msg, cause);
 	}
 
 	/**
-	 * Creates an exception containing the throwable which caused this exception to
-	 * be thrown.
+	 * Creates an exception containing the throwable which caused this exception
+	 * to be thrown.
 	 *
-	 * @param cause The throwable which caused this exception
+	 * @param cause
+	 *            The throwable which caused this exception
 	 * @since 1.0
 	 */
-	public DannException(final Throwable cause)
-	{
+	public DannException(final Throwable cause) {
 		super(cause);
 	}
 }

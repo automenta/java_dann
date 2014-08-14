@@ -19,7 +19,7 @@
 package syncleus.dann.neural.backprop;
 
 import syncleus.dann.neural.Brain;
-import syncleus.dann.neural.activation.ActivationFunction;
+import syncleus.dann.neural.activation.DannActivationFunction;
 
 /**
  * The SimpleBackpropNeuron is the most fundamental component of a back-prop
@@ -31,8 +31,7 @@ import syncleus.dann.neural.activation.ActivationFunction;
  * @see com.syncleus.dann.neural.SimpleSynapse
  * @since 1.0
  */
-public final class SimpleBackpropNeuron extends AbstractBackpropNeuron
-{
+public final class SimpleBackpropNeuron extends AbstractBackpropNeuron {
 	private static final long serialVersionUID = 982375098231423L;
 
 	/**
@@ -40,8 +39,7 @@ public final class SimpleBackpropNeuron extends AbstractBackpropNeuron
 	 *
 	 * @since 1.0
 	 */
-	public SimpleBackpropNeuron(final Brain brain)
-	{
+	public SimpleBackpropNeuron(final Brain brain) {
 		super(brain);
 	}
 
@@ -49,11 +47,12 @@ public final class SimpleBackpropNeuron extends AbstractBackpropNeuron
 	 * Creates a new instance of SimpleBackpropNeuron with the specified
 	 * activation function.
 	 *
-	 * @param activationFunction The Neuron's activation function.
+	 * @param activationFunction
+	 *            The Neuron's activation function.
 	 * @since 1.0
 	 */
-	public SimpleBackpropNeuron(final Brain brain, final ActivationFunction activationFunction)
-	{
+	public SimpleBackpropNeuron(final Brain brain,
+			final DannActivationFunction activationFunction) {
 		super(brain, activationFunction);
 	}
 
@@ -61,11 +60,11 @@ public final class SimpleBackpropNeuron extends AbstractBackpropNeuron
 	 * Creates a new instance of a SimpleBackpropNeuron using the default
 	 * activation function with the specified learning rate.
 	 *
-	 * @param learningRate learning rate of this neuron.
+	 * @param learningRate
+	 *            learning rate of this neuron.
 	 * @since 1.0
 	 */
-	public SimpleBackpropNeuron(final Brain brain, final double learningRate)
-	{
+	public SimpleBackpropNeuron(final Brain brain, final double learningRate) {
 		super(brain, learningRate);
 	}
 
@@ -73,11 +72,14 @@ public final class SimpleBackpropNeuron extends AbstractBackpropNeuron
 	 * Creates a new instance of a SimpleBackpropNeuron with the specified
 	 * activation function and learning rate.
 	 *
-	 * @param activationFunction Activation function for this neuron.
-	 * @param learningRate Learning rate for this neuron.
+	 * @param activationFunction
+	 *            Activation function for this neuron.
+	 * @param learningRate
+	 *            Learning rate for this neuron.
 	 */
-	public SimpleBackpropNeuron(final Brain brain, final ActivationFunction activationFunction, final double learningRate)
-	{
+	public SimpleBackpropNeuron(final Brain brain,
+			final DannActivationFunction activationFunction,
+			final double learningRate) {
 		super(brain, activationFunction, learningRate);
 	}
 }

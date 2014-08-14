@@ -21,7 +21,7 @@ package syncleus.dann.neural.backprop.brain;
 import java.util.concurrent.ExecutorService;
 
 import syncleus.dann.neural.Synapse;
-import syncleus.dann.neural.activation.ActivationFunction;
+import syncleus.dann.neural.activation.DannActivationFunction;
 import syncleus.dann.neural.backprop.BackpropNeuron;
 import syncleus.dann.neural.backprop.InputBackpropNeuron;
 import syncleus.dann.neural.backprop.OutputBackpropNeuron;
@@ -29,20 +29,23 @@ import syncleus.dann.neural.backprop.SimpleBackpropNeuron;
 import syncleus.dann.neural.backprop.SimpleInputBackpropNeuron;
 import syncleus.dann.neural.backprop.SimpleOutputBackpropNeuron;
 
-public final class FullyConnectedFeedforwardBrain<IN extends InputBackpropNeuron, ON extends OutputBackpropNeuron, N extends BackpropNeuron, S extends Synapse<N>> extends AbstractFullyConnectedFeedforwardBrain<IN, ON, N, S>
-{
+public final class FullyConnectedFeedforwardBrain<IN extends InputBackpropNeuron, ON extends OutputBackpropNeuron, N extends BackpropNeuron, S extends Synapse<N>>
+		extends AbstractFullyConnectedFeedforwardBrain<IN, ON, N, S> {
 	private static final long serialVersionUID = 3666884827880527998L;
 	private final double learningRate;
-	private final ActivationFunction activationFunction;
+	private final DannActivationFunction activationFunction;
 
 	/**
 	 * Uses the given threadExecutor for executing tasks.
 	 *
-	 * @param threadExecutor executor to use for executing tasks.
+	 * @param threadExecutor
+	 *            executor to use for executing tasks.
 	 * @since 2.0
 	 */
-	public FullyConnectedFeedforwardBrain(final int[] neuronsPerLayer, final double learningRate, final ActivationFunction activationFunction, final ExecutorService threadExecutor)
-	{
+	public FullyConnectedFeedforwardBrain(final int[] neuronsPerLayer,
+			final double learningRate,
+			final DannActivationFunction activationFunction,
+			final ExecutorService threadExecutor) {
 		super(threadExecutor);
 		this.learningRate = learningRate;
 		this.activationFunction = activationFunction;
@@ -51,13 +54,14 @@ public final class FullyConnectedFeedforwardBrain<IN extends InputBackpropNeuron
 	}
 
 	/**
-	 * Default constructor initializes a default threadExecutor based on the number
-	 * of processors.
+	 * Default constructor initializes a default threadExecutor based on the
+	 * number of processors.
 	 *
 	 * @since 2.0
 	 */
-	public FullyConnectedFeedforwardBrain(final int[] neuronsPerLayer, final double learningRate, final ActivationFunction activationFunction)
-	{
+	public FullyConnectedFeedforwardBrain(final int[] neuronsPerLayer,
+			final double learningRate,
+			final DannActivationFunction activationFunction) {
 		super();
 		this.learningRate = learningRate;
 		this.activationFunction = activationFunction;
@@ -66,21 +70,17 @@ public final class FullyConnectedFeedforwardBrain<IN extends InputBackpropNeuron
 	}
 
 	@Override
-	protected N createNeuron(final int layer, final int index)
-	{
+	protected N createNeuron(final int layer, final int index) {
 		final BackpropNeuron neuron;
 
-		if (layer == 0)
-		{
+		if (layer == 0) {
 			neuron = new SimpleInputBackpropNeuron(this);
-		}
-		else if (layer >= (getLayerCount() - 1))
-		{
-			neuron = new SimpleOutputBackpropNeuron(this, activationFunction, learningRate);
-		}
-		else
-		{
-			neuron = new SimpleBackpropNeuron(this, activationFunction, learningRate);
+		} else if (layer >= (getLayerCount() - 1)) {
+			neuron = new SimpleOutputBackpropNeuron(this, activationFunction,
+					learningRate);
+		} else {
+			neuron = new SimpleBackpropNeuron(this, activationFunction,
+					learningRate);
 		}
 
 		// TODO fix typing

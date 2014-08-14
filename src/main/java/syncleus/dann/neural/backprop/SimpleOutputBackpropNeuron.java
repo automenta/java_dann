@@ -19,7 +19,7 @@
 package syncleus.dann.neural.backprop;
 
 import syncleus.dann.neural.Brain;
-import syncleus.dann.neural.activation.ActivationFunction;
+import syncleus.dann.neural.activation.DannActivationFunction;
 
 /**
  * This is a special type of neuron that provides the output.
@@ -28,8 +28,8 @@ import syncleus.dann.neural.activation.ActivationFunction;
  * @see SimpleInputBackpropNeuron
  * @since 1.0
  */
-public final class SimpleOutputBackpropNeuron extends AbstractOutputBackpropNeuron
-{
+public final class SimpleOutputBackpropNeuron extends
+		AbstractOutputBackpropNeuron {
 	private static final long serialVersionUID = -2098502740983214L;
 
 	/**
@@ -37,8 +37,7 @@ public final class SimpleOutputBackpropNeuron extends AbstractOutputBackpropNeur
 	 *
 	 * @since 1.0
 	 */
-	public SimpleOutputBackpropNeuron(final Brain brain)
-	{
+	public SimpleOutputBackpropNeuron(final Brain brain) {
 		super(brain);
 	}
 
@@ -46,35 +45,40 @@ public final class SimpleOutputBackpropNeuron extends AbstractOutputBackpropNeur
 	 * Creates a new instance of OutputBackpropNeuron using the specified
 	 * activation function.
 	 *
-	 * @param activationFunction The activation function to use.
+	 * @param activationFunction
+	 *            The activation function to use.
 	 * @since 1.0
 	 */
-	public SimpleOutputBackpropNeuron(final Brain brain, final ActivationFunction activationFunction)
-	{
+	public SimpleOutputBackpropNeuron(final Brain brain,
+			final DannActivationFunction activationFunction) {
 		super(brain, activationFunction);
 	}
 
 	/**
 	 * Creates a new instance of this class using the specified learning rate.
 	 *
-	 * @param learningRate The learning rate for this neuron.
+	 * @param learningRate
+	 *            The learning rate for this neuron.
 	 * @since 1.0
 	 */
-	public SimpleOutputBackpropNeuron(final Brain brain, final double learningRate)
-	{
+	public SimpleOutputBackpropNeuron(final Brain brain,
+			final double learningRate) {
 		super(brain, learningRate);
 	}
 
 	/**
-	 * Creates a new instance of this class with the specified activation function
-	 * and learning rate.
+	 * Creates a new instance of this class with the specified activation
+	 * function and learning rate.
 	 *
-	 * @param activationFunction The activation used by this neuron.
-	 * @param learningRate The learning rate for this neuron.
+	 * @param activationFunction
+	 *            The activation used by this neuron.
+	 * @param learningRate
+	 *            The learning rate for this neuron.
 	 * @since 1.0
 	 */
-	public SimpleOutputBackpropNeuron(final Brain brain, final ActivationFunction activationFunction, final double learningRate)
-	{
+	public SimpleOutputBackpropNeuron(final Brain brain,
+			final DannActivationFunction activationFunction,
+			final double learningRate) {
 		super(brain, activationFunction, learningRate);
 	}
 }

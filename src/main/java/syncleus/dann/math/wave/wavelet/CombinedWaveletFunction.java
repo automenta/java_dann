@@ -28,51 +28,43 @@ import java.util.TreeSet;
 import syncleus.dann.math.AbstractFunction;
 import syncleus.dann.math.wave.WaveMultidimensionalFunction;
 
-public class CombinedWaveletFunction extends AbstractFunction
-{
+public class CombinedWaveletFunction extends AbstractFunction {
 	private Set<String> dimensions = new TreeSet<String>();
-	private List<WaveMultidimensionalFunction> waves = Collections.synchronizedList(new ArrayList<WaveMultidimensionalFunction>());
+	private List<WaveMultidimensionalFunction> waves = Collections
+			.synchronizedList(new ArrayList<WaveMultidimensionalFunction>());
 
-	public CombinedWaveletFunction(final String[] dimensions)
-	{
+	public CombinedWaveletFunction(final String[] dimensions) {
 		super(dimensions);
 		this.dimensions.addAll(Arrays.asList(dimensions));
 	}
 
-	public int getWaveCount()
-	{
+	public int getWaveCount() {
 		return this.waves.size();
 	}
 
-	public Set<String> getDimensions()
-	{
+	public Set<String> getDimensions() {
 		return new TreeSet<String>(this.dimensions);
 	}
 
-	public void setDimension(final String dimension, final double value)
-	{
+	public void setDimension(final String dimension, final double value) {
 		this.setParameter(this.getParameterNameIndex(dimension), value);
 	}
 
-	public double getDimension(final String dimension)
-	{
+	public double getDimension(final String dimension) {
 		return this.getParameter(this.getParameterNameIndex(dimension));
 	}
 
-	public void addWave(final WaveMultidimensionalFunction wave)
-	{
+	public void addWave(final WaveMultidimensionalFunction wave) {
 		this.waves.add(wave);
 	}
 
 	@Override
-	public double calculate()
-	{
+	public double calculate() {
 		double waveTotal = 0.0;
-		for(final WaveMultidimensionalFunction currentWave : this.waves)
-		{
-			for(final String dimension : this.dimensions)
-			{
-				currentWave.setDimension(dimension, this.getDimension(dimension));
+		for (final WaveMultidimensionalFunction currentWave : this.waves) {
+			for (final String dimension : this.dimensions) {
+				currentWave.setDimension(dimension,
+						this.getDimension(dimension));
 			}
 			waveTotal += currentWave.calculate();
 		}
@@ -80,24 +72,24 @@ public class CombinedWaveletFunction extends AbstractFunction
 	}
 
 	@Override
-	public CombinedWaveletFunction clone()
-	{
-		final CombinedWaveletFunction copy = (CombinedWaveletFunction) super.clone();
+	public CombinedWaveletFunction clone() {
+		final CombinedWaveletFunction copy = (CombinedWaveletFunction) super
+				.clone();
 		copy.dimensions = new TreeSet<String>(this.dimensions);
 		copy.waves = new ArrayList<WaveMultidimensionalFunction>(this.waves);
 		return copy;
 	}
 
 	@Override
-	public String toString()
-	{
-		final WaveMultidimensionalFunction[] waveArray = new WaveMultidimensionalFunction[this.waves.size()];
-		final StringBuilder equationBuffer = new StringBuilder(waveArray.length * 20);
+	public String toString() {
+		final WaveMultidimensionalFunction[] waveArray = new WaveMultidimensionalFunction[this.waves
+				.size()];
+		final StringBuilder equationBuffer = new StringBuilder(
+				waveArray.length * 20);
 		this.waves.toArray(waveArray);
-		for(int waveArrayIndex = 0; waveArrayIndex < waveArray.length; waveArrayIndex++)
-		{
+		for (int waveArrayIndex = 0; waveArrayIndex < waveArray.length; waveArrayIndex++) {
 			final WaveMultidimensionalFunction currentWave = waveArray[waveArrayIndex];
-			if( waveArrayIndex > 0 )
+			if (waveArrayIndex > 0)
 				equationBuffer.append(" + ");
 			equationBuffer.append(currentWave.toString());
 		}

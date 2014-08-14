@@ -20,10 +20,8 @@ package syncleus.dann.neural.som;
 
 import syncleus.dann.neural.Brain;
 
-public final class SimpleSomInputNeuron extends AbstractSomInputNeuron
-{
-	public SimpleSomInputNeuron(final Brain brain)
-	{
+public final class SimpleSomInputNeuron extends AbstractSomInputNeuron {
+	public SimpleSomInputNeuron(final Brain brain) {
 		super(brain);
 	}
 }

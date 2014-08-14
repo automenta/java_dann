@@ -24,7 +24,7 @@ import syncleus.dann.graph.BidirectedGraph;
 import syncleus.dann.graph.DirectedEdge;
 
 // TODO make this follow the optimizer approach
-public interface TopologicalSorter<N>
-{
-	List<N> sort(BidirectedGraph<? extends N, ? extends DirectedEdge<? extends N>> graph);
+public interface TopologicalSorter<N> {
+	List<N> sort(
+			BidirectedGraph<? extends N, ? extends DirectedEdge<? extends N>> graph);
 }

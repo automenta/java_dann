@@ -23,3 +23,4 @@
  * Fisher's linear discriminant</a>.
  */
 package syncleus.dann.classify.naive.bayes.fisher;
+

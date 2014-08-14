@@ -18,7 +18,6 @@
  ******************************************************************************/
 package syncleus.dann.graph;
 
-public interface Weighted
-{
+public interface Weighted {
 	double getWeight();
 }

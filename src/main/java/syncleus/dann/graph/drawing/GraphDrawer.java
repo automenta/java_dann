@@ -25,13 +25,18 @@ import syncleus.dann.math.Vector;
 
 // TODO use optimizer approach
 
-public interface GraphDrawer<G extends Graph<N, ?>, N>
-{
+public interface GraphDrawer<G extends Graph<N, ?>, N> {
 	G getGraph();
+
 	boolean isAlignable();
+
 	boolean isAligned();
+
 	void align();
+
 	int getDimensions();
+
 	Map<N, Vector> getCoordinates();
+
 	void reset();
 }

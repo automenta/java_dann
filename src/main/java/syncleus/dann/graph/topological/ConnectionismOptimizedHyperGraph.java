@@ -21,15 +21,16 @@ package syncleus.dann.graph.topological;
 import syncleus.dann.graph.HyperEdge;
 import syncleus.dann.graph.HyperGraph;
 
-public interface ConnectionismOptimizedHyperGraph<N, E extends HyperEdge<N>> extends HyperGraph<N, E>
-{
+public interface ConnectionismOptimizedHyperGraph<N, E extends HyperEdge<N>>
+		extends HyperGraph<N, E> {
 	/**
-	 * Determines the number of end points of the edge with the largest number of
-	 * end points. The graph must have at least one edge.
+	 * Determines the number of end points of the edge with the largest number
+	 * of end points. The graph must have at least one edge.
 	 *
-	 * @return the number of end points of the edge with the largest number of end
-	 *         points. The graph must have at least one edge.
-	 * @throws IllegalStateException thrown if no edges exist.
+	 * @return the number of end points of the edge with the largest number of
+	 *         end points. The graph must have at least one edge.
+	 * @throws IllegalStateException
+	 *             thrown if no edges exist.
 	 * @since 2.0
 	 */
 	int getRank();

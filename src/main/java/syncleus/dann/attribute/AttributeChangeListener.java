@@ -18,7 +18,7 @@
  ******************************************************************************/
 package syncleus.dann.attribute;
 
-public interface AttributeChangeListener<T>
-{
-	<V extends T> void attributeChanged(Attribute<?, V> attribute, V attributeValue);
+public interface AttributeChangeListener<T> {
+	<V extends T> void attributeChanged(Attribute<?, V> attribute,
+			V attributeValue);
 }

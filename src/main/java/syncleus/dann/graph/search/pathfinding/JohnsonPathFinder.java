@@ -23,38 +23,37 @@ import java.util.List;
 import syncleus.dann.graph.BidirectedGraph;
 import syncleus.dann.graph.WeightedDirectedEdge;
 
-public class JohnsonPathFinder<N, E extends WeightedDirectedEdge<N>> implements PathFinder<N, WeightedDirectedEdge<N>>
-{
+public class JohnsonPathFinder<N, E extends WeightedDirectedEdge<N>> implements
+		PathFinder<N, WeightedDirectedEdge<N>> {
 	private final BidirectedGraph<N, E> graph;
 	private final JohnsonGraphTransformer<N> transformer = new JohnsonGraphTransformer<N>();
 
-	public JohnsonPathFinder(final BidirectedGraph<N, E> graph)
-	{
-		if( graph == null )
+	public JohnsonPathFinder(final BidirectedGraph<N, E> graph) {
+		if (graph == null)
 			throw new IllegalArgumentException("graph can not be null");
 		this.graph = graph;
 	}
 
 	@Override
-	public List<WeightedDirectedEdge<N>> getBestPath(final N begin, final N end)
-	{
-		final BidirectedGraph<N, WeightedDirectedEdge<N>> johnsonGraph = transformer.transform(this.graph);
-		final DijkstraPathFinder<N, WeightedDirectedEdge<N>> pathFinder = new DijkstraPathFinder<N, WeightedDirectedEdge<N>>(johnsonGraph);
-		final List<WeightedDirectedEdge<N>> pathWalk = pathFinder.getBestPath(begin, end);
-		if( pathWalk == null )
+	public List<WeightedDirectedEdge<N>> getBestPath(final N begin, final N end) {
+		final BidirectedGraph<N, WeightedDirectedEdge<N>> johnsonGraph = transformer
+				.transform(this.graph);
+		final DijkstraPathFinder<N, WeightedDirectedEdge<N>> pathFinder = new DijkstraPathFinder<N, WeightedDirectedEdge<N>>(
+				johnsonGraph);
+		final List<WeightedDirectedEdge<N>> pathWalk = pathFinder.getBestPath(
+				begin, end);
+		if (pathWalk == null)
 			return null;
 		return pathWalk;
 	}
 
 	@Override
-	public boolean isReachable(final N begin, final N end)
-	{
+	public boolean isReachable(final N begin, final N end) {
 		return (this.getBestPath(begin, end) != null);
 	}
 
 	@Override
-	public boolean isConnected(final N begin, final N end)
-	{
+	public boolean isConnected(final N begin, final N end) {
 		return (this.getBestPath(begin, end) != null);
 	}
 }

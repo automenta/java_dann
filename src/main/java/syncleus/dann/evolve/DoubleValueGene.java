@@ -26,48 +26,46 @@ package syncleus.dann.evolve;
  * @author Jeffrey Phillips Freeman
  * @since 2.0
  */
-public class DoubleValueGene extends AbstractValueGene<MutableDouble>
-{
+public class DoubleValueGene extends AbstractValueGene<MutableDouble> {
 	/**
 	 * Initializes a new instance of this class with a value of 0.
 	 *
 	 * @since 2.0
 	 */
-	public DoubleValueGene()
-	{
+	public DoubleValueGene() {
 		super(new MutableDouble(0d));
 	}
 
 	/**
 	 * Initializes a new instance of this class with the specified value.
 	 *
-	 * @param value The value for this gene.
+	 * @param value
+	 *            The value for this gene.
 	 * @since 2.0
 	 */
-	public DoubleValueGene(final double value)
-	{
+	public DoubleValueGene(final double value) {
 		super(new MutableDouble(value));
 	}
 
 	/**
 	 * Initializes a new instance of this class with the specified value.
 	 *
-	 * @param value The value for this gene.
+	 * @param value
+	 *            The value for this gene.
 	 * @since 2.0
 	 */
-	public DoubleValueGene(final Double value)
-	{
+	public DoubleValueGene(final Double value) {
 		super(new MutableDouble(value));
 	}
 
 	/**
 	 * Initializes a new instance of this class with the specified value.
 	 *
-	 * @param value The value for this gene.
+	 * @param value
+	 *            The value for this gene.
 	 * @since 2.0
 	 */
-	public DoubleValueGene(final MutableDouble value)
-	{
+	public DoubleValueGene(final MutableDouble value) {
 		super(value);
 	}
 
@@ -75,11 +73,11 @@ public class DoubleValueGene extends AbstractValueGene<MutableDouble>
 	 * Initializes a new instance of this class that is a copy of the specified
 	 * value.
 	 *
-	 * @param copyGene The value to copy.
+	 * @param copyGene
+	 *            The value to copy.
 	 * @since 2.0
 	 */
-	public DoubleValueGene(final DoubleValueGene copyGene)
-	{
+	public DoubleValueGene(final DoubleValueGene copyGene) {
 		super(copyGene);
 	}
 
@@ -90,24 +88,23 @@ public class DoubleValueGene extends AbstractValueGene<MutableDouble>
 	 * @since 2.0
 	 */
 	@Override
-	public DoubleValueGene clone()
-	{
+	public DoubleValueGene clone() {
 		return (DoubleValueGene) super.clone();
 	}
 
 	/**
-	 * This will make a copy of the object and mutate it. The mutation has a normal
-	 * distribution multiplied by the deviation.
+	 * This will make a copy of the object and mutate it. The mutation has a
+	 * normal distribution multiplied by the deviation.
 	 *
-	 * @param deviation A double indicating how extreme the mutation will be. The
-	 * greater the deviation the more drastically the object will mutate. A
-	 * deviation of 0 should cause no mutation.
+	 * @param deviation
+	 *            A double indicating how extreme the mutation will be. The
+	 *            greater the deviation the more drastically the object will
+	 *            mutate. A deviation of 0 should cause no mutation.
 	 * @return A copy of the current object with potential mutations.
 	 * @since 2.0
 	 */
 	@Override
-	public DoubleValueGene mutate(final double deviation)
-	{
+	public DoubleValueGene mutate(final double deviation) {
 		final DoubleValueGene copy = this.clone();
 		copy.internalMutate(deviation);
 

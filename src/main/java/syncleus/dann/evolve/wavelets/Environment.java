@@ -19,6 +19,5 @@
 package syncleus.dann.evolve.wavelets;
 
 // TODO unused.. remove?
-public class Environment
-{
+public class Environment {
 }

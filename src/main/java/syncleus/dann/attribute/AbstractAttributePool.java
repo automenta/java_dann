@@ -23,26 +23,26 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public abstract class AbstractAttributePool<T> implements AttributePool<T>
-{
+public abstract class AbstractAttributePool<T> implements AttributePool<T> {
 	private final Set<AttributeChangeListener<T>> globalListeners = new HashSet<AttributeChangeListener<T>>();
 	private final Map<Attribute<?, ? extends T>, Set<AttributeChangeListener<?>>> listeners = new HashMap<Attribute<?, ? extends T>, Set<AttributeChangeListener<?>>>();
 
 	@Override
-	public final <C extends T> boolean listen(final AttributeChangeListener<C> listener, final Attribute<?, ? extends C> attribute)
-	{
-		if( attribute == null )
+	public final <C extends T> boolean listen(
+			final AttributeChangeListener<C> listener,
+			final Attribute<?, ? extends C> attribute) {
+		if (attribute == null)
 			throw new IllegalArgumentException("attribute can not be null");
-		if(listener == null)
+		if (listener == null)
 			throw new IllegalArgumentException("listener can not be null");
 
-		//if its already a global listener forget about it
-		if( this.globalListeners.contains(listener) )
+		// if its already a global listener forget about it
+		if (this.globalListeners.contains(listener))
 			return false;
 
-		Set<AttributeChangeListener<?>> attributesListeners = listeners.get(attribute);
-		if( attributesListeners == null )
-		{
+		Set<AttributeChangeListener<?>> attributesListeners = listeners
+				.get(attribute);
+		if (attributesListeners == null) {
 			attributesListeners = new HashSet<AttributeChangeListener<?>>();
 			listeners.put(attribute, attributesListeners);
 		}
@@ -50,60 +50,61 @@ public abstract class AbstractAttributePool<T> implements AttributePool<T>
 	}
 
 	@Override
-	public final boolean listenAll(final AttributeChangeListener<T> listener)
-	{
-		if(listener == null)
+	public final boolean listenAll(final AttributeChangeListener<T> listener) {
+		if (listener == null)
 			throw new IllegalArgumentException("listener can not be null");
 
-		if( this.globalListeners.contains(listener) )
+		if (this.globalListeners.contains(listener))
 			return false;
 
-		//since its global now lets make sure it isnt on a specific attribute
+		// since its global now lets make sure it isnt on a specific attribute
 		this.removeListener(listener);
 
 		return this.globalListeners.add(listener);
 	}
 
 	@Override
-	public final boolean removeListener(final AttributeChangeListener<?> listener)
-	{
+	public final boolean removeListener(
+			final AttributeChangeListener<?> listener) {
 		boolean removed = false;
-		for(final Map.Entry<Attribute<?, ? extends T>, Set<AttributeChangeListener<?>>> listenerEntry : this.listeners.entrySet())
-		{
-			assert (listenerEntry.getValue() != null) && (listenerEntry.getValue().size() > 0);
+		for (final Map.Entry<Attribute<?, ? extends T>, Set<AttributeChangeListener<?>>> listenerEntry : this.listeners
+				.entrySet()) {
+			assert (listenerEntry.getValue() != null)
+					&& (listenerEntry.getValue().size() > 0);
 
-			if( listenerEntry.getValue().remove(listener) )
-			{
+			if (listenerEntry.getValue().remove(listener)) {
 				removed = true;
-				if(listenerEntry.getValue().size() <= 0)
+				if (listenerEntry.getValue().size() <= 0)
 					listeners.remove(listenerEntry.getKey());
 			}
 		}
 
-		if( this.globalListeners.remove(listener) )
+		if (this.globalListeners.remove(listener))
 			return true;
 
 		return removed;
 	}
 
 	@Override
-	public final <C extends T> boolean removeListener(final AttributeChangeListener<C> listener, final Attribute<?, ? extends C> attribute)
-	{
+	public final <C extends T> boolean removeListener(
+			final AttributeChangeListener<C> listener,
+			final Attribute<?, ? extends C> attribute) {
 		// if this listener is global we cant remove it despite still listening
 		// so throw an exception
-		if( this.globalListeners.contains(listener) )
-			throw new IllegalArgumentException("listener is a global listener so we can not remove it for a single attribute");
+		if (this.globalListeners.contains(listener))
+			throw new IllegalArgumentException(
+					"listener is a global listener so we can not remove it for a single attribute");
 
-		final Set<AttributeChangeListener<?>> attributeListeners = this.listeners.get(attribute);
+		final Set<AttributeChangeListener<?>> attributeListeners = this.listeners
+				.get(attribute);
 
-		if( attributeListeners == null )
+		if (attributeListeners == null)
 			return false;
 
 		assert !attributeListeners.isEmpty();
 
-		if( attributeListeners.remove(listener) )
-		{
-			if(attributeListeners.size() <= 0)
+		if (attributeListeners.remove(listener)) {
+			if (attributeListeners.size() <= 0)
 				listeners.remove(attribute);
 			return true;
 		}
@@ -111,25 +112,26 @@ public abstract class AbstractAttributePool<T> implements AttributePool<T>
 		return false;
 	}
 
-	protected final <C extends T> void notify(final Attribute<?, C> attribute, final C attributeValue)
-	{
-		final Set<AttributeChangeListener<?>> attributeListeners = this.listeners.get(attribute);
+	protected final <C extends T> void notify(final Attribute<?, C> attribute,
+			final C attributeValue) {
+		final Set<AttributeChangeListener<?>> attributeListeners = this.listeners
+				.get(attribute);
 
-		//lets notify everyone who is subscribed
-		for( final AttributeChangeListener listener : attributeListeners )
-		{
+		// lets notify everyone who is subscribed
+		for (final AttributeChangeListener listener : attributeListeners) {
 			listener.attributeChanged(attribute, attributeValue);
 		}
 
-		//now lets handle global listeners
-		for( final AttributeChangeListener<T> listener : this.globalListeners )
-		{
+		// now lets handle global listeners
+		for (final AttributeChangeListener<T> listener : this.globalListeners) {
 			listener.attributeChanged(attribute, attributeValue);
 		}
 	}
 
 	@Override
 	public abstract <I extends T> I getAttributeValue(Attribute<?, I> attribute);
+
 	@Override
-	public abstract <C extends T> C setAttributeValue(Attribute<?, C> attribute, C value);
+	public abstract <C extends T> C setAttributeValue(
+			Attribute<?, C> attribute, C value);
 }

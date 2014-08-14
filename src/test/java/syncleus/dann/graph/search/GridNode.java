@@ -21,46 +21,40 @@ package syncleus.dann.graph.search;
 import syncleus.dann.graph.Weighted;
 import syncleus.dann.math.Vector;
 
-public class GridNode extends Vector implements Weighted
-{
+public class GridNode extends Vector implements Weighted {
 	private final double weight;
 	private static final long serialVersionUID = 3733460419806813102L;
 
-	public GridNode(final int x, final int y, final double weight)
-	{
+	public GridNode(final int x, final int y, final double weight) {
 		super(x, y);
 		this.weight = weight;
 	}
 
 	@Override
-	public double getWeight()
-	{
+	public double getWeight() {
 		return this.weight;
 	}
 
-	public int getX()
-	{
+	public int getX() {
 		return (int) this.get(1);
 	}
 
-	public int getY()
-	{
+	public int getY() {
 		return (int) this.get(2);
 	}
 
 	@Override
-	public int hashCode()
-	{
+	public int hashCode() {
 		return (this.getX() * this.getY()) + this.getY();
 	}
 
 	@Override
-	public boolean equals(final Object compareToObj)
-	{
-		if( !(compareToObj instanceof GridNode) )
+	public boolean equals(final Object compareToObj) {
+		if (!(compareToObj instanceof GridNode))
 			return false;
 
 		final GridNode compareTo = (GridNode) compareToObj;
-		return ((compareTo.getX() == this.getX()) && (compareTo.getY() == this.getY()));
+		return ((compareTo.getX() == this.getX()) && (compareTo.getY() == this
+				.getY()));
 	}
 }

@@ -21,18 +21,16 @@ package syncleus.dann.neural.backprop;
 import syncleus.dann.neural.AbstractInputNeuron;
 import syncleus.dann.neural.Brain;
 
-public abstract class AbstractInputBackpropNeuron extends AbstractInputNeuron implements InputBackpropNeuron
-{
+public abstract class AbstractInputBackpropNeuron extends AbstractInputNeuron
+		implements InputBackpropNeuron {
 	private static final long serialVersionUID = -29385097824095L;
 
-	protected AbstractInputBackpropNeuron(final Brain brain)
-	{
+	protected AbstractInputBackpropNeuron(final Brain brain) {
 		super(brain);
 	}
 
 	@Override
-	public void backPropagate()
-	{
-		//Do nothing, this is an input neuron.
+	public void backPropagate() {
+		// Do nothing, this is an input neuron.
 	}
 }

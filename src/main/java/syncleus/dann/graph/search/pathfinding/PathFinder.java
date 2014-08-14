@@ -24,9 +24,10 @@ import syncleus.dann.graph.Edge;
 
 // TODO implement optimizer approach
 
-public interface PathFinder<N, E extends Edge<? extends N>>
-{
+public interface PathFinder<N, E extends Edge<? extends N>> {
 	List<E> getBestPath(N begin, N end);
+
 	boolean isReachable(N begin, N end);
+
 	boolean isConnected(N begin, N end);
 }

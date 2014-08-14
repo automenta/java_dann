@@ -27,88 +27,88 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-public class ImmutableDirectedAdjacencyGraph<N, E extends DirectedEdge<N>> extends AbstractDirectedAdjacencyGraph<N, E>
-{
+public class ImmutableDirectedAdjacencyGraph<N, E extends DirectedEdge<N>>
+		extends AbstractDirectedAdjacencyGraph<N, E> {
 	private static final long serialVersionUID = -4588563094809496900L;
 
-	public ImmutableDirectedAdjacencyGraph()
-	{
+	public ImmutableDirectedAdjacencyGraph() {
 		super();
 	}
 
-	public ImmutableDirectedAdjacencyGraph(final Graph<N, E> copyGraph)
-	{
+	public ImmutableDirectedAdjacencyGraph(final Graph<N, E> copyGraph) {
 		super(copyGraph);
 	}
 
-	public ImmutableDirectedAdjacencyGraph(final Set<N> nodes, final Set<E> edges)
-	{
+	public ImmutableDirectedAdjacencyGraph(final Set<N> nodes,
+			final Set<E> edges) {
 		super(nodes, edges);
 	}
 
 	@Override
-	protected Set<E> getInternalEdges()
-	{
+	protected Set<E> getInternalEdges() {
 		return Collections.unmodifiableSet(super.getInternalEdges());
 	}
 
 	@Override
-	protected Map<N, Set<E>> getInternalAdjacencyEdges()
-	{
+	protected Map<N, Set<E>> getInternalAdjacencyEdges() {
 		final Map<N, Set<E>> newAdjacentEdges = new HashMap<N, Set<E>>();
-		for(final Entry<N, Set<E>> neighborEdgeEntry : super.getInternalAdjacencyEdges().entrySet())
-			newAdjacentEdges.put(neighborEdgeEntry.getKey(), new HashSet<E>(neighborEdgeEntry.getValue()));
+		for (final Entry<N, Set<E>> neighborEdgeEntry : super
+				.getInternalAdjacencyEdges().entrySet())
+			newAdjacentEdges.put(neighborEdgeEntry.getKey(), new HashSet<E>(
+					neighborEdgeEntry.getValue()));
 		return newAdjacentEdges;
 	}
 
 	@Override
-	protected Map<N, List<N>> getInternalAdjacencyNodes()
-	{
+	protected Map<N, List<N>> getInternalAdjacencyNodes() {
 		final Map<N, List<N>> newAdjacentNodes = new HashMap<N, List<N>>();
-		for(final Entry<N, List<N>> neighborNodeEntry : super.getInternalAdjacencyNodes().entrySet())
-			newAdjacentNodes.put(neighborNodeEntry.getKey(), new ArrayList<N>(neighborNodeEntry.getValue()));
+		for (final Entry<N, List<N>> neighborNodeEntry : super
+				.getInternalAdjacencyNodes().entrySet())
+			newAdjacentNodes.put(neighborNodeEntry.getKey(), new ArrayList<N>(
+					neighborNodeEntry.getValue()));
 		return newAdjacentNodes;
 	}
 
 	@Override
-	public ImmutableDirectedAdjacencyGraph<N, E> cloneAdd(final E newEdge)
-	{
+	public ImmutableDirectedAdjacencyGraph<N, E> cloneAdd(final E newEdge) {
 		return (ImmutableDirectedAdjacencyGraph<N, E>) super.cloneAdd(newEdge);
 	}
 
 	@Override
-	public ImmutableDirectedAdjacencyGraph<N, E> cloneAdd(final N newNode)
-	{
+	public ImmutableDirectedAdjacencyGraph<N, E> cloneAdd(final N newNode) {
 		return (ImmutableDirectedAdjacencyGraph<N, E>) super.cloneAdd(newNode);
 	}
 
 	@Override
-	public ImmutableDirectedAdjacencyGraph<N, E> cloneAdd(final Set<N> newNodes, final Set<E> newEdges)
-	{
-		return (ImmutableDirectedAdjacencyGraph<N, E>) super.cloneAdd(newNodes, newEdges);
+	public ImmutableDirectedAdjacencyGraph<N, E> cloneAdd(
+			final Set<N> newNodes, final Set<E> newEdges) {
+		return (ImmutableDirectedAdjacencyGraph<N, E>) super.cloneAdd(newNodes,
+				newEdges);
 	}
 
 	@Override
-	public ImmutableDirectedAdjacencyGraph<N, E> cloneRemove(final E edgeToRemove)
-	{
-		return (ImmutableDirectedAdjacencyGraph<N, E>) super.cloneRemove(edgeToRemove);
+	public ImmutableDirectedAdjacencyGraph<N, E> cloneRemove(
+			final E edgeToRemove) {
+		return (ImmutableDirectedAdjacencyGraph<N, E>) super
+				.cloneRemove(edgeToRemove);
 	}
 
 	@Override
-	public ImmutableDirectedAdjacencyGraph<N, E> cloneRemove(final N nodeToRemove)
-	{
-		return (ImmutableDirectedAdjacencyGraph<N, E>) super.cloneRemove(nodeToRemove);
+	public ImmutableDirectedAdjacencyGraph<N, E> cloneRemove(
+			final N nodeToRemove) {
+		return (ImmutableDirectedAdjacencyGraph<N, E>) super
+				.cloneRemove(nodeToRemove);
 	}
 
 	@Override
-	public ImmutableDirectedAdjacencyGraph<N, E> cloneRemove(final Set<N> deleteNodes, final Set<E> deleteEdges)
-	{
-		return (ImmutableDirectedAdjacencyGraph<N, E>) super.cloneRemove(deleteNodes, deleteEdges);
+	public ImmutableDirectedAdjacencyGraph<N, E> cloneRemove(
+			final Set<N> deleteNodes, final Set<E> deleteEdges) {
+		return (ImmutableDirectedAdjacencyGraph<N, E>) super.cloneRemove(
+				deleteNodes, deleteEdges);
 	}
 
 	@Override
-	public ImmutableDirectedAdjacencyGraph<N, E> clone()
-	{
+	public ImmutableDirectedAdjacencyGraph<N, E> clone() {
 		return (ImmutableDirectedAdjacencyGraph<N, E>) super.clone();
 	}
 }

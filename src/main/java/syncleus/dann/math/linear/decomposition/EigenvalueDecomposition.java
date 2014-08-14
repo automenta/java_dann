@@ -23,9 +23,10 @@ import java.util.List;
 import syncleus.dann.math.RealNumber;
 import syncleus.dann.math.linear.RealMatrix;
 
-public interface EigenvalueDecomposition extends Decomposition<RealMatrix>
-{
+public interface EigenvalueDecomposition extends Decomposition<RealMatrix> {
 	RealMatrix getBlockDiagonalMatrix();
+
 	List<RealNumber> getImaginaryEigenvalues();
+
 	List<RealNumber> getRealEigenvalues();
 }

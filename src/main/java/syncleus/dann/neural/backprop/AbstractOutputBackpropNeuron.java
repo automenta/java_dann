@@ -20,10 +20,10 @@ package syncleus.dann.neural.backprop;
 
 import syncleus.dann.neural.Brain;
 import syncleus.dann.neural.Synapse;
-import syncleus.dann.neural.activation.ActivationFunction;
+import syncleus.dann.neural.activation.DannActivationFunction;
 
-public abstract class AbstractOutputBackpropNeuron extends AbstractBackpropNeuron implements OutputBackpropNeuron
-{
+public abstract class AbstractOutputBackpropNeuron extends
+		AbstractBackpropNeuron implements OutputBackpropNeuron {
 	private static final long serialVersionUID = -4643866124019076672L;
 	/**
 	 * holds the value for the current training set.
@@ -37,8 +37,7 @@ public abstract class AbstractOutputBackpropNeuron extends AbstractBackpropNeuro
 	 *
 	 * @since 1.0
 	 */
-	protected AbstractOutputBackpropNeuron(final Brain brain)
-	{
+	protected AbstractOutputBackpropNeuron(final Brain brain) {
 		super(brain);
 	}
 
@@ -46,22 +45,24 @@ public abstract class AbstractOutputBackpropNeuron extends AbstractBackpropNeuro
 	 * Creates a new instance of OutputBackpropNeuron using the specified
 	 * activation function.
 	 *
-	 * @param activationFunction The activation function to use.
+	 * @param activationFunction
+	 *            The activation function to use.
 	 * @since 1.0
 	 */
-	protected AbstractOutputBackpropNeuron(final Brain brain, final ActivationFunction activationFunction)
-	{
+	protected AbstractOutputBackpropNeuron(final Brain brain,
+			final DannActivationFunction activationFunction) {
 		super(brain, activationFunction);
 	}
 
 	/**
 	 * Creates a new instance of this class using the specified learning rate.
 	 *
-	 * @param learningRate The learning rate for this neuron.
+	 * @param learningRate
+	 *            The learning rate for this neuron.
 	 * @since 1.0
 	 */
-	protected AbstractOutputBackpropNeuron(final Brain brain, final double learningRate)
-	{
+	protected AbstractOutputBackpropNeuron(final Brain brain,
+			final double learningRate) {
 		super(brain, learningRate);
 	}
 
@@ -69,34 +70,37 @@ public abstract class AbstractOutputBackpropNeuron extends AbstractBackpropNeuro
 	 * Creates a new instance of this class with the specified activation
 	 * function and learning rate.
 	 *
-	 * @param activationFunction The activation used by this neuron.
-	 * @param learningRate The learning rate for this neuron.
+	 * @param activationFunction
+	 *            The activation used by this neuron.
+	 * @param learningRate
+	 *            The learning rate for this neuron.
 	 * @since 1.0
 	 */
-	protected AbstractOutputBackpropNeuron(final Brain brain, final ActivationFunction activationFunction, final double learningRate)
-	{
+	protected AbstractOutputBackpropNeuron(final Brain brain,
+			final DannActivationFunction activationFunction,
+			final double learningRate) {
 		super(brain, activationFunction, learningRate);
 	}
 
 	/**
 	 * This method sets the expected output for this neuron to learn from.
 	 *
-	 * @param trainingToSet sets the current desired output.
+	 * @param trainingToSet
+	 *            sets the current desired output.
 	 * @since 1.0
 	 */
 	@Override
-	public void setDesired(final double trainingToSet)
-	{
+	public void setDesired(final double trainingToSet) {
 		this.desired = trainingToSet;
 	}
 
 	@Override
-	protected void calculateDeltaTrain()
-	{
+	protected void calculateDeltaTrain() {
 		double newDeltaTrain = 0.0;
-		for (final Synapse currentSynapse : getBrain().getTraversableEdges(this))
-		{
-			newDeltaTrain += currentSynapse.getWeight() * getDeltaTrainDestinations().get(currentSynapse);
+		for (final Synapse currentSynapse : getBrain()
+				.getTraversableEdges(this)) {
+			newDeltaTrain += currentSynapse.getWeight()
+					* getDeltaTrainDestinations().get(currentSynapse);
 		}
 		newDeltaTrain += desired - getOutput();
 		newDeltaTrain *= activateDerivitive();
@@ -104,8 +108,7 @@ public abstract class AbstractOutputBackpropNeuron extends AbstractBackpropNeuro
 	}
 
 	@Override
-	public double getOutput()
-	{
+	public double getOutput() {
 		return super.getOutput();
 	}
 }

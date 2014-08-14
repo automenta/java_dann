@@ -27,8 +27,7 @@ import syncleus.dann.DannRuntimeException;
  * @author Jeffrey Phillips Freeman
  * @since 1.0
  */
-public class InvalidConnectionTypeDannException extends DannRuntimeException
-{
+public class InvalidConnectionTypeDannException extends DannRuntimeException {
 	private static final long serialVersionUID = -2042929829459488405L;
 
 	/**
@@ -36,19 +35,18 @@ public class InvalidConnectionTypeDannException extends DannRuntimeException
 	 *
 	 * @since 1.0
 	 */
-	public InvalidConnectionTypeDannException()
-	{
+	public InvalidConnectionTypeDannException() {
 		super();
 	}
 
 	/**
 	 * Creates an exception with a message describing the cause.
 	 *
-	 * @param msg A string describing the cause of the exception
+	 * @param msg
+	 *            A string describing the cause of the exception
 	 * @since 1.0
 	 */
-	public InvalidConnectionTypeDannException(final String msg)
-	{
+	public InvalidConnectionTypeDannException(final String msg) {
 		super(msg);
 	}
 
@@ -56,12 +54,14 @@ public class InvalidConnectionTypeDannException extends DannRuntimeException
 	 * Creates an exception with a message describing the cause as well as the
 	 * throwable which caused this exception to be thrown.
 	 *
-	 * @param msg A string describing the cause of the exception
-	 * @param cause The throwable which caused this exception
+	 * @param msg
+	 *            A string describing the cause of the exception
+	 * @param cause
+	 *            The throwable which caused this exception
 	 * @since 1.0
 	 */
-	public InvalidConnectionTypeDannException(final String msg, final Throwable cause)
-	{
+	public InvalidConnectionTypeDannException(final String msg,
+			final Throwable cause) {
 		super(msg, cause);
 	}
 
@@ -69,11 +69,11 @@ public class InvalidConnectionTypeDannException extends DannRuntimeException
 	 * Creates an exception containing the throwable which caused this exception
 	 * to be thrown.
 	 *
-	 * @param cause The throwable which caused this exception
+	 * @param cause
+	 *            The throwable which caused this exception
 	 * @since 1.0
 	 */
-	public InvalidConnectionTypeDannException(final Throwable cause)
-	{
+	public InvalidConnectionTypeDannException(final Throwable cause) {
 		super(cause);
 	}
 }

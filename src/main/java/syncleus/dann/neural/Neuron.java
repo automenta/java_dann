@@ -27,8 +27,7 @@ import java.io.Serializable;
  * @author Jeffrey Phillips Freeman
  * @since 1.0
  */
-public interface Neuron extends Serializable
-{
+public interface Neuron extends Serializable {
 	/**
 	 * Indicates the neuron has an opportunity to perform any processing of its
 	 * IO.

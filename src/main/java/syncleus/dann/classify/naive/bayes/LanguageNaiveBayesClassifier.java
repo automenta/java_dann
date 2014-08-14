@@ -21,12 +21,14 @@ package syncleus.dann.classify.naive.bayes;
 import syncleus.dann.classify.LanguageClassifier;
 
 /**
- * Classifies words based on
- * <a href="http://en.wikipedia.org/wiki/Naive_Bayes_classifier">
- *     Bayes' Theorem</a> with a strong independence assumption.
- * @param <C> The categories to place words in
+ * Classifies words based on <a
+ * href="http://en.wikipedia.org/wiki/Naive_Bayes_classifier"> Bayes'
+ * Theorem</a> with a strong independence assumption.
+ *
+ * @param <C>
+ *            The categories to place words in
  * @author Jeffrey Phillips Freeman
  */
-public interface LanguageNaiveBayesClassifier<C> extends NaiveBayesClassifier<String, String, C>, LanguageClassifier<C>
-{
+public interface LanguageNaiveBayesClassifier<C> extends
+		NaiveBayesClassifier<String, String, C>, LanguageClassifier<C> {
 }

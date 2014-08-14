@@ -24,23 +24,26 @@ package syncleus.dann.evolve;
  * represented by its natural ordering through implementation of the Comparable
  * interface.
  *
- * @param <E> Reflexive parameter for the type of AbstractGeneticAlgorithmFitnessFunction used
+ * @param <E>
+ *            Reflexive parameter for the type of
+ *            AbstractGeneticAlgorithmFitnessFunction used
  * @author Jeffrey Phillips Freeman
  * @since 2.0
  */
-public abstract class AbstractGeneticAlgorithmFitnessFunction<E extends AbstractGeneticAlgorithmFitnessFunction> implements Comparable<E>
-{
+public abstract class AbstractGeneticAlgorithmFitnessFunction<E extends AbstractGeneticAlgorithmFitnessFunction<?>>
+		implements Comparable<E> {
 	private final GeneticAlgorithmChromosome chromosome;
 
 	/**
 	 * Initializes a new instance of this class acting as a wrapper for the
 	 * specified chromosome.
 	 *
-	 * @param ourChromosome Chromosome to wrap and evaluate the fitness of.
+	 * @param ourChromosome
+	 *            Chromosome to wrap and evaluate the fitness of.
 	 * @since 2.0
 	 */
-	public AbstractGeneticAlgorithmFitnessFunction(final GeneticAlgorithmChromosome ourChromosome)
-	{
+	public AbstractGeneticAlgorithmFitnessFunction(
+			final GeneticAlgorithmChromosome ourChromosome) {
 		this.chromosome = ourChromosome;
 	}
 
@@ -50,23 +53,21 @@ public abstract class AbstractGeneticAlgorithmFitnessFunction<E extends Abstract
 	 * @return The chromosome this class is evaluating and wrapping.
 	 * @since 2.0
 	 */
-	public GeneticAlgorithmChromosome getChromosome()
-	{
+	public GeneticAlgorithmChromosome getChromosome() {
 		return this.chromosome;
 	}
 
 	@Override
-	public boolean equals(final Object compareWith)
-	{
-		if( compareWith instanceof AbstractGeneticAlgorithmFitnessFunction )
-			return ((AbstractGeneticAlgorithmFitnessFunction) compareWith).chromosome.equals(this.chromosome);
+	public boolean equals(final Object compareWith) {
+		if (compareWith instanceof AbstractGeneticAlgorithmFitnessFunction)
+			return ((AbstractGeneticAlgorithmFitnessFunction) compareWith).chromosome
+					.equals(this.chromosome);
 		else
 			return false;
 	}
 
 	@Override
-	public int hashCode()
-	{
+	public int hashCode() {
 		return this.chromosome.hashCode();
 	}
 
@@ -74,11 +75,11 @@ public abstract class AbstractGeneticAlgorithmFitnessFunction<E extends Abstract
 	 * Evaluates the fitness of the chromosome being wrapped relative to the
 	 * specified chromosome.
 	 *
-	 * @param compareWith The fitness function containing a chromosome to compare
-	 * to.
-	 * @return If this chromosome is more fit it will return a positive value, if
-	 *         it is less fit it will be negative. If they are both equally as fit
-	 *         it will return 0.
+	 * @param compareWith
+	 *            The fitness function containing a chromosome to compare to.
+	 * @return If this chromosome is more fit it will return a positive value,
+	 *         if it is less fit it will be negative. If they are both equally
+	 *         as fit it will return 0.
 	 * @since 2.0
 	 */
 	@Override

@@ -20,50 +20,45 @@ package syncleus.dann.graph;
 
 import java.util.List;
 
-public final class SimpleWeightedHyperEdge<N> extends AbstractHyperEdge<N> implements WeightedEdge<N>, MutableWeighted
-{
+public final class SimpleWeightedHyperEdge<N> extends AbstractHyperEdge<N>
+		implements WeightedEdge<N>, MutableWeighted {
 	private static final long serialVersionUID = 2622882478754498808L;
 	private double weight;
 
-	public SimpleWeightedHyperEdge(final List<N> nodes, final double ourWeight)
-	{
+	public SimpleWeightedHyperEdge(final List<N> nodes, final double ourWeight) {
 		super(nodes);
 		this.weight = ourWeight;
 	}
 
-	public SimpleWeightedHyperEdge(final List<N> nodes, final double ourWeight, final boolean allowJoiningMultipleGraphs, final boolean contextEnabled)
-	{
+	public SimpleWeightedHyperEdge(final List<N> nodes, final double ourWeight,
+			final boolean allowJoiningMultipleGraphs,
+			final boolean contextEnabled) {
 		super(nodes, allowJoiningMultipleGraphs, contextEnabled);
 		this.weight = ourWeight;
 	}
 
 	@Override
-	public double getWeight()
-	{
+	public double getWeight() {
 		return this.weight;
 	}
 
 	@Override
-	public void setWeight(final double newWeight)
-	{
+	public void setWeight(final double newWeight) {
 		this.weight = newWeight;
 	}
 
 	@Override
-	public SimpleWeightedHyperEdge<N> disconnect(final N node)
-	{
+	public SimpleWeightedHyperEdge<N> disconnect(final N node) {
 		return (SimpleWeightedHyperEdge<N>) super.disconnect(node);
 	}
 
 	@Override
-	public SimpleWeightedHyperEdge<N> disconnect(final List<N> nodes)
-	{
+	public SimpleWeightedHyperEdge<N> disconnect(final List<N> nodes) {
 		return (SimpleWeightedHyperEdge<N>) super.disconnect(nodes);
 	}
 
 	@Override
-	public SimpleWeightedHyperEdge<N> clone()
-	{
+	public SimpleWeightedHyperEdge<N> clone() {
 		return (SimpleWeightedHyperEdge<N>) super.clone();
 	}
 }

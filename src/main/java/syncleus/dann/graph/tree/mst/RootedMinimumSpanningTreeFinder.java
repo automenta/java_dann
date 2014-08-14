@@ -23,7 +23,7 @@ import java.util.Set;
 import syncleus.dann.graph.Edge;
 import syncleus.dann.graph.Graph;
 
-public interface RootedMinimumSpanningTreeFinder<N, E extends Edge<N>> extends MinimumSpanningTreeFinder<N, E>
-{
+public interface RootedMinimumSpanningTreeFinder<N, E extends Edge<N>> extends
+		MinimumSpanningTreeFinder<N, E> {
 	Set<E> findMinimumSpanningTree(Graph<N, E> graph, N startNode);
 }

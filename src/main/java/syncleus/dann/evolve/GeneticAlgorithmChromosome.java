@@ -37,14 +37,14 @@ import syncleus.dann.evolve.wavelets.Mutations;
  * @author Jeffrey Phillips Freeman
  * @since 2.0
  */
-public class GeneticAlgorithmChromosome implements Chromatid<AbstractValueGene>, Cloneable
-{
+public class GeneticAlgorithmChromosome implements
+		Chromatid<AbstractValueGene>, Cloneable {
 	private List<AbstractValueGene> alleles;
 	private static final Random RANDOM = Mutations.getRandom();
-	private static final Logger LOGGER = LogManager.getLogger(GeneticAlgorithmChromosome.class);
+	private static final Logger LOGGER = LogManager
+			.getLogger(GeneticAlgorithmChromosome.class);
 
-	private GeneticAlgorithmChromosome()
-	{
+	private GeneticAlgorithmChromosome() {
 		this.alleles = new ArrayList<AbstractValueGene>();
 	}
 
@@ -52,11 +52,11 @@ public class GeneticAlgorithmChromosome implements Chromatid<AbstractValueGene>,
 	 * Initializes a new instance of this class that is a copy of the specified
 	 * object.
 	 *
-	 * @param copy The object to copy.
+	 * @param copy
+	 *            The object to copy.
 	 * @since 2.0
 	 */
-	public GeneticAlgorithmChromosome(final GeneticAlgorithmChromosome copy)
-	{
+	public GeneticAlgorithmChromosome(final GeneticAlgorithmChromosome copy) {
 		this.alleles = new ArrayList<AbstractValueGene>(copy.alleles);
 	}
 
@@ -65,14 +65,14 @@ public class GeneticAlgorithmChromosome implements Chromatid<AbstractValueGene>,
 	 * initial geneCount. All initial genes will be DoubleGeneValue with an
 	 * initial value of 0.
 	 *
-	 * @param geneCount The number of genes to create in this chromosome.
+	 * @param geneCount
+	 *            The number of genes to create in this chromosome.
 	 * @since 2.0
 	 */
-	public GeneticAlgorithmChromosome(final int geneCount)
-	{
+	public GeneticAlgorithmChromosome(final int geneCount) {
 		this();
 
-		while( this.alleles.size() < geneCount )
+		while (this.alleles.size() < geneCount)
 			this.alleles.add(new DoubleValueGene());
 	}
 
@@ -82,17 +82,20 @@ public class GeneticAlgorithmChromosome implements Chromatid<AbstractValueGene>,
 	 * initial value with a normal distribution around 0 multiplied by
 	 * maxDeviation.
 	 *
-	 * @param geneCount The number of genes to create in this chromosome.
-	 * @param maxDeviation The multiplier for the normal distribution of initial
-	 * values for this object's genes.
+	 * @param geneCount
+	 *            The number of genes to create in this chromosome.
+	 * @param maxDeviation
+	 *            The multiplier for the normal distribution of initial values
+	 *            for this object's genes.
 	 * @since 2.0
 	 */
-	public GeneticAlgorithmChromosome(final int geneCount, final double maxDeviation)
-	{
+	public GeneticAlgorithmChromosome(final int geneCount,
+			final double maxDeviation) {
 		this();
 
-		while( this.alleles.size() < geneCount )
-			this.alleles.add(new DoubleValueGene(((RANDOM.nextDouble() * 2d) - 1d) * maxDeviation));
+		while (this.alleles.size() < geneCount)
+			this.alleles.add(new DoubleValueGene(
+					((RANDOM.nextDouble() * 2d) - 1d) * maxDeviation));
 	}
 
 	/**
@@ -103,8 +106,7 @@ public class GeneticAlgorithmChromosome implements Chromatid<AbstractValueGene>,
 	 * @since 2.0
 	 */
 	@Override
-	public final List<AbstractValueGene> getGenes()
-	{
+	public final List<AbstractValueGene> getGenes() {
 		return Collections.unmodifiableList(this.alleles);
 	}
 
@@ -113,42 +115,48 @@ public class GeneticAlgorithmChromosome implements Chromatid<AbstractValueGene>,
 	 * point specified to the end of the chromatid. This will not modify the
 	 * Chromatid.
 	 *
-	 * @param point the point (index) in the chromatid to act as the crossover
-	 * point
+	 * @param point
+	 *            the point (index) in the chromatid to act as the crossover
+	 *            point
 	 * @return A List of the genetic segment crossing over.
 	 */
 	@Override
-	public List<AbstractValueGene> crossover(final int point)
-	{
-		if( point <= 0 )
+	public List<AbstractValueGene> crossover(final int point) {
+		if (point <= 0)
 			throw new IllegalArgumentException("point must be positive");
-		if( point > this.alleles.size() )
-			throw new IllegalArgumentException("point can not be larger than the number of alleles");
+		if (point > this.alleles.size())
+			throw new IllegalArgumentException(
+					"point can not be larger than the number of alleles");
 
-		return Collections.unmodifiableList(this.alleles.subList(point, this.alleles.size()));
+		return Collections.unmodifiableList(this.alleles.subList(point,
+				this.alleles.size()));
 	}
 
 	/**
 	 * The second step in crossover. This will replace its own genetic code with
 	 * the specified genetic segment at the specified crossover point.
 	 *
-	 * @param geneticSegment Segmet of genetic code crossing over.
-	 * @param point Crossover point (index) where genes are spliced
+	 * @param geneticSegment
+	 *            Segmet of genetic code crossing over.
+	 * @param point
+	 *            Crossover point (index) where genes are spliced
 	 * @see com.syncleus.dann.genetics.Chromatid#crossover(int)
 	 * @since 2.0
 	 */
 	@Override
-	public void crossover(final List<AbstractValueGene> geneticSegment, final int point)
-	{
-		if( point <= 0 )
+	public void crossover(final List<AbstractValueGene> geneticSegment,
+			final int point) {
+		if (point <= 0)
 			throw new IllegalArgumentException("point must be positive");
-		if( point > this.alleles.size() )
-			throw new IllegalArgumentException("point can not be larger than the number of alleles");
+		if (point > this.alleles.size())
+			throw new IllegalArgumentException(
+					"point can not be larger than the number of alleles");
 
-		//remove allel replaced by crossover
-		this.alleles = new ArrayList<AbstractValueGene>(this.alleles.subList(0, point));
+		// remove allel replaced by crossover
+		this.alleles = new ArrayList<AbstractValueGene>(this.alleles.subList(0,
+				point));
 
-		//add the genetic segment to the end
+		// add the genetic segment to the end
 		this.alleles.addAll(geneticSegment);
 	}
 
@@ -159,37 +167,37 @@ public class GeneticAlgorithmChromosome implements Chromatid<AbstractValueGene>,
 	 * @since 2.0
 	 */
 	@Override
-	public GeneticAlgorithmChromosome clone()
-	{
-		try
-		{
-			final GeneticAlgorithmChromosome copy = (GeneticAlgorithmChromosome) super.clone();
+	public GeneticAlgorithmChromosome clone() {
+		try {
+			final GeneticAlgorithmChromosome copy = (GeneticAlgorithmChromosome) super
+					.clone();
 			copy.alleles = new ArrayList<AbstractValueGene>(this.alleles);
 			return copy;
-		}
-		catch(final CloneNotSupportedException caught)
-		{
-			LOGGER.error("CloneNotSupportedException caught but not expected!", caught);
-			throw new UnexpectedDannError("CloneNotSupportedException caught but not expected", caught);
+		} catch (final CloneNotSupportedException caught) {
+			LOGGER.error("CloneNotSupportedException caught but not expected!",
+					caught);
+			throw new UnexpectedDannError(
+					"CloneNotSupportedException caught but not expected",
+					caught);
 		}
 	}
 
 	/**
-	 * This will make a copy of the object and mutate it. The mutation has a normal
-	 * distribution multiplied by the deviation. This will be applied to each gene
-	 * in the chromosome.
+	 * This will make a copy of the object and mutate it. The mutation has a
+	 * normal distribution multiplied by the deviation. This will be applied to
+	 * each gene in the chromosome.
 	 *
-	 * @param deviation A double indicating how extreme the mutation will be. The
-	 * greater the deviation the more drastically the object will mutate. A
-	 * deviation of 0 should cause no mutation.
+	 * @param deviation
+	 *            A double indicating how extreme the mutation will be. The
+	 *            greater the deviation the more drastically the object will
+	 *            mutate. A deviation of 0 should cause no mutation.
 	 * @return A copy of the current object with potential mutations.
 	 * @since 2.0
 	 */
-	public GeneticAlgorithmChromosome mutate(final double deviation)
-	{
+	public GeneticAlgorithmChromosome mutate(final double deviation) {
 		final GeneticAlgorithmChromosome mutated = this.clone();
 		mutated.alleles.clear();
-		for(final AbstractValueGene allele : this.alleles)
+		for (final AbstractValueGene allele : this.alleles)
 			mutated.alleles.add(allele.mutate(deviation));
 		return mutated;
 	}
@@ -200,8 +208,7 @@ public class GeneticAlgorithmChromosome implements Chromatid<AbstractValueGene>,
 	 * @return the number of genes in the chromosome.
 	 * @since 2.0
 	 */
-	public final int getGeneCount()
-	{
+	public final int getGeneCount() {
 		return this.alleles.size();
 	}
 }

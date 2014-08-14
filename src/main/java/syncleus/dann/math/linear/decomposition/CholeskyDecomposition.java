@@ -31,8 +31,8 @@ import syncleus.dann.math.linear.Matrix;
  * a partial decomposition and sets an internal flag that may be queried by the
  * isSpd() method.
  */
-public interface CholeskyDecomposition<M extends Matrix<M, F>, F extends OrderedAlgebraic<F>> extends java.io.Serializable, SolvableDecomposition<M>
-{
+public interface CholeskyDecomposition<M extends Matrix<M, F>, F extends OrderedAlgebraic<F>>
+		extends java.io.Serializable, SolvableDecomposition<M> {
 	/**
 	 * Is the matrix symmetric and positive definite?
 	 *
@@ -40,4 +40,3 @@ public interface CholeskyDecomposition<M extends Matrix<M, F>, F extends Ordered
 	 */
 	boolean isSpd();
 }
-

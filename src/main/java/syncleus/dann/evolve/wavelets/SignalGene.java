@@ -22,33 +22,30 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-public class SignalGene extends AbstractWaveletGene
-{
+public class SignalGene extends AbstractWaveletGene {
 	private SignalKey outputSignal;
 	private SignalKeyConcentration expressingConcentration;
 
-	public SignalGene(final ReceptorKey initialReceptor, final SignalKey initialSignal)
-	{
+	public SignalGene(final ReceptorKey initialReceptor,
+			final SignalKey initialSignal) {
 		super(initialReceptor);
 
 		this.outputSignal = initialSignal;
 		this.expressingConcentration = null;
 	}
 
-	public SignalGene(final SignalGene copy)
-	{
+	public SignalGene(final SignalGene copy) {
 		super(copy);
 
 		this.outputSignal = copy.outputSignal;
 	}
 
 	@Override
-	public boolean bind(final SignalKeyConcentration concentration, final boolean isExternal)
-	{
+	public boolean bind(final SignalKeyConcentration concentration,
+			final boolean isExternal) {
 		boolean bound;
 		bound = super.bind(concentration, isExternal);
-		if( concentration.getSignal().equals(this.outputSignal) )
-		{
+		if (concentration.getSignal().equals(this.outputSignal)) {
 			this.expressingConcentration = concentration;
 			bound = true;
 		}
@@ -56,46 +53,43 @@ public class SignalGene extends AbstractWaveletGene
 	}
 
 	@Override
-	public void tick(final double promotion)
-	{
+	public void tick(final double promotion) {
 		super.tick(promotion);
-		this.expressingConcentration.setConcentration(this.expressingConcentration.getConcentration() + this.expressionActivity());
+		this.expressingConcentration
+				.setConcentration(this.expressingConcentration
+						.getConcentration() + this.expressionActivity());
 	}
 
 	@Override
-	public Set<AbstractKey> getKeys()
-	{
-		final Set<AbstractKey> allKeys = new HashSet<AbstractKey>(super.getKeys());
+	public Set<AbstractKey> getKeys() {
+		final Set<AbstractKey> allKeys = new HashSet<AbstractKey>(
+				super.getKeys());
 		allKeys.add(this.outputSignal);
 		return Collections.unmodifiableSet(allKeys);
 	}
 
-	public SignalKey getOutputSignal()
-	{
+	public SignalKey getOutputSignal() {
 		return this.outputSignal;
 	}
 
-	protected SignalKeyConcentration getExpressingConcentration()
-	{
+	protected SignalKeyConcentration getExpressingConcentration() {
 		return expressingConcentration;
 	}
 
-	protected void setExpressingConcentration(final SignalKeyConcentration newExpressingConcentration)
-	{
+	protected void setExpressingConcentration(
+			final SignalKeyConcentration newExpressingConcentration) {
 		this.expressingConcentration = newExpressingConcentration;
 	}
 
 	@Override
-	public SignalGene clone()
-	{
+	public SignalGene clone() {
 		final SignalGene copy = (SignalGene) super.clone();
 		copy.outputSignal = this.outputSignal;
 		return copy;
 	}
 
 	@Override
-	public void mutate(final Set<AbstractKey> keyPool)
-	{
+	public void mutate(final Set<AbstractKey> keyPool) {
 		super.mutate(keyPool);
 		this.outputSignal = this.outputSignal.mutate(this.getMutability());
 	}

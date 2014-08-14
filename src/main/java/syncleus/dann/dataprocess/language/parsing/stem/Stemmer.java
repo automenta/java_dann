@@ -19,15 +19,17 @@
 package syncleus.dann.dataprocess.language.parsing.stem;
 
 /**
- * A Stemmer gets the <a href="http://en.wikipedia.org/wiki/Word_stem">
- * word stem</a> from a word.
+ * A Stemmer gets the <a href="http://en.wikipedia.org/wiki/Word_stem"> word
+ * stem</a> from a word.
+ *
  * @author Jeffrey Phillips Freeman
  */
-public interface Stemmer
-{
+public interface Stemmer {
 	/**
 	 * Gets the word stem from the given word.
-	 * @param word The word to get the stem from
+	 *
+	 * @param word
+	 *            The word to get the stem from
 	 * @return The stem for the given word
 	 */
 	String stemWord(String word);

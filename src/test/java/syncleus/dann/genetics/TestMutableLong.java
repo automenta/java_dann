@@ -18,57 +18,56 @@
  ******************************************************************************/
 package syncleus.dann.genetics;
 
-import syncleus.dann.evolve.MutableLong;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class TestMutableLong
-{
+import syncleus.dann.evolve.MutableLong;
+
+public class TestMutableLong {
 	@Test
-	public void testConstructors()
-	{
+	public void testConstructors() {
 		MutableLong test = new MutableLong(123);
 		Assert.assertTrue("value constructor failed", test.getNumber() == 123);
 		test = new MutableLong("456");
-		Assert.assertTrue("string value constructor failed", test.getNumber() == 456);
+		Assert.assertTrue("string value constructor failed",
+				test.getNumber() == 456);
 		test = new MutableLong(789L);
-		Assert.assertTrue("Number value constructor failed", test.getNumber() == 789);
+		Assert.assertTrue("Number value constructor failed",
+				test.getNumber() == 789);
 	}
 
 	@Test
-	public void testMax()
-	{
+	public void testMax() {
 		final MutableLong highValue = new MutableLong(Long.MAX_VALUE);
 
-		for(int testCount = 0; testCount < 1000; testCount++)
-		{
+		for (int testCount = 0; testCount < 1000; testCount++) {
 			final MutableLong mutated = highValue.mutate(100.0);
 
-			Assert.assertTrue("mutation caused number to roll over: " + mutated, mutated.longValue() >= -1);
+			Assert.assertTrue(
+					"mutation caused number to roll over: " + mutated,
+					mutated.longValue() >= -1);
 		}
 	}
 
 	@Test
-	public void testMin()
-	{
+	public void testMin() {
 		final MutableLong lowValue = new MutableLong(Long.MIN_VALUE);
 
-		for(int testCount = 0; testCount < 1000; testCount++)
-		{
+		for (int testCount = 0; testCount < 1000; testCount++) {
 			final MutableLong mutated = lowValue.mutate(100.0);
 
-			Assert.assertTrue("mutation caused number to roll over: " + mutated, mutated.longValue() <= 1);
+			Assert.assertTrue(
+					"mutation caused number to roll over: " + mutated,
+					mutated.longValue() <= 1);
 		}
 	}
 
 	@Test
-	public void testDeviation()
-	{
+	public void testDeviation() {
 		final MutableLong center = new MutableLong(0);
 		double averageSum = 0;
 		double testCount;
-		for(testCount = 0.0; testCount < 10000; testCount++)
-		{
+		for (testCount = 0.0; testCount < 10000; testCount++) {
 			averageSum += center.mutate(1.0).longValue();
 		}
 		final double average = averageSum / testCount;

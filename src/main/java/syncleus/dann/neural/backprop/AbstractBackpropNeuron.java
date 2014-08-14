@@ -25,10 +25,10 @@ import syncleus.dann.neural.AbstractActivationNeuron;
 import syncleus.dann.neural.Brain;
 import syncleus.dann.neural.Neuron;
 import syncleus.dann.neural.Synapse;
-import syncleus.dann.neural.activation.ActivationFunction;
+import syncleus.dann.neural.activation.DannActivationFunction;
 
-public abstract class AbstractBackpropNeuron extends AbstractActivationNeuron implements BackpropNeuron
-{
+public abstract class AbstractBackpropNeuron extends AbstractActivationNeuron
+		implements BackpropNeuron {
 	private static final long serialVersionUID = 85919762906996765L;
 	private static final double DEFAULT_LEARNING_RATE = 0.001;
 	/**
@@ -41,8 +41,8 @@ public abstract class AbstractBackpropNeuron extends AbstractActivationNeuron im
 	private double deltaTrain = 0.0;
 	private double learningRate = DEFAULT_LEARNING_RATE;
 	/**
-	 * A map which contains the current delta train for each of the
-	 * destination synapses.
+	 * A map which contains the current delta train for each of the destination
+	 * synapses.
 	 *
 	 * @since 1.0
 	 */
@@ -53,8 +53,7 @@ public abstract class AbstractBackpropNeuron extends AbstractActivationNeuron im
 	 *
 	 * @since 1.0
 	 */
-	protected AbstractBackpropNeuron(final Brain brain)
-	{
+	protected AbstractBackpropNeuron(final Brain brain) {
 		super(brain);
 	}
 
@@ -62,11 +61,12 @@ public abstract class AbstractBackpropNeuron extends AbstractActivationNeuron im
 	 * Creates a new instance of SimpleBackpropNeuron with the specified
 	 * activation function.
 	 *
-	 * @param activationFunction The Neuron's activation function.
+	 * @param activationFunction
+	 *            The Neuron's activation function.
 	 * @since 1.0
 	 */
-	protected AbstractBackpropNeuron(final Brain brain, final ActivationFunction activationFunction)
-	{
+	protected AbstractBackpropNeuron(final Brain brain,
+			final DannActivationFunction activationFunction) {
 		super(brain, activationFunction);
 	}
 
@@ -74,11 +74,12 @@ public abstract class AbstractBackpropNeuron extends AbstractActivationNeuron im
 	 * Creates a new instance of a SimpleBackpropNeuron using the default
 	 * activation function with the specified learning rate.
 	 *
-	 * @param learningRate learning rate of this neuron.
+	 * @param learningRate
+	 *            learning rate of this neuron.
 	 * @since 1.0
 	 */
-	protected AbstractBackpropNeuron(final Brain brain, final double learningRate)
-	{
+	protected AbstractBackpropNeuron(final Brain brain,
+			final double learningRate) {
 		super(brain);
 		this.learningRate = learningRate;
 	}
@@ -87,11 +88,14 @@ public abstract class AbstractBackpropNeuron extends AbstractActivationNeuron im
 	 * Creates a new instance of a SimpleBackpropNeuron with the specified
 	 * activation function and learning rate.
 	 *
-	 * @param activationFunction Activation function for this neuron.
-	 * @param learningRate Learning rate for this neuron.
+	 * @param activationFunction
+	 *            Activation function for this neuron.
+	 * @param learningRate
+	 *            Learning rate for this neuron.
 	 */
-	protected AbstractBackpropNeuron(final Brain brain, final ActivationFunction activationFunction, final double learningRate)
-	{
+	protected AbstractBackpropNeuron(final Brain brain,
+			final DannActivationFunction activationFunction,
+			final double learningRate) {
 		super(brain, activationFunction);
 		this.learningRate = learningRate;
 	}
@@ -102,36 +106,39 @@ public abstract class AbstractBackpropNeuron extends AbstractActivationNeuron im
 	 * @since 1.0
 	 */
 	@Override
-	public void backPropagate()
-	{
+	public void backPropagate() {
 		this.calculateDeltaTrain();
-		//TODO fix this bad typing
+		// TODO fix this bad typing
 		/*
-		//step thru source synapses and make them learn their new weight.
-		for(final Synapse currentSynapse : this.getBrain().getInEdges(this))
-		{
-			final Neuron sourceNeuron = currentSynapse.getSourceNode();
-			if( sourceNeuron instanceof BackpropNeuron )
-			{
+		 * //step thru source synapses and make them learn their new weight.
+		 * for(final Synapse currentSynapse : this.getBrain().getInEdges(this))
+		 * { final Neuron sourceNeuron = currentSynapse.getSourceNode(); if(
+		 * sourceNeuron instanceof BackpropNeuron ) { final BackpropNeuron
+		 * sourceBackpropNeuron = (BackpropNeuron) sourceNeuron; // TODO instead
+		 * of only working on SimpleBackpropNeuron perhaps make deltaTrain part
+		 * of a Backprop synapse if( sourceBackpropNeuron instanceof
+		 * SimpleBackpropNeuron ) ((SimpleBackpropNeuron)
+		 * sourceBackpropNeuron).deltaTrainDestinations.put(currentSynapse,
+		 * this.deltaTrain); currentSynapse.setWeight(currentSynapse.getWeight()
+		 * + (this.deltaTrain * this.learningRate * currentSynapse.getInput()));
+		 * } }
+		 */
+		// step thru source synapses and make them learn their new weight.
+		for (final Object currentSynapse : this.getBrain().getInEdges(this)) {
+			final Neuron sourceNeuron = (Neuron) ((Synapse) currentSynapse)
+					.getSourceNode();
+			if (sourceNeuron instanceof BackpropNeuron) {
 				final BackpropNeuron sourceBackpropNeuron = (BackpropNeuron) sourceNeuron;
-				// TODO instead of only working on SimpleBackpropNeuron perhaps make deltaTrain part of a Backprop synapse
-				if( sourceBackpropNeuron instanceof SimpleBackpropNeuron )
-					((SimpleBackpropNeuron) sourceBackpropNeuron).deltaTrainDestinations.put(currentSynapse, this.deltaTrain);
-				currentSynapse.setWeight(currentSynapse.getWeight() + (this.deltaTrain * this.learningRate * currentSynapse.getInput()));
-			}
-		}
-		*/
-		//step thru source synapses and make them learn their new weight.
-		for(final Object currentSynapse : this.getBrain().getInEdges(this))
-		{
-			final Neuron sourceNeuron = (Neuron) ((Synapse)currentSynapse).getSourceNode();
-			if( sourceNeuron instanceof BackpropNeuron )
-			{
-				final BackpropNeuron sourceBackpropNeuron = (BackpropNeuron) sourceNeuron;
-				// TODO instead of only working on SimpleBackpropNeuron perhaps make deltaTrain part of a Backprop synapse
-				if( sourceBackpropNeuron instanceof SimpleBackpropNeuron )
-					((SimpleBackpropNeuron) sourceBackpropNeuron).getDeltaTrainDestinations().put(((Synapse)currentSynapse), this.deltaTrain);
-				((Synapse)currentSynapse).setWeight(((Synapse)currentSynapse).getWeight() + (this.deltaTrain * this.learningRate * ((Synapse)currentSynapse).getInput()));
+				// TODO instead of only working on SimpleBackpropNeuron perhaps
+				// make deltaTrain part of a Backprop synapse
+				if (sourceBackpropNeuron instanceof SimpleBackpropNeuron)
+					((SimpleBackpropNeuron) sourceBackpropNeuron)
+							.getDeltaTrainDestinations()
+							.put(((Synapse) currentSynapse), this.deltaTrain);
+				((Synapse) currentSynapse)
+						.setWeight(((Synapse) currentSynapse).getWeight()
+								+ (this.deltaTrain * this.learningRate * ((Synapse) currentSynapse)
+										.getInput()));
 			}
 		}
 	}
@@ -142,12 +149,12 @@ public abstract class AbstractBackpropNeuron extends AbstractActivationNeuron im
 	 * @see com.syncleus.dann.neural.backprop.SimpleBackpropNeuron#backPropagate
 	 * @since 1.0
 	 */
-	protected void calculateDeltaTrain()
-	{
+	protected void calculateDeltaTrain() {
 		double newDeltaTrain = 0.0;
-		for (final Synapse<Neuron> currentSynapse : getBrain().getTraversableEdges(this))
-		{
-			newDeltaTrain += (currentSynapse.getWeight() * getDeltaTrainDestinations().get(currentSynapse));
+		for (final Synapse<Neuron> currentSynapse : getBrain()
+				.getTraversableEdges(this)) {
+			newDeltaTrain += (currentSynapse.getWeight() * getDeltaTrainDestinations()
+					.get(currentSynapse));
 		}
 		newDeltaTrain *= activateDerivitive();
 		setDeltaTrain(newDeltaTrain);
@@ -156,11 +163,11 @@ public abstract class AbstractBackpropNeuron extends AbstractActivationNeuron im
 	/**
 	 * Sets the new delta train of the neuron.
 	 *
-	 * @param deltaTrain The new delta train of the neuron.
+	 * @param deltaTrain
+	 *            The new delta train of the neuron.
 	 * @since 2.0
 	 */
-	protected void setDeltaTrain(final double deltaTrain)
-	{
+	protected void setDeltaTrain(final double deltaTrain) {
 		this.deltaTrain = deltaTrain;
 	}
 
@@ -171,8 +178,7 @@ public abstract class AbstractBackpropNeuron extends AbstractActivationNeuron im
 	 * @since 1.0
 	 */
 	// TODO put this in the interface and expose as public
-	protected double getDeltaTrain()
-	{
+	protected double getDeltaTrain() {
 		return this.deltaTrain;
 	}
 
@@ -183,8 +189,7 @@ public abstract class AbstractBackpropNeuron extends AbstractActivationNeuron im
 	 * @since 1.0
 	 */
 	// TODO put this in the interface and expose as public
-	protected Map<Synapse, Double> getDeltaTrainDestinations()
-	{
+	protected Map<Synapse, Double> getDeltaTrainDestinations() {
 		return this.deltaTrainDestinations;
 	}
 }

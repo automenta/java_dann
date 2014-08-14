@@ -18,32 +18,32 @@
  ******************************************************************************/
 package syncleus.dann.graphicalmodel;
 
-import syncleus.dann.graphmodel.StateEvidence;
-import syncleus.dann.graphmodel.EvidenceMap;
-import syncleus.dann.graphmodel.SimpleGraphicalModelNode;
-import syncleus.dann.graphmodel.GraphicalModelNode;
 import java.util.HashSet;
 import java.util.Set;
 
 import org.junit.Assert;
 import org.junit.Test;
 
-import syncleus.dann.graphmodel.bayesian.MutableBayesianAdjacencyNetwork;
+import syncleus.dann.learn.EvidenceMap;
+import syncleus.dann.learn.GraphicalModelNode;
+import syncleus.dann.learn.SimpleGraphicalModelNode;
+import syncleus.dann.learn.StateEvidence;
+import syncleus.dann.learn.bayesian.MutableBayesianAdjacencyNetwork;
 
-public class TestEvidenceMap
-{
-	private static enum TestEnum
-	{
+public class TestEvidenceMap {
+	private static enum TestEnum {
 		TRUE, FALSE
 	}
 
 	@Test
-	public void testOverall()
-	{
-		final MutableBayesianAdjacencyNetwork network = new MutableBayesianAdjacencyNetwork();
-		final GraphicalModelNode<TestEnum> influence1 = new SimpleGraphicalModelNode<TestEnum>(TestEnum.FALSE);
-		final GraphicalModelNode<TestEnum> influence2 = new SimpleGraphicalModelNode<TestEnum>(TestEnum.FALSE);
-		final GraphicalModelNode<TestEnum> influence3 = new SimpleGraphicalModelNode<TestEnum>(TestEnum.FALSE);
+	public void testOverall() {
+		new MutableBayesianAdjacencyNetwork();
+		final GraphicalModelNode<TestEnum> influence1 = new SimpleGraphicalModelNode<TestEnum>(
+				TestEnum.FALSE);
+		final GraphicalModelNode<TestEnum> influence2 = new SimpleGraphicalModelNode<TestEnum>(
+				TestEnum.FALSE);
+		final GraphicalModelNode<TestEnum> influence3 = new SimpleGraphicalModelNode<TestEnum>(
+				TestEnum.FALSE);
 
 		final Set<GraphicalModelNode> nodes = new HashSet<GraphicalModelNode>();
 		nodes.add(influence1);
@@ -52,7 +52,7 @@ public class TestEvidenceMap
 
 		final EvidenceMap<TestEnum> evidence = new EvidenceMap<TestEnum>(nodes);
 
-		//train some values
+		// train some values
 		influence1.setState(TestEnum.TRUE);
 		influence2.setState(TestEnum.TRUE);
 		influence3.setState(TestEnum.TRUE);
@@ -117,87 +117,141 @@ public class TestEvidenceMap
 		evidence.incrementState(nodes, TestEnum.TRUE);
 		evidence.incrementState(nodes, TestEnum.TRUE);
 
-		//test thevalues
+		// test thevalues
 		influence1.setState(TestEnum.FALSE);
 		influence2.setState(TestEnum.FALSE);
 		influence3.setState(TestEnum.FALSE);
 		StateEvidence<TestEnum> stateEvidence = evidence.get(nodes);
-		Assert.assertTrue("incorrect percentage!", Math.abs(stateEvidence.getPercentage(TestEnum.TRUE) - 0.75) < 0.0001);
-		Assert.assertTrue("incorrect percentage!", Math.abs(stateEvidence.getPercentage(TestEnum.FALSE) - 0.25) < 0.0001);
-		Assert.assertTrue("incorrect total evidence!", stateEvidence.getTotalEvidence() == 4);
-		Assert.assertTrue("incorrect individual evidence!", stateEvidence.get(TestEnum.TRUE) == 3);
-		Assert.assertTrue("incorrect individual evidence!", stateEvidence.get(TestEnum.FALSE) == 1);
+		Assert.assertTrue(
+				"incorrect percentage!",
+				Math.abs(stateEvidence.getPercentage(TestEnum.TRUE) - 0.75) < 0.0001);
+		Assert.assertTrue(
+				"incorrect percentage!",
+				Math.abs(stateEvidence.getPercentage(TestEnum.FALSE) - 0.25) < 0.0001);
+		Assert.assertTrue("incorrect total evidence!",
+				stateEvidence.getTotalEvidence() == 4);
+		Assert.assertTrue("incorrect individual evidence!",
+				stateEvidence.get(TestEnum.TRUE) == 3);
+		Assert.assertTrue("incorrect individual evidence!",
+				stateEvidence.get(TestEnum.FALSE) == 1);
 
 		influence1.setState(TestEnum.TRUE);
 		influence2.setState(TestEnum.FALSE);
 		influence3.setState(TestEnum.FALSE);
 		stateEvidence = evidence.get(nodes);
-		Assert.assertTrue("incorrect percentage!", Math.abs(stateEvidence.getPercentage(TestEnum.TRUE) - 0.75) < 0.0001);
-		Assert.assertTrue("incorrect percentage!", Math.abs(stateEvidence.getPercentage(TestEnum.FALSE) - 0.25) < 0.0001);
-		Assert.assertTrue("incorrect total evidence!", stateEvidence.getTotalEvidence() == 4);
-		Assert.assertTrue("incorrect individual evidence!", stateEvidence.get(TestEnum.TRUE) == 3);
-		Assert.assertTrue("incorrect individual evidence!", stateEvidence.get(TestEnum.FALSE) == 1);
+		Assert.assertTrue(
+				"incorrect percentage!",
+				Math.abs(stateEvidence.getPercentage(TestEnum.TRUE) - 0.75) < 0.0001);
+		Assert.assertTrue(
+				"incorrect percentage!",
+				Math.abs(stateEvidence.getPercentage(TestEnum.FALSE) - 0.25) < 0.0001);
+		Assert.assertTrue("incorrect total evidence!",
+				stateEvidence.getTotalEvidence() == 4);
+		Assert.assertTrue("incorrect individual evidence!",
+				stateEvidence.get(TestEnum.TRUE) == 3);
+		Assert.assertTrue("incorrect individual evidence!",
+				stateEvidence.get(TestEnum.FALSE) == 1);
 
 		influence1.setState(TestEnum.FALSE);
 		influence2.setState(TestEnum.TRUE);
 		influence3.setState(TestEnum.FALSE);
 		stateEvidence = evidence.get(nodes);
-		Assert.assertTrue("incorrect percentage!", Math.abs(stateEvidence.getPercentage(TestEnum.TRUE) - 0.75) < 0.0001);
-		Assert.assertTrue("incorrect percentage!", Math.abs(stateEvidence.getPercentage(TestEnum.FALSE) - 0.25) < 0.0001);
-		Assert.assertTrue("incorrect total evidence!", stateEvidence.getTotalEvidence() == 4);
-		Assert.assertTrue("incorrect individual evidence!", stateEvidence.get(TestEnum.TRUE) == 3);
-		Assert.assertTrue("incorrect individual evidence!", stateEvidence.get(TestEnum.FALSE) == 1);
+		Assert.assertTrue(
+				"incorrect percentage!",
+				Math.abs(stateEvidence.getPercentage(TestEnum.TRUE) - 0.75) < 0.0001);
+		Assert.assertTrue(
+				"incorrect percentage!",
+				Math.abs(stateEvidence.getPercentage(TestEnum.FALSE) - 0.25) < 0.0001);
+		Assert.assertTrue("incorrect total evidence!",
+				stateEvidence.getTotalEvidence() == 4);
+		Assert.assertTrue("incorrect individual evidence!",
+				stateEvidence.get(TestEnum.TRUE) == 3);
+		Assert.assertTrue("incorrect individual evidence!",
+				stateEvidence.get(TestEnum.FALSE) == 1);
 
 		influence1.setState(TestEnum.FALSE);
 		influence2.setState(TestEnum.FALSE);
 		influence3.setState(TestEnum.TRUE);
 		stateEvidence = evidence.get(nodes);
-		Assert.assertTrue("incorrect percentage!", Math.abs(stateEvidence.getPercentage(TestEnum.TRUE) - 0.75) < 0.0001);
-		Assert.assertTrue("incorrect percentage!", Math.abs(stateEvidence.getPercentage(TestEnum.FALSE) - 0.25) < 0.0001);
-		Assert.assertTrue("incorrect total evidence!", stateEvidence.getTotalEvidence() == 4);
-		Assert.assertTrue("incorrect individual evidence!", stateEvidence.get(TestEnum.TRUE) == 3);
-		Assert.assertTrue("incorrect individual evidence!", stateEvidence.get(TestEnum.FALSE) == 1);
-
-
+		Assert.assertTrue(
+				"incorrect percentage!",
+				Math.abs(stateEvidence.getPercentage(TestEnum.TRUE) - 0.75) < 0.0001);
+		Assert.assertTrue(
+				"incorrect percentage!",
+				Math.abs(stateEvidence.getPercentage(TestEnum.FALSE) - 0.25) < 0.0001);
+		Assert.assertTrue("incorrect total evidence!",
+				stateEvidence.getTotalEvidence() == 4);
+		Assert.assertTrue("incorrect individual evidence!",
+				stateEvidence.get(TestEnum.TRUE) == 3);
+		Assert.assertTrue("incorrect individual evidence!",
+				stateEvidence.get(TestEnum.FALSE) == 1);
 
 		influence1.setState(TestEnum.FALSE);
 		influence2.setState(TestEnum.TRUE);
 		influence3.setState(TestEnum.TRUE);
 		stateEvidence = evidence.get(nodes);
-		Assert.assertTrue("incorrect percentage!", Math.abs(stateEvidence.getPercentage(TestEnum.TRUE) - 0.25) < 0.0001);
-		Assert.assertTrue("incorrect percentage!", Math.abs(stateEvidence.getPercentage(TestEnum.FALSE) - 0.75) < 0.0001);
-		Assert.assertTrue("incorrect total evidence!", stateEvidence.getTotalEvidence() == 4);
-		Assert.assertTrue("incorrect individual evidence!", stateEvidence.get(TestEnum.TRUE) == 1);
-		Assert.assertTrue("incorrect individual evidence!", stateEvidence.get(TestEnum.FALSE) == 3);
+		Assert.assertTrue(
+				"incorrect percentage!",
+				Math.abs(stateEvidence.getPercentage(TestEnum.TRUE) - 0.25) < 0.0001);
+		Assert.assertTrue(
+				"incorrect percentage!",
+				Math.abs(stateEvidence.getPercentage(TestEnum.FALSE) - 0.75) < 0.0001);
+		Assert.assertTrue("incorrect total evidence!",
+				stateEvidence.getTotalEvidence() == 4);
+		Assert.assertTrue("incorrect individual evidence!",
+				stateEvidence.get(TestEnum.TRUE) == 1);
+		Assert.assertTrue("incorrect individual evidence!",
+				stateEvidence.get(TestEnum.FALSE) == 3);
 
 		influence1.setState(TestEnum.TRUE);
 		influence2.setState(TestEnum.FALSE);
 		influence3.setState(TestEnum.TRUE);
 		stateEvidence = evidence.get(nodes);
-		Assert.assertTrue("incorrect percentage!", Math.abs(stateEvidence.getPercentage(TestEnum.TRUE) - 0.25) < 0.0001);
-		Assert.assertTrue("incorrect percentage!", Math.abs(stateEvidence.getPercentage(TestEnum.FALSE) - 0.75) < 0.0001);
-		Assert.assertTrue("incorrect total evidence!", stateEvidence.getTotalEvidence() == 4);
-		Assert.assertTrue("incorrect individual evidence!", stateEvidence.get(TestEnum.TRUE) == 1);
-		Assert.assertTrue("incorrect individual evidence!", stateEvidence.get(TestEnum.FALSE) == 3);
+		Assert.assertTrue(
+				"incorrect percentage!",
+				Math.abs(stateEvidence.getPercentage(TestEnum.TRUE) - 0.25) < 0.0001);
+		Assert.assertTrue(
+				"incorrect percentage!",
+				Math.abs(stateEvidence.getPercentage(TestEnum.FALSE) - 0.75) < 0.0001);
+		Assert.assertTrue("incorrect total evidence!",
+				stateEvidence.getTotalEvidence() == 4);
+		Assert.assertTrue("incorrect individual evidence!",
+				stateEvidence.get(TestEnum.TRUE) == 1);
+		Assert.assertTrue("incorrect individual evidence!",
+				stateEvidence.get(TestEnum.FALSE) == 3);
 
 		influence1.setState(TestEnum.TRUE);
 		influence2.setState(TestEnum.TRUE);
 		influence3.setState(TestEnum.FALSE);
 		stateEvidence = evidence.get(nodes);
-		Assert.assertTrue("incorrect percentage!", Math.abs(stateEvidence.getPercentage(TestEnum.TRUE) - 0.25) < 0.0001);
-		Assert.assertTrue("incorrect percentage!", Math.abs(stateEvidence.getPercentage(TestEnum.FALSE) - 0.75) < 0.0001);
-		Assert.assertTrue("incorrect total evidence!", stateEvidence.getTotalEvidence() == 4);
-		Assert.assertTrue("incorrect individual evidence!", stateEvidence.get(TestEnum.TRUE) == 1);
-		Assert.assertTrue("incorrect individual evidence!", stateEvidence.get(TestEnum.FALSE) == 3);
+		Assert.assertTrue(
+				"incorrect percentage!",
+				Math.abs(stateEvidence.getPercentage(TestEnum.TRUE) - 0.25) < 0.0001);
+		Assert.assertTrue(
+				"incorrect percentage!",
+				Math.abs(stateEvidence.getPercentage(TestEnum.FALSE) - 0.75) < 0.0001);
+		Assert.assertTrue("incorrect total evidence!",
+				stateEvidence.getTotalEvidence() == 4);
+		Assert.assertTrue("incorrect individual evidence!",
+				stateEvidence.get(TestEnum.TRUE) == 1);
+		Assert.assertTrue("incorrect individual evidence!",
+				stateEvidence.get(TestEnum.FALSE) == 3);
 
 		influence1.setState(TestEnum.TRUE);
 		influence2.setState(TestEnum.TRUE);
 		influence3.setState(TestEnum.TRUE);
 		stateEvidence = evidence.get(nodes);
-		Assert.assertTrue("incorrect percentage!", Math.abs(stateEvidence.getPercentage(TestEnum.TRUE) - 0.25) < 0.0001);
-		Assert.assertTrue("incorrect percentage!", Math.abs(stateEvidence.getPercentage(TestEnum.FALSE) - 0.75) < 0.0001);
-		Assert.assertTrue("incorrect total evidence!", stateEvidence.getTotalEvidence() == 4);
-		Assert.assertTrue("incorrect individual evidence!", stateEvidence.get(TestEnum.TRUE) == 1);
-		Assert.assertTrue("incorrect individual evidence!", stateEvidence.get(TestEnum.FALSE) == 3);
+		Assert.assertTrue(
+				"incorrect percentage!",
+				Math.abs(stateEvidence.getPercentage(TestEnum.TRUE) - 0.25) < 0.0001);
+		Assert.assertTrue(
+				"incorrect percentage!",
+				Math.abs(stateEvidence.getPercentage(TestEnum.FALSE) - 0.75) < 0.0001);
+		Assert.assertTrue("incorrect total evidence!",
+				stateEvidence.getTotalEvidence() == 4);
+		Assert.assertTrue("incorrect individual evidence!",
+				stateEvidence.get(TestEnum.TRUE) == 1);
+		Assert.assertTrue("incorrect individual evidence!",
+				stateEvidence.get(TestEnum.FALSE) == 3);
 	}
 }

@@ -25,18 +25,18 @@ package syncleus.dann.evolve;
  * @author Jeffrey Phillips Freeman
  * @since 2.0
  */
-public class MutableFloat extends MutableNumber<Float> implements Comparable<MutableFloat>
-{
+public class MutableFloat extends MutableNumber<Float> implements
+		Comparable<MutableFloat> {
 	private static final long serialVersionUID = 3985002065460583625L;
 
 	/**
 	 * Initializes a new instance of this class with the specified value.
 	 *
-	 * @param value The value of this number.
+	 * @param value
+	 *            The value of this number.
 	 * @since 2.0
 	 */
-	public MutableFloat(final float value)
-	{
+	public MutableFloat(final float value) {
 		super(value);
 	}
 
@@ -44,11 +44,11 @@ public class MutableFloat extends MutableNumber<Float> implements Comparable<Mut
 	 * Initializes a new instance of this class from the value represented by
 	 * the specified string.
 	 *
-	 * @param str A string representing the value of this number.
+	 * @param str
+	 *            A string representing the value of this number.
 	 * @since 2.0
 	 */
-	public MutableFloat(final String str)
-	{
+	public MutableFloat(final String str) {
 		super(Float.valueOf(str));
 	}
 
@@ -56,11 +56,11 @@ public class MutableFloat extends MutableNumber<Float> implements Comparable<Mut
 	 * Initializes a new instance of this class as a copy of the specified
 	 * number.
 	 *
-	 * @param value The value to copy
+	 * @param value
+	 *            The value to copy
 	 * @since 2.0
 	 */
-	public MutableFloat(final Float value)
-	{
+	public MutableFloat(final Float value) {
 		super(value);
 	}
 
@@ -71,8 +71,7 @@ public class MutableFloat extends MutableNumber<Float> implements Comparable<Mut
 	 * @since 2.0
 	 */
 	@Override
-	public MutableFloat clone()
-	{
+	public MutableFloat clone() {
 		return (MutableFloat) super.clone();
 	}
 
@@ -82,41 +81,41 @@ public class MutableFloat extends MutableNumber<Float> implements Comparable<Mut
 	 * past its largest or smallest representable number it will simply return
 	 * the max or min respectively.
 	 *
-	 * @param deviation A double indicating how extreme the mutation will be.
-	 *   The greater the deviation the more drastically the object will mutate.
-	 *   A deviation of 0 should cause no mutation.
+	 * @param deviation
+	 *            A double indicating how extreme the mutation will be. The
+	 *            greater the deviation the more drastically the object will
+	 *            mutate. A deviation of 0 should cause no mutation.
 	 * @return A copy of the current object with potential mutations.
 	 * @since 2.0
 	 */
 	@Override
-	public MutableFloat mutate(final double deviation)
-	{
-		final double doubleDistributed = MutableNumber.getDistributedRandom(deviation);
+	public MutableFloat mutate(final double deviation) {
+		final double doubleDistributed = MutableNumber
+				.getDistributedRandom(deviation);
 		float distributedRand = (float) doubleDistributed;
-		if( doubleDistributed > Float.MAX_VALUE )
+		if (doubleDistributed > Float.MAX_VALUE)
 			distributedRand = Float.MAX_VALUE;
-		else if( doubleDistributed < (Float.MAX_VALUE * -1f) )
+		else if (doubleDistributed < (Float.MAX_VALUE * -1f))
 			distributedRand = Float.MAX_VALUE * -1f;
 		final float result = this.getNumber() + distributedRand;
-		if( (distributedRand > 0f) && (result < this.getNumber()) )
+		if ((distributedRand > 0f) && (result < this.getNumber()))
 			return new MutableFloat(Float.MAX_VALUE);
-		else if( (distributedRand < 0f) && (result > this.getNumber()) )
+		else if ((distributedRand < 0f) && (result > this.getNumber()))
 			return new MutableFloat(Float.MAX_VALUE * -1f);
 		return new MutableFloat(result);
 	}
 
 	/**
 	 * Compares the value of this number against another object of the same
-	 * type.
-	 * The backing number handles the comparison.
+	 * type. The backing number handles the comparison.
 	 *
-	 * @param compareWith Number to compare against.
+	 * @param compareWith
+	 *            Number to compare against.
 	 * @return the natural ordering of the backed number.
 	 * @since 2.0
 	 */
 	@Override
-	public int compareTo(final MutableFloat compareWith)
-	{
+	public int compareTo(final MutableFloat compareWith) {
 		return this.getNumber().compareTo(compareWith.getNumber());
 	}
 }

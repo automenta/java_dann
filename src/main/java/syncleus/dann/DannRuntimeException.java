@@ -25,8 +25,7 @@ package syncleus.dann;
  * @author Jeffrey Phillips Freeman
  * @since 2.0
  */
-public class DannRuntimeException extends RuntimeException
-{
+public class DannRuntimeException extends RuntimeException {
 	private static final long serialVersionUID = 8593525800629091420L;
 
 	/**
@@ -34,19 +33,18 @@ public class DannRuntimeException extends RuntimeException
 	 *
 	 * @since 2.0
 	 */
-	public DannRuntimeException()
-	{
+	public DannRuntimeException() {
 		super();
 	}
 
 	/**
 	 * Creates an exception with a message describing the cause.
 	 *
-	 * @param msg A string describing the cause of the exception
+	 * @param msg
+	 *            A string describing the cause of the exception
 	 * @since 2.0
 	 */
-	public DannRuntimeException(final String msg)
-	{
+	public DannRuntimeException(final String msg) {
 		super(msg);
 	}
 
@@ -54,24 +52,25 @@ public class DannRuntimeException extends RuntimeException
 	 * Creates an exception with a message describing the cause as well as the
 	 * throwable which caused this exception to be thrown.
 	 *
-	 * @param msg A string describing the cause of the exception
-	 * @param cause The throwable which caused this exception
+	 * @param msg
+	 *            A string describing the cause of the exception
+	 * @param cause
+	 *            The throwable which caused this exception
 	 * @since 2.0
 	 */
-	public DannRuntimeException(final String msg, final Throwable cause)
-	{
+	public DannRuntimeException(final String msg, final Throwable cause) {
 		super(msg, cause);
 	}
 
 	/**
-	 * Creates an exception containing the throwable which caused this exception to
-	 * be thrown.
+	 * Creates an exception containing the throwable which caused this exception
+	 * to be thrown.
 	 *
-	 * @param cause The throwable which caused this exception
+	 * @param cause
+	 *            The throwable which caused this exception
 	 * @since 2.0
 	 */
-	public DannRuntimeException(final Throwable cause)
-	{
+	public DannRuntimeException(final Throwable cause) {
 		super(cause);
 	}
 }

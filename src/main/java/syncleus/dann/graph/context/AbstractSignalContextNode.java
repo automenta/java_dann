@@ -24,61 +24,51 @@ import java.util.Set;
 import syncleus.dann.graph.Edge;
 import syncleus.dann.graph.Graph;
 
-public abstract class AbstractSignalContextNode<N, E extends Edge<N>, S> extends AbstractContextNode<N, E, Graph<N, E>> implements SignalContextNode<N, E, S>
-{
+public abstract class AbstractSignalContextNode<N, E extends Edge<N>, S>
+		extends AbstractContextNode<N, E, Graph<N, E>> implements
+		SignalContextNode<N, E, S> {
 	private final Set<SignalingContextEdge<N, S>> contextEdges = new HashSet<SignalingContextEdge<N, S>>();
 	private transient S state = null;
 
-	protected AbstractSignalContextNode(final boolean allowJoiningMultipleGraphs)
-	{
+	protected AbstractSignalContextNode(final boolean allowJoiningMultipleGraphs) {
 		super(allowJoiningMultipleGraphs);
 	}
 
-	protected AbstractSignalContextNode()
-	{
+	protected AbstractSignalContextNode() {
 		super(true);
 	}
 
 	@Override
-	public boolean connectingEdge(final E edge)
-	{
-		if( super.connectingEdge(edge) )
-		{
-			if(edge instanceof SignalingContextEdge)
-				this.contextEdges.add((SignalingContextEdge)edge);
+	public boolean connectingEdge(final E edge) {
+		if (super.connectingEdge(edge)) {
+			if (edge instanceof SignalingContextEdge)
+				this.contextEdges.add((SignalingContextEdge) edge);
 			return true;
-		}
-		else
+		} else
 			return false;
 	}
 
 	@Override
-	public boolean disconnectingEdge(final E edge)
-	{
-		if( super.disconnectingEdge(edge) )
-		{
-			if(edge instanceof SignalingContextEdge)
+	public boolean disconnectingEdge(final E edge) {
+		if (super.disconnectingEdge(edge)) {
+			if (edge instanceof SignalingContextEdge)
 				this.contextEdges.remove(edge);
 			return true;
-		}
-		else
+		} else
 			return false;
 	}
 
 	@Override
-	public S getState()
-	{
+	public S getState() {
 		return this.state;
 	}
 
-	protected void setState(final S state)
-	{
+	protected void setState(final S state) {
 		this.state = state;
 
-		//lets notify all edges
-		for(final SignalingContextEdge edge : this.contextEdges)
-		{
-			if( edge.isTraversable(this) )
+		// lets notify all edges
+		for (final SignalingContextEdge edge : this.contextEdges) {
+			if (edge.isTraversable(this))
 				edge.nodeStateChanged(this, state);
 		}
 	}

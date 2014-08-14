@@ -29,11 +29,13 @@ import syncleus.dann.graph.DirectedGraph;
  *
  * @author Jeffrey Phillips Freeman
  * @since 1.0
- * @param <IN> The input-neuron type
- * @param <ON> The output-neuron type
+ * @param <IN>
+ *            The input-neuron type
+ * @param <ON>
+ *            The output-neuron type
  */
-public interface Brain<IN extends InputNeuron, ON extends OutputNeuron, N extends Neuron, S extends Synapse<N>> extends DirectedGraph<N, S>
-{
+public interface Brain<IN extends InputNeuron, ON extends OutputNeuron, N extends Neuron, S extends Synapse<N>>
+		extends DirectedGraph<N, S> {
 	/**
 	 * Obtains all InputNeurons contained within the brain.
 	 *
@@ -41,6 +43,7 @@ public interface Brain<IN extends InputNeuron, ON extends OutputNeuron, N extend
 	 * @since 1.0
 	 */
 	Set<IN> getInputNeurons();
+
 	/**
 	 * Obtains all OutputNeurons contained within the brain.
 	 *

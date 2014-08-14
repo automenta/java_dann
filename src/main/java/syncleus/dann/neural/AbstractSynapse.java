@@ -23,8 +23,8 @@ import java.util.Random;
 
 import syncleus.dann.graph.AbstractDirectedEdge;
 
-public abstract class AbstractSynapse<N> extends AbstractDirectedEdge<N> implements Synapse<N>
-{
+public abstract class AbstractSynapse<N> extends AbstractDirectedEdge<N>
+		implements Synapse<N> {
 	private static final long serialVersionUID = -7939448149356677295L;
 	/**
 	 * The current weight of the synapse.
@@ -43,13 +43,16 @@ public abstract class AbstractSynapse<N> extends AbstractDirectedEdge<N> impleme
 	/**
 	 * Creates a new instance of AbstractSynapse.
 	 *
-	 * @param sourceToSet The incoming neuron connection.
-	 * @param destinationToSet The outgoing neuron connection.
-	 * @param initialWeight The initial weight of the synapse
+	 * @param sourceToSet
+	 *            The incoming neuron connection.
+	 * @param destinationToSet
+	 *            The outgoing neuron connection.
+	 * @param initialWeight
+	 *            The initial weight of the synapse
 	 * @since 1.0
 	 */
-	protected AbstractSynapse(final N sourceToSet, final N destinationToSet, final double initialWeight)
-	{
+	protected AbstractSynapse(final N sourceToSet, final N destinationToSet,
+			final double initialWeight) {
 		super(sourceToSet, destinationToSet);
 		this.weight = initialWeight;
 	}
@@ -57,12 +60,13 @@ public abstract class AbstractSynapse<N> extends AbstractDirectedEdge<N> impleme
 	/**
 	 * Creates a new instance of AbstractSynapse.
 	 *
-	 * @param sourceToSet The incoming neuron connection.
-	 * @param destinationToSet The outgoing neuron connection.
+	 * @param sourceToSet
+	 *            The incoming neuron connection.
+	 * @param destinationToSet
+	 *            The outgoing neuron connection.
 	 * @since 1.0
 	 */
-	protected AbstractSynapse(final N sourceToSet, final N destinationToSet)
-	{
+	protected AbstractSynapse(final N sourceToSet, final N destinationToSet) {
 		super(sourceToSet, destinationToSet);
 		this.weight = ((RANDOM.nextDouble() * 2.0) - 1.0) / 10000.0;
 	}
@@ -70,51 +74,61 @@ public abstract class AbstractSynapse<N> extends AbstractDirectedEdge<N> impleme
 	/**
 	 * Creates a new instance of AbstractSynapse.
 	 *
-	 * @param sourceToSet The incoming neuron connection.
-	 * @param destinationToSet The outgoing neuron connection.
-	 * @param initialWeight The initial weight of the synapse
+	 * @param sourceToSet
+	 *            The incoming neuron connection.
+	 * @param destinationToSet
+	 *            The outgoing neuron connection.
+	 * @param initialWeight
+	 *            The initial weight of the synapse
 	 * @since 1.0
 	 */
-	protected AbstractSynapse(final N sourceToSet, final N destinationToSet, final double initialWeight, final boolean allowJoiningMultipleGraphs, final boolean contextEnabled)
-	{
-		super(sourceToSet, destinationToSet, allowJoiningMultipleGraphs, contextEnabled);
+	protected AbstractSynapse(final N sourceToSet, final N destinationToSet,
+			final double initialWeight,
+			final boolean allowJoiningMultipleGraphs,
+			final boolean contextEnabled) {
+		super(sourceToSet, destinationToSet, allowJoiningMultipleGraphs,
+				contextEnabled);
 		this.weight = initialWeight;
 	}
 
 	/**
 	 * Creates a new instance of AbstractSynapse.
 	 *
-	 * @param sourceToSet The incoming neuron connection.
-	 * @param destinationToSet The outgoing neuron connection.
+	 * @param sourceToSet
+	 *            The incoming neuron connection.
+	 * @param destinationToSet
+	 *            The outgoing neuron connection.
 	 * @since 1.0
 	 */
-	protected AbstractSynapse(final N sourceToSet, final N destinationToSet, final boolean allowJoiningMultipleGraphs, final boolean contextEnabled)
-	{
-		super(sourceToSet, destinationToSet, allowJoiningMultipleGraphs, contextEnabled);
+	protected AbstractSynapse(final N sourceToSet, final N destinationToSet,
+			final boolean allowJoiningMultipleGraphs,
+			final boolean contextEnabled) {
+		super(sourceToSet, destinationToSet, allowJoiningMultipleGraphs,
+				contextEnabled);
 		this.weight = ((RANDOM.nextDouble() * 2.0) - 1.0) / 10000.0;
 	}
 
 	/**
 	 * Set the current input for the synapse.
 	 *
-	 * @param newInput The new input value to set.
+	 * @param newInput
+	 *            The new input value to set.
 	 * @since 1.0
 	 */
 	@Override
-	public void setInput(final double newInput)
-	{
+	public void setInput(final double newInput) {
 		this.input = newInput;
 	}
 
 	/**
 	 * Set the weight of the synapse.
 	 *
-	 * @param newWeight new weight for the synapse.
+	 * @param newWeight
+	 *            new weight for the synapse.
 	 * @since 1.0
 	 */
 	@Override
-	public void setWeight(final double newWeight)
-	{
+	public void setWeight(final double newWeight) {
 		this.weight = newWeight;
 	}
 
@@ -125,8 +139,7 @@ public abstract class AbstractSynapse<N> extends AbstractDirectedEdge<N> impleme
 	 * @since 1.0
 	 */
 	@Override
-	public double getWeight()
-	{
+	public double getWeight() {
 		return this.weight;
 	}
 
@@ -137,26 +150,22 @@ public abstract class AbstractSynapse<N> extends AbstractDirectedEdge<N> impleme
 	 * @since 1.0
 	 */
 	@Override
-	public double getInput()
-	{
+	public double getInput() {
 		return this.input;
 	}
 
 	@Override
-	public AbstractSynapse<N> disconnect(final N node)
-	{
+	public AbstractSynapse<N> disconnect(final N node) {
 		return (AbstractSynapse<N>) super.disconnect(node);
 	}
 
 	@Override
-	public AbstractSynapse<N> disconnect(final List<N> nodes)
-	{
+	public AbstractSynapse<N> disconnect(final List<N> nodes) {
 		return (AbstractSynapse<N>) super.disconnect(nodes);
 	}
 
 	@Override
-	public AbstractSynapse<N> clone()
-	{
+	public AbstractSynapse<N> clone() {
 		return (AbstractSynapse<N>) super.clone();
 	}
 }

@@ -21,44 +21,47 @@ package syncleus.dann.graph;
 import java.util.Set;
 
 /**
- * An AbstractHyperAdjacencyGraph is a HyperGraph implemented using adjacency lists.
+ * An AbstractHyperAdjacencyGraph is a HyperGraph implemented using adjacency
+ * lists.
  *
  * @since 2.0
- * @param <N> The node type
- * @param <E> The type of edge for the given node type
+ * @param <N>
+ *            The node type
+ * @param <E>
+ *            The type of edge for the given node type
  */
-public abstract class AbstractHyperAdjacencyGraph<N, E extends HyperEdge<N>> extends AbstractAdjacencyGraph<N, E> implements HyperGraph<N, E>
-{
-    /**
-     * Creates a new graph with no edges and no adjacencies.
-     * nodeContext and edgeContext is enabled.
-     */
-	protected AbstractHyperAdjacencyGraph()
-	{
+public abstract class AbstractHyperAdjacencyGraph<N, E extends HyperEdge<N>>
+		extends AbstractAdjacencyGraph<N, E> implements HyperGraph<N, E> {
+	/**
+	 * Creates a new graph with no edges and no adjacencies. nodeContext and
+	 * edgeContext is enabled.
+	 */
+	protected AbstractHyperAdjacencyGraph() {
 		super();
 	}
 
-    /**
-     * Creates a new graph as a copy of the current Graph.
-     * nodeContext is enabled.
-     * @param copyGraph The Graph to copy
-     */
-	protected AbstractHyperAdjacencyGraph(final Graph<N, E> copyGraph)
-	{
+	/**
+	 * Creates a new graph as a copy of the current Graph. nodeContext is
+	 * enabled.
+	 *
+	 * @param copyGraph
+	 *            The Graph to copy
+	 */
+	protected AbstractHyperAdjacencyGraph(final Graph<N, E> copyGraph) {
 		super(copyGraph.getNodes(), copyGraph.getEdges());
 	}
 
-    /**
-     * Creates a new graph from the given list of nodes, and
-     * the given list of Edges.
-     * The adjacency lists are created from this structure. nodeContext is
-     * enabled.
-     *
-     * @param nodes The set of all nodes
-     * @param edges The set of all ourEdges
-     */
-	protected AbstractHyperAdjacencyGraph(final Set<N> nodes, final Set<E> edges)
-	{
+	/**
+	 * Creates a new graph from the given list of nodes, and the given list of
+	 * Edges. The adjacency lists are created from this structure. nodeContext
+	 * is enabled.
+	 *
+	 * @param nodes
+	 *            The set of all nodes
+	 * @param edges
+	 *            The set of all ourEdges
+	 */
+	protected AbstractHyperAdjacencyGraph(final Set<N> nodes, final Set<E> edges) {
 		super(nodes, edges);
 	}
 
@@ -68,8 +71,7 @@ public abstract class AbstractHyperAdjacencyGraph<N, E extends HyperEdge<N>> ext
 	 * @return always returns false
 	 */
 	@Override
-	public boolean hasMaximumAllowableRank()
-	{
+	public boolean hasMaximumAllowableRank() {
 		return false;
 	}
 
@@ -79,8 +81,7 @@ public abstract class AbstractHyperAdjacencyGraph<N, E extends HyperEdge<N>> ext
 	 * @return Always returns -1
 	 */
 	@Override
-	public int getMaximumAllowableRank()
-	{
+	public int getMaximumAllowableRank() {
 		return -1;
 	}
 
@@ -90,60 +91,58 @@ public abstract class AbstractHyperAdjacencyGraph<N, E extends HyperEdge<N>> ext
 	 * @return Always returns false
 	 */
 	@Override
-	public boolean hasMinimumAllowableRank()
-	{
+	public boolean hasMinimumAllowableRank() {
 		return false;
 	}
 
 	/**
 	 * Always returns -1 since rank is not limited.
+	 *
 	 * @return always -1 since the rank is not limited.
 	 */
 	@Override
-	public int getMinimumAllowableRank()
-	{
+	public int getMinimumAllowableRank() {
 		return -1;
 	}
 
 	@Override
-	public AbstractHyperAdjacencyGraph<N, E> cloneAdd(final E newEdge)
-	{
+	public AbstractHyperAdjacencyGraph<N, E> cloneAdd(final E newEdge) {
 		return (AbstractHyperAdjacencyGraph<N, E>) super.cloneAdd(newEdge);
 	}
 
 	@Override
-	public AbstractHyperAdjacencyGraph<N, E> cloneAdd(final N newNode)
-	{
+	public AbstractHyperAdjacencyGraph<N, E> cloneAdd(final N newNode) {
 		return (AbstractHyperAdjacencyGraph<N, E>) super.cloneAdd(newNode);
 	}
 
 	@Override
-	public AbstractHyperAdjacencyGraph<N, E> cloneAdd(final Set<N> newNodes, final Set<E> newEdges)
-	{
-		return (AbstractHyperAdjacencyGraph<N, E>) super.cloneAdd(newNodes, newEdges);
+	public AbstractHyperAdjacencyGraph<N, E> cloneAdd(final Set<N> newNodes,
+			final Set<E> newEdges) {
+		return (AbstractHyperAdjacencyGraph<N, E>) super.cloneAdd(newNodes,
+				newEdges);
 	}
 
 	@Override
-	public AbstractHyperAdjacencyGraph<N, E> cloneRemove(final E edgeToRemove)
-	{
-		return (AbstractHyperAdjacencyGraph<N, E>) super.cloneRemove(edgeToRemove);
+	public AbstractHyperAdjacencyGraph<N, E> cloneRemove(final E edgeToRemove) {
+		return (AbstractHyperAdjacencyGraph<N, E>) super
+				.cloneRemove(edgeToRemove);
 	}
 
 	@Override
-	public AbstractHyperAdjacencyGraph<N, E> cloneRemove(final N nodeToRemove)
-	{
-		return (AbstractHyperAdjacencyGraph<N, E>) super.cloneRemove(nodeToRemove);
+	public AbstractHyperAdjacencyGraph<N, E> cloneRemove(final N nodeToRemove) {
+		return (AbstractHyperAdjacencyGraph<N, E>) super
+				.cloneRemove(nodeToRemove);
 	}
 
 	@Override
-	public AbstractHyperAdjacencyGraph<N, E> cloneRemove(final Set<N> deleteNodes, final Set<E> deleteEdges)
-	{
-		return (AbstractHyperAdjacencyGraph<N, E>) super.cloneRemove(deleteNodes, deleteEdges);
+	public AbstractHyperAdjacencyGraph<N, E> cloneRemove(
+			final Set<N> deleteNodes, final Set<E> deleteEdges) {
+		return (AbstractHyperAdjacencyGraph<N, E>) super.cloneRemove(
+				deleteNodes, deleteEdges);
 	}
 
 	@Override
-	public AbstractHyperAdjacencyGraph<N, E> clone()
-	{
+	public AbstractHyperAdjacencyGraph<N, E> clone() {
 		return (AbstractHyperAdjacencyGraph<N, E>) super.clone();
 	}
 }

@@ -20,45 +20,41 @@ package syncleus.dann.graph;
 
 import java.util.List;
 
-public abstract class AbstractUniqueEdge<N> extends AbstractEdge<N>
-{
-	protected AbstractUniqueEdge()
-	{
+public abstract class AbstractUniqueEdge<N> extends AbstractEdge<N> {
+	protected AbstractUniqueEdge() {
 		super();
 	}
 
-	protected AbstractUniqueEdge(final boolean allowJoiningMultipleGraphs, final boolean contextEnabled)
-	{
+	protected AbstractUniqueEdge(final boolean allowJoiningMultipleGraphs,
+			final boolean contextEnabled) {
 		super(allowJoiningMultipleGraphs, contextEnabled);
 	}
 
-	protected AbstractUniqueEdge(final List<N> nodes)
-	{
+	protected AbstractUniqueEdge(final List<N> nodes) {
 		super(nodes);
 	}
 
-	protected AbstractUniqueEdge(final N... nodes)
-	{
+	protected AbstractUniqueEdge(final N... nodes) {
 		super(nodes);
 	}
 
-	protected AbstractUniqueEdge(final List<N> nodes, final boolean allowJoiningMultipleGraphs, final boolean contextEnabled)
-	{
+	protected AbstractUniqueEdge(final List<N> nodes,
+			final boolean allowJoiningMultipleGraphs,
+			final boolean contextEnabled) {
 		super(nodes, allowJoiningMultipleGraphs, contextEnabled);
 	}
 
-	protected AbstractUniqueEdge(final boolean allowJoiningMultipleGraphs, final boolean contextEnabled, final N... nodes)
-	{
+	protected AbstractUniqueEdge(final boolean allowJoiningMultipleGraphs,
+			final boolean contextEnabled, final N... nodes) {
 		super(allowJoiningMultipleGraphs, contextEnabled, nodes);
 	}
 
 	@Override
-	public boolean equals(final Object compareToObj)
-	{
-		if( compareToObj == null )
+	public boolean equals(final Object compareToObj) {
+		if (compareToObj == null)
 			return false;
 
-		if( !(compareToObj instanceof Edge) )
+		if (!(compareToObj instanceof Edge))
 			return false;
 
 		final Edge compareTo = (Edge) compareToObj;
@@ -67,10 +63,9 @@ public abstract class AbstractUniqueEdge<N> extends AbstractEdge<N>
 	}
 
 	@Override
-	public int hashCode()
-	{
+	public int hashCode() {
 		int hash = 0;
-		for(final N node : this.getNodes())
+		for (final N node : this.getNodes())
 			hash += node.hashCode();
 		return hash;
 	}

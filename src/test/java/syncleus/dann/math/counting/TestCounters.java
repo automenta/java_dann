@@ -18,7 +18,6 @@
  ******************************************************************************/
 package syncleus.dann.math.counting;
 
-import syncleus.dann.math.counting.Counters;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -28,29 +27,31 @@ import org.apache.logging.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class TestCounters
-{
-	private static final Logger LOGGER = LogManager.getLogger(TestCounters.class);
+public class TestCounters {
+	private static final Logger LOGGER = LogManager
+			.getLogger(TestCounters.class);
 	private static final String SUPER_SET = "1234";
 	private static final int COMBINATION_COUNT = 15;
 
 	@Test
-	public void testStringCombinations()
-	{
+	public void testStringCombinations() {
 		LOGGER.info("Generating combinations for: " + SUPER_SET);
 		final char[] lettersArray = SUPER_SET.toCharArray();
 		final List<Character> letters = new ArrayList<Character>();
-		for(final char letter : lettersArray)
+		for (final char letter : lettersArray)
 			letters.add(letter);
-		final Set<List<Character>> combinations = Counters.everyCombination(letters);
-		for(final List<Character> combination : combinations)
-		{
-			final StringBuilder combinationString = new StringBuilder(combination.size());
-			for(final Character combinationChar : combination)
+		final Set<List<Character>> combinations = Counters
+				.everyCombination(letters);
+		for (final List<Character> combination : combinations) {
+			final StringBuilder combinationString = new StringBuilder(
+					combination.size());
+			for (final Character combinationChar : combination)
 				combinationString.append(combinationChar);
 			LOGGER.info("Combination Generated: " + combinationString);
 		}
 
-		Assert.assertTrue("Wrong number of combinations: " + combinations.size(), combinations.size() == COMBINATION_COUNT);
+		Assert.assertTrue(
+				"Wrong number of combinations: " + combinations.size(),
+				combinations.size() == COMBINATION_COUNT);
 	}
 }

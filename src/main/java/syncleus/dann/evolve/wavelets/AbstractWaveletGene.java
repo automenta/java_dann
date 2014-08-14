@@ -31,81 +31,74 @@ import syncleus.dann.UnexpectedDannError;
 import syncleus.dann.evolve.Gene;
 import syncleus.dann.math.AbstractFunction;
 
-public abstract class AbstractWaveletGene implements Gene
-{
+public abstract class AbstractWaveletGene implements Gene {
 	private double currentActivity;
 	private double pendingActivity;
 	private double mutability;
-	private static final Logger LOGGER = LogManager.getLogger(AbstractWaveletGene.class);
+	private static final Logger LOGGER = LogManager
+			.getLogger(AbstractWaveletGene.class);
 	private ExpressionFunction expressionFunction;
 	private Set<SignalKeyConcentration> receivingConcentrations;
 	protected static final Random RANDOM = Mutations.getRandom();
 
-	protected AbstractWaveletGene(final ReceptorKey initialReceptor)
-	{
+	protected AbstractWaveletGene(final ReceptorKey initialReceptor) {
 		this.expressionFunction = new ExpressionFunction(initialReceptor);
 		this.mutability = 1d;
 		this.receivingConcentrations = new HashSet<SignalKeyConcentration>();
 	}
 
-	protected AbstractWaveletGene(final AbstractWaveletGene copy)
-	{
+	protected AbstractWaveletGene(final AbstractWaveletGene copy) {
 		this.currentActivity = copy.currentActivity;
 		this.pendingActivity = copy.pendingActivity;
 		this.expressionFunction = copy.expressionFunction;
 
 		this.mutability = copy.mutability;
-		this.receivingConcentrations = new HashSet<SignalKeyConcentration>(copy.receivingConcentrations);
+		this.receivingConcentrations = new HashSet<SignalKeyConcentration>(
+				copy.receivingConcentrations);
 	}
 
-	public Set<AbstractKey> getKeys()
-	{
-		return Collections.unmodifiableSet(new HashSet<AbstractKey>(this.expressionFunction.getReceptors()));
+	public Set<AbstractKey> getKeys() {
+		return Collections.unmodifiableSet(new HashSet<AbstractKey>(
+				this.expressionFunction.getReceptors()));
 	}
 
-	protected final double getMutability()
-	{
+	protected final double getMutability() {
 		return this.mutability;
 	}
 
-	protected ExpressionFunction getExpressionFunction()
-	{
+	protected ExpressionFunction getExpressionFunction() {
 		return expressionFunction;
 	}
 
-	protected void setExpressionFunction(final ExpressionFunction newExpressionFunction)
-	{
+	protected void setExpressionFunction(
+			final ExpressionFunction newExpressionFunction) {
 		this.expressionFunction = newExpressionFunction;
 	}
 
-	public Set<SignalKeyConcentration> getReceivingConcentrations()
-	{
+	public Set<SignalKeyConcentration> getReceivingConcentrations() {
 		return receivingConcentrations;
 	}
 
-	public void setReceivingConcentrations(final Set<SignalKeyConcentration> newReceivingConcentrations)
-	{
+	public void setReceivingConcentrations(
+			final Set<SignalKeyConcentration> newReceivingConcentrations) {
 		this.receivingConcentrations = newReceivingConcentrations;
 	}
 
-	public final AbstractFunction getExpressionActivityMathFunction()
-	{
+	public final AbstractFunction getExpressionActivityMathFunction() {
 		return this.expressionFunction.getWaveletMathFunction();
 	}
 
 	@Override
-	public final double expressionActivity()
-	{
+	public final double expressionActivity() {
 		return this.currentActivity;
 	}
 
-	public boolean bind(final SignalKeyConcentration concentration, final boolean isExternal)
-	{
-		if( isExternal )
+	public boolean bind(final SignalKeyConcentration concentration,
+			final boolean isExternal) {
+		if (isExternal)
 			return false;
 
-		if( this.expressionFunction.receives(concentration.getSignal()) )
-		{
+		if (this.expressionFunction.receives(concentration.getSignal())) {
 			this.receivingConcentrations.add(concentration);
 			return true;
 		}
@@ -113,50 +106,50 @@ public abstract class AbstractWaveletGene implements Gene
 		return false;
 	}
 
-	public void preTick()
-	{
-		this.pendingActivity = this.expressionFunction.calculate(this.receivingConcentrations);
+	public void preTick() {
+		this.pendingActivity = this.expressionFunction
+				.calculate(this.receivingConcentrations);
 	}
 
-	public void tick(final double promotion)
-	{
-		this.currentActivity = this.pendingActivity + (this.pendingActivity * promotion);
+	public void tick(final double promotion) {
+		this.currentActivity = this.pendingActivity
+				+ (this.pendingActivity * promotion);
 	}
 
-	public void mutate(final Set<AbstractKey> keyPool)
-	{
+	public void mutate(final Set<AbstractKey> keyPool) {
 		this.currentActivity = 0.0;
 		this.pendingActivity = 0.0;
-		if( (keyPool != null) && (keyPool.isEmpty()) )
-		{
-			final ReceptorKey newReceptor = new ReceptorKey(new ArrayList<AbstractKey>(keyPool).get(RANDOM.nextInt(keyPool.size())));
+		if ((keyPool != null) && (keyPool.isEmpty())) {
+			final ReceptorKey newReceptor = new ReceptorKey(
+					new ArrayList<AbstractKey>(keyPool).get(RANDOM
+							.nextInt(keyPool.size())));
 			this.expressionFunction.mutate(this.mutability, newReceptor);
-		}
-		else
+		} else
 			this.expressionFunction.mutate(this.mutability);
-		if( Mutations.mutationEvent(this.mutability) )
+		if (Mutations.mutationEvent(this.mutability))
 			this.mutability = Mutations.mutabilityMutation(this.mutability);
 	}
 
 	@Override
-	public AbstractWaveletGene clone()
-	{
-		try
-		{
-			final AbstractWaveletGene copy = (AbstractWaveletGene) super.clone();
+	public AbstractWaveletGene clone() {
+		try {
+			final AbstractWaveletGene copy = (AbstractWaveletGene) super
+					.clone();
 
 			copy.currentActivity = this.currentActivity;
 			copy.pendingActivity = this.pendingActivity;
 			copy.expressionFunction = this.expressionFunction.clone();
 			copy.mutability = this.mutability;
-			copy.receivingConcentrations = new HashSet<SignalKeyConcentration>(this.receivingConcentrations);
+			copy.receivingConcentrations = new HashSet<SignalKeyConcentration>(
+					this.receivingConcentrations);
 
 			return copy;
-		}
-		catch(final CloneNotSupportedException caught)
-		{
-			LOGGER.error("CloneNotSupportedException caught but not expected!", caught);
-			throw new UnexpectedDannError("CloneNotSupportedException caught but not expected", caught);
+		} catch (final CloneNotSupportedException caught) {
+			LOGGER.error("CloneNotSupportedException caught but not expected!",
+					caught);
+			throw new UnexpectedDannError(
+					"CloneNotSupportedException caught but not expected",
+					caught);
 		}
 	}
 }

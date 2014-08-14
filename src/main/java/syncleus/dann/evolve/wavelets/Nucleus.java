@@ -31,10 +31,10 @@ import syncleus.dann.UnexpectedDannError;
 
 /**
  * A Nucleus is a collection of Chromosomes with a known mutability.
+ *
  * @see com.syncleus.dann.genetics.wavelets.Chromosome
  */
-public class Nucleus implements Cloneable
-{
+public class Nucleus implements Cloneable {
 	private List<Chromosome> chromosomes;
 	private static final Logger LOGGER = LogManager.getLogger(Nucleus.class);
 	private static final double MUTABILITY_ADJUSTMENT = 10.0;
@@ -43,106 +43,103 @@ public class Nucleus implements Cloneable
 	 * Creates a new Nucleus with at least one chromosome. Additional
 	 * chromosomes could be added based on the random mutability factor.
 	 */
-	public Nucleus()
-	{
+	public Nucleus() {
 		this.chromosomes = new ArrayList<Chromosome>();
-		final double mutability = Mutations.getRandom().nextDouble() * MUTABILITY_ADJUSTMENT;
-		//make sure there is at least one starting chromosome.
+		final double mutability = Mutations.getRandom().nextDouble()
+				* MUTABILITY_ADJUSTMENT;
+		// make sure there is at least one starting chromosome.
 		this.chromosomes.add(new Chromosome());
-		//there is a chance more chromosomes can be created
-		while( Mutations.mutationEvent(mutability) )
+		// there is a chance more chromosomes can be created
+		while (Mutations.mutationEvent(mutability))
 			this.chromosomes.add(new Chromosome());
 	}
 
 	/**
 	 * Creates a new Nucleus as a copy of the old Nucleus.
-	 * @param copy The Nucleus to copy
+	 *
+	 * @param copy
+	 *            The Nucleus to copy
 	 */
-	public Nucleus(final Nucleus copy)
-	{
+	public Nucleus(final Nucleus copy) {
 		this.chromosomes = new ArrayList<Chromosome>(copy.getChromosomes());
 	}
 
 	/**
 	 * Gets all chromosomes associated with this object.
+	 *
 	 * @return A list of chromosomes
 	 */
-	protected List<Chromosome> getChromosomes()
-	{
+	protected List<Chromosome> getChromosomes() {
 		return Collections.unmodifiableList(this.chromosomes);
 	}
 
 	/**
 	 * Performs a preTick() operation on each Chromosome.
+	 *
 	 * @see Chromosome#preTick()
 	 */
-	public void preTick()
-	{
-		for(final Chromosome chromosome : this.chromosomes)
+	public void preTick() {
+		for (final Chromosome chromosome : this.chromosomes)
 			chromosome.preTick();
 	}
 
 	/**
 	 * Performs a tick() operation on each Chromosome.
+	 *
 	 * @see Chromosome#tick()
 	 */
-	public void tick()
-	{
-		for(final Chromosome chromosome : this.chromosomes)
+	public void tick() {
+		for (final Chromosome chromosome : this.chromosomes)
 			chromosome.tick();
 	}
 
-	public boolean bind(final SignalKeyConcentration concentration, final boolean isExternal)
-	{
+	public boolean bind(final SignalKeyConcentration concentration,
+			final boolean isExternal) {
 		boolean bound = true;
-		for(final Chromosome chromosome : this.chromosomes)
-			if( chromosome.bind(concentration, isExternal) )
+		for (final Chromosome chromosome : this.chromosomes)
+			if (chromosome.bind(concentration, isExternal))
 				bound = true;
 		return bound;
 	}
 
 	@Override
-	public Nucleus clone()
-	{
-		try
-		{
+	public Nucleus clone() {
+		try {
 			final Nucleus copy = (Nucleus) super.clone();
 			copy.chromosomes = new ArrayList<Chromosome>();
-			for(final Chromosome chromosome : this.chromosomes)
+			for (final Chromosome chromosome : this.chromosomes)
 				copy.chromosomes.add(chromosome.clone());
 			return copy;
-		}
-		catch(final CloneNotSupportedException caught)
-		{
-			LOGGER.error("CloneNotSupportedException caught but not expected!", caught);
-			throw new UnexpectedDannError("CloneNotSupportedException caught but not expected", caught);
+		} catch (final CloneNotSupportedException caught) {
+			LOGGER.error("CloneNotSupportedException caught but not expected!",
+					caught);
+			throw new UnexpectedDannError(
+					"CloneNotSupportedException caught but not expected",
+					caught);
 		}
 	}
 
-	public void mutate()
-	{
+	public void mutate() {
 		final Set<AbstractKey> allKeys = new HashSet<AbstractKey>();
-		for(final Chromosome chromosome : this.chromosomes)
+		for (final Chromosome chromosome : this.chromosomes)
 			allKeys.addAll(chromosome.getKeys());
 
-		for(final Chromosome chromosome : this.chromosomes)
+		for (final Chromosome chromosome : this.chromosomes)
 			chromosome.mutate(allKeys);
 	}
 
-	public void mutate(final Set<AbstractKey> keyPool)
-	{
+	public void mutate(final Set<AbstractKey> keyPool) {
 		final Set<AbstractKey> allKeys = new HashSet<AbstractKey>(keyPool);
-		for(final Chromosome chromosome : this.chromosomes)
+		for (final Chromosome chromosome : this.chromosomes)
 			allKeys.addAll(chromosome.getKeys());
 
-		for(final Chromosome chromosome : this.chromosomes)
+		for (final Chromosome chromosome : this.chromosomes)
 			chromosome.mutate(allKeys);
 	}
 
-	Set<SignalKey> getExpressedSignals(final boolean external)
-	{
+	Set<SignalKey> getExpressedSignals(final boolean external) {
 		final Set<SignalKey> allSignals = new HashSet<SignalKey>();
-		for(final Chromosome chromosome : this.chromosomes)
+		for (final Chromosome chromosome : this.chromosomes)
 			allSignals.addAll(chromosome.getExpressedSignals(external));
 		return Collections.unmodifiableSet(allSignals);
 	}

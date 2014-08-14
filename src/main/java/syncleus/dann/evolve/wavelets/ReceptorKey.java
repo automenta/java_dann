@@ -21,57 +21,49 @@ package syncleus.dann.evolve.wavelets;
 import java.util.Map;
 import java.util.Map.Entry;
 
-public class ReceptorKey extends AbstractKey
-{
-	public ReceptorKey()
-	{
+public class ReceptorKey extends AbstractKey {
+	public ReceptorKey() {
 		super();
 	}
 
-	public ReceptorKey(final AbstractKey copy)
-	{
+	public ReceptorKey(final AbstractKey copy) {
 		super(copy);
 	}
 
-	public ReceptorKey(final Map<Integer, Boolean> points)
-	{
+	public ReceptorKey(final Map<Integer, Boolean> points) {
 		super(points);
 	}
 
-	public ReceptorKey(final String keyString)
-	{
+	public ReceptorKey(final String keyString) {
 		super(keyString);
 	}
 
-	public boolean binds(final SignalKey signal)
-	{
-		if( signal.getPoints().size() < this.getPoints().size() )
+	public boolean binds(final SignalKey signal) {
+		if (signal.getPoints().size() < this.getPoints().size())
 			return false;
 
 		boolean matching;
-		for(final Integer offsetPoint : signal.getPoints().keySet())
-		{
+		for (final Integer offsetPoint : signal.getPoints().keySet()) {
 			matching = true;
 			Integer offset = null;
-			for(final Entry<Integer, Boolean> point : this.getPoints().entrySet())
-			{
-				if( offset == null )
+			for (final Entry<Integer, Boolean> point : this.getPoints()
+					.entrySet()) {
+				if (offset == null)
 					offset = offsetPoint - point.getKey();
 
-				final Boolean bindingValue = signal.getPoints().get(point.getKey() + offset);
-				if( bindingValue == null )
-				{
+				final Boolean bindingValue = signal.getPoints().get(
+						point.getKey() + offset);
+				if (bindingValue == null) {
 					matching = false;
 					break;
-				}
-				else if( bindingValue.booleanValue() != point.getValue().booleanValue() )
-				{
+				} else if (bindingValue.booleanValue() != point.getValue()
+						.booleanValue()) {
 					matching = false;
 					break;
 				}
 			}
 
-			if( matching )
+			if (matching)
 				return true;
 		}
 
@@ -79,14 +71,12 @@ public class ReceptorKey extends AbstractKey
 	}
 
 	@Override
-	public ReceptorKey clone()
-	{
+	public ReceptorKey clone() {
 		return (ReceptorKey) super.clone();
 	}
 
 	@Override
-	public ReceptorKey mutate(final double deviation)
-	{
+	public ReceptorKey mutate(final double deviation) {
 		return (ReceptorKey) super.mutate(deviation);
 	}
 }

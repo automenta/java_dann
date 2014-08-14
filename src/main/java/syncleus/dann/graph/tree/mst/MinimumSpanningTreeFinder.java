@@ -24,10 +24,11 @@ import syncleus.dann.graph.Edge;
 import syncleus.dann.graph.Graph;
 
 /**
- * @param <N> The node type
- * @param <E> The type of edge for the given node type
+ * @param <N>
+ *            The node type
+ * @param <E>
+ *            The type of edge for the given node type
  */
-public interface MinimumSpanningTreeFinder<N, E extends Edge<N>>
-{
+public interface MinimumSpanningTreeFinder<N, E extends Edge<N>> {
 	Set<E> findMinimumSpanningTree(Graph<N, E> graph);
 }

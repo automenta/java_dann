@@ -20,8 +20,7 @@ package syncleus.dann.math.counting;
 
 import java.math.BigInteger;
 
-public abstract class AbstractPermutationCounter implements Counter
-{
+public abstract class AbstractPermutationCounter implements Counter {
 	private final int setSize;
 	private final int permutationSize;
 	private final BigInteger permutationsPerCombination;
@@ -32,13 +31,15 @@ public abstract class AbstractPermutationCounter implements Counter
 	private BigInteger combinationPermutationsRemaining;
 	private BigInteger remaining;
 
-	protected AbstractPermutationCounter(final int setSize, final int permutationSize)
-	{
-		if( permutationSize > setSize )
-			throw new IllegalArgumentException("permutationSize can not be larger than setSize");
-		if( permutationSize < 0 )
-			throw new IllegalArgumentException("permutation size must be larger than 0");
-		if( setSize < 0 )
+	protected AbstractPermutationCounter(final int setSize,
+			final int permutationSize) {
+		if (permutationSize > setSize)
+			throw new IllegalArgumentException(
+					"permutationSize can not be larger than setSize");
+		if (permutationSize < 0)
+			throw new IllegalArgumentException(
+					"permutation size must be larger than 0");
+		if (setSize < 0)
 			throw new IllegalArgumentException("setSize must be greater than 0");
 
 		this.setSize = setSize;
@@ -46,13 +47,15 @@ public abstract class AbstractPermutationCounter implements Counter
 		this.combinations = new CombinationCounter(setSize, permutationSize);
 
 		this.permutation = new int[permutationSize];
-		this.permutationsPerCombination = CombinationCounter.calculateFactorial(permutationSize);
-		this.total = (permutationSize == 0 || setSize == 0 ? BigInteger.ZERO : this.combinations.getTotal().multiply(this.permutationsPerCombination));
+		this.permutationsPerCombination = CombinationCounter
+				.calculateFactorial(permutationSize);
+		this.total = (permutationSize == 0 || setSize == 0 ? BigInteger.ZERO
+				: this.combinations.getTotal().multiply(
+						this.permutationsPerCombination));
 	}
 
 	@Override
-	public void reset()
-	{
+	public void reset() {
 		this.resetPermutations();
 
 		this.combinations.reset();
@@ -60,80 +63,72 @@ public abstract class AbstractPermutationCounter implements Counter
 		this.combination = this.combinations.getNext();
 	}
 
-	protected void resetPermutations()
-	{
-		for(int i = 0; i < this.permutationSize; i++)
-		{
+	protected void resetPermutations() {
+		for (int i = 0; i < this.permutationSize; i++) {
 			this.permutation[i] = i;
 		}
 		this.combinationPermutationsRemaining = this.permutationsPerCombination;
 	}
 
 	@Override
-	public BigInteger getRemaining()
-	{
+	public BigInteger getRemaining() {
 		return this.remaining;
 	}
 
 	@Override
-	public BigInteger getTotal()
-	{
+	public BigInteger getTotal() {
 		return this.total;
 	}
 
 	@Override
-	public boolean hasMore()
-	{
+	public boolean hasMore() {
 		return remaining.compareTo(BigInteger.ZERO) == 1;
 	}
 
-	private static int[] permutateCombination(final int[] combination, final int[] permutation)
-	{
+	private static int[] permutateCombination(final int[] combination,
+			final int[] permutation) {
 		final int[] permutated = new int[combination.length];
 		int permutatedIndex = 0;
-		for(final int combinationIndex : permutation)
+		for (final int combinationIndex : permutation)
 			permutated[permutatedIndex++] = combination[combinationIndex];
 		return permutated;
 	}
 
 	@Override
-	public int[] getNext()
-	{
-		if( !this.hasMore() )
+	public int[] getNext() {
+		if (!this.hasMore())
 			return null;
 
-		if( this.combinationPermutationsRemaining.equals(BigInteger.ZERO) )
-		{
+		if (this.combinationPermutationsRemaining.equals(BigInteger.ZERO)) {
 			this.combination = this.combinations.getNext();
 			this.resetPermutations();
 		}
 
-		if( this.combinationPermutationsRemaining.equals(this.permutationsPerCombination) )
-		{
+		if (this.combinationPermutationsRemaining
+				.equals(this.permutationsPerCombination)) {
 			this.remaining = remaining.subtract(BigInteger.ONE);
-			this.combinationPermutationsRemaining = combinationPermutationsRemaining.subtract(BigInteger.ONE);
+			this.combinationPermutationsRemaining = combinationPermutationsRemaining
+					.subtract(BigInteger.ONE);
 			return permutateCombination(this.combination, this.permutation);
 		}
 
 		assert next();
 
-		this.combinationPermutationsRemaining = this.combinationPermutationsRemaining.subtract(BigInteger.ONE);
+		this.combinationPermutationsRemaining = this.combinationPermutationsRemaining
+				.subtract(BigInteger.ONE);
 		this.remaining = this.remaining.subtract(BigInteger.ONE);
 		return permutateCombination(this.combination, this.permutation);
 	}
 
-	public int getSetSize()
-	{
+	public int getSetSize() {
 		return this.setSize;
 	}
 
-	public int getPermutationSize()
-	{
+	public int getPermutationSize() {
 		return this.permutationSize;
 	}
 
-	protected int[] getPermutation()
-	{
+	protected int[] getPermutation() {
 		return permutation;
 	}
 

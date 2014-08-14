@@ -28,16 +28,25 @@ import syncleus.dann.neural.som.SomInputNeuron;
 import syncleus.dann.neural.som.SomNeuron;
 import syncleus.dann.neural.som.SomOutputNeuron;
 
-public interface SomBrain<IN extends SomInputNeuron, ON extends SomOutputNeuron, N extends SomNeuron, S extends Synapse<N>> extends Brain<IN, ON, N, S>
-{
+public interface SomBrain<IN extends SomInputNeuron, ON extends SomOutputNeuron, N extends SomNeuron, S extends Synapse<N>>
+		extends Brain<IN, ON, N, S> {
 	void createOutput(final Vector position);
+
 	Set<Vector> getPositions();
+
 	double getOutput(final Vector position);
+
 	Vector getBestMatchingUnit();
+
 	Vector getBestMatchingUnit(final boolean train);
+
 	int getIterationsTrained();
+
 	int getInputCount();
+
 	void setInput(final int inputIndex, final double inputValue);
+
 	double getInput(final int index);
+
 	Map<Vector, double[]> getOutputWeightVectors();
 }

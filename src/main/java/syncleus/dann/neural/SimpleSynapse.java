@@ -28,74 +28,85 @@ import java.util.List;
  * @see com.syncleus.dann.neural.Neuron
  * @since 1.0
  */
-public final class SimpleSynapse<N> extends AbstractSynapse<N>
-{
+public final class SimpleSynapse<N> extends AbstractSynapse<N> {
 	private static final long serialVersionUID = -209835498037456098L;
+
 	/**
 	 * Creates a new instance of SimpleSynapse.
 	 *
-	 * @param sourceToSet The incoming neuron connection.
-	 * @param destinationToSet The outgoing neuron connection.
-	 * @param initialWeight The initial weight of the synapse
+	 * @param sourceToSet
+	 *            The incoming neuron connection.
+	 * @param destinationToSet
+	 *            The outgoing neuron connection.
+	 * @param initialWeight
+	 *            The initial weight of the synapse
 	 * @since 1.0
 	 */
-	public SimpleSynapse(final N sourceToSet, final N destinationToSet, final double initialWeight)
-	{
+	public SimpleSynapse(final N sourceToSet, final N destinationToSet,
+			final double initialWeight) {
 		super(sourceToSet, destinationToSet, initialWeight);
 	}
 
 	/**
 	 * Creates a new instance of SimpleSynapse.
 	 *
-	 * @param sourceToSet The incoming neuron connection.
-	 * @param destinationToSet The outgoing neuron connection.
+	 * @param sourceToSet
+	 *            The incoming neuron connection.
+	 * @param destinationToSet
+	 *            The outgoing neuron connection.
 	 * @since 1.0
 	 */
-	public SimpleSynapse(final N sourceToSet, final N destinationToSet)
-	{
+	public SimpleSynapse(final N sourceToSet, final N destinationToSet) {
 		super(sourceToSet, destinationToSet);
 	}
 
 	/**
 	 * Creates a new instance of SimpleSynapse.
 	 *
-	 * @param sourceToSet The incoming neuron connection.
-	 * @param destinationToSet The outgoing neuron connection.
-	 * @param initialWeight The initial weight of the synapse
+	 * @param sourceToSet
+	 *            The incoming neuron connection.
+	 * @param destinationToSet
+	 *            The outgoing neuron connection.
+	 * @param initialWeight
+	 *            The initial weight of the synapse
 	 * @since 1.0
 	 */
-	public SimpleSynapse(final N sourceToSet, final N destinationToSet, final double initialWeight, final boolean allowJoiningMultipleGraphs, final boolean contextEnabled)
-	{
-		super(sourceToSet, destinationToSet, initialWeight, allowJoiningMultipleGraphs, contextEnabled);
+	public SimpleSynapse(final N sourceToSet, final N destinationToSet,
+			final double initialWeight,
+			final boolean allowJoiningMultipleGraphs,
+			final boolean contextEnabled) {
+		super(sourceToSet, destinationToSet, initialWeight,
+				allowJoiningMultipleGraphs, contextEnabled);
 	}
 
 	/**
 	 * Creates a new instance of SimpleSynapse.
 	 *
-	 * @param sourceToSet The incoming neuron connection.
-	 * @param destinationToSet The outgoing neuron connection.
+	 * @param sourceToSet
+	 *            The incoming neuron connection.
+	 * @param destinationToSet
+	 *            The outgoing neuron connection.
 	 * @since 1.0
 	 */
-	public SimpleSynapse(final N sourceToSet, final N destinationToSet, final boolean allowJoiningMultipleGraphs, final boolean contextEnabled)
-	{
-		super(sourceToSet, destinationToSet, allowJoiningMultipleGraphs, contextEnabled);
+	public SimpleSynapse(final N sourceToSet, final N destinationToSet,
+			final boolean allowJoiningMultipleGraphs,
+			final boolean contextEnabled) {
+		super(sourceToSet, destinationToSet, allowJoiningMultipleGraphs,
+				contextEnabled);
 	}
 
 	@Override
-	public SimpleSynapse<N> disconnect(final N node)
-	{
+	public SimpleSynapse<N> disconnect(final N node) {
 		return (SimpleSynapse<N>) super.disconnect(node);
 	}
 
 	@Override
-	public SimpleSynapse<N> disconnect(final List<N> nodes)
-	{
+	public SimpleSynapse<N> disconnect(final List<N> nodes) {
 		return (SimpleSynapse<N>) super.disconnect(nodes);
 	}
 
 	@Override
-	public SimpleSynapse<N> clone()
-	{
+	public SimpleSynapse<N> clone() {
 		return (SimpleSynapse<N>) super.clone();
 	}
 }

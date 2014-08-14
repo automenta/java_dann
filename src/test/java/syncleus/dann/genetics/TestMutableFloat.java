@@ -18,57 +18,59 @@
  ******************************************************************************/
 package syncleus.dann.genetics;
 
-import syncleus.dann.evolve.MutableFloat;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class TestMutableFloat
-{
+import syncleus.dann.evolve.MutableFloat;
+
+public class TestMutableFloat {
 	@Test
-	public void testConstructors()
-	{
+	public void testConstructors() {
 		MutableFloat test = new MutableFloat(123f);
-		Assert.assertTrue("value constructor failed", Math.abs(test.getNumber() - 123f) < (float) 0.000001);
+		Assert.assertTrue("value constructor failed",
+				Math.abs(test.getNumber() - 123f) < (float) 0.000001);
 		test = new MutableFloat("456");
-		Assert.assertTrue("string value constructor failed", Math.abs(test.getNumber() - 456f) < (float) 0.000001);
+		Assert.assertTrue("string value constructor failed",
+				Math.abs(test.getNumber() - 456f) < (float) 0.000001);
 		test = new MutableFloat(789f);
-		Assert.assertTrue("Number value constructor failed", Math.abs(test.getNumber() - 789f) < (float) 0.000001);
+		Assert.assertTrue("Number value constructor failed",
+				Math.abs(test.getNumber() - 789f) < (float) 0.000001);
 	}
 
 	@Test
-	public void testMax()
-	{
+	public void testMax() {
 		final MutableFloat highValue = new MutableFloat(Float.MAX_VALUE);
 
-		for(int testCount = 0; testCount < 1000; testCount++)
-		{
+		for (int testCount = 0; testCount < 1000; testCount++) {
 			final MutableFloat mutated = highValue.mutate(100.0);
 
-			Assert.assertTrue("mutation caused number to roll over: " + mutated, (mutated.floatValue() != Float.POSITIVE_INFINITY) && (mutated.floatValue() != Float.NEGATIVE_INFINITY));
+			Assert.assertTrue(
+					"mutation caused number to roll over: " + mutated,
+					(mutated.floatValue() != Float.POSITIVE_INFINITY)
+							&& (mutated.floatValue() != Float.NEGATIVE_INFINITY));
 		}
 	}
 
 	@Test
-	public void testMin()
-	{
+	public void testMin() {
 		final MutableFloat lowValue = new MutableFloat(Float.MAX_VALUE * -1f);
 
-		for(int testCount = 0; testCount < 1000; testCount++)
-		{
+		for (int testCount = 0; testCount < 1000; testCount++) {
 			final MutableFloat mutated = lowValue.mutate(100.0);
 
-			Assert.assertTrue("mutation caused number to roll over: " + mutated, (mutated.floatValue() != Float.POSITIVE_INFINITY) && (mutated.floatValue() != Float.NEGATIVE_INFINITY));
+			Assert.assertTrue(
+					"mutation caused number to roll over: " + mutated,
+					(mutated.floatValue() != Float.POSITIVE_INFINITY)
+							&& (mutated.floatValue() != Float.NEGATIVE_INFINITY));
 		}
 	}
 
 	@Test
-	public void testDeviation()
-	{
+	public void testDeviation() {
 		final MutableFloat center = new MutableFloat(0);
 		double averageSum = 0;
 		double testCount;
-		for(testCount = 0.0; testCount < 10000; testCount++)
-		{
+		for (testCount = 0.0; testCount < 10000; testCount++) {
 			averageSum += center.mutate(1.0).floatValue();
 		}
 		final double average = averageSum / testCount;

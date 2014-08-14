@@ -18,8 +18,6 @@
  ******************************************************************************/
 package syncleus.dann.graph.tree.mst;
 
-import syncleus.dann.graph.tree.mst.PrimMinimumSpanningTreeFinder;
-import syncleus.dann.graph.tree.mst.RootedMinimumSpanningTreeFinder;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -39,13 +37,12 @@ import syncleus.dann.graph.cycle.ColoredDepthFirstSearchDetector;
 import syncleus.dann.graph.cycle.CycleDetector;
 import syncleus.dann.graph.topological.Topography;
 
-public class TestPrimMinimumSpanningTreeFinder
-{
-	private static final Logger LOGGER = LogManager.getLogger(TestPrimMinimumSpanningTreeFinder.class);
+public class TestPrimMinimumSpanningTreeFinder {
+	private static final Logger LOGGER = LogManager
+			.getLogger(TestPrimMinimumSpanningTreeFinder.class);
 
 	@Test
-	public void testUndirected()
-	{
+	public void testUndirected() {
 		final Set<Object> nodes = new HashSet<Object>();
 		final Object centerNode = "centerNode";
 		nodes.add(centerNode);
@@ -57,36 +54,49 @@ public class TestPrimMinimumSpanningTreeFinder
 		nodes.add(rightNode);
 
 		final Set<BidirectedEdge<Object>> edges = new HashSet<BidirectedEdge<Object>>();
-		final BidirectedEdge<Object> centerTopEdge = new ImmutableUndirectedEdge<Object>(centerNode, topNode);
+		final BidirectedEdge<Object> centerTopEdge = new ImmutableUndirectedEdge<Object>(
+				centerNode, topNode);
 		edges.add(centerTopEdge);
-		final BidirectedEdge<Object> centerLeftEdge = new ImmutableUndirectedEdge<Object>(centerNode, leftNode);
+		final BidirectedEdge<Object> centerLeftEdge = new ImmutableUndirectedEdge<Object>(
+				centerNode, leftNode);
 		edges.add(centerLeftEdge);
-		final BidirectedEdge<Object> centerRightEdge = new ImmutableUndirectedEdge<Object>(centerNode, rightNode);
+		final BidirectedEdge<Object> centerRightEdge = new ImmutableUndirectedEdge<Object>(
+				centerNode, rightNode);
 		edges.add(centerRightEdge);
-		final BidirectedEdge<Object> topRightEdge = new ImmutableUndirectedEdge<Object>(topNode, rightNode);
+		final BidirectedEdge<Object> topRightEdge = new ImmutableUndirectedEdge<Object>(
+				topNode, rightNode);
 		edges.add(topRightEdge);
-		final BidirectedEdge<Object> rightLeftEdge = new ImmutableUndirectedEdge<Object>(rightNode, leftNode);
+		final BidirectedEdge<Object> rightLeftEdge = new ImmutableUndirectedEdge<Object>(
+				rightNode, leftNode);
 		edges.add(rightLeftEdge);
-		final BidirectedEdge<Object> leftTopEdge = new ImmutableUndirectedEdge<Object>(leftNode, topNode);
+		final BidirectedEdge<Object> leftTopEdge = new ImmutableUndirectedEdge<Object>(
+				leftNode, topNode);
 		edges.add(leftTopEdge);
 
-		final Graph<Object, BidirectedEdge<Object>> graph = new ImmutableAdjacencyGraph<Object, BidirectedEdge<Object>>(nodes, edges);
+		final Graph<Object, BidirectedEdge<Object>> graph = new ImmutableAdjacencyGraph<Object, BidirectedEdge<Object>>(
+				nodes, edges);
 
 		final RootedMinimumSpanningTreeFinder<Object, BidirectedEdge<Object>> finder = new PrimMinimumSpanningTreeFinder<Object, BidirectedEdge<Object>>();
-		final Set<BidirectedEdge<Object>> mstEdges = finder.findMinimumSpanningTree(graph);
-		final TreeGraph<Object, BidirectedEdge<Object>> mst = new ImmutableTreeAdjacencyGraph<Object, BidirectedEdge<Object>>(graph.getNodes(), mstEdges);
+		final Set<BidirectedEdge<Object>> mstEdges = finder
+				.findMinimumSpanningTree(graph);
+		final TreeGraph<Object, BidirectedEdge<Object>> mst = new ImmutableTreeAdjacencyGraph<Object, BidirectedEdge<Object>>(
+				graph.getNodes(), mstEdges);
 
 		LOGGER.info("mst edges:");
-		for(final Edge edge : mst.getEdges())
+		for (final Edge edge : mst.getEdges())
 			LOGGER.info(edge);
 
 		final CycleDetector detector = new ColoredDepthFirstSearchDetector();
 		LOGGER.info("mst is cyclic: " + detector.hasCycle(mst));
 		LOGGER.info("mst is connected: " + Topography.isStronglyConnected(mst));
-		LOGGER.info("mst is contains all nodes: " + mst.getNodes().containsAll(graph.getNodes()));
+		LOGGER.info("mst is contains all nodes: "
+				+ mst.getNodes().containsAll(graph.getNodes()));
 
 		Assert.assertTrue("mst was not acyclic", !detector.hasCycle(mst));
-		Assert.assertTrue("mst was not connected", Topography.isStronglyConnected(mst));
-		Assert.assertTrue("mst did not contain all the nodes of the paret graph", mst.getNodes().containsAll(graph.getNodes()));
+		Assert.assertTrue("mst was not connected",
+				Topography.isStronglyConnected(mst));
+		Assert.assertTrue(
+				"mst did not contain all the nodes of the paret graph", mst
+						.getNodes().containsAll(graph.getNodes()));
 	}
 }

@@ -18,7 +18,6 @@
  ******************************************************************************/
 package syncleus.dann.neural.backprop;
 
-import syncleus.dann.neural.backprop.SimpleOutputBackpropNeuron;
 import java.util.ArrayList;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -30,7 +29,7 @@ import org.junit.Test;
 import syncleus.dann.DannException;
 import syncleus.dann.neural.InputNeuron;
 import syncleus.dann.neural.OutputNeuron;
-import syncleus.dann.neural.activation.ActivationFunction;
+import syncleus.dann.neural.activation.DannActivationFunction;
 import syncleus.dann.neural.activation.SineActivationFunction;
 import syncleus.dann.neural.backprop.brain.FullyConnectedFeedforwardBrain;
 
@@ -42,8 +41,7 @@ import syncleus.dann.neural.backprop.brain.FullyConnectedFeedforwardBrain;
  *
  * @author Jeffrey Phillips Freeman
  */
-public class TestXor
-{
+public class TestXor {
 	private InputNeuron inputA = null;
 	private InputNeuron inputB = null;
 	private InputNeuron inputC = null;
@@ -51,133 +49,159 @@ public class TestXor
 	private FullyConnectedFeedforwardBrain brain = null;
 	private static final int TRAINING_CYCLES = 1000;
 	private static final double LEARNING_RATE = 0.0175;
-	private static final int[] TOPOLOGY = {3, 3, 1};
+	private static final int[] TOPOLOGY = { 3, 3, 1 };
 
 	@Test
-	public void testXor() throws DannException
-	{
-		//Adjust the learning rate
-		final ActivationFunction activationFunction = new SineActivationFunction();
+	public void testXor() throws DannException {
+		// Adjust the learning rate
+		final DannActivationFunction activationFunction = new SineActivationFunction();
 
 		final int cores = Runtime.getRuntime().availableProcessors();
-		final ThreadPoolExecutor executor = new ThreadPoolExecutor(cores + 1, cores * 2, 20, TimeUnit.SECONDS, new LinkedBlockingQueue());
-		try
-		{
-			this.brain = new FullyConnectedFeedforwardBrain(TOPOLOGY, LEARNING_RATE, activationFunction, executor);
-			final ArrayList<InputNeuron> inputs = new ArrayList<InputNeuron>(this.brain.getInputNeurons());
+		final ThreadPoolExecutor executor = new ThreadPoolExecutor(cores + 1,
+				cores * 2, 20, TimeUnit.SECONDS, new LinkedBlockingQueue());
+		try {
+			this.brain = new FullyConnectedFeedforwardBrain(TOPOLOGY,
+					LEARNING_RATE, activationFunction, executor);
+			final ArrayList<InputNeuron> inputs = new ArrayList<InputNeuron>(
+					this.brain.getInputNeurons());
 			this.inputA = inputs.get(0);
 			this.inputB = inputs.get(1);
 			this.inputC = inputs.get(2);
-			final ArrayList<OutputNeuron> outputs = new ArrayList<OutputNeuron>(this.brain.getOutputNeurons());
+			final ArrayList<OutputNeuron> outputs = new ArrayList<OutputNeuron>(
+					this.brain.getOutputNeurons());
 			this.output = (SimpleOutputBackpropNeuron) outputs.get(0);
 
 			train(TRAINING_CYCLES);
 
 			checkOutput();
-		}
-		finally
-		{
+		} finally {
 			executor.shutdown();
 		}
 	}
 
-	private void propogateOutput()
-	{
+	private void propogateOutput() {
 		this.brain.propagate();
 	}
 
-	private void backPropogateTraining()
-	{
+	private void backPropogateTraining() {
 		this.brain.backPropagate();
 	}
 
-	private void setCurrentInput(final double[] inputToSet)
-	{
+	private void setCurrentInput(final double[] inputToSet) {
 		inputA.setInput(inputToSet[0]);
 		inputB.setInput(inputToSet[1]);
 		inputC.setInput(inputToSet[2]);
 	}
 
-	private static boolean checkTruthTable(final double in1, final double in2, final double in3, final double result)
-	{
-		if( ((in1 > 0.0) && (in2 <= 0.0) && (in3 <= 0.0)) ||
-				((in1 <= 0.0) && (in2 > 0.0) && (in3 <= 0.0)) ||
-				((in1 <= 0.0) && (in2 <= 0.0) && (in3 > 0.0))
-				)
+	private static boolean checkTruthTable(final double in1, final double in2,
+			final double in3, final double result) {
+		if (((in1 > 0.0) && (in2 <= 0.0) && (in3 <= 0.0))
+				|| ((in1 <= 0.0) && (in2 > 0.0) && (in3 <= 0.0))
+				|| ((in1 <= 0.0) && (in2 <= 0.0) && (in3 > 0.0)))
 			return (result > 0.0);
 		else
 			return (result <= 0.0);
 	}
 
-	private void checkOutput()
-	{
-		final double[] curInput =
-				{
-						-1, -1, -1
-				};
+	private void checkOutput() {
+		final double[] curInput = { -1, -1, -1 };
 		setCurrentInput(curInput);
 		propogateOutput();
-		Assert.assertTrue("Failed Truth Table: curInput[0]:" + curInput[0] + " curInput[1]:" + curInput[1] + " curInput[2]:" + curInput[2] + " result:" + output.getOutput(), checkTruthTable(curInput[0], curInput[1], curInput[2], output.getOutput()));
-
+		Assert.assertTrue(
+				"Failed Truth Table: curInput[0]:" + curInput[0]
+						+ " curInput[1]:" + curInput[1] + " curInput[2]:"
+						+ curInput[2] + " result:" + output.getOutput(),
+				checkTruthTable(curInput[0], curInput[1], curInput[2],
+						output.getOutput()));
 
 		curInput[0] = 1;
 		curInput[1] = -1;
 		curInput[2] = -1;
 		setCurrentInput(curInput);
 		propogateOutput();
-		Assert.assertTrue("Failed Truth Table: curInput[0]:" + curInput[0] + " curInput[1]:" + curInput[1] + " curInput[2]:" + curInput[2] + " result:" + output.getOutput(), checkTruthTable(curInput[0], curInput[1], curInput[2], output.getOutput()));
+		Assert.assertTrue(
+				"Failed Truth Table: curInput[0]:" + curInput[0]
+						+ " curInput[1]:" + curInput[1] + " curInput[2]:"
+						+ curInput[2] + " result:" + output.getOutput(),
+				checkTruthTable(curInput[0], curInput[1], curInput[2],
+						output.getOutput()));
 
 		curInput[0] = -1;
 		curInput[1] = 1;
 		curInput[2] = -1;
 		setCurrentInput(curInput);
 		propogateOutput();
-		Assert.assertTrue("Failed Truth Table: curInput[0]:" + curInput[0] + " curInput[1]:" + curInput[1] + " curInput[2]:" + curInput[2] + " result:" + output.getOutput(), checkTruthTable(curInput[0], curInput[1], curInput[2], output.getOutput()));
+		Assert.assertTrue(
+				"Failed Truth Table: curInput[0]:" + curInput[0]
+						+ " curInput[1]:" + curInput[1] + " curInput[2]:"
+						+ curInput[2] + " result:" + output.getOutput(),
+				checkTruthTable(curInput[0], curInput[1], curInput[2],
+						output.getOutput()));
 
 		curInput[0] = -1;
 		curInput[1] = -1;
 		curInput[2] = 1;
 		setCurrentInput(curInput);
 		propogateOutput();
-		Assert.assertTrue("Failed Truth Table: curInput[0]:" + curInput[0] + " curInput[1]:" + curInput[1] + " curInput[2]:" + curInput[2] + " result:" + output.getOutput(), checkTruthTable(curInput[0], curInput[1], curInput[2], output.getOutput()));
+		Assert.assertTrue(
+				"Failed Truth Table: curInput[0]:" + curInput[0]
+						+ " curInput[1]:" + curInput[1] + " curInput[2]:"
+						+ curInput[2] + " result:" + output.getOutput(),
+				checkTruthTable(curInput[0], curInput[1], curInput[2],
+						output.getOutput()));
 
 		curInput[0] = 1;
 		curInput[1] = 1;
 		curInput[2] = -1;
 		setCurrentInput(curInput);
 		propogateOutput();
-		Assert.assertTrue("Failed Truth Table: curInput[0]:" + curInput[0] + " curInput[1]:" + curInput[1] + " curInput[2]:" + curInput[2] + " result:" + output.getOutput(), checkTruthTable(curInput[0], curInput[1], curInput[2], output.getOutput()));
+		Assert.assertTrue(
+				"Failed Truth Table: curInput[0]:" + curInput[0]
+						+ " curInput[1]:" + curInput[1] + " curInput[2]:"
+						+ curInput[2] + " result:" + output.getOutput(),
+				checkTruthTable(curInput[0], curInput[1], curInput[2],
+						output.getOutput()));
 
 		curInput[0] = -1;
 		curInput[1] = 1;
 		curInput[2] = 1;
 		setCurrentInput(curInput);
 		propogateOutput();
-		Assert.assertTrue("Failed Truth Table: curInput[0]:" + curInput[0] + " curInput[1]:" + curInput[1] + " curInput[2]:" + curInput[2] + " result:" + output.getOutput(), checkTruthTable(curInput[0], curInput[1], curInput[2], output.getOutput()));
+		Assert.assertTrue(
+				"Failed Truth Table: curInput[0]:" + curInput[0]
+						+ " curInput[1]:" + curInput[1] + " curInput[2]:"
+						+ curInput[2] + " result:" + output.getOutput(),
+				checkTruthTable(curInput[0], curInput[1], curInput[2],
+						output.getOutput()));
 
 		curInput[0] = 1;
 		curInput[1] = -1;
 		curInput[2] = 1;
 		setCurrentInput(curInput);
 		propogateOutput();
-		Assert.assertTrue("Failed Truth Table: curInput[0]:" + curInput[0] + " curInput[1]:" + curInput[1] + " curInput[2]:" + curInput[2] + " result:" + output.getOutput(), checkTruthTable(curInput[0], curInput[1], curInput[2], output.getOutput()));
+		Assert.assertTrue(
+				"Failed Truth Table: curInput[0]:" + curInput[0]
+						+ " curInput[1]:" + curInput[1] + " curInput[2]:"
+						+ curInput[2] + " result:" + output.getOutput(),
+				checkTruthTable(curInput[0], curInput[1], curInput[2],
+						output.getOutput()));
 
 		curInput[0] = 1;
 		curInput[1] = 1;
 		curInput[2] = 1;
 		setCurrentInput(curInput);
 		propogateOutput();
-		Assert.assertTrue("Failed Truth Table: curInput[0]:" + curInput[0] + " curInput[1]:" + curInput[1] + " curInput[2]:" + curInput[2] + " result:" + output.getOutput(), checkTruthTable(curInput[0], curInput[1], curInput[2], output.getOutput()));
+		Assert.assertTrue(
+				"Failed Truth Table: curInput[0]:" + curInput[0]
+						+ " curInput[1]:" + curInput[1] + " curInput[2]:"
+						+ curInput[2] + " result:" + output.getOutput(),
+				checkTruthTable(curInput[0], curInput[1], curInput[2],
+						output.getOutput()));
 	}
 
-	private void train(final int count)
-	{
-		for(int lcv = 0; lcv < count; lcv++)
-		{
-			final double[] curInput =
-					{
-							-1, -1, -1
-					};
+	private void train(final int count) {
+		for (int lcv = 0; lcv < count; lcv++) {
+			final double[] curInput = { -1, -1, -1 };
 			double curTrain = -1;
 			setCurrentInput(curInput);
 			propogateOutput();

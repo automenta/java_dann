@@ -20,8 +20,7 @@ package syncleus.dann.graph.search.pathfinding;
 
 import syncleus.dann.DannRuntimeException;
 
-public class NegativeWeightCycleException extends DannRuntimeException
-{
+public class NegativeWeightCycleException extends DannRuntimeException {
 	private static final long serialVersionUID = -3399414912478441842L;
 
 	/**
@@ -29,19 +28,18 @@ public class NegativeWeightCycleException extends DannRuntimeException
 	 *
 	 * @since 2.0
 	 */
-	public NegativeWeightCycleException()
-	{
+	public NegativeWeightCycleException() {
 		super();
 	}
 
 	/**
 	 * Creates an exception with a message describing the cause.
 	 *
-	 * @param msg A string describing the cause of the exception
+	 * @param msg
+	 *            A string describing the cause of the exception
 	 * @since 2.0
 	 */
-	public NegativeWeightCycleException(final String msg)
-	{
+	public NegativeWeightCycleException(final String msg) {
 		super(msg);
 	}
 
@@ -49,24 +47,25 @@ public class NegativeWeightCycleException extends DannRuntimeException
 	 * Creates an exception with a message describing the cause as well as the
 	 * throwable which caused this exception to be thrown.
 	 *
-	 * @param msg A string describing the cause of the exception
-	 * @param cause The throwable which caused this exception
+	 * @param msg
+	 *            A string describing the cause of the exception
+	 * @param cause
+	 *            The throwable which caused this exception
 	 * @since 2.0
 	 */
-	public NegativeWeightCycleException(final String msg, final Throwable cause)
-	{
+	public NegativeWeightCycleException(final String msg, final Throwable cause) {
 		super(msg, cause);
 	}
 
 	/**
-	 * Creates an exception containing the throwable which caused this exception to
-	 * be thrown.
+	 * Creates an exception containing the throwable which caused this exception
+	 * to be thrown.
 	 *
-	 * @param cause The throwable which caused this exception
+	 * @param cause
+	 *            The throwable which caused this exception
 	 * @since 2.0
 	 */
-	public NegativeWeightCycleException(final Throwable cause)
-	{
+	public NegativeWeightCycleException(final Throwable cause) {
 		super(cause);
 	}
 }

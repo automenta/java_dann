@@ -36,82 +36,50 @@ import syncleus.dann.neural.backprop.BackpropNeuron;
 import syncleus.dann.neural.backprop.InputBackpropNeuron;
 import syncleus.dann.neural.backprop.OutputBackpropNeuron;
 
-public abstract class AbstractFeedforwardBrain<IN extends InputBackpropNeuron, ON extends OutputBackpropNeuron, N extends BackpropNeuron, S extends Synapse<N>> extends AbstractLocalBrain<IN, ON, N, S> implements FeedforwardBackpropBrain<IN, ON, N, S>
-{
+public abstract class AbstractFeedforwardBrain<IN extends InputBackpropNeuron, ON extends OutputBackpropNeuron, N extends BackpropNeuron, S extends Synapse<N>>
+		extends AbstractLocalBrain<IN, ON, N, S> implements
+		FeedforwardBackpropBrain<IN, ON, N, S> {
 	private boolean initialized = false;
 	private final List<NeuronGroup<N>> neuronLayers = new ArrayList<NeuronGroup<N>>();
 	private int layerCount;
-	private static final Logger LOGGER = LogManager.getLogger(AbstractFeedforwardBrain.class);
-
-	private static class Propagate implements Runnable
-	{
-		private final BackpropNeuron neuron;
-
-		public Propagate(final BackpropNeuron neuron)
-		{
-			this.neuron = neuron;
-		}
-
-		@Override
-		public void run()
-		{
-			this.neuron.tick();
-		}
-	}
-
-	private static class BackPropagate implements Runnable
-	{
-		private final BackpropNeuron neuron;
-
-		public BackPropagate(final BackpropNeuron neuron)
-		{
-			this.neuron = neuron;
-		}
-
-		@Override
-		public void run()
-		{
-			this.neuron.backPropagate();
-		}
-	}
+	private static final Logger LOGGER = LogManager
+			.getLogger(AbstractFeedforwardBrain.class);
 
 	/**
 	 * Uses the given threadExecutor for executing tasks.
 	 *
-	 * @param threadExecutor executor to use for executing tasks.
+	 * @param threadExecutor
+	 *            executor to use for executing tasks.
 	 * @since 2.0
 	 */
-	protected AbstractFeedforwardBrain(final ExecutorService threadExecutor)
-	{
+	protected AbstractFeedforwardBrain(final ExecutorService threadExecutor) {
 		super(threadExecutor);
 	}
 
 	/**
-	 * Default constructor initializes a default threadExecutor based on the number
-	 * of processors.
+	 * Default constructor initializes a default threadExecutor based on the
+	 * number of processors.
 	 *
 	 * @since 2.0
 	 */
-	protected AbstractFeedforwardBrain()
-	{
+	protected AbstractFeedforwardBrain() {
 		super();
 	}
 
-	protected void initalizeNetwork(final int[] neuronsPerLayer)
-	{
-		if( neuronsPerLayer.length < 2 )
-			throw new IllegalArgumentException("neuronsPerLayer must have atleast 2 elements");
+	protected void initalizeNetwork(final int[] neuronsPerLayer) {
+		if (neuronsPerLayer.length < 2)
+			throw new IllegalArgumentException(
+					"neuronsPerLayer must have atleast 2 elements");
 
 		this.layerCount = neuronsPerLayer.length;
 
-		//create each layer
+		// create each layer
 		int currentLayerCount = 0;
-		for(final int neuronCount : neuronsPerLayer)
-		{
+		for (final int neuronCount : neuronsPerLayer) {
 			final NeuronGroup<N> currentGroup = new NeuronGroup<N>();
-			for(int neuronIndex = 0; neuronIndex < neuronCount; neuronIndex++)
-			{
-				final N currentNeuron = this.createNeuron(currentLayerCount, neuronIndex);
+			for (int neuronIndex = 0; neuronIndex < neuronCount; neuronIndex++) {
+				final N currentNeuron = this.createNeuron(currentLayerCount,
+						neuronIndex);
 
 				currentGroup.add(currentNeuron);
 				this.add(currentNeuron);
@@ -131,22 +99,18 @@ public abstract class AbstractFeedforwardBrain<IN extends InputBackpropNeuron, O
 	 * @return the neuronLayers for children to use for connection.
 	 * @since 2.0
 	 */
-	protected final List<NeuronGroup<N>> getEditableLayers()
-	{
+	protected final List<NeuronGroup<N>> getEditableLayers() {
 		return this.neuronLayers;
 	}
 
 	@Override
-	public final List<Set<N>> getLayers()
-	{
+	public final List<Set<N>> getLayers() {
 		final List<Set<N>> layerList = new ArrayList<Set<N>>();
-		for(final NeuronGroup<N> layerGroup : this.neuronLayers)
-		{
-			final Set<N> layer = new HashSet<N>();                        
-			layerGroup.getChildrenNeuronsRecursivly().forEach(n ->
-                                layer.add(n)
-                        );
-                        
+		for (final NeuronGroup<N> layerGroup : this.neuronLayers) {
+			final Set<N> layer = new HashSet<N>();
+			layerGroup.getChildrenNeuronsRecursivly()
+					.forEach(n -> layer.add(n));
+
 			layerList.add(Collections.unmodifiableSet(layer));
 		}
 		return Collections.unmodifiableList(layerList);
@@ -156,97 +120,108 @@ public abstract class AbstractFeedforwardBrain<IN extends InputBackpropNeuron, O
 	 * @return the layerCount
 	 */
 	@Override
-	public final int getLayerCount()
-	{
+	public final int getLayerCount() {
 		return this.layerCount;
 	}
 
 	@Override
-	public final void propagate()
-	{
-		if( !this.initialized )
-			throw new IllegalStateException("An implementation of AbstractFeedforwardBrain did not initialize network");
-		//step forward through all the layers, except the last (output)
-		for(final NeuronGroup<N> layer : this.neuronLayers)
-		{
+	public final void propagate() {
+		if (!this.initialized)
+			throw new IllegalStateException(
+					"An implementation of AbstractFeedforwardBrain did not initialize network");
+		// step forward through all the layers, except the last (output)
+		for (final NeuronGroup<N> layer : this.neuronLayers) {
 			final Stream<N> layerNeurons = layer.getChildrenNeuronsRecursivly();
-                        layerNeurons.parallel().forEach(n -> n.tick());
-                        
-//                        if( this.getThreadExecutor() == null )
-//			{
-//				for(final syncleus.dann.neural.backprop.BackpropNeuron neuron : layerNeurons)
-//					neuron.tick();
-//			}
-//			else
-//			{
-//				//begin processing all neurons in one layer simultaniously
-//				final java.util.ArrayList<java.util.concurrent.Future> futures = new java.util.ArrayList<java.util.concurrent.Future>();
-//				for(final syncleus.dann.neural.backprop.BackpropNeuron neuron : layerNeurons)
-//					futures.add(this.getThreadExecutor().submit(new syncleus.dann.neural.backprop.brain.AbstractFeedforwardBrain.Propagate(neuron)));
-//				//wait until all neurons have propogated
-//				try
-//				{
-//					for(final java.util.concurrent.Future future : futures)
-//						future.get();
-//				}
-//				catch(final InterruptedException caught)
-//				{
-//					LOGGER.warn("Propagate was unexpectidy interupted", caught);
-//					throw new syncleus.dann.UnexpectedInterruptedException("Unexpected interuption. Get should block indefinately", caught);
-//				}
-//				catch(final java.util.concurrent.ExecutionException caught)
-//				{
-//					LOGGER.error("Propagate had an unexcepted problem executing.", caught);
-//					throw new syncleus.dann.UnexpectedDannError("Unexpected execution exception. Get should block indefinately", caught);
-//				}
-//			}
+			layerNeurons.parallel().forEach(n -> n.tick());
+
+			// if( this.getThreadExecutor() == null )
+			// {
+			// for(final syncleus.dann.neural.backprop.BackpropNeuron neuron :
+			// layerNeurons)
+			// neuron.tick();
+			// }
+			// else
+			// {
+			// //begin processing all neurons in one layer simultaniously
+			// final java.util.ArrayList<java.util.concurrent.Future> futures =
+			// new java.util.ArrayList<java.util.concurrent.Future>();
+			// for(final syncleus.dann.neural.backprop.BackpropNeuron neuron :
+			// layerNeurons)
+			// futures.add(this.getThreadExecutor().submit(new
+			// syncleus.dann.neural.backprop.brain.AbstractFeedforwardBrain.Propagate(neuron)));
+			// //wait until all neurons have propogated
+			// try
+			// {
+			// for(final java.util.concurrent.Future future : futures)
+			// future.get();
+			// }
+			// catch(final InterruptedException caught)
+			// {
+			// LOGGER.warn("Propagate was unexpectidy interupted", caught);
+			// throw new
+			// syncleus.dann.UnexpectedInterruptedException("Unexpected interuption. Get should block indefinately",
+			// caught);
+			// }
+			// catch(final java.util.concurrent.ExecutionException caught)
+			// {
+			// LOGGER.error("Propagate had an unexcepted problem executing.",
+			// caught);
+			// throw new
+			// syncleus.dann.UnexpectedDannError("Unexpected execution exception. Get should block indefinately",
+			// caught);
+			// }
+			// }
 		}
 	}
 
 	@Override
-	public final void backPropagate()
-	{
-		if( !this.initialized )
-			throw new IllegalStateException("An implementation of AbstractFeedforwardBrain did not initialize network");
+	public final void backPropagate() {
+		if (!this.initialized)
+			throw new IllegalStateException(
+					"An implementation of AbstractFeedforwardBrain did not initialize network");
 
-		//step backwards through all the layers, except the first.
-		for(int layerIndex = (this.neuronLayers.size() - 1); layerIndex >= 0; layerIndex--)
-		{
+		// step backwards through all the layers, except the first.
+		for (int layerIndex = (this.neuronLayers.size() - 1); layerIndex >= 0; layerIndex--) {
 			final NeuronGroup<N> layer = this.neuronLayers.get(layerIndex);
-			layer.getChildrenNeuronsRecursivly().parallel().forEach(n ->
-                                n.backPropagate()
-                        );
+			layer.getChildrenNeuronsRecursivly().parallel()
+					.forEach(n -> n.backPropagate());
 
-//                        
-//			if( this.getThreadExecutor() == null )
-//			{
-//				for(final BackpropNeuron neuron : layerNeurons)
-//					neuron.backPropagate();
-//			}
-//			else
-//			{
-//				//begin processing all neurons in one layer simultaniously
-//				final ArrayList<Future> futures = new ArrayList<Future>();
-//				for(final BackpropNeuron neuron : layerNeurons)
-//					futures.add(this.getThreadExecutor().submit(new BackPropagate(neuron)));
-//
-//				//wait until all neurons have backPropogated
-//				try
-//				{
-//					for(final Future future : futures)
-//						future.get();
-//				}
-//				catch(final InterruptedException caught)
-//				{
-//					LOGGER.warn("BackPropagate was unexpectidy interupted", caught);
-//					throw new UnexpectedInterruptedException("Unexpected interuption. Get should block indefinately", caught);
-//				}
-//				catch(final ExecutionException caught)
-//				{
-//					LOGGER.error("BackPropagate had an unexcepted problem executing.", caught);
-//					throw new UnexpectedDannError("Unexpected execution exception. Get should block indefinately", caught);
-//				}
-//			}
+			//
+			// if( this.getThreadExecutor() == null )
+			// {
+			// for(final BackpropNeuron neuron : layerNeurons)
+			// neuron.backPropagate();
+			// }
+			// else
+			// {
+			// //begin processing all neurons in one layer simultaniously
+			// final ArrayList<Future> futures = new ArrayList<Future>();
+			// for(final BackpropNeuron neuron : layerNeurons)
+			// futures.add(this.getThreadExecutor().submit(new
+			// BackPropagate(neuron)));
+			//
+			// //wait until all neurons have backPropogated
+			// try
+			// {
+			// for(final Future future : futures)
+			// future.get();
+			// }
+			// catch(final InterruptedException caught)
+			// {
+			// LOGGER.warn("BackPropagate was unexpectidy interupted", caught);
+			// throw new
+			// UnexpectedInterruptedException("Unexpected interuption. Get should block indefinately",
+			// caught);
+			// }
+			// catch(final ExecutionException caught)
+			// {
+			// LOGGER.error("BackPropagate had an unexcepted problem executing.",
+			// caught);
+			// throw new
+			// UnexpectedDannError("Unexpected execution exception. Get should block indefinately",
+			// caught);
+			// }
+			// }
 		}
 	}
 
@@ -254,8 +229,10 @@ public abstract class AbstractFeedforwardBrain<IN extends InputBackpropNeuron, O
 	 * Since a specific ActivationFunction or learning rate is needed then this
 	 * should be overridden in a child class.
 	 *
-	 * @param layer the current layer index for which we are creating the neuron.
-	 * @param index The index of the new neuron within the layer.
+	 * @param layer
+	 *            the current layer index for which we are creating the neuron.
+	 * @param index
+	 *            The index of the new neuron within the layer.
 	 * @return The new SimpleBackpropNeuron to be added to the current layer.
 	 * @since 2.0
 	 */

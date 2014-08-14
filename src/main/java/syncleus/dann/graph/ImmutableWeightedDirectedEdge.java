@@ -20,44 +20,41 @@ package syncleus.dann.graph;
 
 import java.util.List;
 
-public final class ImmutableWeightedDirectedEdge<N> extends AbstractDirectedEdge<N> implements WeightedDirectedEdge<N>
-{
+public final class ImmutableWeightedDirectedEdge<N> extends
+		AbstractDirectedEdge<N> implements WeightedDirectedEdge<N> {
 	private static final long serialVersionUID = -6843921044147012645L;
 	private final double weight;
 
-	public ImmutableWeightedDirectedEdge(final N source, final N destination, final double ourWeight)
-	{
+	public ImmutableWeightedDirectedEdge(final N source, final N destination,
+			final double ourWeight) {
 		super(source, destination);
 		this.weight = ourWeight;
 	}
 
-	public ImmutableWeightedDirectedEdge(final N source, final N destination, final double ourWeight, final boolean allowJoiningMultipleGraphs, final boolean contextEnabled)
-	{
+	public ImmutableWeightedDirectedEdge(final N source, final N destination,
+			final double ourWeight, final boolean allowJoiningMultipleGraphs,
+			final boolean contextEnabled) {
 		super(source, destination, allowJoiningMultipleGraphs, contextEnabled);
 		this.weight = ourWeight;
 	}
 
 	@Override
-	public double getWeight()
-	{
+	public double getWeight() {
 		return this.weight;
 	}
 
 	@Override
-	public ImmutableWeightedDirectedEdge<N> disconnect(final N node)
-	{
+	public ImmutableWeightedDirectedEdge<N> disconnect(final N node) {
 		return (ImmutableWeightedDirectedEdge<N>) super.disconnect(node);
 	}
 
 	@Override
-	public ImmutableWeightedDirectedEdge<N> disconnect(final List<N> nodes)
-	{
+	public ImmutableWeightedDirectedEdge<N> disconnect(final List<N> nodes) {
 		return (ImmutableWeightedDirectedEdge<N>) super.disconnect(nodes);
 	}
 
 	@Override
-	public ImmutableWeightedDirectedEdge<N> clone()
-	{
+	public ImmutableWeightedDirectedEdge<N> clone() {
 		return (ImmutableWeightedDirectedEdge<N>) super.clone();
 	}
 }

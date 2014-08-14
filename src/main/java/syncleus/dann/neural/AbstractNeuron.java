@@ -20,8 +20,7 @@ package syncleus.dann.neural;
 
 import java.util.Random;
 
-public abstract class AbstractNeuron implements Neuron
-{
+public abstract class AbstractNeuron implements Neuron {
 	/**
 	 * Random number generator used to produce any needed RANDOM values.
 	 *
@@ -36,15 +35,14 @@ public abstract class AbstractNeuron implements Neuron
 	 *
 	 * @since 1.0
 	 */
-	protected AbstractNeuron(final Brain<InputNeuron, OutputNeuron, Neuron, Synapse<Neuron>> brain)
-	{
-		if( brain == null )
+	protected AbstractNeuron(
+			final Brain<InputNeuron, OutputNeuron, Neuron, Synapse<Neuron>> brain) {
+		if (brain == null)
 			throw new IllegalArgumentException("brain can not be null");
 		this.brain = brain;
 	}
 
-	protected Brain<InputNeuron, OutputNeuron, Neuron, Synapse<Neuron>> getBrain()
-	{
+	protected Brain<InputNeuron, OutputNeuron, Neuron, Synapse<Neuron>> getBrain() {
 		return this.brain;
 	}
 

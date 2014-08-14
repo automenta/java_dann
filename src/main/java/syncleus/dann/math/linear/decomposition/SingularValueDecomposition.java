@@ -34,15 +34,19 @@ import syncleus.dann.math.linear.RealMatrix;
  * sigma[1] >= ... >= sigma[n-1].
  * <p/>
  * The singular value decompostion always exists, so the constructor will never
- * fail.  The matrix condition number and the effective numerical rank can be
+ * fail. The matrix condition number and the effective numerical rank can be
  * computed from this decomposition.<br/>
  */
-public interface SingularValueDecomposition extends Decomposition<RealMatrix>
-{
+public interface SingularValueDecomposition extends Decomposition<RealMatrix> {
 	RealMatrix getLeftSingularMatrix();
+
 	RealMatrix getRightSingularMatrix();
+
 	List<RealNumber> getSingularValues();
+
 	RealNumber norm2();
+
 	RealNumber norm2Condition();
+
 	int rank();
 }

@@ -27,24 +27,21 @@ import org.apache.logging.log4j.Logger;
 
 import syncleus.dann.UnexpectedDannError;
 
-public abstract class AbstractFunction implements Cloneable, Function
-{
+public abstract class AbstractFunction implements Cloneable, Function {
 	private double[] parameters;
 	private final String[] parameterNames;
 	private final Map<String, Integer> indexNames;
-	private static final Logger LOGGER = LogManager.getLogger(AbstractFunction.class);
+	private static final Logger LOGGER = LogManager
+			.getLogger(AbstractFunction.class);
 
-	protected AbstractFunction(final AbstractFunction copy)
-	{
+	protected AbstractFunction(final AbstractFunction copy) {
 		this.parameters = copy.parameters.clone();
 		this.parameterNames = copy.parameterNames;
 		this.indexNames = copy.indexNames;
 	}
 
-	protected AbstractFunction(final String[] parameterNames)
-	{
-		if( parameterNames.length <= 0 )
-		{
+	protected AbstractFunction(final String[] parameterNames) {
+		if (parameterNames.length <= 0) {
 			this.indexNames = new HashMap<String, Integer>();
 			this.parameters = null;
 			this.parameterNames = null;
@@ -53,13 +50,13 @@ public abstract class AbstractFunction implements Cloneable, Function
 		this.parameters = new double[parameterNames.length];
 		this.parameterNames = parameterNames.clone();
 		final Map<String, Integer> newIndexNames = new HashMap<String, Integer>();
-		for(int index = 0; index < this.parameterNames.length; index++)
+		for (int index = 0; index < this.parameterNames.length; index++)
 			newIndexNames.put(this.parameterNames[index], index);
 		this.indexNames = Collections.unmodifiableMap(newIndexNames);
 	}
 
-	protected static String[] combineLabels(final String[] first, final String[] second)
-	{
+	protected static String[] combineLabels(final String[] first,
+			final String[] second) {
 		final String[] result = new String[first.length + second.length];
 		int resultIndex = 0;
 		System.arraycopy(first, 0, result, resultIndex, first.length);
@@ -69,69 +66,64 @@ public abstract class AbstractFunction implements Cloneable, Function
 	}
 
 	@Override
-	public final void setParameter(final int parameterIndex, final double value)
-	{
-		if( parameterIndex >= parameters.length || parameterIndex < 0 )
-			throw new IllegalArgumentException("parameterIndex of " + parameterIndex + " is out of range");
+	public final void setParameter(final int parameterIndex, final double value) {
+		if (parameterIndex >= parameters.length || parameterIndex < 0)
+			throw new IllegalArgumentException("parameterIndex of "
+					+ parameterIndex + " is out of range");
 		this.parameters[parameterIndex] = value;
 	}
 
 	@Override
-	public final void setParameter(final String parameterName, final double value)
-	{
+	public final void setParameter(final String parameterName,
+			final double value) {
 		this.setParameter(this.getParameterNameIndex(parameterName), value);
 	}
 
 	@Override
-	public final double getParameter(final int parameterIndex)
-	{
-		if( parameterIndex >= parameters.length || parameterIndex < 0 )
+	public final double getParameter(final int parameterIndex) {
+		if (parameterIndex >= parameters.length || parameterIndex < 0)
 			throw new IllegalArgumentException("parameterIndex out of range");
 		return this.parameters[parameterIndex];
 	}
 
 	@Override
-	public final double getParameter(final String parameterName)
-	{
+	public final double getParameter(final String parameterName) {
 		return this.getParameter(this.getParameterNameIndex(parameterName));
 	}
 
 	@Override
-	public final String getParameterName(final int parameterIndex)
-	{
-		if( parameterIndex >= this.parameterNames.length || parameterIndex < 0 )
-			throw new IllegalArgumentException("parameterIndex is not within range");
+	public final String getParameterName(final int parameterIndex) {
+		if (parameterIndex >= this.parameterNames.length || parameterIndex < 0)
+			throw new IllegalArgumentException(
+					"parameterIndex is not within range");
 		return this.parameterNames[parameterIndex];
 	}
 
 	@Override
-	public final int getParameterNameIndex(final String parameterName)
-	{
-		if( !this.indexNames.containsKey(parameterName) )
-			throw new IllegalArgumentException("parameterName: " + parameterName + " does not exist");
+	public final int getParameterNameIndex(final String parameterName) {
+		if (!this.indexNames.containsKey(parameterName))
+			throw new IllegalArgumentException("parameterName: "
+					+ parameterName + " does not exist");
 		return this.indexNames.get(parameterName);
 	}
 
 	@Override
-	public final int getParameterCount()
-	{
+	public final int getParameterCount() {
 		return this.parameters.length;
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
-	public AbstractFunction clone()
-	{
-		try
-		{
+	public AbstractFunction clone() {
+		try {
 			final AbstractFunction copy = (AbstractFunction) super.clone();
 			copy.parameters = this.parameters.clone();
 			return copy;
-		}
-		catch(final CloneNotSupportedException caught)
-		{
-			LOGGER.error("CloneNotSupportedException caught but not expected!", caught);
-			throw new UnexpectedDannError("CloneNotSupportedException caught but not expected", caught);
+		} catch (final CloneNotSupportedException caught) {
+			LOGGER.error("CloneNotSupportedException caught but not expected!",
+					caught);
+			throw new UnexpectedDannError(
+					"CloneNotSupportedException caught but not expected",
+					caught);
 		}
 	}
 

@@ -25,18 +25,18 @@ package syncleus.dann.evolve;
  * @author Jeffrey Phillips Freeman
  * @since 2.0
  */
-public class MutableLong extends MutableNumber<Long> implements Comparable<MutableLong>
-{
+public class MutableLong extends MutableNumber<Long> implements
+		Comparable<MutableLong> {
 	private static final long serialVersionUID = -7857580423320471776L;
 
 	/**
 	 * Initializes a new instance of this class with the specified value.
 	 *
-	 * @param value The value of this number.
+	 * @param value
+	 *            The value of this number.
 	 * @since 2.0
 	 */
-	public MutableLong(final long value)
-	{
+	public MutableLong(final long value) {
 		super(value);
 	}
 
@@ -44,11 +44,11 @@ public class MutableLong extends MutableNumber<Long> implements Comparable<Mutab
 	 * Initializes a new instance of this class from the value represented by
 	 * the specified string.
 	 *
-	 * @param str A string representing the value of this number.
+	 * @param str
+	 *            A string representing the value of this number.
 	 * @since 2.0
 	 */
-	public MutableLong(final String str)
-	{
+	public MutableLong(final String str) {
 		super(Long.valueOf(str));
 	}
 
@@ -56,11 +56,11 @@ public class MutableLong extends MutableNumber<Long> implements Comparable<Mutab
 	 * Initializes a new instance of this class as a copy of the specified
 	 * number.
 	 *
-	 * @param value The value to copy
+	 * @param value
+	 *            The value to copy
 	 * @since 2.0
 	 */
-	public MutableLong(final Long value)
-	{
+	public MutableLong(final Long value) {
 		super(value);
 	}
 
@@ -71,8 +71,7 @@ public class MutableLong extends MutableNumber<Long> implements Comparable<Mutab
 	 * @since 2.0
 	 */
 	@Override
-	public MutableLong clone()
-	{
+	public MutableLong clone() {
 		return (MutableLong) super.clone();
 	}
 
@@ -82,41 +81,41 @@ public class MutableLong extends MutableNumber<Long> implements Comparable<Mutab
 	 * past its largest or smallest representable number it will simply return
 	 * the max or min respectively.
 	 *
-	 * @param deviation A double indicating how extreme the mutation will be.
-	 *   The greater the deviation the more drastically the object will mutate.
-	 *   A deviation of 0 should cause no mutation.
+	 * @param deviation
+	 *            A double indicating how extreme the mutation will be. The
+	 *            greater the deviation the more drastically the object will
+	 *            mutate. A deviation of 0 should cause no mutation.
 	 * @return A copy of the current object with potential mutations.
 	 * @since 2.0
 	 */
 	@Override
-	public MutableLong mutate(final double deviation)
-	{
-		final double doubleDistributed = MutableNumber.getDistributedRandom(deviation);
+	public MutableLong mutate(final double deviation) {
+		final double doubleDistributed = MutableNumber
+				.getDistributedRandom(deviation);
 		long distributedRand = (long) doubleDistributed;
-		if( doubleDistributed > Long.MAX_VALUE )
+		if (doubleDistributed > Long.MAX_VALUE)
 			distributedRand = Long.MAX_VALUE;
-		else if( doubleDistributed < Long.MIN_VALUE )
+		else if (doubleDistributed < Long.MIN_VALUE)
 			distributedRand = Long.MIN_VALUE;
 		final long result = this.getNumber() + distributedRand;
-		if( (distributedRand > 0) && (result < this.getNumber()) )
+		if ((distributedRand > 0) && (result < this.getNumber()))
 			return new MutableLong(Long.MAX_VALUE);
-		else if( (distributedRand < 0) && (result > this.getNumber()) )
+		else if ((distributedRand < 0) && (result > this.getNumber()))
 			return new MutableLong(Long.MIN_VALUE);
 		return new MutableLong(result);
 	}
 
 	/**
 	 * Compares the value of this number against another object of the same
-	 * type.
-	 * The backing number handles the comparison.
+	 * type. The backing number handles the comparison.
 	 *
-	 * @param compareWith Number to compare against.
+	 * @param compareWith
+	 *            Number to compare against.
 	 * @return the natural ordering of the backed number.
 	 * @since 2.0
 	 */
 	@Override
-	public int compareTo(final MutableLong compareWith)
-	{
+	public int compareTo(final MutableLong compareWith) {
 		return this.getNumber().compareTo(compareWith.getNumber());
 	}
 }

@@ -24,8 +24,7 @@ package syncleus.dann.neural.activation;
  * @author Jeffrey Phillips Freeman
  * @since 2.0
  */
-public class IdentityActivationFunction implements ActivationFunction
-{
+public class IdentityActivationFunction implements DannActivationFunction {
 	private static final long serialVersionUID = 8055171842751744405L;
 	private static final double UPPER_LIMIT = Double.MAX_VALUE;
 	private static final double LOWER_LIMIT = -1.0 * Double.MAX_VALUE;
@@ -33,45 +32,43 @@ public class IdentityActivationFunction implements ActivationFunction
 	/**
 	 * The activation function.
 	 *
-	 * @param activity the neuron's current activity.
-	 * @return The result of the activation function. Usually a bound value between
-	 *         1 and -1 or 1 and 0. However this bound range is not required.
+	 * @param activity
+	 *            the neuron's current activity.
+	 * @return The result of the activation function. Usually a bound value
+	 *         between 1 and -1 or 1 and 0. However this bound range is not
+	 *         required.
 	 * @since 2.0
 	 */
 	@Override
-	public double activate(final double activity)
-	{
+	public double activate(final double activity) {
 		return activity;
 	}
 
 	/**
 	 * The derivative of the activation function.
 	 *
-	 * @param activity The neuron's current activity.
+	 * @param activity
+	 *            The neuron's current activity.
 	 * @return The result of the derivative of the activation function.
 	 * @since 2.0
 	 */
 	@Override
-	public double activateDerivative(final double activity)
-	{
+	public double activateDerivative(final double activity) {
 		return 1.0;
 	}
 
 	@Override
-	public boolean isBound()
-	{
+	public boolean isBound() {
 		return false;
 	}
 
 	@Override
-	public double getUpperLimit()
-	{
+	public double getUpperLimit() {
 		return UPPER_LIMIT;
 	}
 
 	@Override
-	public double getLowerLimit()
-	{
+	public double getLowerLimit() {
 		return LOWER_LIMIT;
 	}
 }

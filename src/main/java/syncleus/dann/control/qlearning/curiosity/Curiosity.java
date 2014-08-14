@@ -1,7 +1,7 @@
 package syncleus.dann.control.qlearning.curiosity;
 
-
 import java.io.Serializable;
+
 import syncleus.dann.control.qlearning.ErrorBackpropagationNN;
 import syncleus.dann.control.qlearning.Perception;
 
@@ -16,19 +16,20 @@ public class Curiosity implements Serializable {
 
 	private final CuriousBrain brain;
 
-	private Perception curiosityPerc;
+	private final Perception curiosityPerc;
 
 	private double avgError;
 
-	private double[] desiredOutput;
+	private final double[] desiredOutput;
 
-	private double[] inputBkp;
+	private final double[] inputBkp;
 
-	private double[] outputBkp;
+	private final double[] outputBkp;
 
-	private double[] desOutputBkp;
+	private final double[] desOutputBkp;
 
-	public Curiosity(CuriousPlayerPerception perception, CuriousBrain brain, int[] hiddenNeurons) {
+	public Curiosity(final CuriousPlayerPerception perception, final CuriousBrain brain,
+			final int[] hiddenNeurons) {
 		this.perception = perception;
 		this.brain = brain;
 		this.perception.setCuriosity(this);
@@ -45,7 +46,7 @@ public class Curiosity implements Serializable {
 		desOutputBkp = new double[nn.getDesiredOutput().length];
 	}
 
-	private void arraycopy(double[] src, double[] dest, boolean check) {
+	private void arraycopy(final double[] src, final double[] dest, final boolean check) {
 		if (check && src.length != dest.length) {
 			System.out.println("src.length != dest.length");
 		}
@@ -53,7 +54,7 @@ public class Curiosity implements Serializable {
 	}
 
 	public void learn() {
-		double[] percOut = this.perception.getForeseeOutput();
+		final double[] percOut = this.perception.getForeseeOutput();
 		arraycopy(percOut, desiredOutput, false);
 		arraycopy(nn.getInput(), inputBkp, true);
 		arraycopy(nn.getOutput(), outputBkp, true);
@@ -79,7 +80,7 @@ public class Curiosity implements Serializable {
 		return nn;
 	}
 
-	public void setNn(ErrorBackpropagationNN nn) {
+	public void setNn(final ErrorBackpropagationNN nn) {
 		this.nn = nn;
 	}
 

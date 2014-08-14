@@ -1,0 +1,160 @@
+/*
+ * Encog(tm) Core v3.2 - Java Version
+ * http://www.heatonresearch.com/encog/
+ * https://github.com/encog/encog-java-core
+
+ * Copyright 2008-2013 Heaton Research, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * For more information on Heaton Research copyrights, licenses
+ * and trademarks visit:
+ * http://www.heatonresearch.com/copyright
+ */
+package syncleus.dann.dataprocess.language.time;
+
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+
+public class NumericDateUtil {
+	public static final int YEAR_OFFSET = 10000;
+	public static final int MONTH_OFFSET = 100;
+
+	public static final int HOUR_OFFSET = 10000;
+	public static final int MINUTE_OFFSET = 100;
+
+	public static long date2Long(final Date time) {
+		final GregorianCalendar gc = new GregorianCalendar();
+		gc.setTime(time);
+		final int month = gc.get(Calendar.MONTH) + 1;
+		final int day = gc.get(Calendar.DAY_OF_MONTH);
+		final int year = gc.get(Calendar.YEAR);
+		return day + (month * MONTH_OFFSET) + (year * YEAR_OFFSET);
+	}
+
+	public static Date long2Date(final long l) {
+		long rest = l;
+		final int year = (int) (rest / YEAR_OFFSET);
+		rest -= year * YEAR_OFFSET;
+		final int month = (int) (rest / MONTH_OFFSET);
+		rest -= month * MONTH_OFFSET;
+		final int day = (int) rest;
+		final GregorianCalendar gc = new GregorianCalendar(year, month, day);
+		return gc.getTime();
+	}
+
+	public static Date stripTime(final Date time) {
+		final GregorianCalendar gc = new GregorianCalendar();
+		gc.setTime(time);
+		final int month = gc.get(Calendar.MONTH) + 1;
+		final int day = gc.get(Calendar.DAY_OF_MONTH);
+		final int year = gc.get(Calendar.YEAR);
+		final GregorianCalendar gc2 = new GregorianCalendar(year, month, day);
+		return gc2.getTime();
+	}
+
+	public static boolean haveSameDate(final Date d1, final Date d2) {
+		final GregorianCalendar gc1 = new GregorianCalendar();
+		gc1.setTime(d1);
+
+		final GregorianCalendar gc2 = new GregorianCalendar();
+		gc2.setTime(d2);
+
+		return ((gc1.get(Calendar.DAY_OF_MONTH) == gc2
+				.get(Calendar.DAY_OF_MONTH))
+				&& (gc1.get(Calendar.DAY_OF_MONTH) == gc2
+						.get(Calendar.DAY_OF_MONTH)) && (gc1.get(Calendar.YEAR) == gc2
+				.get(Calendar.YEAR)));
+	}
+
+	public static Date int2Time(final Date date, final int i) {
+		int rest = i;
+		final int hour = rest / HOUR_OFFSET;
+		rest -= (hour * HOUR_OFFSET);
+		final int minute = rest / MONTH_OFFSET;
+		rest -= (minute * MINUTE_OFFSET);
+		final int second = rest;
+
+		final GregorianCalendar gc = new GregorianCalendar();
+		gc.setTime(date);
+		final int month = gc.get(Calendar.MONTH) + 1;
+		final int day = gc.get(Calendar.DAY_OF_MONTH);
+		final int year = gc.get(Calendar.YEAR);
+
+		return new GregorianCalendar(year, month, day, hour, minute, second)
+				.getTime();
+	}
+
+	public static int time2Int(final Date time) {
+		final GregorianCalendar gc = new GregorianCalendar();
+		gc.setTime(time);
+		final int hour = gc.get(Calendar.HOUR);
+		final int minute = gc.get(Calendar.MINUTE);
+		final int second = gc.get(Calendar.SECOND);
+		return second + (minute * MINUTE_OFFSET) + (hour * HOUR_OFFSET);
+	}
+
+	public static int getYear(final long date) {
+		return (int) (date / YEAR_OFFSET);
+	}
+
+	public static int getMonth(final long l) {
+		long rest = l;
+		final int year = (int) (rest / YEAR_OFFSET);
+		rest -= year * YEAR_OFFSET;
+		return (int) (rest / MONTH_OFFSET);
+	}
+
+	public static int getMinutePeriod(final int time, final int period) {
+		int rest = time;
+		final int hour = rest / HOUR_OFFSET;
+		rest -= (hour * HOUR_OFFSET);
+		final int minute = rest / MONTH_OFFSET;
+
+		final int minutes = minute + (hour * 60);
+		return minutes / period;
+
+	}
+
+	public static long combine(final long date, final int time) {
+		return (date * 1000000) + time;
+	}
+
+	public static int GetDayOfWeek(final long p) {
+		final Date t = long2Date(p);
+		final GregorianCalendar gc = new GregorianCalendar();
+		gc.setTime(t);
+
+		switch (gc.get(Calendar.DAY_OF_WEEK)) {
+		case Calendar.SUNDAY:
+			return 0;
+		case Calendar.MONDAY:
+			return 1;
+		case Calendar.TUESDAY:
+			return 2;
+		case Calendar.WEDNESDAY:
+			return 3;
+		case Calendar.THURSDAY:
+			return 4;
+		case Calendar.FRIDAY:
+			return 5;
+		case Calendar.SATURDAY:
+			return 6;
+		default:
+			// no way this should happen!
+			return -1;
+		}
+	}
+
+}

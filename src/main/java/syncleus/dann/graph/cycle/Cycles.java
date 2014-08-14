@@ -20,115 +20,84 @@ package syncleus.dann.graph.cycle;
 
 import syncleus.dann.graph.Graph;
 
-public final class Cycles
-{
+public final class Cycles {
 	private static final CycleFinder EXHAUSTIVE_FINDER = new ExhaustiveDepthFirstSearchCycleFinder();
 	private static final CycleDetector COLORED_DETECTOR = new ColoredDepthFirstSearchDetector();
 
 	/**
 	 * This is an utility class, so it can not be instantiated.
 	 */
-	private Cycles()
-	{
-		throw new IllegalStateException("This is an utility class, it can not be instantiated");
+	private Cycles() {
+		throw new IllegalStateException(
+				"This is an utility class, it can not be instantiated");
 	}
 
-	public static int getCycleCount(final Graph graph)
-	{
-		if( graph instanceof CycleOptimizedGraph )
-		{
-			try
-			{
-				return ((CycleOptimizedGraph)graph).getCycleCount();
-			}
-			catch(final UnsupportedOperationException caught)
-			{
-				//if its not supported lets handle it as if its not optimized
+	public static int getCycleCount(final Graph graph) {
+		if (graph instanceof CycleOptimizedGraph) {
+			try {
+				return ((CycleOptimizedGraph) graph).getCycleCount();
+			} catch (final UnsupportedOperationException caught) {
+				// if its not supported lets handle it as if its not optimized
 			}
 		}
 
 		return EXHAUSTIVE_FINDER.cycleCount(graph);
 	}
 
-	public static boolean isPancyclic(final Graph graph)
-	{
-		if( graph instanceof CycleOptimizedGraph )
-		{
-			try
-			{
-				return ((CycleOptimizedGraph)graph).isPancyclic();
-			}
-			catch(final UnsupportedOperationException caught)
-			{
-				//if its not supported lets handle it as if its not optimized
+	public static boolean isPancyclic(final Graph graph) {
+		if (graph instanceof CycleOptimizedGraph) {
+			try {
+				return ((CycleOptimizedGraph) graph).isPancyclic();
+			} catch (final UnsupportedOperationException caught) {
+				// if its not supported lets handle it as if its not optimized
 			}
 		}
 
 		return EXHAUSTIVE_FINDER.isPancyclic(graph);
 	}
 
-	public static boolean isUnicyclic(final Graph graph)
-	{
-		if( graph instanceof CycleOptimizedGraph )
-		{
-			try
-			{
-				return ((CycleOptimizedGraph)graph).isUnicyclic();
-			}
-			catch(final UnsupportedOperationException caught)
-			{
-				//if its not supported lets handle it as if its not optimized
+	public static boolean isUnicyclic(final Graph graph) {
+		if (graph instanceof CycleOptimizedGraph) {
+			try {
+				return ((CycleOptimizedGraph) graph).isUnicyclic();
+			} catch (final UnsupportedOperationException caught) {
+				// if its not supported lets handle it as if its not optimized
 			}
 		}
 
 		return EXHAUSTIVE_FINDER.isUnicyclic(graph);
 	}
 
-	public static boolean isAcyclic(final Graph graph)
-	{
-		if( graph instanceof CycleOptimizedGraph )
-		{
-			try
-			{
-				return ((CycleOptimizedGraph)graph).isAcyclic();
-			}
-			catch(final UnsupportedOperationException caught)
-			{
-				//if its not supported lets handle it as if its not optimized
+	public static boolean isAcyclic(final Graph graph) {
+		if (graph instanceof CycleOptimizedGraph) {
+			try {
+				return ((CycleOptimizedGraph) graph).isAcyclic();
+			} catch (final UnsupportedOperationException caught) {
+				// if its not supported lets handle it as if its not optimized
 			}
 		}
 
 		return !COLORED_DETECTOR.hasCycle(graph);
 	}
 
-	public static int getGirth(final Graph graph)
-	{
-		if( graph instanceof CycleOptimizedGraph )
-		{
-			try
-			{
-				return ((CycleOptimizedGraph)graph).getGirth();
-			}
-			catch(final UnsupportedOperationException caught)
-			{
-				//if its not supported lets handle it as if its not optimized
+	public static int getGirth(final Graph graph) {
+		if (graph instanceof CycleOptimizedGraph) {
+			try {
+				return ((CycleOptimizedGraph) graph).getGirth();
+			} catch (final UnsupportedOperationException caught) {
+				// if its not supported lets handle it as if its not optimized
 			}
 		}
 
 		return EXHAUSTIVE_FINDER.girth(graph);
 	}
 
-	public static int getCircumference(final Graph graph)
-	{
-		if( graph instanceof CycleOptimizedGraph )
-		{
-			try
-			{
-				return ((CycleOptimizedGraph)graph).getCircumference();
-			}
-			catch(final UnsupportedOperationException caught)
-			{
-				//if its not supported lets handle it as if its not optimized
+	public static int getCircumference(final Graph graph) {
+		if (graph instanceof CycleOptimizedGraph) {
+			try {
+				return ((CycleOptimizedGraph) graph).getCircumference();
+			} catch (final UnsupportedOperationException caught) {
+				// if its not supported lets handle it as if its not optimized
 			}
 		}
 

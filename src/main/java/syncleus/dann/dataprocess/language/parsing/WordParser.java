@@ -23,20 +23,24 @@ import java.util.Set;
 
 /**
  * A WordParser splits a String into individual words.
+ *
  * @author Jeffrey Phillips Freeman
  */
-public interface WordParser
-{
+public interface WordParser {
 	/**
 	 * Gets all words from the given String.
-	 * @param text The string to use
+	 *
+	 * @param text
+	 *            The string to use
 	 * @return The list of all words
 	 */
 	List<String> getWords(String text);
 
 	/**
 	 * Gets the unique words from the given String.
-	 * @param text The string to use
+	 *
+	 * @param text
+	 *            The string to use
 	 * @return The set of all unique words
 	 * @see WordParser#getWords(String)
 	 */

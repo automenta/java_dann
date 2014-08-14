@@ -12,95 +12,92 @@ import java.util.Arrays;
  *
  * @author me
  */
-public class QLearner  {
+public class QLearner {
 
-    private Action[] qaction;
-    private QBrain brain;
-    double nextReward;
-    double[] sensor;
-    double[] action;
+	private Action[] qaction;
+	private QBrain brain;
+	double nextReward;
+	double[] sensor;
+	double[] action;
 
-    public QLearner(int sensors, Action[] actions) {
-        
-        this.qaction = actions;
-        
-        for (int i = 0; i < actions.length; i++) {
-            final int I = i;
-            qaction[i] = new Action() {                
-                @Override public int execute() { return I; }
-            };
-        }
-        
-        sensor = new double[sensors];        
-        
-        brain = new QBrain(new Perception() {
+	public QLearner(final int sensors, final Action[] actions) {
 
-            @Override
-            public boolean isUnipolar() {
-                return true;
-            }
+		this.qaction = actions;
 
-            @Override
-            public double getReward() {
-                return nextReward;
-            }
+		for (int i = 0; i < actions.length; i++) {
+			final int I = i;
+			qaction[i] = new Action() {
+				@Override
+				public int execute() {
+					return I;
+				}
+			};
+		}
 
-            @Override
-            protected void updateInputValues() {
-                for (int i = 0; i < sensor.length; i++)
-                    setNextValue(sensor[i]);        
-            }
-        }, qaction );
-        
-        /*
-        brain = new Brain(new DAPerception(sensor, 4) {
+		sensor = new double[sensors];
 
-            @Override
-            public boolean isUnipolar() {
-                return true;
-            }
+		brain = new QBrain(new Perception() {
 
-            @Override
-            public double getReward() {
-                return nextReward;
-            }
-            
-        }, qaction ); 
-        */
-                
-        brain.reset();
-    }
+			@Override
+			public boolean isUnipolar() {
+				return true;
+			}
 
-    double minReward = Double.MAX_VALUE;
-    double maxReward = Double.MIN_VALUE;
-    
-    public int step(double reward) {
-        maxReward = Math.max(reward, maxReward);
-        minReward = Math.min(reward, minReward);
-        this.nextReward = (reward - minReward)/(maxReward-minReward)-0.5;
-        
-        brain.getPerception().perceive();
-        brain.count();
-        
-        Arrays.fill(action, 0.0);
-        int a = brain.getAction();
-        action[a] = 1.0;
-        
-        //brain.printStats();
-        //System.out.println(reward + " " + a);
-        //Util.printArray(brain.getInput());
-        //Util.printArray(brain.getOutput());
-        //Util.printArray(action);
-        
-        return a;
-    }
+			@Override
+			public double getReward() {
+				return nextReward;
+			}
 
-    public double[] getSensor() {
-        return sensor;
-    }
+			@Override
+			protected void updateInputValues() {
+				for (int i = 0; i < sensor.length; i++)
+					setNextValue(sensor[i]);
+			}
+		}, qaction);
 
-    public double[] getAction() {
-        return action;
-    }
-    
+		/*
+		 * brain = new Brain(new DAPerception(sensor, 4) {
+		 *
+		 * @Override public boolean isUnipolar() { return true; }
+		 *
+		 * @Override public double getReward() { return nextReward; }
+		 *
+		 * }, qaction );
+		 */
+
+		brain.reset();
+	}
+
+	double minReward = Double.MAX_VALUE;
+	double maxReward = Double.MIN_VALUE;
+
+	public int step(final double reward) {
+		maxReward = Math.max(reward, maxReward);
+		minReward = Math.min(reward, minReward);
+		this.nextReward = (reward - minReward) / (maxReward - minReward) - 0.5;
+
+		brain.getPerception().perceive();
+		brain.count();
+
+		Arrays.fill(action, 0.0);
+		final int a = brain.getAction();
+		action[a] = 1.0;
+
+		// brain.printStats();
+		// System.out.println(reward + " " + a);
+		// Util.printArray(brain.getInput());
+		// Util.printArray(brain.getOutput());
+		// Util.printArray(action);
+
+		return a;
+	}
+
+	public double[] getSensor() {
+		return sensor;
+	}
+
+	public double[] getAction() {
+		return action;
+	}
+
 }

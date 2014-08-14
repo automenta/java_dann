@@ -24,12 +24,16 @@ import syncleus.dann.graph.Cycle;
 import syncleus.dann.graph.Edge;
 import syncleus.dann.graph.Graph;
 
-public interface CycleFinder<N, E extends Edge<N>> extends CycleDetector
-{
+public interface CycleFinder<N, E extends Edge<N>> extends CycleDetector {
 	int cycleCount(Graph<N, E> graph);
+
 	Set<Cycle<N, E>> findCycles(Graph<N, E> graph);
+
 	boolean isPancyclic(Graph<N, E> graph);
+
 	boolean isUnicyclic(Graph<N, E> graph);
+
 	int girth(Graph<N, E> graph);
+
 	int circumference(Graph<N, E> graph);
 }

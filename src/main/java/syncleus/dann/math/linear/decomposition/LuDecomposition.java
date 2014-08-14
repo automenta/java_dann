@@ -32,16 +32,20 @@ import syncleus.dann.math.linear.Matrix;
  * lowerTriangularFactor is height-by-height and U is height-by-width.
  * <p/>
  * The matrixToDecomposeElements decompostion with pivoting always exists, even
- * if the matrix is singular, so the constructor will never fail.  The primary
+ * if the matrix is singular, so the constructor will never fail. The primary
  * use of the matrixToDecomposeElements decomposition is in the solution of
- * square systems of simultaneous linear equations.  This will fail if
+ * square systems of simultaneous linear equations. This will fail if
  * isNonsingular() returns false.
  */
-public interface LuDecomposition<M extends Matrix<M, F>, F extends OrderedAlgebraic<F>> extends java.io.Serializable, SolvableDecomposition<M>
-{
+public interface LuDecomposition<M extends Matrix<M, F>, F extends OrderedAlgebraic<F>>
+		extends java.io.Serializable, SolvableDecomposition<M> {
 	F getDeterminant();
+
 	M getLowerTriangularFactor();
+
 	M getUpperTriangularFactor();
+
 	boolean isNonsingular();
+
 	int[] getPivot();
 }

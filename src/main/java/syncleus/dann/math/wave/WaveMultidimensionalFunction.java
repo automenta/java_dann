@@ -21,143 +21,128 @@ package syncleus.dann.math.wave;
 import syncleus.dann.math.AbstractFunction;
 import syncleus.dann.math.wave.wavelet.SharpenedWaveletFunction;
 
-public class WaveMultidimensionalFunction extends AbstractFunction
-{
+public class WaveMultidimensionalFunction extends AbstractFunction {
 	private boolean constantMode = false;
 	private double constantValue;
 	private String[] dimensionNames = null;
 	private SharpenedWaveletFunction wave;
 
-	public WaveMultidimensionalFunction(final WaveMultidimensionalFunction copy)
-	{
+	public WaveMultidimensionalFunction(final WaveMultidimensionalFunction copy) {
 		super(copy);
-		this.dimensionNames = (copy.dimensionNames == null ? null : copy.dimensionNames.clone());
+		this.dimensionNames = (copy.dimensionNames == null ? null
+				: copy.dimensionNames.clone());
 		this.constantMode = copy.constantMode;
 		this.constantValue = copy.constantValue;
 		this.wave = new SharpenedWaveletFunction(copy.wave);
 	}
 
-	public WaveMultidimensionalFunction(final double constantValue)
-	{
-		super(new String[]{});
+	public WaveMultidimensionalFunction(final double constantValue) {
+		super(new String[] {});
 
 		this.constantMode = true;
 		this.constantValue = constantValue;
 		this.wave = new SharpenedWaveletFunction();
 	}
 
-	public WaveMultidimensionalFunction(final String[] dimensions)
-	{
-		super(combineLabels(appendStrings(dimensions, "center-"), combineLabels(dimensions, new String[]{"distribution", "form", "frequency", "amplitude", "phase"})));
+	public WaveMultidimensionalFunction(final String[] dimensions) {
+		super(combineLabels(
+				appendStrings(dimensions, "center-"),
+				combineLabels(dimensions, new String[] { "distribution",
+						"form", "frequency", "amplitude", "phase" })));
 		this.dimensionNames = dimensions.clone();
 		this.wave = new SharpenedWaveletFunction();
 		this.setDistribution(1.0);
 	}
 
-	public String[] getDimensions()
-	{
+	public String[] getDimensions() {
 		return this.dimensionNames.clone();
 	}
 
-	private static String[] appendStrings(final String[] original, final String append)
-	{
+	private static String[] appendStrings(final String[] original,
+			final String append) {
 		final String[] copy = new String[original.length];
-		for(int index = 0; index < copy.length; index++)
-		{
+		for (int index = 0; index < copy.length; index++) {
 			copy[index] = append + original[index];
 		}
 		return copy;
 	}
 
-	public final void setDimension(final String dimension, final double value)
-	{
+	public final void setDimension(final String dimension, final double value) {
 		this.setParameter(this.getParameterNameIndex(dimension), value);
 	}
 
-	public final double getDimension(final String dimension)
-	{
+	public final double getDimension(final String dimension) {
 		return this.getParameter(this.getParameterNameIndex(dimension));
 	}
 
-	public final void setCenter(final String dimension, final double value)
-	{
-		this.setParameter(this.getParameterNameIndex("center-" + dimension), value);
+	public final void setCenter(final String dimension, final double value) {
+		this.setParameter(this.getParameterNameIndex("center-" + dimension),
+				value);
 		this.wave.setCenter(0.0);
 	}
 
-	public final double getCenter(final String dimension)
-	{
-		return this.getParameter(this.getParameterNameIndex("center-" + dimension));
+	public final double getCenter(final String dimension) {
+		return this.getParameter(this.getParameterNameIndex("center-"
+				+ dimension));
 	}
 
-	public final void setDistribution(final double distribution)
-	{
-		if( distribution == 0.0 )
+	public final void setDistribution(final double distribution) {
+		if (distribution == 0.0)
 			throw new IllegalArgumentException("distribution can't be 0");
 
-		this.setParameter(this.getParameterNameIndex("distribution"), distribution);
+		this.setParameter(this.getParameterNameIndex("distribution"),
+				distribution);
 		this.wave.setDistribution(distribution);
 	}
 
-	public final double getDistribution()
-	{
+	public final double getDistribution() {
 		return this.getParameter(this.getParameterNameIndex("distribution"));
 	}
 
-	public final void setFrequency(final double frequency)
-	{
+	public final void setFrequency(final double frequency) {
 		this.setParameter(this.getParameterNameIndex("frequency"), frequency);
 		this.wave.setFrequency(frequency);
 	}
 
-	public final double getFrequency()
-	{
+	public final double getFrequency() {
 		return this.getParameter(this.getParameterNameIndex("frequency"));
 	}
 
-	public final void setAmplitude(final double amplitude)
-	{
+	public final void setAmplitude(final double amplitude) {
 		this.setParameter(this.getParameterNameIndex("amplitude"), amplitude);
 		this.wave.setAmplitude(amplitude);
 	}
 
-	public final double getAmplitude()
-	{
+	public final double getAmplitude() {
 		return this.getParameter(this.getParameterNameIndex("amplitude"));
 	}
 
-	public final void setPhase(final double phase)
-	{
+	public final void setPhase(final double phase) {
 		this.setParameter(this.getParameterNameIndex("phase"), phase);
 		this.wave.setPhase(phase);
 	}
 
-	public final double getPhase()
-	{
+	public final double getPhase() {
 		return this.getParameter(this.getParameterNameIndex("phase"));
 	}
 
-	public final void setForm(final double form)
-	{
+	public final void setForm(final double form) {
 		this.setParameter(this.getParameterNameIndex("form"), form);
 		this.wave.setForm(form);
 	}
 
-	public final double getForm()
-	{
+	public final double getForm() {
 		return this.getParameter(this.getParameterNameIndex("form"));
 	}
 
 	@Override
-	public double calculate()
-	{
-		if( this.constantMode )
+	public double calculate() {
+		if (this.constantMode)
 			return this.constantValue;
 
-		//step through each dimension value and center value
+		// step through each dimension value and center value
 		double squaredSum = 0.0;
-		for(final String dimensionName : this.dimensionNames)
-		{
+		for (final String dimensionName : this.dimensionNames) {
 			final double dimensionValue = this.getDimension(dimensionName);
 			final double centerValue = this.getCenter(dimensionName);
 			final double relativeValue = dimensionValue - centerValue;
@@ -172,9 +157,9 @@ public class WaveMultidimensionalFunction extends AbstractFunction
 	}
 
 	@Override
-	public WaveMultidimensionalFunction clone()
-	{
-		final WaveMultidimensionalFunction copy = (WaveMultidimensionalFunction) super.clone();
+	public WaveMultidimensionalFunction clone() {
+		final WaveMultidimensionalFunction copy = (WaveMultidimensionalFunction) super
+				.clone();
 
 		copy.wave = this.wave.clone();
 		copy.dimensionNames = this.dimensionNames.clone();
@@ -182,14 +167,16 @@ public class WaveMultidimensionalFunction extends AbstractFunction
 		return copy;
 	}
 
-	String toString(final String centerName)
-	{
+	String toString(final String centerName) {
 		final StringBuffer equationBuffer = new StringBuffer(32);
-		for(int squaredSumsIndex = 0; squaredSumsIndex < this.dimensionNames.length; squaredSumsIndex++)
-		{
-			if( squaredSumsIndex > 0 )
+		for (int squaredSumsIndex = 0; squaredSumsIndex < this.dimensionNames.length; squaredSumsIndex++) {
+			if (squaredSumsIndex > 0)
 				equationBuffer.append(" + ");
-			equationBuffer.append('(').append(this.dimensionNames[squaredSumsIndex]).append(" - center-").append(this.dimensionNames[squaredSumsIndex]).append(")^2");
+			equationBuffer.append('(')
+					.append(this.dimensionNames[squaredSumsIndex])
+					.append(" - center-")
+					.append(this.dimensionNames[squaredSumsIndex])
+					.append(")^2");
 		}
 
 		final String equation = "sqrt( " + equationBuffer + " )";
@@ -198,13 +185,11 @@ public class WaveMultidimensionalFunction extends AbstractFunction
 	}
 
 	@Override
-	public String toString()
-	{
+	public String toString() {
 		return this.toString("center");
 	}
 
-	public String[] getDimensionNames()
-	{
+	public String[] getDimensionNames() {
 		return dimensionNames.clone();
 	}
 }

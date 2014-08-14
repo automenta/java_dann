@@ -25,18 +25,18 @@ package syncleus.dann.evolve;
  * @author Jeffrey Phillips Freeman
  * @since 2.0
  */
-public class MutableShort extends MutableNumber<Short> implements Comparable<MutableShort>
-{
+public class MutableShort extends MutableNumber<Short> implements
+		Comparable<MutableShort> {
 	private static final long serialVersionUID = -3179941382201139819L;
 
 	/**
 	 * Initializes a new instance of this class with the specified value.
 	 *
-	 * @param value The value of this number.
+	 * @param value
+	 *            The value of this number.
 	 * @since 2.0
 	 */
-	public MutableShort(final short value)
-	{
+	public MutableShort(final short value) {
 		super(value);
 	}
 
@@ -44,11 +44,11 @@ public class MutableShort extends MutableNumber<Short> implements Comparable<Mut
 	 * Initializes a new instance of this class from the value represented by
 	 * the specified string.
 	 *
-	 * @param str A string representing the value of this number.
+	 * @param str
+	 *            A string representing the value of this number.
 	 * @since 2.0
 	 */
-	public MutableShort(final String str)
-	{
+	public MutableShort(final String str) {
 		super(Short.valueOf(str));
 	}
 
@@ -56,11 +56,11 @@ public class MutableShort extends MutableNumber<Short> implements Comparable<Mut
 	 * Initializes a new instance of this class as a copy of the specified
 	 * number.
 	 *
-	 * @param value The value to copy
+	 * @param value
+	 *            The value to copy
 	 * @since 2.0
 	 */
-	public MutableShort(final Short value)
-	{
+	public MutableShort(final Short value) {
 		super(value);
 	}
 
@@ -71,8 +71,7 @@ public class MutableShort extends MutableNumber<Short> implements Comparable<Mut
 	 * @since 2.0
 	 */
 	@Override
-	public MutableShort clone()
-	{
+	public MutableShort clone() {
 		return (MutableShort) super.clone();
 	}
 
@@ -82,41 +81,41 @@ public class MutableShort extends MutableNumber<Short> implements Comparable<Mut
 	 * past its largest or smallest representable number it will simply return
 	 * the max or min respectively.
 	 *
-	 * @param deviation A double indicating how extreme the mutation will be.
-	 *   The greater the deviation the more drastically the object will mutate.
-	 *   A deviation of 0 should cause no mutation.
+	 * @param deviation
+	 *            A double indicating how extreme the mutation will be. The
+	 *            greater the deviation the more drastically the object will
+	 *            mutate. A deviation of 0 should cause no mutation.
 	 * @return A copy of the current object with potential mutations.
 	 * @since 2.0
 	 */
 	@Override
-	public MutableShort mutate(final double deviation)
-	{
-		final double doubleDistributed = MutableNumber.getDistributedRandom(deviation);
+	public MutableShort mutate(final double deviation) {
+		final double doubleDistributed = MutableNumber
+				.getDistributedRandom(deviation);
 		short distributedRand = (short) doubleDistributed;
-		if( doubleDistributed > Short.MAX_VALUE )
+		if (doubleDistributed > Short.MAX_VALUE)
 			distributedRand = Short.MAX_VALUE;
-		else if( doubleDistributed < Short.MIN_VALUE )
+		else if (doubleDistributed < Short.MIN_VALUE)
 			distributedRand = Short.MIN_VALUE;
 		final short result = (short) (this.getNumber() + distributedRand);
-		if( (distributedRand > (short) 0) && (result < this.getNumber()) )
+		if ((distributedRand > (short) 0) && (result < this.getNumber()))
 			return new MutableShort(Short.MAX_VALUE);
-		else if( (distributedRand < (short) 0) && (result > this.getNumber()) )
+		else if ((distributedRand < (short) 0) && (result > this.getNumber()))
 			return new MutableShort(Short.MIN_VALUE);
 		return new MutableShort(result);
 	}
 
 	/**
 	 * Compares the value of this number against another object of the same
-	 * type.
-	 * The backing number handles the comparison.
+	 * type. The backing number handles the comparison.
 	 *
-	 * @param compareWith Number to compare against.
+	 * @param compareWith
+	 *            Number to compare against.
 	 * @return the natural ordering of the backed number.
 	 * @since 2.0
 	 */
 	@Override
-	public int compareTo(final MutableShort compareWith)
-	{
+	public int compareTo(final MutableShort compareWith) {
 		return this.getNumber().compareTo(compareWith.getNumber());
 	}
 }

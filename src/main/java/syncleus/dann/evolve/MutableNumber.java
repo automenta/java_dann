@@ -30,24 +30,26 @@ import syncleus.dann.evolve.wavelets.Mutations;
  * An abstract class representing a gene which expresses a constant value which
  * only changes through mutation.
  *
- * @param <N> The type of Number to use
+ * @param <N>
+ *            The type of Number to use
  * @author Jeffrey Phillips Freeman
  * @since 2.0
  */
-public abstract class MutableNumber<N extends Number> extends Number implements Cloneable
-{
+public abstract class MutableNumber<N extends Number> extends Number implements
+		Cloneable {
 	private static final Random RANDOM = Mutations.getRandom();
 	private N number;
-	private static final Logger LOGGER = LogManager.getLogger(MutableNumber.class);
+	private static final Logger LOGGER = LogManager
+			.getLogger(MutableNumber.class);
 
 	/**
 	 * Initializes a new MutableNumber backed by the specified backingNumber.
 	 *
-	 * @param backingNumber The backingNumber to back this MutableNumber
+	 * @param backingNumber
+	 *            The backingNumber to back this MutableNumber
 	 * @since 2.0
 	 */
-	protected MutableNumber(final N backingNumber)
-	{
+	protected MutableNumber(final N backingNumber) {
 		this.number = backingNumber;
 	}
 
@@ -55,18 +57,17 @@ public abstract class MutableNumber<N extends Number> extends Number implements 
 	 * Returns a RANDOM double normally distributed around 0.0 and multiplied by
 	 * deviation.
 	 *
-	 * @param deviation multiplier for the distribution.
+	 * @param deviation
+	 *            multiplier for the distribution.
 	 * @return Random double with the appropriate distribution.
 	 * @since 2.0
 	 */
-	protected static double getDistributedRandom(final double deviation)
-	{
+	protected static double getDistributedRandom(final double deviation) {
 		final double normalRand = (MutableNumber.RANDOM.nextDouble() * 2.0) - 1.0;
 		return atanh(normalRand) * Math.abs(deviation);
 	}
 
-	private static double atanh(final double value)
-	{
+	private static double atanh(final double value) {
 		final double oneHalf = 0.5;
 		return oneHalf * Math.log(Math.abs((value + 1.0) / (1.0 - value)));
 	}
@@ -77,8 +78,7 @@ public abstract class MutableNumber<N extends Number> extends Number implements 
 	 * @return The backing number.
 	 * @since 2.0
 	 */
-	public final N getNumber()
-	{
+	public final N getNumber() {
 		return this.number;
 	}
 
@@ -89,8 +89,7 @@ public abstract class MutableNumber<N extends Number> extends Number implements 
 	 * @since 2.0
 	 */
 	@Override
-	public final double doubleValue()
-	{
+	public final double doubleValue() {
 		return this.number.doubleValue();
 	}
 
@@ -101,8 +100,7 @@ public abstract class MutableNumber<N extends Number> extends Number implements 
 	 * @since 2.0
 	 */
 	@Override
-	public final float floatValue()
-	{
+	public final float floatValue() {
 		return this.number.floatValue();
 	}
 
@@ -113,8 +111,7 @@ public abstract class MutableNumber<N extends Number> extends Number implements 
 	 * @since 2.0
 	 */
 	@Override
-	public final byte byteValue()
-	{
+	public final byte byteValue() {
 		return this.number.byteValue();
 	}
 
@@ -125,8 +122,7 @@ public abstract class MutableNumber<N extends Number> extends Number implements 
 	 * @since 2.0
 	 */
 	@Override
-	public final short shortValue()
-	{
+	public final short shortValue() {
 		return this.number.shortValue();
 	}
 
@@ -137,8 +133,7 @@ public abstract class MutableNumber<N extends Number> extends Number implements 
 	 * @since 2.0
 	 */
 	@Override
-	public final int intValue()
-	{
+	public final int intValue() {
 		return this.number.intValue();
 	}
 
@@ -149,8 +144,7 @@ public abstract class MutableNumber<N extends Number> extends Number implements 
 	 * @since 2.0
 	 */
 	@Override
-	public final long longValue()
-	{
+	public final long longValue() {
 		return this.number.longValue();
 	}
 
@@ -161,25 +155,24 @@ public abstract class MutableNumber<N extends Number> extends Number implements 
 	 * @since 2.0
 	 */
 	@Override
-	public final int hashCode()
-	{
+	public final int hashCode() {
 		return this.number.hashCode();
 	}
 
 	/**
 	 * Checks equals using the equals of the backing number.
 	 *
-	 * @param compareWith object to check if it is equal to this object.
+	 * @param compareWith
+	 *            object to check if it is equal to this object.
 	 * @return equals as reported by the backing number.
 	 * @since 2.0
 	 */
 	@Override
-	public final boolean equals(final Object compareWith)
-	{
-		if( compareWith == null )
+	public final boolean equals(final Object compareWith) {
+		if (compareWith == null)
 			return true;
 
-		if( compareWith instanceof MutableNumber )
+		if (compareWith instanceof MutableNumber)
 			return this.number.equals(((MutableNumber) compareWith).number);
 		else
 			return false;
@@ -192,8 +185,7 @@ public abstract class MutableNumber<N extends Number> extends Number implements 
 	 * @since 2.0
 	 */
 	@Override
-	public String toString()
-	{
+	public String toString() {
 		return this.number.toString();
 	}
 
@@ -207,18 +199,17 @@ public abstract class MutableNumber<N extends Number> extends Number implements 
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public MutableNumber<N> clone()
-	{
-		try
-		{
+	public MutableNumber<N> clone() {
+		try {
 			final MutableNumber<N> copy = (MutableNumber<N>) super.clone();
 			copy.number = this.number;
 			return copy;
-		}
-		catch(final CloneNotSupportedException caught)
-		{
-			LOGGER.error("CloneNotSupportedException caught but not expected!", caught);
-			throw new UnexpectedDannError("CloneNotSupportedException caught but not expected", caught);
+		} catch (final CloneNotSupportedException caught) {
+			LOGGER.error("CloneNotSupportedException caught but not expected!",
+					caught);
+			throw new UnexpectedDannError(
+					"CloneNotSupportedException caught but not expected",
+					caught);
 		}
 	}
 
@@ -228,9 +219,10 @@ public abstract class MutableNumber<N extends Number> extends Number implements 
 	 * past its largest or smallest representable number it will simply return
 	 * the max or min respectively.
 	 *
-	 * @param deviation A double indicating how extreme the mutation will be.
-	 *   The greater the deviation the more drastically the object will mutate.
-	 *   A deviation of 0 should cause no mutation.
+	 * @param deviation
+	 *            A double indicating how extreme the mutation will be. The
+	 *            greater the deviation the more drastically the object will
+	 *            mutate. A deviation of 0 should cause no mutation.
 	 * @return A copy of the current object with potential mutations.
 	 * @since 2.0
 	 */

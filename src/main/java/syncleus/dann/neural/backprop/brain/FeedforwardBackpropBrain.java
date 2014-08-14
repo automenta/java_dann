@@ -26,8 +26,9 @@ import syncleus.dann.neural.backprop.BackpropNeuron;
 import syncleus.dann.neural.backprop.InputBackpropNeuron;
 import syncleus.dann.neural.backprop.OutputBackpropNeuron;
 
-public interface FeedforwardBackpropBrain<IN extends InputBackpropNeuron, ON extends OutputBackpropNeuron, N extends BackpropNeuron, S extends Synapse<N>> extends BackpropBrain<IN, ON, N, S>
-{
+public interface FeedforwardBackpropBrain<IN extends InputBackpropNeuron, ON extends OutputBackpropNeuron, N extends BackpropNeuron, S extends Synapse<N>>
+		extends BackpropBrain<IN, ON, N, S> {
 	int getLayerCount();
+
 	List<Set<N>> getLayers();
 }

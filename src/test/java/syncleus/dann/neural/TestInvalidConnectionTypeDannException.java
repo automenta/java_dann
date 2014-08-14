@@ -18,32 +18,27 @@
  ******************************************************************************/
 package syncleus.dann.neural;
 
-import syncleus.dann.neural.InvalidConnectionTypeDannException;
 import org.junit.Test;
 
-public class TestInvalidConnectionTypeDannException
-{
+public class TestInvalidConnectionTypeDannException {
 	@Test(expected = InvalidConnectionTypeDannException.class)
-	public void testDefault() throws InvalidConnectionTypeDannException
-	{
+	public void testDefault() throws InvalidConnectionTypeDannException {
 		throw new InvalidConnectionTypeDannException();
 	}
 
 	@Test(expected = InvalidConnectionTypeDannException.class)
-	public void testString() throws InvalidConnectionTypeDannException
-	{
+	public void testString() throws InvalidConnectionTypeDannException {
 		throw new InvalidConnectionTypeDannException("This is just a test");
 	}
 
 	@Test(expected = InvalidConnectionTypeDannException.class)
-	public void testCause() throws InvalidConnectionTypeDannException
-	{
+	public void testCause() throws InvalidConnectionTypeDannException {
 		throw new InvalidConnectionTypeDannException(new Exception());
 	}
 
 	@Test(expected = InvalidConnectionTypeDannException.class)
-	public void testStringCause() throws InvalidConnectionTypeDannException
-	{
-		throw new InvalidConnectionTypeDannException("This is just a test", new Exception());
+	public void testStringCause() throws InvalidConnectionTypeDannException {
+		throw new InvalidConnectionTypeDannException("This is just a test",
+				new Exception());
 	}
 }

@@ -23,23 +23,19 @@
  */
 package syncleus.dann.math.counting;
 
-public class PermutationCounter extends AbstractPermutationCounter
-{
-	public PermutationCounter(final int permutationSize)
-	{
+public class PermutationCounter extends AbstractPermutationCounter {
+	public PermutationCounter(final int permutationSize) {
 		this(permutationSize, permutationSize);
 	}
 
 	/**
-	 * Constructor. WARNING: Don't make permutationSize too large.
-	 * Recall that the number of permutations is permutationSize!
-	 * which can be very large, even when permutationSize is as small as 20 --
-	 * 20! = 2,432,902,008,176,640,000 and
-	 * 21! is too big to fit into permutation Java long, which is
-	 * why we use BigInteger instead.
+	 * Constructor. WARNING: Don't make permutationSize too large. Recall that
+	 * the number of permutations is permutationSize! which can be very large,
+	 * even when permutationSize is as small as 20 -- 20! =
+	 * 2,432,902,008,176,640,000 and 21! is too big to fit into permutation Java
+	 * long, which is why we use BigInteger instead.
 	 */
-	public PermutationCounter(final int setSize, final int permutationSize)
-	{
+	public PermutationCounter(final int setSize, final int permutationSize) {
 		super(setSize, permutationSize);
 
 		reset();
@@ -49,18 +45,17 @@ public class PermutationCounter extends AbstractPermutationCounter
 	 * Generates the next permutation (algorithm from Rosen p. 284)
 	 */
 	@Override
-	protected boolean next()
-	{
+	protected boolean next() {
 		int temp;
 		final int[] perm = this.getPermutation();
 		// Find largest index j with perm[j] < perm[j+1]
 		int j = perm.length - 2;
-		while( perm[j] > perm[j + 1] )
+		while (perm[j] > perm[j + 1])
 			j--;
 		// Find index k such that permutation[k] is smallest integer
 		// greater than permutation[j] to the right of permutation[j]
 		int k = getPermutation().length - 1;
-		while( perm[j] > perm[k] )
+		while (perm[j] > perm[k])
 			k--;
 		// Interchange permutation[j] and permutation[k]
 		temp = perm[k];
@@ -69,8 +64,7 @@ public class PermutationCounter extends AbstractPermutationCounter
 		// Put tail end of permutation after jth position in increasing order
 		int r = getPermutation().length - 1;
 		int s = j + 1;
-		while( r > s )
-		{
+		while (r > s) {
 			temp = perm[s];
 			perm[s] = perm[r];
 			perm[r] = temp;

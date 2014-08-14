@@ -18,46 +18,43 @@
  ******************************************************************************/
 package syncleus.dann.math.counting;
 
-public class LexicographicPermutationCounter extends AbstractPermutationCounter
-{
-	public LexicographicPermutationCounter(final int permutationSize)
-	{
+public class LexicographicPermutationCounter extends AbstractPermutationCounter {
+	public LexicographicPermutationCounter(final int permutationSize) {
 		this(permutationSize, permutationSize);
 	}
 
-	public LexicographicPermutationCounter(final int setSize, final int permutationSize)
-	{
+	public LexicographicPermutationCounter(final int setSize,
+			final int permutationSize) {
 		super(setSize, permutationSize);
 
 		reset();
 	}
 
-	private static void swap(final int[] permutation, final int firstIndex, final int secondIndex)
-	{
+	private static void swap(final int[] permutation, final int firstIndex,
+			final int secondIndex) {
 		final int first = permutation[firstIndex];
 		permutation[firstIndex] = permutation[secondIndex];
 		permutation[secondIndex] = first;
 	}
 
 	@Override
-	protected boolean next()
-	{
+	protected boolean next() {
 		final int[] perm = this.getPermutation();
 
-		if( perm.length == 1 )
+		if (perm.length == 1)
 			return false;
 
 		int permutationIndex;
-		for(permutationIndex = perm.length - 2; permutationIndex >= 0; permutationIndex--)
-			if( perm[permutationIndex] < perm[permutationIndex + 1] )
+		for (permutationIndex = perm.length - 2; permutationIndex >= 0; permutationIndex--)
+			if (perm[permutationIndex] < perm[permutationIndex + 1])
 				break;
 
 		int swapIndex = perm.length - 1;
-		while( perm[permutationIndex] > perm[swapIndex] )
+		while (perm[permutationIndex] > perm[swapIndex])
 			swapIndex--;
 		swap(perm, swapIndex, permutationIndex);
 
-		for(int firstSwap = perm.length - 1, secondSwap = permutationIndex + 1; firstSwap > secondSwap; firstSwap--, secondSwap++)
+		for (int firstSwap = perm.length - 1, secondSwap = permutationIndex + 1; firstSwap > secondSwap; firstSwap--, secondSwap++)
 			swap(perm, firstSwap, secondSwap);
 
 		return true;

@@ -18,36 +18,38 @@
  ******************************************************************************/
 package syncleus.dann.genetics;
 
-import syncleus.dann.evolve.DoubleValueGene;
-import syncleus.dann.evolve.ValueGene;
-import syncleus.dann.evolve.MutableDouble;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class TestDoubleValueGene
-{
+import syncleus.dann.evolve.DoubleValueGene;
+import syncleus.dann.evolve.MutableDouble;
+import syncleus.dann.evolve.ValueGene;
+
+public class TestDoubleValueGene {
 	@Test
-	public void testConstructors()
-	{
+	public void testConstructors() {
 		ValueGene test = new DoubleValueGene(93947810231.0);
-		Assert.assertTrue("value constructor failed", Math.abs(test.getValue().getNumber().doubleValue() - 93947810231.0) < 1000);
+		Assert.assertTrue("value constructor failed", Math.abs(test.getValue()
+				.getNumber().doubleValue() - 93947810231.0) < 1000);
 		test = new DoubleValueGene(new MutableDouble(20237420342.0));
-		Assert.assertTrue("MutableDouble value constructor failed", Math.abs(test.getValue().getNumber().doubleValue() - 20237420342.0) < 1000);
+		Assert.assertTrue(
+				"MutableDouble value constructor failed",
+				Math.abs(test.getValue().getNumber().doubleValue() - 20237420342.0) < 1000);
 		test = new DoubleValueGene(82649173937.0);
-		Assert.assertTrue("Number value constructor failed", Math.abs(test.getValue().getNumber().doubleValue() - 82649173937.0) < 1000);
+		Assert.assertTrue("Number value constructor failed", Math.abs(test
+				.getValue().getNumber().doubleValue() - 82649173937.0) < 1000);
 		test = new DoubleValueGene();
-		Assert.assertTrue("default constructor failed", test.getValue().getNumber().doubleValue() == 0.0);
+		Assert.assertTrue("default constructor failed", test.getValue()
+				.getNumber().doubleValue() == 0.0);
 	}
 
 	@Test
-	public void testMutation()
-	{
+	public void testMutation() {
 		final ValueGene center = new DoubleValueGene(0.0);
 
 		double averageSum = 0.0;
 		double testCount;
-		for(testCount = 0.0; testCount < 1000; testCount++)
-		{
+		for (testCount = 0.0; testCount < 1000; testCount++) {
 			averageSum += center.mutate(1.0).getValue().doubleValue();
 		}
 

@@ -220,4 +220,4 @@ package syncleus.dann.graph.drawing.hyperassociativemap.visualization;
 //	{
 //		return this.canvas3D;
 //	}
-//}
+// }

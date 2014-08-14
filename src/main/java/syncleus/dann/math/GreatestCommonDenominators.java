@@ -18,54 +18,47 @@
  ******************************************************************************/
 package syncleus.dann.math;
 
-public final class GreatestCommonDenominators
-{
-	public static class ExtendedGCD
-	{
+public final class GreatestCommonDenominators {
+	public static class ExtendedGCD {
 		private final long x;
 		private final long y;
 		private final long greatestCommonDenominator;
 
-		private ExtendedGCD(final long x, final long y, final long greatestCommonDenominator)
-		{
+		private ExtendedGCD(final long x, final long y,
+				final long greatestCommonDenominator) {
 			this.x = x;
 			this.y = y;
 			this.greatestCommonDenominator = greatestCommonDenominator;
 		}
 
-		public long getX()
-		{
+		public long getX() {
 			return this.x;
 		}
 
-		public long getY()
-		{
+		public long getY() {
 			return this.y;
 		}
 
-		public long getGreatestCommonDenominator()
-		{
+		public long getGreatestCommonDenominator() {
 			return this.greatestCommonDenominator;
 		}
 
 		@Override
-		public String toString()
-		{
-			return "a*" + this.x + " + b*" + this.y + " = " + this.greatestCommonDenominator;
+		public String toString() {
+			return "a*" + this.x + " + b*" + this.y + " = "
+					+ this.greatestCommonDenominator;
 		}
 	}
 
-	private GreatestCommonDenominators()
-	{
-		//this class is an utility class, it can not be instantiated
+	private GreatestCommonDenominators() {
+		// this class is an utility class, it can not be instantiated
 	}
 
-	public static long euclideanGCD(final long firstNumerator, final long secondNumerator)
-	{
+	public static long euclideanGCD(final long firstNumerator,
+			final long secondNumerator) {
 		long firstEuclidean = firstNumerator;
 		long secondEuclidean = secondNumerator;
-		while( firstEuclidean != 0 )
-		{
+		while (firstEuclidean != 0) {
 			final long tempEuclidean = firstEuclidean;
 			firstEuclidean = secondEuclidean % firstEuclidean;
 			secondEuclidean = tempEuclidean;
@@ -73,16 +66,15 @@ public final class GreatestCommonDenominators
 		return Math.abs(secondEuclidean);
 	}
 
-	public static ExtendedGCD extendedEuclideanGCD(final long firstNumerator, final long secondNumerator)
-	{
+	public static ExtendedGCD extendedEuclideanGCD(final long firstNumerator,
+			final long secondNumerator) {
 		long x = 0;
 		long y = 1;
 		long lastx = 1;
 		long lasty = 0;
 		long a = firstNumerator;
 		long b = secondNumerator;
-		while( b != 0 )
-		{
+		while (b != 0) {
 			final long quotient = a / b;
 
 			long temp = b;
@@ -101,39 +93,36 @@ public final class GreatestCommonDenominators
 		return new ExtendedGCD(lastx, lasty, Math.abs(a));
 	}
 
-	public static long binaryGCD(final long firstNumerator, final long secondNumerator)
-	{
+	public static long binaryGCD(final long firstNumerator,
+			final long secondNumerator) {
 		long firstBinary = Math.abs(firstNumerator);
 		long secondBinary = Math.abs(secondNumerator);
 		long shift;
 
-		if( firstBinary == 0 || secondBinary == 0 )
+		if (firstBinary == 0 || secondBinary == 0)
 			return firstBinary | secondBinary;
 
-		for(shift = 0; ((firstBinary | secondBinary) & 1) == 0; ++shift)
-		{
+		for (shift = 0; ((firstBinary | secondBinary) & 1) == 0; ++shift) {
 			firstBinary >>= 1;
 			secondBinary >>= 1;
 		}
 
-		while( (firstBinary & 1) == 0 )
+		while ((firstBinary & 1) == 0)
 			firstBinary >>= 1;
 
-		do
-		{
-			while( (secondBinary & 1) == 0 )
+		do {
+			while ((secondBinary & 1) == 0)
 				secondBinary >>= 1;
 
-			if( firstBinary < secondBinary )
+			if (firstBinary < secondBinary)
 				secondBinary -= firstBinary;
-			else
-			{
+			else {
 				final long diff = firstBinary - secondBinary;
 				firstBinary = secondBinary;
 				secondBinary = diff;
 			}
 			secondBinary >>= 1;
-		} while( secondBinary != 0 );
+		} while (secondBinary != 0);
 
 		return firstBinary << shift;
 	}

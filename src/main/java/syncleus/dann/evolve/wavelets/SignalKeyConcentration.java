@@ -21,44 +21,46 @@ package syncleus.dann.evolve.wavelets;
 /**
  * A SignalKeyConcentration is a SignalKey with a known concentration value.
  */
-public class SignalKeyConcentration
-{
+public class SignalKeyConcentration {
 	private final SignalKey signal;
 	private double concentration;
 
 	/**
-	 * Creates a new SignalKeyConcentration from the supplied SignalKey with a given concentration.
-	 * @param ourSignal The SignalKey to use
+	 * Creates a new SignalKeyConcentration from the supplied SignalKey with a
+	 * given concentration.
+	 *
+	 * @param ourSignal
+	 *            The SignalKey to use
 	 */
-	public SignalKeyConcentration(final SignalKey ourSignal)
-	{
+	public SignalKeyConcentration(final SignalKey ourSignal) {
 		this.signal = ourSignal;
 	}
 
 	/**
 	 * Gets the SignalKey in use.
+	 *
 	 * @return The SignalKey in use
 	 */
-	public final SignalKey getSignal()
-	{
+	public final SignalKey getSignal() {
 		return this.signal;
 	}
 
 	/**
 	 * Gets the current concentration.
+	 *
 	 * @return The concentration in use
 	 */
-	public final double getConcentration()
-	{
+	public final double getConcentration() {
 		return this.concentration;
 	}
 
 	/**
 	 * Sets the newConcentration.
-	 * @param newConcentration The newConcentration to use
+	 *
+	 * @param newConcentration
+	 *            The newConcentration to use
 	 */
-	public final void setConcentration(final double newConcentration)
-	{
+	public final void setConcentration(final double newConcentration) {
 		this.concentration = newConcentration;
 	}
 }

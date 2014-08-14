@@ -18,29 +18,27 @@
  ******************************************************************************/
 package syncleus.dann.neural;
 
-public abstract class AbstractStaticNeuron extends AbstractNeuron
-{
+public abstract class AbstractStaticNeuron extends AbstractNeuron {
 	private static final long serialVersionUID = 4752462697390024068L;
 	private final double output;
 
-	protected AbstractStaticNeuron(final Brain<InputNeuron, OutputNeuron, Neuron, Synapse<Neuron>> brain, final double constantOutput)
-	{
+	protected AbstractStaticNeuron(
+			final Brain<InputNeuron, OutputNeuron, Neuron, Synapse<Neuron>> brain,
+			final double constantOutput) {
 		super(brain);
 		this.output = constantOutput;
 	}
 
 	@Override
-	public void tick()
-	{
-		for (final Synapse<Neuron> current : getBrain().getTraversableEdges(this))
-		{
+	public void tick() {
+		for (final Synapse<Neuron> current : getBrain().getTraversableEdges(
+				this)) {
 			current.setInput(output);
 		}
 	}
 
 	@Override
-	protected double getOutput()
-	{
+	protected double getOutput() {
 		return this.output;
 	}
 }

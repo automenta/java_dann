@@ -25,86 +25,85 @@ import java.util.Set;
 import syncleus.dann.graph.cycle.CycleFinder;
 import syncleus.dann.graph.cycle.ExhaustiveDepthFirstSearchCycleFinder;
 
-public abstract class AbstractWalk<N, E extends Edge<N>> implements Walk<N, E>
-{
-	protected boolean verify(final List<N> nodeSteps, final List<E> edgeSteps)
-	{
-		if( edgeSteps == null )
+public abstract class AbstractWalk<N, E extends Edge<N>> implements Walk<N, E> {
+	protected boolean verify(final List<N> nodeSteps, final List<E> edgeSteps) {
+		if (edgeSteps == null)
 			throw new IllegalArgumentException("steps can not be null");
-		if( edgeSteps.contains(null) )
+		if (edgeSteps.contains(null))
 			throw new IllegalArgumentException("steps can not contain a null");
-		if( nodeSteps == null )
+		if (nodeSteps == null)
 			throw new IllegalArgumentException("nodeSteps can not be null");
-		if( nodeSteps.contains(null) )
-			throw new IllegalArgumentException("nodeSteps can not contain a null");
-		if( (nodeSteps.size() != (edgeSteps.size() + 1)) || (nodeSteps.size() < 2) || (edgeSteps.size() < 1) )
+		if (nodeSteps.contains(null))
+			throw new IllegalArgumentException(
+					"nodeSteps can not contain a null");
+		if ((nodeSteps.size() != (edgeSteps.size() + 1))
+				|| (nodeSteps.size() < 2) || (edgeSteps.size() < 1))
 			throw new IllegalArgumentException("Wrong number of nodes or steps");
 		int nextNodeIndex = 0;
-		for(final E edgeStep : edgeSteps)
-		{
-			if( !edgeStep.getNodes().contains(nodeSteps.get(nextNodeIndex)) )
+		for (final E edgeStep : edgeSteps) {
+			if (!edgeStep.getNodes().contains(nodeSteps.get(nextNodeIndex)))
 				return false;
 			nextNodeIndex++;
 		}
-		return edgeSteps.get(edgeSteps.size() - 1).getNodes().contains(nodeSteps.get(nextNodeIndex));
+		return edgeSteps.get(edgeSteps.size() - 1).getNodes()
+				.contains(nodeSteps.get(nextNodeIndex));
 	}
 
 	@Override
-	public boolean isClosed()
-	{
-		return this.getNodeSteps().get(0).equals(this.getNodeSteps().get(this.getNodeSteps().size() - 1));
+	public boolean isClosed() {
+		return this
+				.getNodeSteps()
+				.get(0)
+				.equals(this.getNodeSteps().get(this.getNodeSteps().size() - 1));
 	}
 
 	@Override
-	public int getLength()
-	{
+	public int getLength() {
 		return this.getSteps().size();
 	}
 
 	@Override
-	public boolean isTrail()
-	{
+	public boolean isTrail() {
 		final Set<E> edgeSet = new HashSet<E>(this.getSteps());
 		return edgeSet.size() >= this.getSteps().size();
 	}
 
 	@Override
-	public boolean isTour()
-	{
+	public boolean isTour() {
 		return (this.isTrail()) && (this.isClosed());
 	}
 
-	public boolean isCycle()
-	{
-		return this.getNodeSteps().get(0).equals(this.getNodeSteps().get(this.getNodeSteps().size() - 1));
+	public boolean isCycle() {
+		return this
+				.getNodeSteps()
+				.get(0)
+				.equals(this.getNodeSteps().get(this.getNodeSteps().size() - 1));
 	}
 
 	@Override
-	public boolean hasChildCycles()
-	{
-		final Graph<N, E> graph = new ImmutableAdjacencyGraph<N, E>(new HashSet<N>(this.getNodeSteps()), new HashSet<E>(this.getSteps()));
+	public boolean hasChildCycles() {
+		final Graph<N, E> graph = new ImmutableAdjacencyGraph<N, E>(
+				new HashSet<N>(this.getNodeSteps()), new HashSet<E>(
+						this.getSteps()));
 		final CycleFinder<N, E> finder = new ExhaustiveDepthFirstSearchCycleFinder<N, E>();
-		if( this.isCycle() )
-			if( finder.cycleCount(graph) > 1 )
+		if (this.isCycle())
+			if (finder.cycleCount(graph) > 1)
 				return true;
-			else if( finder.hasCycle(graph) )
+			else if (finder.hasCycle(graph))
 				return true;
 		return false;
 	}
 
-	protected double calculateWeight(final double defaultWeight)
-	{
+	protected double calculateWeight(final double defaultWeight) {
 		double newTotalWeight = 0.0;
-		for(final E step : this.getSteps())
-		{
-			if( step instanceof Weighted )
+		for (final E step : this.getSteps()) {
+			if (step instanceof Weighted)
 				newTotalWeight += ((Weighted) step).getWeight();
 			else
 				newTotalWeight += defaultWeight;
 		}
-		for(final N step : this.getNodeSteps())
-		{
-			if( step instanceof Weighted )
+		for (final N step : this.getNodeSteps()) {
+			if (step instanceof Weighted)
 				newTotalWeight += ((Weighted) step).getWeight();
 			else
 				newTotalWeight += defaultWeight;
@@ -113,34 +112,32 @@ public abstract class AbstractWalk<N, E extends Edge<N>> implements Walk<N, E>
 	}
 
 	@Override
-	public int hashCode()
-	{
+	public int hashCode() {
 		final Set<N> uniqueNodes = new HashSet<N>(this.getNodeSteps());
 		final Set<E> uniqueEdges = new HashSet<E>(this.getSteps());
-		return (uniqueNodes.hashCode() + uniqueEdges.hashCode()) * uniqueEdges.hashCode();
+		return (uniqueNodes.hashCode() + uniqueEdges.hashCode())
+				* uniqueEdges.hashCode();
 	}
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public boolean equals(final Object object)
-	{
-		if( object == null )
+	public boolean equals(final Object object) {
+		if (object == null)
 			return false;
-		if( object.getClass() != this.getClass() )
+		if (object.getClass() != this.getClass())
 			return false;
 		final Walk walk = (Walk) object;
 		final Set uniqueNodes = new HashSet<N>(this.getNodeSteps());
 		final Set uniqueEdges = new HashSet<E>(this.getSteps());
 		final Set otherUniqueNodes = new HashSet(walk.getNodeSteps());
 		final Set otherUniqueEdges = new HashSet(walk.getSteps());
-		if( !(uniqueNodes.equals(otherUniqueNodes)) )
+		if (!(uniqueNodes.equals(otherUniqueNodes)))
 			return false;
 		return uniqueEdges.equals(otherUniqueEdges);
 	}
 
 	@Override
-	public String toString()
-	{
+	public String toString() {
 		return this.getSteps().toString();
 	}
 }

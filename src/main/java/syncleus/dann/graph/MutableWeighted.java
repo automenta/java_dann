@@ -18,7 +18,6 @@
  ******************************************************************************/
 package syncleus.dann.graph;
 
-public interface MutableWeighted extends Weighted
-{
+public interface MutableWeighted extends Weighted {
 	void setWeight(double newWeight);
 }

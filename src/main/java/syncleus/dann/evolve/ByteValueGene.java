@@ -26,48 +26,46 @@ package syncleus.dann.evolve;
  * @author Jeffrey Phillips Freeman
  * @since 2.0
  */
-public class ByteValueGene extends AbstractValueGene<MutableByte>
-{
+public class ByteValueGene extends AbstractValueGene<MutableByte> {
 	/**
 	 * Initializes a new instance of this class with a value of 0.
 	 *
 	 * @since 2.0
 	 */
-	public ByteValueGene()
-	{
+	public ByteValueGene() {
 		super(new MutableByte((byte) 0));
 	}
 
 	/**
 	 * Initializes a new instance of this class with the specified value.
 	 *
-	 * @param value The value for this gene.
+	 * @param value
+	 *            The value for this gene.
 	 * @since 2.0
 	 */
-	public ByteValueGene(final byte value)
-	{
+	public ByteValueGene(final byte value) {
 		super(new MutableByte(value));
 	}
 
 	/**
 	 * Initializes a new instance of this class with the specified value.
 	 *
-	 * @param value The value for this gene.
+	 * @param value
+	 *            The value for this gene.
 	 * @since 2.0
 	 */
-	public ByteValueGene(final Byte value)
-	{
+	public ByteValueGene(final Byte value) {
 		super(new MutableByte(value));
 	}
 
 	/**
 	 * Initializes a new instance of this class with the specified value.
 	 *
-	 * @param value The value for this gene.
+	 * @param value
+	 *            The value for this gene.
 	 * @since 2.0
 	 */
-	public ByteValueGene(final MutableByte value)
-	{
+	public ByteValueGene(final MutableByte value) {
 		super(value);
 	}
 
@@ -75,11 +73,11 @@ public class ByteValueGene extends AbstractValueGene<MutableByte>
 	 * Initializes a new instance of this class that is a copy of the specified
 	 * value.
 	 *
-	 * @param copyGene The value to copy.
+	 * @param copyGene
+	 *            The value to copy.
 	 * @since 2.0
 	 */
-	public ByteValueGene(final ByteValueGene copyGene)
-	{
+	public ByteValueGene(final ByteValueGene copyGene) {
 		super(copyGene);
 	}
 
@@ -90,24 +88,23 @@ public class ByteValueGene extends AbstractValueGene<MutableByte>
 	 * @since 2.0
 	 */
 	@Override
-	public ByteValueGene clone()
-	{
+	public ByteValueGene clone() {
 		return (ByteValueGene) super.clone();
 	}
 
 	/**
-	 * This will make a copy of the object and mutate it. The mutation has a normal
-	 * distribution multiplied by the deviation.
+	 * This will make a copy of the object and mutate it. The mutation has a
+	 * normal distribution multiplied by the deviation.
 	 *
-	 * @param deviation A double indicating how extreme the mutation will be. The
-	 * greater the deviation the more drastically the object will mutate. A
-	 * deviation of 0 should cause no mutation.
+	 * @param deviation
+	 *            A double indicating how extreme the mutation will be. The
+	 *            greater the deviation the more drastically the object will
+	 *            mutate. A deviation of 0 should cause no mutation.
 	 * @return A copy of the current object with potential mutations.
 	 * @since 2.0
 	 */
 	@Override
-	public ByteValueGene mutate(final double deviation)
-	{
+	public ByteValueGene mutate(final double deviation) {
 		final ByteValueGene copy = this.clone();
 		copy.internalMutate(deviation);
 

@@ -20,7 +20,6 @@ package syncleus.dann.neural.backprop;
 
 import syncleus.dann.neural.Neuron;
 
-public interface BackpropNeuron extends Neuron
-{
+public interface BackpropNeuron extends Neuron {
 	void backPropagate();
 }

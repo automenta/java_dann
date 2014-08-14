@@ -26,48 +26,46 @@ package syncleus.dann.evolve;
  * @author Jeffrey Phillips Freeman
  * @since 2.0
  */
-public class ShortValueGene extends AbstractValueGene<MutableShort>
-{
+public class ShortValueGene extends AbstractValueGene<MutableShort> {
 	/**
 	 * Initializes a new instance of this class with a value of 0.
 	 *
 	 * @since 2.0
 	 */
-	public ShortValueGene()
-	{
+	public ShortValueGene() {
 		super(new MutableShort((short) 0));
 	}
 
 	/**
 	 * Initializes a new instance of this class with the specified value.
 	 *
-	 * @param value The value for this gene.
+	 * @param value
+	 *            The value for this gene.
 	 * @since 2.0
 	 */
-	public ShortValueGene(final short value)
-	{
+	public ShortValueGene(final short value) {
 		super(new MutableShort(value));
 	}
 
 	/**
 	 * Initializes a new instance of this class with the specified value.
 	 *
-	 * @param value The value for this gene.
+	 * @param value
+	 *            The value for this gene.
 	 * @since 2.0
 	 */
-	public ShortValueGene(final Short value)
-	{
+	public ShortValueGene(final Short value) {
 		super(new MutableShort(value));
 	}
 
 	/**
 	 * Initializes a new instance of this class with the specified value.
 	 *
-	 * @param value The value for this gene.
+	 * @param value
+	 *            The value for this gene.
 	 * @since 2.0
 	 */
-	public ShortValueGene(final MutableShort value)
-	{
+	public ShortValueGene(final MutableShort value) {
 		super(value);
 	}
 
@@ -75,11 +73,11 @@ public class ShortValueGene extends AbstractValueGene<MutableShort>
 	 * Initializes a new instance of this class that is a copy of the specified
 	 * value.
 	 *
-	 * @param copyGene The value to copy.
+	 * @param copyGene
+	 *            The value to copy.
 	 * @since 2.0
 	 */
-	public ShortValueGene(final ShortValueGene copyGene)
-	{
+	public ShortValueGene(final ShortValueGene copyGene) {
 		super(copyGene);
 	}
 
@@ -90,24 +88,23 @@ public class ShortValueGene extends AbstractValueGene<MutableShort>
 	 * @since 2.0
 	 */
 	@Override
-	public ShortValueGene clone()
-	{
+	public ShortValueGene clone() {
 		return (ShortValueGene) super.clone();
 	}
 
 	/**
-	 * This will make a copy of the object and mutate it. The mutation has a normal
-	 * distribution multiplied by the deviation.
+	 * This will make a copy of the object and mutate it. The mutation has a
+	 * normal distribution multiplied by the deviation.
 	 *
-	 * @param deviation A double indicating how extreme the mutation will be. The
-	 * greater the deviation the more drastically the object will mutate. A
-	 * deviation of 0 should cause no mutation.
+	 * @param deviation
+	 *            A double indicating how extreme the mutation will be. The
+	 *            greater the deviation the more drastically the object will
+	 *            mutate. A deviation of 0 should cause no mutation.
 	 * @return A copy of the current object with potential mutations.
 	 * @since 2.0
 	 */
 	@Override
-	public ShortValueGene mutate(final double deviation)
-	{
+	public ShortValueGene mutate(final double deviation) {
 		final ShortValueGene copy = this.clone();
 		copy.internalMutate(deviation);
 

@@ -30,49 +30,47 @@ import syncleus.dann.graph.AbstractAdjacencyGraph;
 import syncleus.dann.graph.Edge;
 import syncleus.dann.graph.Graph;
 
-public class LinkedGraph<N, E extends Edge<N>> extends AbstractAdjacencyGraph<N, E>
-{
+public class LinkedGraph<N, E extends Edge<N>> extends
+		AbstractAdjacencyGraph<N, E> {
 	private final Set<N> nodes;
 	private final Set<E> edges;
 	private final Map<N, Set<E>> neighborEdges = new HashMap<N, Set<E>>();
 	private final Map<N, List<N>> neighborNodes = new HashMap<N, List<N>>();
 	private static final long serialVersionUID = -5301697513399013407L;
 
-	public LinkedGraph(final Graph<N, E> copyGraph)
-	{
+	public LinkedGraph(final Graph<N, E> copyGraph) {
 		this(copyGraph.getNodes(), copyGraph.getEdges());
 	}
 
-	public LinkedGraph(final Set<N> nodes, final Set<E> edges)
-	{
+	public LinkedGraph(final Set<N> nodes, final Set<E> edges) {
 		this.nodes = new LinkedHashSet<N>(nodes);
 		this.edges = new LinkedHashSet<E>(edges);
-		for(final E edge : edges)
-		{
+		for (final E edge : edges) {
 			final List<N> edgeNodes = edge.getNodes();
-			for(int startNodeIndex = 0; startNodeIndex < edgeNodes.size(); startNodeIndex++)
-			{
-				if( !this.nodes.contains(edgeNodes.get(startNodeIndex)) )
-					throw new IllegalArgumentException("A node that is an end point in one of the edges was not in the nodes list");
+			for (int startNodeIndex = 0; startNodeIndex < edgeNodes.size(); startNodeIndex++) {
+				if (!this.nodes.contains(edgeNodes.get(startNodeIndex)))
+					throw new IllegalArgumentException(
+							"A node that is an end point in one of the edges was not in the nodes list");
 
-				Set<E> startNeighborEdges = this.neighborEdges.get(edgeNodes.get(startNodeIndex));
-				if( startNeighborEdges == null )
-				{
+				Set<E> startNeighborEdges = this.neighborEdges.get(edgeNodes
+						.get(startNodeIndex));
+				if (startNeighborEdges == null) {
 					startNeighborEdges = new LinkedHashSet<E>();
-					this.neighborEdges.put(edgeNodes.get(startNodeIndex), startNeighborEdges);
+					this.neighborEdges.put(edgeNodes.get(startNodeIndex),
+							startNeighborEdges);
 				}
 				startNeighborEdges.add(edge);
 
-				List<N> startNeighborNodes = this.neighborNodes.get(edgeNodes.get(startNodeIndex));
-				if( startNeighborNodes == null )
-				{
+				List<N> startNeighborNodes = this.neighborNodes.get(edgeNodes
+						.get(startNodeIndex));
+				if (startNeighborNodes == null) {
 					startNeighborNodes = new ArrayList<N>();
-					this.neighborNodes.put(edgeNodes.get(startNodeIndex), startNeighborNodes);
+					this.neighborNodes.put(edgeNodes.get(startNodeIndex),
+							startNeighborNodes);
 				}
 
-				for(int endNodeIndex = 0; endNodeIndex < edgeNodes.size(); endNodeIndex++)
-				{
-					if( startNodeIndex == endNodeIndex )
+				for (int endNodeIndex = 0; endNodeIndex < edgeNodes.size(); endNodeIndex++) {
+					if (startNodeIndex == endNodeIndex)
 						continue;
 
 					startNeighborNodes.add(edgeNodes.get(endNodeIndex));
@@ -82,29 +80,26 @@ public class LinkedGraph<N, E extends Edge<N>> extends AbstractAdjacencyGraph<N,
 	}
 
 	@Override
-	public Set<N> getNodes()
-	{
+	public Set<N> getNodes() {
 		return Collections.unmodifiableSet(this.nodes);
 	}
 
 	@Override
-	public Set<E> getEdges()
-	{
+	public Set<E> getEdges() {
 		return Collections.unmodifiableSet(this.edges);
 	}
 
 	@Override
-	public Set<E> getAdjacentEdges(final N node)
-	{
-		if( this.neighborEdges.containsKey(node) )
+	public Set<E> getAdjacentEdges(final N node) {
+		if (this.neighborEdges.containsKey(node))
 			return Collections.unmodifiableSet(this.neighborEdges.get(node));
 		else
-			return Collections.<E>emptySet();
+			return Collections.<E> emptySet();
 	}
 
 	@Override
-	public List<N> getAdjacentNodes(final N node)
-	{
-		return Collections.unmodifiableList(new ArrayList<N>(this.neighborNodes.get(node)));
+	public List<N> getAdjacentNodes(final N node) {
+		return Collections.unmodifiableList(new ArrayList<N>(this.neighborNodes
+				.get(node)));
 	}
 }

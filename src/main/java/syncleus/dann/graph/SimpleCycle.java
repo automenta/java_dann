@@ -21,63 +21,62 @@ package syncleus.dann.graph;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SimpleCycle<N, E extends Edge<N>> extends SimpleWalk<N, E> implements Cycle<N, E>
-{
-	public SimpleCycle(final List<E> steps, final List<N> nodes, final double defaultWeight)
-	{
+public class SimpleCycle<N, E extends Edge<N>> extends SimpleWalk<N, E>
+		implements Cycle<N, E> {
+	public SimpleCycle(final List<E> steps, final List<N> nodes,
+			final double defaultWeight) {
 		super(steps, nodes, defaultWeight);
 	}
 
-	public SimpleCycle(final List<E> steps, final double defaultWeight)
-	{
-		this(steps, SimpleCycle.<N, E>edgeToNodeSteps(steps), defaultWeight);
+	public SimpleCycle(final List<E> steps, final double defaultWeight) {
+		this(steps, SimpleCycle.<N, E> edgeToNodeSteps(steps), defaultWeight);
 	}
 
-	public SimpleCycle(final List<E> steps, final List<N> nodes)
-	{
+	public SimpleCycle(final List<E> steps, final List<N> nodes) {
 		super(steps, nodes, 0.0);
 	}
 
-	public SimpleCycle(final List<E> steps)
-	{
-		this(steps, SimpleCycle.<N, E>edgeToNodeSteps(steps), 0.0);
+	public SimpleCycle(final List<E> steps) {
+		this(steps, SimpleCycle.<N, E> edgeToNodeSteps(steps), 0.0);
 	}
 
-	private static <N, E extends Edge<N>> N startNodeFromSteps(final List<E> steps)
-	{
-		if( steps.size() == 1 )
+	private static <N, E extends Edge<N>> N startNodeFromSteps(
+			final List<E> steps) {
+		if (steps.size() == 1)
 			return steps.get(0).getNodes().get(0);
 
-		final List<N> exclusiveFirstNodes = new ArrayList<N>(steps.get(0).getNodes());
+		final List<N> exclusiveFirstNodes = new ArrayList<N>(steps.get(0)
+				.getNodes());
 		exclusiveFirstNodes.removeAll(steps.get(1).getNodes());
-		if( exclusiveFirstNodes.size() == 1 )
+		if (exclusiveFirstNodes.size() == 1)
 			return exclusiveFirstNodes.get(0);
-		else if( exclusiveFirstNodes.isEmpty() )
+		else if (exclusiveFirstNodes.isEmpty())
 			return steps.get(0).getNodes().get(0);
 		else
 			throw new IllegalArgumentException("steps does not form a path");
 	}
 
 	@Override
-	protected boolean verify(final List<N> nodeSteps, final List<E> edgeSteps)
-	{
-		return (super.verify(nodeSteps, edgeSteps)) && (syncleus.dann.graph.AbstractCycle.verifyUtility(nodeSteps, edgeSteps));
+	protected boolean verify(final List<N> nodeSteps, final List<E> edgeSteps) {
+		return (super.verify(nodeSteps, edgeSteps))
+				&& (syncleus.dann.graph.AbstractCycle.verifyUtility(nodeSteps,
+						edgeSteps));
 	}
 
-	private static <N, E extends Edge<N>> List<N> edgeToNodeSteps(final List<E> steps)
-	{
-		if( steps == null )
+	private static <N, E extends Edge<N>> List<N> edgeToNodeSteps(
+			final List<E> steps) {
+		if (steps == null)
 			throw new IllegalArgumentException("steps can not be null");
-		if( steps.contains(null) )
+		if (steps.contains(null))
 			throw new IllegalArgumentException("steps can not contain a null");
-		if( steps.size() < 1 )
+		if (steps.size() < 1)
 			throw new IllegalArgumentException("steps can not be empty");
 		final List<N> newNodeSteps = new ArrayList<N>();
-		N nextNodeStep = SimpleCycle.<N, E>startNodeFromSteps(steps);
-		for(final E edgeStep : steps)
-		{
-			if( !(edgeStep instanceof BidirectedEdge) )
-				throw new IllegalArgumentException("all steps are not BidirectedEdge");
+		N nextNodeStep = SimpleCycle.<N, E> startNodeFromSteps(steps);
+		for (final E edgeStep : steps) {
+			if (!(edgeStep instanceof BidirectedEdge))
+				throw new IllegalArgumentException(
+						"all steps are not BidirectedEdge");
 			newNodeSteps.add(nextNodeStep);
 			final List<N> nextNodes = new ArrayList<N>(edgeStep.getNodes());
 			nextNodes.remove(nextNodeStep);
@@ -88,24 +87,21 @@ public class SimpleCycle<N, E extends Edge<N>> extends SimpleWalk<N, E> implemen
 	}
 
 	@Override
-	public boolean isOddCycle()
-	{
+	public boolean isOddCycle() {
 		return AbstractCycle.isOddCycle(this);
 	}
 
 	@Override
-	protected double calculateWeight(final double defaultWeight)
-	{
+	protected double calculateWeight(final double defaultWeight) {
 		final N startNode = this.getNodeSteps().get(0);
 		double endNodeWeight = 0.0;
-		if( startNode instanceof Weighted )
+		if (startNode instanceof Weighted)
 			endNodeWeight = ((Weighted) startNode).getWeight();
 		return super.calculateWeight(defaultWeight) - endNodeWeight;
 	}
 
 	@Override
-	public boolean isCycle()
-	{
+	public boolean isCycle() {
 		return true;
 	}
 }

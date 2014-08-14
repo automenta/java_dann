@@ -1,7 +1,5 @@
 package syncleus.dann.control.qlearning;
 
-import syncleus.dann.math.Sigmoids;
-import syncleus.dann.math.Randoms;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -10,15 +8,17 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
-
+import syncleus.dann.math.Randoms;
+import syncleus.dann.math.Sigmoids;
 
 /**
- * Main class of the framework, contains the whole Error Backpropagation algorithm.
- * Takes information from the Perception object and learns on the basis of
- * desired output.  
+ * Main class of the framework, contains the whole Error Backpropagation
+ * algorithm. Takes information from the Perception object and learns on the
+ * basis of desired output.
+ *
  * @author Elser
  */
-public class ErrorBackpropagationNN implements Serializable{
+public class ErrorBackpropagationNN implements Serializable {
 	private static final long serialVersionUID = 1L;
 	/**
 	 * Neuron activation function mode
@@ -27,28 +27,28 @@ public class ErrorBackpropagationNN implements Serializable{
 	/**
 	 * An instance of class extending Perception
 	 */
-	private Perception perception;
+	private final Perception perception;
 	/**
 	 * Array of actions that can be taken
 	 */
-	private double[] input;
-	private double layerInput[][];
+	private final double[] input;
+	private final double layerInput[][];
 	/**
 	 * Neurons' activation values
 	 */
-	private double activation[][];
+	private final double activation[][];
 	/**
-	 * Weight   matrix [layer][i][j]
+	 * Weight matrix [layer][i][j]
 	 */
-	private double w[][][]; // weight   matrix [layer][i][j]
+	private double w[][][]; // weight matrix [layer][i][j]
 	/**
-	 * Weight   matrix [layer][i][j]
+	 * Weight matrix [layer][i][j]
 	 */
-	private double wDelta[][][]; // weight  delta matrix [layer][i][j]
+	private final double wDelta[][][]; // weight delta matrix [layer][i][j]
 	/**
 	 * Gradient matrix [layer][i]
 	 */
-	private double g[][];
+	private final double g[][];
 	/**
 	 * Learning rate
 	 */
@@ -59,24 +59,33 @@ public class ErrorBackpropagationNN implements Serializable{
 	 */
 	private double maxWeight;
 	private static final double MAX_WEIGHT_DEFAULT = 0.5;
-	
-	private int[] neuronsNo;
+
+	private final int[] neuronsNo;
 	private double[][][] wBackup;
 	private double[] desiredOutput;
 	private double error;
 	private double momentum = 0;
-	private double[] output;
+	private final double[] output;
 
 	/**
-	 * @param perception an instance of class extending Perception
-	 * @param actionsArray array of actions that can be taken
-	 * @param hiddenNeuronsNo numbers of neurons in hidden layers
-	 * @param alpha learning rate
-	 * @param lambda eligibility traces forgetting rate
-	 * @param gamma Q-learning Discount factor
-	 * @param maxWeight maximum initial weight of neuron connection
+	 * @param perception
+	 *            an instance of class extending Perception
+	 * @param actionsArray
+	 *            array of actions that can be taken
+	 * @param hiddenNeuronsNo
+	 *            numbers of neurons in hidden layers
+	 * @param alpha
+	 *            learning rate
+	 * @param lambda
+	 *            eligibility traces forgetting rate
+	 * @param gamma
+	 *            Q-learning Discount factor
+	 * @param maxWeight
+	 *            maximum initial weight of neuron connection
 	 */
-	public ErrorBackpropagationNN(Perception perception, double[] desiredOutput, int[] hiddenNeuronsNo, double alpha, double maxWeight) {
+	public ErrorBackpropagationNN(final Perception perception,
+			final double[] desiredOutput, final int[] hiddenNeuronsNo, final double alpha,
+			final double maxWeight) {
 		this.unipolar = perception.isUnipolar();
 		perception.start();
 		this.perception = perception;
@@ -84,9 +93,10 @@ public class ErrorBackpropagationNN implements Serializable{
 		this.input = perception.getOutput();
 		this.alpha = alpha;
 		this.maxWeight = maxWeight;
-		neuronsNo = new int[hiddenNeuronsNo.length+1];
-            System.arraycopy(hiddenNeuronsNo, 0, neuronsNo, 0, hiddenNeuronsNo.length);
-		neuronsNo[neuronsNo.length-1] = desiredOutput.length;
+		neuronsNo = new int[hiddenNeuronsNo.length + 1];
+		System.arraycopy(hiddenNeuronsNo, 0, neuronsNo, 0,
+				hiddenNeuronsNo.length);
+		neuronsNo[neuronsNo.length - 1] = desiredOutput.length;
 		activation = createActivationTable(neuronsNo);
 		output = activation[activation.length - 1];
 		layerInput = createLayerInputs(neuronsNo);
@@ -97,72 +107,74 @@ public class ErrorBackpropagationNN implements Serializable{
 	}
 
 	/**
-	 * @param perception - an instance of class implementing Perception
-	 * @param actionsArray - array of actions that can be taken
-	 * @param hiddenNeuronsNo - numbers of neurons in hidden layers
+	 * @param perception
+	 *            - an instance of class implementing Perception
+	 * @param actionsArray
+	 *            - array of actions that can be taken
+	 * @param hiddenNeuronsNo
+	 *            - numbers of neurons in hidden layers
 	 */
-	public ErrorBackpropagationNN(Perception perception, double[] desiredOutput, int[] hiddenNeuronsNo) {
-		this(
-			perception,
-			desiredOutput,
-			hiddenNeuronsNo,
-			ALPHA_DEFAULT,
-			MAX_WEIGHT_DEFAULT
-		);
+	public ErrorBackpropagationNN(final Perception perception,
+			final double[] desiredOutput, final int[] hiddenNeuronsNo) {
+		this(perception, desiredOutput, hiddenNeuronsNo, ALPHA_DEFAULT,
+				MAX_WEIGHT_DEFAULT);
 	}
 
 	/**
 	 * Use this constructor for one-layer neural network.
-	 * @param perception - an instance of class implementing Perception
-	 * @param actionsArray - array of actions that can be taken
+	 *
+	 * @param perception
+	 *            - an instance of class implementing Perception
+	 * @param actionsArray
+	 *            - array of actions that can be taken
 	 */
-	public ErrorBackpropagationNN(Perception perception, double[] desiredOutput) {
-		this(
-				perception,
-				desiredOutput,
-				new int[] {}	// no hidden layers
+	public ErrorBackpropagationNN(final Perception perception, final double[] desiredOutput) {
+		this(perception, desiredOutput, new int[] {} // no hidden layers
 		);
 	}
+
 	/**
-	 * One step of the Q-learning algorithm. Should be invoked at every time step.
-	 * It is responsible for selecting the action and updating weights.
+	 * One step of the Q-learning algorithm. Should be invoked at every time
+	 * step. It is responsible for selecting the action and updating weights.
 	 * DOES NOT execute any action. For this use Brain.execute() method.
-	 * @see ErrorBackpropagationNN#executeAction() 
+	 *
+	 * @see ErrorBackpropagationNN#executeAction()
 	 */
 	public void learn() {
-		countGradients();		// g(t)
-		updateWeights();		// w(t)
+		countGradients(); // g(t)
+		updateWeights(); // w(t)
 	}
-	
+
 	/**
-	 * Counts gradients with respect to the chosen action only and
-	 * updates all the eligibility traces. See algorithm description
-	 * for the details.
+	 * Counts gradients with respect to the chosen action only and updates all
+	 * the eligibility traces. See algorithm description for the details.
+	 *
 	 * @param action
 	 */
 	private void countGradients() {
 		double sumSqrError = 0;
-		for (int l = g.length-1; l>=0; l--) {
+		for (int l = g.length - 1; l >= 0; l--) {
 			for (int i = 0; i < activation[l].length; i++) {
 				double error = 0;
-				if(l == g.length-1) {
+				if (l == g.length - 1) {
 					error = desiredOutput[i] - output[i];
 					sumSqrError += error * error;
 				} else {
-					for (int j = 0; j < activation[l+1].length; j++) {
-						error += w[l+1][j][i] * g[l+1][j];
+					for (int j = 0; j < activation[l + 1].length; j++) {
+						error += w[l + 1][j][i] * g[l + 1][j];
 					}
 				}
-				double activ = activation[l][i];
-				if(unipolar) {
-					g[l][i] = activ * (1 - activ) * error; //uni
+				final double activ = activation[l][i];
+				if (unipolar) {
+					g[l][i] = activ * (1 - activ) * error; // uni
 				} else {
-					g[l][i] = 0.5 * (1 - activ*activ) * error; //bi
+					g[l][i] = 0.5 * (1 - activ * activ) * error; // bi
 				}
 			}
 		}
 		this.error = Math.sqrt(sumSqrError) / desiredOutput.length;
 	}
+
 	/**
 	 * Randomizes all the weights of neurons' connections.
 	 */
@@ -175,17 +187,19 @@ public class ErrorBackpropagationNN implements Serializable{
 			}
 		}
 	}
+
 	/**
 	 * Gives random weight value
+	 *
 	 * @return random weight value
 	 */
 	private double randWeight() {
 		return Randoms.d(-maxWeight, maxWeight);
 	}
-	
+
 	/**
-	 * Propagates the input signal throughout the network to the output.
-	 * In other words, it updates the activations of all the neurons.
+	 * Propagates the input signal throughout the network to the output. In
+	 * other words, it updates the activations of all the neurons.
 	 */
 	public void propagate() {
 		double weightedSum = 0;
@@ -197,7 +211,7 @@ public class ErrorBackpropagationNN implements Serializable{
 				for (int j = 0; j < wli.length; j++) {
 					weightedSum += wli[j] * layerInput[l][j];
 				}
-				if(unipolar) {
+				if (unipolar) {
 					activation[l][i] = Sigmoids.sigmoidUni(weightedSum);
 				} else {
 					activation[l][i] = Sigmoids.sigmoidBi(weightedSum);
@@ -205,17 +219,19 @@ public class ErrorBackpropagationNN implements Serializable{
 			}
 		}
 	}
-	
+
 	/**
-	 * Used to teach the neural network. Updates all the weights
-	 * basing on eligibility traces and the change value.
+	 * Used to teach the neural network. Updates all the weights basing on
+	 * eligibility traces and the change value.
+	 *
 	 * @param change
 	 */
 	private void updateWeights() {
-		for (int l = w.length-1; l >= 0; l--) {
+		for (int l = w.length - 1; l >= 0; l--) {
 			for (int i = 0; i < w[l].length; i++) {
 				for (int j = 0; j < w[l][i].length; j++) {
-					wDelta[l][i][j] = alpha * g[l][i] * layerInput[l][j] + momentum * wDelta[l][i][j];
+					wDelta[l][i][j] = alpha * g[l][i] * layerInput[l][j]
+							+ momentum * wDelta[l][i][j];
 					w[l][i][j] = w[l][i][j] + wDelta[l][i][j];
 				}
 			}
@@ -223,29 +239,30 @@ public class ErrorBackpropagationNN implements Serializable{
 	}
 
 	/**
-	 * Mutates the neural network by given percent.
-	 * Usually it is not used in the algorithm, however you may want use it,
-	 * if you implement a genetic algorithm.
+	 * Mutates the neural network by given percent. Usually it is not used in
+	 * the algorithm, however you may want use it, if you implement a genetic
+	 * algorithm.
+	 *
 	 * @param percent
 	 */
-	public void mutate(double percent) {
+	public void mutate(final double percent) {
 		for (int l = 0; l < w.length; l++) {
 			for (int i = 0; i < w[l].length; i++) {
 				for (int j = 0; j < w[l][i].length; j++) {
-					if(Randoms.successWithPercent(percent)) {
+					if (Randoms.successWithPercent(percent)) {
 						w[l][i][j] = randWeight();
 					}
 				}
 			}
 		}
 	}
-	
 
-	public void inheritFrom(ErrorBackpropagationNN father, ErrorBackpropagationNN mother) {
+	public void inheritFrom(final ErrorBackpropagationNN father,
+			final ErrorBackpropagationNN mother) {
 		for (int l = 0; l < w.length; l++) {
 			for (int i = 0; i < w[l].length; i++) {
 				for (int j = 0; j < w[l][i].length; j++) {
-					if(mother==null || Randoms.b()) {
+					if (mother == null || Randoms.b()) {
 						w[l][i][j] = father.w[l][i][j];
 					} else {
 						w[l][i][j] = mother.w[l][i][j];
@@ -254,14 +271,15 @@ public class ErrorBackpropagationNN implements Serializable{
 			}
 		}
 	}
+
 	/**
-	 * Resets the gradients and eligibility traces. Should be called everytime before 
-	 * the new learning episode starts.
+	 * Resets the gradients and eligibility traces. Should be called everytime
+	 * before the new learning episode starts.
 	 */
 	public void reset() {
 		for (int l = 0; l < w.length; l++) {
 			for (int i = 0; i < w[l].length; i++) {
-				g[l][i] = 0; 
+				g[l][i] = 0;
 			}
 		}
 	}
@@ -270,7 +288,7 @@ public class ErrorBackpropagationNN implements Serializable{
 		return alpha;
 	}
 
-	public void setAlpha(double alpha) {
+	public void setAlpha(final double alpha) {
 		this.alpha = alpha;
 	}
 
@@ -278,7 +296,7 @@ public class ErrorBackpropagationNN implements Serializable{
 		return maxWeight;
 	}
 
-	public void setMaxWeight(double maxWeight) {
+	public void setMaxWeight(final double maxWeight) {
 		this.maxWeight = maxWeight;
 	}
 
@@ -286,57 +304,64 @@ public class ErrorBackpropagationNN implements Serializable{
 		return unipolar;
 	}
 
-	public void setUnipolar(boolean unipolar) {
+	public void setUnipolar(final boolean unipolar) {
 		this.unipolar = unipolar;
 	}
 
 	/**
 	 * Method allocating input arrays for all the NN layers
+	 *
 	 * @param neuronsNo
 	 * @return
 	 */
-	private double[][] createLayerInputs(int[] neuronsNo) {
-		double[][] ret = new double[neuronsNo.length][];
+	private double[][] createLayerInputs(final int[] neuronsNo) {
+		final double[][] ret = new double[neuronsNo.length][];
 		for (int l = 0; l < neuronsNo.length; l++) {
-			if(l==0) {
+			if (l == 0) {
 				ret[l] = input;
 			} else {
-				ret[l] = activation[l-1];
+				ret[l] = activation[l - 1];
 			}
 		}
 		return ret;
 	}
+
 	/**
 	 * Method allocating neuron activation values' arrays
+	 *
 	 * @param neuronsNo
 	 * @return
 	 */
-	private double[][] createActivationTable(int[] neuronsNo) {
-		double[][] ret = new double[neuronsNo.length][];
+	private double[][] createActivationTable(final int[] neuronsNo) {
+		final double[][] ret = new double[neuronsNo.length][];
 		for (int l = 0; l < ret.length; l++) {
 			ret[l] = new double[neuronsNo[l]];
 		}
 		return ret;
 	}
+
 	/**
 	 * Method allocating neuron weights' arrays
+	 *
 	 * @param neuronsNo
 	 * @return
 	 */
-	private double[][][] createWeightTable(int[] neuronsNo) {
-		double[][][] ret = new double[neuronsNo.length][][];
+	private double[][][] createWeightTable(final int[] neuronsNo) {
+		final double[][][] ret = new double[neuronsNo.length][][];
 		for (int l = 0; l < ret.length; l++) {
 			ret[l] = new double[neuronsNo[l]][layerInput[l].length];
 		}
 		return ret;
 	}
+
 	/**
 	 * Returns the maximal absolute value of all the weights
-	 * @return 
+	 *
+	 * @return
 	 */
 	public double getMaxW() {
 		double ret = 0.0;
-		int no=0;
+		int no = 0;
 		for (int l = 0; l < w.length; l++) {
 			for (int i = 0; i < w[l].length; i++) {
 				for (int j = 0; j < w[l][i].length; j++) {
@@ -345,34 +370,35 @@ public class ErrorBackpropagationNN implements Serializable{
 				}
 			}
 		}
-		return ret/no;
+		return ret / no;
 	}
 
 	public void backup() {
-		if(wBackup==null) {
+		if (wBackup == null) {
 			wBackup = createWeightTable(neuronsNo);
 		}
 		for (int l = 0; l < w.length; l++) {
 			for (int i = 0; i < w[l].length; i++) {
-                            System.arraycopy(w[l][i], 0, wBackup[l][i], 0, w[l][i].length);
+				System.arraycopy(w[l][i], 0, wBackup[l][i], 0, w[l][i].length);
 			}
 		}
 	}
 
 	public void restore() {
-		if(wBackup!=null) {
+		if (wBackup != null) {
 			for (int l = 0; l < w.length; l++) {
 				for (int i = 0; i < w[l].length; i++) {
-                                    System.arraycopy(wBackup[l][i], 0, w[l][i], 0, w[l][i].length);
+					System.arraycopy(wBackup[l][i], 0, w[l][i], 0,
+							w[l][i].length);
 				}
 			}
 		}
 	}
 
-	public void set(ErrorBackpropagationNN brain) {
+	public void set(final ErrorBackpropagationNN brain) {
 		for (int l = 0; l < w.length; l++) {
 			for (int i = 0; i < w[l].length; i++) {
-                            System.arraycopy(brain.w[l][i], 0, w[l][i], 0, w[l][i].length);
+				System.arraycopy(brain.w[l][i], 0, w[l][i], 0, w[l][i].length);
 			}
 		}
 	}
@@ -393,18 +419,22 @@ public class ErrorBackpropagationNN implements Serializable{
 		return activation;
 	}
 
-	public void setW(double[][][] w) {
+	public void setW(final double[][][] w) {
 		this.w = w;
 	}
 
-	public void save(String filename) throws FileNotFoundException, IOException {
-		ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(filename));
+	public void save(final String filename) throws FileNotFoundException, IOException {
+		final ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(
+				filename));
 		out.writeObject(w);
 		out.close();
 	}
-	public void load(String filename) throws FileNotFoundException, IOException, ClassNotFoundException {
-		ObjectInputStream in = new ObjectInputStream(new FileInputStream(filename));
-		w = (double[][][])in.readObject();
+
+	public void load(final String filename) throws FileNotFoundException,
+			IOException, ClassNotFoundException {
+		final ObjectInputStream in = new ObjectInputStream(new FileInputStream(
+				filename));
+		w = (double[][][]) in.readObject();
 		in.close();
 	}
 
@@ -420,7 +450,7 @@ public class ErrorBackpropagationNN implements Serializable{
 		return desiredOutput;
 	}
 
-	public void setDesiredOutput(double[] desiredOutput) {
+	public void setDesiredOutput(final double[] desiredOutput) {
 		this.desiredOutput = desiredOutput;
 	}
 
@@ -428,7 +458,7 @@ public class ErrorBackpropagationNN implements Serializable{
 		return momentum;
 	}
 
-	public void setMomentum(double momentum) {
+	public void setMomentum(final double momentum) {
 		this.momentum = momentum;
 	}
 

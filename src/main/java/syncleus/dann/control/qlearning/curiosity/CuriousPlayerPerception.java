@@ -2,8 +2,6 @@ package syncleus.dann.control.qlearning.curiosity;
 
 import syncleus.dann.control.qlearning.Perception;
 
-
-
 public abstract class CuriousPlayerPerception extends Perception {
 	private static double rMin = 0.02;
 	private static double rMax = 0.325;
@@ -16,36 +14,36 @@ public abstract class CuriousPlayerPerception extends Perception {
 	private double novelty;
 	private Perception foreseePerc = this;
 
-        @Override
+	@Override
 	public double getReward() {
 		this.novelty = curiosity.getAvgError();
-		double wundtCurve = wundtCurve(this.novelty);
-		//System.out.println(wundtCurve);
+		final double wundtCurve = wundtCurve(this.novelty);
+		// System.out.println(wundtCurve);
 		return wundtCurve;
 	}
 
-	public double wundtCurve(double n) {
-		double R = func(n, rMin, rMax, rSlope);
-		double P = func(n, pMin, pMax, pSlope);
+	public double wundtCurve(final double n) {
+		final double R = func(n, rMin, rMax, rSlope);
+		final double P = func(n, pMin, pMax, pSlope);
 		return R - P + offset;
 	}
 
-	private double func(double n, double min, double max, double slope) {
+	private double func(final double n, final double min, final double max, final double slope) {
 		return max / (1 + Math.exp(-slope * (n - min)));
 	}
-	
-        @Override
+
+	@Override
 	public void start() {
 		super.start();
 		if (foreseePerc != this) {
 			foreseePerc.start();
 		}
 	}
-	
-        @Override
+
+	@Override
 	public void perceive() {
 		super.perceive();
-		if (getOutput()!=null && foreseePerc != this) {
+		if (getOutput() != null && foreseePerc != this) {
 			foreseePerc.perceive();
 		}
 	}
@@ -54,14 +52,14 @@ public abstract class CuriousPlayerPerception extends Perception {
 		return curiosity;
 	}
 
-	public void setCuriosity(Curiosity curiosity) {
+	public void setCuriosity(final Curiosity curiosity) {
 		this.curiosity = curiosity;
 	}
 
 	public double getNovelty() {
 		return novelty;
 	}
-	
+
 	public double[] getForeseeOutput() {
 		return foreseePerc.getOutput();
 	}
@@ -70,16 +68,16 @@ public abstract class CuriousPlayerPerception extends Perception {
 		return foreseePerc;
 	}
 
-	public void setForeseePerc(Perception foreseePerc) {
+	public void setForeseePerc(final Perception foreseePerc) {
 		this.foreseePerc = foreseePerc;
-		//this.foreseePerc.setInputPerception(this);
+		// this.foreseePerc.setInputPerception(this);
 	}
 
 	public static double getPMax() {
 		return pMax;
 	}
 
-	public static void setPMax(double max) {
+	public static void setPMax(final double max) {
 		pMax = max;
 	}
 
@@ -87,7 +85,7 @@ public abstract class CuriousPlayerPerception extends Perception {
 		return pMin;
 	}
 
-	public static void setPMin(double min) {
+	public static void setPMin(final double min) {
 		pMin = min;
 	}
 
@@ -95,7 +93,7 @@ public abstract class CuriousPlayerPerception extends Perception {
 		return rMax;
 	}
 
-	public static void setRMax(double max) {
+	public static void setRMax(final double max) {
 		rMax = max;
 	}
 
@@ -103,7 +101,7 @@ public abstract class CuriousPlayerPerception extends Perception {
 		return rMin;
 	}
 
-	public static void setRMin(double min) {
+	public static void setRMin(final double min) {
 		rMin = min;
 	}
 
@@ -111,7 +109,7 @@ public abstract class CuriousPlayerPerception extends Perception {
 		return pSlope;
 	}
 
-	public static void setPSlope(double slope) {
+	public static void setPSlope(final double slope) {
 		pSlope = slope;
 	}
 
@@ -119,7 +117,7 @@ public abstract class CuriousPlayerPerception extends Perception {
 		return rSlope;
 	}
 
-	public static void setRSlope(double slope) {
+	public static void setRSlope(final double slope) {
 		rSlope = slope;
 	}
 
@@ -127,7 +125,7 @@ public abstract class CuriousPlayerPerception extends Perception {
 		return offset;
 	}
 
-	public static void setOffset(double offset) {
+	public static void setOffset(final double offset) {
 		CuriousPlayerPerception.offset = offset;
 	}
 }

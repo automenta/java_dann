@@ -21,3 +21,4 @@
  * Contains Classifiers, Trainables, and TrainableClassifiers.
  */
 package syncleus.dann.classify;
+

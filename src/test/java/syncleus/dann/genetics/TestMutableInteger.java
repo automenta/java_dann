@@ -18,57 +18,56 @@
  ******************************************************************************/
 package syncleus.dann.genetics;
 
-import syncleus.dann.evolve.MutableInteger;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class TestMutableInteger
-{
+import syncleus.dann.evolve.MutableInteger;
+
+public class TestMutableInteger {
 	@Test
-	public void testConstructors()
-	{
+	public void testConstructors() {
 		MutableInteger test = new MutableInteger(123);
 		Assert.assertTrue("value constructor failed", test.getNumber() == 123);
 		test = new MutableInteger("456");
-		Assert.assertTrue("string value constructor failed", test.getNumber() == 456);
+		Assert.assertTrue("string value constructor failed",
+				test.getNumber() == 456);
 		test = new MutableInteger(789);
-		Assert.assertTrue("Number value constructor failed", test.getNumber() == 789);
+		Assert.assertTrue("Number value constructor failed",
+				test.getNumber() == 789);
 	}
 
 	@Test
-	public void testMax()
-	{
+	public void testMax() {
 		final MutableInteger highValue = new MutableInteger(Integer.MAX_VALUE);
 
-		for(int testCount = 0; testCount < 1000; testCount++)
-		{
+		for (int testCount = 0; testCount < 1000; testCount++) {
 			final MutableInteger mutated = highValue.mutate(100.0);
 
-			Assert.assertTrue("mutation caused number to roll over: " + mutated, mutated.intValue() >= -1);
+			Assert.assertTrue(
+					"mutation caused number to roll over: " + mutated,
+					mutated.intValue() >= -1);
 		}
 	}
 
 	@Test
-	public void testMin()
-	{
+	public void testMin() {
 		final MutableInteger lowValue = new MutableInteger(Integer.MIN_VALUE);
 
-		for(int testCount = 0; testCount < 1000; testCount++)
-		{
+		for (int testCount = 0; testCount < 1000; testCount++) {
 			final MutableInteger mutated = lowValue.mutate(100.0);
 
-			Assert.assertTrue("mutation caused number to roll over: " + mutated, mutated.intValue() <= -1);
+			Assert.assertTrue(
+					"mutation caused number to roll over: " + mutated,
+					mutated.intValue() <= -1);
 		}
 	}
 
 	@Test
-	public void testDeviation()
-	{
+	public void testDeviation() {
 		final MutableInteger center = new MutableInteger(0);
 		double averageSum = 0;
 		double testCount;
-		for(testCount = 0.0; testCount < 10000; testCount++)
-		{
+		for (testCount = 0.0; testCount < 10000; testCount++) {
 			averageSum += center.mutate(1.0).intValue();
 		}
 		final double average = averageSum / testCount;

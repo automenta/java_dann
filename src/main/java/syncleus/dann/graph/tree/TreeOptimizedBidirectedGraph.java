@@ -21,13 +21,13 @@ package syncleus.dann.graph.tree;
 import syncleus.dann.graph.BidirectedEdge;
 import syncleus.dann.graph.BidirectedGraph;
 
-public interface TreeOptimizedBidirectedGraph<N, E extends BidirectedEdge<N>> extends BidirectedGraph<N, E>
-{
+public interface TreeOptimizedBidirectedGraph<N, E extends BidirectedEdge<N>>
+		extends BidirectedGraph<N, E> {
 	/**
 	 * Determines if the graph is a simple acyclic graph with no more than one
-	 * undirected edge between any two nodes, there can be muliple directed edges
-	 * so long as the graph remains simple and acyclic. if there are no edges or
-	 * nodes this returns true.
+	 * undirected edge between any two nodes, there can be muliple directed
+	 * edges so long as the graph remains simple and acyclic. if there are no
+	 * edges or nodes this returns true.
 	 *
 	 * @return true if the graph is a polytree, false otherwise.
 	 * @since 2.0

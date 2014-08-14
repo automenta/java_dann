@@ -18,36 +18,38 @@
  ******************************************************************************/
 package syncleus.dann.genetics;
 
-import syncleus.dann.evolve.MutableFloat;
-import syncleus.dann.evolve.FloatValueGene;
-import syncleus.dann.evolve.ValueGene;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class TestFloatValueGene
-{
+import syncleus.dann.evolve.FloatValueGene;
+import syncleus.dann.evolve.MutableFloat;
+import syncleus.dann.evolve.ValueGene;
+
+public class TestFloatValueGene {
 	@Test
-	public void testConstructors()
-	{
+	public void testConstructors() {
 		ValueGene test = new FloatValueGene(939810231.0f);
-		Assert.assertTrue("value constructor failed", Math.abs(test.getValue().getNumber().floatValue() - 939810231.0f) < 1000);
+		Assert.assertTrue("value constructor failed", Math.abs(test.getValue()
+				.getNumber().floatValue() - 939810231.0f) < 1000);
 		test = new FloatValueGene(new MutableFloat(202320342.0f));
-		Assert.assertTrue("MutableFloat value constructor failed", Math.abs(test.getValue().getNumber().floatValue() - 202320342.0f) < 1000);
+		Assert.assertTrue(
+				"MutableFloat value constructor failed",
+				Math.abs(test.getValue().getNumber().floatValue() - 202320342.0f) < 1000);
 		test = new FloatValueGene(826493937.0f);
-		Assert.assertTrue("Number value constructor failed", Math.abs(test.getValue().getNumber().floatValue() - 826493937.0f) < 1000);
+		Assert.assertTrue("Number value constructor failed", Math.abs(test
+				.getValue().getNumber().floatValue() - 826493937.0f) < 1000);
 		test = new FloatValueGene();
-		Assert.assertTrue("default constructor failed", test.getValue().getNumber().floatValue() == (float) 0.0);
+		Assert.assertTrue("default constructor failed", test.getValue()
+				.getNumber().floatValue() == (float) 0.0);
 	}
 
 	@Test
-	public void testMutation()
-	{
+	public void testMutation() {
 		final ValueGene center = new FloatValueGene(0.0f);
 
 		float averageSum = 0.0f;
 		float testCount;
-		for(testCount = 0.0f; testCount < 1000; testCount++)
-		{
+		for (testCount = 0.0f; testCount < 1000; testCount++) {
 			averageSum += center.mutate(1.0).getValue().floatValue();
 		}
 

@@ -18,53 +18,52 @@
  ******************************************************************************/
 package syncleus.dann.genetics;
 
-import syncleus.dann.evolve.MutableByte;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class TestMutableByte
-{
+import syncleus.dann.evolve.MutableByte;
+
+public class TestMutableByte {
 	@Test
-	public void testConstructors()
-	{
+	public void testConstructors() {
 		MutableByte test = new MutableByte((byte) 123);
 		Assert.assertTrue("value constructor failed", test.getNumber() == 123);
 		test = new MutableByte("57");
-		Assert.assertTrue("string value constructor failed", test.getNumber() == 57);
+		Assert.assertTrue("string value constructor failed",
+				test.getNumber() == 57);
 		test = new MutableByte((byte) 83);
-		Assert.assertTrue("Number value constructor failed", test.getNumber() == 83);
+		Assert.assertTrue("Number value constructor failed",
+				test.getNumber() == 83);
 	}
 
 	@Test
-	public void testMax()
-	{
+	public void testMax() {
 		final MutableByte highValue = new MutableByte(Byte.MAX_VALUE);
-		for(int testCount = 0; testCount < 1000; testCount++)
-		{
+		for (int testCount = 0; testCount < 1000; testCount++) {
 			final MutableByte mutated = highValue.mutate(100.0);
-			Assert.assertTrue("mutation caused number to roll over: " + mutated, mutated.byteValue() >= (byte) -1);
+			Assert.assertTrue(
+					"mutation caused number to roll over: " + mutated,
+					mutated.byteValue() >= (byte) -1);
 		}
 	}
 
 	@Test
-	public void testMin()
-	{
+	public void testMin() {
 		final MutableByte lowValue = new MutableByte(Byte.MIN_VALUE);
-		for(int testCount = 0; testCount < 1000; testCount++)
-		{
+		for (int testCount = 0; testCount < 1000; testCount++) {
 			final MutableByte mutated = lowValue.mutate(100.0);
-			Assert.assertTrue("mutation caused number to roll over: " + mutated, mutated.byteValue() <= (byte) 1);
+			Assert.assertTrue(
+					"mutation caused number to roll over: " + mutated,
+					mutated.byteValue() <= (byte) 1);
 		}
 	}
 
 	@Test
-	public void testDeviation()
-	{
+	public void testDeviation() {
 		final MutableByte center = new MutableByte((byte) 0);
 		double averageSum = 0;
 		double testCount;
-		for(testCount = 0.0; testCount < 1000; testCount++)
-		{
+		for (testCount = 0.0; testCount < 1000; testCount++) {
 			averageSum += center.mutate(1.0).byteValue();
 		}
 		final double average = averageSum / testCount;

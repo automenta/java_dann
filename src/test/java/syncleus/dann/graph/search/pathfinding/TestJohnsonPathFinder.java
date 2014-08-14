@@ -18,7 +18,6 @@
  ******************************************************************************/
 package syncleus.dann.graph.search.pathfinding;
 
-import syncleus.dann.graph.search.pathfinding.JohnsonPathFinder;
 import java.util.List;
 
 import org.junit.Assert;
@@ -29,66 +28,61 @@ import syncleus.dann.graph.WeightedDirectedEdge;
 import syncleus.dann.graph.search.GridNode;
 import syncleus.dann.graph.search.WeightedDirectedGrid;
 
-public class TestJohnsonPathFinder
-{
+public class TestJohnsonPathFinder {
 	private static final double INF = Double.MAX_VALUE;
-	private static final double[][] HARD_GRID =
-			{
-					{1.0, 1.0, 1000.0, 1.0, 1.0, 1.0, 1.0, 1.0},
-					{1.0, 1.0, 1.0, 1.0, 10.0, 10.0, 1.0, 1.0},
-					{INF, INF, INF, INF, INF, 1.0, 1.0, 1.0},
-					{11.0, 1.0, 1.0, 1.0, 1.0, 10.0, 2.0, 1.0},
-					{1.0, 10.0, INF, 1.0, INF, INF, INF, INF},
-					{1.0, INF, INF, INF, INF, 1.0, 1.0, 1.0},
-					{1.0, INF, 1.0, 1.0, 1.0, 1.0, INF, 1.0},
-					{1.0, 1.0, 1.0, INF, INF, 10.0, 1.0, 1.0}
-			};
-	private static final int[] HARD_GRID_START = {1, 0};
-	private static final int[] HARD_GRID_END = {7, 7};
-	private static final int[][] HARD_GRID_SOLUTION =
-			{
-					{1, 0}, {1, 1}, {2, 1}, {3, 1}, {3, 0}, {4, 0}, {5, 0}, {6, 0}, {6, 1}, {6, 2}, {5, 2},
-					{5, 3}, {4, 3}, {3, 3}, {2, 3}, {1, 3}, {1, 4}, {0, 4}, {0, 5}, {0, 6}, {0, 7}, {1, 7},
-					{2, 7}, {2, 6}, {3, 6}, {4, 6}, {5, 6}, {5, 5}, {6, 5}, {7, 5}, {7, 6}, {7, 7}
-			};
-	private static final double[][] EASY_GRID =
-			{
-					{INF, INF, INF, 1.0, 1.0, 1.0, 1.0, INF},
-					{INF, 1.0, 1.0, 1.0, INF, INF, 1.0, INF},
-					{INF, INF, INF, INF, INF, 1.0, 1.0, INF},
-					{INF, 1.0, 1.0, 1.0, 1.0, 10.0, INF, INF},
-					{1.0, 10.0, INF, INF, INF, INF, INF, INF},
-					{1.0, INF, INF, INF, INF, 1.0, 1.0, 1.0},
-					{1.0, INF, 1.0, 1.0, 1.0, 1.0, INF, 1.0},
-					{1.0, 1.0, 1.0, INF, INF, INF, INF, 1.0}
-			};
-	private static final int[] EASY_GRID_START = {1, 0};
-	private static final int[] EASY_GRID_END = {7, 7};
-	private static final int[][] EASY_GRID_SOLUTION =
-			{
-					{1, 0}, {1, 1}, {2, 1}, {3, 1}, {3, 0}, {4, 0}, {5, 0}, {6, 0}, {6, 1}, {6, 2}, {5, 2},
-					{5, 3}, {4, 3}, {3, 3}, {2, 3}, {1, 3}, {1, 4}, {0, 4}, {0, 5}, {0, 6}, {0, 7}, {1, 7},
-					{2, 7}, {2, 6}, {3, 6}, {4, 6}, {5, 6}, {5, 5}, {6, 5}, {7, 5}, {7, 6}, {7, 7}
-			};
+	private static final double[][] HARD_GRID = {
+			{ 1.0, 1.0, 1000.0, 1.0, 1.0, 1.0, 1.0, 1.0 },
+			{ 1.0, 1.0, 1.0, 1.0, 10.0, 10.0, 1.0, 1.0 },
+			{ INF, INF, INF, INF, INF, 1.0, 1.0, 1.0 },
+			{ 11.0, 1.0, 1.0, 1.0, 1.0, 10.0, 2.0, 1.0 },
+			{ 1.0, 10.0, INF, 1.0, INF, INF, INF, INF },
+			{ 1.0, INF, INF, INF, INF, 1.0, 1.0, 1.0 },
+			{ 1.0, INF, 1.0, 1.0, 1.0, 1.0, INF, 1.0 },
+			{ 1.0, 1.0, 1.0, INF, INF, 10.0, 1.0, 1.0 } };
+	private static final int[] HARD_GRID_START = { 1, 0 };
+	private static final int[] HARD_GRID_END = { 7, 7 };
+	private static final int[][] HARD_GRID_SOLUTION = { { 1, 0 }, { 1, 1 },
+			{ 2, 1 }, { 3, 1 }, { 3, 0 }, { 4, 0 }, { 5, 0 }, { 6, 0 },
+			{ 6, 1 }, { 6, 2 }, { 5, 2 }, { 5, 3 }, { 4, 3 }, { 3, 3 },
+			{ 2, 3 }, { 1, 3 }, { 1, 4 }, { 0, 4 }, { 0, 5 }, { 0, 6 },
+			{ 0, 7 }, { 1, 7 }, { 2, 7 }, { 2, 6 }, { 3, 6 }, { 4, 6 },
+			{ 5, 6 }, { 5, 5 }, { 6, 5 }, { 7, 5 }, { 7, 6 }, { 7, 7 } };
+	private static final double[][] EASY_GRID = {
+			{ INF, INF, INF, 1.0, 1.0, 1.0, 1.0, INF },
+			{ INF, 1.0, 1.0, 1.0, INF, INF, 1.0, INF },
+			{ INF, INF, INF, INF, INF, 1.0, 1.0, INF },
+			{ INF, 1.0, 1.0, 1.0, 1.0, 10.0, INF, INF },
+			{ 1.0, 10.0, INF, INF, INF, INF, INF, INF },
+			{ 1.0, INF, INF, INF, INF, 1.0, 1.0, 1.0 },
+			{ 1.0, INF, 1.0, 1.0, 1.0, 1.0, INF, 1.0 },
+			{ 1.0, 1.0, 1.0, INF, INF, INF, INF, 1.0 } };
+	private static final int[] EASY_GRID_START = { 1, 0 };
+	private static final int[] EASY_GRID_END = { 7, 7 };
+	private static final int[][] EASY_GRID_SOLUTION = { { 1, 0 }, { 1, 1 },
+			{ 2, 1 }, { 3, 1 }, { 3, 0 }, { 4, 0 }, { 5, 0 }, { 6, 0 },
+			{ 6, 1 }, { 6, 2 }, { 5, 2 }, { 5, 3 }, { 4, 3 }, { 3, 3 },
+			{ 2, 3 }, { 1, 3 }, { 1, 4 }, { 0, 4 }, { 0, 5 }, { 0, 6 },
+			{ 0, 7 }, { 1, 7 }, { 2, 7 }, { 2, 6 }, { 3, 6 }, { 4, 6 },
+			{ 5, 6 }, { 5, 5 }, { 6, 5 }, { 7, 5 }, { 7, 6 }, { 7, 7 } };
 
-	private static boolean checkNode(final GridNode node, final int[] coords)
-	{
+	private static boolean checkNode(final GridNode node, final int[] coords) {
 		return ((node.getX() == coords[0]) && (node.getY() == coords[1]));
 	}
 
-	private static boolean checkSolution(final GridNode start, final List<WeightedDirectedEdge<GridNode>> path, final int[][] solution)
-	{
+	private static boolean checkSolution(final GridNode start,
+			final List<WeightedDirectedEdge<GridNode>> path,
+			final int[][] solution) {
 		int solutionIndex = 0;
 		GridNode lastNode = start;
-		if( !checkNode(lastNode, solution[solutionIndex]) )
+		if (!checkNode(lastNode, solution[solutionIndex]))
 			return false;
 
-		for(final BidirectedEdge<GridNode> edge : path)
-		{
+		for (final BidirectedEdge<GridNode> edge : path) {
 			solutionIndex++;
 
-			final GridNode currentNode = (edge.getLeftNode().equals(lastNode) ? edge.getRightNode() : edge.getLeftNode());
-			if( !checkNode(currentNode, solution[solutionIndex]) )
+			final GridNode currentNode = (edge.getLeftNode().equals(lastNode) ? edge
+					.getRightNode() : edge.getLeftNode());
+			if (!checkNode(currentNode, solution[solutionIndex]))
 				return false;
 			lastNode = currentNode;
 		}
@@ -97,30 +91,40 @@ public class TestJohnsonPathFinder
 	}
 
 	@Test
-	public void testHardGrid()
-	{
-		final WeightedDirectedGrid hardGrid = new WeightedDirectedGrid(HARD_GRID);
-		final JohnsonPathFinder<GridNode, WeightedDirectedEdge<GridNode>> pathFinder = new JohnsonPathFinder<GridNode, WeightedDirectedEdge<GridNode>>(hardGrid);
+	public void testHardGrid() {
+		final WeightedDirectedGrid hardGrid = new WeightedDirectedGrid(
+				HARD_GRID);
+		final JohnsonPathFinder<GridNode, WeightedDirectedEdge<GridNode>> pathFinder = new JohnsonPathFinder<GridNode, WeightedDirectedEdge<GridNode>>(
+				hardGrid);
 
-		final GridNode startNode = hardGrid.getNode(HARD_GRID_START[0], HARD_GRID_START[1]);
-		final GridNode endNode = hardGrid.getNode(HARD_GRID_END[0], HARD_GRID_END[1]);
+		final GridNode startNode = hardGrid.getNode(HARD_GRID_START[0],
+				HARD_GRID_START[1]);
+		final GridNode endNode = hardGrid.getNode(HARD_GRID_END[0],
+				HARD_GRID_END[1]);
 
-		final List<WeightedDirectedEdge<GridNode>> path = pathFinder.getBestPath(startNode, endNode);
+		final List<WeightedDirectedEdge<GridNode>> path = pathFinder
+				.getBestPath(startNode, endNode);
 
-		Assert.assertTrue("incorrect path found!", checkSolution(startNode, path, HARD_GRID_SOLUTION));
+		Assert.assertTrue("incorrect path found!",
+				checkSolution(startNode, path, HARD_GRID_SOLUTION));
 	}
 
 	@Test
-	public void testInfinityGrid()
-	{
-		final WeightedDirectedGrid infinityGrid = new WeightedDirectedGrid(EASY_GRID);
-		final JohnsonPathFinder<GridNode, WeightedDirectedEdge<GridNode>> pathFinder = new JohnsonPathFinder<GridNode, WeightedDirectedEdge<GridNode>>(infinityGrid);
+	public void testInfinityGrid() {
+		final WeightedDirectedGrid infinityGrid = new WeightedDirectedGrid(
+				EASY_GRID);
+		final JohnsonPathFinder<GridNode, WeightedDirectedEdge<GridNode>> pathFinder = new JohnsonPathFinder<GridNode, WeightedDirectedEdge<GridNode>>(
+				infinityGrid);
 
-		final GridNode startNode = infinityGrid.getNode(EASY_GRID_START[0], EASY_GRID_START[1]);
-		final GridNode endNode = infinityGrid.getNode(EASY_GRID_END[0], EASY_GRID_END[1]);
+		final GridNode startNode = infinityGrid.getNode(EASY_GRID_START[0],
+				EASY_GRID_START[1]);
+		final GridNode endNode = infinityGrid.getNode(EASY_GRID_END[0],
+				EASY_GRID_END[1]);
 
-		final List<WeightedDirectedEdge<GridNode>> path = pathFinder.getBestPath(startNode, endNode);
+		final List<WeightedDirectedEdge<GridNode>> path = pathFinder
+				.getBestPath(startNode, endNode);
 
-		Assert.assertTrue("incorrect path found!", checkSolution(startNode, path, EASY_GRID_SOLUTION));
+		Assert.assertTrue("incorrect path found!",
+				checkSolution(startNode, path, EASY_GRID_SOLUTION));
 	}
 }

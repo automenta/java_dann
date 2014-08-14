@@ -18,8 +18,6 @@
  ******************************************************************************/
 package syncleus.dann.graph.topological.sorter;
 
-import syncleus.dann.graph.topological.sorter.TopologicalSorter;
-import syncleus.dann.graph.topological.sorter.SimpleTopologicalRanker;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -32,11 +30,9 @@ import syncleus.dann.graph.DirectedEdge;
 import syncleus.dann.graph.ImmutableDirectedAdjacencyGraph;
 import syncleus.dann.graph.ImmutableDirectedEdge;
 
-public class TestSimpleTopologialSort
-{
+public class TestSimpleTopologialSort {
 	@Test
-	public void testTopologicalSort()
-	{
+	public void testTopologicalSort() {
 		final Set<Object> nodes = new HashSet<Object>();
 		final Object centerNode = "centerNode";
 		nodes.add(centerNode);
@@ -50,21 +46,28 @@ public class TestSimpleTopologialSort
 		nodes.add(rightNode);
 
 		final Set<DirectedEdge<Object>> edges = new HashSet<DirectedEdge<Object>>();
-		final DirectedEdge<Object> centerTopEdge = new ImmutableDirectedEdge<Object>(centerNode, topNode);
+		final DirectedEdge<Object> centerTopEdge = new ImmutableDirectedEdge<Object>(
+				centerNode, topNode);
 		edges.add(centerTopEdge);
-		final DirectedEdge<Object> centerLeftEdge = new ImmutableDirectedEdge<Object>(centerNode, leftNode);
+		final DirectedEdge<Object> centerLeftEdge = new ImmutableDirectedEdge<Object>(
+				centerNode, leftNode);
 		edges.add(centerLeftEdge);
-		final DirectedEdge<Object> leftLeftiestEdge = new ImmutableDirectedEdge<Object>(leftNode, leftiestNode);
+		final DirectedEdge<Object> leftLeftiestEdge = new ImmutableDirectedEdge<Object>(
+				leftNode, leftiestNode);
 		edges.add(leftLeftiestEdge);
-		final DirectedEdge<Object> centerRightEdge = new ImmutableDirectedEdge<Object>(centerNode, rightNode);
+		final DirectedEdge<Object> centerRightEdge = new ImmutableDirectedEdge<Object>(
+				centerNode, rightNode);
 		edges.add(centerRightEdge);
 
-		final BidirectedGraph<Object, DirectedEdge<Object>> graph = new ImmutableDirectedAdjacencyGraph<Object, DirectedEdge<Object>>(nodes, edges);
+		final BidirectedGraph<Object, DirectedEdge<Object>> graph = new ImmutableDirectedAdjacencyGraph<Object, DirectedEdge<Object>>(
+				nodes, edges);
 
 		final TopologicalSorter<Object> sorter = new SimpleTopologicalRanker<Object>();
 		final List<Object> sortedNodes = sorter.sort(graph);
 
-		Assert.assertTrue("center node is not the first node!", sortedNodes.get(0) == centerNode);
-		Assert.assertTrue("left node is not before leftiest node!", sortedNodes.indexOf(leftNode) < sortedNodes.indexOf(leftiestNode));
+		Assert.assertTrue("center node is not the first node!",
+				sortedNodes.get(0) == centerNode);
+		Assert.assertTrue("left node is not before leftiest node!", sortedNodes
+				.indexOf(leftNode) < sortedNodes.indexOf(leftiestNode));
 	}
 }

@@ -23,45 +23,50 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Represents a field of classification probabilities possible from a given category. This represents the relative
- * probability that an item will be classified into a given category.
+ * Represents a field of classification probabilities possible from a given
+ * category. This represents the relative probability that an item will be
+ * classified into a given category.
  *
- * @param <C> The type of category
+ * @param <C>
+ *            The type of category
  * @author Jeffrey Phillips Freeman
  */
-public class ClassificationProbabilities<C>
-{
+public class ClassificationProbabilities<C> {
 	private int probabilitySum;
 	private final Map<C, Integer> categoryProbabilityMap = new HashMap<C, Integer>();
 
 	/**
 	 * Gets an unmodifiable version of the category's probability map.
+	 *
 	 * @return The category's probability map.
 	 */
-	public Map<C, Integer> getCategoryProbabilityMap()
-	{
+	public Map<C, Integer> getCategoryProbabilityMap() {
 		return Collections.unmodifiableMap(this.categoryProbabilityMap);
 	}
 
 	/**
 	 * Makes a certain category 1 more likely.
-	 * @param category The category to change
-	 * @see com.syncleus.dann.classify.naive.ClassificationProbabilities#incrementCategory(Object, int)
+	 *
+	 * @param category
+	 *            The category to change
+	 * @see com.syncleus.dann.classify.naive.ClassificationProbabilities#incrementCategory(Object,
+	 *      int)
 	 */
-	public void incrementCategory(final C category)
-	{
+	public void incrementCategory(final C category) {
 		this.incrementCategory(category, 1);
 	}
 
 	/**
 	 * Makes a given category more likely by a given value.
-	 * @param category The category to change
-	 * @param value How much to change it by
+	 *
+	 * @param category
+	 *            The category to change
+	 * @param value
+	 *            How much to change it by
 	 */
-	public void incrementCategory(final C category, final int value)
-	{
+	public void incrementCategory(final C category, final int value) {
 		Integer currentProbability = this.categoryProbabilityMap.get(category);
-		if( currentProbability == null )
+		if (currentProbability == null)
 			currentProbability = value;
 		else
 			currentProbability = currentProbability + value;
@@ -70,25 +75,26 @@ public class ClassificationProbabilities<C>
 	}
 
 	/**
-	 * Gets the sum of the probability of all possibilities. This is used to normalize the relative probabilities
-	 * in the map.
+	 * Gets the sum of the probability of all possibilities. This is used to
+	 * normalize the relative probabilities in the map.
+	 *
 	 * @return The sum of the probabilities
 	 */
-	public int getProbabilitySum()
-	{
+	public int getProbabilitySum() {
 		return this.probabilitySum;
 	}
 
 	/**
 	 * Gets the probability of a given category.
-	 * @param category The category to use
+	 *
+	 * @param category
+	 *            The category to use
 	 * @return The probability of that category
 	 * @see ClassificationProbabilities#getProbabilitySum()
 	 */
-	public int getCategoryProbability(final C category)
-	{
+	public int getCategoryProbability(final C category) {
 		final Integer probability = this.categoryProbabilityMap.get(category);
-		if( probability == null )
+		if (probability == null)
 			return 0;
 		else
 			return probability;

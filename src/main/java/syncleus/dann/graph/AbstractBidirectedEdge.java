@@ -18,27 +18,25 @@
  ******************************************************************************/
 package syncleus.dann.graph;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class AbstractBidirectedEdge<N> extends AbstractEdge<N> implements BidirectedEdge<N>
-{
+public abstract class AbstractBidirectedEdge<N> extends AbstractEdge<N>
+		implements BidirectedEdge<N> {
 	private final N leftNode;
 	private final N rightNode;
 	private final EndState leftEndState;
 	private final EndState rightEndState;
 
-	protected AbstractBidirectedEdge()
-	{
+	protected AbstractBidirectedEdge() {
 		this.leftNode = null;
 		this.rightNode = null;
 		this.leftEndState = null;
 		this.rightEndState = null;
 	}
 
-	protected AbstractBidirectedEdge(final boolean allowJoiningMultipleGraphs, final boolean contextEnabled)
-	{
+	protected AbstractBidirectedEdge(final boolean allowJoiningMultipleGraphs,
+			final boolean contextEnabled) {
 		super(allowJoiningMultipleGraphs, contextEnabled);
 
 		this.leftNode = null;
@@ -47,8 +45,9 @@ public abstract class AbstractBidirectedEdge<N> extends AbstractEdge<N> implemen
 		this.rightEndState = null;
 	}
 
-	protected AbstractBidirectedEdge(final N newLeftNode, final EndState newLeftEndState, final N newRightNode, final EndState newRightEndState)
-	{
+	protected AbstractBidirectedEdge(final N newLeftNode,
+			final EndState newLeftEndState, final N newRightNode,
+			final EndState newRightEndState) {
 		super(packNodes(newLeftNode, newRightNode));
 
 		this.leftNode = newLeftNode;
@@ -57,9 +56,13 @@ public abstract class AbstractBidirectedEdge<N> extends AbstractEdge<N> implemen
 		this.rightEndState = newRightEndState;
 	}
 
-	protected AbstractBidirectedEdge(final N newLeftNode, final EndState newLeftEndState, final N newRightNode, final EndState newRightEndState, final boolean allowJoiningMultipleGraphs, final boolean contextEnabled)
-	{
-		super(packNodes(newLeftNode, newRightNode), allowJoiningMultipleGraphs, contextEnabled);
+	protected AbstractBidirectedEdge(final N newLeftNode,
+			final EndState newLeftEndState, final N newRightNode,
+			final EndState newRightEndState,
+			final boolean allowJoiningMultipleGraphs,
+			final boolean contextEnabled) {
+		super(packNodes(newLeftNode, newRightNode), allowJoiningMultipleGraphs,
+				contextEnabled);
 
 		this.leftNode = newLeftNode;
 		this.rightNode = newRightNode;
@@ -67,8 +70,7 @@ public abstract class AbstractBidirectedEdge<N> extends AbstractEdge<N> implemen
 		this.rightEndState = newRightEndState;
 	}
 
-	private static <N> List<N> packNodes(final N leftNode, final N rightNode)
-	{
+	private static <N> List<N> packNodes(final N leftNode, final N rightNode) {
 		final List<N> pack = new ArrayList<N>();
 		pack.add(leftNode);
 		pack.add(rightNode);
@@ -76,93 +78,85 @@ public abstract class AbstractBidirectedEdge<N> extends AbstractEdge<N> implemen
 	}
 
 	@Override
-	public final N getLeftNode()
-	{
+	public final N getLeftNode() {
 		return this.leftNode;
 	}
 
 	@Override
-	public final N getRightNode()
-	{
+	public final N getRightNode() {
 		return this.rightNode;
 	}
 
 	@Override
-	public final EndState getLeftEndState()
-	{
+	public final EndState getLeftEndState() {
 		return this.leftEndState;
 	}
 
 	@Override
-	public final EndState getRightEndState()
-	{
+	public final EndState getRightEndState() {
 		return this.rightEndState;
 	}
 
 	@Override
-	public boolean isIntroverted()
-	{
-		return (this.rightEndState == BidirectedEdge.EndState.INWARD) && (this.leftEndState == BidirectedEdge.EndState.INWARD);
+	public boolean isIntroverted() {
+		return (this.rightEndState == BidirectedEdge.EndState.INWARD)
+				&& (this.leftEndState == BidirectedEdge.EndState.INWARD);
 	}
 
 	@Override
-	public boolean isExtroverted()
-	{
-		return (this.rightEndState == BidirectedEdge.EndState.OUTWARD) && (this.leftEndState == BidirectedEdge.EndState.OUTWARD);
+	public boolean isExtroverted() {
+		return (this.rightEndState == BidirectedEdge.EndState.OUTWARD)
+				&& (this.leftEndState == BidirectedEdge.EndState.OUTWARD);
 	}
 
 	@Override
-	public boolean isDirected()
-	{
-		if( (this.rightEndState == EndState.INWARD) && (this.leftEndState == EndState.OUTWARD) )
+	public boolean isDirected() {
+		if ((this.rightEndState == EndState.INWARD)
+				&& (this.leftEndState == EndState.OUTWARD))
 			return true;
-		else if( (this.rightEndState == EndState.OUTWARD) && (this.leftEndState == EndState.INWARD) )
-			return true;
-		return false;
-	}
-
-	@Override
-	public boolean isHalfEdge()
-	{
-		if( (this.rightEndState == EndState.NONE) && (this.leftEndState != EndState.NONE) )
-			return true;
-		else if( (this.rightEndState != EndState.NONE) && (this.leftEndState == EndState.NONE) )
+		else if ((this.rightEndState == EndState.OUTWARD)
+				&& (this.leftEndState == EndState.INWARD))
 			return true;
 		return false;
 	}
 
 	@Override
-	public boolean isLooseEdge()
-	{
-		return (this.rightEndState == BidirectedEdge.EndState.NONE) && (this.leftEndState == BidirectedEdge.EndState.NONE);
+	public boolean isHalfEdge() {
+		if ((this.rightEndState == EndState.NONE)
+				&& (this.leftEndState != EndState.NONE))
+			return true;
+		else if ((this.rightEndState != EndState.NONE)
+				&& (this.leftEndState == EndState.NONE))
+			return true;
+		return false;
 	}
 
 	@Override
-	public boolean isOrdinaryEdge()
-	{
+	public boolean isLooseEdge() {
+		return (this.rightEndState == BidirectedEdge.EndState.NONE)
+				&& (this.leftEndState == BidirectedEdge.EndState.NONE);
+	}
+
+	@Override
+	public boolean isOrdinaryEdge() {
 		return (!this.isHalfEdge()) && (!this.isLooseEdge());
 	}
 
 	@Override
-	public boolean isLoop()
-	{
+	public boolean isLoop() {
 		return this.leftEndState.equals(this.rightEndState);
 	}
 
 	@Override
-	public String toString()
-	{
+	public String toString() {
 		return this.leftNode.toString()
-				+ endStateToString(this.leftEndState, true)
-				+ '-'
-				+ endStateToString(this.rightEndState, false)
-				+ this.rightNode;
+				+ endStateToString(this.leftEndState, true) + '-'
+				+ endStateToString(this.rightEndState, false) + this.rightNode;
 	}
 
-	private static String endStateToString(final EndState state, final boolean isLeft)
-	{
-		switch(state)
-		{
+	private static String endStateToString(final EndState state,
+			final boolean isLeft) {
+		switch (state) {
 		case INWARD:
 			return (isLeft ? ">" : "<");
 		case OUTWARD:
@@ -173,8 +167,7 @@ public abstract class AbstractBidirectedEdge<N> extends AbstractEdge<N> implemen
 	}
 
 	@Override
-	public AbstractBidirectedEdge<N> clone()
-	{
+	public AbstractBidirectedEdge<N> clone() {
 		return (AbstractBidirectedEdge<N>) super.clone();
 	}
 

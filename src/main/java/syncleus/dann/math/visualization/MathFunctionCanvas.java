@@ -213,4 +213,4 @@ package syncleus.dann.math.visualization;
 ////		this.resolution = resolution;
 ////		this.refresh();
 ////	}
-////}
+// //}

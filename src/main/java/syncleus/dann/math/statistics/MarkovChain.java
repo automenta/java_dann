@@ -24,21 +24,34 @@ import java.util.Set;
 
 import syncleus.dann.math.linear.RealMatrix;
 
-public interface MarkovChain<S>
-{
+public interface MarkovChain<S> {
 	int getOrder();
+
 	Set<S> getStates();
+
 	void transition(S nextState);
+
 	S generateTransition();
+
 	S generateTransition(boolean step);
+
 	S getCurrentState();
+
 	List<S> getStateHistory();
+
 	void reset();
+
 	Map<S, Double> getProbability(int steps);
+
 	Map<S, Double> getSteadyStateProbability();
+
 	double getProbability(S futureState, int steps);
+
 	double getSteadyStateProbability(S futureState);
+
 	List<S> getTransitionProbabilityColumns();
+
 	List<List<S>> getTransitionProbabilityRows();
+
 	RealMatrix getTransitionProbabilityMatrix();
 }

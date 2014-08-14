@@ -22,37 +22,35 @@ import syncleus.dann.math.OrderedAlgebraic;
 import syncleus.dann.math.linear.Matrix;
 import syncleus.dann.math.linear.RealMatrix;
 
-public final class Decompositions
-{
-	private Decompositions()
-	{
+public final class Decompositions {
+	private Decompositions() {
 	}
 
-	public static EigenvalueDecomposition createEigenvalueDecomposition(final RealMatrix matrixToDecompose)
-	{
-		if( matrixToDecompose.isSymmetric() )
+	public static EigenvalueDecomposition createEigenvalueDecomposition(
+			final RealMatrix matrixToDecompose) {
+		if (matrixToDecompose.isSymmetric())
 			return new TridiagonalEignevalueDecomposition(matrixToDecompose);
 		else
 			return new SchurEigenvalueDecomposition(matrixToDecompose);
 	}
 
-	public static <M extends Matrix<M, F>, F extends OrderedAlgebraic<F>> CholeskyDecomposition<M, F> createCholeskyDecomposition(final M matrix)
-	{
+	public static <M extends Matrix<M, F>, F extends OrderedAlgebraic<F>> CholeskyDecomposition<M, F> createCholeskyDecomposition(
+			final M matrix) {
 		return new CholeskyBanachiewiczCholeskyDecomposition<M, F>(matrix);
 	}
 
-	public static <M extends Matrix<M, F>, F extends OrderedAlgebraic<F>> LuDecomposition<M, F> createLuDecomposition(final M matrix)
-	{
+	public static <M extends Matrix<M, F>, F extends OrderedAlgebraic<F>> LuDecomposition<M, F> createLuDecomposition(
+			final M matrix) {
 		return new DoolittleLuDecomposition<M, F>(matrix);
 	}
 
-	public static <M extends Matrix<M, F>, F extends OrderedAlgebraic<F>> QrDecomposition<M, F> createQrDecomposition(final M matrix)
-	{
+	public static <M extends Matrix<M, F>, F extends OrderedAlgebraic<F>> QrDecomposition<M, F> createQrDecomposition(
+			final M matrix) {
 		return new HouseholderQrDecomposition<M, F>(matrix);
 	}
 
-	public static SingularValueDecomposition createSingularValueDecomposition(final RealMatrix matrix)
-	{
+	public static SingularValueDecomposition createSingularValueDecomposition(
+			final RealMatrix matrix) {
 		return new StewartSingularValueDecomposition(matrix);
 	}
 }

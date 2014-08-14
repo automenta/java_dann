@@ -238,4 +238,4 @@ package syncleus.dann.math.visualization;
 //	{
 //		return this.minZ;
 //	}
-//}
+// }

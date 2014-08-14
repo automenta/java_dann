@@ -26,13 +26,11 @@ import javax.swing.JPanel;
 import javax.swing.JTextPane;
 import javax.swing.border.EmptyBorder;
 
-public class ComponentUnavailableException extends Exception
-{
+public class ComponentUnavailableException extends Exception {
 	private static final int BORDER_SPACE = 6;
 	private final UnsatisfiedLinkError unsatisfiedLinkError;
 
-	public ComponentUnavailableException(final UnsatisfiedLinkError error)
-	{
+	public ComponentUnavailableException(final UnsatisfiedLinkError error) {
 		super(error);
 		this.unsatisfiedLinkError = error;
 	}
@@ -40,29 +38,26 @@ public class ComponentUnavailableException extends Exception
 	/**
 	 * Creates a JComponent (usually a JPanel) that provides instructions for to
 	 * fix or activate the missing component.
+	 *
 	 * @return Swing component
 	 */
-	public JComponent newPanel()
-	{
+	public JComponent newPanel() {
 		JComponent component;
 
-		if (unsatisfiedLinkError == null)
-		{
+		if (unsatisfiedLinkError == null) {
 			component = new JLabel(this.toString());
-		}
-		else
-		{
-			if (unsatisfiedLinkError.getMessage().contains("j3d"))
-			{
+		} else {
+			if (unsatisfiedLinkError.getMessage().contains("j3d")) {
 				final JPanel panel = new JPanel(new BorderLayout());
 				final StringBuilder msg = new StringBuilder(
 						"<html> <span style=\"font-size: 20pt\"><b>"
-						+ "Java Component Missing:</b> ");
-				msg.append(this.toString()).append("</span><br/><br/>See"
-						+ " <a href=\""
-						+ "http://www.oracle.com/technetwork/java/javase/tech/index-jsp-138252.html\">"
-						+ "http://www.oracle.com/technetwork/java/javase/tech/index-jsp-138252.html</a>"
-						+ " for Java3D installation instructions</a>. </html>");
+								+ "Java Component Missing:</b> ");
+				msg.append(this.toString())
+						.append("</span><br/><br/>See"
+								+ " <a href=\""
+								+ "http://www.oracle.com/technetwork/java/javase/tech/index-jsp-138252.html\">"
+								+ "http://www.oracle.com/technetwork/java/javase/tech/index-jsp-138252.html</a>"
+								+ " for Java3D installation instructions</a>. </html>");
 				final JTextPane msgArea = new JTextPane();
 				msgArea.setEditable(false);
 				msgArea.setOpaque(false);
@@ -72,9 +67,7 @@ public class ComponentUnavailableException extends Exception
 				msgArea.setText(msg.toString());
 				panel.add(msgArea, BorderLayout.CENTER);
 				component = panel;
-			}
-			else
-			{
+			} else {
 				component = new JLabel(unsatisfiedLinkError.toString());
 			}
 		}
