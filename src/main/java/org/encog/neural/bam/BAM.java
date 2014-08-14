@@ -27,8 +27,8 @@ import org.encog.ml.BasicML;
 import org.encog.neural.NeuralNetworkError;
 import org.encog.neural.networks.NeuralDataMapping;
 
-import syncleus.dann.dataprocess.MLData;
-import syncleus.dann.math.linear.SimpleRealMatrix;
+import syncleus.dann.learn.MLData;
+import syncleus.dann.math.matrix.SimpleRealMatrix;
 
 /**
  * Bidirectional associative memory (BAM) is a type of neural network developed

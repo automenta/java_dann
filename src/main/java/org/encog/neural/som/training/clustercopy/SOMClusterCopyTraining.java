@@ -30,9 +30,9 @@ import org.encog.neural.NeuralNetworkError;
 import org.encog.neural.networks.training.propagation.TrainingContinuation;
 import org.encog.neural.som.SOM;
 
-import syncleus.dann.dataprocess.MLData;
-import syncleus.dann.dataprocess.MLDataPair;
-import syncleus.dann.dataprocess.MLDataSet;
+import syncleus.dann.learn.MLData;
+import syncleus.dann.learn.MLDataPair;
+import syncleus.dann.learn.MLDataSet;
 
 /**
  * SOM cluster copy is a very simple trainer for SOM's. Using this trainer all

@@ -23,7 +23,7 @@
  */
 package org.encog.ml;
 
-import syncleus.dann.dataprocess.MLData;
+import syncleus.dann.learn.MLData;
 
 /**
  * This interface defines a MLMethod that is used for classification.

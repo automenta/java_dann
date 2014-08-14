@@ -104,7 +104,7 @@ public class FlatNetworkRBF extends FlatNetwork implements Serializable,
 		final int outputIndex = this.getLayerIndex()[1];
 
 		for (int i = 0; i < rbf.length; i++) {
-			final double o = this.rbf[i].calculate(x);
+			final double o = this.rbf[i].apply(x);
 			this.getLayerOutput()[outputIndex + i] = o;
 		}
 

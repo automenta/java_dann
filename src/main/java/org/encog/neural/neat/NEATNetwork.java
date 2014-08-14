@@ -30,8 +30,8 @@ import org.encog.ml.MLError;
 import org.encog.ml.MLRegression;
 import org.encog.ml.data.basic.BasicMLData;
 
-import syncleus.dann.dataprocess.MLData;
-import syncleus.dann.dataprocess.MLDataSet;
+import syncleus.dann.learn.MLData;
+import syncleus.dann.learn.MLDataSet;
 import syncleus.dann.math.EncogUtility;
 import syncleus.dann.math.array.EngineArray;
 

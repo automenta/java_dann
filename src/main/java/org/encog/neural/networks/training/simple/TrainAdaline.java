@@ -31,9 +31,9 @@ import org.encog.neural.networks.BasicNetwork;
 import org.encog.neural.networks.training.LearningRate;
 import org.encog.neural.networks.training.propagation.TrainingContinuation;
 
-import syncleus.dann.dataprocess.MLData;
-import syncleus.dann.dataprocess.MLDataPair;
-import syncleus.dann.dataprocess.MLDataSet;
+import syncleus.dann.learn.MLData;
+import syncleus.dann.learn.MLDataPair;
+import syncleus.dann.learn.MLDataSet;
 import syncleus.dann.math.statistics.ErrorCalculation;
 
 /**

@@ -27,7 +27,7 @@ import org.encog.ml.bayesian.BayesianNetwork;
 import org.encog.ml.bayesian.training.TrainBayesian;
 import org.encog.ml.bayesian.training.search.k2.BayesSearch;
 
-import syncleus.dann.dataprocess.MLDataSet;
+import syncleus.dann.learn.MLDataSet;
 
 /**
  * Simple class to perform no search for optimal network structure.

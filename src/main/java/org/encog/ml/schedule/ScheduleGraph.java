@@ -27,9 +27,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.encog.ml.graph.BasicEdge;
-import org.encog.ml.graph.BasicGraph;
+import syncleus.dann.graph.path.PathGraph;
 
-public class ScheduleGraph extends BasicGraph {
+public class ScheduleGraph extends PathGraph {
 
 	public ActionNode startNode;
 	public ActionNode finishNode = new ActionNode("Finish");
@@ -67,7 +67,7 @@ public class ScheduleGraph extends BasicGraph {
 			result.append(node.toString());
 			result.append("\n");
                         node.getConnections().stream().forEach((edge) -> {
-                        dumpNode(result, (ActionNode) edge.getTo(), visited);
+                        dumpNode(result, (ActionNode) edge.getDestination(), visited);
                     });
 		}
 	}

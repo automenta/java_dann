@@ -32,7 +32,7 @@ import org.encog.ml.prg.EncogProgramContext;
 import org.encog.ml.prg.ProgramNode;
 import org.encog.ml.prg.expvalue.ValueType;
 
-import syncleus.dann.dataprocess.language.SimpleParser;
+import syncleus.dann.data.language.SimpleParser;
 
 /**
  * A basic template.

@@ -23,7 +23,7 @@
  */
 package org.encog.ml.data.basic;
 
-import syncleus.dann.dataprocess.MLData;
+import syncleus.dann.learn.MLData;
 import syncleus.dann.math.cluster.Centroid;
 
 /**

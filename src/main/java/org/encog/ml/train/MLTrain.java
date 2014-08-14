@@ -30,7 +30,7 @@ import org.encog.ml.TrainingImplementationType;
 import org.encog.ml.train.strategy.Strategy;
 import org.encog.neural.networks.training.propagation.TrainingContinuation;
 
-import syncleus.dann.dataprocess.MLDataSet;
+import syncleus.dann.learn.MLDataSet;
 
 /**
  * Defines a training method for a machine learning method. Most MLMethod

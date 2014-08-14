@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import syncleus.dann.math.linear.RealMatrix;
+import syncleus.dann.math.matrix.RealMatrix;
 
 public interface MarkovChain<S> {
 	int getOrder();

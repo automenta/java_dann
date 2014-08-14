@@ -33,7 +33,7 @@ import org.encog.ml.hmm.distributions.ContinousDistribution;
 import org.encog.ml.hmm.distributions.DiscreteDistribution;
 import org.encog.ml.hmm.distributions.StateDistribution;
 
-import syncleus.dann.math.linear.SimpleRealMatrix;
+import syncleus.dann.math.matrix.SimpleRealMatrix;
 
 /**
  * Persist a HMM.

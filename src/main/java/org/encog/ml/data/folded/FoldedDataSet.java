@@ -28,9 +28,9 @@ import java.util.Iterator;
 import org.encog.ml.data.basic.BasicMLDataPair;
 import org.encog.neural.networks.training.TrainingError;
 
-import syncleus.dann.dataprocess.MLData;
-import syncleus.dann.dataprocess.MLDataPair;
-import syncleus.dann.dataprocess.MLDataSet;
+import syncleus.dann.learn.MLData;
+import syncleus.dann.learn.MLDataPair;
+import syncleus.dann.learn.MLDataSet;
 
 /**
  * A folded data set allows you to "fold" the data into several equal(or nearly

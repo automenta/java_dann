@@ -33,7 +33,7 @@ import org.encog.neural.networks.BasicNetwork;
 import org.encog.neural.networks.ContainsFlat;
 import org.encog.neural.networks.training.propagation.quick.QuickPropagation;
 
-import syncleus.dann.dataprocess.MLDataSet;
+import syncleus.dann.learn.MLDataSet;
 
 /**
  * A factory for quick propagation training.

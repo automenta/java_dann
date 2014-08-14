@@ -26,7 +26,7 @@ package org.encog.ml.factory;
 import org.encog.ml.MLMethod;
 import org.encog.ml.train.MLTrain;
 
-import syncleus.dann.dataprocess.MLDataSet;
+import syncleus.dann.learn.MLDataSet;
 
 /**
  * This factory is used to create trainers for machine learning methods.

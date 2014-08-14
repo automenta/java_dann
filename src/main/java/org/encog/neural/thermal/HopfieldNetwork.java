@@ -26,12 +26,12 @@ package org.encog.neural.thermal;
 import org.encog.ml.data.specific.BiPolarNeuralData;
 import org.encog.neural.NeuralNetworkError;
 
-import syncleus.dann.dataprocess.MLData;
+import syncleus.dann.learn.MLData;
 import syncleus.dann.math.array.EngineArray;
-import syncleus.dann.math.linear.BiPolarUtil;
-import syncleus.dann.math.linear.Matrix;
-import syncleus.dann.math.linear.MatrixMath;
-import syncleus.dann.math.linear.SimpleRealMatrix;
+import syncleus.dann.math.matrix.BiPolarUtil;
+import syncleus.dann.math.matrix.Matrix;
+import syncleus.dann.math.matrix.MatrixMath;
+import syncleus.dann.math.matrix.SimpleRealMatrix;
 
 /**
  * Implements a Hopfield network.

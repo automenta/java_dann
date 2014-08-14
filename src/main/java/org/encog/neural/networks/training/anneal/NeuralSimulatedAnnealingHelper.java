@@ -23,7 +23,7 @@
  */
 package org.encog.neural.networks.training.anneal;
 
-import org.encog.ml.anneal.SimulatedAnnealing;
+import syncleus.dann.learn.anneal.SimulatedAnnealing;
 
 import syncleus.dann.math.array.EngineArray;
 

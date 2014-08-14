@@ -32,7 +32,7 @@ import java.io.IOException;
 import java.util.Random;
 import java.util.StringTokenizer;
 
-import syncleus.dann.dataprocess.file.csv.CSVFormat;
+import syncleus.dann.data.file.csv.CSVFormat;
 
 /**
  * This class was taken from the libsvm package. We have made some modifications

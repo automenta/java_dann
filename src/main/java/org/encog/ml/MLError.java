@@ -23,7 +23,7 @@
  */
 package org.encog.ml;
 
-import syncleus.dann.dataprocess.MLDataSet;
+import syncleus.dann.learn.MLDataSet;
 
 /**
  * Defines Machine Learning Method that can calculate an error based on a data

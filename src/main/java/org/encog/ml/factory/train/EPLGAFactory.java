@@ -38,7 +38,7 @@ import org.encog.ml.prg.train.rewrite.RewriteConstants;
 import org.encog.ml.train.MLTrain;
 import org.encog.neural.networks.training.TrainingSetScore;
 
-import syncleus.dann.dataprocess.MLDataSet;
+import syncleus.dann.learn.MLDataSet;
 
 public class EPLGAFactory {
 	/**

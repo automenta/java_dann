@@ -49,12 +49,12 @@ import org.encog.neural.networks.training.propagation.Propagation;
 import org.encog.neural.networks.training.propagation.resilient.ResilientPropagation;
 import org.encog.neural.pattern.FeedForwardPattern;
 
-import syncleus.dann.dataprocess.MLData;
-import syncleus.dann.dataprocess.MLDataPair;
-import syncleus.dann.dataprocess.MLDataSet;
-import syncleus.dann.dataprocess.file.BasicFile;
-import syncleus.dann.dataprocess.file.csv.CSVFormat;
-import syncleus.dann.dataprocess.file.csv.ReadCSV;
+import syncleus.dann.learn.MLData;
+import syncleus.dann.learn.MLDataPair;
+import syncleus.dann.learn.MLDataSet;
+import syncleus.dann.data.file.BasicFile;
+import syncleus.dann.data.file.csv.CSVFormat;
+import syncleus.dann.data.file.csv.ReadCSV;
 import syncleus.dann.math.statistics.ErrorCalculation;
 import syncleus.dann.neural.activation.ActivationSigmoid;
 import syncleus.dann.neural.activation.ActivationTANH;

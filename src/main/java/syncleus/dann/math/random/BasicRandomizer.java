@@ -29,7 +29,7 @@ import org.encog.ml.MLEncodable;
 import org.encog.ml.MLMethod;
 import org.encog.neural.networks.BasicNetwork;
 
-import syncleus.dann.math.linear.SimpleRealMatrix;
+import syncleus.dann.math.matrix.SimpleRealMatrix;
 
 /**
  * Provides basic functionality that most randomizers will need.

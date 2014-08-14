@@ -23,8 +23,8 @@
  */
 package syncleus.dann.math.rbf;
 
-import syncleus.dann.dataprocess.file.csv.CSVFormat;
-import syncleus.dann.dataprocess.language.NumberList;
+import syncleus.dann.data.file.csv.CSVFormat;
+import syncleus.dann.data.language.NumberList;
 import syncleus.dann.math.EncogMath;
 import syncleus.dann.math.Format;
 import syncleus.dann.math.array.EngineArray;

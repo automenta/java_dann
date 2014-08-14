@@ -23,7 +23,7 @@
  */
 package org.encog.ml;
 
-import syncleus.dann.dataprocess.MLDataSet;
+import syncleus.dann.learn.MLDataSet;
 
 /**
  * A state sequence ML method, for example a Hidden Markov Model.

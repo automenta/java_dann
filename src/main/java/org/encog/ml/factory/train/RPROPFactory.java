@@ -33,7 +33,7 @@ import org.encog.neural.networks.ContainsFlat;
 import org.encog.neural.networks.training.propagation.resilient.RPROPConst;
 import org.encog.neural.networks.training.propagation.resilient.ResilientPropagation;
 
-import syncleus.dann.dataprocess.MLDataSet;
+import syncleus.dann.learn.MLDataSet;
 
 /**
  * A factory that creates RPROP trainers.

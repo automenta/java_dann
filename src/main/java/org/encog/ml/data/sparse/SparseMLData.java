@@ -25,8 +25,8 @@ package org.encog.ml.data.sparse;
 
 import java.io.Serializable;
 
-import syncleus.dann.dataprocess.MLData;
-import syncleus.dann.dataprocess.MLDataError;
+import syncleus.dann.learn.MLData;
+import syncleus.dann.learn.MLDataError;
 import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.math.cluster.Centroid;
 

@@ -25,7 +25,7 @@ package org.encog.ml.hmm.alog;
 
 import org.encog.ml.hmm.HiddenMarkovModel;
 
-import syncleus.dann.dataprocess.MLDataSet;
+import syncleus.dann.learn.MLDataSet;
 
 /**
  * This class produces a Kullback-Leibler estimation of the distance between two

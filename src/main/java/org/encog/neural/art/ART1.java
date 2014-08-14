@@ -28,8 +28,8 @@ import org.encog.ml.MLResettable;
 import org.encog.ml.data.specific.BiPolarNeuralData;
 import org.encog.neural.NeuralNetworkError;
 
-import syncleus.dann.dataprocess.MLData;
-import syncleus.dann.math.linear.SimpleRealMatrix;
+import syncleus.dann.learn.MLData;
+import syncleus.dann.math.matrix.SimpleRealMatrix;
 
 /**
  * Implements an ART1 neural network. An ART1 neural network is trained to

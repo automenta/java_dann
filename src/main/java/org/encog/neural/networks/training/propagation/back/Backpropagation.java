@@ -32,7 +32,7 @@ import org.encog.neural.networks.training.propagation.TrainingContinuation;
 import org.encog.neural.networks.training.strategy.SmartLearningRate;
 import org.encog.neural.networks.training.strategy.SmartMomentum;
 
-import syncleus.dann.dataprocess.MLDataSet;
+import syncleus.dann.learn.MLDataSet;
 
 /**
  * This class implements a backpropagation training algorithm for feed forward

@@ -33,7 +33,7 @@ import org.apache.logging.log4j.LogManager;
 import static org.apache.logging.log4j.LogManager.getLogger;
 import org.apache.logging.log4j.Logger;
 
-import syncleus.dann.UnexpectedDannError;
+import syncleus.dann.util.UnexpectedDannError;
 import syncleus.dann.graph.context.ContextGraphElement;
 
 /**

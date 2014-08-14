@@ -36,8 +36,8 @@ import java.util.concurrent.TimeUnit;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import syncleus.dann.UnexpectedDannError;
-import syncleus.dann.UnexpectedInterruptedException;
+import syncleus.dann.util.UnexpectedDannError;
+import syncleus.dann.util.UnexpectedInterruptedException;
 
 /**
  * Represents a population governed by Genetic Algorithm parameters. This class

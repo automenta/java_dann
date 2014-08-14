@@ -37,9 +37,9 @@ import org.encog.neural.som.training.basic.neighborhood.NeighborhoodRBF;
 import org.encog.neural.som.training.basic.neighborhood.NeighborhoodRBF1D;
 import org.encog.neural.som.training.basic.neighborhood.NeighborhoodSingle;
 
-import syncleus.dann.dataprocess.MLDataSet;
-import syncleus.dann.dataprocess.file.csv.CSVFormat;
-import syncleus.dann.dataprocess.language.NumberList;
+import syncleus.dann.learn.MLDataSet;
+import syncleus.dann.data.file.csv.CSVFormat;
+import syncleus.dann.data.language.NumberList;
 import syncleus.dann.math.rbf.RBFEnum;
 
 /**

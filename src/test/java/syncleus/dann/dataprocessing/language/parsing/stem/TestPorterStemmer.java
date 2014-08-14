@@ -21,8 +21,8 @@ package syncleus.dann.dataprocessing.language.parsing.stem;
 import org.junit.Assert;
 import org.junit.Test;
 
-import syncleus.dann.dataprocess.language.parsing.stem.PorterStemmer;
-import syncleus.dann.dataprocess.language.parsing.stem.Stemmer;
+import syncleus.dann.data.language.parsing.stem.PorterStemmer;
+import syncleus.dann.data.language.parsing.stem.Stemmer;
 
 public class TestPorterStemmer {
 	@Test

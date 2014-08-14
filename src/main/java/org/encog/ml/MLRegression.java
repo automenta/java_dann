@@ -23,7 +23,7 @@
  */
 package org.encog.ml;
 
-import syncleus.dann.dataprocess.MLData;
+import syncleus.dann.learn.MLData;
 
 /**
  * Defines a Machine Learning Method that supports regression. Regression takes

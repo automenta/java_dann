@@ -41,7 +41,7 @@ import org.encog.ml.bayesian.BayesianNetwork;
 import org.encog.ml.bayesian.table.TableLine;
 import org.xml.sax.SAXException;
 
-import syncleus.dann.dataprocess.file.csv.CSVFormat;
+import syncleus.dann.data.file.csv.CSVFormat;
 import syncleus.dann.math.EncogMath;
 
 /**

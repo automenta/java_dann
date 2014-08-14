@@ -28,9 +28,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import syncleus.dann.dataprocess.MLData;
-import syncleus.dann.dataprocess.MLDataPair;
-import syncleus.dann.dataprocess.MLDataSet;
+import syncleus.dann.learn.MLData;
+import syncleus.dann.learn.MLDataPair;
+import syncleus.dann.learn.MLDataSet;
 import syncleus.dann.math.array.EngineArray;
 
 /**

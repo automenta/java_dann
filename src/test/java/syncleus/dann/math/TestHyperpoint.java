@@ -136,9 +136,9 @@ public class TestHyperpoint {
 				Math.abs(testPoint.get(2) - 2.0d) < 0.000001);
 		Assert.assertTrue("coordinate 3 incorrect",
 				Math.abs(testPoint.get(3) - 3.0d) < 0.000001);
-		testPoint = testPoint.setNew(5.0d, 1);
-		testPoint = testPoint.setNew(4.0d, 2);
-		testPoint = testPoint.setNew(3.0d, 3);
+		testPoint = testPoint.clone(5.0d, 1);
+		testPoint = testPoint.clone(4.0d, 2);
+		testPoint = testPoint.clone(3.0d, 3);
 		double angle1 = testPoint.getAngularComponent(1);
 		double angle2 = testPoint.getAngularComponent(2);
 		testPoint = testPoint.setDistance(5.0d);
@@ -152,9 +152,9 @@ public class TestHyperpoint {
 				"angle drifted after setting distance",
 				Math.abs(testPoint.getAngularComponent(2) - angle2) < TEST_ACCEPTABLE_ERROR);
 
-		testPoint = testPoint.setNew(15.0d, 1);
-		testPoint = testPoint.setNew(14.0d, 2);
-		testPoint = testPoint.setNew(13.0d, 3);
+		testPoint = testPoint.clone(15.0d, 1);
+		testPoint = testPoint.clone(14.0d, 2);
+		testPoint = testPoint.clone(13.0d, 3);
 		testPoint = testPoint.setDistance(10.0d);
 		angle1 = testPoint.getAngularComponent(1);
 		angle2 = testPoint.getAngularComponent(2);
@@ -172,36 +172,36 @@ public class TestHyperpoint {
 				Math.abs(testPoint.getAngularComponent(2) - angle2) < TEST_ACCEPTABLE_ERROR);
 
 		testPoint = new Vector(2);
-		testPoint = testPoint.setNew(1.0d, 1);
-		testPoint = testPoint.setNew(1.0d, 2);
+		testPoint = testPoint.clone(1.0d, 1);
+		testPoint = testPoint.clone(1.0d, 2);
 		testPoint = testPoint.setAngularComponent(Math.PI / 8.0d, 1);
 		Assert.assertTrue(
 				"angular component didnt set properly",
 				Math.abs(testPoint.getAngularComponent(1) - Math.PI / 8.0d) < TEST_ACCEPTABLE_ERROR);
 
 		testPoint = new Vector(4);
-		testPoint = testPoint.setNew(1.0d, 1);
-		testPoint = testPoint.setNew(1.0d, 2);
-		testPoint = testPoint.setNew(1.0d, 3);
-		testPoint = testPoint.setNew(1.0d, 4);
+		testPoint = testPoint.clone(1.0d, 1);
+		testPoint = testPoint.clone(1.0d, 2);
+		testPoint = testPoint.clone(1.0d, 3);
+		testPoint = testPoint.clone(1.0d, 4);
 		testPoint = testPoint.setAngularComponent(Math.PI / 8.0d, 1);
 		Assert.assertTrue(
 				"angular component didnt set properly",
 				Math.abs(testPoint.getAngularComponent(1) - Math.PI / 8.0d) < TEST_ACCEPTABLE_ERROR);
 
-		testPoint = testPoint.setNew(1.0d, 1);
-		testPoint = testPoint.setNew(1.0d, 2);
-		testPoint = testPoint.setNew(1.0d, 3);
-		testPoint = testPoint.setNew(1.0d, 4);
+		testPoint = testPoint.clone(1.0d, 1);
+		testPoint = testPoint.clone(1.0d, 2);
+		testPoint = testPoint.clone(1.0d, 3);
+		testPoint = testPoint.clone(1.0d, 4);
 		testPoint = testPoint.setAngularComponent(Math.PI / 8.0d, 2);
 		Assert.assertTrue(
 				"angular component didnt set properly",
 				Math.abs(testPoint.getAngularComponent(2) - Math.PI / 8.0d) < TEST_ACCEPTABLE_ERROR);
 
-		testPoint = testPoint.setNew(1.0d, 1);
-		testPoint = testPoint.setNew(1.0d, 2);
-		testPoint = testPoint.setNew(1.0d, 3);
-		testPoint = testPoint.setNew(1.0d, 4);
+		testPoint = testPoint.clone(1.0d, 1);
+		testPoint = testPoint.clone(1.0d, 2);
+		testPoint = testPoint.clone(1.0d, 3);
+		testPoint = testPoint.clone(1.0d, 4);
 		testPoint = testPoint.setAngularComponent(Math.PI / 8.0d, 3);
 		Assert.assertTrue(
 				"angular component didnt set properly",

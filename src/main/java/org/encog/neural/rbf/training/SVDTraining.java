@@ -29,7 +29,7 @@ import org.encog.neural.networks.training.TrainingError;
 import org.encog.neural.networks.training.propagation.TrainingContinuation;
 import org.encog.neural.rbf.RBFNetwork;
 
-import syncleus.dann.dataprocess.MLDataSet;
+import syncleus.dann.learn.MLDataSet;
 import syncleus.dann.math.ObjectPair;
 import syncleus.dann.math.rbf.RadialBasisFunction;
 

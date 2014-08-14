@@ -31,7 +31,7 @@ import java.util.Map;
 import org.encog.neural.flat.FlatNetworkRBF;
 import org.encog.neural.networks.BasicNetwork;
 
-import syncleus.dann.dataprocess.file.csv.CSVFormat;
+import syncleus.dann.data.file.csv.CSVFormat;
 import syncleus.dann.math.rbf.RadialBasisFunction;
 
 /**

@@ -33,7 +33,7 @@ import org.encog.ml.prg.EncogProgramContext;
 import org.encog.ml.prg.ProgramNode;
 import org.encog.ml.prg.expvalue.ExpressionValue;
 import org.encog.ml.prg.extension.StandardExtensions;
-import org.encog.ml.tree.TreeNode;
+import syncleus.dann.graph.tree.TreeNode;
 
 /**
  * Mutate the constant nodes of an Encog program. This mutation only changes

@@ -30,7 +30,7 @@ import org.encog.ml.MLMethod;
 import org.encog.ml.data.basic.BasicMLData;
 import org.encog.ml.prg.EncogProgram;
 
-import syncleus.dann.dataprocess.MLData;
+import syncleus.dann.learn.MLData;
 
 /**
  * This is a very simple evaluation function that simply passes in all zeros for

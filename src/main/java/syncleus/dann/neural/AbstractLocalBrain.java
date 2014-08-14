@@ -29,7 +29,7 @@ import java.util.Random;
 import java.util.Set;
 import java.util.concurrent.ExecutorService;
 
-import syncleus.dann.UnexpectedDannError;
+import syncleus.dann.util.UnexpectedDannError;
 import syncleus.dann.graph.AbstractBidirectedAdjacencyGraph;
 import syncleus.dann.graph.topological.StrongConnectivityOptimizedGraph;
 
@@ -166,7 +166,7 @@ public abstract class AbstractLocalBrain<IN extends InputNeuron, ON extends Outp
 
 		final boolean added = this.neurons.addAll(newNeurons);
 
-                newNeurons.stream().map((newNeuron) -> {
+                newNeurons.stream().map((N newNeuron) -> {
             this.outMap.put(newNeuron, new HashSet<S>());
             return newNeuron;
         }).map((newNeuron) -> {

@@ -25,7 +25,7 @@ import java.util.Map;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import syncleus.dann.UnexpectedDannError;
+import syncleus.dann.util.UnexpectedDannError;
 
 public abstract class AbstractFunction implements Cloneable, Function {
 	private double[] parameters;

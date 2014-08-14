@@ -26,9 +26,9 @@ package org.encog.ml.fitting.gaussian;
 import org.encog.ml.MLRegression;
 import org.encog.ml.data.basic.BasicMLData;
 
-import syncleus.dann.dataprocess.MLData;
-import syncleus.dann.math.linear.MatrixMath;
-import syncleus.dann.math.linear.SimpleRealMatrix;
+import syncleus.dann.learn.MLData;
+import syncleus.dann.math.matrix.MatrixMath;
+import syncleus.dann.math.matrix.SimpleRealMatrix;
 
 public class GaussianFitting implements MLRegression {
 

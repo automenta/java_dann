@@ -29,11 +29,11 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-import syncleus.dann.dataprocess.MLData;
-import syncleus.dann.dataprocess.MLDataError;
-import syncleus.dann.dataprocess.MLDataPair;
-import syncleus.dann.dataprocess.MLDataSet;
-import syncleus.dann.dataprocess.MLSequenceSet;
+import syncleus.dann.learn.MLData;
+import syncleus.dann.learn.MLDataError;
+import syncleus.dann.learn.MLDataPair;
+import syncleus.dann.learn.MLDataSet;
+import syncleus.dann.learn.MLSequenceSet;
 import syncleus.dann.math.array.EngineArray;
 
 /**

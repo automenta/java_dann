@@ -30,8 +30,8 @@ import org.encog.ml.MLCluster;
 import org.encog.ml.MLClustering;
 import org.encog.ml.data.basic.BasicMLDataPair;
 
-import syncleus.dann.dataprocess.MLDataPair;
-import syncleus.dann.dataprocess.MLDataSet;
+import syncleus.dann.learn.MLDataPair;
+import syncleus.dann.learn.MLDataSet;
 import syncleus.dann.math.cluster.KMeansUtil;
 
 /**

@@ -27,8 +27,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Map;
 
-import syncleus.dann.dataprocess.file.csv.CSVFormat;
-import syncleus.dann.dataprocess.language.NumberList;
+import syncleus.dann.data.file.csv.CSVFormat;
+import syncleus.dann.data.language.NumberList;
 
 /**
  * Persist the Boltzmann machine.

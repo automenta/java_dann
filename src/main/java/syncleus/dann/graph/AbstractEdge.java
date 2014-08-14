@@ -26,7 +26,7 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import syncleus.dann.UnexpectedDannError;
+import syncleus.dann.util.UnexpectedDannError;
 import syncleus.dann.graph.context.AbstractContextGraphElement;
 import syncleus.dann.graph.context.ContextNode;
 

@@ -30,9 +30,9 @@ import java.io.PrintStream;
 
 import org.encog.ml.data.buffer.BufferedDataError;
 
-import syncleus.dann.dataprocess.file.csv.CSVFormat;
-import syncleus.dann.dataprocess.file.csv.ReadCSV;
-import syncleus.dann.dataprocess.language.NumberList;
+import syncleus.dann.data.file.csv.CSVFormat;
+import syncleus.dann.data.file.csv.ReadCSV;
+import syncleus.dann.data.language.NumberList;
 import syncleus.dann.math.array.EngineArray;
 
 /**

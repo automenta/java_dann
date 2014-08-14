@@ -25,7 +25,7 @@ package syncleus.dann.math.random;
 
 import org.encog.neural.networks.BasicNetwork;
 
-import syncleus.dann.math.linear.SimpleRealMatrix;
+import syncleus.dann.math.matrix.SimpleRealMatrix;
 
 /**
  * A randomizer that attempts to create starting weight values that are

@@ -33,7 +33,7 @@ import org.encog.neural.networks.ContainsFlat;
 import org.encog.neural.networks.training.BatchSize;
 import org.encog.neural.networks.training.Train;
 
-import syncleus.dann.dataprocess.MLDataSet;
+import syncleus.dann.learn.MLDataSet;
 import syncleus.dann.math.IntRange;
 import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.neural.activation.ActivationSigmoid;

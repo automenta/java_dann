@@ -23,18 +23,20 @@
  */
 package syncleus.dann.math.linear;
 
+import syncleus.dann.math.matrix.RealMatrix;
+import syncleus.dann.math.matrix.SimpleRealMatrix;
 import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
 
 import syncleus.dann.math.RealNumber;
-import syncleus.dann.math.linear.decomposition.Decompositions;
-import syncleus.dann.math.linear.decomposition.DoolittleLuDecomposition;
-import syncleus.dann.math.linear.decomposition.EigenvalueDecomposition;
-import syncleus.dann.math.linear.decomposition.HouseholderQrDecomposition;
-import syncleus.dann.math.linear.decomposition.LuDecomposition;
-import syncleus.dann.math.linear.decomposition.QrDecomposition;
+import syncleus.dann.math.matrix.decomposition.Decompositions;
+import syncleus.dann.math.matrix.decomposition.DoolittleLuDecomposition;
+import syncleus.dann.math.matrix.decomposition.EigenvalueDecomposition;
+import syncleus.dann.math.matrix.decomposition.HouseholderQrDecomposition;
+import syncleus.dann.math.matrix.decomposition.LuDecomposition;
+import syncleus.dann.math.matrix.decomposition.QrDecomposition;
 
 public class TestMagicSquare {
 	public static SimpleRealMatrix magic(final int n) {

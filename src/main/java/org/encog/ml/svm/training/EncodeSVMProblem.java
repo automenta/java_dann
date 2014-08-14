@@ -23,9 +23,9 @@
  */
 package org.encog.ml.svm.training;
 
-import syncleus.dann.dataprocess.MLData;
-import syncleus.dann.dataprocess.MLDataPair;
-import syncleus.dann.dataprocess.MLDataSet;
+import syncleus.dann.learn.MLData;
+import syncleus.dann.learn.MLDataPair;
+import syncleus.dann.learn.MLDataSet;
 import syncleus.dann.learn.svm.svm_node;
 import syncleus.dann.learn.svm.svm_problem;
 

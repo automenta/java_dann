@@ -28,7 +28,7 @@ import org.encog.ml.train.MLTrain;
 import org.encog.neural.rbf.RBFNetwork;
 import org.encog.neural.rbf.training.SVDTraining;
 
-import syncleus.dann.dataprocess.MLDataSet;
+import syncleus.dann.learn.MLDataSet;
 
 /**
  * This factory is used to create a SVD trainer for an RBF network.

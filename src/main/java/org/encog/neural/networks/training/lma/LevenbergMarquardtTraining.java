@@ -33,12 +33,12 @@ import org.encog.neural.networks.structure.NetworkCODEC;
 import org.encog.neural.networks.training.TrainingError;
 import org.encog.neural.networks.training.propagation.TrainingContinuation;
 
-import syncleus.dann.dataprocess.MLData;
-import syncleus.dann.dataprocess.MLDataPair;
-import syncleus.dann.dataprocess.MLDataSet;
-import syncleus.dann.math.hessian.ComputeHessian;
-import syncleus.dann.math.hessian.HessianCR;
-import syncleus.dann.math.linear.decomposition.LuDecomposition2;
+import syncleus.dann.learn.MLData;
+import syncleus.dann.learn.MLDataPair;
+import syncleus.dann.learn.MLDataSet;
+import syncleus.dann.math.matrix.hessian.ComputeHessian;
+import syncleus.dann.math.matrix.hessian.HessianCR;
+import syncleus.dann.math.matrix.decomposition.LuDecomposition2;
 import syncleus.dann.math.statistics.ErrorCalculation;
 
 /**

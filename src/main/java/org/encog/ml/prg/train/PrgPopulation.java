@@ -30,7 +30,7 @@ import org.encog.ml.ea.species.Species;
 import org.encog.ml.prg.EncogProgram;
 import org.encog.ml.prg.EncogProgramContext;
 
-import syncleus.dann.dataprocess.MLData;
+import syncleus.dann.learn.MLData;
 
 /**
  * A population that contains EncogProgram's. The primary difference between

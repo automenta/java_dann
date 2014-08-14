@@ -47,7 +47,7 @@ public class SVD {
 		// coordinates
 		for (i = 0; i < x.length; i++) {
 			for (j = 0; j < funcs.length; j++)
-				u[i][j] = funcs[j].calculate(x[i]);
+				u[i][j] = funcs[j].apply(x[i]);
 		}
 
 		// Perform decomposition
@@ -75,7 +75,7 @@ public class SVD {
 			for (i = 0; i < y.length; i++) {
 				sum = 0.0;
 				for (j = 0; j < funcs.length; j++)
-					sum += a[j][k] * funcs[j].calculate(x[i]);
+					sum += a[j][k] * funcs[j].apply(x[i]);
 				tmp = (y[i][k] - sum);
 				chisq += tmp * tmp;
 			}

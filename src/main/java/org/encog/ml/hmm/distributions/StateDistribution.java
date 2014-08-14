@@ -25,8 +25,8 @@ package org.encog.ml.hmm.distributions;
 
 import java.io.Serializable;
 
-import syncleus.dann.dataprocess.MLDataPair;
-import syncleus.dann.dataprocess.MLDataSet;
+import syncleus.dann.learn.MLDataPair;
+import syncleus.dann.learn.MLDataSet;
 
 /**
  * This class represents a "state distribution". This is the means by which the

@@ -25,7 +25,7 @@ package org.encog.neural.thermal;
 
 import org.encog.ml.data.specific.BiPolarNeuralData;
 
-import syncleus.dann.dataprocess.MLData;
+import syncleus.dann.learn.MLData;
 import syncleus.dann.math.BoundMath;
 import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.math.random.RangeRandomizer;

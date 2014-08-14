@@ -29,7 +29,7 @@ import org.encog.neural.freeform.FreeformConnection;
 import org.encog.neural.freeform.FreeformNetwork;
 import org.encog.neural.networks.training.propagation.TrainingContinuation;
 
-import syncleus.dann.dataprocess.MLDataSet;
+import syncleus.dann.learn.MLDataSet;
 
 /**
  * Perform backpropagation for a freeform neural network.

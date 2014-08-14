@@ -34,7 +34,7 @@ import org.encog.ml.bayesian.training.search.k2.SearchK2;
 import org.encog.ml.train.BasicTraining;
 import org.encog.neural.networks.training.propagation.TrainingContinuation;
 
-import syncleus.dann.dataprocess.MLDataSet;
+import syncleus.dann.learn.MLDataSet;
 
 /**
  * Train a Bayesian network.

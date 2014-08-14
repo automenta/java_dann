@@ -22,8 +22,8 @@ import java.util.Locale;
 import java.util.Set;
 
 import syncleus.dann.classify.naive.FeatureExtractor;
-import syncleus.dann.dataprocess.language.parsing.BasicWordParser;
-import syncleus.dann.dataprocess.language.parsing.WordParser;
+import syncleus.dann.data.language.parsing.BasicWordParser;
+import syncleus.dann.data.language.parsing.WordParser;
 
 /**
  * A SimpleLanguageNaiveBayesClassifier classifies Strings by breaking them into

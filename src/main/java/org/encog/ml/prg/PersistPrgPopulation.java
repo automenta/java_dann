@@ -35,7 +35,7 @@ import org.encog.ml.prg.expvalue.ValueType;
 import org.encog.ml.prg.extension.ProgramExtensionTemplate;
 import org.encog.ml.prg.train.PrgPopulation;
 
-import syncleus.dann.dataprocess.file.csv.CSVFormat;
+import syncleus.dann.data.file.csv.CSVFormat;
 
 /**
  * Persist the Encog population.

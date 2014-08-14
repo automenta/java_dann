@@ -27,8 +27,8 @@ import java.util.Iterator;
 
 import org.encog.ml.hmm.HiddenMarkovModel;
 
-import syncleus.dann.dataprocess.MLDataPair;
-import syncleus.dann.dataprocess.MLDataSet;
+import syncleus.dann.learn.MLDataPair;
+import syncleus.dann.learn.MLDataSet;
 
 /**
  * The Viterbi algorithm is used to find the most likely sequence of hidden

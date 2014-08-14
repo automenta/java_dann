@@ -29,12 +29,12 @@ import java.util.Random;
 import org.encog.ml.data.basic.BasicMLData;
 import org.encog.ml.data.basic.BasicMLDataPair;
 
-import syncleus.dann.dataprocess.MLDataPair;
-import syncleus.dann.dataprocess.MLDataSet;
+import syncleus.dann.learn.MLDataPair;
+import syncleus.dann.learn.MLDataSet;
 import syncleus.dann.math.array.EngineArray;
-import syncleus.dann.math.linear.MatrixMath;
-import syncleus.dann.math.linear.SimpleRealMatrix;
-import syncleus.dann.math.linear.decomposition.CholeskyDecomposition2;
+import syncleus.dann.math.matrix.MatrixMath;
+import syncleus.dann.math.matrix.SimpleRealMatrix;
+import syncleus.dann.math.matrix.decomposition.CholeskyDecomposition2;
 
 /**
  * A continuous distribution represents an infinite range of choices between two

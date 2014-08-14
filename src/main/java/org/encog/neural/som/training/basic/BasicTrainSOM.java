@@ -32,12 +32,12 @@ import org.encog.neural.networks.training.propagation.TrainingContinuation;
 import org.encog.neural.som.SOM;
 import org.encog.neural.som.training.basic.neighborhood.NeighborhoodFunction;
 
-import syncleus.dann.dataprocess.MLData;
-import syncleus.dann.dataprocess.MLDataPair;
-import syncleus.dann.dataprocess.MLDataSet;
+import syncleus.dann.learn.MLData;
+import syncleus.dann.learn.MLDataPair;
+import syncleus.dann.learn.MLDataSet;
 import syncleus.dann.math.Format;
-import syncleus.dann.math.linear.MatrixMath;
-import syncleus.dann.math.linear.SimpleRealMatrix;
+import syncleus.dann.math.matrix.MatrixMath;
+import syncleus.dann.math.matrix.SimpleRealMatrix;
 
 /**
  * This class implements competitive training, which would be used in a

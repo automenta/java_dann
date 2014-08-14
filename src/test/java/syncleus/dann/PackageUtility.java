@@ -1,5 +1,6 @@
 package syncleus.dann;
 
+import syncleus.dann.util.DannError;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

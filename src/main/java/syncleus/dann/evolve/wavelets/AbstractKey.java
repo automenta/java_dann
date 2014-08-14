@@ -28,7 +28,7 @@ import java.util.TreeSet;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import syncleus.dann.UnexpectedDannError;
+import syncleus.dann.util.UnexpectedDannError;
 import syncleus.dann.evolve.MutableInteger;
 
 public abstract class AbstractKey implements Cloneable {

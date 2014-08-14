@@ -27,7 +27,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-import syncleus.dann.dataprocess.file.csv.CSVFormat;
+import syncleus.dann.data.file.csv.CSVFormat;
 import syncleus.dann.math.EncogMath;
 
 /**

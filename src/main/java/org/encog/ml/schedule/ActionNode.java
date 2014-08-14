@@ -23,9 +23,9 @@
  */
 package org.encog.ml.schedule;
 
-import org.encog.ml.graph.BasicNode;
+import syncleus.dann.graph.path.PathNode;
 
-public class ActionNode extends BasicNode {
+public class ActionNode extends PathNode {
 	private double duration;
 	private double earliestStartTime;
 	private double latestStartTime;

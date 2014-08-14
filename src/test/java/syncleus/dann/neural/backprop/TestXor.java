@@ -26,7 +26,7 @@ import java.util.concurrent.TimeUnit;
 import org.junit.Assert;
 import org.junit.Test;
 
-import syncleus.dann.DannException;
+import syncleus.dann.util.DannException;
 import syncleus.dann.neural.InputNeuron;
 import syncleus.dann.neural.OutputNeuron;
 import syncleus.dann.neural.activation.DannActivationFunction;

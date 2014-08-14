@@ -27,9 +27,9 @@ import org.encog.ml.data.basic.BasicMLDataSet;
 import org.encog.ml.data.basic.BasicMLSequenceSet;
 import org.encog.ml.hmm.HiddenMarkovModel;
 
-import syncleus.dann.dataprocess.MLDataPair;
-import syncleus.dann.dataprocess.MLDataSet;
-import syncleus.dann.dataprocess.MLSequenceSet;
+import syncleus.dann.learn.MLDataPair;
+import syncleus.dann.learn.MLDataSet;
+import syncleus.dann.learn.MLSequenceSet;
 
 /**
  * This class is used to generate random sequences based on a Hidden Markov

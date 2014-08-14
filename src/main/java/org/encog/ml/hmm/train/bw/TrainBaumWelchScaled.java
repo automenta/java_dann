@@ -30,9 +30,9 @@ import org.encog.ml.hmm.HiddenMarkovModel;
 import org.encog.ml.hmm.alog.ForwardBackwardCalculator;
 import org.encog.ml.hmm.alog.ForwardBackwardScaledCalculator;
 
-import syncleus.dann.dataprocess.MLDataPair;
-import syncleus.dann.dataprocess.MLDataSet;
-import syncleus.dann.dataprocess.MLSequenceSet;
+import syncleus.dann.learn.MLDataPair;
+import syncleus.dann.learn.MLDataSet;
+import syncleus.dann.learn.MLSequenceSet;
 
 /**
  * Baum Welch Learning allows a HMM to be constructed from a series of sequence

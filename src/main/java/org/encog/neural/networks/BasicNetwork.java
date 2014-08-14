@@ -39,10 +39,10 @@ import org.encog.neural.networks.layers.Layer;
 import org.encog.neural.networks.structure.NetworkCODEC;
 import org.encog.neural.networks.structure.NeuralStructure;
 
-import syncleus.dann.dataprocess.MLData;
-import syncleus.dann.dataprocess.MLDataSet;
-import syncleus.dann.dataprocess.file.csv.CSVFormat;
-import syncleus.dann.dataprocess.language.NumberList;
+import syncleus.dann.learn.MLData;
+import syncleus.dann.learn.MLDataSet;
+import syncleus.dann.data.file.csv.CSVFormat;
+import syncleus.dann.data.language.NumberList;
 import syncleus.dann.math.EncogMath;
 import syncleus.dann.math.EncogUtility;
 import syncleus.dann.math.array.EngineArray;

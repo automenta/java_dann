@@ -31,8 +31,8 @@ import org.encog.ml.bayesian.BayesianNetwork;
 import org.encog.ml.bayesian.query.enumerate.EnumerationQuery;
 import org.encog.ml.bayesian.training.TrainBayesian;
 
-import syncleus.dann.dataprocess.MLDataPair;
-import syncleus.dann.dataprocess.MLDataSet;
+import syncleus.dann.learn.MLDataPair;
+import syncleus.dann.learn.MLDataSet;
 import syncleus.dann.math.EncogMath;
 
 /**

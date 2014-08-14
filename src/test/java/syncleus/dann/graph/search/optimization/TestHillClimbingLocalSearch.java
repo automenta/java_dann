@@ -18,6 +18,7 @@
  ******************************************************************************/
 package syncleus.dann.graph.search.optimization;
 
+import syncleus.dann.graph.path.search.HillClimbingLocalSearch;
 import org.junit.Assert;
 import org.junit.Test;
 

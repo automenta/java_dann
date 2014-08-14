@@ -40,8 +40,8 @@ import org.encog.neural.hyperneat.substrate.Substrate;
 import org.encog.neural.neat.training.NEATGenome;
 import org.encog.neural.neat.training.NEATInnovationList;
 
-import syncleus.dann.dataprocess.MLData;
-import syncleus.dann.dataprocess.MLDataSet;
+import syncleus.dann.learn.MLData;
+import syncleus.dann.learn.MLDataSet;
 import syncleus.dann.math.random.RandomFactory;
 import syncleus.dann.neural.activation.ActivationSteepenedSigmoid;
 

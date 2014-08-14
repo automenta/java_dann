@@ -34,8 +34,8 @@ import org.encog.neural.flat.FlatNetwork;
 import org.encog.neural.flat.FlatNetworkRBF;
 import org.encog.neural.networks.ContainsFlat;
 
-import syncleus.dann.dataprocess.MLData;
-import syncleus.dann.dataprocess.MLDataSet;
+import syncleus.dann.learn.MLData;
+import syncleus.dann.learn.MLDataSet;
 import syncleus.dann.math.EncogUtility;
 import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.math.random.ConsistentRandomizer;

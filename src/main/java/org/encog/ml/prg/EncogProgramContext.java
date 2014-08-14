@@ -35,7 +35,7 @@ import org.encog.ml.prg.expvalue.ValueType;
 import org.encog.ml.prg.extension.FunctionFactory;
 import org.encog.ml.prg.extension.StandardExtensions;
 
-import syncleus.dann.dataprocess.file.csv.CSVFormat;
+import syncleus.dann.data.file.csv.CSVFormat;
 
 /**
  * Every EncogProgram must belong to a context. When programs are in a

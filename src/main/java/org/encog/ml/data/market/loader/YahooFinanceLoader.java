@@ -37,8 +37,8 @@ import java.util.Set;
 import org.encog.ml.data.market.MarketDataType;
 import org.encog.ml.data.market.TickerSymbol;
 
-import syncleus.dann.dataprocess.file.csv.CSVFormat;
-import syncleus.dann.dataprocess.file.csv.ReadCSV;
+import syncleus.dann.data.file.csv.CSVFormat;
+import syncleus.dann.data.file.csv.ReadCSV;
 
 /**
  * This class loads financial data from Yahoo. One caution on Yahoo data.

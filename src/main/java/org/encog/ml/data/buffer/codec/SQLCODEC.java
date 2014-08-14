@@ -29,7 +29,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import syncleus.dann.dataprocess.MLDataError;
+import syncleus.dann.learn.MLDataError;
 
 /**
  * A CODEC that is designed to read data from an SQL source. This is a read-only

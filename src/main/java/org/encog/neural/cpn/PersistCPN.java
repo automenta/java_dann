@@ -27,7 +27,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Map;
 
-import syncleus.dann.math.linear.SimpleRealMatrix;
+import syncleus.dann.math.matrix.SimpleRealMatrix;
 
 /**
  * Persist a CPN network.

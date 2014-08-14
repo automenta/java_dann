@@ -35,8 +35,8 @@ import org.encog.ml.hmm.distributions.ContinousDistribution;
 import org.encog.ml.hmm.distributions.DiscreteDistribution;
 import org.encog.ml.hmm.distributions.StateDistribution;
 
-import syncleus.dann.dataprocess.MLDataPair;
-import syncleus.dann.dataprocess.MLDataSet;
+import syncleus.dann.learn.MLDataPair;
+import syncleus.dann.learn.MLDataSet;
 
 /**
  * A Hidden Markov Model (HMM) is a Machine Learning Method that allows for

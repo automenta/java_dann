@@ -28,7 +28,7 @@ import java.util.List;
 import org.encog.ml.data.basic.BasicMLDataSet;
 import org.encog.neural.data.NeuralDataSet;
 
-import syncleus.dann.dataprocess.MLDataPair;
+import syncleus.dann.learn.MLDataPair;
 
 /**
  * This is an alias class for Encog 2.5 compatibility. This class aliases

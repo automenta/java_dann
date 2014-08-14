@@ -37,7 +37,7 @@ import java.util.zip.ZipOutputStream;
 
 import org.encog.ml.data.buffer.BufferedDataError;
 
-import syncleus.dann.dataprocess.file.csv.CSVFormat;
+import syncleus.dann.data.file.csv.CSVFormat;
 import syncleus.dann.math.EncogMath;
 
 /**

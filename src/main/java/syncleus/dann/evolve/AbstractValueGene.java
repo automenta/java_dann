@@ -21,7 +21,7 @@ package syncleus.dann.evolve;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import syncleus.dann.UnexpectedDannError;
+import syncleus.dann.util.UnexpectedDannError;
 
 /**
  * Represents a Gene which can mutate and expresses constant activity. The

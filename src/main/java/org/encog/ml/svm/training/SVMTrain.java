@@ -29,7 +29,7 @@ import org.encog.ml.svm.SVM;
 import org.encog.ml.train.BasicTraining;
 import org.encog.neural.networks.training.propagation.TrainingContinuation;
 
-import syncleus.dann.dataprocess.MLDataSet;
+import syncleus.dann.learn.MLDataSet;
 import syncleus.dann.learn.svm.svm;
 import syncleus.dann.learn.svm.svm_parameter;
 import syncleus.dann.learn.svm.svm_problem;

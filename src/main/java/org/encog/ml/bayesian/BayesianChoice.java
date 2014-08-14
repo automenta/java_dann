@@ -25,7 +25,7 @@ package org.encog.ml.bayesian;
 
 import java.io.Serializable;
 
-import syncleus.dann.dataprocess.file.csv.CSVFormat;
+import syncleus.dann.data.file.csv.CSVFormat;
 import syncleus.dann.math.EncogMath;
 
 /**

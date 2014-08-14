@@ -41,11 +41,11 @@ import org.encog.ml.prg.expvalue.ValueType;
 import org.encog.ml.prg.extension.FunctionFactory;
 import org.encog.ml.prg.extension.StandardExtensions;
 import org.encog.ml.prg.train.PrgPopulation;
-import org.encog.ml.tree.traverse.tasks.TaskGetNodeIndex;
-import org.encog.ml.tree.traverse.tasks.TaskReplaceNode;
+import syncleus.dann.graph.tree.traverse.tasks.TaskGetNodeIndex;
+import syncleus.dann.graph.tree.traverse.tasks.TaskReplaceNode;
 
-import syncleus.dann.dataprocess.MLData;
-import syncleus.dann.dataprocess.MLDataSet;
+import syncleus.dann.learn.MLData;
+import syncleus.dann.learn.MLDataSet;
 import syncleus.dann.math.EncogUtility;
 
 /**

@@ -40,7 +40,7 @@ import org.encog.neural.neat.NEATLink;
 import org.encog.neural.neat.NEATNetwork;
 import org.encog.neural.neat.NEATPopulation;
 
-import syncleus.dann.dataprocess.MLData;
+import syncleus.dann.learn.MLData;
 import syncleus.dann.neural.activation.ActivationSteepenedSigmoid;
 
 public class HyperNEATCODEC implements GeneticCODEC {

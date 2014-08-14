@@ -34,9 +34,9 @@ import org.encog.ml.data.basic.BasicMLDataPair;
 import org.encog.neural.data.basic.BasicNeuralData;
 import org.encog.neural.data.basic.BasicNeuralDataSet;
 
-import syncleus.dann.dataprocess.MLData;
-import syncleus.dann.dataprocess.MLDataPair;
-import syncleus.dann.dataprocess.language.time.TimeSpan;
+import syncleus.dann.learn.MLData;
+import syncleus.dann.learn.MLDataPair;
+import syncleus.dann.data.language.time.TimeSpan;
 
 /**
  * This class implements a temporal neural data set. A temporal neural dataset

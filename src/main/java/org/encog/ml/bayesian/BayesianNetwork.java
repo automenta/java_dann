@@ -43,10 +43,10 @@ import org.encog.ml.bayesian.query.BayesianQuery;
 import org.encog.ml.bayesian.query.enumerate.EnumerationQuery;
 import org.encog.ml.bayesian.query.sample.EventState;
 
-import syncleus.dann.dataprocess.MLData;
-import syncleus.dann.dataprocess.MLDataPair;
-import syncleus.dann.dataprocess.MLDataSet;
-import syncleus.dann.dataprocess.file.csv.CSVFormat;
+import syncleus.dann.learn.MLData;
+import syncleus.dann.learn.MLDataPair;
+import syncleus.dann.learn.MLDataSet;
+import syncleus.dann.data.file.csv.CSVFormat;
 import syncleus.dann.math.array.EngineArray;
 
 /**

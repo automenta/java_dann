@@ -28,7 +28,7 @@ import org.encog.ml.train.MLTrain;
 import org.encog.neural.som.SOM;
 import org.encog.neural.som.training.clustercopy.SOMClusterCopyTraining;
 
-import syncleus.dann.dataprocess.MLDataSet;
+import syncleus.dann.learn.MLDataSet;
 
 /**
  * Create a trainer that uses the SOM cluster training method.

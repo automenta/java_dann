@@ -31,7 +31,7 @@ import org.encog.ml.train.strategy.Strategy;
 import org.encog.ml.train.strategy.end.EndTrainingStrategy;
 import org.encog.neural.networks.BasicNetwork;
 
-import syncleus.dann.dataprocess.MLDataSet;
+import syncleus.dann.learn.MLDataSet;
 
 /**
  * Base class for all concurrent training jobs.

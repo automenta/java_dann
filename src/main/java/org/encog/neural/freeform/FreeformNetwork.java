@@ -48,8 +48,8 @@ import org.encog.neural.freeform.task.ConnectionTask;
 import org.encog.neural.freeform.task.NeuronTask;
 import org.encog.neural.networks.BasicNetwork;
 
-import syncleus.dann.dataprocess.MLData;
-import syncleus.dann.dataprocess.MLDataSet;
+import syncleus.dann.learn.MLData;
+import syncleus.dann.learn.MLDataSet;
 import syncleus.dann.math.EncogMath;
 import syncleus.dann.math.EncogUtility;
 import syncleus.dann.math.array.EngineArray;

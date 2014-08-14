@@ -28,7 +28,7 @@ import org.encog.ml.MLMethod;
 import org.encog.ml.MLRegression;
 import org.encog.ml.data.buffer.BufferedMLDataSet;
 
-import syncleus.dann.dataprocess.MLDataSet;
+import syncleus.dann.learn.MLDataSet;
 
 /**
  * Calculate a score based on a training set. This class allows simulated

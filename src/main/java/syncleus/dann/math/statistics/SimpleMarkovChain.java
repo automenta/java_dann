@@ -29,8 +29,8 @@ import java.util.Map.Entry;
 import java.util.Random;
 import java.util.Set;
 
-import syncleus.dann.math.linear.RealMatrix;
-import syncleus.dann.math.linear.SimpleRealMatrix;
+import syncleus.dann.math.matrix.RealMatrix;
+import syncleus.dann.math.matrix.SimpleRealMatrix;
 
 public class SimpleMarkovChain<S> extends AbstractMarkovChain<S> {
 	private final RealMatrix transitionProbabilityMatrix;

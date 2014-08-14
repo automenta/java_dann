@@ -165,7 +165,7 @@ public class NeighborhoodRBF implements NeighborhoodFunction {
 		for (int i = 0; i < vectorCurrent.length; i++) {
 			vector[i] = vectorCurrent[i] - vectorBest[i];
 		}
-		return this.rbf.calculate(vector);
+		return this.rbf.apply(vector);
 
 	}
 

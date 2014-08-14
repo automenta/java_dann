@@ -18,27 +18,22 @@
  ******************************************************************************/
 package syncleus.dann.graph.drawing.hyperassociativemap;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
 import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Future;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import syncleus.dann.UnexpectedDannError;
-import syncleus.dann.UnexpectedInterruptedException;
 import syncleus.dann.graph.Graph;
 import syncleus.dann.graph.Weighted;
 import syncleus.dann.graph.drawing.GraphDrawer;
 import syncleus.dann.graph.topological.Topography;
+import syncleus.dann.math.MutableVector;
 import syncleus.dann.math.Vector;
 
 /**
@@ -74,8 +69,8 @@ public class HyperassociativeMap<G extends Graph<N, ?>, N> implements
 	private final ExecutorService threadExecutor;
 	private static final Logger LOGGER = LogManager
 			.getLogger(HyperassociativeMap.class);
-	private Map<N, Vector> coordinates = Collections
-			.synchronizedMap(new HashMap<N, Vector>());
+	private Map<N, MutableVector> coordinates = Collections
+			.synchronizedMap(new HashMap<N, MutableVector>());
 	private static final Random RANDOM = new Random();
 	private final boolean useWeights;
 	private double equilibriumDistance;
@@ -179,7 +174,7 @@ public class HyperassociativeMap<G extends Graph<N, ?>, N> implements
 	public void align() {
 		// refresh all nodes
 		if (!coordinates.keySet().equals(graph.getNodes())) {
-			final Map<N, Vector> newCoordinates = new HashMap<N, Vector>(
+			final Map<N, MutableVector> newCoordinates = new HashMap<N, MutableVector>(
 					coordinates.size() /* ESTIMATE */);
 			graph.streamNodes().forEach(node -> {
 				if (coordinates.containsKey(node)) {
@@ -193,10 +188,11 @@ public class HyperassociativeMap<G extends Graph<N, ?>, N> implements
 
 		totalMovement = DEFAULT_TOTAL_MOVEMENT;
 		maxMovement = DEFAULT_MAX_MOVEMENT;
-		Vector center;
-		if (threadExecutor == null) {
+		MutableVector center;
+		//if (threadExecutor == null) {
 			center = processLocally();
-		} else {
+		//} /*else {
+                        /*
 			// align all nodes in parallel
 			final List<Future<Vector>> futures = submitFutureAligns();
 
@@ -211,8 +207,8 @@ public class HyperassociativeMap<G extends Graph<N, ?>, N> implements
 				throw new UnexpectedInterruptedException(
 						"Unexpected interruption. Get should block indefinitely",
 						caught);
-			}
-		}
+			}*/
+		//}
 
 		if (LOGGER.isDebugEnabled())
 			LOGGER.debug("maxMove: " + maxMovement + ", Average Move: "
@@ -291,15 +287,17 @@ public class HyperassociativeMap<G extends Graph<N, ?>, N> implements
 		final Vector location = coordinates.get(nodeToAlign);
 		final Map<N, Double> neighbors = getNeighbors(nodeToAlign, neighborStore);
 
-		Vector compositeVector = new Vector(location.getDimensions());
+		MutableVector compositeVector = new MutableVector(location.getDimensions());
 		// align with neighbours
 		for (final Entry<N, Double> neighborEntry : neighbors.entrySet()) {
 			final N neighbor = neighborEntry.getKey();
 			final double associationEquilibriumDistance = neighborEntry
 					.getValue();
 
-			final Vector neighborVector = coordinates.get(neighbor)
+			final Vector _neighborVector = coordinates.get(neighbor)
 					.calculateRelativeTo(location);
+                        final MutableVector neighborVector = new MutableVector(_neighborVector);
+                        
 			if (Math.abs(neighborVector.getDistance()) > associationEquilibriumDistance) {
 				double newDistance = Math.pow(
 						Math.abs(neighborVector.getDistance())
@@ -347,7 +345,7 @@ public class HyperassociativeMap<G extends Graph<N, ?>, N> implements
 				}
 				newDistance *= learningRate;
 				nodeVector = nodeVector.setDistance(newDistance);
-				compositeVector = compositeVector.add(nodeVector);
+				compositeVector.plus(nodeVector);
 			}
 		}
 		Vector newLocation = location.add(compositeVector);
@@ -373,7 +371,7 @@ public class HyperassociativeMap<G extends Graph<N, ?>, N> implements
 		}
 		totalMovement += moveDistance;
 
-		coordinates.put(nodeToAlign, newLocation);
+		coordinates.put(nodeToAlign, new MutableVector(newLocation));
 		return newLocation;
 	}
 
@@ -386,13 +384,13 @@ public class HyperassociativeMap<G extends Graph<N, ?>, N> implements
 	 * @return New RANDOM Vector
 	 * @since 1.0
 	 */
-	public static Vector randomCoordinates(final int dimensions) {
+	public static MutableVector randomCoordinates(final int dimensions) {
 		final double[] randomCoordinates = new double[dimensions];
 		for (int randomCoordinatesIndex = 0; randomCoordinatesIndex < dimensions; randomCoordinatesIndex++) {
 			randomCoordinates[randomCoordinatesIndex] = (RANDOM.nextDouble() * 2.0) - 1.0;
 		}
 
-		return new Vector(randomCoordinates);
+		return new MutableVector(randomCoordinates);
 	}
 
 	/**
@@ -408,17 +406,9 @@ public class HyperassociativeMap<G extends Graph<N, ?>, N> implements
 		return Math.log(Math.abs((value + 1.0) / (1.0 - value))) / 2;
 	}
 
-	@Deprecated
-	private List<Future<Vector>> submitFutureAligns() {
-		final ArrayList<Future<Vector>> futures = new ArrayList<Future<Vector>>();
-                graph.getNodes().stream().forEach((node) -> {
-                futures.add(threadExecutor.submit(new Align(node)));
-            });
-		return futures;
-	}
 
-	private Vector processLocally() {
-		final Vector pointSum = new Vector(dimensions);
+	private MutableVector processLocally() {
+		final MutableVector pointSum = new MutableVector(dimensions);
 		graph.streamNodes().parallel().forEach(node -> {
 			align(node);
 			pointSum.plus(align(node));
@@ -437,35 +427,47 @@ public class HyperassociativeMap<G extends Graph<N, ?>, N> implements
 		return pointSum;
 	}
 
-	private Vector waitAndProcessFutures(final List<Future<Vector>> futures)
-			throws InterruptedException {
-		// wait for all nodes to finish aligning and calculate the new center
-		// point
-		Vector pointSum = new Vector(dimensions);
-		try {
-			for (final Future<Vector> future : futures) {
-				final Vector newPoint = future.get();
-				for (int dimensionIndex = 1; dimensionIndex <= dimensions; dimensionIndex++) {
-					pointSum = pointSum.setNew(pointSum.get(dimensionIndex)
-							+ newPoint.get(dimensionIndex), dimensionIndex);
-				}
-			}
-		} catch (final ExecutionException caught) {
-			LOGGER.error("Align had an unexpected problem executing.", caught);
-			throw new UnexpectedDannError(
-					"Unexpected execution exception. Get should block indefinitely",
-					caught);
-		}
-		if (learningRate * LEARNING_RATE_PROCESSING_ADJUSTMENT < DEFAULT_LEARNING_RATE) {
-			final double acceptableDistanceAdjustment = 0.1;
-			if (getAverageMovement() < (equilibriumDistance
-					* acceptableDistanceFactor * acceptableDistanceAdjustment)) {
-				acceptableDistanceFactor = maxMovement * 2.0;
-			}
-			learningRate *= LEARNING_RATE_PROCESSING_ADJUSTMENT;
-			LOGGER.debug("learning rate: " + learningRate
-					+ ", acceptableDistanceFactor: " + acceptableDistanceFactor);
-		}
-		return pointSum;
-	}
+        
+//	@Deprecated
+//	private List<Future<Vector>> submitFutureAligns() {
+//		final ArrayList<Future<Vector>> futures = new ArrayList<Future<Vector>>();
+//                graph.getNodes().stream().forEach((node) -> {
+//                futures.add(threadExecutor.submit(new Align(node)));
+//            });
+//		return futures;
+//	}
+        
+//	private MutableVector waitAndProcessFutures(final List<Future<Vector>> futures)
+//			throws InterruptedException {
+//		// wait for all nodes to finish aligning and calculate the new center
+//		// point
+//		MutableVector pointSum = new MutableVector(dimensions);
+//		try {
+//			for (final Future<Vector> future : futures) {
+//				final Vector newPoint = future.get();
+//				for (int dimensionIndex = 1; dimensionIndex <= dimensions; dimensionIndex++) {
+//					pointSum = pointSum.clone(pointSum.get(dimensionIndex)
+//							+ newPoint.get(dimensionIndex), dimensionIndex);
+//				}
+//			}
+//		} catch (final ExecutionException caught) {
+//			LOGGER.error("Align had an unexpected problem executing.", caught);
+//			throw new UnexpectedDannError(
+//					"Unexpected execution exception. Get should block indefinitely",
+//					caught);
+//		}
+//		if (learningRate * LEARNING_RATE_PROCESSING_ADJUSTMENT < DEFAULT_LEARNING_RATE) {
+//			final double acceptableDistanceAdjustment = 0.1;
+//			if (getAverageMovement() < (equilibriumDistance
+//					* acceptableDistanceFactor * acceptableDistanceAdjustment)) {
+//				acceptableDistanceFactor = maxMovement * 2.0;
+//			}
+//			learningRate *= LEARNING_RATE_PROCESSING_ADJUSTMENT;
+//			LOGGER.debug("learning rate: " + learningRate
+//					+ ", acceptableDistanceFactor: " + acceptableDistanceFactor);
+//		}
+//		return pointSum;
+//	}
+
+
 }

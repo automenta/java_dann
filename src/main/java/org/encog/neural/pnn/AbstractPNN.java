@@ -25,7 +25,7 @@ package org.encog.neural.pnn;
 
 import org.encog.ml.BasicML;
 
-import syncleus.dann.dataprocess.MLData;
+import syncleus.dann.learn.MLData;
 
 /**
  * Abstract class to build PNN networks upon.

@@ -31,8 +31,8 @@ import java.util.List;
 import org.encog.ml.data.basic.BasicMLDataPair;
 import org.encog.neural.networks.BasicNetwork;
 
-import syncleus.dann.dataprocess.MLDataPair;
-import syncleus.dann.dataprocess.MLDataSet;
+import syncleus.dann.learn.MLDataPair;
+import syncleus.dann.learn.MLDataSet;
 import syncleus.dann.math.EncogMath;
 import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.math.statistics.ErrorCalculation;

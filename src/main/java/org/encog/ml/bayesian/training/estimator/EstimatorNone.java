@@ -26,7 +26,7 @@ package org.encog.ml.bayesian.training.estimator;
 import org.encog.ml.bayesian.BayesianNetwork;
 import org.encog.ml.bayesian.training.TrainBayesian;
 
-import syncleus.dann.dataprocess.MLDataSet;
+import syncleus.dann.learn.MLDataSet;
 
 /**
  * A simple estimator that does nothing.

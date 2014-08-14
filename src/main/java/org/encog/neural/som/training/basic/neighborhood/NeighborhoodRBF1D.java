@@ -98,7 +98,7 @@ public class NeighborhoodRBF1D implements NeighborhoodFunction {
 	public double function(final int currentNeuron, final int bestNeuron) {
 		final double[] d = new double[1];
 		d[0] = currentNeuron - bestNeuron;
-		return this.radial.calculate(d);
+		return this.radial.apply(d);
 	}
 
 	/**

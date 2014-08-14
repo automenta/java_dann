@@ -25,8 +25,8 @@ package org.encog.ml;
 
 import java.util.List;
 
-import syncleus.dann.dataprocess.MLData;
-import syncleus.dann.dataprocess.MLDataSet;
+import syncleus.dann.learn.MLData;
+import syncleus.dann.learn.MLDataSet;
 
 /**
  * Defines a cluster. Usually used with the MLClustering method to break input

@@ -27,7 +27,7 @@ import org.encog.neural.networks.ContainsFlat;
 import org.encog.neural.networks.training.propagation.Propagation;
 import org.encog.neural.networks.training.propagation.TrainingContinuation;
 
-import syncleus.dann.dataprocess.MLDataSet;
+import syncleus.dann.learn.MLDataSet;
 import syncleus.dann.math.BoundNumbers;
 import syncleus.dann.math.array.EngineArray;
 

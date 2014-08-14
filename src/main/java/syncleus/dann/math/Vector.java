@@ -33,8 +33,8 @@ public class Vector implements Serializable {
 	private static final long serialVersionUID = -1488734312355605257L;
 	private static final String DIMENSIONS_BELOW_ONE = "dimensions can not be less than or equal to zero";
 
-	private final double[] coordinates;
-	private Double distanceCache = null;
+	protected final double[] coordinates;
+	protected Double distanceCache = null;
 
 	/**
 	 * Creates a Vector at the origin (all coordinates are 0) in the specified
@@ -112,16 +112,16 @@ public class Vector implements Serializable {
 	/**
 	 * Sets the specified coordinate.
 	 *
-	 * @param coordinate
+	 * @param newCoordinateValue
 	 *            The new value to set for the coordinate.
-	 * @param dimension
+	 * @param whichDimension
 	 *            The dimension of the coordinate to set.
 	 * @throws IllegalArgumentException
 	 *             Thrown if the coordinate is less than or equal to 0 or more
 	 *             than the number of dimensions.
 	 * @since 1.0
 	 */
-	public Vector setNew(final double coordinate, final int dimension) {
+	public Vector clone(final double newCoordinateValue, final int whichDimension) {
 		/*
 		 * if( dimension <= 0 ) throw new
 		 * IllegalArgumentException(DIMENSIONS_BELOW_ONE); if( dimension >
@@ -129,14 +129,10 @@ public class Vector implements Serializable {
 		 * "dimensions is larger than the dimensionality of this point");
 		 */
 		final double[] coords = this.coordinates.clone();
-		coords[dimension - 1] = coordinate;
+		coords[whichDimension - 1] = newCoordinateValue;
 		return new Vector(coords);
 	}
 
-	public void set(final double coordinate, final int dimension) {
-		this.coordinates[dimension - 1] = coordinate;
-		distanceCache = null;
-	}
 
 	/**
 	 * Gets the current value of the specified coordinate.
@@ -182,17 +178,6 @@ public class Vector implements Serializable {
 		return newVector;
 	}
 
-	/** same as setDistance but modifies this vector */
-	public void modifyDistance(final double distance) {
-
-		final double currentDistance = this.getDistance();
-		final double scalar = distance / currentDistance;
-
-		for (int i = 0; i < coordinates.length; i++)
-			coordinates[i] *= scalar;
-
-		distanceCache = null;
-	}
 
 	/**
 	 * Sets the one of the angular components of the hyper-spherical
@@ -356,22 +341,6 @@ public class Vector implements Serializable {
 		return new Vector(relativeCoords);
 	}
 
-	/** same as calculateRelativeTo but modifies this vector */
-	public void moveRelativeTo(final Vector absolutePoint) {
-		if (absolutePoint == null)
-			throw new IllegalArgumentException("absolutePoint can not be null!");
-
-		final double[] absoluteCoords = absolutePoint.coordinates;
-
-		if (absoluteCoords.length != coordinates.length)
-			throw new IllegalArgumentException(
-					"absolutePoint must have the same dimensions as this point");
-
-		for (int coordIndex = 0; coordIndex < coordinates.length; coordIndex++)
-			coordinates[coordIndex] -= absoluteCoords[coordIndex];
-
-	}
-
 	/**
 	 * Adds the specified Vector to this Vector.
 	 *
@@ -399,12 +368,6 @@ public class Vector implements Serializable {
 		return new Vector(relativeCoords);
 	}
 
-	/** same as Add, but modifies this vector */
-	public void plus(final Vector pointToAdd) {
-		final double pc[] = pointToAdd.coordinates;
-		for (int coordIndex = 0; coordIndex < coordinates.length; coordIndex++)
-			coordinates[coordIndex] += pc[coordIndex];
-	}
 
 	public Vector subtract(final Vector pointToAdd) {
 		if (pointToAdd == null)
@@ -546,9 +509,5 @@ public class Vector implements Serializable {
 		return true;
 	}
 
-	public void set(final Vector align) {
-		System.arraycopy(align.coordinates, 0, coordinates, 0,
-				coordinates.length);
-	}
 
 }

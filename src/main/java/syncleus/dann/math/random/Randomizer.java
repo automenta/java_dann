@@ -27,7 +27,7 @@ import java.util.Random;
 
 import org.encog.ml.MLMethod;
 
-import syncleus.dann.math.linear.SimpleRealMatrix;
+import syncleus.dann.math.matrix.SimpleRealMatrix;
 
 /**
  * Defines the interface for a class that is capable of randomizing the weights

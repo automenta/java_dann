@@ -18,7 +18,7 @@
  ******************************************************************************/
 package syncleus.dann.neural;
 
-import syncleus.dann.DannRuntimeException;
+import syncleus.dann.util.DannRuntimeException;
 
 /**
  * An exception thrown to indicate two neurons trying to be connected are

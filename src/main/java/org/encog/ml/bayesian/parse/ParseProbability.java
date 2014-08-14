@@ -29,8 +29,8 @@ import java.util.List;
 import org.encog.ml.bayesian.BayesianError;
 import org.encog.ml.bayesian.BayesianNetwork;
 
-import syncleus.dann.dataprocess.file.csv.CSVFormat;
-import syncleus.dann.dataprocess.language.SimpleParser;
+import syncleus.dann.data.file.csv.CSVFormat;
+import syncleus.dann.data.language.SimpleParser;
 
 /**
  * Used to parse probability strings for the Bayes networks.

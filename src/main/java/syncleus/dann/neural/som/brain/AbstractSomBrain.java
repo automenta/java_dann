@@ -34,8 +34,8 @@ import java.util.concurrent.Future;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import syncleus.dann.UnexpectedDannError;
-import syncleus.dann.UnexpectedInterruptedException;
+import syncleus.dann.util.UnexpectedDannError;
+import syncleus.dann.util.UnexpectedInterruptedException;
 import syncleus.dann.graph.AbstractBidirectedAdjacencyGraph;
 import syncleus.dann.math.Vector;
 import syncleus.dann.neural.AbstractLocalBrain;
@@ -177,11 +177,11 @@ public abstract class AbstractSomBrain<IN extends SomInputNeuron, ON extends Som
 		for (int dimensionIndex = 1; dimensionIndex <= position.getDimensions(); dimensionIndex++) {
 			if (this.upperBounds.get(dimensionIndex) < position
 					.get(dimensionIndex))
-				this.upperBounds = this.upperBounds.setNew(
+				this.upperBounds = this.upperBounds.clone(
 						position.get(dimensionIndex), dimensionIndex);
 			if (this.lowerBounds.get(dimensionIndex) > position
 					.get(dimensionIndex))
-				this.lowerBounds = this.lowerBounds.setNew(
+				this.lowerBounds = this.lowerBounds.clone(
 						position.get(dimensionIndex), dimensionIndex);
 		}
 	}

@@ -26,7 +26,7 @@ package org.encog.ml.bayesian.training.search.k2;
 import org.encog.ml.bayesian.BayesianNetwork;
 import org.encog.ml.bayesian.training.TrainBayesian;
 
-import syncleus.dann.dataprocess.MLDataSet;
+import syncleus.dann.learn.MLDataSet;
 
 /**
  * Search for a good Bayes structure.

@@ -18,7 +18,7 @@
  ******************************************************************************/
 package syncleus.dann.graph.drawing.hyperassociativemap;
 
-import syncleus.dann.DannException;
+import syncleus.dann.util.DannException;
 
 /**
  * An exception thrown to indicate that no neighbor nodes currently exist.

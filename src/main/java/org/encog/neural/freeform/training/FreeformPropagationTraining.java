@@ -35,9 +35,9 @@ import org.encog.neural.freeform.FreeformNetwork;
 import org.encog.neural.freeform.FreeformNeuron;
 import org.encog.neural.freeform.task.ConnectionTask;
 
-import syncleus.dann.dataprocess.MLData;
-import syncleus.dann.dataprocess.MLDataPair;
-import syncleus.dann.dataprocess.MLDataSet;
+import syncleus.dann.learn.MLData;
+import syncleus.dann.learn.MLDataPair;
+import syncleus.dann.learn.MLDataSet;
 import syncleus.dann.math.statistics.ErrorCalculation;
 import syncleus.dann.neural.activation.ActivationSigmoid;
 

@@ -40,7 +40,7 @@ import org.encog.neural.neat.training.NEATInnovationList;
 import org.encog.neural.neat.training.NEATLinkGene;
 import org.encog.neural.neat.training.NEATNeuronGene;
 
-import syncleus.dann.dataprocess.file.csv.CSVFormat;
+import syncleus.dann.data.file.csv.CSVFormat;
 
 /**
  * Persist a NEAT or HyperNEAT network.

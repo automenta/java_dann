@@ -27,8 +27,8 @@ import java.util.Iterator;
 
 import org.encog.ml.data.basic.BasicMLDataPair;
 
-import syncleus.dann.dataprocess.MLDataError;
-import syncleus.dann.dataprocess.MLDataPair;
+import syncleus.dann.learn.MLDataError;
+import syncleus.dann.learn.MLDataPair;
 
 /**
  * An iterator for the BufferedNeuralDataSet.

@@ -35,8 +35,8 @@ import org.encog.ml.train.MLTrain;
 import org.encog.ml.train.strategy.Strategy;
 import org.encog.neural.networks.training.propagation.TrainingContinuation;
 
-import syncleus.dann.dataprocess.MLDataSet;
-import syncleus.dann.dataprocess.MLSequenceSet;
+import syncleus.dann.learn.MLDataSet;
+import syncleus.dann.learn.MLSequenceSet;
 
 /**
  * This class provides the base implementation for Baum-Welch learning for

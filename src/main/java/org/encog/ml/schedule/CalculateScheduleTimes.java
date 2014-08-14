@@ -32,15 +32,15 @@ public class CalculateScheduleTimes {
 		// find the max
 		double m = Double.NEGATIVE_INFINITY;
 		for (final BasicEdge edge : node.getBackConnections()) {
-			final double d = ((ActionNode) edge.getFrom())
+			final double d = ((ActionNode) edge.getSource())
 					.getEarliestStartTime()
-					+ ((ActionNode) edge.getFrom()).getDuration();
+					+ ((ActionNode) edge.getSource()).getDuration();
 			m = Math.max(d, m);
 		}
 		node.setEarliestStartTime(m);
 
                 node.getConnections().stream().forEach((edge) -> {
-                forward((ActionNode) edge.getTo());
+                forward((ActionNode) edge.getDestination());
             });
 	}
 
@@ -48,14 +48,14 @@ public class CalculateScheduleTimes {
 		// find the min
 		double m = Double.POSITIVE_INFINITY;
 		for (final BasicEdge edge : node.getConnections()) {
-			final double d = ((ActionNode) edge.getTo()).getLatestStartTime()
-					- ((ActionNode) edge.getFrom()).getDuration();
+			final double d = ((ActionNode) edge.getDestination()).getLatestStartTime()
+					- ((ActionNode) edge.getSource()).getDuration();
 			m = Math.min(d, m);
 		}
 		node.setLatestStartTime(m);
 
                 node.getBackConnections().stream().forEach((edge) -> {
-                backward((ActionNode) edge.getFrom());
+                backward((ActionNode) edge.getSource());
             });
 	}
 
@@ -63,14 +63,14 @@ public class CalculateScheduleTimes {
 		// forward pass
 		graph.getStartNode().setEarliestStartTime(0);
                 graph.getStartNode().getConnections().stream().forEach((edge) -> {
-                forward((ActionNode) edge.getTo());
+                forward((ActionNode) edge.getDestination());
             });
 
 		// backward
 		graph.getFinishNode().setLatestStartTime(
 				graph.getFinishNode().getEarliestStartTime());
                 graph.getFinishNode().getBackConnections().stream().forEach((edge) -> {
-                backward((ActionNode) edge.getFrom());
+                backward((ActionNode) edge.getSource());
             });
 	}
 }

@@ -18,6 +18,7 @@
  ******************************************************************************/
 package syncleus.dann.graph.search.pathfinding;
 
+import syncleus.dann.graph.path.pathfinding.JohnsonPathFinder;
 import java.util.List;
 
 import org.junit.Assert;

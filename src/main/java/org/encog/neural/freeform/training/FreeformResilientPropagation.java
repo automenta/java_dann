@@ -31,7 +31,7 @@ import org.encog.neural.freeform.task.ConnectionTask;
 import org.encog.neural.networks.training.propagation.TrainingContinuation;
 import org.encog.neural.networks.training.propagation.resilient.RPROPConst;
 
-import syncleus.dann.dataprocess.MLDataSet;
+import syncleus.dann.learn.MLDataSet;
 import syncleus.dann.math.EncogMath;
 
 public class FreeformResilientPropagation extends FreeformPropagationTraining

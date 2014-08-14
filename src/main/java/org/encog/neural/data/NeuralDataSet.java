@@ -23,7 +23,7 @@
  */
 package org.encog.neural.data;
 
-import syncleus.dann.dataprocess.MLDataSet;
+import syncleus.dann.learn.MLDataSet;
 
 /**
  * This is an alias class for Encog 2.5 compatibility. This class aliases

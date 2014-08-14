@@ -18,7 +18,7 @@
  ******************************************************************************/
 package syncleus.dann.neural;
 
-import syncleus.dann.DannException;
+import syncleus.dann.util.DannException;
 
 /**
  * This indicates that a required synapse does not exist.

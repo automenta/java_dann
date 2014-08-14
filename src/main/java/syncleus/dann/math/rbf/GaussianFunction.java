@@ -98,7 +98,7 @@ public class GaussianFunction extends BasicRBF {
 	 * @return The result of the function.
 	 */
 	@Override
-	public final double calculate(final double[] x) {
+	public final double apply(final double[] x) {
 		double value = 0;
 		final double[] center = getCenters();
 		final double width = getWidth();

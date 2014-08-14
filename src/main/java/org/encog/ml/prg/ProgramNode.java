@@ -27,8 +27,8 @@ import java.io.Serializable;
 
 import org.encog.ml.prg.expvalue.ExpressionValue;
 import org.encog.ml.prg.extension.ProgramExtensionTemplate;
-import org.encog.ml.tree.TreeNode;
-import org.encog.ml.tree.basic.BasicTreeNode;
+import syncleus.dann.graph.tree.TreeNode;
+import syncleus.dann.graph.tree.basic.BasicTreeNode;
 
 /**
  * Represents a program node in an EPL program.

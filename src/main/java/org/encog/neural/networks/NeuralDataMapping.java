@@ -23,7 +23,7 @@
  */
 package org.encog.neural.networks;
 
-import syncleus.dann.dataprocess.MLData;
+import syncleus.dann.learn.MLData;
 
 /**
  * Used to map one neural data object to another. Useful for a BAM network.

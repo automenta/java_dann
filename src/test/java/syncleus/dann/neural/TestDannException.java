@@ -20,7 +20,7 @@ package syncleus.dann.neural;
 
 import org.junit.Test;
 
-import syncleus.dann.DannException;
+import syncleus.dann.util.DannException;
 
 public class TestDannException {
 	@Test(expected = DannException.class)

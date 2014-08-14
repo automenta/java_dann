@@ -30,8 +30,8 @@ import org.encog.ml.MLRegression;
 import org.encog.ml.data.basic.BasicMLData;
 import org.encog.neural.NeuralNetworkError;
 
-import syncleus.dann.dataprocess.MLData;
-import syncleus.dann.dataprocess.MLDataSet;
+import syncleus.dann.learn.MLData;
+import syncleus.dann.learn.MLDataSet;
 import syncleus.dann.learn.svm.svm;
 import syncleus.dann.learn.svm.svm_model;
 import syncleus.dann.learn.svm.svm_node;

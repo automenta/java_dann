@@ -25,8 +25,8 @@ package org.encog.ml.data.basic;
 
 import java.io.Serializable;
 
-import syncleus.dann.dataprocess.MLData;
-import syncleus.dann.dataprocess.MLDataPair;
+import syncleus.dann.learn.MLData;
+import syncleus.dann.learn.MLDataPair;
 import syncleus.dann.math.cluster.Centroid;
 
 /**

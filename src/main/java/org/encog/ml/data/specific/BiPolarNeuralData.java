@@ -25,10 +25,10 @@ package org.encog.ml.data.specific;
 
 import java.io.Serializable;
 
-import syncleus.dann.dataprocess.MLData;
-import syncleus.dann.dataprocess.MLDataError;
+import syncleus.dann.learn.MLData;
+import syncleus.dann.learn.MLDataError;
 import syncleus.dann.math.cluster.Centroid;
-import syncleus.dann.math.linear.BiPolarUtil;
+import syncleus.dann.math.matrix.BiPolarUtil;
 
 /**
  * A NeuralData implementation designed to work with bipolar data. Bipolar data

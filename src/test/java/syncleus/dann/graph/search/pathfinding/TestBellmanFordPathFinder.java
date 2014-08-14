@@ -18,6 +18,7 @@
  ******************************************************************************/
 package syncleus.dann.graph.search.pathfinding;
 
+import syncleus.dann.graph.path.pathfinding.BellmanFordPathFinder;
 import java.util.List;
 
 import org.junit.Assert;

@@ -24,9 +24,9 @@ import java.util.Random;
 import org.junit.Assert;
 import org.junit.Test;
 
-import syncleus.dann.dataprocess.signal.transform.CooleyTukeyFastFourierTransformer;
-import syncleus.dann.dataprocess.signal.transform.DiscreteFourierTransform;
-import syncleus.dann.dataprocess.signal.transform.FastFourierTransformer;
+import syncleus.dann.data.signal.transform.CooleyTukeyFastFourierTransformer;
+import syncleus.dann.data.signal.transform.DiscreteFourierTransform;
+import syncleus.dann.data.signal.transform.FastFourierTransformer;
 import syncleus.dann.math.ComplexNumber;
 
 public class TestCooleyTukeyFastFourierTransformer {

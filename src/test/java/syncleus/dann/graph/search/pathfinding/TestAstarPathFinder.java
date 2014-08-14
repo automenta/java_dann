@@ -18,6 +18,8 @@
  ******************************************************************************/
 package syncleus.dann.graph.search.pathfinding;
 
+import syncleus.dann.graph.path.pathfinding.AstarPathFinder;
+import syncleus.dann.graph.path.pathfinding.HeuristicPathCost;
 import java.util.List;
 
 import org.junit.Assert;

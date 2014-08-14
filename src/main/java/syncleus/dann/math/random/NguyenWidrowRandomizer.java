@@ -26,7 +26,7 @@ package syncleus.dann.math.random;
 import org.encog.ml.MLMethod;
 import org.encog.neural.networks.BasicNetwork;
 
-import syncleus.dann.math.linear.SimpleRealMatrix;
+import syncleus.dann.math.matrix.SimpleRealMatrix;
 import syncleus.dann.neural.activation.EncogActivationFunction;
 
 /**

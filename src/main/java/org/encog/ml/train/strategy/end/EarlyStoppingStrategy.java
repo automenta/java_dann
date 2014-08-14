@@ -26,7 +26,7 @@ package org.encog.ml.train.strategy.end;
 import org.encog.ml.MLError;
 import org.encog.ml.train.MLTrain;
 
-import syncleus.dann.dataprocess.MLDataSet;
+import syncleus.dann.learn.MLDataSet;
 
 /**
  * Stop early when validation set no longer improves.

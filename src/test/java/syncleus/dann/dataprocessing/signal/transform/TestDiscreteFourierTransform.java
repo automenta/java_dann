@@ -23,7 +23,7 @@ import java.util.Random;
 import org.junit.Assert;
 import org.junit.Test;
 
-import syncleus.dann.dataprocess.signal.transform.DiscreteFourierTransform;
+import syncleus.dann.data.signal.transform.DiscreteFourierTransform;
 import syncleus.dann.math.ComplexNumber;
 
 public class TestDiscreteFourierTransform {

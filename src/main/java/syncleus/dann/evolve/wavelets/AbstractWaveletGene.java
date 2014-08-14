@@ -27,7 +27,7 @@ import java.util.Set;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import syncleus.dann.UnexpectedDannError;
+import syncleus.dann.util.UnexpectedDannError;
 import syncleus.dann.evolve.Gene;
 import syncleus.dann.math.AbstractFunction;
 

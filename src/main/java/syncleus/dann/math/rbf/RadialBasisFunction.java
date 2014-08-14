@@ -39,7 +39,7 @@ public interface RadialBasisFunction extends Serializable, ArrayToScalarFunction
 	 *            The value to be passed into the RBF.
 	 * @return The RBF value.
 	 */
-	double calculate(double[] x);
+	double apply(double[] x);
 
 	/**
 	 * Get the center of this RBD.

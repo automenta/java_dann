@@ -30,7 +30,7 @@ import org.encog.ml.TrainingImplementationType;
 import org.encog.ml.train.strategy.Strategy;
 import org.encog.ml.train.strategy.end.EndTrainingStrategy;
 
-import syncleus.dann.dataprocess.MLDataSet;
+import syncleus.dann.learn.MLDataSet;
 
 /**
  * An abstract class that implements basic training for most training
