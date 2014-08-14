@@ -7,8 +7,8 @@ package syncleus.dann.math;
  * @author Elser
  */
 public class Sigmoids {
-	private static final double sigmoPrecomputed[];
-	private sfinal tatic double SIGMO_RANGE = 30.0; // -4.0..4.0
+	private static double sigmoPrecomputed[];
+	private static double SIGMO_RANGE = 30.0; // -4.0..4.0
 	static {
 		sigmoPrecomputed = new double[800];
 		for (int i = 0; i < sigmoPrecomputed.length; i++) {

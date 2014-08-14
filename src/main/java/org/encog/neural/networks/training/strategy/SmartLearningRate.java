@@ -85,7 +85,7 @@ public class SmartLearningRate implements Strategy {
 		this.trainingSize = train.getTraining().getRecordCount();
 		this.currentLearningRate = 1.0 / this.trainingSize;
 		//EncogLogging.log(//EncogLogging.LEVEL_DEBUG, "Starting learning rate: "
-				+ this.currentLearningRate);
+				//+ this.currentLearningRate);
 		this.setter.setLearningRate(this.currentLearningRate);
 	}
 
@@ -99,8 +99,8 @@ public class SmartLearningRate implements Strategy {
 				this.currentLearningRate *= SmartLearningRate.LEARNING_DECAY;
 				this.setter.setLearningRate(this.currentLearningRate);
 				//EncogLogging.log(//EncogLogging.LEVEL_DEBUG,
-						"Adjusting learning rate to {}"
-								+ this.currentLearningRate);
+						//"Adjusting learning rate to {}"
+						//		+ this.currentLearningRate);
 			}
 		} else {
 			this.ready = true;

@@ -590,8 +590,8 @@ public class PruneIncremental extends ConcurrentJob {
 
 		if (choice != this.bestNetwork) {
 			//EncogLogging.log(//EncogLogging.LEVEL_DEBUG,
-					"Prune found new best network: error=" + error
-							+ ", network=" + choice);
+					//"Prune found new best network: error=" + error
+					//		+ ", network=" + choice);
 			this.bestNetwork = choice;
 		}
 

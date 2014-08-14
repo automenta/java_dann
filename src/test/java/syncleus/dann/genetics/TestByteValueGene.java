@@ -30,16 +30,16 @@ public class TestByteValueGene {
 	public void testConstructors() {
 		ValueGene test = new ByteValueGene((byte) 123);
 		Assert.assertTrue("value constructor failed", test.getValue()
-				.getNumber().byteValue() == 123);
-		test = new ByteValueGene(new MutableByte(57));
+				.getNumber().byteValue() == (byte) 123);
+		test = new ByteValueGene(new MutableByte((byte) 57));
 		Assert.assertTrue("MutableByte value constructor failed", test
-				.getValue().getNumber().byteValue() == 57);
-		test = new ByteValueGene(83);
+				.getValue().getNumber().byteValue() == (byte) 57);
+		test = new ByteValueGene((byte) 83);
 		Assert.assertTrue("Number value constructor failed", test.getValue()
-				.getNumber().byteValue() == 83);
+				.getNumber().byteValue() == (byte) 83);
 		test = new ByteValueGene();
 		Assert.assertTrue("default constructor failed", test.getValue()
-				.getNumber().byteValue() == 0);
+				.getNumber().byteValue() == (byte) 0);
 	}
 
 	@Test

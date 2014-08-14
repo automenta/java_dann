@@ -25,7 +25,6 @@ package org.encog.ml.train.strategy;
 
 import org.encog.ml.MLResettable;
 import org.encog.ml.train.MLTrain;
-import org.encog.neural.networks.training.TrainingError;
 
 /**
  * The reset strategy will reset the weights if the neural network fails to fall
@@ -90,7 +89,7 @@ public class ResetStrategy implements Strategy {
 		this.train = train;
 
 		if (!(train.getMethod() instanceof MLResettable)) {
-			throw new TrainingError(
+			throw new RuntimeException(
 					"To use the reset strategy the machine learning method must support MLResettable.");
 		}
 
@@ -114,7 +113,7 @@ public class ResetStrategy implements Strategy {
 			this.badCycleCount++;
 			if (this.badCycleCount > this.cycles) {
 				//EncogLogging.log(//EncogLogging.LEVEL_DEBUG,
-						"Failed to imrove network, resetting.");
+						//"Failed to imrove network, resetting.");
 				this.method.reset();
 				this.badCycleCount = 0;
 			}

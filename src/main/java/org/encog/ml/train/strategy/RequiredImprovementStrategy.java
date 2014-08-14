@@ -25,7 +25,6 @@ package org.encog.ml.train.strategy;
 
 import org.encog.ml.MLResettable;
 import org.encog.ml.train.MLTrain;
-import org.encog.neural.networks.training.TrainingError;
 
 /**
  * The reset strategy will reset the weights if the neural network fails to
@@ -123,7 +122,7 @@ public class RequiredImprovementStrategy implements Strategy {
 		this.train = train;
 
 		if (!(train.getMethod() instanceof MLResettable)) {
-			throw new TrainingError(
+			throw new RuntimeException(
 					"To use the required improvement strategy the machine learning method must support MLResettable.");
 		}
 
@@ -151,7 +150,7 @@ public class RequiredImprovementStrategy implements Strategy {
 					this.badCycleCount++;
 					if (this.badCycleCount > this.cycles) {
 						//EncogLogging.log(//EncogLogging.LEVEL_DEBUG,
-								"Failed to improve network, resetting.");
+								//"Failed to improve network, resetting.");
 						this.method.reset();
 						this.badCycleCount = 0;
 						this.lastError = Double.NaN;

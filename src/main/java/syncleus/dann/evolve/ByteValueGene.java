@@ -33,7 +33,7 @@ public class ByteValueGene extends AbstractValueGene<MutableByte> {
 	 * @since 2.0
 	 */
 	public ByteValueGene() {
-		super(new MutableByte(0));
+		super(new MutableByte((byte)0));
 	}
 
 	/**

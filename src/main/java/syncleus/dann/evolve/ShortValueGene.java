@@ -33,7 +33,7 @@ public class ShortValueGene extends AbstractValueGene<MutableShort> {
 	 * @since 2.0
 	 */
 	public ShortValueGene() {
-		super(new MutableShort(0));
+		super(new MutableShort((short)0));
 	}
 
 	/**

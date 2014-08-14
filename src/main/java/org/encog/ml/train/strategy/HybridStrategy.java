@@ -157,7 +157,7 @@ public class HybridStrategy implements Strategy {
 			this.lastImprovement = (currentError - this.lastError)
 					/ this.lastError;
 			//EncogLogging.log(//EncogLogging.LEVEL_DEBUG, "Last improvement: "
-					+ this.lastImprovement);
+					//+ this.lastImprovement);
 
 			if ((this.lastImprovement > 0)
 					|| (Math.abs(this.lastImprovement) < this.minImprovement)) {
@@ -167,7 +167,7 @@ public class HybridStrategy implements Strategy {
 					this.lastHybrid = 0;
 
 					//EncogLogging.log(//EncogLogging.LEVEL_DEBUG,
-							"Performing hybrid cycle");
+							//"Performing hybrid cycle");
 
 					for (int i = 0; i < this.alternateCycles; i++) {
 						this.altTrain.iteration();

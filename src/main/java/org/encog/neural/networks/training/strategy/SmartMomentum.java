@@ -123,7 +123,7 @@ public class SmartMomentum implements Strategy {
 			this.lastImprovement = (currentError - this.lastError)
 					/ this.lastError;
 			//EncogLogging.log(//EncogLogging.LEVEL_DEBUG, "Last improvement: "
-					+ this.lastImprovement);
+					//+ this.lastImprovement);
 
 			if ((this.lastImprovement > 0)
 					|| (Math.abs(this.lastImprovement) < SmartMomentum.MIN_IMPROVEMENT)) {
@@ -137,11 +137,11 @@ public class SmartMomentum implements Strategy {
 					this.currentMomentum *= (1.0 + SmartMomentum.MOMENTUM_INCREASE);
 					this.setter.setMomentum(this.currentMomentum);
 					//EncogLogging.log(//EncogLogging.LEVEL_DEBUG,
-							"Adjusting momentum: " + this.currentMomentum);
+							//"Adjusting momentum: " + this.currentMomentum);
 				}
 			} else {
 				//EncogLogging.log(//EncogLogging.LEVEL_DEBUG,
-						"Setting momentum back to zero.");
+						//"Setting momentum back to zero.");
 
 				this.currentMomentum = 0;
 				this.setter.setMomentum(0);

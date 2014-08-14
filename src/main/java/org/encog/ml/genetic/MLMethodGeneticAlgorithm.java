@@ -59,8 +59,7 @@ import org.encog.neural.networks.training.propagation.TrainingContinuation;
  * create your own implementation of the CalculateScore method. This class can
  * then score the networks any way that you like.
  */
-public class MLMethodGeneticAlgorithm extends BasicTraining implements
-		MultiThreadable {
+public class MLMethodGeneticAlgorithm extends BasicTraining /*implements MultiThreadable*/ {
 
 	/**
 	 * Very simple class that implements a genetic algorithm.
@@ -169,10 +168,10 @@ public class MLMethodGeneticAlgorithm extends BasicTraining implements
 		return this.genetic.getCODEC().decode(best);
 	}
 
-	@Override
+	/*@Override
 	public int getThreadCount() {
 		return this.genetic.getThreadCount();
-	}
+	}*/
 
 	/**
 	 * Perform one training iteration.
@@ -181,7 +180,7 @@ public class MLMethodGeneticAlgorithm extends BasicTraining implements
 	public void iteration() {
 
 		//EncogLogging.log(//EncogLogging.LEVEL_INFO,
-				"Performing Genetic iteration.");
+				//"Performing Genetic iteration.");
 		preIteration();
 		setError(getGenetic().getError());
 		getGenetic().iteration();
@@ -215,9 +214,9 @@ public class MLMethodGeneticAlgorithm extends BasicTraining implements
 		this.genetic = genetic;
 	}
 
-	@Override
+/*	@Override
 	public void setThreadCount(final int numThreads) {
 		this.genetic.setThreadCount(numThreads);
 
-	}
+	}*/
 }

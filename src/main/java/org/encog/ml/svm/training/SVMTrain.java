@@ -34,6 +34,7 @@ import syncleus.dann.learn.svm.svm;
 import syncleus.dann.learn.svm.svm_parameter;
 import syncleus.dann.learn.svm.svm_problem;
 import syncleus.dann.math.EncogMath;
+import syncleus.dann.math.Format;
 import syncleus.dann.math.statistics.ErrorCalculation;
 
 /**
@@ -192,7 +193,7 @@ public class SVMTrain extends BasicTraining {
 		this.network.getParams().C = this.c;
 		this.network.getParams().gamma = this.gamma;
 		//EncogLogging.log(//EncogLogging.LEVEL_INFO,
-				"Training with parameters C = " + c + ", gamma = " + gamma);
+				//"Training with parameters C = " + c + ", gamma = " + gamma);
 
 		if (this.fold > 1) {
 			// cross validate

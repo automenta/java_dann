@@ -144,9 +144,9 @@ class Cache {
 			h.data = new_data;
 			size -= more;
 			do {
-				final int _ = h.len;
+				final int l = h.len;
 				h.len = len;
-				len = _;
+				len = l;
 			} while (false);
 		}
 

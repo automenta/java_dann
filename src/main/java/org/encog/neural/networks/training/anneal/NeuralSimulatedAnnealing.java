@@ -29,7 +29,6 @@ import org.encog.ml.MLRegression;
 import org.encog.ml.TrainingImplementationType;
 import org.encog.ml.train.BasicTraining;
 import org.encog.neural.networks.structure.NetworkCODEC;
-import org.encog.neural.networks.training.TrainingError;
 import org.encog.neural.networks.training.propagation.TrainingContinuation;
 
 /**
@@ -92,7 +91,7 @@ public class NeuralSimulatedAnnealing extends BasicTraining {
 		super(TrainingImplementationType.Iterative);
 
 		if (!(network instanceof MLRegression)) {
-			throw new TrainingError(
+			throw new RuntimeException(
 					"Simulated annealing requires the MLMethod to support MLRegression.");
 		}
 
@@ -151,7 +150,7 @@ public class NeuralSimulatedAnnealing extends BasicTraining {
 	@Override
 	public void iteration() {
 		//EncogLogging.log(//EncogLogging.LEVEL_INFO,
-				"Performing Simulated Annealing iteration.");
+				//"Performing Simulated Annealing iteration.");
 		preIteration();
 		this.anneal.iteration();
 		setError(this.anneal.calculateScore());

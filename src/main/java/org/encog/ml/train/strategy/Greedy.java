@@ -25,7 +25,6 @@ package org.encog.ml.train.strategy;
 
 import org.encog.ml.MLEncodable;
 import org.encog.ml.train.MLTrain;
-import org.encog.neural.networks.training.TrainingError;
 
 /**
  * A simple greedy strategy. If the last iteration did not improve training,
@@ -73,7 +72,7 @@ public class Greedy implements Strategy {
 		this.ready = false;
 
 		if (!(train.getMethod() instanceof MLEncodable)) {
-			throw new TrainingError(
+			throw new RuntimeException(
 					"To make use of the Greedy strategy the machine learning method must support MLEncodable.");
 		}
 
@@ -89,7 +88,7 @@ public class Greedy implements Strategy {
 		if (this.ready) {
 			if (this.train.getError() > this.lastError) {
 				//EncogLogging.log(//EncogLogging.LEVEL_DEBUG,
-						"Greedy strategy dropped last iteration.");
+						//"Greedy strategy dropped last iteration.");
 				this.train.setError(this.lastError);
 				this.method.decodeFromArray(this.lastNetwork);
 			}

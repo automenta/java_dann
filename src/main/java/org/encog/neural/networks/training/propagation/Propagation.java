@@ -37,6 +37,7 @@ import syncleus.dann.dataprocess.MLDataSet;
 import syncleus.dann.math.IntRange;
 import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.neural.activation.ActivationSigmoid;
+import syncleus.dann.neural.activation.EncogActivationFunction;
 
 /**
  * Implements basic functionality that is needed by each of the propagation
@@ -268,7 +269,7 @@ public abstract class Propagation extends BasicTraining implements Train,
 				postIteration();
 
 				//EncogLogging.log(//EncogLogging.LEVEL_INFO,
-						"Training iteration done, error: " + getError());
+						//"Training iteration done, error: " + getError());
 
 			}
 		} catch (final ArrayIndexOutOfBoundsException ex) {
@@ -377,7 +378,7 @@ public abstract class Propagation extends BasicTraining implements Train,
 		if (this.shouldFixFlatSpot) {
 			for (int i = 0; i < this.currentFlatNetwork
 					.getActivationFunctions().length; i++) {
-				final ActivationFunction af = this.currentFlatNetwork
+				final EncogActivationFunction af = this.currentFlatNetwork
 						.getActivationFunctions()[i];
 
 				if (af instanceof ActivationSigmoid) {

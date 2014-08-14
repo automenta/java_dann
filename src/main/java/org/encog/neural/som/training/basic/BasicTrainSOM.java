@@ -23,7 +23,6 @@
  */
 package org.encog.neural.som.training.basic;
 
-import org.encog.mathutil.matrices.Matrix;
 import org.encog.ml.MLMethod;
 import org.encog.ml.TrainingImplementationType;
 import org.encog.ml.data.basic.BasicMLData;
@@ -36,6 +35,7 @@ import org.encog.neural.som.training.basic.neighborhood.NeighborhoodFunction;
 import syncleus.dann.dataprocess.MLData;
 import syncleus.dann.dataprocess.MLDataPair;
 import syncleus.dann.dataprocess.MLDataSet;
+import syncleus.dann.math.Format;
 import syncleus.dann.math.linear.MatrixMath;
 import syncleus.dann.math.linear.SimpleRealMatrix;
 
@@ -173,7 +173,7 @@ public class BasicTrainSOM extends BasicTraining implements LearningRate {
 		setError(0);
 
 		// setup the correction matrix
-		this.correctionMatrix = new Matrix(this.outputNeuronCount,
+		this.correctionMatrix = new SimpleRealMatrix(this.outputNeuronCount,
 				this.inputNeuronCount);
 
 		// create the BMU class
@@ -375,7 +375,7 @@ public class BasicTrainSOM extends BasicTraining implements LearningRate {
 	public void iteration() {
 
 		//EncogLogging.log(//EncogLogging.LEVEL_INFO,
-				"Performing SOM Training iteration.");
+				//"Performing SOM Training iteration.");
 
 		preIteration();
 
@@ -596,7 +596,7 @@ public class BasicTrainSOM extends BasicTraining implements LearningRate {
 
 		for (int i = 0; i < som.getOutputCount(); i++) {
 			final SimpleRealMatrix optr = som.getWeights().getRow(i);
-			final SimpleRealMatrix inputMatrix = Matrix.createRowMatrix(input.getData());
+			final SimpleRealMatrix inputMatrix = SimpleRealMatrix.createRowMatrix(input.getData());
 			result.setData(i, MatrixMath.dotProduct(inputMatrix, optr));
 		}
 

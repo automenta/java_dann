@@ -30,6 +30,7 @@ import java.io.PrintWriter;
 
 import syncleus.dann.dataprocess.file.csv.CSVFormat;
 import syncleus.dann.dataprocess.file.csv.ReadCSV;
+import syncleus.dann.math.EncogMath;
 import syncleus.dann.math.array.QuantError;
 
 /**
@@ -144,7 +145,7 @@ public class BasicFile implements QuantTask {
 	 * Construct the object, and set the defaults.
 	 */
 	public BasicFile() {
-		this.precision = EncogMath..DEFAULT_PRECISION;
+		this.precision = EncogMath.DEFAULT_PRECISION;
 		this.report = new NullStatusReportable();
 		this.reportInterval = REPORT_INTERVAL;
 		this.produceOutputHeaders = true;
