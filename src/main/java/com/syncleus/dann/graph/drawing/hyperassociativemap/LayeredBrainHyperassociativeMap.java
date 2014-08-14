@@ -78,7 +78,7 @@ public class LayeredBrainHyperassociativeMap extends HyperassociativeMap<Feedfor
 	}
 
 	@Override
-	Map<BackpropNeuron, Double> getNeighbors(final BackpropNeuron nodeToQuery)
+	public Map<BackpropNeuron, Double> getNeighbors(final BackpropNeuron nodeToQuery)
 	{
 		final BackpropNeuron neuronToQuery = nodeToQuery;
 

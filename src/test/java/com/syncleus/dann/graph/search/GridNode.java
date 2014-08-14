@@ -40,12 +40,12 @@ public class GridNode extends Vector implements Weighted
 
 	public int getX()
 	{
-		return (int) this.getCoordinate(1);
+		return (int) this.get(1);
 	}
 
 	public int getY()
 	{
-		return (int) this.getCoordinate(2);
+		return (int) this.get(2);
 	}
 
 	@Override

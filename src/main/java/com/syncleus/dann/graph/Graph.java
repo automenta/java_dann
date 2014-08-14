@@ -23,8 +23,8 @@ import java.util.List;
 import java.util.Set;
 
 import com.syncleus.dann.graph.context.ContextReporter;
-import com.syncleus.dann.graph.xml.GraphXml;
-import com.syncleus.dann.xml.XmlSerializable;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 // TODO consider making all nodes extend from a connectable interface so you can embed other graphs as nodes if they too are connectable.
 
@@ -41,15 +41,22 @@ import com.syncleus.dann.xml.XmlSerializable;
  * @param <N> The node type
  * @param <E> The type of edge for the given node type
  */
-public interface Graph<N, E extends Edge<N>> extends Serializable, Cloneable, XmlSerializable<GraphXml, Object>, ContextReporter
+public interface Graph<N, E extends Edge<N>> extends Serializable, Cloneable, ContextReporter
 {
+    
+        Stream<N> streamNodes();
+        Stream<E> streamEdges();
+        
 	/**
 	 * Get a set of all nodes in the graph.
 	 *
 	 * @return An unmodifiable set of all nodes in the graph.
 	 * @since 2.0
 	 */
-	Set<N> getNodes();
+        default Set<N> getNodes() {
+            return streamNodes().collect(Collectors.toSet());
+        }
+        
 	/**
 	 * Get a set of all edges in the graph. Two edges in the set, and in the graph,
 	 * may have the same end points unless equals in the edges used by this graph
@@ -58,7 +65,11 @@ public interface Graph<N, E extends Edge<N>> extends Serializable, Cloneable, Xm
 	 * @return An unmodifiable set of a all edges in the graph.
 	 * @since 2.0
 	 */
-	Set<E> getEdges();
+	//Set<E> getEdges();
+        default Set<E> getEdges() {
+            return streamEdges().collect(Collectors.toSet());
+        };
+        
 	/**
 	 * Get a list of all nodes adjacent to the specified node. All edges connected
 	 * to this node has its other end points added to the list returned. The
@@ -83,7 +94,16 @@ public interface Graph<N, E extends Edge<N>> extends Serializable, Cloneable, Xm
 	 * @see Graph#getTraversableEdges
 	 * @since 2.0
 	 */
-	Set<E> getAdjacentEdges(N node);
+	
+        
+        default Set<E> getAdjacentEdges(N node) {
+            return streamAdjacentEdges(node).collect(Collectors.toSet());
+        }
+        
+        default Stream<E> streamAdjacentEdges(N node) {
+            return streamEdges().filter(E -> E.getNodes().contains(node));
+        };
+        
 	/**
 	 * Get a list of all reachable nodes adjacent to node. All edges connected to
 	 * node and is traversable from node will have its destination node(s) added to
@@ -107,7 +127,14 @@ public interface Graph<N, E extends Edge<N>> extends Serializable, Cloneable, Xm
 	 * @return An unmodifiable set of all edges that can be traversed from node.
 	 * @since 2.0
 	 */
-	Set<E> getTraversableEdges(N node);
+        default Set<E> getTraversableEdges(N node) {
+            return streamTraversableEdges(node).collect(Collectors.toSet());
+        }
+        
+        default public Stream<E> streamTraversableEdges(N node) {
+            return streamEdges().filter(E -> E.isTraversable(node));
+        }
+        
 	/**
 	 * Adds the specified edge to a clone of this class.
 	 *

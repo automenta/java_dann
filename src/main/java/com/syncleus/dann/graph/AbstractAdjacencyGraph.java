@@ -26,20 +26,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.syncleus.dann.UnexpectedDannError;
 import com.syncleus.dann.graph.context.ContextGraphElement;
-import com.syncleus.dann.graph.xml.EdgeXml;
-import com.syncleus.dann.graph.xml.GraphElementXml;
-import com.syncleus.dann.graph.xml.GraphXml;
-import com.syncleus.dann.xml.NameXml;
-import com.syncleus.dann.xml.NamedValueXml;
-import com.syncleus.dann.xml.Namer;
-import com.syncleus.dann.xml.XmlSerializable;
+import java.util.stream.Stream;
 
 /**
  * An AbstractAdjacencyGraph is a Graph implemented using adjacency lists.
@@ -48,7 +41,6 @@ import com.syncleus.dann.xml.XmlSerializable;
  * @param <N> The node type
  * @param <E> The type of edge for the given node type
  */
-@XmlJavaTypeAdapter( com.syncleus.dann.xml.XmlSerializableAdapter.class )
 public abstract class AbstractAdjacencyGraph<N, E extends Edge<N>> implements Graph<N, E>
 {
 	private static final Logger LOGGER = LogManager.getLogger(AbstractAdjacencyGraph.class);
@@ -242,6 +234,18 @@ public abstract class AbstractAdjacencyGraph<N, E extends Edge<N>> implements Gr
 		return Collections.unmodifiableSet(this.edges);
 	}
 
+    @Override
+    public Stream<E> streamEdges() {
+        return edges.stream();
+    }
+
+    @Override
+    public Stream<N> streamNodes() {
+        return adjacentNodes.keySet().stream();
+    }
+        
+        
+
 	/**
 	 * Gets all edges adjacent to a given node.
 	 * @param node the end point for all edges to retrieve.
@@ -255,7 +259,12 @@ public abstract class AbstractAdjacencyGraph<N, E extends Edge<N>> implements Gr
 		else
 			return Collections.<E>emptySet();
 	}
+                
+        public boolean contains(N node) {
+            return adjacentNodes.keySet().contains(node);
+        }
 
+        
 	/**
 	 * Gets all nodes adjacent to the given node.
 	 * @param node The whose neighbors are to be returned.
@@ -464,96 +473,4 @@ public abstract class AbstractAdjacencyGraph<N, E extends Edge<N>> implements Gr
 		}
 	}
 
-	/**
-	 * Converts the current AbstractAdjacencyGraph to a GraphXML.
-	 * @return The GraphXML representation of this AbstractAdjacencyGraph
-	 */
-	@Override
-	public GraphXml toXml()
-	{
-		final GraphElementXml xml = new GraphElementXml();
-		final Namer<Object> namer = new Namer<Object>();
-
-		xml.setNodeInstances(new GraphElementXml.NodeInstances());
-		for(final N node : this.adjacentEdges.keySet())
-		{
-			final String nodeName = namer.getNameOrCreate(node);
-
-			final Object nodeXml;
-			if(node instanceof XmlSerializable)
-				nodeXml = ((XmlSerializable)node).toXml(namer);
-			else
-				// if the object is not XmlSerializable lets try to just
-				// serialize it as a regular JAXB object
-				nodeXml = node;
-
-			final NamedValueXml encapsulation = new NamedValueXml();
-			encapsulation.setName(nodeName);
-			encapsulation.setValue(nodeXml);
-
-			xml.getNodeInstances().getNodes().add(encapsulation);
-		}
-
-		this.toXml(xml, namer);
-		return xml;
-	}
-
-	/**
-	 * Converts a given Namer to its GraphXML representation.
-	 * @param namer The namer to convert
-	 * @return The GraphXML representation of this namer
-	 */
-	@Override
-	public GraphXml toXml(final Namer<Object> namer)
-	{
-		if(namer == null)
-			throw new IllegalArgumentException("namer can not be null");
-
-		final GraphXml xml = new GraphXml();
-		this.toXml(xml, namer);
-		return xml;
-	}
-
-	/**
-	 * Adds a current Namer to the given GraphXML object.
-	 * @param jaxbObject The graph to add the object to
-	 * @param namer THe namer to add to the GraphXML
-	 */
-	@Override
-	public void toXml(final GraphXml jaxbObject, final Namer<Object> namer)
-	{
-		if(namer == null)
-			throw new IllegalArgumentException("nodeNames can not be null");
-		if(jaxbObject == null)
-			throw new IllegalArgumentException("jaxbObject can not be null");
-
-		for(final N node : this.adjacentEdges.keySet())
-		{
-			final String nodeName = namer.getNameOrCreate(node);
-
-			final Object nodeXml;
-			if(node instanceof XmlSerializable)
-				nodeXml = ((XmlSerializable)node).toXml(namer);
-			else
-				// if the object is not XmlSerializable lets try to just
-				// serialize it as a regular JAXB object
-				nodeXml = node;
-
-			final NameXml encapsulation = new NameXml();
-			encapsulation.setName(nodeName);
-
-			if( jaxbObject.getNodes() == null )
-				jaxbObject.setNodes(new GraphXml.Nodes());
-			jaxbObject.getNodes().getNodes().add(encapsulation);
-		}
-
-		for(final E edge : this.edges)
-		{
-			final EdgeXml edgeXml = edge.toXml(namer);
-
-			if( jaxbObject.getEdges() == null )
-				jaxbObject.setEdges(new GraphXml.Edges());
-			jaxbObject.getEdges().getEdges().add(edgeXml);
-		}
-	}
 }

@@ -22,14 +22,18 @@ import java.io.Serializable;
 import java.util.List;
 
 import com.syncleus.dann.graph.context.ContextReporter;
-import com.syncleus.dann.graph.xml.EdgeXml;
-import com.syncleus.dann.xml.XmlSerializable;
+import java.util.stream.Stream;
 
-public interface Edge<N> extends Serializable, Cloneable, XmlSerializable<EdgeXml, Object>, ContextReporter
+
+public interface Edge<N> extends Serializable, Cloneable, ContextReporter
 {
 	List<N> getNodes();
 	List<N> getTraversableNodes(N node);
 	boolean isTraversable(N node);
+        
+        default Stream<N> streamNodes() {
+            return getNodes().stream();
+        }
 
 	/**
 	 * Returns an edge with the specified node disconnected.

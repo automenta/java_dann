@@ -43,4 +43,11 @@ public interface BidirectedEdge<N> extends Edge<N>
 	BidirectedEdge<N> disconnect(List<N> node);
 	@Override
 	BidirectedEdge<N> clone();
+        
+        default N getOtherNode(N n) {
+            if (getLeftNode().equals(n)) return getRightNode();
+            else if (getRightNode().equals(n)) return getLeftNode();
+            else
+                return null;
+        }
 }

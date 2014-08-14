@@ -48,7 +48,7 @@ public abstract class AbstractExponentialDecaySomBrain<IN extends SomInputNeuron
 		double maxCrossSection = 0.0;
 		for(int dimensionIndex = 1; dimensionIndex <= this.getUpperBounds().getDimensions(); dimensionIndex++)
 		{
-			final double crossSection = this.getUpperBounds().getCoordinate(dimensionIndex) - this.getLowerBounds().getCoordinate(dimensionIndex);
+			final double crossSection = this.getUpperBounds().get(dimensionIndex) - this.getLowerBounds().get(dimensionIndex);
 			if( crossSection > maxCrossSection )
 				maxCrossSection = crossSection;
 		}

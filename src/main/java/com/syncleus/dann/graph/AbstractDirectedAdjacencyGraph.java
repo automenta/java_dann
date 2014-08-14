@@ -18,6 +18,8 @@
  ******************************************************************************/
 package com.syncleus.dann.graph;
 
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.Set;
 
 /**
@@ -103,4 +105,13 @@ public abstract class AbstractDirectedAdjacencyGraph<N, E extends DirectedEdge<N
 	{
 		return (AbstractDirectedAdjacencyGraph<N, E>) super.clone();
 	}
+                
+	public Iterator<E> iterateAdjacentEdges(final N source, final N target)
+	{
+            Set<E> ec = getAdjacentEdges(source);
+            if (ec == null) return Collections.EMPTY_LIST.iterator();
+                    
+            return ec.stream().filter(e -> e.getDestinationNode() == target).iterator();
+	}
+        
 }

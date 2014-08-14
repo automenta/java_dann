@@ -18,15 +18,10 @@
  ******************************************************************************/
 package com.syncleus.dann.graphicalmodel.bayesian;
 
-import java.io.StringReader;
-import java.io.StringWriter;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
-import javax.xml.bind.JAXB;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Marshaller;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.junit.Assert;
@@ -35,7 +30,6 @@ import org.junit.Test;
 import com.syncleus.dann.graph.ImmutableDirectedEdge;
 import com.syncleus.dann.graphicalmodel.GraphicalModelNode;
 import com.syncleus.dann.graphicalmodel.SimpleGraphicalModelNode;
-import com.syncleus.dann.graphicalmodel.bayesian.xml.BayesianNetworkXml;
 
 public class TestSicknessBayesianNetwork
 {
@@ -73,26 +67,6 @@ public class TestSicknessBayesianNetwork
 	private GraphicalModelNode<BooleanState> tired = new SimpleGraphicalModelNode<BooleanState>(BooleanState.FALSE);
 	private GraphicalModelNode<BooleanState> sick = new SimpleGraphicalModelNode<BooleanState>(BooleanState.FALSE);
 
-	@Test
-	public void testXml() throws Exception
-	{
-		testOverall();
-
-		//mashall it
-		final JAXBContext context = JAXBContext.newInstance(BayesianNetworkXml.class, TestSicknessBayesianNetwork.FeverState.class, TestSicknessBayesianNetwork.AgeState.class, TestSicknessBayesianNetwork.BooleanState.class, TestSicknessBayesianNetwork.SeasonState.class);
-		final Marshaller marshal = context.createMarshaller();
-
-		final StringWriter writer = new StringWriter();
-		marshal.marshal(network.toXml(), writer);
-
-		//unmarshall it
-		final StringReader reader = new StringReader(writer.toString());
-		final BayesianNetworkXml xml = JAXB.unmarshal(reader, BayesianNetworkXml.class);
-
-		Assert.assertTrue("could not unmarshal object!", xml != null);
-		Assert.assertTrue("Wrong number of edges after unmarshaling: " + xml.getEdges().getEdges().size(), xml.getEdges().getEdges().size() == 14);
-		Assert.assertTrue("Wrong number of nodes after unmarshaling: " + xml.getNodes().getNodes().size(), xml.getNodes().getNodes().size() == 6);
-	}
 
 	@Test
 	public void testOverallRepeated()

@@ -18,10 +18,8 @@
  ******************************************************************************/
 package com.syncleus.dann.graph;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -70,15 +68,13 @@ public abstract class AbstractBidirectedAdjacencyGraph<N, E extends BidirectedEd
 	public Set<E> getInEdges(final N node)
 	{
 		final Set<E> inEdges = new HashSet<E>();
-		for(final E edge : this.getEdges())
-		{
-			final List<N> adjacentNodes = new ArrayList<N>(edge.getNodes());
-			adjacentNodes.remove(node);
-			final N adjacentNode = adjacentNodes.get(0);
+		this.streamEdges().forEach(edge -> {
+			
+			final N adjacentNode = edge.getOtherNode(node);
 
 			if( edge.isTraversable(adjacentNode) && edge.getTraversableNodes(adjacentNode).contains(node) )
 				inEdges.add(edge);
-		}
+		});
 		return Collections.unmodifiableSet(inEdges);
 	}
 

@@ -70,7 +70,7 @@ public class BrainHyperassociativeMap extends HyperassociativeMap<Brain<InputNeu
 	}
 
 	@Override
-	Map<Neuron, Double> getNeighbors(final Neuron nodeToQuery)
+	public Map<Neuron, Double> getNeighbors(final Neuron nodeToQuery)
 	{
 		final Map<Neuron, Double> associations = super.getNeighbors(nodeToQuery);
 		if( nodeToQuery instanceof InputNeuron )

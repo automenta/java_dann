@@ -171,10 +171,10 @@ public abstract class AbstractSomBrain<IN extends SomInputNeuron, ON extends Som
 
 		for(int dimensionIndex = 1; dimensionIndex <= position.getDimensions(); dimensionIndex++)
 		{
-			if( this.upperBounds.getCoordinate(dimensionIndex) < position.getCoordinate(dimensionIndex) )
-				this.upperBounds = this.upperBounds.setCoordinate(position.getCoordinate(dimensionIndex), dimensionIndex);
-			if( this.lowerBounds.getCoordinate(dimensionIndex) > position.getCoordinate(dimensionIndex) )
-				this.lowerBounds = this.lowerBounds.setCoordinate(position.getCoordinate(dimensionIndex), dimensionIndex);
+			if( this.upperBounds.get(dimensionIndex) < position.get(dimensionIndex) )
+				this.upperBounds = this.upperBounds.setNew(position.get(dimensionIndex), dimensionIndex);
+			if( this.lowerBounds.get(dimensionIndex) > position.get(dimensionIndex) )
+				this.lowerBounds = this.lowerBounds.setNew(position.get(dimensionIndex), dimensionIndex);
 		}
 	}
 
