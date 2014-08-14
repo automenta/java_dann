@@ -65,8 +65,12 @@ public abstract class AbstractUniqueEdge<N> extends AbstractEdge<N> {
 	@Override
 	public int hashCode() {
 		int hash = 0;
-		for (final N node : this.getNodes())
-			hash += node.hashCode();
+                hash = this.getNodes().stream().map((node) -> node.hashCode()).reduce(hash, Integer::sum);
 		return hash;
 	}
+
+    @Override
+    public AbstractEdge<N> clone() {
+        return super.clone(); //To change body of generated methods, choose Tools | Templates.
+    }
 }

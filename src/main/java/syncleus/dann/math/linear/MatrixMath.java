@@ -85,9 +85,7 @@ public final class MatrixMath {
 		final double[][] t = target.getData();
 
 		for (int row = 0; row < source.getRows(); row++) {
-			for (int col = 0; col < source.getCols(); col++) {
-				t[row][col] = s[row][col];
-			}
+                    System.arraycopy(s[row], 0, t[row], 0, source.getCols());
 		}
 
 	}
@@ -153,9 +151,7 @@ public final class MatrixMath {
 		int targetRow = 0;
 		for (int row = 0; row < matrix.getRows(); row++) {
 			if (row != deleted) {
-				for (int col = 0; col < matrix.getCols(); col++) {
-					newMatrix[targetRow][col] = d[row][col];
-				}
+                            System.arraycopy(d[row], 0, newMatrix[targetRow], 0, matrix.getCols());
 				targetRow++;
 			}
 		}

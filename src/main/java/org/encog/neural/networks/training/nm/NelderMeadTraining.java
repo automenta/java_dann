@@ -199,16 +199,12 @@ public class NelderMeadTraining extends BasicTraining {
 
 		final int n = this.start.length;
 
-		for (int i = 0; i < n; i++) {
-			this.p[i + n * n] = this.start[i];
-		}
+            System.arraycopy(this.start, 0, this.p, n * n, n);
 		this.y[n] = fn(this.start);
 		for (int j = 0; j < n; j++) {
 			final double x = this.start[j];
-			this.start[j] = this.start[j] + this.step[j] * this.del;
-			for (int i = 0; i < n; i++) {
-				this.p[i + j * n] = this.start[i];
-			}
+                        this.start[j] += this.step[j] * this.del;
+                System.arraycopy(this.start, 0, this.p, j * n, n);
 			this.y[j] = fn(this.start);
 			this.start[j] = x;
 		}
@@ -250,9 +246,9 @@ public class NelderMeadTraining extends BasicTraining {
 			for (int i = 0; i < n; i++) {
 				this.z = 0.0;
 				for (int j = 0; j < this.nn; j++) {
-					this.z = this.z + this.p[i + j * n];
+                                    this.z += this.p[i + j * n];
 				}
-				this.z = this.z - this.p[i + this.ihi * n];
+                                this.z -= this.p[i + this.ihi * n];
 				this.pbar[i] = this.z / n;
 			}
 			/*
@@ -276,18 +272,14 @@ public class NelderMeadTraining extends BasicTraining {
 				 * Check extension.
 				 */
 				if (this.ystar < this.y2star) {
-					for (int i = 0; i < n; i++) {
-						this.p[i + this.ihi * n] = this.pstar[i];
-					}
+                        System.arraycopy(this.pstar, 0, this.p, this.ihi * n, n);
 					this.y[this.ihi] = this.ystar;
 				}
 				/*
 				 * Retain extension or contraction.
 				 */
 				else {
-					for (int i = 0; i < n; i++) {
-						this.p[i + this.ihi * n] = this.p2star[i];
-					}
+                        System.arraycopy(this.p2star, 0, this.p, this.ihi * n, n);
 					this.y[this.ihi] = this.y2star;
 				}
 			}
@@ -298,14 +290,12 @@ public class NelderMeadTraining extends BasicTraining {
 				this.l = 0;
 				for (int i = 0; i < this.nn; i++) {
 					if (this.ystar < this.y[i]) {
-						this.l = this.l + 1;
+                                            this.l += 1;
 					}
 				}
 
 				if (1 < this.l) {
-					for (int i = 0; i < n; i++) {
-						this.p[i + this.ihi * n] = this.pstar[i];
-					}
+                        System.arraycopy(this.pstar, 0, this.p, this.ihi * n, n);
 					this.y[this.ihi] = this.ystar;
 				}
 				/*
@@ -344,9 +334,7 @@ public class NelderMeadTraining extends BasicTraining {
 					 * Retain contraction.
 					 */
 					else {
-						for (int i = 0; i < n; i++) {
-							this.p[i + this.ihi * n] = this.p2star[i];
-						}
+                            System.arraycopy(this.p2star, 0, this.p, this.ihi * n, n);
 						this.y[this.ihi] = this.y2star;
 					}
 				}
@@ -363,14 +351,10 @@ public class NelderMeadTraining extends BasicTraining {
 					 * Retain reflection?
 					 */
 					if (this.y2star <= this.ystar) {
-						for (int i = 0; i < n; i++) {
-							this.p[i + this.ihi * n] = this.p2star[i];
-						}
+                            System.arraycopy(this.p2star, 0, this.p, this.ihi * n, n);
 						this.y[this.ihi] = this.y2star;
 					} else {
-						for (int i = 0; i < n; i++) {
-							this.p[i + this.ihi * n] = this.pstar[i];
-						}
+                            System.arraycopy(this.pstar, 0, this.p, this.ihi * n, n);
 						this.y[this.ihi] = this.ystar;
 					}
 				}
@@ -382,7 +366,7 @@ public class NelderMeadTraining extends BasicTraining {
 				this.ylo = this.y[this.ihi];
 				this.ilo = this.ihi;
 			}
-			this.jcount = this.jcount - 1;
+                        this.jcount -= 1;
 
 			if (0 < this.jcount) {
 				continue;
@@ -396,13 +380,13 @@ public class NelderMeadTraining extends BasicTraining {
 
 				this.z = 0.0;
 				for (int i = 0; i < this.nn; i++) {
-					this.z = this.z + this.y[i];
+                                    this.z += this.y[i];
 				}
 				final double x = this.z / this.nn;
 
 				this.z = 0.0;
 				for (int i = 0; i < this.nn; i++) {
-					this.z = this.z + Math.pow(this.y[i] - x, 2);
+                                    this.z += Math.pow(this.y[i] - x, 2);
 				}
 
 				if (this.z <= this.rq) {
@@ -441,12 +425,10 @@ public class NelderMeadTraining extends BasicTraining {
 		if (!fault) {
 			this.converged = true;
 		} else {
-			/*
-			 * Restart the procedure.
-			 */
-			for (int i = 0; i < n; i++) {
-				this.start[i] = this.trainedWeights[i];
-			}
+                /*
+                 * Restart the procedure.
+                 */
+                System.arraycopy(this.trainedWeights, 0, this.start, 0, n);
 			this.del = this.eps;
 		}
 

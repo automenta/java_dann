@@ -13,7 +13,7 @@ import java.util.Random;
  */
 public class Randoms {
 	private static final int arrPercentSize = 97397;
-	private static double arrPercent[];
+	private static final double arrPercent[];
 	static Random random = null;
 	static {
 		random = new Random();

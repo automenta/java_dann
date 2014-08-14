@@ -19,6 +19,7 @@
 package syncleus.dann.neural.backprop.brain;
 
 import java.util.concurrent.ExecutorService;
+import syncleus.dann.graph.AbstractBidirectedAdjacencyGraph;
 
 import syncleus.dann.neural.Synapse;
 import syncleus.dann.neural.activation.DannActivationFunction;
@@ -86,4 +87,9 @@ public final class FullyConnectedFeedforwardBrain<IN extends InputBackpropNeuron
 		// TODO fix typing
 		return (N) neuron;
 	}
+
+    @Override
+    public AbstractBidirectedAdjacencyGraph<N, S> clone() {
+        return super.clone(); //To change body of generated methods, choose Tools | Templates.
+    }
 }

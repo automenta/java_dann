@@ -59,10 +59,10 @@ public class BasicCluster implements MLCluster {
 	 *            The other cluster.
 	 */
 	public BasicCluster(final Cluster<BasicMLDataPair> cluster) {
-		this.centroid = (BasicMLDataPairCentroid) cluster.centroid();
-		for (final MLDataPair pair : cluster.getContents()) {
-			this.data.add(pair.getInput());
-		}
+		this.centroid = cluster.centroid();
+                cluster.getContents().stream().forEach((pair) -> {
+                this.data.add(pair.getInput());
+            });
 	}
 
 	/**
@@ -85,9 +85,9 @@ public class BasicCluster implements MLCluster {
 	public final MLDataSet createDataSet() {
 		final MLDataSet result = new BasicMLDataSet();
 
-		for (final MLData dataItem : this.data) {
-			result.add(dataItem);
-		}
+                this.data.stream().forEach((dataItem) -> {
+                result.add(dataItem);
+            });
 
 		return result;
 	}

@@ -189,13 +189,11 @@ public abstract class NEATMutation implements EvolutionaryOperator {
 	 */
 	public boolean isDuplicateLink(final NEATGenome target,
 			final long fromNeuronID, final long toNeuronID) {
-		for (final NEATLinkGene linkGene : target.getLinksChromosome()) {
-			if ((linkGene.isEnabled())
-					&& (linkGene.getFromNeuronID() == fromNeuronID)
-					&& (linkGene.getToNeuronID() == toNeuronID)) {
-				return true;
-			}
-		}
+            if (target.getLinksChromosome().stream().anyMatch((linkGene) -> ((linkGene.isEnabled())
+                    && (linkGene.getFromNeuronID() == fromNeuronID)
+                    && (linkGene.getToNeuronID() == toNeuronID)))) {
+                return true;
+            }
 
 		return false;
 	}
@@ -212,17 +210,11 @@ public abstract class NEATMutation implements EvolutionaryOperator {
 	 */
 	public boolean isNeuronNeeded(final NEATGenome target, final long neuronID) {
 
-		// do not remove bias or input neurons or output
-		for (final NEATNeuronGene gene : target.getNeuronsChromosome()) {
-			if (gene.getId() == neuronID) {
-				final NEATNeuronGene neuron = gene;
-				if ((neuron.getNeuronType() == NEATNeuronType.Input)
-						|| (neuron.getNeuronType() == NEATNeuronType.Bias)
-						|| (neuron.getNeuronType() == NEATNeuronType.Output)) {
-					return true;
-				}
-			}
-		}
+            if (target.getNeuronsChromosome().stream().filter((gene) -> (gene.getId() == neuronID)).map((gene) -> gene).anyMatch((neuron) -> ((neuron.getNeuronType() == NEATNeuronType.Input)
+                    || (neuron.getNeuronType() == NEATNeuronType.Bias)
+                    || (neuron.getNeuronType() == NEATNeuronType.Output)))) {
+                return true;
+            }
 
 		// Now check to see if the neuron is used in any links
 		for (final NEATLinkGene gene : target.getLinksChromosome()) {

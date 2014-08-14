@@ -97,10 +97,9 @@ public class ConstMutation implements EvolutionaryOperator {
 			}
 		}
 
-		for (final TreeNode n : node.getChildNodes()) {
-			final ProgramNode childNode = (ProgramNode) n;
-			mutateNode(rnd, childNode);
-		}
+                node.getChildNodes().stream().map((n) -> (ProgramNode) n).forEach((childNode) -> {
+                mutateNode(rnd, childNode);
+            });
 	}
 
 	/**

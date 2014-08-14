@@ -103,15 +103,18 @@ public class BIFHandler extends DefaultHandler {
 	 */
 	private void handleBeginNETWORK(final String qName,
 			final Attributes attributes) {
-		if (qName.equals("VARIABLE")) {
-			this.currentSection.add(FileSection.VARIABLE);
-			this.currentVariable = new BIFVariable();
-			this.bifVariables.add(this.currentVariable);
-		} else if (qName.equals("DEFINITION")) {
-			this.currentSection.add(FileSection.DEFINITION);
-			this.currentDefinition = new BIFDefinition();
-			this.bifDefinitions.add(this.currentDefinition);
-		}
+            switch (qName) {
+                case "VARIABLE":
+                    this.currentSection.add(FileSection.VARIABLE);
+                    this.currentVariable = new BIFVariable();
+                    this.bifVariables.add(this.currentVariable);
+                    break;
+                case "DEFINITION":
+                    this.currentSection.add(FileSection.DEFINITION);
+                    this.currentDefinition = new BIFDefinition();
+                    this.bifDefinitions.add(this.currentDefinition);
+                    break;
+            }
 	}
 
 	/**
@@ -175,13 +178,17 @@ public class BIFHandler extends DefaultHandler {
 	 *            The name of the tag.
 	 */
 	private void handleEndVARIABLE(final String qName) {
-		if (qName.equals("NAME")) {
-			this.currentVariable.setName(this.currentString);
-		} else if (qName.equals("OUTCOME")) {
-			this.currentVariable.addOption(this.currentString);
-		} else if (qName.equals("VARIABLE")) {
-			this.currentSection.remove(this.currentSection.size() - 1);
-		}
+            switch (qName) {
+                case "NAME":
+                    this.currentVariable.setName(this.currentString);
+                    break;
+                case "OUTCOME":
+                    this.currentVariable.addOption(this.currentString);
+                    break;
+                case "VARIABLE":
+                    this.currentSection.remove(this.currentSection.size() - 1);
+                    break;
+            }
 	}
 
 	/**
@@ -191,15 +198,20 @@ public class BIFHandler extends DefaultHandler {
 	 *            The name of the tag.
 	 */
 	private void handleEndDEFINITION(final String qName) {
-		if (qName.equals("FOR")) {
-			this.currentDefinition.setForDefinition(this.currentString);
-		} else if (qName.equals("GIVEN")) {
-			this.currentDefinition.addGiven(this.currentString);
-		} else if (qName.equals("TABLE")) {
-			this.currentDefinition.setTable(this.currentString);
-		} else if (qName.equals("DEFINITION")) {
-			this.currentSection.remove(this.currentSection.size() - 1);
-		}
+            switch (qName) {
+                case "FOR":
+                    this.currentDefinition.setForDefinition(this.currentString);
+                    break;
+                case "GIVEN":
+                    this.currentDefinition.addGiven(this.currentString);
+                    break;
+                case "TABLE":
+                    this.currentDefinition.setTable(this.currentString);
+                    break;
+                case "DEFINITION":
+                    this.currentSection.remove(this.currentSection.size() - 1);
+                    break;
+            }
 	}
 
 	/**
@@ -211,7 +223,7 @@ public class BIFHandler extends DefaultHandler {
 			throws SAXException {
 		super.startElement(uri, localName, qName, attributes);
 
-		if (this.currentSection.size() == 0 && qName.equals("BIF")) {
+		if (this.currentSection.isEmpty() && qName.equals("BIF")) {
 			this.currentSection.add(FileSection.BIF);
 		}
 
@@ -273,45 +285,39 @@ public class BIFHandler extends DefaultHandler {
 	public void endDocument() throws SAXException {
 		super.endDocument();
 
-		// define variables
-		for (final BIFVariable v : this.bifVariables) {
-			final List<BayesianChoice> c = new ArrayList<BayesianChoice>();
-			int index = 0;
-			for (final String s : v.getOptions()) {
-				c.add(new BayesianChoice(s, index++));
-			}
-
-			this.network.createEvent(v.getName(), c);
-		}
-
-		// define relations
-		for (final BIFDefinition d : this.bifDefinitions) {
-			final BayesianEvent childEvent = this.network.requireEvent(d
-					.getForDefinition());
-			for (final String s : d.getGivenDefinitions()) {
-				final BayesianEvent parentEvent = this.network.requireEvent(s);
-				this.network.createDependency(parentEvent, childEvent);
-			}
-		}
+                this.bifVariables.stream().forEach((v) -> {
+                final List<BayesianChoice> c = new ArrayList<BayesianChoice>();
+                int index = 0;
+                for (final String s : v.getOptions()) {
+                    c.add(new BayesianChoice(s, index++));
+                }
+                
+                this.network.createEvent(v.getName(), c);
+            });
+            this.bifDefinitions.stream().forEach((d) -> {
+                final BayesianEvent childEvent = this.network.requireEvent(d
+                        .getForDefinition());
+                d.getGivenDefinitions().stream().map((s) -> this.network.requireEvent(s)).forEach((parentEvent) -> {
+                    this.network.createDependency(parentEvent, childEvent);
+                });
+            });
 
 		this.network.finalizeStructure();
 
-		// define probabilities
-
-		for (final BIFDefinition d : this.bifDefinitions) {
-			final double[] t = d.getTable();
-			final BayesianEvent childEvent = this.network.requireEvent(d
-					.getForDefinition());
-
-			int tableIndex = 0;
-			final int[] args = new int[childEvent.getParents().size()];
-			do {
-				for (int result = 0; result < childEvent.getChoices().size(); result++) {
-					childEvent.getTable()
-							.addLine(t[tableIndex++], result, args);
-				}
-			} while (BIFUtil.rollArgs(childEvent, args));
-		}
+                this.bifDefinitions.stream().forEach((d) -> {
+                final double[] t = d.getTable();
+                final BayesianEvent childEvent = this.network.requireEvent(d
+                        .getForDefinition());
+                
+                int tableIndex = 0;
+                final int[] args = new int[childEvent.getParents().size()];
+                do {
+                    for (int result = 0; result < childEvent.getChoices().size(); result++) {
+                        childEvent.getTable()
+                                .addLine(t[tableIndex++], result, args);
+                    }
+                } while (BIFUtil.rollArgs(childEvent, args));
+            });
 	}
 
 	/**

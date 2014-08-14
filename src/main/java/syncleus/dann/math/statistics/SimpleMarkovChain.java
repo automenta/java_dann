@@ -69,16 +69,16 @@ public class SimpleMarkovChain<S> extends AbstractMarkovChain<S> {
 			this.rowMapping.add(Collections.<S> emptyList());
 		}
 
-		// first put the rows in order to match the columns
-		for (final S currentColumn : this.columnMapping) {
-			final List<S> columnAsHeader = Collections
-					.singletonList(currentColumn);
-
-			assert rowHeadersLeft.contains(columnAsHeader);
-
-			rowHeadersLeft.remove(columnAsHeader);
-			this.rowMapping.add(columnAsHeader);
-		}
+                this.columnMapping.stream().map((currentColumn) -> Collections
+                    .singletonList(currentColumn)).map((columnAsHeader) -> {
+                                            assert rowHeadersLeft.contains(columnAsHeader);
+                return columnAsHeader;
+            }).map((columnAsHeader) -> {
+                rowHeadersLeft.remove(columnAsHeader);
+                return columnAsHeader;
+            }).forEach((columnAsHeader) -> {
+                this.rowMapping.add(columnAsHeader);
+            });
 
 		if (rowMapping.contains(Collections.<S> emptyList())) {
 			this.columnMapping.add(0, null);
@@ -124,14 +124,15 @@ public class SimpleMarkovChain<S> extends AbstractMarkovChain<S> {
 			final Map<S, Map<S, Double>> transitions) {
 		final Map<List<S>, Map<S, Double>> pack = new LinkedHashMap<List<S>, Map<S, Double>>(
 				transitions.size());
-		for (final Map.Entry<S, Map<S, Double>> transitionEntry : transitions
-				.entrySet())
-			if (transitionEntry.getKey() == null)
-				pack.put(Collections.<S> emptyList(),
-						transitionEntry.getValue());
-			else
-				pack.put(Collections.singletonList(transitionEntry.getKey()),
-						transitionEntry.getValue());
+                transitions
+                        .entrySet().stream().forEach((transitionEntry) -> {
+                                    if (transitionEntry.getKey() == null)
+                                        pack.put(Collections.<S> emptyList(),
+                                                transitionEntry.getValue());
+                                    else
+                                        pack.put(Collections.singletonList(transitionEntry.getKey()),
+                                                transitionEntry.getValue());
+            });
 		return pack;
 	}
 

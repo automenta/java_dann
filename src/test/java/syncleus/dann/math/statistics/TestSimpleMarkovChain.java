@@ -19,6 +19,7 @@
 package syncleus.dann.math.statistics;
 
 import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -43,9 +44,9 @@ public class TestSimpleMarkovChain {
 
 	@Test
 	public void testExplicitChainFirstOrder() {
-		final Map<WeatherState, Map<WeatherState, Double>> transitionProbabilities = new HashMap<WeatherState, Map<WeatherState, Double>>();
-		final Map<WeatherState, Double> sunnyTransitions = new HashMap<WeatherState, Double>();
-		final Map<WeatherState, Double> rainyTransitions = new HashMap<WeatherState, Double>();
+		final Map<WeatherState, Map<WeatherState, Double>> transitionProbabilities = new EnumMap<WeatherState, Map<WeatherState, Double>>(WeatherState.class);
+		final Map<WeatherState, Double> sunnyTransitions = new EnumMap<WeatherState, Double>(WeatherState.class);
+		final Map<WeatherState, Double> rainyTransitions = new EnumMap<WeatherState, Double>(WeatherState.class);
 
 		/*
 		 * final Map<WeatherState, Double> initialTransitions = new
@@ -117,14 +118,14 @@ public class TestSimpleMarkovChain {
 
 		final List<WeatherState> sunnyState = new ArrayList<WeatherState>();
 		sunnyState.add(WeatherState.SUNNY);
-		final Map<WeatherState, Double> sunnyTransitions = new TreeMap<WeatherState, Double>();
+		final Map<WeatherState, Double> sunnyTransitions = new EnumMap<WeatherState, Double>(WeatherState.class);
 		sunnyTransitions.put(WeatherState.SUNNY, 0.9);
 		sunnyTransitions.put(WeatherState.RAINY, 0.1);
 		transitionProbabilities.put(sunnyState, sunnyTransitions);
 
 		final List<WeatherState> rainyState = new ArrayList<WeatherState>();
 		rainyState.add(WeatherState.RAINY);
-		final Map<WeatherState, Double> rainyTransitions = new TreeMap<WeatherState, Double>();
+		final Map<WeatherState, Double> rainyTransitions = new EnumMap<WeatherState, Double>(WeatherState.class);
 		rainyTransitions.put(WeatherState.SUNNY, 0.5);
 		rainyTransitions.put(WeatherState.RAINY, 0.5);
 		transitionProbabilities.put(rainyState, rainyTransitions);
@@ -132,7 +133,7 @@ public class TestSimpleMarkovChain {
 		final List<WeatherState> sunnySunnyState = new ArrayList<WeatherState>();
 		sunnySunnyState.add(WeatherState.SUNNY);
 		sunnySunnyState.add(WeatherState.SUNNY);
-		final Map<WeatherState, Double> sunnySunnyTransitions = new TreeMap<WeatherState, Double>();
+		final Map<WeatherState, Double> sunnySunnyTransitions = new EnumMap<WeatherState, Double>(WeatherState.class);
 		sunnySunnyTransitions.put(WeatherState.SUNNY, 0.9);
 		sunnySunnyTransitions.put(WeatherState.RAINY, 0.1);
 		transitionProbabilities.put(sunnySunnyState, sunnySunnyTransitions);
@@ -140,7 +141,7 @@ public class TestSimpleMarkovChain {
 		final List<WeatherState> sunnyRainyState = new ArrayList<WeatherState>();
 		sunnyRainyState.add(WeatherState.SUNNY);
 		sunnyRainyState.add(WeatherState.RAINY);
-		final Map<WeatherState, Double> sunnyRainyTransitions = new TreeMap<WeatherState, Double>();
+		final Map<WeatherState, Double> sunnyRainyTransitions = new EnumMap<WeatherState, Double>(WeatherState.class);
 		sunnyRainyTransitions.put(WeatherState.SUNNY, 0.5);
 		sunnyRainyTransitions.put(WeatherState.RAINY, 0.5);
 		transitionProbabilities.put(sunnyRainyState, sunnyRainyTransitions);
@@ -148,7 +149,7 @@ public class TestSimpleMarkovChain {
 		final List<WeatherState> rainySunnyState = new ArrayList<WeatherState>();
 		rainySunnyState.add(WeatherState.RAINY);
 		rainySunnyState.add(WeatherState.SUNNY);
-		final Map<WeatherState, Double> rainySunnyTransitions = new TreeMap<WeatherState, Double>();
+		final Map<WeatherState, Double> rainySunnyTransitions = new EnumMap<WeatherState, Double>(WeatherState.class);
 		rainySunnyTransitions.put(WeatherState.SUNNY, 0.9);
 		rainySunnyTransitions.put(WeatherState.RAINY, 0.1);
 		transitionProbabilities.put(rainySunnyState, rainySunnyTransitions);
@@ -156,7 +157,7 @@ public class TestSimpleMarkovChain {
 		final List<WeatherState> rainyRainyState = new ArrayList<WeatherState>();
 		rainyRainyState.add(WeatherState.RAINY);
 		rainyRainyState.add(WeatherState.RAINY);
-		final Map<WeatherState, Double> rainyRainyTransitions = new TreeMap<WeatherState, Double>();
+		final Map<WeatherState, Double> rainyRainyTransitions = new EnumMap<WeatherState, Double>(WeatherState.class);
 		rainyRainyTransitions.put(WeatherState.SUNNY, 0.5);
 		rainyRainyTransitions.put(WeatherState.RAINY, 0.5);
 		transitionProbabilities.put(rainyRainyState, rainyRainyTransitions);

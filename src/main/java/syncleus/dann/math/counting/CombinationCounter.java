@@ -96,7 +96,7 @@ public class CombinationCounter implements Counter {
 		while (this.currentCombination[i] == (this.setSize
 				- this.combinationSize + i))
 			i--;
-		this.currentCombination[i] = this.currentCombination[i] + 1;
+		this.currentCombination[i] += 1;
 		for (int j = i + 1; j < this.combinationSize; j++)
 			this.currentCombination[j] = this.currentCombination[i] + j - i;
 		this.remaining = remaining.subtract(BigInteger.ONE);

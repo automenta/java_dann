@@ -75,21 +75,28 @@ public class ParamTemplate implements Serializable {
 	 *            The type to add.
 	 */
 	public void addType(final String theType) {
-		if (theType.equals("b")) {
-			addType(ValueType.booleanType);
-		} else if (theType.equals("e")) {
-			addType(ValueType.enumType);
-		} else if (theType.equals("f")) {
-			addType(ValueType.floatingType);
-		} else if (theType.equals("i")) {
-			addType(ValueType.intType);
-		} else if (theType.equals("s")) {
-			addType(ValueType.stringType);
-		} else if (theType.equals("*")) {
-			addAllTypes();
-		} else {
-			throw new EACompileError("Unknown type: " + theType);
-		}
+            switch (theType) {
+                case "b":
+                    addType(ValueType.booleanType);
+                    break;
+                case "e":
+                    addType(ValueType.enumType);
+                    break;
+                case "f":
+                    addType(ValueType.floatingType);
+                    break;
+                case "i":
+                    addType(ValueType.intType);
+                    break;
+                case "s":
+                    addType(ValueType.stringType);
+                    break;
+                case "*":
+                    addAllTypes();
+                    break;
+                default:
+                    throw new EACompileError("Unknown type: " + theType);
+            }
 	}
 
 	/**

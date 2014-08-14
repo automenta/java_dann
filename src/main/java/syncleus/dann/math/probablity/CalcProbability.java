@@ -52,8 +52,8 @@ public class CalcProbability {
 	public double calculate(final int classNumber) {
 		final double classItems = this.classes.get(classNumber);
 		final double totalItems = this.total;
-		final double d = ((double) this.laplacianSmoothing * (double) classes
-				.size());
+		final double d = (this.laplacianSmoothing * classes
+                        .size());
 		return (classItems + (this.laplacianSmoothing)) / (totalItems + d);
 	}
 }

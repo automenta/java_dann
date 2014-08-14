@@ -146,7 +146,7 @@ public final class NumberList {
 			if (i != 0) {
 				result.append(format.getSeparator());
 			}
-			result.append("" + data[i]);
+			result.append("").append(data[i]);
 		}
 	}
 }

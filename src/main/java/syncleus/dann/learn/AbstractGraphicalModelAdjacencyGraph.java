@@ -48,8 +48,9 @@ public abstract class AbstractGraphicalModelAdjacencyGraph<N extends GraphicalMo
 
 	@Override
 	public void learnStates() {
-		for (final N node : this.getNodes())
-			node.learnState();
+            this.getNodes().stream().forEach((node) -> {
+                node.learnState();
+            });
 	}
 
 	@Override
@@ -65,11 +66,9 @@ public abstract class AbstractGraphicalModelAdjacencyGraph<N extends GraphicalMo
 		// reset the network back to its starting
 		// point when we are done
 		final Map<N, Object> startingStates = new HashMap<N, Object>();
-		for (final N node : this.getNodes()) {
-			// we wont be changing influences nodes, so we can skip those
-			if (!influences.contains(node))
-				startingStates.put(node, node.getState());
-		}
+                this.getNodes().stream().filter((node) -> (!influences.contains(node))).forEach((node) -> {
+                startingStates.put(node, node.getState());
+            });
 
 		try {
 			List<N> varyingNodes = new ArrayList<N>(this.getNodes());
@@ -95,25 +94,26 @@ public abstract class AbstractGraphicalModelAdjacencyGraph<N extends GraphicalMo
 			// all done
 			return numerator / denominator;
 		} finally {
-			// restore the initial states when we are done
-			for (final Map.Entry<N, Object> nodeState : startingStates
-					.entrySet())
-				nodeState.getKey().setState(nodeState.getValue());
+                    startingStates
+                            .entrySet().stream().forEach((nodeState) -> {
+                                            nodeState.getKey().setState(nodeState.getValue());
+                });
 		}
 	}
 
 	@SuppressWarnings("unchecked")
 	protected static <N extends GraphicalModelNode> void resetNodeStates(
 			final Collection<N> incNodes) {
-		for (final N incNode : incNodes)
-			incNode.setState((incNode.getLearnedStates().toArray())[0]);
+            incNodes.stream().forEach((incNode) -> {
+                incNode.setState((incNode.getLearnedStates().toArray())[0]);
+            });
 	}
 
 	protected static <N extends GraphicalModelNode> boolean incrementNodeStates(
 			final Collection<N> incNodes) {
-		for (final N incNode : incNodes)
-			if (!incrementNodeState(incNode))
-				return false;
+            if (!incNodes.stream().noneMatch((incNode) -> (!incrementNodeState(incNode)))) {
+                return false;
+            }
 		return true;
 	}
 

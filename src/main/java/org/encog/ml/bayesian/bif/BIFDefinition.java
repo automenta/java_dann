@@ -71,7 +71,7 @@ public class BIFDefinition {
 		while (tok.hasMoreTokens()) {
 			final String str = tok.nextToken();
 			// support both radix formats
-			if (str.indexOf(",") != -1) {
+			if (str.indexOf(',') != -1) {
 				list.add(CSVFormat.DECIMAL_COMMA.parse(str));
 			} else {
 				list.add(CSVFormat.DECIMAL_POINT.parse(str));

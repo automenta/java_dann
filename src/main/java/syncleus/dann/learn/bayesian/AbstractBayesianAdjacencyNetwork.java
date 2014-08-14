@@ -43,8 +43,12 @@ public abstract class AbstractBayesianAdjacencyNetwork<N extends GraphicalModelN
 	@Override
 	public double jointProbability() {
 		double probabilityProduct = 1.0;
-		for (final N node : this.getNodes())
-			probabilityProduct *= node.stateProbability();
+                probabilityProduct = this.getNodes().stream().map((node) -> node.stateProbability()).reduce(probabilityProduct, (accumulator, _item) -> accumulator * _item);
 		return probabilityProduct;
 	}
+
+    @Override
+    public AbstractGraphicalModelAdjacencyGraph<N, E> clone() {
+        return super.clone(); //To change body of generated methods, choose Tools | Templates.
+    }
 }

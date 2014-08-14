@@ -19,6 +19,7 @@
 package syncleus.dann.neural.backprop.brain;
 
 import java.util.concurrent.ExecutorService;
+import syncleus.dann.graph.AbstractBidirectedAdjacencyGraph;
 
 import syncleus.dann.neural.NeuronGroup;
 import syncleus.dann.neural.SimpleSynapse;
@@ -127,4 +128,9 @@ public abstract class AbstractFullyConnectedFeedforwardBrain<IN extends InputBac
 					});
 		}
 	}
+
+    @Override
+    public AbstractBidirectedAdjacencyGraph<N, S> clone() {
+        return super.clone(); //To change body of generated methods, choose Tools | Templates.
+    }
 }

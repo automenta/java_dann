@@ -42,12 +42,10 @@ public class ValueIteration extends MarkovDecisionProcess {
 		if (!getWorld().isGoalState(state)) {
 			for (final Action action : getWorld().getActions()) {
 				double sum = 0;
-				for (final SuccessorState statePrime : this.getWorld()
-						.getProbability()
-						.determineSuccessorStates(state, action)) {
-					sum += statePrime.getProbability()
-							* statePrime.getState().getPolicyValue()[0];
-				}
+                                sum = this.getWorld()
+                                    .getProbability()
+                                    .determineSuccessorStates(state, action).stream().map((statePrime) -> statePrime.getProbability()
+                                                        * statePrime.getState().getPolicyValue()[0]).reduce(sum, (accumulator, _item) -> accumulator + _item);
 				sum *= this.discountFactor;
 
 				result = Math.max(result, sum);
@@ -60,9 +58,9 @@ public class ValueIteration extends MarkovDecisionProcess {
 	}
 
 	public void iteration() {
-		for (final State state : getWorld().getStates()) {
-			calculateValue(state);
-		}
+            getWorld().getStates().stream().forEach((state) -> {
+                calculateValue(state);
+            });
 	}
 
 }

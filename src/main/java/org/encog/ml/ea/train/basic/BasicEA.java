@@ -84,9 +84,7 @@ public class BasicEA implements EvolutionaryAlgorithm, MultiThreadable,
 		final double score = genome.getScore();
 		double delta = 0;
 
-		for (final AdjustScore a : adjusters) {
-			delta += a.calculateAdjustment(genome);
-		}
+                delta = adjusters.stream().map((a) -> a.calculateAdjustment(genome)).reduce(delta, (accumulator, _item) -> accumulator + _item);
 
 		genome.setAdjustedScore(score + delta);
 	}
@@ -246,13 +244,12 @@ public class BasicEA implements EvolutionaryAlgorithm, MultiThreadable,
 			this.bestComparator = new MaximizeScoreComp();
 		}
 
-		// set the iteration
-		for (final Species species : thePopulation.getSpecies()) {
-			for (final Genome genome : species.getMembers()) {
-				setIteration(Math.max(getIteration(),
-						genome.getBirthGeneration()));
-			}
-		}
+                thePopulation.getSpecies().stream().forEach((species) -> {
+                species.getMembers().stream().forEach((genome) -> {
+                    setIteration(Math.max(getIteration(),
+                            genome.getBirthGeneration()));
+                });
+            });
 
 		// Set a best genome, just so it is not null.
 		// We won't know the true best genome until the first iteration.
@@ -566,7 +563,7 @@ public class BasicEA implements EvolutionaryAlgorithm, MultiThreadable,
 			preIteration();
 		}
 
-		if (getPopulation().getSpecies().size() == 0) {
+		if (getPopulation().getSpecies().isEmpty()) {
 			throw new RuntimeException("Population is empty, there are no species.");
 		}
 

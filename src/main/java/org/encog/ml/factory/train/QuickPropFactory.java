@@ -30,6 +30,7 @@ import org.encog.ml.factory.MLTrainFactory;
 import org.encog.ml.factory.parse.ArchitectureParse;
 import org.encog.ml.train.MLTrain;
 import org.encog.neural.networks.BasicNetwork;
+import org.encog.neural.networks.ContainsFlat;
 import org.encog.neural.networks.training.propagation.quick.QuickPropagation;
 
 import syncleus.dann.dataprocess.MLDataSet;
@@ -60,7 +61,7 @@ public class QuickPropFactory {
 		final double learningRate = holder.getDouble(
 				MLTrainFactory.PROPERTY_LEARNING_RATE, false, 2.0);
 
-		return new QuickPropagation((BasicNetwork) method, training,
+		return new QuickPropagation((ContainsFlat) method, training,
 				learningRate);
 	}
 }

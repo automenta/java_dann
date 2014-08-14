@@ -188,7 +188,7 @@ public class NeuralSimulatedAnnealing extends BasicTraining {
 			double add = NeuralSimulatedAnnealing.CUT - Math.random();
 			add /= this.anneal.getStartTemperature();
 			add *= this.anneal.getTemperature();
-			array[i] = array[i] + add;
+			array[i] += add;
 		}
 
 		NetworkCODEC.arrayToNetwork(array,

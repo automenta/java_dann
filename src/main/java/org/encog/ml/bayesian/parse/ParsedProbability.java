@@ -87,7 +87,7 @@ public class ParsedProbability {
 					"Only one base event may be used to define a probability, i.e. P(a), not P(a,b).");
 		}
 
-		if (this.baseEvents.size() == 0) {
+		if (this.baseEvents.isEmpty()) {
 			throw new BayesianError(
 					"At least one event must be provided, i.e. P() or P(|a,b,c) is not allowed.");
 		}
@@ -142,11 +142,10 @@ public class ParsedProbability {
 		final ParsedEvent childParsed = getChildEvent();
 		final BayesianEvent childEvent = network.requireEvent(childParsed
 				.getLabel());
-		for (final ParsedEvent event : this.givenEvents) {
-			final BayesianEvent parentEvent = network.requireEvent(event
-					.getLabel());
-			network.createDependency(parentEvent, childEvent);
-		}
+                this.givenEvents.stream().map((event) -> network.requireEvent(event
+                    .getLabel())).forEach((parentEvent) -> {
+                                            network.createDependency(parentEvent, childEvent);
+            });
 
 	}
 

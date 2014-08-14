@@ -100,13 +100,10 @@ public class FeedForwardPattern implements NeuralNetworkPattern {
 		final BasicNetwork result = new BasicNetwork();
 		result.addLayer(input);
 
-		for (final Integer count : this.hidden) {
-
-			final Layer hidden = new BasicLayer(this.activationHidden, true,
-					count);
-
-			result.addLayer(hidden);
-		}
+                this.hidden.stream().map((count) -> new BasicLayer(this.activationHidden, true,
+                    count)).forEach((hidden) -> {
+                                            result.addLayer(hidden);
+            });
 
 		final Layer output = new BasicLayer(this.activationOutput, false,
 				this.outputNeurons);

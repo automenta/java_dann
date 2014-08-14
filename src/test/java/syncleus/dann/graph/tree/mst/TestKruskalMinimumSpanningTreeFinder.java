@@ -84,8 +84,9 @@ public class TestKruskalMinimumSpanningTreeFinder {
 				graph.getNodes(), mstEdges);
 
 		LOGGER.info("mst edges:");
-		for (final Edge edge : mst.getEdges())
-			LOGGER.info(edge);
+                mst.getEdges().stream().forEach((edge) -> {
+                LOGGER.info(edge);
+            });
 
 		final CycleDetector detector = new ColoredDepthFirstSearchDetector();
 		LOGGER.info("mst is cyclic: " + detector.hasCycle(mst));
@@ -143,15 +144,18 @@ public class TestKruskalMinimumSpanningTreeFinder {
 				graph.getNodes(), mstEdges);
 
 		LOGGER.info("Linkedgraph objects:");
-		for (final Object node : nodes)
-			LOGGER.info(node);
+                nodes.stream().forEach((node) -> {
+                LOGGER.info(node);
+            });
 		LOGGER.info("Linkedgraph edges:");
-		for (final Edge edge : edges)
-			LOGGER.info(edge);
+                edges.stream().forEach((edge) -> {
+                LOGGER.info(edge);
+            });
 
 		LOGGER.info("Linked mst edges:");
-		for (final Edge edge : mst.getEdges())
-			LOGGER.info(edge);
+                mst.getEdges().stream().forEach((edge) -> {
+                LOGGER.info(edge);
+            });
 
 		final CycleDetector detector = new ColoredDepthFirstSearchDetector();
 		LOGGER.info("Linked mst is cyclic: " + detector.hasCycle(mst));

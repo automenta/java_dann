@@ -22,6 +22,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 
 import org.junit.Assert;
 import org.junit.Test;
+import syncleus.dann.graph.AbstractBidirectedAdjacencyGraph;
 
 import syncleus.dann.neural.AbstractLocalBrain;
 import syncleus.dann.neural.InputNeuron;
@@ -46,6 +47,11 @@ public class TestHyperassociativeMap {
 		public boolean connect(final Synapse synapse, final boolean initialize) {
 			return super.connect(synapse, initialize);
 		}
+
+        @Override
+        public AbstractBidirectedAdjacencyGraph clone() {
+            return super.clone(); //To change body of generated methods, choose Tools | Templates.
+        }
 	}
 
 	private static class TestMap

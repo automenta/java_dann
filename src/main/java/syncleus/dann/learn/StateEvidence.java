@@ -52,13 +52,18 @@ public class StateEvidence<S> extends HashMap<S, Integer> {
 		final Map<S, Integer> oldMap = new HashMap<S, Integer>(this);
 		super.putAll(map);
 
-		for (final Map.Entry<? extends S, ? extends Integer> entry : map
-				.entrySet()) {
-			final Integer oldEvidence = oldMap.get(entry.getKey());
-			final Integer newEvidence = this.get(entry.getKey());
-			this.totalEvidence = (this.totalEvidence - oldEvidence)
-					+ newEvidence;
-		}
+                map
+                        .entrySet().stream().forEach((entry) -> {
+                                    final Integer oldEvidence = oldMap.get(entry.getKey());
+                                    final Integer newEvidence = this.get(entry.getKey());
+                                    this.totalEvidence = (this.totalEvidence - oldEvidence)
+                                            + newEvidence;
+        });
 	}
+
+    @Override
+    public Object clone() {
+        return super.clone(); //To change body of generated methods, choose Tools | Templates.
+    }
 
 }

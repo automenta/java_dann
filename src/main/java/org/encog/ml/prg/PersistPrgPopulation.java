@@ -201,12 +201,9 @@ public class PersistPrgPopulation implements EncogPersistor {
 				result.setBestGenome(species.getMembers().get(0));
 			}
 
-			// set the leaders
-			for (final Species sp : result.getSpecies()) {
-				if (sp.getMembers().size() > 0) {
-					sp.setLeader(sp.getMembers().get(0));
-				}
-			}
+                        result.getSpecies().stream().filter((sp) -> (sp.getMembers().size() > 0)).forEach((sp) -> {
+                        sp.setLeader(sp.getMembers().get(0));
+                    });
 		}
 		return result;
 	}
@@ -223,12 +220,16 @@ public class PersistPrgPopulation implements EncogPersistor {
 		out.addSubSection("PARAMS");
 		out.addProperties(pop.getProperties());
 		out.addSubSection("EPL-OPCODES");
-		for (final ProgramExtensionTemplate temp : pop.getContext()
-				.getFunctions().getOpCodes()) {
-			out.addColumn(temp.getName());
-			out.addColumn(temp.getChildNodeCount());
-			out.writeLine();
-		}
+                pop.getContext()
+                        .getFunctions().getOpCodes().stream().map((temp) -> {
+                                    out.addColumn(temp.getName());
+                return temp;
+            }).map((temp) -> {
+                out.addColumn(temp.getChildNodeCount());
+                return temp;
+            }).forEach((_item) -> {
+                out.writeLine();
+            });
 		out.addSubSection("EPL-SYMBOLIC");
 		out.addColumn("name");
 		out.addColumn("type");
@@ -244,41 +245,54 @@ public class PersistPrgPopulation implements EncogPersistor {
 		out.addColumn(pop.getContext().getResult().getEnumValueCount());
 		out.writeLine();
 
-		// write the next lines, the variables
-		for (final VariableMapping mapping : pop.getContext()
-				.getDefinedVariables()) {
-			out.addColumn(mapping.getName());
-			out.addColumn(getType(mapping));
-			out.addColumn(mapping.getEnumType());
-			out.addColumn(mapping.getEnumValueCount());
-			out.writeLine();
-		}
+                pop.getContext()
+                        .getDefinedVariables().stream().map((mapping) -> {
+                                    out.addColumn(mapping.getName());
+                return mapping;
+            }).map((mapping) -> {
+                out.addColumn(getType(mapping));
+                return mapping;
+            }).map((mapping) -> {
+                out.addColumn(mapping.getEnumType());
+                return mapping;
+            }).map((mapping) -> {
+                out.addColumn(mapping.getEnumValueCount());
+                return mapping;
+            }).forEach((_item) -> {
+                out.writeLine();
+            });
 		out.addSubSection("EPL-POPULATION");
-		for (final Species species : pop.getSpecies()) {
-			if (species.getMembers().size() > 0) {
-				out.addColumn("s");
-				out.addColumn(species.getAge());
-				out.addColumn(species.getBestScore());
-				out.addColumn(species.getGensNoImprovement());
-				out.writeLine();
-				for (final Genome genome : species.getMembers()) {
-					final EncogProgram prg = (EncogProgram) genome;
-					out.addColumn("p");
-					if (Double.isInfinite(prg.getScore())
-							|| Double.isNaN(prg.getScore())) {
-						out.addColumn("NaN");
-						out.addColumn("NaN");
-					} else {
-
-						out.addColumn(prg.getScore());
-						out.addColumn(prg.getAdjustedScore());
-					}
-
-					out.addColumn(prg.generateEPL());
-					out.writeLine();
-				}
-			}
-		}
+                pop.getSpecies().stream().filter((species) -> (species.getMembers().size() > 0)).map((species) -> {
+                out.addColumn("s");
+                out.addColumn(species.getAge());
+                return species;
+            }).map((species) -> {
+                out.addColumn(species.getBestScore());
+                return species;
+            }).map((species) -> {
+                out.addColumn(species.getGensNoImprovement());
+                return species;
+            }).forEach((species) -> {
+                out.writeLine();
+                species.getMembers().stream().map((genome) -> (EncogProgram) genome).map((prg) -> {
+                    out.addColumn("p");
+                    if (Double.isInfinite(prg.getScore())
+                            || Double.isNaN(prg.getScore())) {
+                        out.addColumn("NaN");
+                        out.addColumn("NaN");
+                    } else {
+                        
+                        out.addColumn(prg.getScore());
+                        out.addColumn(prg.getAdjustedScore());
+                    }
+                    return prg;
+                }).map((prg) -> {
+                    out.addColumn(prg.generateEPL());
+                    return prg;
+                }).forEach((_item) -> {
+                    out.writeLine();
+                });
+            });
 
 		out.flush();
 	}

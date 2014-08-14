@@ -89,19 +89,20 @@ public class PersistNEATPopulation implements EncogPersistor {
 	}
 
 	public static NEATNeuronType stringToNeuronType(final String t) {
-		if (t.equals("b")) {
-			return NEATNeuronType.Bias;
-		} else if (t.equals("h")) {
-			return NEATNeuronType.Hidden;
-		} else if (t.equals("i")) {
-			return NEATNeuronType.Input;
-		} else if (t.equals("n")) {
-			return NEATNeuronType.None;
-		} else if (t.equals("o")) {
-			return NEATNeuronType.Output;
-		} else {
-			return null;
-		}
+            switch (t) {
+                case "b":
+                    return NEATNeuronType.Bias;
+                case "h":
+                    return NEATNeuronType.Hidden;
+                case "i":
+                    return NEATNeuronType.Input;
+                case "n":
+                    return NEATNeuronType.None;
+                case "o":
+                    return NEATNeuronType.Output;
+                default:
+                    return null;
+            }
 	}
 
 	@Override
@@ -286,15 +287,19 @@ public class PersistNEATPopulation implements EncogPersistor {
 				pop.getSurvivalRate());
 		out.addSubSection("INNOVATIONS");
 		if (pop.getInnovations() != null) {
-			for (final String key : pop.getInnovations().getInnovations()
-					.keySet()) {
-				final NEATInnovation innovation = pop.getInnovations()
-						.getInnovations().get(key);
-				out.addColumn(key);
-				out.addColumn(innovation.getInnovationID());
-				out.addColumn(innovation.getNeuronID());
-				out.writeLine();
-			}
+                    pop.getInnovations().getInnovations()
+                            .keySet().stream().map((key) -> {
+                                            final NEATInnovation innovation = pop.getInnovations()
+                                                    .getInnovations().get(key);
+                        out.addColumn(key);
+                        out.addColumn(innovation.getInnovationID());
+                        return innovation;
+                    }).map((innovation) -> {
+                        out.addColumn(innovation.getNeuronID());
+                        return innovation;
+                    }).forEach((_item) -> {
+                        out.writeLine();
+                    });
 		}
 
 		out.addSubSection("SPECIES");
@@ -305,12 +310,9 @@ public class PersistNEATPopulation implements EncogPersistor {
 			saveSpecies(out, bestSpecies);
 		}
 
-		// now write the other species, other than the best one
-		for (final Species species : pop.getSpecies()) {
-			if (species != bestSpecies) {
-				saveSpecies(out, species);
-			}
-		}
+                pop.getSpecies().stream().filter((species) -> (species != bestSpecies)).forEach((species) -> {
+                saveSpecies(out, species);
+            });
 		out.flush();
 	}
 
@@ -321,37 +323,62 @@ public class PersistNEATPopulation implements EncogPersistor {
 		out.addColumn(species.getGensNoImprovement());
 		out.writeLine();
 
-		for (final Genome genome : species.getMembers()) {
-			final NEATGenome neatGenome = (NEATGenome) genome;
-			out.addColumn("g");
-			out.addColumn(neatGenome.getAdjustedScore());
-			out.addColumn(neatGenome.getScore());
-			out.addColumn(neatGenome.getBirthGeneration());
-			out.writeLine();
-
-			for (final NEATNeuronGene neatNeuronGene : neatGenome
-					.getNeuronsChromosome()) {
-				out.addColumn("n");
-				out.addColumn(neatNeuronGene.getId());
-				out.addColumn(neatNeuronGene.getActivationFunction());
-				out.addColumn(PersistNEATPopulation
-						.neuronTypeToString(neatNeuronGene.getNeuronType()));
-				out.addColumn(neatNeuronGene.getInnovationId());
-				out.writeLine();
-			}
-			for (final NEATLinkGene neatLinkGene : neatGenome
-					.getLinksChromosome()) {
-				out.addColumn("l");
-				out.addColumn(neatLinkGene.getId());
-				out.addColumn(neatLinkGene.isEnabled());
-				out.addColumn(neatLinkGene.getFromNeuronID());
-				out.addColumn(neatLinkGene.getToNeuronID());
-				out.addColumn(neatLinkGene.getWeight());
-				out.addColumn(neatLinkGene.getInnovationId());
-				out.writeLine();
-			}
-
-		}
+                species.getMembers().stream().map((genome) -> (NEATGenome) genome).map((neatGenome) -> {
+                out.addColumn("g");
+                out.addColumn(neatGenome.getAdjustedScore());
+                return neatGenome;
+            }).map((neatGenome) -> {
+                out.addColumn(neatGenome.getScore());
+                return neatGenome;
+            }).map((neatGenome) -> {
+                out.addColumn(neatGenome.getBirthGeneration());
+                return neatGenome;
+            }).map((neatGenome) -> {
+                out.writeLine();
+                neatGenome
+                        .getNeuronsChromosome().stream().map((neatNeuronGene) -> {
+                                            out.addColumn("n");
+                    out.addColumn(neatNeuronGene.getId());
+                    return neatNeuronGene;
+                }).map((neatNeuronGene) -> {
+                    out.addColumn(neatNeuronGene.getActivationFunction());
+                    return neatNeuronGene;
+                }).map((neatNeuronGene) -> {
+                    out.addColumn(PersistNEATPopulation
+                            .neuronTypeToString(neatNeuronGene.getNeuronType()));
+                    return neatNeuronGene;
+                }).map((neatNeuronGene) -> {
+                    out.addColumn(neatNeuronGene.getInnovationId());
+                    return neatNeuronGene;
+                }).forEach((_item) -> {
+                    out.writeLine();
+                });
+                return neatGenome;
+            }).forEach((neatGenome) -> {
+                neatGenome
+                        .getLinksChromosome().stream().map((neatLinkGene) -> {
+                                            out.addColumn("l");
+                    out.addColumn(neatLinkGene.getId());
+                    return neatLinkGene;
+                }).map((neatLinkGene) -> {
+                    out.addColumn(neatLinkGene.isEnabled());
+                    return neatLinkGene;
+                }).map((neatLinkGene) -> {
+                    out.addColumn(neatLinkGene.getFromNeuronID());
+                    return neatLinkGene;
+                }).map((neatLinkGene) -> {
+                    out.addColumn(neatLinkGene.getToNeuronID());
+                    return neatLinkGene;
+                }).map((neatLinkGene) -> {
+                    out.addColumn(neatLinkGene.getWeight());
+                    return neatLinkGene;
+                }).map((neatLinkGene) -> {
+                    out.addColumn(neatLinkGene.getInnovationId());
+                    return neatLinkGene;
+                }).forEach((_item) -> {
+                    out.writeLine();
+                });
+            });
 
 	}
 }

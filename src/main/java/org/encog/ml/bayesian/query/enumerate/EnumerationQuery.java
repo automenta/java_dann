@@ -87,22 +87,22 @@ public class EnumerationQuery extends BasicQuery implements Serializable {
 			final boolean includeOutcome) {
 		this.enumerationEvents.clear();
 
-		for (final EventState state : this.getEvents().values()) {
-			if (state.getEventType() == EventType.Hidden) {
-				this.enumerationEvents.add(state);
-				state.setValue(0);
-			} else if (includeEvidence
-					&& state.getEventType() == EventType.Evidence) {
-				this.enumerationEvents.add(state);
-				state.setValue(0);
-			} else if (includeOutcome
-					&& state.getEventType() == EventType.Outcome) {
-				this.enumerationEvents.add(state);
-				state.setValue(0);
-			} else {
-				state.setValue(state.getCompareValue());
-			}
-		}
+                this.getEvents().values().stream().forEach((state) -> {
+                if (state.getEventType() == EventType.Hidden) {
+                    this.enumerationEvents.add(state);
+                    state.setValue(0);
+                } else if (includeEvidence
+                        && state.getEventType() == EventType.Evidence) {
+                    this.enumerationEvents.add(state);
+                    state.setValue(0);
+                } else if (includeOutcome
+                        && state.getEventType() == EventType.Outcome) {
+                    this.enumerationEvents.add(state);
+                    state.setValue(0);
+                } else {
+                    state.setValue(state.getCompareValue());
+                }
+            });
 	}
 
 	/**
@@ -116,7 +116,7 @@ public class EnumerationQuery extends BasicQuery implements Serializable {
 		boolean done = false;
 		boolean eof = false;
 
-		if (this.enumerationEvents.size() == 0) {
+		if (this.enumerationEvents.isEmpty()) {
 			done = true;
 			eof = true;
 		}
@@ -258,7 +258,7 @@ public class EnumerationQuery extends BasicQuery implements Serializable {
 		boolean done = false;
 		boolean eof = false;
 
-		if (enumerationEvents.size() == 0) {
+		if (enumerationEvents.isEmpty()) {
 			done = true;
 			eof = true;
 		}

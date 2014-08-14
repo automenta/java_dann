@@ -111,7 +111,6 @@ public class NEATCrossover implements EvolutionaryOperator {
 
 		vec.add(findBestNeuron(nodeID, best, notBest));
 
-		return;
 	}
 
 	/**
@@ -289,7 +288,7 @@ public class NEATCrossover implements EvolutionaryOperator {
 			}
 
 			if (selectedGene != null) {
-				if (selectedLinks.size() == 0) {
+				if (selectedLinks.isEmpty()) {
 					selectedLinks.add(selectedGene);
 				} else {
 					if (selectedLinks.get(selectedLinks.size() - 1)

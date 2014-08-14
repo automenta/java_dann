@@ -91,7 +91,7 @@ public class AutoFloatDataSet implements Serializable, MLDataSet {
 
 	@Override
 	public long getRecordCount() {
-		if (this.columns.size() == 0) {
+		if (this.columns.isEmpty()) {
 			return 0;
 		} else {
 			final int totalRows = this.columns.get(0).getData().length;

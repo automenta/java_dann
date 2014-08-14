@@ -288,7 +288,7 @@ public class ExcelCODEC implements DataSetCODEC {
 			this.xmlOut.beginTag("worksheet");
 			final StringBuilder d = new StringBuilder();
 			d.append(toColumn(this.inputCount + this.idealCount));
-			d.append("" + recordCount);
+			d.append("").append(recordCount);
 			this.xmlOut.addAttribute("ref", "A1:" + d.toString());
 			this.xmlOut.beginTag("dimension");
 			this.xmlOut.endTag();

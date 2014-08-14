@@ -572,8 +572,7 @@ public class SimpleRealMatrix implements Cloneable, Serializable, RealMatrix {
 		final double[][] newMatrixElements = this.matrixElements.clone();
 		for (int heightIndex = 0; heightIndex < this.height; heightIndex++)
 			for (int widthIndex = 0; widthIndex < this.width; widthIndex++)
-				newMatrixElements[heightIndex][widthIndex] = newMatrixElements[heightIndex][widthIndex]
-						+ operand.get(heightIndex, widthIndex);
+				newMatrixElements[heightIndex][widthIndex] += operand.get(heightIndex, widthIndex);
 		return new SimpleRealMatrix(newMatrixElements);
 	}
 
@@ -631,8 +630,7 @@ public class SimpleRealMatrix implements Cloneable, Serializable, RealMatrix {
 		checkMatrixDimensions(operand);
 		for (int i = 0; i < this.height; i++)
 			for (int j = 0; j < this.width; j++)
-				this.matrixElements[i][j] = this.matrixElements[i][j]
-						* operand.get(i, j);
+				this.matrixElements[i][j] *= operand.get(i, j);
 		return this;
 	}
 
@@ -654,8 +652,7 @@ public class SimpleRealMatrix implements Cloneable, Serializable, RealMatrix {
 		checkMatrixDimensions(operand);
 		for (int i = 0; i < this.height; i++)
 			for (int j = 0; j < this.width; j++)
-				this.matrixElements[i][j] = this.matrixElements[i][j]
-						/ operand.get(i, j);
+				this.matrixElements[i][j] /= operand.get(i, j);
 		return this;
 	}
 
@@ -956,7 +953,7 @@ public class SimpleRealMatrix implements Cloneable, Serializable, RealMatrix {
 	
 		for (int r = 0; r < getRows(); r++) {
 			for (int c = 0; c < getCols(); c++) {
-				if ((long) (this.matrixElements[r][c] * actualPrecision) != (long) (data[r][c] * actualPrecision)) {
+				if ((this.matrixElements[r][c] * actualPrecision) != (data[r][c] * actualPrecision)) {
 					return false;
 				}
 			}
@@ -1012,9 +1009,7 @@ public class SimpleRealMatrix implements Cloneable, Serializable, RealMatrix {
 	public double[][] getArrayCopy() {
 		final double[][] result = new double[getRows()][getCols()];
 		for (int i = 0; i < getRows(); i++) {
-			for (int j = 0; j < getCols(); j++) {
-				result[i][j] = this.matrixElements[i][j];
-			}
+                    System.arraycopy(this.matrixElements[i], 0, result[i], 0, getCols());
 		}
 		return result;
 	}
@@ -1177,9 +1172,7 @@ public class SimpleRealMatrix implements Cloneable, Serializable, RealMatrix {
 	
 		final double[][] newMatrix = new double[1][getCols()];
 	
-		for (int col = 0; col < getCols(); col++) {
-			newMatrix[0][col] = this.matrixElements[row][col];
-		}
+            System.arraycopy(this.matrixElements[row], 0, newMatrix[0], 0, getCols());
 	
 		return new SimpleRealMatrix(newMatrix);
 	}
@@ -1334,9 +1327,7 @@ public class SimpleRealMatrix implements Cloneable, Serializable, RealMatrix {
 		final double[][] source = theMatrix.getData();
 	
 		for (int row = 0; row < getRows(); row++) {
-			for (int col = 0; col < getCols(); col++) {
-				this.matrixElements[row][col] = source[row][col];
-			}
+                    System.arraycopy(source[row], 0, this.matrixElements[row], 0, getCols());
 		}
 	}
 

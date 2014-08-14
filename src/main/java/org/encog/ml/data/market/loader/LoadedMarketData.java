@@ -24,6 +24,7 @@
 package org.encog.ml.data.market.loader;
 
 import java.util.Date;
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -69,7 +70,7 @@ public class LoadedMarketData implements Comparable<LoadedMarketData> {
 	public LoadedMarketData(final Date when, final TickerSymbol ticker) {
 		this.when = when;
 		this.ticker = ticker;
-		this.data = new HashMap<MarketDataType, Double>();
+		this.data = new EnumMap<MarketDataType, Double>(MarketDataType.class);
 	}
 
 	/**

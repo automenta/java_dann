@@ -22,6 +22,7 @@ import java.util.stream.Collectors;
 
 import org.junit.Assert;
 import org.junit.Test;
+import syncleus.dann.graph.AbstractBidirectedAdjacencyGraph;
 
 import syncleus.dann.neural.backprop.SimpleBackpropNeuron;
 
@@ -30,7 +31,12 @@ public class TestNeuronGroup {
 		private static final long serialVersionUID = 3393474496867875251L;
 
 		@Override
-		public boolean add(final Neuron newNeuron) {
+		public boolean add(f
+        @Override
+        public AbstractBidirectedAdjacencyGraph clone() {
+            return super.clone(); //To change body of generated methods, choose Tools | Templates.
+        }
+inal Neuron newNeuron) {
 			return super.add(newNeuron);
 		}
 	}

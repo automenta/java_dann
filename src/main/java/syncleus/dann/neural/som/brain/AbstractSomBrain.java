@@ -36,6 +36,7 @@ import org.apache.logging.log4j.Logger;
 
 import syncleus.dann.UnexpectedDannError;
 import syncleus.dann.UnexpectedInterruptedException;
+import syncleus.dann.graph.AbstractBidirectedAdjacencyGraph;
 import syncleus.dann.math.Vector;
 import syncleus.dann.neural.AbstractLocalBrain;
 import syncleus.dann.neural.InputNeuron;
@@ -66,6 +67,11 @@ public abstract class AbstractSomBrain<IN extends SomInputNeuron, ON extends Som
 	private final Map<Vector, ON> outputs = new HashMap<Vector, ON>();
 	private static final Logger LOGGER = LogManager
 			.getLogger(AbstractSomBrain.class);
+
+    @Override
+    public AbstractBidirectedAdjacencyGraph<N, S> clone() {
+        return super.clone(); //To change body of generated methods, choose Tools | Templates.
+    }
 
 	private class PropagateOutput implements Callable<Double> {
 		private final ON neuron;
@@ -204,13 +210,10 @@ public abstract class AbstractSomBrain<IN extends SomInputNeuron, ON extends Som
 		// TODO fix typing
 		this.add((N) outputNeuron);
 
-		// connect all inputs to the new neuron
-		// TODO fix typing
-		for (final InputNeuron input : this.inputs) {
-			final Synapse<N> synapse = new SimpleSynapse<N>((N) input,
-					(N) outputNeuron);
-			this.connect((S) synapse, true);
-		}
+                this.inputs.stream().map((input) -> new SimpleSynapse<N>((N) input,
+                (N) outputNeuron)).forEach((synapse) -> {
+                                            this.connect((S) synapse, true);
+        });
 	}
 
 	/**
@@ -222,8 +225,9 @@ public abstract class AbstractSomBrain<IN extends SomInputNeuron, ON extends Som
 	@Override
 	public final Set<Vector> getPositions() {
 		final Set<Vector> positions = new HashSet<Vector>();
-		for (final Vector position : this.outputs.keySet())
-			positions.add(new Vector(position));
+                this.outputs.keySet().stream().forEach((position) -> {
+            positions.add(new Vector(position));
+        });
 		return Collections.unmodifiableSet(positions);
 	}
 
@@ -296,12 +300,12 @@ public abstract class AbstractSomBrain<IN extends SomInputNeuron, ON extends Som
 		} else {
 			// stick all the neurons in the queue to propagate
 			final Map<Vector, Future<Double>> futureOutput = new HashMap<Vector, Future<Double>>();
-			for (final Entry<Vector, ON> entry : this.outputs.entrySet()) {
-				final PropagateOutput callable = new PropagateOutput(
-						entry.getValue());
-				futureOutput.put(entry.getKey(), this.getThreadExecutor()
-						.submit(callable));
-			}
+                        this.outputs.entrySet().stream().forEach((entry) -> {
+                final PropagateOutput callable = new PropagateOutput(
+                        entry.getValue());
+                futureOutput.put(entry.getKey(), this.getThreadExecutor()
+                        .submit(callable));
+            });
 
 			// find the best matching unit
 			for (final Entry<Vector, ON> entry : this.outputs.entrySet()) {
@@ -343,21 +347,19 @@ public abstract class AbstractSomBrain<IN extends SomInputNeuron, ON extends Som
 		final double learningRate = this.learningRateFunction();
 
 		if (this.getThreadExecutor() == null) {
-			for (final Entry<Vector, ON> entry : this.outputs.entrySet()) {
-				final TrainNeuron runnable = new TrainNeuron(entry.getValue(),
-						entry.getKey(), bestMatchingUnit, neighborhoodRadius,
-						learningRate);
-				runnable.run();
-			}
+                    this.outputs.entrySet().stream().map((entry) -> new TrainNeuron(entry.getValue(),
+                    entry.getKey(), bestMatchingUnit, neighborhoodRadius,
+                    learningRate)).forEach((runnable) -> {
+                                                    runnable.run();
+            });
 		} else {
 			// add all the neuron training events to the thread queue
 			final ArrayList<Future> futures = new ArrayList<Future>();
-			for (final Entry<Vector, ON> entry : this.outputs.entrySet()) {
-				final TrainNeuron runnable = new TrainNeuron(entry.getValue(),
-						entry.getKey(), bestMatchingUnit, neighborhoodRadius,
-						learningRate);
-				futures.add(this.getThreadExecutor().submit(runnable));
-			}
+                        this.outputs.entrySet().stream().map((entry) -> new TrainNeuron(entry.getValue(),
+                    entry.getKey(), bestMatchingUnit, neighborhoodRadius,
+                    learningRate)).forEach((runnable) -> {
+                                                    futures.add(this.getThreadExecutor().submit(runnable));
+            });
 
 			// wait until all neurons are trained
 			try {
@@ -462,21 +464,20 @@ public abstract class AbstractSomBrain<IN extends SomInputNeuron, ON extends Som
 	public final Map<Vector, double[]> getOutputWeightVectors() {
 		// iterate through the output lattice
 		final HashMap<Vector, double[]> weightVectors = new HashMap<Vector, double[]>();
-		for (final Entry<Vector, ON> output : this.outputs.entrySet()) {
-			final double[] weightVector = new double[this.inputs.size()];
-			final ON currentNeuron = output.getValue();
-			final Vector currentPoint = output.getKey();
-			// iterate through the weight vectors of the current neuron
-			// TODO fix typing
-			for (final S source : this.getInEdges((N) currentNeuron)) {
-				assert (source.getSourceNode() instanceof InputNeuron);
-				final int sourceIndex = this.inputs.indexOf(source
-						.getSourceNode());
-				weightVector[sourceIndex] = source.getWeight();
-			}
-			// add the current weight vector to the map
-			weightVectors.put(currentPoint, weightVector);
-		}
+                this.outputs.entrySet().stream().forEach((output) -> {
+            final double[] weightVector = new double[this.inputs.size()];
+            final ON currentNeuron = output.getValue();
+            final Vector currentPoint = output.getKey();
+            this.getInEdges((N) currentNeuron).stream().map((source) -> {
+                assert (source.getSourceNode() instanceof InputNeuron);
+                return source;
+            }).forEach((source) -> {
+                final int sourceIndex = this.inputs.indexOf(source
+                        .getSourceNode());
+                weightVector[sourceIndex] = source.getWeight();
+            });
+            weightVectors.put(currentPoint, weightVector);
+        });
 		return Collections.unmodifiableMap(weightVectors);
 	}
 

@@ -31,7 +31,7 @@ import org.encog.ca.universe.UniverseCell;
 import org.encog.ca.universe.UniverseCellFactory;
 import org.encog.ml.BasicML;
 
-public class BasicUniverse extends BasicML implements Universe, Serializable {
+public class BasicUniverse extends BasicML implements Universe, Serializable, Cloneable {
 	/**
 	 *
 	 */
@@ -93,7 +93,7 @@ public class BasicUniverse extends BasicML implements Universe, Serializable {
 			}
 		}
 
-		return (double) result / (double) total;
+		return result / total;
 	}
 
 	@Override
@@ -124,10 +124,7 @@ public class BasicUniverse extends BasicML implements Universe, Serializable {
 
 	@Override
 	public boolean isValid(final int row, final int col) {
-		if (row < 0 || col < 0 || row >= getRows() || col >= getColumns()) {
-			return false;
-		}
-		return true;
+		return row >= 0 && col >= 0 && row < getRows() && col < getColumns();
 	}
 
 	@Override
@@ -157,6 +154,6 @@ public class BasicUniverse extends BasicML implements Universe, Serializable {
 			}
 		}
 
-		return (double) result / (double) total;
+		return result / total;
 	}
 }

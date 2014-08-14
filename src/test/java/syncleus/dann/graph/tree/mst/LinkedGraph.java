@@ -102,4 +102,9 @@ public class LinkedGraph<N, E extends Edge<N>> extends
 		return Collections.unmodifiableList(new ArrayList<N>(this.neighborNodes
 				.get(node)));
 	}
+
+    @Override
+    public AbstractAdjacencyGraph<N, E> clone() {
+        return super.clone(); //To change body of generated methods, choose Tools | Templates.
+    }
 }

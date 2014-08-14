@@ -187,7 +187,7 @@ public class BayesianNetwork extends BasicML implements MLClassification,
 
 		BayesianEvent event;
 
-		if (options.size() == 0) {
+		if (options.isEmpty()) {
 			event = new BayesianEvent(label);
 		} else {
 			event = new BayesianEvent(label, options);
@@ -321,25 +321,19 @@ public class BayesianNetwork extends BasicML implements MLClassification,
 				.parseProbabilityList(this, line);
 		final List<String> labelList = new ArrayList<String>();
 
-		// ensure that all events are there
-		for (final ParsedProbability prob : list) {
-			final ParsedEvent parsedEvent = prob.getChildEvent();
-			final String eventLabel = parsedEvent.getLabel();
-			labelList.add(eventLabel);
-
-			// create event, if not already here
-			final BayesianEvent e = getEvent(eventLabel);
-			if (e == null) {
-				final List<BayesianChoice> cl = new ArrayList<BayesianChoice>();
-
-				for (final ParsedChoice c : parsedEvent.getList()) {
-					cl.add(new BayesianChoice(c.getLabel(), c.getMin(), c
-							.getMax()));
-				}
-
-				createEvent(eventLabel, cl);
-			}
-		}
+                list.stream().map((prob) -> prob.getChildEvent()).forEach((parsedEvent) -> {
+                final String eventLabel = parsedEvent.getLabel();
+                labelList.add(eventLabel);
+                final BayesianEvent e = getEvent(eventLabel);
+                if (e == null) {
+                    final List<BayesianChoice> cl = new ArrayList<BayesianChoice>();
+                    parsedEvent.getList().stream().forEach((c) -> {
+                        cl.add(new BayesianChoice(c.getLabel(), c.getMin(), c
+                                .getMax()));
+                    });
+                    createEvent(eventLabel, cl);
+                }
+            });
 
 		// now remove all events that were not covered
 		for (int i = 0; i < events.size(); i++) {
@@ -349,32 +343,28 @@ public class BayesianNetwork extends BasicML implements MLClassification,
 			}
 		}
 
-		// handle dependencies
-		for (final ParsedProbability prob : list) {
-			final ParsedEvent parsedEvent = prob.getChildEvent();
-			final String eventLabel = parsedEvent.getLabel();
-
-			final BayesianEvent event = requireEvent(eventLabel);
-
-			// ensure that all "givens" are present
-			final List<String> givenList = new ArrayList<String>();
-			for (final ParsedEvent given : prob.getGivenEvents()) {
-				if (!event.hasGiven(given.getLabel())) {
-					final BayesianEvent givenEvent = requireEvent(given
-							.getLabel());
-					this.createDependency(givenEvent, event);
-				}
-				givenList.add(given.getLabel());
-			}
-
-			// now remove givens that were not covered
-			for (int i = 0; i < event.getParents().size(); i++) {
-				final BayesianEvent event2 = event.getParents().get(i);
-				if (!givenList.contains(event2.getLabel())) {
-					removeDependency(event2, event);
-				}
-			}
-		}
+                list.stream().forEach((prob) -> {
+                final ParsedEvent parsedEvent = prob.getChildEvent();
+                final String eventLabel = parsedEvent.getLabel();
+                final BayesianEvent event = requireEvent(eventLabel);
+                final List<String> givenList = new ArrayList<String>();
+                prob.getGivenEvents().stream().map((given) -> {
+                    if (!event.hasGiven(given.getLabel())) {
+                        final BayesianEvent givenEvent = requireEvent(given
+                                .getLabel());
+                        this.createDependency(givenEvent, event);
+                    }
+                    return given;
+                }).forEach((given) -> {
+                    givenList.add(given.getLabel());
+                });
+                for (int i = 0; i < event.getParents().size(); i++) {
+                    final BayesianEvent event2 = event.getParents().get(i);
+                    if (!givenList.contains(event2.getLabel())) {
+                        removeDependency(event2, event);
+                    }
+                }
+            });
 
 		// finalize the structure
 		finalizeStructure();
@@ -406,9 +396,9 @@ public class BayesianNetwork extends BasicML implements MLClassification,
 	 *            The event to remove.
 	 */
 	private void removeEvent(final BayesianEvent event) {
-		for (final BayesianEvent e : event.getParents()) {
-			e.getChildren().remove(event);
-		}
+            event.getParents().stream().forEach((e) -> {
+                e.getChildren().remove(event);
+            });
 		this.eventMap.remove(event.getLabel());
 		this.events.remove(event);
 	}
@@ -436,9 +426,7 @@ public class BayesianNetwork extends BasicML implements MLClassification,
 	 */
 	public int calculateParameterCount() {
 		int result = 0;
-		for (final BayesianEvent e : this.eventMap.values()) {
-			result += e.calculateParameterCount();
-		}
+                result = this.eventMap.values().stream().map((e) -> e.calculateParameterCount()).reduce(result, Integer::sum);
 		return result;
 	}
 
@@ -446,9 +434,9 @@ public class BayesianNetwork extends BasicML implements MLClassification,
 	 * Finalize the structure of this Bayesian network.
 	 */
 	public void finalizeStructure() {
-		for (final BayesianEvent e : this.eventMap.values()) {
-			e.finalizeStructure();
-		}
+            this.eventMap.values().stream().forEach((e) -> {
+                e.finalizeStructure();
+            });
 
 		if (this.query != null) {
 			this.query.finalizeStructure();
@@ -463,9 +451,9 @@ public class BayesianNetwork extends BasicML implements MLClassification,
 	 * Validate the structure of this Bayesian network.
 	 */
 	public void validate() {
-		for (final BayesianEvent e : this.eventMap.values()) {
-			e.validate();
-		}
+            this.eventMap.values().stream().forEach((e) -> {
+                e.validate();
+            });
 	}
 
 	/**
@@ -499,10 +487,9 @@ public class BayesianNetwork extends BasicML implements MLClassification,
 		if (a == b)
 			return true;
 
-		for (final BayesianEvent e : b.getChildren()) {
-			if (isDescendant(a, e))
-				return true;
-		}
+            if (b.getChildren().stream().anyMatch((e) -> (isDescendant(a, e)))) {
+                return true;
+            }
 		return false;
 	}
 
@@ -549,24 +536,18 @@ public class BayesianNetwork extends BasicML implements MLClassification,
 			return false;
 		}
 
-		// search children
-		for (final BayesianEvent e : a.getChildren()) {
-			if (!searched.contains(e) || !isGiven(given, a)) {
-				searched.add(e);
-				if (!isCondIndependent(true, e, goal, searched, given))
-					return false;
-			}
-		}
-
-		// search parents
-		for (final BayesianEvent e : a.getParents()) {
-			if (!searched.contains(e)) {
-				searched.add(e);
-				if (!previousHead || isGivenOrDescendant(given, a))
-					if (!isCondIndependent(false, e, goal, searched, given))
-						return false;
-			}
-		}
+            if (!a.getChildren().stream().filter((e) -> (!searched.contains(e) || !isGiven(given, a))).map((e) -> {
+                searched.add(e);
+                return e;
+            }).noneMatch((e) -> (!isCondIndependent(true, e, goal, searched, given)))) {
+                return false;
+            }
+            if (!a.getParents().stream().filter((e) -> (!searched.contains(e))).map((e) -> {
+                searched.add(e);
+                return e;
+            }).filter((e) -> (!previousHead || isGivenOrDescendant(given, a))).noneMatch((e) -> (!isCondIndependent(false, e, goal, searched, given)))) {
+                return false;
+            }
 
 		return true;
 	}
@@ -713,20 +694,17 @@ public class BayesianNetwork extends BasicML implements MLClassification,
 		// first, mark all events as hidden
 		q.reset();
 
-		// deal with evidence (input)
-		for (final ParsedEvent parsedEvent : parsedProbability.getGivenEvents()) {
-			final BayesianEvent event = this.requireEvent(parsedEvent
-					.getLabel());
-			q.defineEventType(event, EventType.Evidence);
-			q.setEventValue(event, parsedEvent.resolveValue(event));
-		}
-
-		// deal with outcome (output)
-		for (final ParsedEvent parsedEvent : parsedProbability.getBaseEvents()) {
-			final BayesianEvent event = requireEvent(parsedEvent.getLabel());
-			q.defineEventType(event, EventType.Outcome);
-			q.setEventValue(event, parsedEvent.resolveValue(event));
-		}
+                parsedProbability.getGivenEvents().stream().forEach((parsedEvent) -> {
+                final BayesianEvent event = this.requireEvent(parsedEvent
+                        .getLabel());
+                q.defineEventType(event, EventType.Evidence);
+                q.setEventValue(event, parsedEvent.resolveValue(event));
+            });
+            parsedProbability.getBaseEvents().stream().forEach((parsedEvent) -> {
+                final BayesianEvent event = requireEvent(parsedEvent.getLabel());
+                q.defineEventType(event, EventType.Outcome);
+                q.setEventValue(event, parsedEvent.resolveValue(event));
+            });
 
 		q.locateEventTypes();
 
@@ -755,9 +733,9 @@ public class BayesianNetwork extends BasicML implements MLClassification,
 	 * Remove all relations between nodes.
 	 */
 	public void removeAllRelations() {
-		for (final BayesianEvent event : this.events) {
-			event.removeAllRelations();
-		}
+            this.events.stream().forEach((event) -> {
+                event.removeAllRelations();
+            });
 	}
 
 	/**
@@ -774,9 +752,9 @@ public class BayesianNetwork extends BasicML implements MLClassification,
 	 */
 	@Override
 	public void reset(final int seed) {
-		for (final BayesianEvent event : this.events) {
-			event.reset();
-		}
+            this.events.stream().forEach((event) -> {
+                event.reset();
+            });
 
 	}
 
@@ -878,19 +856,18 @@ public class BayesianNetwork extends BasicML implements MLClassification,
 					"Must only define a single probability, not a chain.");
 		}
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			throw new BayesianError("Must define at least one probability.");
 		}
 
-		// first define everything to be hidden
-		for (final BayesianEvent event : this.events) {
-			this.query.defineEventType(event, EventType.Hidden);
-		}
+                this.events.stream().forEach((event) -> {
+                this.query.defineEventType(event, EventType.Hidden);
+            });
 
 		// define the base event
 		final ParsedProbability prob = list.get(0);
 
-		if (prob.getBaseEvents().size() == 0) {
+		if (prob.getBaseEvents().isEmpty()) {
 			return;
 		}
 
@@ -898,19 +875,16 @@ public class BayesianNetwork extends BasicML implements MLClassification,
 		this.classificationTarget = this.events.indexOf(be);
 		this.query.defineEventType(be, EventType.Outcome);
 
-		// define the given events
-		for (final ParsedEvent parsedGiven : prob.getGivenEvents()) {
-			final BayesianEvent given = this.getEvent(parsedGiven.getLabel());
-			this.query.defineEventType(given, EventType.Evidence);
-		}
+                prob.getGivenEvents().stream().map((parsedGiven) -> this.getEvent(parsedGiven.getLabel())).forEach((given) -> {
+                this.query.defineEventType(given, EventType.Evidence);
+            });
 
 		this.query.locateEventTypes();
 
-		// set the values
-		for (final ParsedEvent parsedGiven : prob.getGivenEvents()) {
-			final BayesianEvent event = this.getEvent(parsedGiven.getLabel());
-			this.query.setEventValue(event, parseInt(parsedGiven.getValue()));
-		}
+                prob.getGivenEvents().stream().forEach((parsedGiven) -> {
+                final BayesianEvent event = this.getEvent(parsedGiven.getLabel());
+                this.query.setEventValue(event, parseInt(parsedGiven.getValue()));
+            });
 
 		this.query.setEventValue(be, parseInt(prob.getBaseEvents().get(0)
 				.getValue()));
@@ -963,7 +937,7 @@ public class BayesianNetwork extends BasicML implements MLClassification,
 			}
 		}
 
-		return (double) badCount / (double) totalCount;
+		return badCount / totalCount;
 	}
 
 	/**
@@ -1010,11 +984,6 @@ public class BayesianNetwork extends BasicML implements MLClassification,
 	 * @return True if this network has a valid classification target.
 	 */
 	public boolean hasValidClassificationTarget() {
-		if (this.classificationTarget < 0
-				|| this.classificationTarget >= this.events.size()) {
-			return false;
-		} else {
-			return true;
-		}
+            return this.classificationTarget >= 0 && this.classificationTarget < this.events.size();
 	}
 }

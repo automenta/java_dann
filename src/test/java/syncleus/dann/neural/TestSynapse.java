@@ -20,6 +20,7 @@ package syncleus.dann.neural;
 
 import org.junit.Assert;
 import org.junit.Test;
+import syncleus.dann.graph.AbstractBidirectedAdjacencyGraph;
 
 import syncleus.dann.neural.backprop.SimpleBackpropNeuron;
 
@@ -31,6 +32,11 @@ public class TestSynapse {
 		public boolean add(final Neuron newNeuron) {
 			return super.add(newNeuron);
 		}
+
+        @Override
+        public AbstractBidirectedAdjacencyGraph clone() {
+            return super.clone(); //To change body of generated methods, choose Tools | Templates.
+        }
 	}
 
 	private static final double INITIAL_WEIGHT = 0.01;

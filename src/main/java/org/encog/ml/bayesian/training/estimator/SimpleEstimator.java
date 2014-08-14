@@ -110,10 +110,10 @@ public class SimpleEstimator implements BayesEstimator {
 	@Override
 	public boolean iteration() {
 		final BayesianEvent event = this.network.getEvents().get(this.index);
-		for (final TableLine line : event.getTable().getLines()) {
-			line.setProbability(calculateProbability(event, line.getResult(),
-					line.getArguments()));
-		}
+                event.getTable().getLines().stream().forEach((line) -> {
+                line.setProbability(calculateProbability(event, line.getResult(),
+                        line.getArguments()));
+            });
 		index++;
 
 		return index < this.network.getEvents().size();

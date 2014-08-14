@@ -74,15 +74,12 @@ public abstract class AbstractGraphSearch implements GraphSearch {
 			final BasicNode state = path.getDestinationNode();
 			this.explored.add(state);
 
-			for (final BasicEdge connection : state.getConnections()) {
-				if (!this.explored.contains(connection.getTo())
-						&& !this.frontier.containsDestination(connection
-								.getTo())) {
-					final BasicPath path2 = new BasicPath(path,
-							connection.getTo());
-					this.frontier.add(path2);
-				}
-			}
+                        state.getConnections().stream().filter((connection) -> (!this.explored.contains(connection.getTo())
+                            && !this.frontier.containsDestination(connection
+                                    .getTo()))).map((connection) -> new BasicPath(path,
+                                                                        connection.getTo())).forEach((path2) -> {
+                                                            this.frontier.add(path2);
+                    });
 		}
 	}
 

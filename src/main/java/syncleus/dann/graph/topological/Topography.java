@@ -84,10 +84,9 @@ public final class Topography {
 		} else {
 			final Set<E> adjacentNodesEdges = graph.getAdjacentEdges(node);
 			int degree = 0;
-			for (final E adjacentEdge : adjacentNodesEdges)
-				for (final N adjacentNode : adjacentEdge.getNodes())
-					if (adjacentNode.equals(node))
-						degree++;
+                        adjacentNodesEdges.stream().forEach((adjacentEdge) -> {
+                        degree = adjacentEdge.getNodes().stream().filter((adjacentNode) -> (adjacentNode.equals(node))).map((_item) -> 1).reduce(degree, Integer::sum);
+                    });
 			return degree;
 		}
 	}
@@ -113,12 +112,13 @@ public final class Topography {
 		}
 
 		final Set<N> nodes = graph.getNodes();
-		for (final N fromNode : nodes)
-			for (final N toNode : nodes)
-				if ((toNode != fromNode)
-						&& (!Topography.isStronglyConnected(graph, toNode,
-								fromNode)))
-					return false;
+                nodes.stream().forEach((fromNode) -> {
+                if (!nodes.stream().noneMatch((toNode) -> ((toNode != fromNode)
+                        && (!Topography.isStronglyConnected(graph, toNode,
+                                fromNode))))) {
+                    return false;
+                }
+            });
 		return true;
 	}
 
@@ -146,11 +146,11 @@ public final class Topography {
 		while (remainingNodes.size() >= 2) {
 			final N fromNode = remainingNodes.get(0);
 			remainingNodes.remove(0);
-			for (final N toNode : remainingNodes)
-				if ((toNode != fromNode)
-						&& (!Topography.isWeaklyConnected(graph, toNode,
-								fromNode)))
-					return false;
+                    if (!remainingNodes.stream().noneMatch((toNode) -> ((toNode != fromNode)
+                            && (!Topography.isWeaklyConnected(graph, toNode,
+                                    fromNode))))) {
+                        return false;
+                    }
 		}
 		return true;
 	}
@@ -309,10 +309,11 @@ public final class Topography {
 		// check to make sure none of the edges exclusive to the parent graph
 		// connect to any of the nodes in the subgraph.
 		final Set<? extends N> subnodes = subGraph.getNodes();
-		for (final E exclusiveParentEdge : exclusiveParentEdges)
-			for (final N exclusiveParentNode : exclusiveParentEdge.getNodes())
-				if (subnodes.contains(exclusiveParentNode))
-					return false;
+                exclusiveParentEdges.stream().forEach((exclusiveParentEdge) -> {
+                if (!exclusiveParentEdge.getNodes().stream().noneMatch((exclusiveParentNode) -> (subnodes.contains(exclusiveParentNode)))) {
+                    return false;
+                }
+            });
 		// passed all the tests, must be maximal
 		return true;
 	}
@@ -549,13 +550,12 @@ public final class Topography {
 
 		if (!Topography.isSimple(graph))
 			return false;
-		for (final N startNode : graph.getNodes()) {
-			for (final N endNode : graph.getNodes()) {
-				if (!startNode.equals(endNode)
-						&& !graph.getAdjacentNodes(startNode).contains(endNode))
-					return false;
-			}
-		}
+                graph.getNodes().stream().forEach((startNode) -> {
+                if (!graph.getNodes().stream().noneMatch((endNode) -> (!startNode.equals(endNode)
+                        && !graph.getAdjacentNodes(startNode).contains(endNode)))) {
+                    return false;
+                }
+            });
 		return true;
 	}
 
@@ -585,13 +585,13 @@ public final class Topography {
 
 		final Set<N> nodes = graph.getNodes();
 		final Set<N> subnodes = subgraph.getNodes();
-		for (final N subnode : subnodes)
-			if (!nodes.contains(subnode))
-				return false;
+            if (!subnodes.stream().noneMatch((subnode) -> (!nodes.contains(subnode)))) {
+                return false;
+            }
 		final Set<E> subedges = subgraph.getEdges();
-		for (final E subedge : subedges)
-			if (!graph.getEdges().contains(subedge))
-				return false;
+            if (!subedges.stream().noneMatch((subedge) -> (!graph.getEdges().contains(subedge)))) {
+                return false;
+            }
 		return true;
 	}
 
@@ -844,18 +844,13 @@ public final class Topography {
 		final List<N> edgeNodes = edge.getNodes();
 		final Set<E> potentialMultiples = graph.getAdjacentEdges(edge
 				.getNodes().get(0));
-		for (final E potentialMultiple : potentialMultiples) {
-			if (potentialMultiple.equals(edge))
-				continue;
-			final List<N> potentialNodes = new ArrayList<N>(
-					potentialMultiple.getNodes());
-			if (potentialNodes.size() != edgeNodes.size())
-				continue;
-			for (final N edgeNode : edgeNodes)
-				potentialNodes.remove(edgeNode);
-			if (potentialNodes.isEmpty())
-				multiplicity++;
-		}
+                multiplicity = potentialMultiples.stream().filter((potentialMultiple) -> !(potentialMultiple.equals(edge))).map((potentialMultiple) -> new ArrayList<N>(
+                    potentialMultiple.getNodes())).filter((potentialNodes) -> !(potentialNodes.size() != edgeNodes.size())).map((potentialNodes) -> {
+                                            edgeNodes.stream().forEach((edgeNode) -> {
+                    potentialNodes.remove(edgeNode);
+                });
+                return potentialNodes;
+            }).filter((potentialNodes) -> (potentialNodes.isEmpty())).map((_item) -> 1).reduce(multiplicity, Integer::sum);
 		return multiplicity;
 	}
 
@@ -887,18 +882,15 @@ public final class Topography {
 		final List<N> edgeNodes = edge.getNodes();
 		final Set<E> potentialMultiples = graph.getAdjacentEdges(edge
 				.getNodes().get(0));
-		for (final E potentialMultiple : potentialMultiples) {
-			if (potentialMultiple.equals(edge))
-				continue;
-			final List<N> potentialNodes = new ArrayList<N>(
-					potentialMultiple.getNodes());
-			if (potentialNodes.size() != edgeNodes.size())
-				continue;
-			for (final N edgeNode : edgeNodes)
-				potentialNodes.remove(edgeNode);
-			if (potentialNodes.isEmpty())
-				return true;
-		}
+            if (potentialMultiples.stream().filter((potentialMultiple) -> !(potentialMultiple.equals(edge))).map((potentialMultiple) -> new ArrayList<N>(
+                    potentialMultiple.getNodes())).filter((potentialNodes) -> !(potentialNodes.size() != edgeNodes.size())).map((potentialNodes) -> {
+                                            edgeNodes.stream().forEach((edgeNode) -> {
+                    potentialNodes.remove(edgeNode);
+                });
+                return potentialNodes;
+            }).anyMatch((potentialNodes) -> (potentialNodes.isEmpty()))) {
+                return true;
+            }
 		return false;
 	}
 
@@ -1076,25 +1068,26 @@ public final class Topography {
 		cutNodes.removeAll(deleteNodes);
 		// remove the deleteEdges
 		final Set<Edge<N>> cutEdges = new HashSet<Edge<N>>(deleteEdges);
-		for (final E edge : deleteEdges)
-			cutEdges.remove(edge);
+                deleteEdges.stream().forEach((edge) -> {
+                cutEdges.remove(edge);
+            });
 		// remove any remaining deleteEdges which connect to removed deleteNodes
 		// also replace deleteEdges that have one removed node but still have
 		// 2 or more remaining deleteNodes with a new edge.
 		final Set<Edge<N>> removeEdges = new HashSet<Edge<N>>();
 		final Set<Edge<N>> addEdges = new HashSet<Edge<N>>();
-		for (final Edge<N> cutEdge : cutEdges) {
-			final List<N> cutEdgeNeighbors = cutEdge.getNodes();
-			cutEdgeNeighbors.removeAll(cutNodes);
-			if (cutEdgeNeighbors.size() != cutEdge.getNodes().size())
-				removeEdges.add(cutEdge);
-			if (cutEdgeNeighbors.size() > 1)
-				// TODO instead of ImmutableHyperEdge implement clone or
-				// something
-				addEdges.add(new ImmutableHyperEdge<N>(cutEdgeNeighbors));
-		}
-		for (final Edge<N> removeEdge : removeEdges)
-			cutEdges.remove(removeEdge);
+                cutEdges.stream().map((cutEdge) -> {
+                final List<N> cutEdgeNeighbors = cutEdge.getNodes();
+                cutEdgeNeighbors.removeAll(cutNodes);
+                if (cutEdgeNeighbors.size() != cutEdge.getNodes().size())
+                    removeEdges.add(cutEdge);
+                return cutEdgeNeighbors;
+            }).filter((cutEdgeNeighbors) -> (cutEdgeNeighbors.size() > 1)).forEach((cutEdgeNeighbors) -> {
+                addEdges.add(new ImmutableHyperEdge<N>(cutEdgeNeighbors));
+            });
+            removeEdges.stream().forEach((removeEdge) -> {
+                cutEdges.remove(removeEdge);
+            });
 		cutEdges.addAll(addEdges);
 		// check if a graph from the new set of deleteEdges and deleteNodes is
 		// still connected

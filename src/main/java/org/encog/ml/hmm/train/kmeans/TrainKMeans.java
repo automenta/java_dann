@@ -151,9 +151,9 @@ public class TrainKMeans implements MLTrain {
 				hmm.setStateDistribution(i, o);
 			} else {
 				final MLDataSet temp = new BasicMLDataSet();
-				for (final MLDataPair pair : clusterObservations) {
-					temp.add(pair);
-				}
+                                clusterObservations.stream().forEach((pair) -> {
+                                temp.add(pair);
+                            });
 				hmm.getStateDistribution(i).fit(temp);
 			}
 		}
@@ -166,9 +166,9 @@ public class TrainKMeans implements MLTrain {
 			pi[i] = 0.;
 		}
 
-		for (final MLDataSet sequence : this.sequnces.getSequences()) {
-			pi[this.clusters.cluster(sequence.get(0))]++;
-		}
+                this.sequnces.getSequences().stream().forEach((sequence) -> {
+                pi[this.clusters.cluster(sequence.get(0))]++;
+            });
 
 		for (int i = 0; i < this.states; i++) {
 			hmm.setPi(i, pi[i] / this.sequnces.size());
@@ -182,23 +182,19 @@ public class TrainKMeans implements MLTrain {
 			}
 		}
 
-		for (final MLDataSet obsSeq : this.sequnces.getSequences()) {
-			if (obsSeq.size() < 2) {
-				continue;
-			}
-
-			int first_state;
-			int second_state = this.clusters.cluster(obsSeq.get(0));
-			for (int i = 1; i < obsSeq.size(); i++) {
-				first_state = second_state;
-				second_state = this.clusters.cluster(obsSeq.get(i));
-
-				hmm.setTransitionProbability(
-						first_state,
-						second_state,
-						hmm.getTransitionProbability(first_state, second_state) + 1.);
-			}
-		}
+                this.sequnces.getSequences().stream().filter((obsSeq) -> !(obsSeq.size() < 2)).forEach((obsSeq) -> {
+                int first_state;
+                int second_state = this.clusters.cluster(obsSeq.get(0));
+                for (int i = 1; i < obsSeq.size(); i++) {
+                    first_state = second_state;
+                    second_state = this.clusters.cluster(obsSeq.get(i));
+                    
+                    hmm.setTransitionProbability(
+                            first_state,
+                            second_state,
+                            hmm.getTransitionProbability(first_state, second_state) + 1.);
+                }
+            });
 
 		/* Normalize Aij array */
 		for (int i = 0; i < hmm.getStateCount(); i++) {

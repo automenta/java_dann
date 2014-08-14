@@ -139,7 +139,7 @@ public class SimpleGraphicalModelNode<S>
 		if (totalOccurrence == 0)
 			return 0.0;
 
-		return ((double) evidenceOccurrence) / ((double) totalOccurrence);
+		return evidenceOccurrence / totalOccurrence;
 	}
 
 	private Map<GraphicalModelNode, Object> getInfluencingStates() {
@@ -153,15 +153,15 @@ public class SimpleGraphicalModelNode<S>
 
 		final Set<BidirectedEdge<GraphicalModelNode<S>>> inEdges = this
 				.getJoinedGraphs().iterator().next().getAdjacentEdges(this);
-		for (final BidirectedEdge<GraphicalModelNode<S>> inEdge : inEdges) {
-			// if it is traversable to this node it is an influence
-			final List<GraphicalModelNode<S>> otherNodes = new ArrayList<GraphicalModelNode<S>>(
-					inEdge.getNodes());
-			otherNodes.remove(this);
-			final GraphicalModelNode<S> otherNode = otherNodes.get(0);
-			if (inEdge.isTraversable(otherNode))
-				inStates.put(otherNode, otherNode.getState());
-		}
+                inEdges.stream().forEach((inEdge) -> {
+                final List<GraphicalModelNode<S>> otherNodes = new ArrayList<GraphicalModelNode<S>>(
+                        inEdge.getNodes());
+                otherNodes.remove(this);
+                final GraphicalModelNode<S> otherNode = otherNodes.get(0);
+                if (inEdge.isTraversable(otherNode)) {
+                    inStates.put(otherNode, otherNode.getState());
+                }
+            });
 
 		return inStates;
 	}
@@ -176,15 +176,15 @@ public class SimpleGraphicalModelNode<S>
 		final Set<BidirectedEdge<GraphicalModelNode<S>>> inEdges = this
 				.getJoinedGraphs().iterator().next().getAdjacentEdges(this);
 		final Set<GraphicalModelNode> inNodes = new HashSet<GraphicalModelNode>();
-		for (final BidirectedEdge<GraphicalModelNode<S>> inEdge : inEdges) {
-			// if it is traversable to this node it is an influence
-			final List<GraphicalModelNode<S>> otherNodes = new ArrayList<GraphicalModelNode<S>>(
-					inEdge.getNodes());
-			otherNodes.remove(this);
-			final GraphicalModelNode<S> otherNode = otherNodes.get(0);
-			if (inEdge.isTraversable(otherNode))
-				inNodes.add(otherNode);
-		}
+                inEdges.stream().forEach((inEdge) -> {
+                final List<GraphicalModelNode<S>> otherNodes = new ArrayList<GraphicalModelNode<S>>(
+                        inEdge.getNodes());
+                otherNodes.remove(this);
+                final GraphicalModelNode<S> otherNode = otherNodes.get(0);
+                if (inEdge.isTraversable(otherNode)) {
+                    inNodes.add(otherNode);
+                }
+            });
 		return Collections.unmodifiableSet(inNodes);
 	}
 

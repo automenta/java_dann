@@ -82,11 +82,7 @@ public class OperationList extends ChooseObject<EvolutionaryOperator> {
 
 		// determine the total probability of eligible operators
 		double total = 0;
-		for (final ObjectHolder<EvolutionaryOperator> holder : getList()) {
-			if (holder.getObj().parentsNeeded() <= maxParents) {
-				total += holder.getProbability();
-			}
-		}
+                total = getList().stream().filter((holder) -> (holder.getObj().parentsNeeded() <= maxParents)).map((holder) -> holder.getProbability()).reduce(total, (accumulator, _item) -> accumulator + _item);
 
 		// choose an operator
 		final double r = rnd.nextDouble() * total;

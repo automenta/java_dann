@@ -142,9 +142,10 @@ public class SimpleNaiveBayesClassifier<I, F, C> extends
 	@Override
 	public Map<C, Double> getCategoryProbabilities(final I item) {
 		final Map<C, Double> categoryProbabilities = new HashMap<C, Double>();
-		for (final C category : this.getCategories())
-			categoryProbabilities.put(category,
-					this.classificationProbability(item, category));
+                this.getCategories().stream().forEach((category) -> {
+                categoryProbabilities.put(category,
+                        this.classificationProbability(item, category));
+            });
 		return Collections.unmodifiableMap(categoryProbabilities);
 	}
 
@@ -159,12 +160,11 @@ public class SimpleNaiveBayesClassifier<I, F, C> extends
 	 */
 	@Override
 	public double classificationProbability(final I item, final C category) {
-		double probability = ((double) this.getOverallProbability(category))
-				/ ((double) this.getOverallProbabilitySum());
+		double probability = this.getOverallProbability(category)
+				/ this.getOverallProbabilitySum();
 		final Set<F> features = this.getExtractor().getFeatures(item);
-		for (final F feature : features)
-			probability *= this.featureClassificationWeightedProbability(
-					feature, category);
+                probability = features.stream().map((feature) -> this.featureClassificationWeightedProbability(
+                    feature, category)).reduce(probability, (accumulator, _item) -> accumulator * _item);
 		return probability;
 	}
 }

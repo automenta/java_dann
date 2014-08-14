@@ -49,8 +49,9 @@ public class KruskalMinimumSpanningTreeFinder<N, E extends Edge<N>> implements
 	@Override
 	public Set<E> findMinimumSpanningTree(final Graph<N, E> graph) {
 		final Set<Set<N>> componentNodeSets = new HashSet<Set<N>>();
-		for (final N node : graph.getNodes())
-			componentNodeSets.add(Collections.singleton(node));
+                graph.getNodes().stream().forEach((node) -> {
+                componentNodeSets.add(Collections.singleton(node));
+            });
 		final Queue<E> edgeQueue = new PriorityQueue<E>(
 				graph.getEdges().size(), new WeightComparator<E>());
 		edgeQueue.addAll(graph.getEdges());
@@ -63,20 +64,20 @@ public class KruskalMinimumSpanningTreeFinder<N, E extends Edge<N>> implements
 			if (queuedEdge == null)
 				return null;
 			final Set<Set<N>> setContainingEndNodes = new HashSet<Set<N>>();
-			for (final Set<N> component : componentNodeSets) {
-				for (final N endNode : queuedEdge.getNodes()) {
-					if (component.contains(endNode)) {
-						setContainingEndNodes.add(component);
-					}
-				}
-			}
+                        componentNodeSets.stream().forEach((component) -> {
+                    queuedEdge.getNodes().stream().filter((endNode) -> (component.contains(endNode))).forEach((_item) -> {
+                        setContainingEndNodes.add(component);
+                    });
+                });
 			// if more than one set was found then merge them
 			if (setContainingEndNodes.size() > 1) {
 				final Set<N> mergedSet = new HashSet<N>();
-				for (final Set<N> toMerge : setContainingEndNodes) {
-					mergedSet.addAll(toMerge);
-					componentNodeSets.remove(toMerge);
-				}
+                                setContainingEndNodes.stream().map((toMerge) -> {
+                        mergedSet.addAll(toMerge);
+                        return toMerge;
+                    }).forEach((toMerge) -> {
+                        componentNodeSets.remove(toMerge);
+                    });
 				componentNodeSets.add(mergedSet);
 				mstEdges.add(queuedEdge);
 			}

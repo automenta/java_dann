@@ -60,8 +60,9 @@ public class SimpleDynamicGraphicalModelNode<S> extends
 			throw new IllegalArgumentException("initialState can not be null");
 		final List<SimpleGraphicalModelNode<S>> newHistoricalNodes = new ArrayList<SimpleGraphicalModelNode<S>>(
 				history.size());
-		for (final S aHistory : history)
-			newHistoricalNodes.add(new SimpleGraphicalModelNode<S>(aHistory));
+                history.stream().forEach((aHistory) -> {
+                newHistoricalNodes.add(new SimpleGraphicalModelNode<S>(aHistory));
+            });
 		this.historicalNodes = Collections.unmodifiableList(newHistoricalNodes);
 	}
 
@@ -108,8 +109,9 @@ public class SimpleDynamicGraphicalModelNode<S> extends
 	public List<S> getStateHistory() {
 		final List<S> historyStates = new ArrayList<S>(
 				this.getStateHistoryCapacity());
-		for (final SimpleGraphicalModelNode<S> node : this.historicalNodes)
-			historyStates.add(node.getState());
+                this.historicalNodes.stream().forEach((node) -> {
+                historyStates.add(node.getState());
+            });
 		return Collections.unmodifiableList(historyStates);
 	}
 

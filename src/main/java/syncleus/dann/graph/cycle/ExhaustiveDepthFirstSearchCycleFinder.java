@@ -133,45 +133,45 @@ public class ExhaustiveDepthFirstSearchCycleFinder<N, E extends Edge<N>>
 				graph.getTraversableEdges(currentNode));
 		if (lastEdge != null)
 			unexploredPaths.remove(lastEdge);
-		for (final E unexploredPath : unexploredPaths) {
-			for (final N neighborNode : neighborsFromEdge(unexploredPath,
-					currentNode)) {
-				if (parentNodes.contains(neighborNode)) {
-					final List<N> parentNodesCopy = new ArrayList<N>(
-							parentNodes);
-					final List<E> parentEdgesCopy = new ArrayList<E>(
-							parentEdges);
-					final List<E> cycleEdges = new ArrayList<E>();
-					final List<N> cycleNodes = new ArrayList<N>();
-					cycleEdges.add(unexploredPath);
-					cycleNodes.add(neighborNode);
-
-					N currentCycleNode = parentNodesCopy.get(parentNodesCopy
-							.size() - 1);
-					cycleNodes.add(currentCycleNode);
-					parentNodesCopy.remove(currentCycleNode);
-					while (currentCycleNode != neighborNode) {
-						currentCycleNode = parentNodesCopy.get(parentNodesCopy
-								.size() - 1);
-						parentNodesCopy.remove(currentCycleNode);
-
-						final E currentCycleEdge = parentEdgesCopy
-								.get(parentEdgesCopy.size() - 1);
-						parentEdgesCopy.remove(currentCycleEdge);
-
-						if ((currentCycleEdge != null)) {
-							cycleEdges.add(currentCycleEdge);
-							cycleNodes.add(currentCycleNode);
-						}
-					}
-
-					cycles.add(new SimpleCycle<N, E>(cycleEdges, cycleNodes));
-				} else {
-					traverse(graph, untouchedNodes, cycles, parentNodes,
-							parentEdges, unexploredPath, neighborNode);
-				}
-			}
-		}
+                unexploredPaths.stream().forEach((unexploredPath) -> {
+                neighborsFromEdge(unexploredPath,
+                        currentNode).stream().forEach((neighborNode) -> {
+                                            if (parentNodes.contains(neighborNode)) {
+                                                final List<N> parentNodesCopy = new ArrayList<N>(
+                                                        parentNodes);
+                                                final List<E> parentEdgesCopy = new ArrayList<E>(
+                                                        parentEdges);
+                                                final List<E> cycleEdges = new ArrayList<E>();
+                                                final List<N> cycleNodes = new ArrayList<N>();
+                                                cycleEdges.add(unexploredPath);
+                                                cycleNodes.add(neighborNode);
+                                                
+                                                N currentCycleNode = parentNodesCopy.get(parentNodesCopy
+                                                        .size() - 1);
+                                                cycleNodes.add(currentCycleNode);
+                                                parentNodesCopy.remove(currentCycleNode);
+                                                while (currentCycleNode != neighborNode) {
+                                                    currentCycleNode = parentNodesCopy.get(parentNodesCopy
+                                                            .size() - 1);
+                                                    parentNodesCopy.remove(currentCycleNode);
+                                                    
+                                                    final E currentCycleEdge = parentEdgesCopy
+                                                            .get(parentEdgesCopy.size() - 1);
+                                                    parentEdgesCopy.remove(currentCycleEdge);
+                                                    
+                                                    if ((currentCycleEdge != null)) {
+                                                        cycleEdges.add(currentCycleEdge);
+                                                        cycleNodes.add(currentCycleNode);
+                                                    }
+                                                }
+                                                
+                                                cycles.add(new SimpleCycle<N, E>(cycleEdges, cycleNodes));
+                                            } else {
+                                                traverse(graph, untouchedNodes, cycles, parentNodes,
+                                                        parentEdges, unexploredPath, neighborNode);
+                                            }
+                });
+            });
 
 		parentNodes.pop();
 		parentEdges.pop();

@@ -39,10 +39,9 @@ public class CalculateScheduleTimes {
 		}
 		node.setEarliestStartTime(m);
 
-		// handle other nodes
-		for (final BasicEdge edge : node.getConnections()) {
-			forward((ActionNode) edge.getTo());
-		}
+                node.getConnections().stream().forEach((edge) -> {
+                forward((ActionNode) edge.getTo());
+            });
 	}
 
 	public void backward(final ActionNode node) {
@@ -55,24 +54,23 @@ public class CalculateScheduleTimes {
 		}
 		node.setLatestStartTime(m);
 
-		// handle other nodes
-		for (final BasicEdge edge : node.getBackConnections()) {
-			backward((ActionNode) edge.getFrom());
-		}
+                node.getBackConnections().stream().forEach((edge) -> {
+                backward((ActionNode) edge.getFrom());
+            });
 	}
 
 	public void calculate(final ScheduleGraph graph) {
 		// forward pass
 		graph.getStartNode().setEarliestStartTime(0);
-		for (final BasicEdge edge : graph.getStartNode().getConnections()) {
-			forward((ActionNode) edge.getTo());
-		}
+                graph.getStartNode().getConnections().stream().forEach((edge) -> {
+                forward((ActionNode) edge.getTo());
+            });
 
 		// backward
 		graph.getFinishNode().setLatestStartTime(
 				graph.getFinishNode().getEarliestStartTime());
-		for (final BasicEdge edge : graph.getFinishNode().getBackConnections()) {
-			backward((ActionNode) edge.getFrom());
-		}
+                graph.getFinishNode().getBackConnections().stream().forEach((edge) -> {
+                backward((ActionNode) edge.getFrom());
+            });
 	}
 }

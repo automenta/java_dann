@@ -30,6 +30,7 @@ import org.encog.ml.factory.MLTrainFactory;
 import org.encog.ml.factory.parse.ArchitectureParse;
 import org.encog.ml.train.MLTrain;
 import org.encog.neural.networks.BasicNetwork;
+import org.encog.neural.networks.ContainsFlat;
 import org.encog.neural.networks.training.propagation.manhattan.ManhattanPropagation;
 
 import syncleus.dann.dataprocess.MLDataSet;
@@ -60,7 +61,7 @@ public class ManhattanFactory {
 		final double learningRate = holder.getDouble(
 				MLTrainFactory.PROPERTY_LEARNING_RATE, false, 0.1);
 
-		return new ManhattanPropagation((BasicNetwork) method, training,
+		return new ManhattanPropagation((ContainsFlat) method, training,
 				learningRate);
 	}
 }

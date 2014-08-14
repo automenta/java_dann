@@ -59,35 +59,34 @@ public class SimpleTopologicalRanker<N> implements TopologicalRanker<N> {
 		while (!remainingNodes.isEmpty()) {
 			// find all nodes current with a in degree of 0
 			final Set<N> currentRootNodes = new HashSet<N>();
-			for (final N node : remainingNodes)
-				if (getIndegree(remainingEdges, node) == 0)
-					currentRootNodes.add(node);
+                        remainingNodes.stream().filter((node) -> (getIndegree(remainingEdges, node) == 0)).forEach((node) -> {
+                        currentRootNodes.add(node);
+                    });
 
 			// if no nodes were found yet some are still remaining then this
 			// cant be sorted
 			if (currentRootNodes.isEmpty())
 				return null;
 
-			// now lets delete all the nodes we found
-			for (final N node : currentRootNodes) {
-				final Set<DirectedEdge<? extends N>> neighbors = remainingNeighborEdges
-						.get(node);
-				for (final DirectedEdge<? extends N> neighbor : neighbors) {
-					final List<N> adjacentNodes = new ArrayList<N>(
-							neighbor.getNodes());
-					adjacentNodes.remove(node);
-					final N adjacentNode = adjacentNodes.get(0);
-
-					// delete the edge from the neighbor map
-					final Set<DirectedEdge<? extends N>> deleteFromEdges = remainingNeighborEdges
-							.get(adjacentNode);
-					deleteFromEdges.remove(neighbor);
-
-					// delete the edge from edges
-					remainingEdges.remove(neighbor);
-				}
-				remainingNodes.remove(node);
-			}
+                        currentRootNodes.stream().map((node) -> {
+                        final Set<DirectedEdge<? extends N>> neighbors = remainingNeighborEdges
+                                .get(node);
+                        neighbors.stream().map((neighbor) -> {
+                            final List<N> adjacentNodes = new ArrayList<N>(
+                                    neighbor.getNodes());
+                            adjacentNodes.remove(node);
+                            final N adjacentNode = adjacentNodes.get(0);
+                            final Set<DirectedEdge<? extends N>> deleteFromEdges = remainingNeighborEdges
+                                    .get(adjacentNode);
+                            deleteFromEdges.remove(neighbor);
+                            return neighbor;
+                        }).forEach((neighbor) -> {
+                            remainingEdges.remove(neighbor);
+                        });
+                        return node;
+                    }).forEach((node) -> {
+                        remainingNodes.remove(node);
+                    });
 
 			// lets add the current root nodes and continue
 			topologicalNodes.add(currentRootNodes);
@@ -103,8 +102,9 @@ public class SimpleTopologicalRanker<N> implements TopologicalRanker<N> {
 
 		// convert ranked nodes into sorted nodes
 		final List<N> sortedNodes = new ArrayList<N>(graph.getNodes().size());
-		for (final Set<N> levelNodes : rankedNodes)
-			sortedNodes.addAll(levelNodes);
+                rankedNodes.stream().forEach((levelNodes) -> {
+                sortedNodes.addAll(levelNodes);
+            });
 
 		return sortedNodes;
 	}
@@ -112,9 +112,7 @@ public class SimpleTopologicalRanker<N> implements TopologicalRanker<N> {
 	private int getIndegree(final Set<DirectedEdge<? extends N>> edges,
 			final N node) {
 		int inDegree = 0;
-		for (final DirectedEdge<? extends N> edge : edges)
-			if (edge.getDestinationNode() == node)
-				inDegree++;
+                inDegree = edges.stream().filter((edge) -> (edge.getDestinationNode() == node)).map((_item) -> 1).reduce(inDegree, Integer::sum);
 		return inDegree;
 	}
 }

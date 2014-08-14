@@ -41,58 +41,57 @@ public class FloydWarshallPathFinder<N, E extends Edge<N>> implements
 		this.walkWeight = new HashMap<N, Map<N, Double>>(this.graph.getNodes()
 				.size());
 		this.nextNode = new HashMap<N, Map<N, N>>(this.graph.getNodes().size());
-		for (final N nodeX : this.graph.getNodes()) {
-			final Map<N, Double> weightMapX = new HashMap<N, Double>(this.graph
-					.getNodes().size());
-			this.walkWeight.put(nodeX, weightMapX);
-
-			final Map<N, N> nodeMapX = new HashMap<N, N>(this.graph.getNodes()
-					.size());
-			this.nextNode.put(nodeX, nodeMapX);
-
-			for (final N nodeY : this.graph.getNodes()) {
-				double initialWeight = Double.POSITIVE_INFINITY;
-
-				if (nodeX.equals(nodeY))
-					initialWeight = 0.0;
-				else if (this.graph.getTraversableNodes(nodeX).contains(nodeY)) {
-					E connectedEdge = null;
-					for (final E edge : this.graph.getTraversableEdges(nodeX))
-						if (edge.getNodes().contains(nodeY))
-							connectedEdge = edge;
-					assert connectedEdge != null;
-					initialWeight = (connectedEdge instanceof WeightedEdge ? ((WeightedEdge) connectedEdge)
-							.getWeight() : 1.0);
-					if (nodeY instanceof Weighted)
-						initialWeight += ((Weighted) nodeY).getWeight();
-				}
-
-				weightMapX.put(nodeY, initialWeight);
-				nodeMapX.put(nodeY, null);
-			}
-		}
+                this.graph.getNodes().stream().forEach((nodeX) -> {
+                final Map<N, Double> weightMapX = new HashMap<N, Double>(this.graph
+                        .getNodes().size());
+                this.walkWeight.put(nodeX, weightMapX);
+                final Map<N, N> nodeMapX = new HashMap<N, N>(this.graph.getNodes()
+                        .size());
+                this.nextNode.put(nodeX, nodeMapX);
+                this.graph.getNodes().stream().map((nodeY) -> {
+                    double initialWeight = Double.POSITIVE_INFINITY;
+                    if (nodeX.equals(nodeY)) {
+                        initialWeight = 0.0;
+                    } else if (this.graph.getTraversableNodes(nodeX).contains(nodeY)) {
+                        E connectedEdge = null;
+                        for (final E edge : this.graph.getTraversableEdges(nodeX))
+                            if (edge.getNodes().contains(nodeY))
+                                connectedEdge = edge;
+                        assert connectedEdge != null;
+                        initialWeight = (connectedEdge instanceof WeightedEdge ? ((Weighted) connectedEdge).getWeight() : 1.0);
+                        if (nodeY instanceof Weighted)
+                            initialWeight += ((Weighted) nodeY).getWeight();
+                    }
+                    weightMapX.put(nodeY, initialWeight);
+                    return nodeY;
+                }).forEach((nodeY) -> {
+                    nodeMapX.put(nodeY, null);
+                });
+            });
 
 		this.calculatePaths();
 	}
 
 	private void calculatePaths() {
-		for (final N nodeK : this.graph.getNodes())
-			for (final N nodeX : this.graph.getNodes())
-				for (final N nodeY : this.graph.getNodes()) {
-					if (!Double.isInfinite(this.walkWeight.get(nodeX)
-							.get(nodeK))
-							&& !Double.isInfinite(this.walkWeight.get(nodeK)
-									.get(nodeY))
-							&& this.walkWeight.get(nodeX).get(nodeK)
-									+ this.walkWeight.get(nodeK).get(nodeY) < this.walkWeight
-									.get(nodeX).get(nodeY)) {
-						final double newWeight = this.walkWeight.get(nodeX)
-								.get(nodeK)
-								+ this.walkWeight.get(nodeK).get(nodeY);
-						this.walkWeight.get(nodeX).put(nodeY, newWeight);
-						this.nextNode.get(nodeX).put(nodeY, nodeK);
-					}
-				}
+            this.graph.getNodes().stream().forEach((nodeK) -> {
+                this.graph.getNodes().stream().forEach((nodeX) -> {
+                    this.graph.getNodes().stream().filter((nodeY) -> (!Double.isInfinite(this.walkWeight.get(nodeX)
+                            .get(nodeK))
+                            && !Double.isInfinite(this.walkWeight.get(nodeK)
+                                    .get(nodeY))
+                            && this.walkWeight.get(nodeX).get(nodeK)
+                                    + this.walkWeight.get(nodeK).get(nodeY) < this.walkWeight
+                                            .get(nodeX).get(nodeY))).map((nodeY) -> {
+                                                                            final double newWeight = this.walkWeight.get(nodeX)
+                                                                                    .get(nodeK)
+                                                                                    + this.walkWeight.get(nodeK).get(nodeY);
+                        this.walkWeight.get(nodeX).put(nodeY, newWeight);
+                        return nodeY;
+                    }).forEach((nodeY) -> {
+                        this.nextNode.get(nodeX).put(nodeY, nodeK);
+                    });
+                });
+            });
 	}
 
 	@Override
@@ -111,9 +110,9 @@ public class FloydWarshallPathFinder<N, E extends Edge<N>> implements
 					if (stepEdge == null)
 						stepEdge = edge;
 					else if (edge instanceof WeightedEdge) {
-						if (((WeightedEdge) edge).getWeight() < stepEdgeWeight) {
+						if (((Weighted) edge).getWeight() < stepEdgeWeight) {
 							stepEdge = edge;
-							stepEdgeWeight = ((WeightedEdge) edge).getWeight();
+							stepEdgeWeight = ((Weighted) edge).getWeight();
 						}
 					} else
 						stepEdge = edge;
@@ -124,7 +123,7 @@ public class FloydWarshallPathFinder<N, E extends Edge<N>> implements
 			edgePath.add(stepEdge);
 
 			if (stepEdge instanceof WeightedEdge)
-				((WeightedEdge) stepEdge).getWeight();
+				((Weighted) stepEdge).getWeight();
 			if (toNode instanceof Weighted)
 				((Weighted) toNode).getWeight();
 		}

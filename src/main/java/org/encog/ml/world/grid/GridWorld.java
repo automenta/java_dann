@@ -61,10 +61,7 @@ public class GridWorld extends BasicWorld {
 	}
 
 	public static boolean isStateBlocked(final GridState state) {
-		if (state == null)
-			return true;
-		else
-			return false;
+            return state == null;
 	}
 
 	public int getRows() {

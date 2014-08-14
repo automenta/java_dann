@@ -37,9 +37,9 @@ public abstract class AbstractContextNode<N, E extends Edge<N>, G extends Graph<
 	@Override
 	public boolean joiningGraph(final G graph) {
 		if (super.joiningGraph(graph)) {
-			// notify all context edges that this node has joined a graph
-			for (final ContextEdge<N, E, G> contextEdge : contextEdges)
-				contextEdge.nodeJoiningGraph(graph, (N) this);
+                    contextEdges.stream().forEach((contextEdge) -> {
+                        contextEdge.nodeJoiningGraph(graph, (N) this);
+                    });
 			return true;
 		} else
 			return false;
@@ -48,9 +48,9 @@ public abstract class AbstractContextNode<N, E extends Edge<N>, G extends Graph<
 	@Override
 	public boolean leavingGraph(final G graph) {
 		if (super.leavingGraph(graph)) {
-			// notify all context edges that this node is leaving a graph
-			for (final ContextEdge<N, E, G> contextEdge : contextEdges)
-				contextEdge.nodeLeavingGraph(graph, (N) this);
+                    contextEdges.stream().forEach((contextEdge) -> {
+                        contextEdge.nodeLeavingGraph(graph, (N) this);
+                    });
 			return true;
 		} else
 			return false;

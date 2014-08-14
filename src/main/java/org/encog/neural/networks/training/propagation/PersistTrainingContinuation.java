@@ -87,10 +87,10 @@ public class PersistTrainingContinuation implements EncogPersistor {
 		out.addSection("CONT");
 		out.addSubSection("PARAMS");
 		out.writeProperty("type", cont.getTrainingType());
-		for (final String key : cont.getContents().keySet()) {
-			final double[] list = (double[]) cont.get(key);
-			out.writeProperty(key, list);
-		}
+                cont.getContents().keySet().stream().forEach((key) -> {
+                final double[] list = (double[]) cont.get(key);
+                out.writeProperty(key, list);
+            });
 		out.flush();
 	}
 

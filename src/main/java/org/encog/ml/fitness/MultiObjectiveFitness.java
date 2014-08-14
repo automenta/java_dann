@@ -60,7 +60,7 @@ public class MultiObjectiveFitness implements CalculateScore, Serializable {
 	 */
 	public void addObjective(final double weight,
 			final CalculateScore fitnessFunction) {
-		if (this.objectives.size() == 0) {
+		if (this.objectives.isEmpty()) {
 			this.min = fitnessFunction.shouldMinimize();
 		} else {
 			if (fitnessFunction.shouldMinimize() != this.min) {
@@ -78,9 +78,7 @@ public class MultiObjectiveFitness implements CalculateScore, Serializable {
 	public double calculateScore(final MLMethod method) {
 		double result = 0;
 
-		for (final FitnessObjective obj : this.objectives) {
-			result += obj.getScore().calculateScore(method) * obj.getWeight();
-		}
+                result = this.objectives.stream().map((obj) -> obj.getScore().calculateScore(method) * obj.getWeight()).reduce(result, (accumulator, _item) -> accumulator + _item);
 
 		return result;
 	}
@@ -98,11 +96,9 @@ public class MultiObjectiveFitness implements CalculateScore, Serializable {
 	 */
 	@Override
 	public boolean requireSingleThreaded() {
-		for (final FitnessObjective obj : this.objectives) {
-			if (obj.getScore().requireSingleThreaded()) {
-				return true;
-			}
-		}
+            if (this.objectives.stream().anyMatch((obj) -> (obj.getScore().requireSingleThreaded()))) {
+                return true;
+            }
 		return false;
 	}
 

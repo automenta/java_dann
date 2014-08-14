@@ -65,10 +65,10 @@ public class CompoundOperator implements EvolutionaryOperator {
 	@Override
 	public void init(final EvolutionaryAlgorithm theOwner) {
 		this.owner = theOwner;
-		for (final ObjectHolder<EvolutionaryOperator> obj : this.components
-				.getList()) {
-			obj.getObj().init(theOwner);
-		}
+                this.components
+                        .getList().stream().forEach((obj) -> {
+                                    obj.getObj().init(theOwner);
+            });
 	}
 
 	/**

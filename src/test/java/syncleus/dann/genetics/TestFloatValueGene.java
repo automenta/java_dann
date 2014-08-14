@@ -40,7 +40,7 @@ public class TestFloatValueGene {
 				.getValue().getNumber().floatValue() - 826493937.0f) < 1000);
 		test = new FloatValueGene();
 		Assert.assertTrue("default constructor failed", test.getValue()
-				.getNumber().floatValue() == (float) 0.0);
+				.getNumber().floatValue() == 0.0);
 	}
 
 	@Test

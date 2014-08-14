@@ -55,4 +55,9 @@ public abstract class AbstractMarkovRandomFieldAdjacencyGraph<N extends Graphica
 		}
 		return probabilityProduct;
 	}
+
+    @Override
+    public AbstractGraphicalModelAdjacencyGraph<N, E> clone() {
+        return super.clone(); //To change body of generated methods, choose Tools | Templates.
+    }
 }

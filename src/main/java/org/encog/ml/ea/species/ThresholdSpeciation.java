@@ -164,7 +164,7 @@ public abstract class ThresholdSpeciation implements Speciation, Serializable {
 			}
 
 			// if the share is zero, then remove the species
-			if ((species.getMembers().size() == 0) || (share == 0)) {
+			if ((species.getMembers().isEmpty()) || (share == 0)) {
 				removeSpecies(species);
 			}
 			// if the species has not improved over the specified number of
@@ -217,11 +217,11 @@ public abstract class ThresholdSpeciation implements Speciation, Serializable {
 	 */
 	private void divideEven(final List<Species> speciesCollection) {
 		final double ratio = 1.0 / speciesCollection.size();
-		for (final Species species : speciesCollection) {
-			final int share = (int) Math.round(ratio
-					* this.owner.getPopulation().getPopulationSize());
-			species.setOffspringCount(share);
-		}
+                speciesCollection.stream().forEach((species) -> {
+                final int share = (int) Math.round(ratio
+                        * this.owner.getPopulation().getPopulationSize());
+                species.setOffspringCount(share);
+            });
 	}
 
 	/**
@@ -278,7 +278,7 @@ public abstract class ThresholdSpeciation implements Speciation, Serializable {
 		int total = 0;
 		final List<Species> list = this.population.getSpecies();
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			throw new RuntimeException(
 					"Can't speciate, next generation contains no species.");
 		}
@@ -290,10 +290,7 @@ public abstract class ThresholdSpeciation implements Speciation, Serializable {
 			list.get(0).setOffspringCount(1);
 		}
 
-		// total up offspring
-		for (final Species species : list) {
-			total += species.getOffspringCount();
-		}
+                total = list.stream().map((species) -> species.getOffspringCount()).reduce(total, Integer::sum);
 
 		// how does the total offspring count match the target
 		int diff = this.population.getPopulationSize() - total;
@@ -337,10 +334,9 @@ public abstract class ThresholdSpeciation implements Speciation, Serializable {
 		final List<Genome> result = new ArrayList<Genome>();
 		final Object[] speciesArray = this.population.getSpecies().toArray();
 
-		// Add the genomes
-		for (final Genome genome : inputGenomes) {
-			result.add(genome);
-		}
+                inputGenomes.stream().forEach((genome) -> {
+                result.add(genome);
+            });
 
 		for (final Object element : speciesArray) {
 			final BasicSpecies s = (BasicSpecies) element;
@@ -359,7 +355,7 @@ public abstract class ThresholdSpeciation implements Speciation, Serializable {
 			result.remove(s.getLeader());
 		}
 
-		if (this.population.getSpecies().size() == 0) {
+		if (this.population.getSpecies().isEmpty()) {
 			throw new RuntimeException("Can't speciate, the population is empty.");
 		}
 
@@ -408,13 +404,13 @@ public abstract class ThresholdSpeciation implements Speciation, Serializable {
 	private void speciateAndCalculateSpawnLevels(final List<Genome> genomes) {
 		double maxScore = 0;
 
-		if (genomes.size() == 0) {
+		if (genomes.isEmpty()) {
 			throw new RuntimeException("Can't speciate, the population is empty.");
 		}
 
 		final List<Species> speciesCollection = this.population.getSpecies();
 
-		if (speciesCollection.size() == 0) {
+		if (speciesCollection.isEmpty()) {
 			throw new RuntimeException("Can't speciate, there are no species.1");
 		}
 
@@ -458,7 +454,7 @@ public abstract class ThresholdSpeciation implements Speciation, Serializable {
 					.getScoreFunction().shouldMinimize(), maxScore);
 		}
 
-		if (speciesCollection.size() == 0) {
+		if (speciesCollection.isEmpty()) {
 			throw new RuntimeException("Can't speciate, there are no species.2");
 		}
 		if (totalSpeciesScore < EncogMath.DEFAULT_EPSILON) {

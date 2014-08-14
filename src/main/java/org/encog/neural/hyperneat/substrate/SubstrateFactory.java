@@ -81,10 +81,9 @@ public class SubstrateFactory {
 				outputNode.getLocation()[1] = outputOrig + (orow * outputTick);
 				outputNode.getLocation()[2] = outputOrig + (ocol * outputTick);
 
-				// link this output node to every input node
-				for (final SubstrateNode inputNode : result.getInputNodes()) {
-					result.createLink(inputNode, outputNode);
-				}
+                                result.getInputNodes().stream().forEach((inputNode) -> {
+                                result.createLink(inputNode, outputNode);
+                            });
 			}
 		}
 

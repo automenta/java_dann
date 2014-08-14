@@ -101,6 +101,11 @@ public class TestSimpleBooleanNetwork {
 			goal.setState(goalState);
 			learnStates();
 		}
+
+        @Override
+        public MutableBayesianAdjacencyNetwork clone() {
+            return super.clone(); //To change body of generated methods, choose Tools | Templates.
+        }
 	}
 
 	/**

@@ -84,11 +84,11 @@ public class CholeskyDecomposition2 implements Serializable {
 				}
 				s = (a[j][k] - s) / l[k][k];
 				lrowj[k] = s;
-				d = d + s * s;
-				isspd = isspd & (a[k][j] == a[j][k]);
+				d += s * s;
+				isspd &= (a[k][j] == a[j][k]);
 			}
 			d = a[j][j] - d;
-			isspd = isspd & (d > 0.0);
+			isspd &= (d > 0.0);
 			l[j][j] = Math.sqrt(Math.max(d, 0.0));
 			for (int k = j + 1; k < n; k++) {
 				l[j][k] = 0.0;

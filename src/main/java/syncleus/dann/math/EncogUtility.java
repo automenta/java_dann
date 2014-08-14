@@ -344,7 +344,7 @@ public final class EncogUtility {
 			final boolean headers) {
 
 		(new File(binFile)).delete();
-		final CSVNeuralDataSet csv = new CSVNeuralDataSet(csvFile.toString(),
+		final CSVNeuralDataSet csv = new CSVNeuralDataSet(csvFile,
 				inputCount, outputCount, headers);
 		final BufferedMLDataSet buffer = new BufferedMLDataSet(
 				new File(binFile));
@@ -464,7 +464,7 @@ public final class EncogUtility {
 				correct++;
 			total++;
 		}
-		return (double) (total - correct) / (double) total;
+		return (total - correct) / total;
 	}
 
 	/**

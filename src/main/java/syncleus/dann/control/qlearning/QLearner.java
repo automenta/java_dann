@@ -15,7 +15,7 @@ import java.util.Arrays;
 public class QLearner {
 
 	private Action[] qaction;
-	private QBrain brain;
+	private final QBrain brain;
 	double nextReward;
 	double[] sensor;
 	double[] action;

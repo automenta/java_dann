@@ -49,9 +49,9 @@ public abstract class AbstractInputNeuron extends AbstractNeuron implements
 
 	@Override
 	public void tick() {
-		for (final Synapse<Neuron> current : getBrain().getTraversableEdges(
-				this)) {
-			current.setInput(input);
-		}
+            getBrain().getTraversableEdges(
+                    this).stream().forEach((current) -> {
+                                    current.setInput(input);
+            });
 	}
 }

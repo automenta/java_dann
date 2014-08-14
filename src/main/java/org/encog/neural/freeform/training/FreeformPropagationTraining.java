@@ -131,47 +131,34 @@ public abstract class FreeformPropagationTraining extends BasicTraining
 		// neurons, this means a hidden layer.
 		if (toNeuron.getInputSummation() != null) {
 
-			// between the layer deltas between toNeuron and the neurons that
-			// feed toNeuron.
-			// also calculate all inbound gradeints to toNeuron
-			for (final FreeformConnection connection : toNeuron
-					.getInputSummation().list()) {
-
-				// calculate the gradient
-				final double gradient = connection.getSource().getActivation()
-						* toNeuron.getTempTraining(0);
-				connection.addTempTraining(0, gradient);
-
-				// calculate the next layer delta
-				final FreeformNeuron fromNeuron = connection.getSource();
-				double sum = 0;
-				for (final FreeformConnection toConnection : fromNeuron
-						.getOutputs()) {
-					sum += toConnection.getTarget().getTempTraining(0)
-							* toConnection.getWeight();
-				}
-				final double neuronOutput = fromNeuron.getActivation();
-				final double neuronSum = fromNeuron.getSum();
-				double deriv = toNeuron.getInputSummation()
-						.getActivationFunction()
-						.derivativeFunction(neuronSum, neuronOutput);
-
-				if (this.fixFlatSopt
-						&& (toNeuron.getInputSummation()
-								.getActivationFunction() instanceof ActivationSigmoid)) {
-					deriv += FreeformPropagationTraining.FLAT_SPOT_CONST;
-				}
-
-				final double layerDelta = sum * deriv;
-				fromNeuron.setTempTraining(0, layerDelta);
-			}
-
-			// recurse to the next level
-			for (final FreeformConnection connection : toNeuron
-					.getInputSummation().list()) {
-				final FreeformNeuron fromNeuron = connection.getSource();
-				calculateNeuronGradient(fromNeuron);
-			}
+                    toNeuron
+                            .getInputSummation().list().stream().map((connection) -> {
+                                            final double gradient = connection.getSource().getActivation()
+                                                    * toNeuron.getTempTraining(0);
+                        connection.addTempTraining(0, gradient);
+                        return connection;
+                    }).map((connection) -> connection.getSource()).forEach((fromNeuron) -> {
+                        double sum = 0;
+                        sum = fromNeuron
+                                .getOutputs().stream().map((toConnection) -> toConnection.getTarget().getTempTraining(0)
+                                                        * toConnection.getWeight()).reduce(sum, (accumulator, _item) -> accumulator + _item);
+                        final double neuronOutput = fromNeuron.getActivation();
+                        final double neuronSum = fromNeuron.getSum();
+                        double deriv = toNeuron.getInputSummation()
+                                .getActivationFunction()
+                                .derivativeFunction(neuronSum, neuronOutput);
+                        if (this.fixFlatSopt
+                                && (toNeuron.getInputSummation()
+                                        .getActivationFunction() instanceof ActivationSigmoid)) {
+                            deriv += FreeformPropagationTraining.FLAT_SPOT_CONST;
+                        }
+                        final double layerDelta = sum * deriv;
+                        fromNeuron.setTempTraining(0, layerDelta);
+                    });
+                    toNeuron
+                            .getInputSummation().list().stream().map((connection) -> connection.getSource()).forEach((fromNeuron) -> {
+                                            calculateNeuronGradient(fromNeuron);
+                    });
 
 		}
 

@@ -58,9 +58,9 @@ public class SimpleParser {
 
 	public char peek() {
 		if (eol())
-			return (char) 0;
+			return 0;
 		else if (currentPosition >= this.line.length())
-			return (char) 0;
+			return 0;
 		else
 			return this.line.charAt(this.currentPosition);
 	}
@@ -86,7 +86,7 @@ public class SimpleParser {
 
 	public char readChar() {
 		if (eol())
-			return (char) 0;
+			return 0;
 
 		final char ch = peek();
 		advance();

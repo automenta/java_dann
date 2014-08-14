@@ -74,4 +74,9 @@ public abstract class AbstractUniqueBidirectedEdge<N> extends
 		return leftNodeHash + (leftNodeHash * leftStateHash) + rightNodeHash
 				+ (rightNodeHash * rightStateHash);
 	}
+
+    @Override
+    public AbstractBidirectedEdge<N> clone() {
+        return super.clone(); //To change body of generated methods, choose Tools | Templates.
+    }
 }

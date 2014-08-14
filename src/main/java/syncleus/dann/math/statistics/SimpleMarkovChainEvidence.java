@@ -109,10 +109,11 @@ public class SimpleMarkovChainEvidence<S> implements MarkovChainEvidence<S> {
 	public MarkovChain<S> getMarkovChain() {
 		final Map<List<S>, Map<S, Double>> transitionProbabilities = new LinkedHashMap<List<S>, Map<S, Double>>(
 				this.evidence.size());
-		for (final Map.Entry<List<S>, StateCounter<S>> countEntry : this.evidence
-				.entrySet())
-			transitionProbabilities.put(countEntry.getKey(), countEntry
-					.getValue().probabilities());
+                this.evidence
+                        .entrySet().stream().forEach((countEntry) -> {
+                                    transitionProbabilities.put(countEntry.getKey(), countEntry
+                                            .getValue().probabilities());
+            });
 
 		return new SimpleMarkovChain<S>(transitionProbabilities, this.order,
 				this.observedStates);
@@ -135,10 +136,11 @@ public class SimpleMarkovChainEvidence<S> implements MarkovChainEvidence<S> {
 		public Map<S, Double> probabilities() {
 			final Map<S, Double> prob = new HashMap<S, Double>(
 					this.stateCount.size());
-			for (final Map.Entry<S, Integer> countEntry : this.stateCount
-					.entrySet())
-				prob.put(countEntry.getKey(), countEntry.getValue()
-						.doubleValue() / (this.totalEvidence));
+                        this.stateCount
+                                .entrySet().stream().forEach((countEntry) -> {
+                                            prob.put(countEntry.getKey(), countEntry.getValue()
+                                                    .doubleValue() / (this.totalEvidence));
+                    });
 			return prob;
 		}
 	}

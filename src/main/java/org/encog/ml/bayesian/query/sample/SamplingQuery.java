@@ -131,11 +131,10 @@ public class SamplingQuery extends BasicQuery implements Serializable {
 			}
 		}
 
-		// randomize children
-		for (final BayesianEvent childEvent : eventState.getEvent()
-				.getChildren()) {
-			randomizeEvents(getEventState(childEvent));
-		}
+                eventState.getEvent()
+                        .getChildren().stream().forEach((childEvent) -> {
+                                    randomizeEvents(getEventState(childEvent));
+            });
 	}
 
 	/**
@@ -143,10 +142,7 @@ public class SamplingQuery extends BasicQuery implements Serializable {
 	 */
 	private int countUnCalculated() {
 		int result = 0;
-		for (final EventState state : getEvents().values()) {
-			if (!state.isCalculated())
-				result++;
-		}
+                result = getEvents().values().stream().filter((state) -> (!state.isCalculated())).map((_item) -> 1).reduce(result, Integer::sum);
 		return result;
 	}
 
@@ -166,9 +162,9 @@ public class SamplingQuery extends BasicQuery implements Serializable {
 			int lastUncalculated = Integer.MAX_VALUE;
 			int uncalculated;
 			do {
-				for (final EventState state : getEvents().values()) {
-					randomizeEvents(state);
-				}
+                            getEvents().values().stream().forEach((state) -> {
+                                randomizeEvents(state);
+                            });
 				uncalculated = countUnCalculated();
 				if (uncalculated == lastUncalculated) {
 					throw new BayesianError(
@@ -193,7 +189,7 @@ public class SamplingQuery extends BasicQuery implements Serializable {
 	 */
 	@Override
 	public double getProbability() {
-		return (double) this.goodSamples / (double) this.usableSamples;
+		return this.goodSamples / this.usableSamples;
 	}
 
 	/**
@@ -201,10 +197,12 @@ public class SamplingQuery extends BasicQuery implements Serializable {
 	 */
 	public String dumpCurrentState() {
 		final StringBuilder result = new StringBuilder();
-		for (final EventState state : getEvents().values()) {
-			result.append(state.toString());
-			result.append("\n");
-		}
+                getEvents().values().stream().map((state) -> {
+                result.append(state.toString());
+                return state;
+            }).forEach((_item) -> {
+                result.append("\n");
+            });
 		return result.toString();
 	}
 

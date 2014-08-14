@@ -175,19 +175,15 @@ public class FunctionFactory implements Serializable {
 			final boolean includeTerminal, final boolean includeFunction) {
 		final List<ProgramExtensionTemplate> result = new ArrayList<ProgramExtensionTemplate>();
 
-		for (final ProgramExtensionTemplate temp : this.opcodes) {
-			for (final ValueType rtn : types) {
-				// it is a possible return type, but given our variables, is it
-				// possible
-				if (temp.isPossibleReturnType(context, rtn)) {
-					if (temp.getChildNodeCount() == 0 && includeTerminal) {
-						result.add(temp);
-					} else if (includeFunction) {
-						result.add(temp);
-					}
-				}
-			}
-		}
+                this.opcodes.stream().forEach((temp) -> {
+                types.stream().filter((rtn) -> (temp.isPossibleReturnType(context, rtn))).forEach((_item) -> {
+                    if (temp.getChildNodeCount() == 0 && includeTerminal) {
+                        result.add(temp);
+                    } else if (includeFunction) {
+                        result.add(temp);
+                    }
+                });
+            });
 
 		return result;
 	}

@@ -61,7 +61,7 @@ public class BasicTreeNode implements TreeNode, Serializable {
 
 	@Override
 	public boolean isLeaf() {
-		return this.childNodes.size() == 0;
+		return this.childNodes.isEmpty();
 	}
 
 	@Override

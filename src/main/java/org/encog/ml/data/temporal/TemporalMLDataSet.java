@@ -231,14 +231,14 @@ public class TemporalMLDataSet extends BasicNeuralDataSet implements
 		this.inputNeuronCount = 0;
 		this.outputNeuronCount = 0;
 
-		for (final TemporalDataDescription desc : this.descriptions) {
-			if (desc.isInput()) {
-				this.inputNeuronCount += this.inputWindowSize;
-			}
-			if (desc.isPredict()) {
-				this.outputNeuronCount += this.predictWindowSize;
-			}
-		}
+                this.descriptions.stream().map((desc) -> {
+                if (desc.isInput()) {
+                    this.inputNeuronCount += this.inputWindowSize;
+                }
+                return desc;
+            }).filter((desc) -> (desc.isPredict())).forEach((_item) -> {
+                this.outputNeuronCount += this.predictWindowSize;
+            });
 	}
 
 	/**
@@ -250,11 +250,7 @@ public class TemporalMLDataSet extends BasicNeuralDataSet implements
 	public int calculatePointsInRange() {
 		int result = 0;
 
-		for (final TemporalPoint point : this.points) {
-			if (isPointInRange(point)) {
-				result++;
-			}
-		}
+                result = this.points.stream().filter((point) -> (isPointInRange(point))).map((_item) -> 1).reduce(result, Integer::sum);
 
 		return result;
 	}
@@ -564,7 +560,7 @@ public class TemporalMLDataSet extends BasicNeuralDataSet implements
 
 		if (this.startingPoint != null) {
 			final TimeSpan span = new TimeSpan(this.startingPoint, when);
-			sequence = (int) span.getSpan(this.sequenceGrandularity);
+			sequence = span.getSpan(this.sequenceGrandularity);
 		} else {
 			this.startingPoint = when;
 			sequence = 0;

@@ -78,10 +78,7 @@ public class TrainingSetScore implements CalculateScore {
 
 	@Override
 	public boolean requireSingleThreaded() {
-		if (this.training instanceof BufferedMLDataSet) {
-			return true;
-		}
-		return false;
+		return this.training instanceof BufferedMLDataSet;
 	}
 
 }

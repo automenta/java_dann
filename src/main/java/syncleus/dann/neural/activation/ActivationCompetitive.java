@@ -96,7 +96,7 @@ public class ActivationCompetitive implements EncogActivationFunction {
 		// adjust weights for winners and non-winners
 		for (int i = start; i < start + size; i++) {
 			if (winners[i]) {
-				x[i] = x[i] / sumWinners;
+				x[i] /= sumWinners;
 			} else {
 				x[i] = 0.0;
 			}

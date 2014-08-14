@@ -48,70 +48,70 @@ public class TestActivationBounds {
 
 	@Test
 	public void testBounds() {
-		for (final DannActivationFunction currentActivationFunction : this.activationFunctions) {
-			double currentIn = UPPER_TEST_VALUE;
-			while (currentIn >= UPPER_CUTOFF_VALUE) {
-				currentActivationFunction.activateDerivative(currentIn);
-				final double result = currentActivationFunction
-						.activate(currentIn);
-				Assert.assertTrue(
-						"Transfer out of bounds. In: " + currentIn
-								+ ", result: " + result,
-						(result <= currentActivationFunction.getUpperLimit())
-								&& (result >= currentActivationFunction
-										.getLowerLimit()));
-				currentIn = currentIn / TEST_INCREMENT;
-			}
-			while (currentIn > 0.0) {
-				currentActivationFunction.activateDerivative(currentIn);
-				final double result = currentActivationFunction
-						.activate(currentIn);
-				Assert.assertTrue(
-						"Transfer out of bounds. In: " + currentIn
-								+ ", result: " + result,
-						(result <= currentActivationFunction.getUpperLimit())
-								&& (result >= currentActivationFunction
-										.getLowerLimit()));
-				currentIn--;
-			}
-			currentIn = LOWER_TEST_VALUE;
-			while (currentIn <= LOWER_CUTOFF_VALUE) {
-				currentActivationFunction.activateDerivative(currentIn);
-				final double result = currentActivationFunction
-						.activate(currentIn);
-				Assert.assertTrue(
-						"Transfer out of bounds. In: " + currentIn
-								+ ", result: " + result,
-						(result <= currentActivationFunction.getUpperLimit())
-								&& (result >= currentActivationFunction
-										.getLowerLimit()));
-				currentIn = currentIn / TEST_INCREMENT;
-			}
-			while (currentIn <= 0.0) {
-				currentActivationFunction.activateDerivative(currentIn);
-				final double result = currentActivationFunction
-						.activate(currentIn);
-				Assert.assertTrue(
-						"Transfer out of bounds. In: " + currentIn
-								+ ", result: " + result,
-						(result <= currentActivationFunction.getUpperLimit())
-								&& (result >= currentActivationFunction
-										.getLowerLimit()));
-				currentIn++;
-			}
-			for (int count = 0; count < RANDOM_TEST_ITERATIONS; count++) {
-				currentIn = ((RANDOM.nextDouble() * 2.0) - 1.0)
-						* RANDOM_TEST_RANGE;
-				currentActivationFunction.activateDerivative(currentIn);
-				final double result = currentActivationFunction
-						.activate(currentIn);
-				Assert.assertTrue(
-						"Transfer out of bounds. In: " + currentIn
-								+ ", result: " + result,
-						(result <= currentActivationFunction.getUpperLimit())
-								&& (result >= currentActivationFunction
-										.getLowerLimit()));
-			}
-		}
+            this.activationFunctions.stream().forEach((currentActivationFunction) -> {
+                double currentIn = UPPER_TEST_VALUE;
+                while (currentIn >= UPPER_CUTOFF_VALUE) {
+                    currentActivationFunction.activateDerivative(currentIn);
+                    final double result = currentActivationFunction
+                            .activate(currentIn);
+                    Assert.assertTrue(
+                            "Transfer out of bounds. In: " + currentIn
+                                    + ", result: " + result,
+                            (result <= currentActivationFunction.getUpperLimit())
+                                    && (result >= currentActivationFunction
+                                            .getLowerLimit()));
+                    currentIn /= TEST_INCREMENT;
+                }
+                while (currentIn > 0.0) {
+                    currentActivationFunction.activateDerivative(currentIn);
+                    final double result = currentActivationFunction
+                            .activate(currentIn);
+                    Assert.assertTrue(
+                            "Transfer out of bounds. In: " + currentIn
+                                    + ", result: " + result,
+                            (result <= currentActivationFunction.getUpperLimit())
+                                    && (result >= currentActivationFunction
+                                            .getLowerLimit()));
+                    currentIn--;
+                }
+                currentIn = LOWER_TEST_VALUE;
+                while (currentIn <= LOWER_CUTOFF_VALUE) {
+                    currentActivationFunction.activateDerivative(currentIn);
+                    final double result = currentActivationFunction
+                            .activate(currentIn);
+                    Assert.assertTrue(
+                            "Transfer out of bounds. In: " + currentIn
+                                    + ", result: " + result,
+                            (result <= currentActivationFunction.getUpperLimit())
+                                    && (result >= currentActivationFunction
+                                            .getLowerLimit()));
+                    currentIn /= TEST_INCREMENT;
+                }
+                while (currentIn <= 0.0) {
+                    currentActivationFunction.activateDerivative(currentIn);
+                    final double result = currentActivationFunction
+                            .activate(currentIn);
+                    Assert.assertTrue(
+                            "Transfer out of bounds. In: " + currentIn
+                                    + ", result: " + result,
+                            (result <= currentActivationFunction.getUpperLimit())
+                                    && (result >= currentActivationFunction
+                                            .getLowerLimit()));
+                    currentIn++;
+                }
+                for (int count = 0; count < RANDOM_TEST_ITERATIONS; count++) {
+                    currentIn = ((RANDOM.nextDouble() * 2.0) - 1.0)
+                            * RANDOM_TEST_RANGE;
+                    currentActivationFunction.activateDerivative(currentIn);
+                    final double result = currentActivationFunction
+                            .activate(currentIn);
+                    Assert.assertTrue(
+                            "Transfer out of bounds. In: " + currentIn
+                                    + ", result: " + result,
+                            (result <= currentActivationFunction.getUpperLimit())
+                                    && (result >= currentActivationFunction
+                                            .getLowerLimit()));
+                }
+            });
 	}
 }

@@ -72,8 +72,9 @@ public class PrimMinimumSpanningTreeFinder<N, E extends Edge<N>> implements
 	private Set<E> primCalculate(final Graph<N, E> graph, final N startNode) {
 		final Set<E> mst = new HashSet<E>();
 		final PrimMap<N, E> primMap = new PrimMap<N, E>();
-		for (final N node : graph.getNodes())
-			primMap.put(node, null);
+                graph.getNodes().stream().forEach((node) -> {
+                primMap.put(node, null);
+            });
 
 		N currentNode = null;
 		while (!primMap.isEmpty()) {
@@ -93,13 +94,13 @@ public class PrimMinimumSpanningTreeFinder<N, E extends Edge<N>> implements
 				// remove all occurrences of currentNode, not just the first
 				while (neighborNodes.remove(currentNode)) {
 				}
-				for (final N neighborNode : neighborNodes) {
-					if (primMap.containsKey(neighborNode)
-							&& primMap.isLess(neighborNode, neighborEdge)) {
-						primMap.put(neighborNode, neighborEdge);
-						primMap.resort();
-					}
-				}
+                                neighborNodes.stream().filter((neighborNode) -> (primMap.containsKey(neighborNode)
+                            && primMap.isLess(neighborNode, neighborEdge))).map((neighborNode) -> {
+                                                            primMap.put(neighborNode, neighborEdge);
+                        return neighborNode;
+                    }).forEach((_item) -> {
+                        primMap.resort();
+                    });
 			}
 		}
 		return mst;
@@ -112,8 +113,9 @@ public class PrimMinimumSpanningTreeFinder<N, E extends Edge<N>> implements
 
 		public void resort() {
 			weightedNodes.clear();
-			for (final Map.Entry<N, E> entry : this.entrySet())
-				weightedNodes.add(entry);
+                        this.entrySet().stream().forEach((entry) -> {
+                weightedNodes.add(entry);
+            });
 		}
 
 		public double getWeight(final N node) {
@@ -142,6 +144,11 @@ public class PrimMinimumSpanningTreeFinder<N, E extends Edge<N>> implements
 				this.remove(poped.getKey());
 			return poped;
 		}
+
+        @Override
+        public Object clone() {
+            return super.clone(); //To change body of generated methods, choose Tools | Templates.
+        }
 
 		private class EntryCompare implements Comparator<Map.Entry<N, E>>,
 				Serializable {

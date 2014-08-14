@@ -67,11 +67,9 @@ public class BasicFreeformLayer implements FreeformLayer, Serializable {
 	 */
 	@Override
 	public boolean hasBias() {
-		for (final FreeformNeuron neuron : this.neurons) {
-			if (neuron.isBias()) {
-				return true;
-			}
-		}
+            if (this.neurons.stream().anyMatch((neuron) -> (neuron.isBias()))) {
+                return true;
+            }
 		return false;
 	}
 
@@ -97,11 +95,7 @@ public class BasicFreeformLayer implements FreeformLayer, Serializable {
 	@Override
 	public int sizeNonBias() {
 		int result = 0;
-		for (final FreeformNeuron neuron : this.neurons) {
-			if (!neuron.isBias()) {
-				result++;
-			}
-		}
+                result = this.neurons.stream().filter((neuron) -> (!neuron.isBias())).map((_item) -> 1).reduce(result, Integer::sum);
 		return result;
 	}
 

@@ -102,6 +102,11 @@ public class TestSimpleBooleanField {
 			goal.setState(goalState);
 			learnStates();
 		}
+
+        @Override
+        public MutableMarkovRandomFieldAdjacencyGraph<GraphicalModelNode, UndirectedEdge<GraphicalModelNode>> clone() {
+            return super.clone(); //To change body of generated methods, choose Tools | Templates.
+        }
 	}
 
 	/**

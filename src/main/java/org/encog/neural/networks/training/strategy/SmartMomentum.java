@@ -131,7 +131,7 @@ public class SmartMomentum implements Strategy {
 
 				if (this.lastMomentum > SmartMomentum.MOMENTUM_CYCLES) {
 					this.lastMomentum = 0;
-					if (((int) this.currentMomentum) == 0) {
+					if (this.currentMomentum == 0) {
 						this.currentMomentum = SmartMomentum.START_MOMENTUM;
 					}
 					this.currentMomentum *= (1.0 + SmartMomentum.MOMENTUM_INCREASE);

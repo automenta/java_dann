@@ -69,7 +69,7 @@ public class RandomChoice implements Serializable {
 			double total2 = 0;
 			final double factor = 1.0 / total;
 			for (int i = 0; i < probabilities.length; i++) {
-				probabilities[i] = probabilities[i] * factor;
+				probabilities[i] *= factor;
 				total2 += probabilities[i];
 			}
 

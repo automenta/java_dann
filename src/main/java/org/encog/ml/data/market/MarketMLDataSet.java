@@ -157,15 +157,12 @@ public class MarketMLDataSet extends TemporalMLDataSet {
 
 		// first obtain a collection of symbols that need to be looked up
 		final Set<TickerSymbol> set = new HashSet<TickerSymbol>();
-		for (final TemporalDataDescription desc : getDescriptions()) {
-			final MarketDataDescription mdesc = (MarketDataDescription) desc;
-			set.add(mdesc.getTicker());
-		}
-
-		// now loop over each symbol and load the data
-		for (final TickerSymbol symbol : set) {
-			loadSymbol(symbol, begin, end);
-		}
+                getDescriptions().stream().map((desc) -> (MarketDataDescription) desc).forEach((mdesc) -> {
+                set.add(mdesc.getTicker());
+            });
+            set.stream().forEach((symbol) -> {
+                loadSymbol(symbol, begin, end);
+            });
 
 		// resort the points
 		sortPoints();
@@ -183,14 +180,10 @@ public class MarketMLDataSet extends TemporalMLDataSet {
 	 */
 	private void loadPointFromMarketData(final TickerSymbol ticker,
 			final TemporalPoint point, final LoadedMarketData item) {
-		for (final TemporalDataDescription desc : getDescriptions()) {
-			final MarketDataDescription mdesc = (MarketDataDescription) desc;
-
-			if (mdesc.getTicker().equals(ticker)) {
-				point.setData(mdesc.getIndex(),
-						item.getData(mdesc.getDataType()));
-			}
-		}
+            getDescriptions().stream().map((desc) -> (MarketDataDescription) desc).filter((mdesc) -> (mdesc.getTicker().equals(ticker))).forEach((mdesc) -> {
+                point.setData(mdesc.getIndex(),
+                        item.getData(mdesc.getDataType()));
+            });
 	}
 
 	/**
@@ -207,11 +200,11 @@ public class MarketMLDataSet extends TemporalMLDataSet {
 			final Date to) {
 		final Collection<LoadedMarketData> data = getLoader().load(ticker,
 				null, from, to);
-		for (final LoadedMarketData item : data) {
-			final TemporalPoint point = this.createPoint(item.getWhen());
-
-			loadPointFromMarketData(ticker, point, item);
-		}
+                data.stream().forEach((item) -> {
+                final TemporalPoint point = this.createPoint(item.getWhen());
+                
+                loadPointFromMarketData(ticker, point, item);
+            });
 	}
 
 }

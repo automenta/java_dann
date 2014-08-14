@@ -272,11 +272,9 @@ public class EncogProgramContext implements Serializable {
 			final List<ValueType> desiredTypes) {
 		final List<VariableMapping> result = new ArrayList<VariableMapping>();
 
-		for (final VariableMapping mapping : this.definedVariables) {
-			if (desiredTypes.contains(mapping.getVariableType())) {
-				result.add(mapping);
-			}
-		}
+                this.definedVariables.stream().filter((mapping) -> (desiredTypes.contains(mapping.getVariableType()))).forEach((mapping) -> {
+                result.add(mapping);
+            });
 
 		return result;
 	}
@@ -375,11 +373,9 @@ public class EncogProgramContext implements Serializable {
 			return true;
 		}
 
-		for (final VariableMapping mapping : this.definedVariables) {
-			if (mapping.getVariableType() == ValueType.enumType) {
-				return true;
-			}
-		}
+            if (this.definedVariables.stream().anyMatch((mapping) -> (mapping.getVariableType() == ValueType.enumType))) {
+                return true;
+            }
 
 		return false;
 	}

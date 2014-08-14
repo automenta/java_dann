@@ -324,7 +324,7 @@ public class ExpressionValue implements Serializable {
 		case intType:
 			return this.intValue;
 		case floatingType:
-			return (int) this.floatValue;
+			return (long) this.floatValue;
 		case booleanType:
 			throw new EARuntimeError(
 					"Type Mismatch: can't convert int to boolean.");

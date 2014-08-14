@@ -93,21 +93,26 @@ public class PersistHMM implements EncogPersistor {
 					&& section.getSubSectionName().startsWith("DISTRIBUTION-")) {
 				final Map<String, String> params = section.parseParams();
 				final String t = params.get(HiddenMarkovModel.TAG_DIST_TYPE);
-				if ("ContinousDistribution".equals(t)) {
-					final double[] mean = section.parseDoubleArray(params,
-							HiddenMarkovModel.TAG_MEAN);
-					final SimpleRealMatrix cova = EncogFileSection.parseMatrix(params,
-							HiddenMarkovModel.TAG_COVARIANCE);
-					final ContinousDistribution dist = new ContinousDistribution(
-							mean, cova.getData());
-					distributions.add(dist);
-				} else if ("DiscreteDistribution".equals(t)) {
-					final SimpleRealMatrix prob = EncogFileSection.parseMatrix(params,
-							HiddenMarkovModel.TAG_PROBABILITIES);
-					final DiscreteDistribution dist = new DiscreteDistribution(
-							prob.getData());
-					distributions.add(dist);
-				}
+				if (null != t) switch (t) {
+                                case "ContinousDistribution":{
+                                    final double[] mean = section.parseDoubleArray(params,
+                                            HiddenMarkovModel.TAG_MEAN);
+                                        final SimpleRealMatrix cova = EncogFileSection.parseMatrix(params,
+                                                HiddenMarkovModel.TAG_COVARIANCE);
+                                        final ContinousDistribution dist = new ContinousDistribution(
+                                                mean, cova.getData());
+                                        distributions.add(dist);
+                                        break;
+                                    }
+                                case "DiscreteDistribution":{
+                                    final SimpleRealMatrix prob = EncogFileSection.parseMatrix(params,
+                                            HiddenMarkovModel.TAG_PROBABILITIES);
+                                        final DiscreteDistribution dist = new DiscreteDistribution(
+                                                prob.getData());
+                                        distributions.add(dist);
+                                        break;
+                                    }
+                            }
 			}
 		}
 

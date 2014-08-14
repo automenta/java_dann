@@ -38,9 +38,9 @@ public class DepthFirstTraversal implements TreeTraversal {
 		if (!task.task(treeNode))
 			return;
 
-		for (final TreeNode childNode : treeNode.getChildNodes()) {
-			traverse(childNode, task);
-		}
+                treeNode.getChildNodes().stream().forEach((childNode) -> {
+                traverse(childNode, task);
+            });
 	}
 
 }

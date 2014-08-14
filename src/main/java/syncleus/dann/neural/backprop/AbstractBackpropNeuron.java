@@ -20,6 +20,8 @@ package syncleus.dann.neural.backprop;
 
 import java.util.HashMap;
 import java.util.Map;
+import syncleus.dann.graph.DirectedEdge;
+import syncleus.dann.graph.Weighted;
 
 import syncleus.dann.neural.AbstractActivationNeuron;
 import syncleus.dann.neural.Brain;
@@ -108,39 +110,17 @@ public abstract class AbstractBackpropNeuron extends AbstractActivationNeuron
 	@Override
 	public void backPropagate() {
 		this.calculateDeltaTrain();
-		// TODO fix this bad typing
-		/*
-		 * //step thru source synapses and make them learn their new weight.
-		 * for(final Synapse currentSynapse : this.getBrain().getInEdges(this))
-		 * { final Neuron sourceNeuron = currentSynapse.getSourceNode(); if(
-		 * sourceNeuron instanceof BackpropNeuron ) { final BackpropNeuron
-		 * sourceBackpropNeuron = (BackpropNeuron) sourceNeuron; // TODO instead
-		 * of only working on SimpleBackpropNeuron perhaps make deltaTrain part
-		 * of a Backprop synapse if( sourceBackpropNeuron instanceof
-		 * SimpleBackpropNeuron ) ((SimpleBackpropNeuron)
-		 * sourceBackpropNeuron).deltaTrainDestinations.put(currentSynapse,
-		 * this.deltaTrain); currentSynapse.setWeight(currentSynapse.getWeight()
-		 * + (this.deltaTrain * this.learningRate * currentSynapse.getInput()));
-		 * } }
-		 */
-		// step thru source synapses and make them learn their new weight.
-		for (final Object currentSynapse : this.getBrain().getInEdges(this)) {
-			final Neuron sourceNeuron = (Neuron) ((Synapse) currentSynapse)
-					.getSourceNode();
-			if (sourceNeuron instanceof BackpropNeuron) {
-				final BackpropNeuron sourceBackpropNeuron = (BackpropNeuron) sourceNeuron;
-				// TODO instead of only working on SimpleBackpropNeuron perhaps
-				// make deltaTrain part of a Backprop synapse
-				if (sourceBackpropNeuron instanceof SimpleBackpropNeuron)
-					((SimpleBackpropNeuron) sourceBackpropNeuron)
-							.getDeltaTrainDestinations()
-							.put(((Synapse) currentSynapse), this.deltaTrain);
-				((Synapse) currentSynapse)
-						.setWeight(((Synapse) currentSynapse).getWeight()
-								+ (this.deltaTrain * this.learningRate * ((Synapse) currentSynapse)
-										.getInput()));
-			}
-		}
+                this.getBrain().getInEdges(this).stream().forEach((currentSynapse) -> {
+                final Neuron sourceNeuron = (Neuron) ((DirectedEdge) currentSynapse).getSourceNode();
+                if (sourceNeuron instanceof BackpropNeuron) {
+                    final BackpropNeuron sourceBackpropNeuron = (BackpropNeuron) sourceNeuron;
+                    if (sourceBackpropNeuron instanceof SimpleBackpropNeuron) {
+                        ((AbstractBackpropNeuron) sourceBackpropNeuron).getDeltaTrainDestinations().put((Synapse) currentSynapse, this.deltaTrain);
+                    }
+                    ((Synapse) currentSynapse).setWeight(((Weighted) currentSynapse).getWeight() + (this.deltaTrain * this.learningRate * ((Synapse) currentSynapse)
+                            .getInput()));
+                }
+            });
 	}
 
 	/**
@@ -151,11 +131,9 @@ public abstract class AbstractBackpropNeuron extends AbstractActivationNeuron
 	 */
 	protected void calculateDeltaTrain() {
 		double newDeltaTrain = 0.0;
-		for (final Synapse<Neuron> currentSynapse : getBrain()
-				.getTraversableEdges(this)) {
-			newDeltaTrain += (currentSynapse.getWeight() * getDeltaTrainDestinations()
-					.get(currentSynapse));
-		}
+                newDeltaTrain = getBrain()
+                    .getTraversableEdges(this).stream().map((currentSynapse) -> (currentSynapse.getWeight() * getDeltaTrainDestinations()
+                                        .get(currentSynapse))).reduce(newDeltaTrain, (accumulator, _item) -> accumulator + _item);
 		newDeltaTrain *= activateDerivitive();
 		setDeltaTrain(newDeltaTrain);
 	}

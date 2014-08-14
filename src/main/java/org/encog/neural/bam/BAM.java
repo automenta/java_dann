@@ -244,7 +244,7 @@ public class BAM extends BasicML {
 				} else {
 					out = 1;
 				}
-				if (out != (int) output.getData(i)) {
+				if (out != output.getData(i)) {
 					stable = false;
 					output.setData(i, out);
 				}

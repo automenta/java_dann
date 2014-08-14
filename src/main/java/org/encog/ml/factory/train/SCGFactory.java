@@ -26,6 +26,7 @@ package org.encog.ml.factory.train;
 import org.encog.ml.MLMethod;
 import org.encog.ml.train.MLTrain;
 import org.encog.neural.networks.BasicNetwork;
+import org.encog.neural.networks.ContainsFlat;
 import org.encog.neural.networks.training.propagation.scg.ScaledConjugateGradient;
 
 import syncleus.dann.dataprocess.MLDataSet;
@@ -56,6 +57,6 @@ public class SCGFactory {
 							+ method.getClass().getName());
 		}
 
-		return new ScaledConjugateGradient((BasicNetwork) method, training);
+		return new ScaledConjugateGradient((ContainsFlat) method, training);
 	}
 }

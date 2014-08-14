@@ -78,9 +78,9 @@ public class BasicCARunner implements CARunner, Runnable {
 
 		this.universe.copy(this.tempUniverse);
 
-		for (final UniverseListener listener : this.listeners) {
-			listener.iterationComplete();
-		}
+                this.listeners.stream().forEach((listener) -> {
+                listener.iterationComplete();
+            });
 	}
 
 	@Override

@@ -290,9 +290,9 @@ public class RBFNetwork extends BasicML implements MLError, MLRegression,
 				// e.g Neuron 5 - x position is (int)5/4 * 0.33 = 0.33
 				// then take modulus of 5%4 = 1
 				// Neuron 5 - y position is (int)1/1 * 0.33 = 0.33
-				centers[i][j - 1] = ((int) (temp / Math.pow(sideLength, j - 1)) * (disMinMaxPosition / (sideLength - 1)))
+				centers[i][j - 1] = ((temp / Math.pow(sideLength, j - 1)) * (disMinMaxPosition / (sideLength - 1)))
 						+ minPosition;
-				temp = temp % (int) (Math.pow(sideLength, j - 1));
+				temp %= (int) (Math.pow(sideLength, j - 1));
 			}
 
 			// Now set the widths

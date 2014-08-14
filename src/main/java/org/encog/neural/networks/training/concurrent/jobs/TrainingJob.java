@@ -177,15 +177,9 @@ public abstract class TrainingJob {
 	 * @return True, if training should continue.
 	 */
 	public boolean shouldContinue() {
-		for (final Strategy strategy : this.train.getStrategies()) {
-			if (strategy instanceof EndTrainingStrategy) {
-				final EndTrainingStrategy end = (EndTrainingStrategy) strategy;
-
-				if (end.shouldStop()) {
-					return false;
-				}
-			}
-		}
+            if (!this.train.getStrategies().stream().filter((strategy) -> (strategy instanceof EndTrainingStrategy)).map((strategy) -> (EndTrainingStrategy) strategy).noneMatch((end) -> (end.shouldStop()))) {
+                return false;
+            }
 		return true;
 	}
 }

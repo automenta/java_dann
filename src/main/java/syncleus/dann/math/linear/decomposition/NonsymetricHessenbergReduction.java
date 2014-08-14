@@ -76,7 +76,7 @@ public class NonsymetricHessenbergReduction implements java.io.Serializable,
 			// Scale column.
 			double scale = 0.0;
 			for (int i = m; i <= high; i++)
-				scale = scale + Math.abs(hessenberg[i][m - 1]);
+				scale += Math.abs(hessenberg[i][m - 1]);
 			if (scale != 0.0) {
 				// Compute Householder transformation.
 				double h = 0.0;
@@ -87,8 +87,8 @@ public class NonsymetricHessenbergReduction implements java.io.Serializable,
 				double g = Math.sqrt(h);
 				if (ort[m] > 0)
 					g = -g;
-				h = h - ort[m] * g;
-				ort[m] = ort[m] - g;
+				h -= ort[m] * g;
+				ort[m] -= g;
 
 				// Apply Householder similarity transformation
 				// hessenbergMatrixElements =
@@ -98,7 +98,7 @@ public class NonsymetricHessenbergReduction implements java.io.Serializable,
 					double f = 0.0;
 					for (int i = high; i >= m; i--)
 						f += ort[i] * hessenberg[i][j];
-					f = f / h;
+					f /= h;
 					for (int i = m; i <= high; i++)
 						hessenberg[i][j] -= f * ort[i];
 				}
@@ -107,7 +107,7 @@ public class NonsymetricHessenbergReduction implements java.io.Serializable,
 					double f = 0.0;
 					for (int j = high; j >= m; j--)
 						f += ort[j] * hessenberg[i][j];
-					f = f / h;
+					f /= h;
 					for (int j = m; j <= high; j++)
 						hessenberg[i][j] -= f * ort[j];
 				}

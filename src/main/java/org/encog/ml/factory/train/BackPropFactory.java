@@ -30,6 +30,7 @@ import org.encog.ml.factory.MLTrainFactory;
 import org.encog.ml.factory.parse.ArchitectureParse;
 import org.encog.ml.train.MLTrain;
 import org.encog.neural.networks.BasicNetwork;
+import org.encog.neural.networks.ContainsFlat;
 import org.encog.neural.networks.training.propagation.back.Backpropagation;
 
 import syncleus.dann.dataprocess.MLDataSet;
@@ -62,7 +63,7 @@ public class BackPropFactory {
 		final double momentum = holder.getDouble(
 				MLTrainFactory.PROPERTY_LEARNING_MOMENTUM, false, 0.3);
 
-		return new Backpropagation((BasicNetwork) method, training,
+		return new Backpropagation((ContainsFlat) method, training,
 				learningRate, momentum);
 	}
 }

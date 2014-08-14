@@ -120,8 +120,8 @@ public class RewriteConstants implements RewriteRule {
 							new ProgramNode[] {});
 
 			// is it an integer?
-			if (Math.abs(ck - ((int) ck)) < EncogMath.DEFAULT_EPSILON) {
-				result.getData()[0] = new ExpressionValue((int) ck);
+			if (Math.abs(ck - ck) < EncogMath.DEFAULT_EPSILON) {
+				result.getData()[0] = new ExpressionValue((long) ck);
 			} else {
 				result.getData()[0] = v;
 			}

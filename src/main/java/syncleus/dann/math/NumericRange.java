@@ -97,9 +97,7 @@ public class NumericRange {
 		// now get the standard deviation
 		double devTotal = 0;
 
-		for (final double d : values) {
-			devTotal += Math.pow(d - this.mean, 2);
-		}
+                devTotal = values.stream().map((d) -> Math.pow(d - this.mean, 2)).reduce(devTotal, (accumulator, _item) -> accumulator + _item);
 		this.standardDeviation = Math.sqrt(devTotal / this.samples);
 	}
 

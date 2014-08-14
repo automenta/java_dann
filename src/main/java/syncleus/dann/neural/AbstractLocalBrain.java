@@ -48,6 +48,11 @@ import syncleus.dann.graph.topological.StrongConnectivityOptimizedGraph;
 public abstract class AbstractLocalBrain<IN extends InputNeuron, ON extends OutputNeuron, N extends Neuron, S extends Synapse<N>>
 		extends AbstractBidirectedAdjacencyGraph<N, S> implements
 		Brain<IN, ON, N, S>, StrongConnectivityOptimizedGraph<N, S> {
+
+    @Override
+    public AbstractBidirectedAdjacencyGraph<N, S> clone() {
+        return super.clone(); //To change body of generated methods, choose Tools | Templates.
+    }
 	private static class NodeConnectivity<N extends Neuron, S extends Synapse<N>>
 			extends HashMap<N, Set<S>> {
 		private static final long serialVersionUID = -2956514569529162804L;
@@ -64,6 +69,11 @@ public abstract class AbstractLocalBrain<IN extends InputNeuron, ON extends Outp
 			}
 			return edges;
 		}
+
+        @Override
+        public Object clone() {
+            return super.clone(); //To change body of generated methods, choose Tools | Templates.
+        }
 	}
 
 	private static final long serialVersionUID = -7626975911198443367L;
@@ -156,15 +166,19 @@ public abstract class AbstractLocalBrain<IN extends InputNeuron, ON extends Outp
 
 		final boolean added = this.neurons.addAll(newNeurons);
 
-		for (final N newNeuron : newNeurons) {
-			this.outMap.put(newNeuron, new HashSet<S>());
-			this.inMap.put(newNeuron, new HashSet<S>());
-			// TODO fix this, its bad typing
-			if (newNeuron instanceof OutputNeuron)
-				this.outputNeurons.add((ON) newNeuron);
-			if (newNeuron instanceof InputNeuron)
-				this.inputNeurons.add((IN) newNeuron);
-		}
+                newNeurons.stream().map((newNeuron) -> {
+            this.outMap.put(newNeuron, new HashSet<S>());
+            return newNeuron;
+        }).map((newNeuron) -> {
+            this.inMap.put(newNeuron, new HashSet<S>());
+            return newNeuron;
+        }).map((newNeuron) -> {
+            if (newNeuron instanceof OutputNeuron)
+                this.outputNeurons.add((ON) newNeuron);
+            return newNeuron;
+        }).filter((newNeuron) -> (newNeuron instanceof InputNeuron)).forEach((newNeuron) -> {
+            this.inputNeurons.add((IN) newNeuron);
+        });
 
 		return added;
 	}
@@ -338,9 +352,10 @@ public abstract class AbstractLocalBrain<IN extends InputNeuron, ON extends Outp
 	public List<N> getAdjacentNodes(final N node) {
 		final Set<S> nodeSynapses = this.getAdjacentEdges(node);
 		final List<N> neighbors = new ArrayList<N>();
-		for (final S nodeSynapse : nodeSynapses)
-			neighbors.add((nodeSynapse.getLeftNode().equals(node) ? nodeSynapse
-					.getRightNode() : nodeSynapse.getLeftNode()));
+                nodeSynapses.stream().forEach((nodeSynapse) -> {
+            neighbors.add((nodeSynapse.getLeftNode().equals(node) ? nodeSynapse
+                    .getRightNode() : nodeSynapse.getLeftNode()));
+        });
 		return Collections.unmodifiableList(neighbors);
 	}
 

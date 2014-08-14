@@ -30,27 +30,27 @@ public class TestShortValueGene {
 	public void testConstructors() {
 		ValueGene test = new ShortValueGene((short) 123);
 		Assert.assertTrue("value constructor failed", test.getValue()
-				.getNumber().shortValue() == (short) 123);
-		test = new ShortValueGene(new MutableShort((short) 57));
+				.getNumber().shortValue() == 123);
+		test = new ShortValueGene(new MutableShort(57));
 		Assert.assertTrue("MutableByte value constructor failed", test
-				.getValue().getNumber().shortValue() == (short) 57);
-		test = new ShortValueGene((short) 83);
+				.getValue().getNumber().shortValue() == 57);
+		test = new ShortValueGene(83);
 		Assert.assertTrue("Number value constructor failed", test.getValue()
-				.getNumber().shortValue() == (short) 83);
+				.getNumber().shortValue() == 83);
 		test = new ShortValueGene();
 		Assert.assertTrue("default constructor failed", test.getValue()
-				.getNumber().shortValue() == (short) 0);
+				.getNumber().shortValue() == 0);
 	}
 
 	@Test
 	public void testMutation() {
 		final ValueGene center = new ShortValueGene((short) 0);
-		short averageSum = (short) 0;
+		short averageSum = 0;
 		int testCount;
 		for (testCount = 0; testCount < 1000; testCount++) {
 			averageSum += center.mutate(10).getValue().shortValue();
 		}
-		final double average = ((double) averageSum) / ((double) testCount);
+		final double average = averageSum / testCount;
 		Assert.assertTrue("average deviation is more than 10.0", average < 10.0);
 	}
 }

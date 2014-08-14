@@ -24,6 +24,7 @@
 package org.encog.ml.factory.train;
 
 import java.util.Map;
+import org.encog.ml.MLInput;
 
 import org.encog.ml.MLMethod;
 import org.encog.ml.factory.MLTrainFactory;
@@ -59,7 +60,7 @@ public class SVMFactory {
 							+ method.getClass().getName());
 		}
 
-		final double defaultGamma = 1.0 / ((SVM) method).getInputCount();
+		final double defaultGamma = 1.0 / ((MLInput) method).getInputCount();
 		final double defaultC = 1.0;
 
 		final Map<String, String> args = ArchitectureParse.parseParams(argsStr);

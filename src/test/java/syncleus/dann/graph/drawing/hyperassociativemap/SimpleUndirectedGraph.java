@@ -130,4 +130,9 @@ public class SimpleUndirectedGraph
 	public List<SimpleNode> getAdjacentNodes(final SimpleNode node) {
 		return Collections.unmodifiableList(this.neighborNodes.get(node));
 	}
+
+    @Override
+    public AbstractBidirectedAdjacencyGraph<SimpleNode, BidirectedEdge<SimpleNode>> clone() {
+        return super.clone(); //To change body of generated methods, choose Tools | Templates.
+    }
 }

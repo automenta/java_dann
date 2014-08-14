@@ -69,7 +69,7 @@ import syncleus.dann.neural.activation.EncogActivationFunction;
  */
 public class BasicNetwork extends BasicML implements ContainsFlat, MLContext,
 		MLRegression, MLEncodable, MLResettable, MLClassification, MLError,
-		MLFactory {
+		MLFactory, Cloneable {
 
 	/**
 	 * Tag used for the connection limit.
@@ -212,9 +212,7 @@ public class BasicNetwork extends BasicML implements ContainsFlat, MLContext,
 	 */
 	public int calculateNeuronCount() {
 		int result = 0;
-		for (final Layer layer : this.structure.getLayers()) {
-			result += layer.getNeuronCount();
-		}
+                result = this.structure.getLayers().stream().map((layer) -> layer.getNeuronCount()).reduce(result, Integer::sum);
 		return result;
 	}
 
@@ -245,7 +243,7 @@ public class BasicNetwork extends BasicML implements ContainsFlat, MLContext,
 	 */
 	@Override
 	public Object clone() {
-		final BasicNetwork result = (BasicNetwork) ObjectCloner.deepCopy(this);
+		final BasicNetwork result = ObjectCloner.deepCopy(this);
 		return result;
 	}
 
@@ -671,11 +669,9 @@ public class BasicNetwork extends BasicML implements ContainsFlat, MLContext,
 		// first, see what mode we are on. If the network has not been
 		// finalized, set the layers
 		if (this.structure.getFlat() == null) {
-			for (final Layer layer : this.structure.getLayers()) {
-				if (layer.hasBias()) {
-					layer.setBiasActivation(activation);
-				}
-			}
+                    this.structure.getLayers().stream().filter((layer) -> (layer.hasBias())).forEach((layer) -> {
+                layer.setBiasActivation(activation);
+            });
 		} else {
 			for (int i = 0; i < getLayerCount(); i++) {
 				if (isLayerBiased(i)) {

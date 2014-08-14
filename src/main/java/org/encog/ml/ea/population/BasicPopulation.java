@@ -130,9 +130,9 @@ public class BasicPopulation extends BasicML implements Population,
 	@Override
 	public List<Genome> flatten() {
 		final List<Genome> result = new ArrayList<Genome>();
-		for (final Species species : this.species) {
-			result.addAll(species.getMembers());
-		}
+                this.species.stream().forEach((species) -> {
+                result.addAll(species.getMembers());
+            });
 		return result;
 	}
 
@@ -259,7 +259,7 @@ public class BasicPopulation extends BasicML implements Population,
 			}
 
 			// is the species now empty?
-			if (species.getMembers().size() == 0) {
+			if (species.getMembers().isEmpty()) {
 				getSpecies().remove(species);
 			} else {
 				// new leader needed?

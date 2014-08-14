@@ -31,7 +31,7 @@ public class TestMutableByte {
 		test = new MutableByte("57");
 		Assert.assertTrue("string value constructor failed",
 				test.getNumber() == 57);
-		test = new MutableByte((byte) 83);
+		test = new MutableByte(83);
 		Assert.assertTrue("Number value constructor failed",
 				test.getNumber() == 83);
 	}
@@ -43,7 +43,7 @@ public class TestMutableByte {
 			final MutableByte mutated = highValue.mutate(100.0);
 			Assert.assertTrue(
 					"mutation caused number to roll over: " + mutated,
-					mutated.byteValue() >= (byte) -1);
+					mutated.byteValue() >= -1);
 		}
 	}
 
@@ -54,7 +54,7 @@ public class TestMutableByte {
 			final MutableByte mutated = lowValue.mutate(100.0);
 			Assert.assertTrue(
 					"mutation caused number to roll over: " + mutated,
-					mutated.byteValue() <= (byte) 1);
+					mutated.byteValue() <= 1);
 		}
 	}
 

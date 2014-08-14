@@ -525,7 +525,7 @@ public class TrainBasicPNN extends BasicTraining implements CalculationCriteria 
 						* vtot - out[outvar] * wtot;
 				if (this.network.getOutputMode() == PNNOutputMode.Classification) {
 
-					if (outvar == (int) target.getData(0)) {
+					if (outvar == target.getData(0)) {
 						temp = 2.0 * (out[outvar] - 1.0);
 					} else {
 						temp = 2.0 * out[outvar];
@@ -623,9 +623,7 @@ public class TrainBasicPNN extends BasicTraining implements CalculationCriteria 
 
 		if (this.network.isTrained()) {
 			k = 0;
-			for (int i = 0; i < this.network.getInputCount(); i++) {
-				x[i] = this.network.getSigma()[i];
-			}
+                    System.arraycopy(this.network.getSigma(), 0, x, 0, this.network.getInputCount());
 			globalMinimum.setY2(1.e30);
 		} else {
 			globalMinimum.findBestRange(this.sigmaLow, this.sigmaHigh,
@@ -641,9 +639,7 @@ public class TrainBasicPNN extends BasicTraining implements CalculationCriteria 
 				globalMinimum.getY2(), base, direc, g, h, dwk2);
 		globalMinimum.setY2(d);
 
-		for (int i = 0; i < this.network.getInputCount(); i++) {
-			this.network.getSigma()[i] = x[i];
-		}
+            System.arraycopy(x, 0, this.network.getSigma(), 0, this.network.getInputCount());
 
 		this.network.setError(Math.abs(globalMinimum.getY2()));
 		this.network.setTrained(true); // Tell other routines net is trained

@@ -47,11 +47,9 @@ public class LevelHolder {
 	 */
 	public static boolean compatibleTypes(final List<ValueType> parentTypes,
 			final List<ValueType> childTypes) {
-		for (final ValueType childType : childTypes) {
-			if (!parentTypes.contains(childType)) {
-				return false;
-			}
-		}
+            if (!childTypes.stream().noneMatch((childType) -> (!parentTypes.contains(childType)))) {
+                return false;
+            }
 		return true;
 	}
 

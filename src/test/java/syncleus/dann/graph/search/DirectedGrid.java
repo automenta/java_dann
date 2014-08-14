@@ -176,4 +176,9 @@ public class DirectedGrid extends
 				this.outNeighborNodes.get(node));
 		return Collections.unmodifiableList(newNeighbors);
 	}
+
+    @Override
+    public AbstractBidirectedAdjacencyGraph<GridNode, DirectedEdge<GridNode>> clone() {
+        return super.clone(); //To change body of generated methods, choose Tools | Templates.
+    }
 }

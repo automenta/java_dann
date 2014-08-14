@@ -69,7 +69,7 @@ public class ClassificationProbabilities<C> {
 		if (currentProbability == null)
 			currentProbability = value;
 		else
-			currentProbability = currentProbability + value;
+			currentProbability += value;
 		this.categoryProbabilityMap.put(category, currentProbability);
 		this.probabilitySum += value;
 	}

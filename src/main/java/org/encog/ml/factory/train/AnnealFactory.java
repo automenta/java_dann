@@ -26,6 +26,7 @@ package org.encog.ml.factory.train;
 import java.util.Map;
 
 import org.encog.ml.CalculateScore;
+import org.encog.ml.MLEncodable;
 import org.encog.ml.MLMethod;
 import org.encog.ml.factory.MLTrainFactory;
 import org.encog.ml.factory.parse.ArchitectureParse;
@@ -72,7 +73,7 @@ public class AnnealFactory {
 		final int cycles = holder.getInt(MLTrainFactory.CYCLES, false, 100);
 
 		final MLTrain train = new NeuralSimulatedAnnealing(
-				(BasicNetwork) method, score, startTemp, stopTemp, cycles);
+				(MLEncodable) method, score, startTemp, stopTemp, cycles);
 
 		return train;
 	}

@@ -19,6 +19,7 @@
 package syncleus.dann.neural.som.brain;
 
 import java.util.concurrent.ExecutorService;
+import syncleus.dann.graph.AbstractBidirectedAdjacencyGraph;
 
 import syncleus.dann.neural.Synapse;
 import syncleus.dann.neural.som.SomInputNeuron;
@@ -49,4 +50,9 @@ public final class ExponentialDecaySomBrain<IN extends SomInputNeuron, ON extend
 		this(inputCount, dimentionality, iterationsToConverge,
 				initialLearningRate, null);
 	}
+
+    @Override
+    public AbstractBidirectedAdjacencyGraph<N, S> clone() {
+        return super.clone(); //To change body of generated methods, choose Tools | Templates.
+    }
 }

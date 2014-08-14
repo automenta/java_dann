@@ -150,11 +150,9 @@ public abstract class BasicWorld implements World {
 
 	@Override
 	public boolean isGoalState(final State s) {
-		for (final State state : this.getGoals()) {
-			if (s == state) {
-				return true;
-			}
-		}
+            if (this.getGoals().stream().anyMatch((state) -> (s == state))) {
+                return true;
+            }
 		return false;
 	}
 
@@ -171,16 +169,16 @@ public abstract class BasicWorld implements World {
 
 	@Override
 	public void tick() {
-		for (final WorldAgent agent : getAgents()) {
-			agent.tick();
-		}
+            getAgents().stream().forEach((agent) -> {
+                agent.tick();
+            });
 	}
 
 	@Override
 	public void setAllRewards(final double d) {
-		for (final State state : this.states) {
-			state.setReward(d);
-		}
+            this.states.stream().forEach((state) -> {
+                state.setReward(d);
+            });
 	}
 
 	public void createAbsorbingState(final State s, final double r) {

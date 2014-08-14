@@ -44,7 +44,7 @@ public class BasicPath {
 	}
 
 	public BasicNode getDestinationNode() {
-		if (this.nodes.size() == 0)
+		if (this.nodes.isEmpty())
 			return null;
 		return this.nodes.get(this.nodes.size() - 1);
 	}

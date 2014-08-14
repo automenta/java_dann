@@ -107,12 +107,9 @@ public class ProgramNode extends BasicTreeNode implements Serializable {
 			return true;
 		}
 
-		for (final TreeNode tn : getChildNodes()) {
-			final ProgramNode childNode = (ProgramNode) tn;
-			if (!childNode.allConstDescendants()) {
-				return false;
-			}
-		}
+            if (!getChildNodes().stream().map((tn) -> (ProgramNode) tn).noneMatch((childNode) -> (!childNode.allConstDescendants()))) {
+                return false;
+            }
 
 		return true;
 	}
@@ -181,11 +178,10 @@ public class ProgramNode extends BasicTreeNode implements Serializable {
 		result.append(", childCount=");
 		result.append(getChildNodes().size());
 		result.append(", childNodes=");
-		for (final TreeNode tn : getChildNodes()) {
-			final ProgramNode node = (ProgramNode) tn;
-			result.append(" ");
-			result.append(node.getTemplate().getName());
-		}
+                getChildNodes().stream().map((tn) -> (ProgramNode) tn).forEach((node) -> {
+                result.append(" ");
+                result.append(node.getTemplate().getName());
+            });
 		result.append("]");
 		return result.toString();
 	}

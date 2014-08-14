@@ -79,8 +79,9 @@ public class Nucleus implements Cloneable {
 	 * @see Chromosome#preTick()
 	 */
 	public void preTick() {
-		for (final Chromosome chromosome : this.chromosomes)
-			chromosome.preTick();
+            this.chromosomes.stream().forEach((chromosome) -> {
+                chromosome.preTick();
+            });
 	}
 
 	/**
@@ -89,8 +90,9 @@ public class Nucleus implements Cloneable {
 	 * @see Chromosome#tick()
 	 */
 	public void tick() {
-		for (final Chromosome chromosome : this.chromosomes)
-			chromosome.tick();
+            this.chromosomes.stream().forEach((chromosome) -> {
+                chromosome.tick();
+            });
 	}
 
 	public boolean bind(final SignalKeyConcentration concentration,
@@ -107,8 +109,9 @@ public class Nucleus implements Cloneable {
 		try {
 			final Nucleus copy = (Nucleus) super.clone();
 			copy.chromosomes = new ArrayList<Chromosome>();
-			for (final Chromosome chromosome : this.chromosomes)
-				copy.chromosomes.add(chromosome.clone());
+                        this.chromosomes.stream().forEach((chromosome) -> {
+                        copy.chromosomes.add(chromosome.clone());
+                    });
 			return copy;
 		} catch (final CloneNotSupportedException caught) {
 			LOGGER.error("CloneNotSupportedException caught but not expected!",
@@ -121,26 +124,29 @@ public class Nucleus implements Cloneable {
 
 	public void mutate() {
 		final Set<AbstractKey> allKeys = new HashSet<AbstractKey>();
-		for (final Chromosome chromosome : this.chromosomes)
-			allKeys.addAll(chromosome.getKeys());
-
-		for (final Chromosome chromosome : this.chromosomes)
-			chromosome.mutate(allKeys);
+                this.chromosomes.stream().forEach((chromosome) -> {
+                allKeys.addAll(chromosome.getKeys());
+            });
+            this.chromosomes.stream().forEach((chromosome) -> {
+                chromosome.mutate(allKeys);
+            });
 	}
 
 	public void mutate(final Set<AbstractKey> keyPool) {
 		final Set<AbstractKey> allKeys = new HashSet<AbstractKey>(keyPool);
-		for (final Chromosome chromosome : this.chromosomes)
-			allKeys.addAll(chromosome.getKeys());
-
-		for (final Chromosome chromosome : this.chromosomes)
-			chromosome.mutate(allKeys);
+                this.chromosomes.stream().forEach((chromosome) -> {
+                allKeys.addAll(chromosome.getKeys());
+            });
+            this.chromosomes.stream().forEach((chromosome) -> {
+                chromosome.mutate(allKeys);
+            });
 	}
 
 	Set<SignalKey> getExpressedSignals(final boolean external) {
 		final Set<SignalKey> allSignals = new HashSet<SignalKey>();
-		for (final Chromosome chromosome : this.chromosomes)
-			allSignals.addAll(chromosome.getExpressedSignals(external));
+                this.chromosomes.stream().forEach((chromosome) -> {
+                allSignals.addAll(chromosome.getExpressedSignals(external));
+            });
 		return Collections.unmodifiableSet(allSignals);
 	}
 }

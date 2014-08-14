@@ -130,7 +130,7 @@ public final class ConcurrentTrainingManager implements Runnable {
 	 *            The training job to add.
 	 */
 	public void addTrainingJob(final TrainingJob job) {
-		if (job.getStrategies().size() == 0) {
+		if (job.getStrategies().isEmpty()) {
 			throw new RuntimeException(
 					"Job has no strategies, it will have no way to know when to end.");
 		}
@@ -245,7 +245,6 @@ public final class ConcurrentTrainingManager implements Runnable {
 		try {
 			this.thread.join();
 		} catch (final InterruptedException e) {
-			return;
 		}
 
 	}

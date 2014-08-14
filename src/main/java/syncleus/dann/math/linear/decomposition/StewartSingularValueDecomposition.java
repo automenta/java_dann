@@ -170,7 +170,7 @@ public class StewartSingularValueDecomposition implements java.io.Serializable,
 				if (ks == k) {
 					k++;
 					oneQrStep(e, p, k);
-					iter = iter + 1;
+					iter += 1;
 				} else if (ks == p - 1) {
 					k++;
 					deflateNegligibleMatrix(e, p, k);

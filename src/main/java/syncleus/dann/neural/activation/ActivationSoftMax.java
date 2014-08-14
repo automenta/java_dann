@@ -61,7 +61,7 @@ public class ActivationSoftMax implements EncogActivationFunction {
 			sum += x[i];
 		}
 		for (int i = start; i < start + size; i++) {
-			x[i] = x[i] / sum;
+			x[i] /= sum;
 		}
 	}
 

@@ -101,9 +101,9 @@ public class NEATMutateWeights extends NEATMutation {
 				.getWeightRange();
 		final List<NEATLinkGene> list = this.linkSelection.selectLinks(rnd,
 				target);
-		for (final NEATLinkGene gene : list) {
-			this.weightMutation.mutateWeight(rnd, gene, weightRange);
-		}
+                list.stream().forEach((gene) -> {
+                this.weightMutation.mutateWeight(rnd, gene, weightRange);
+            });
 	}
 
 	/**

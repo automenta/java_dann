@@ -131,7 +131,7 @@ public class TridiagonalEignevalueDecomposition implements
 			double scale = 0.0;
 			double h = 0.0;
 			for (int k = 0; k < i; k++)
-				scale = scale + Math.abs(d[k]);
+				scale += Math.abs(d[k]);
 			if (scale == 0.0) {
 				e[i] = d[i - 1];
 				for (int j = 0; j < i; j++) {
@@ -150,7 +150,7 @@ public class TridiagonalEignevalueDecomposition implements
 				if (f > 0)
 					g = -g;
 				e[i] = scale * g;
-				h = h - f * g;
+				h -= f * g;
 				d[i - 1] = f - g;
 				for (int j = 0; j < i; j++)
 					e[j] = 0.0;
@@ -261,7 +261,7 @@ public class TridiagonalEignevalueDecomposition implements
 			if (m > l) {
 				int iter = 0;
 				do {
-					iter = iter + 1; // (Could check iteration count here.)
+					iter += 1; // (Could check iteration count here.)
 
 					// Compute implicit shift
 					double g = d[l];
@@ -275,7 +275,7 @@ public class TridiagonalEignevalueDecomposition implements
 					double h = g - d[l];
 					for (int i = l + 2; i < n; i++)
 						d[i] -= h;
-					f = f + h;
+					f += h;
 
 					// Implicit QL transformation.
 					p = d[m];
@@ -314,7 +314,7 @@ public class TridiagonalEignevalueDecomposition implements
 					// Check for convergence.
 				} while (Math.abs(e[l]) > eps * tst1);
 			}
-			d[l] = d[l] + f;
+			d[l] += f;
 			e[l] = 0.0;
 		}
 

@@ -289,7 +289,7 @@ public class FreeformNetwork extends BasicML implements MLContext, Cloneable,
 	 */
 	@Override
 	public Object clone() {
-		final BasicNetwork result = (BasicNetwork) ObjectCloner.deepCopy(this);
+		final BasicNetwork result = ObjectCloner.deepCopy(this);
 		return result;
 	}
 
@@ -368,25 +368,23 @@ public class FreeformNetwork extends BasicML implements MLContext, Cloneable,
 			source.add(biasNeuron);
 		}
 
-		// create connections
-		for (final FreeformNeuron targetNeuron : target.getNeurons()) {
-			// create the summation for the target
-			InputSummation summation = targetNeuron.getInputSummation();
-
-			// do not create a second input summation
-			if (summation == null) {
-				summation = this.summationFactory.factor(theActivationFunction);
-				targetNeuron.setInputSummation(summation);
-			}
-
-			// connect the source neurons to the target neuron
-			for (final FreeformNeuron sourceNeuron : source.getNeurons()) {
-				final FreeformConnection connection = this.connectionFactory
-						.factor(sourceNeuron, targetNeuron);
-				sourceNeuron.addOutput(connection);
-				targetNeuron.addInput(connection);
-			}
-		}
+                target.getNeurons().stream().map((targetNeuron) -> {
+                InputSummation summation = targetNeuron.getInputSummation();
+                if (summation == null) {
+                    summation = this.summationFactory.factor(theActivationFunction);
+                    targetNeuron.setInputSummation(summation);
+                }
+                return targetNeuron;
+            }).forEach((targetNeuron) -> {
+                source.getNeurons().stream().map((sourceNeuron) -> {
+                    final FreeformConnection connection = this.connectionFactory
+                            .factor(sourceNeuron, targetNeuron);
+                    sourceNeuron.addOutput(connection);
+                    return connection;
+                }).forEach((connection) -> {
+                    targetNeuron.addInput(connection);
+                });
+            });
 	}
 
 	/**
@@ -563,10 +561,9 @@ public class FreeformNetwork extends BasicML implements MLContext, Cloneable,
 		final Set<FreeformNeuron> visited = new HashSet<FreeformNeuron>();
 		final List<FreeformNeuron> queue = new ArrayList<FreeformNeuron>();
 
-		// first copy outputs to queue
-		for (final FreeformNeuron neuron : this.outputLayer.getNeurons()) {
-			queue.add(neuron);
-		}
+                this.outputLayer.getNeurons().stream().forEach((neuron) -> {
+                queue.add(neuron);
+            });
 
 		while (queue.size() > 0) {
 			// pop a neuron off the queue
@@ -597,10 +594,9 @@ public class FreeformNetwork extends BasicML implements MLContext, Cloneable,
 		final Set<FreeformNeuron> visited = new HashSet<FreeformNeuron>();
 		final List<FreeformNeuron> queue = new ArrayList<FreeformNeuron>();
 
-		// first copy outputs to queue
-		for (final FreeformNeuron neuron : this.outputLayer.getNeurons()) {
-			queue.add(neuron);
-		}
+                this.outputLayer.getNeurons().stream().forEach((neuron) -> {
+                queue.add(neuron);
+            });
 
 		while (queue.size() > 0) {
 			// pop a neuron off the queue
@@ -633,10 +629,9 @@ public class FreeformNetwork extends BasicML implements MLContext, Cloneable,
 		final Set<FreeformNeuron> visited = new HashSet<FreeformNeuron>();
 		final List<FreeformNeuron> queue = new ArrayList<FreeformNeuron>();
 
-		// first copy outputs to queue
-		for (final FreeformNeuron neuron : this.outputLayer.getNeurons()) {
-			queue.add(neuron);
-		}
+                this.outputLayer.getNeurons().stream().forEach((neuron) -> {
+                queue.add(neuron);
+            });
 
 		while (queue.size() > 0) {
 			// pop a neuron off the queue
@@ -692,9 +687,9 @@ public class FreeformNetwork extends BasicML implements MLContext, Cloneable,
 	public void performConnectionTask(final ConnectionTask task) {
 		final Set<FreeformNeuron> visited = new HashSet<FreeformNeuron>();
 
-		for (final FreeformNeuron neuron : this.outputLayer.getNeurons()) {
-			performConnectionTask(visited, neuron, task);
-		}
+                this.outputLayer.getNeurons().stream().forEach((neuron) -> {
+                performConnectionTask(visited, neuron, task);
+            });
 	}
 
 	/**
@@ -713,16 +708,13 @@ public class FreeformNetwork extends BasicML implements MLContext, Cloneable,
 
 		// does this neuron have any inputs?
 		if (parentNeuron.getInputSummation() != null) {
-			// visit the inputs
-			for (final FreeformConnection connection : parentNeuron
-					.getInputSummation().list()) {
-				task.task(connection);
-				final FreeformNeuron neuron = connection.getSource();
-				// have we already visited this neuron?
-				if (!visited.contains(neuron)) {
-					performConnectionTask(visited, neuron, task);
-				}
-			}
+                    parentNeuron
+                            .getInputSummation().list().stream().map((connection) -> {
+                                            task.task(connection);
+                        return connection;
+                    }).map((connection) -> connection.getSource()).filter((neuron) -> (!visited.contains(neuron))).forEach((neuron) -> {
+                        performConnectionTask(visited, neuron, task);
+                    });
 		}
 	}
 
@@ -735,9 +727,9 @@ public class FreeformNetwork extends BasicML implements MLContext, Cloneable,
 	public void performNeuronTask(final NeuronTask task) {
 		final Set<FreeformNeuron> visited = new HashSet<FreeformNeuron>();
 
-		for (final FreeformNeuron neuron : this.outputLayer.getNeurons()) {
-			performNeuronTask(visited, neuron, task);
-		}
+                this.outputLayer.getNeurons().stream().forEach((neuron) -> {
+                performNeuronTask(visited, neuron, task);
+            });
 	}
 
 	/**
@@ -757,15 +749,10 @@ public class FreeformNetwork extends BasicML implements MLContext, Cloneable,
 
 		// does this neuron have any inputs?
 		if (parentNeuron.getInputSummation() != null) {
-			// visit the inputs
-			for (final FreeformConnection connection : parentNeuron
-					.getInputSummation().list()) {
-				final FreeformNeuron neuron = connection.getSource();
-				// have we already visited this neuron?
-				if (!visited.contains(neuron)) {
-					performNeuronTask(visited, neuron, task);
-				}
-			}
+                    parentNeuron
+                            .getInputSummation().list().stream().map((connection) -> connection.getSource()).filter((neuron) -> (!visited.contains(neuron))).forEach((neuron) -> {
+                                            performNeuronTask(visited, neuron, task);
+                    });
 		}
 	}
 
@@ -811,10 +798,10 @@ public class FreeformNetwork extends BasicML implements MLContext, Cloneable,
 			public void task(final FreeformNeuron neuron) {
 				neuron.allocateTempTraining(neuronSize);
 				if (neuron.getInputSummation() != null) {
-					for (final FreeformConnection connection : neuron
-							.getInputSummation().list()) {
-						connection.allocateTempTraining(connectionSize);
-					}
+                                    neuron
+                                            .getInputSummation().list().stream().forEach((connection) -> {
+                                                            connection.allocateTempTraining(connectionSize);
+                                    });
 				}
 			}
 		});
@@ -829,10 +816,10 @@ public class FreeformNetwork extends BasicML implements MLContext, Cloneable,
 			public void task(final FreeformNeuron neuron) {
 				neuron.clearTempTraining();
 				if (neuron.getInputSummation() != null) {
-					for (final FreeformConnection connection : neuron
-							.getInputSummation().list()) {
-						connection.clearTempTraining();
-					}
+                                    neuron
+                                            .getInputSummation().list().stream().forEach((connection) -> {
+                                                            connection.clearTempTraining();
+                                    });
 				}
 			}
 		});

@@ -232,7 +232,7 @@ public class ErrorBackpropagationNN implements Serializable {
 				for (int j = 0; j < w[l][i].length; j++) {
 					wDelta[l][i][j] = alpha * g[l][i] * layerInput[l][j]
 							+ momentum * wDelta[l][i][j];
-					w[l][i][j] = w[l][i][j] + wDelta[l][i][j];
+					w[l][i][j] += wDelta[l][i][j];
 				}
 			}
 		}

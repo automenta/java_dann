@@ -96,12 +96,9 @@ public class SearchK2 implements BayesSearch {
 			this.nodeOrdering.add(this.network.getClassificationTargetEvent());
 		}
 
-		// now add the others
-		for (final BayesianEvent event : this.network.getEvents()) {
-			if (!this.nodeOrdering.contains(event)) {
-				this.nodeOrdering.add(event);
-			}
-		}
+                this.network.getEvents().stream().filter((event) -> (!this.nodeOrdering.contains(event))).forEach((event) -> {
+                this.nodeOrdering.add(event);
+            });
 	}
 
 	/**

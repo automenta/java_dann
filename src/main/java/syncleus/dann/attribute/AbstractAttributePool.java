@@ -117,15 +117,12 @@ public abstract class AbstractAttributePool<T> implements AttributePool<T> {
 		final Set<AttributeChangeListener<?>> attributeListeners = this.listeners
 				.get(attribute);
 
-		// lets notify everyone who is subscribed
-		for (final AttributeChangeListener listener : attributeListeners) {
-			listener.attributeChanged(attribute, attributeValue);
-		}
-
-		// now lets handle global listeners
-		for (final AttributeChangeListener<T> listener : this.globalListeners) {
-			listener.attributeChanged(attribute, attributeValue);
-		}
+                attributeListeners.stream().forEach((listener) -> {
+                listener.attributeChanged(attribute, attributeValue);
+            });
+            this.globalListeners.stream().forEach((listener) -> {
+                listener.attributeChanged(attribute, attributeValue);
+            });
 	}
 
 	@Override

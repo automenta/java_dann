@@ -77,9 +77,9 @@ public abstract class BasicQuery implements BayesianQuery, Serializable {
 	@Override
 	public void finalizeStructure() {
 		this.events.clear();
-		for (final BayesianEvent event : this.network.getEvents()) {
-			events.put(event, new EventState(event));
-		}
+                this.network.getEvents().stream().forEach((event) -> {
+                events.put(event, new EventState(event));
+            });
 	}
 
 	/**
@@ -139,9 +139,9 @@ public abstract class BasicQuery implements BayesianQuery, Serializable {
 	 */
 	@Override
 	public void reset() {
-		for (final EventState s : this.events.values()) {
-			s.setCalculated(false);
-		}
+            this.events.values().stream().forEach((s) -> {
+                s.setCalculated(false);
+            });
 	}
 
 	/**
@@ -173,12 +173,9 @@ public abstract class BasicQuery implements BayesianQuery, Serializable {
 	 *         needed case. This is used for sampling.
 	 */
 	protected boolean isNeededEvidence() {
-		for (final BayesianEvent evidenceEvent : this.evidenceEvents) {
-			final EventState state = getEventState(evidenceEvent);
-			if (!state.isSatisfied()) {
-				return false;
-			}
-		}
+            if (!this.evidenceEvents.stream().map((evidenceEvent) -> getEventState(evidenceEvent)).noneMatch((state) -> (!state.isSatisfied()))) {
+                return false;
+            }
 		return true;
 	}
 
@@ -186,12 +183,9 @@ public abstract class BasicQuery implements BayesianQuery, Serializable {
 	 * @return True, if the current state satisifies the desired outcome.
 	 */
 	protected boolean satisfiesDesiredOutcome() {
-		for (final BayesianEvent outcomeEvent : this.outcomeEvents) {
-			final EventState state = getEventState(outcomeEvent);
-			if (!state.isSatisfied()) {
-				return false;
-			}
-		}
+            if (!this.outcomeEvents.stream().map((outcomeEvent) -> getEventState(outcomeEvent)).noneMatch((state) -> (!state.isSatisfied()))) {
+                return false;
+            }
 		return true;
 	}
 
@@ -223,7 +217,7 @@ public abstract class BasicQuery implements BayesianQuery, Serializable {
 	@Override
 	public String getProblem() {
 
-		if (this.outcomeEvents.size() == 0)
+		if (this.outcomeEvents.isEmpty())
 			return "";
 
 		final StringBuilder result = new StringBuilder();

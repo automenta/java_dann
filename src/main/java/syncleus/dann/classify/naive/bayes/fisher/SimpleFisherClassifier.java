@@ -126,9 +126,8 @@ public class SimpleFisherClassifier<I, F, C> extends
 			return 0.0;
 
 		double probabilitySum = 0.0;
-		for (final C currentCategory : this.getCategories())
-			probabilitySum += super.featureClassificationProbability(feature,
-					currentCategory);
+                probabilitySum = this.getCategories().stream().map((currentCategory) -> super.featureClassificationProbability(feature,
+                    currentCategory)).reduce(probabilitySum, (accumulator, _item) -> accumulator + _item);
 
 		return probability / probabilitySum;
 	}
@@ -137,9 +136,8 @@ public class SimpleFisherClassifier<I, F, C> extends
 	public double classificationProbability(final I item, final C category) {
 		final Set<F> features = this.getExtractor().getFeatures(item);
 		double probability = 1.0;
-		for (final F feature : features)
-			probability *= this.featureClassificationWeightedProbability(
-					feature, category);
+                probability = features.stream().map((feature) -> this.featureClassificationWeightedProbability(
+                    feature, category)).reduce(probability, (accumulator, _item) -> accumulator * _item);
 		probability = -Math.log(probability); // originally (-2.0 *
 												// Math.log(probability)) / 2.0;
 

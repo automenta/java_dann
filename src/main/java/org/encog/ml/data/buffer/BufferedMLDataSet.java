@@ -93,7 +93,7 @@ public class BufferedMLDataSet implements MLDataSet, Serializable {
 	/**
 	 * Additional sets that were opened.
 	 */
-	private transient List<BufferedMLDataSet> additional = new ArrayList<BufferedMLDataSet>();
+	private final transient List<BufferedMLDataSet> additional = new ArrayList<BufferedMLDataSet>();
 
 	/**
 	 * The owner.

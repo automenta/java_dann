@@ -77,11 +77,13 @@ public class BrainHyperassociativeMap
 		final Map<Neuron, Double> associations = super
 				.getNeighbors(nodeToQuery);
 		if (nodeToQuery instanceof InputNeuron)
-			for (final InputNeuron neuron : this.getGraph().getInputNeurons())
-				associations.put(neuron, this.getEquilibriumDistance());
+                    this.getGraph().getInputNeurons().stream().forEach((neuron) -> {
+                            associations.put(neuron, this.getEquilibriumDistance());
+                });
 		else if (nodeToQuery instanceof OutputNeuron)
-			for (final OutputNeuron neuron : this.getGraph().getOutputNeurons())
-				associations.put(neuron, this.getEquilibriumDistance());
+                    this.getGraph().getOutputNeurons().stream().forEach((neuron) -> {
+                            associations.put(neuron, this.getEquilibriumDistance());
+                });
 		associations.remove(nodeToQuery);
 
 		return associations;

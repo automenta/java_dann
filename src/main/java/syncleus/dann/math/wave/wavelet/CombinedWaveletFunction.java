@@ -61,13 +61,13 @@ public class CombinedWaveletFunction extends AbstractFunction {
 	@Override
 	public double calculate() {
 		double waveTotal = 0.0;
-		for (final WaveMultidimensionalFunction currentWave : this.waves) {
-			for (final String dimension : this.dimensions) {
-				currentWave.setDimension(dimension,
-						this.getDimension(dimension));
-			}
-			waveTotal += currentWave.calculate();
-		}
+                waveTotal = this.waves.stream().map((currentWave) -> {
+                this.dimensions.stream().forEach((dimension) -> {
+                    currentWave.setDimension(dimension,
+                            this.getDimension(dimension));
+                });
+                return currentWave;
+            }).map((currentWave) -> currentWave.calculate()).reduce(waveTotal, (accumulator, _item) -> accumulator + _item);
 		return waveTotal;
 	}
 

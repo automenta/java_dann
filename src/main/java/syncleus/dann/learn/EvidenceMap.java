@@ -48,8 +48,9 @@ public class EvidenceMap<S> extends
 	public int incrementState(final Set<GraphicalModelNode> influences,
 			final S state) {
 		final Map<GraphicalModelNode, Object> influenceMap = new HashMap<GraphicalModelNode, Object>();
-		for (final GraphicalModelNode influence : influences)
-			influenceMap.put(influence, influence.getState());
+                influences.stream().forEach((influence) -> {
+            influenceMap.put(influence, influence.getState());
+        });
 		return this.incrementState(influenceMap, state);
 	}
 
@@ -65,7 +66,7 @@ public class EvidenceMap<S> extends
 		if (evidence == null)
 			evidence = 1;
 		else
-			evidence = evidence + 1;
+                    evidence += 1;
 		stateEvidence.put(state, evidence);
 		return evidence;
 	}
@@ -125,9 +126,15 @@ public class EvidenceMap<S> extends
 	@Override
 	public void putAll(
 			final Map<? extends Map<GraphicalModelNode, Object>, ? extends StateEvidence<S>> map) {
-		for (final Map<GraphicalModelNode, Object> inputStates : map.keySet())
-			this.verifyInfluencingStates(inputStates);
+            map.keySet().stream().forEach((inputStates) -> {
+            this.verifyInfluencingStates(inputStates);
+        });
 		super.putAll(map);
 	}
+
+    @Override
+    public Object clone() {
+        return super.clone(); //To change body of generated methods, choose Tools | Templates.
+    }
 
 }

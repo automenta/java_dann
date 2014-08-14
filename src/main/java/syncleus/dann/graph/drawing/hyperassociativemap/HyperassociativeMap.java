@@ -154,10 +154,9 @@ public class HyperassociativeMap<G extends Graph<N, ?>, N> implements
 	@Override
 	public void reset() {
 		resetLearning();
-		// randomize all nodes
-		for (final N node : coordinates.keySet()) {
-			coordinates.put(node, randomCoordinates(dimensions));
-		}
+                coordinates.keySet().stream().forEach((node) -> {
+                coordinates.put(node, randomCoordinates(dimensions));
+            });
 	}
 
 	@Override
@@ -272,7 +271,7 @@ public class HyperassociativeMap<G extends Graph<N, ?>, N> implements
 
 							neighborEdge.streamNodes().forEach(neighbor -> {
 								if (!neighbor.equals(nodeToQuery)) {
-									neighbors.put((N) neighbor, currentWeight);
+									neighbors.put(neighbor, currentWeight);
 								}
 							});
 						});
@@ -412,9 +411,9 @@ public class HyperassociativeMap<G extends Graph<N, ?>, N> implements
 	@Deprecated
 	private List<Future<Vector>> submitFutureAligns() {
 		final ArrayList<Future<Vector>> futures = new ArrayList<Future<Vector>>();
-		for (final N node : graph.getNodes()) {
-			futures.add(threadExecutor.submit(new Align(node)));
-		}
+                graph.getNodes().stream().forEach((node) -> {
+                futures.add(threadExecutor.submit(new Align(node)));
+            });
 		return futures;
 	}
 

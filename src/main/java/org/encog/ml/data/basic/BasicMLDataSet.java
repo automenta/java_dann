@@ -40,7 +40,7 @@ import syncleus.dann.math.array.EngineArray;
  *
  * @author jheaton
  */
-public class BasicMLDataSet implements Serializable, MLDataSet {
+public class BasicMLDataSet implements Serializable, MLDataSet, Cloneable {
 
 	/**
 	 * An iterator to be used with the BasicMLDataSet. This iterator does not
@@ -269,7 +269,7 @@ public class BasicMLDataSet implements Serializable, MLDataSet {
 	 */
 	@Override
 	public boolean isSupervised() {
-		if (this.data.size() == 0) {
+		if (this.data.isEmpty()) {
 			return false;
 		}
 		return this.data.get(0).isSupervised();

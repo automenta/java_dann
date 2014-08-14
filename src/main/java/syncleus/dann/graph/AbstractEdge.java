@@ -60,12 +60,10 @@ public abstract class AbstractEdge<N> extends
 		// make sure each node with context allows us to connect to it
 		if (contextEnabled) {
 			final List<N> nodesCopy = new ArrayList<N>(ourNodes.size());
-			for (final N ourNode : ourNodes) {
-				if (this.contextEnabled && (ourNode instanceof ContextNode)
-						&& (!((ContextNode) ourNode).connectingEdge(this)))
-					continue;
-				nodesCopy.add(ourNode);
-			}
+                        ourNodes.stream().filter((ourNode) -> !(this.contextEnabled && (ourNode instanceof ContextNode)
+                            && (!((ContextNode) ourNode).connectingEdge(this)))).forEach((ourNode) -> {
+                                                    nodesCopy.add(ourNode);
+                    });
 			this.nodes = Collections.unmodifiableList(new ArrayList<N>(
 					nodesCopy));
 		} else
@@ -126,8 +124,9 @@ public abstract class AbstractEdge<N> extends
 			throw new IllegalArgumentException(
 					"removeNodes do not contain all valid end points");
 		final List<N> newNodes = new ArrayList<N>(this.nodes);
-		for (final N node : removeNodes)
-			newNodes.remove(node);
+                removeNodes.stream().forEach((node) -> {
+                newNodes.remove(node);
+            });
 
 		return createDeepCopy(newNodes);
 	}
@@ -143,14 +142,11 @@ public abstract class AbstractEdge<N> extends
 		try {
 			final AbstractEdge<N> clonedEdge = (AbstractEdge<N>) super.clone();
 			final List<N> clonedNodes = new ArrayList<N>(this.nodes.size());
-			// add each node at a time to the clone considering context
-			for (final N newNode : newNodes) {
-				if (this.contextEnabled
-						&& (newNode instanceof ContextNode)
-						&& (!((ContextNode) newNode).connectingEdge(clonedEdge)))
-					continue;
-				clonedNodes.add(newNode);
-			}
+                        newNodes.stream().filter((newNode) -> !(this.contextEnabled
+                            && (newNode instanceof ContextNode)
+                            && (!((ContextNode) newNode).connectingEdge(clonedEdge)))).forEach((newNode) -> {
+                                                    clonedNodes.add(newNode);
+                    });
 			clonedEdge.nodes = Collections.unmodifiableList(clonedNodes);
 			return clonedEdge;
 		} catch (final CloneNotSupportedException caught) {
@@ -174,9 +170,9 @@ public abstract class AbstractEdge<N> extends
 	public String toString() {
 		final StringBuilder outString = new StringBuilder(
 				this.nodes.size() * 10);
-		for (final N node : this.nodes) {
-			outString.append(':').append(node);
-		}
+                this.nodes.stream().forEach((node) -> {
+                outString.append(':').append(node);
+            });
 		return outString.toString();
 	}
 
@@ -185,13 +181,10 @@ public abstract class AbstractEdge<N> extends
 		try {
 			final AbstractEdge<N> clonedEdge = (AbstractEdge<N>) super.clone();
 			final List<N> clonedNodes = new ArrayList<N>(this.nodes.size());
-			// add each node at a time to the clone considering context
-			for (final N node : this.nodes) {
-				if (this.contextEnabled && (node instanceof ContextNode)
-						&& (!((ContextNode) node).connectingEdge(clonedEdge)))
-					continue;
-				clonedNodes.add(node);
-			}
+                        this.nodes.stream().filter((node) -> !(this.contextEnabled && (node instanceof ContextNode)
+                            && (!((ContextNode) node).connectingEdge(clonedEdge)))).forEach((node) -> {
+                                                    clonedNodes.add(node);
+                    });
 			clonedEdge.nodes = Collections.unmodifiableList(clonedNodes);
 			return clonedEdge;
 		} catch (final CloneNotSupportedException caught) {

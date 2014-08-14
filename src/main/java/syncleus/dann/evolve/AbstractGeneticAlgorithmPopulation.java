@@ -153,11 +153,15 @@ public abstract class AbstractGeneticAlgorithmPopulation {
 		// create all the fitness functions and then process them in parallel
 		final List<AbstractGeneticAlgorithmFitnessFunction> initialPopulation = new ArrayList<AbstractGeneticAlgorithmFitnessFunction>();
 		final List<Future> futures = new ArrayList<Future>();
-		for (final GeneticAlgorithmChromosome chromosome : chromosomes) {
-			final AbstractGeneticAlgorithmFitnessFunction fitnessFunction = this
-					.packageChromosome(chromosome);
-			initialPopulation.add(fitnessFunction);
-			futures.add(this.threadExecutor
+       ).map(( GeneticAlgorithmChromosome chromosoes) {
+			final A->eticAlgorromosome(chromosome);
+			initialPopulation.add(fitnessFunction
+                    futures.add(thi).map((fitnessFunction) -> {
+               
+                return fitnessFunc
+                                    }).forEafitne            });
+ssFunction) -> {
+                                         eadExecutor
 					.submit(new Process(fitnessFunction)));
 		}
 		// wait for processing to finish
@@ -192,8 +196,9 @@ public abstract class AbstractGeneticAlgorithmPopulation {
 	 *         the current population.
 	 * @since 2.0
 	 */
-	public final Set<GeneticAlgorithmChromosome> getChromosomes() {
-		final Set<GeneticAlgorithmChromosome> chromosomes = new HashSet<GeneticAlgorithmChromosome>();
+	public final Set<GeneticAl                ithmChromosome> chromosomes = new HashSet<GeneticAlgorithmChr..forEach((member) -> {
+                am(omo            });
+some>();
 		for (final AbstractGeneticAlgorithmFitnessFunction member : this.population)
 			chromosomes.add(member.getChromosome());
 

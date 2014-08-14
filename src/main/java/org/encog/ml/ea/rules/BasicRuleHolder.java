@@ -83,11 +83,9 @@ public class BasicRuleHolder implements RuleHolder {
 	 */
 	@Override
 	public boolean isValid(final Genome genome) {
-		for (final ConstraintRule rule : this.constraintRules) {
-			if (!rule.isValid(genome)) {
-				return false;
-			}
-		}
+            if (!this.constraintRules.stream().noneMatch((rule) -> (!rule.isValid(genome)))) {
+                return false;
+            }
 		return true;
 	}
 

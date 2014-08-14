@@ -173,31 +173,28 @@ public class AstarPathFinder<N, E extends Edge<N>> implements PathFinder<N, E> {
 			this.graph.streamTraversableEdges(currentStep.node)
 					.forEach(
 							edge -> {
-								for (final N neighborNode : edge.getNodes()) {
-									if (neighborNode.equals(currentStep.node))
-										continue;
-
-									final PathedStep neighborStep;
-									if (nodeStepMapping
-											.containsKey(neighborNode))
-										neighborStep = nodeStepMapping
-												.get(neighborNode);
-									else {
-										neighborStep = new PathedStep(
-												neighborNode, end);
-										nodeStepMapping.put(neighborNode,
-												neighborStep);
-									}
-
-									if (!neighborNode.equals(begin))
-										neighborStep.updateParent(currentStep,
-												edge);
-
-									if (!closedSteps.contains(neighborStep)) {
-										candidateSteps.remove(neighborStep);
-										candidateSteps.add(neighborStep);
-									}
-								}
+                                                            edge.getNodes().stream().filter((neighborNode) -> !(neighborNode.equals(currentStep.node))).map((neighborNode) -> {
+                                final PathedStep neighborStep;
+                                if (nodeStepMapping
+                                        .containsKey(neighborNode))
+                                    neighborStep = nodeStepMapping
+                                            .get(neighborNode);
+                                else {
+                                    neighborStep = new PathedStep(
+                                            neighborNode, end);
+                                    nodeStepMapping.put(neighborNode,
+                                            neighborStep);
+                                }
+                                if (!neighborNode.equals(begin))
+                                    neighborStep.updateParent(currentStep,
+                                            edge);
+                                return neighborStep;
+                            }).filter((neighborStep) -> (!closedSteps.contains(neighborStep))).map((neighborStep) -> {
+                                candidateSteps.remove(neighborStep);
+                                return neighborStep;
+                            }).forEach((neighborStep) -> {
+                                candidateSteps.add(neighborStep);
+                            });
 							});
 
 			closedSteps.add(currentStep);

@@ -113,20 +113,20 @@ public final class Format {
 		if (memory < Format.MEMORY_K) {
 			return memory + " bytes";
 		} else if (memory < Format.MEMORY_MEG) {
-			return Format.formatDouble(((double) memory)
-					/ ((double) Format.MEMORY_K), 2)
+			return Format.formatDouble(memory
+					/ Format.MEMORY_K, 2)
 					+ " KB";
 		} else if (memory < Format.MEMORY_GIG) {
-			return Format.formatDouble(((double) memory)
-					/ ((double) Format.MEMORY_MEG), 2)
+			return Format.formatDouble(memory
+					/ Format.MEMORY_MEG, 2)
 					+ " MB";
 		} else if (memory < Format.MEMORY_TERA) {
-			return Format.formatDouble(((double) memory)
-					/ ((double) Format.MEMORY_GIG), 2)
+			return Format.formatDouble(memory
+					/ Format.MEMORY_GIG, 2)
 					+ " GB";
 		} else {
-			return Format.formatDouble(((double) memory)
-					/ ((double) Format.MEMORY_TERA), 2)
+			return Format.formatDouble(memory
+					/ Format.MEMORY_TERA, 2)
 					+ " TB";
 		}
 	}

@@ -28,9 +28,7 @@ public class OutputErrorFunction implements ErrorFunction {
 	@Override
 	public void calculateError(final double[] ideal, final double[] actual,
 			final double[] error) {
-		for (int i = 0; i < actual.length; i++) {
-			error[i] = actual[i];
-		}
+            System.arraycopy(actual, 0, error, 0, actual.length);
 	}
 
 }

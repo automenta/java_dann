@@ -51,7 +51,7 @@ public class DiscreteFourierTransform {
 		final double frequencyStep = frequencyResolution(ourFrequencies.length,
 				bitrate);
 		final NavigableMap<Double, ComplexNumber> newFrequencies = new TreeMap<Double, ComplexNumber>();
-		for (int index = 0; index <= (int) frequencySize; index++) {
+		for (int index = 0; index <= frequencySize; index++) {
 			final Double currentFrequency = (index) * frequencyStep;
 			newFrequencies.put(currentFrequency, ourFrequencies[index]);
 		}

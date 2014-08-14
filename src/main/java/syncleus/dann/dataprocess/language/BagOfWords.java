@@ -141,14 +141,15 @@ public class BagOfWords {
 		final Set<String> set = new TreeSet<String>();
 		set.addAll(this.words.keySet());
 
-		// display
-		for (final String key : set) {
-			final int i = this.words.get(key);
-			result.append(key);
-			result.append(",");
-			result.append(i);
-			result.append("\n");
-		}
+                set.stream().map((key) -> {
+                final int i = this.words.get(key);
+                result.append(key);
+                result.append(",");
+                result.append(i);
+                return key;
+            }).forEach((_item) -> {
+                result.append("\n");
+            });
 
 		return result.toString();
 	}
@@ -182,7 +183,7 @@ public class BagOfWords {
 	}
 
 	public double probability(final String word) {
-		final double n = ((double) getCount(word)) + ((double) this.k);
+		final double n = getCount(word) + this.k;
 		final double d = ((double) getTotalWords()) + (k * this.laplaceClasses);
 		return n / d;
 	}

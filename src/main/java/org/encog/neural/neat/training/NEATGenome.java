@@ -102,20 +102,15 @@ public class NEATGenome extends BasicGenome implements Cloneable, Serializable {
 		this.outputCount = other.outputCount;
 		this.setSpecies(other.getSpecies());
 
-		// copy neurons
-		for (final NEATNeuronGene oldGene : other.getNeuronsChromosome()) {
-			final NEATNeuronGene newGene = new NEATNeuronGene(oldGene);
-			this.neuronsList.add(newGene);
-		}
-
-		// copy links
-		for (final NEATLinkGene oldGene : other.getLinksChromosome()) {
-			final NEATLinkGene newGene = new NEATLinkGene(
-					oldGene.getFromNeuronID(), oldGene.getToNeuronID(),
-					oldGene.isEnabled(), oldGene.getInnovationId(),
-					oldGene.getWeight());
-			this.linksList.add(newGene);
-		}
+                other.getNeuronsChromosome().stream().map((oldGene) -> new NEATNeuronGene(oldGene)).forEach((newGene) -> {
+            this.neuronsList.add(newGene);
+        });
+        other.getLinksChromosome().stream().map((oldGene) -> new NEATLinkGene(
+                oldGene.getFromNeuronID(), oldGene.getToNeuronID(),
+                oldGene.isEnabled(), oldGene.getInnovationId(),
+                oldGene.getWeight())).forEach((newGene) -> {
+                                            this.linksList.add(newGene);
+        });
 
 	}
 
@@ -139,9 +134,9 @@ public class NEATGenome extends BasicGenome implements Cloneable, Serializable {
 		this.inputCount = inputCount;
 		this.outputCount = outputCount;
 
-		for (final NEATLinkGene gene : links) {
-			this.linksList.add(new NEATLinkGene(gene));
-		}
+                links.stream().forEach((gene) -> {
+            this.linksList.add(new NEATLinkGene(gene));
+        });
 
 		this.neuronsList.addAll(neurons);
 	}
@@ -375,4 +370,9 @@ public class NEATGenome extends BasicGenome implements Cloneable, Serializable {
 		result.append("]");
 		return result.toString();
 	}
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone(); //To change body of generated methods, choose Tools | Templates.
+    }
 }

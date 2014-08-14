@@ -194,8 +194,9 @@ public final class Counters {
 		// get every combination then permutate it
 		final Set<List<O>> permutations = new HashSet<List<O>>();
 		final Set<List<O>> combinations = everyCombination(superList);
-		for (final List<O> combination : combinations)
-			permutations.addAll(sameLengthPermutations(combination));
+                combinations.stream().forEach((combination) -> {
+                permutations.addAll(sameLengthPermutations(combination));
+            });
 		return Collections.unmodifiableSet(permutations);
 	}
 
@@ -220,8 +221,9 @@ public final class Counters {
 		final Set<List<O>> permutations = new HashSet<List<O>>();
 		final Set<List<O>> combinations = fixedLengthCombinations(superList,
 				length);
-		for (final List<O> combination : combinations)
-			permutations.addAll(sameLengthPermutations(combination));
+                combinations.stream().forEach((combination) -> {
+                permutations.addAll(sameLengthPermutations(combination));
+            });
 		return Collections.unmodifiableSet(permutations);
 	}
 
@@ -295,9 +297,10 @@ public final class Counters {
 		// get every combination then permutate it
 		final Set<List<O>> permutations = new HashSet<List<O>>();
 		final Set<List<O>> combinations = everyCombination(superList);
-		for (final List<O> combination : combinations)
-			permutations
-					.addAll(sameLengthLexicographicPermutations(combination));
+                combinations.stream().forEach((combination) -> {
+                permutations
+                        .addAll(sameLengthLexicographicPermutations(combination));
+            });
 		return Collections.unmodifiableSet(permutations);
 	}
 
@@ -323,9 +326,10 @@ public final class Counters {
 		final Set<List<O>> permutations = new HashSet<List<O>>();
 		final Set<List<O>> combinations = fixedLengthCombinations(superList,
 				length);
-		for (final List<O> combination : combinations)
-			permutations
-					.addAll(sameLengthLexicographicPermutations(combination));
+                combinations.stream().forEach((combination) -> {
+                permutations
+                        .addAll(sameLengthLexicographicPermutations(combination));
+            });
 		return Collections.unmodifiableSet(permutations);
 	}
 
@@ -400,9 +404,10 @@ public final class Counters {
 		// get every combination then permutate it
 		final Set<List<O>> permutations = new HashSet<List<O>>();
 		final Set<List<O>> combinations = everyCombination(superList);
-		for (final List<O> combination : combinations)
-			permutations
-					.addAll(sameLengthJohnsonTrotterPermutations(combination));
+                combinations.stream().forEach((combination) -> {
+                permutations
+                        .addAll(sameLengthJohnsonTrotterPermutations(combination));
+            });
 		return Collections.unmodifiableSet(permutations);
 	}
 
@@ -428,9 +433,10 @@ public final class Counters {
 		final Set<List<O>> permutations = new HashSet<List<O>>();
 		final Set<List<O>> combinations = fixedLengthCombinations(superList,
 				length);
-		for (final List<O> combination : combinations)
-			permutations
-					.addAll(sameLengthJohnsonTrotterPermutations(combination));
+                combinations.stream().forEach((combination) -> {
+                permutations
+                        .addAll(sameLengthJohnsonTrotterPermutations(combination));
+            });
 		return Collections.unmodifiableSet(permutations);
 	}
 

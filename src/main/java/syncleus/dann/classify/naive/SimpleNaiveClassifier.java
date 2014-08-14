@@ -100,15 +100,14 @@ public class SimpleNaiveClassifier<I, F, C> implements
 	public Map<C, Double> getCategoryProbabilities(final I item) {
 		final Set<F> features = this.extractor.getFeatures(item);
 		final Map<C, Double> categoryProbabilities = new HashMap<C, Double>();
-		for (final F feature : features) {
-			final C currentCategory = this.featureClassification(feature);
-			Double newProbability = categoryProbabilities.get(currentCategory);
-			if (newProbability == null)
-				newProbability = 1.0;
-			else
-				newProbability++;
-			categoryProbabilities.put(currentCategory, newProbability);
-		}
+                features.stream().map((feature) -> this.featureClassification(feature)).forEach((currentCategory) -> {
+                Double newProbability = categoryProbabilities.get(currentCategory);
+                if (newProbability == null)
+                    newProbability = 1.0;
+                else
+                    newProbability++;
+                categoryProbabilities.put(currentCategory, newProbability);
+            });
 		return categoryProbabilities;
 	}
 
@@ -192,7 +191,7 @@ public class SimpleNaiveClassifier<I, F, C> implements
 		if (overallProb == 0)
 			return 0.0;
 		else
-			return ((double) featureProb) / ((double) overallProb);
+			return featureProb / overallProb;
 	}
 
 	/**
@@ -239,8 +238,9 @@ public class SimpleNaiveClassifier<I, F, C> implements
 	@Override
 	public void train(final I item, final C category) {
 		final Set<F> features = this.extractor.getFeatures(item);
-		for (final F feature : features)
-			this.featureTree.getFeature(feature).incrementCategory(category);
+                features.stream().forEach((feature) -> {
+                this.featureTree.getFeature(feature).incrementCategory(category);
+            });
 		this.overallCategoryProbability.incrementCategory(category);
 	}
 

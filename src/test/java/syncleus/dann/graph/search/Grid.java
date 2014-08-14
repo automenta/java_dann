@@ -151,4 +151,9 @@ public class Grid extends
 		return getAdjacentEdges(node).stream();
 	}
 
+    @Override
+    public AbstractBidirectedAdjacencyGraph<GridNode, BidirectedEdge<GridNode>> clone() {
+        return super.clone(); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

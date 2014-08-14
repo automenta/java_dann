@@ -81,11 +81,9 @@ public class StandardExtensions {
 			if (!super.isPossibleReturnType(context, rtn)) {
 				return false;
 			}
-			for (final VariableMapping mapping : context.getDefinedVariables()) {
-				if (mapping.getVariableType() == rtn) {
-					return true;
-				}
-			}
+                    if (context.getDefinedVariables().stream().anyMatch((mapping) -> (mapping.getVariableType() == rtn))) {
+                        return true;
+                    }
 			return false;
 		}
 
@@ -150,7 +148,7 @@ public class StandardExtensions {
 				break;
 			case intType:
 				actual.getData()[0] = new ExpressionValue(
-						(int) RangeRandomizer
+						(long) RangeRandomizer
 								.randomize(rnd, minValue, maxValue));
 				break;
 			case enumType:
@@ -1209,10 +1207,10 @@ public class StandardExtensions {
 	 */
 	public static void createAll(final EncogProgramContext context) {
 		final FunctionFactory factory = context.getFunctions();
-		for (final ProgramExtensionTemplate temp : EncogOpcodeRegistry.INSTANCE
-				.findAllOpcodes()) {
-			factory.addExtension(temp);
-		}
+                EncogOpcodeRegistry.INSTANCE
+                        .findAllOpcodes().stream().forEach((temp) -> {
+                                    factory.addExtension(temp);
+            });
 	}
 
 	/**

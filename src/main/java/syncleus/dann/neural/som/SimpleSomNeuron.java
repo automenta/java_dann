@@ -57,11 +57,11 @@ public class SimpleSomNeuron extends AbstractNeuron implements SomOutputNeuron {
 	@Override
 	public void train(final double learningRate,
 			final double neighborhoodAdjustment) {
-		for (final Synapse<Neuron> source : getBrain().getInEdges(this)) {
-			source.setWeight(source.getWeight()
-					+ (learningRate * neighborhoodAdjustment * (source
-							.getInput() - source.getWeight())));
-		}
+            getBrain().getInEdges(this).stream().forEach((source) -> {
+                source.setWeight(source.getWeight()
+                        + (learningRate * neighborhoodAdjustment * (source
+                                .getInput() - source.getWeight())));
+            });
 	}
 
 	/**
@@ -73,18 +73,16 @@ public class SimpleSomNeuron extends AbstractNeuron implements SomOutputNeuron {
 	public void tick() {
 		// calculate the current input activity
 		double activity = 0.0;
-		for (final Synapse<Neuron> currentSynapse : getBrain().getInEdges(this)) {
-			activity += Math
-					.pow(currentSynapse.getInput() - currentSynapse.getWeight(),
-							2.0);
-		}
+                activity = getBrain().getInEdges(this).stream().map((currentSynapse) -> Math
+                    .pow(currentSynapse.getInput() - currentSynapse.getWeight(),
+                            2.0)).reduce(activity, (accumulator, _item) -> accumulator + _item);
 
 		// calculate the activity function and set the result as the output
 		output = activationFunction.activate(activity);
-		for (final Synapse<Neuron> current : getBrain().getTraversableEdges(
-				this)) {
-			current.setInput(output);
-		}
+                getBrain().getTraversableEdges(
+                        this).stream().forEach((current) -> {
+                                    current.setInput(output);
+            });
 	}
 
 	/**

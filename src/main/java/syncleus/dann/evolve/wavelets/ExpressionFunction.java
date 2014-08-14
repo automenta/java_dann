@@ -105,10 +105,9 @@ public class ExpressionFunction implements Cloneable {
 	}
 
 	public boolean receives(final SignalKey signal) {
-		for (final ReceptorKey receptor : this.receptors) {
-			if (receptor.binds(signal))
-				return true;
-		}
+            if (this.receptors.stream().anyMatch((receptor) -> (receptor.binds(signal)))) {
+                return true;
+            }
 
 		return false;
 	}
@@ -117,17 +116,12 @@ public class ExpressionFunction implements Cloneable {
 			final Set<SignalKeyConcentration> signalConcentrations) {
 		this.reconstructWavelet();
 
-		for (final ReceptorKey receptor : this.receptors) {
-			double concentration = 0.0;
-			// calculate concentration for the current receptor
-			for (final SignalKeyConcentration signalConcentration : signalConcentrations) {
-				if (receptor.binds(signalConcentration.getSignal()))
-					concentration += signalConcentration.getConcentration();
-			}
-
-			this.wavelet.setParameter(String.valueOf(receptor.hashCode()),
-					concentration);
-		}
+                this.receptors.stream().forEach((receptor) -> {
+                double concentration = 0.0;
+                concentration = signalConcentrations.stream().filter((signalConcentration) -> (receptor.binds(signalConcentration.getSignal()))).map((signalConcentration) -> signalConcentration.getConcentration()).reduce(concentration, (accumulator, _item) -> accumulator + _item);
+                this.wavelet.setParameter(String.valueOf(receptor.hashCode()),
+                        concentration);
+            });
 
 		return this.wavelet.calculate();
 	}
@@ -138,8 +132,9 @@ public class ExpressionFunction implements Cloneable {
 			final ExpressionFunction copy = (ExpressionFunction) super.clone();
 			copy.receptors = new HashSet<ReceptorKey>(this.receptors);
 			final List<WaveMultidimensionalFunction> newWaves = new ArrayList<WaveMultidimensionalFunction>();
-			for (final WaveMultidimensionalFunction wave : this.waves)
-				newWaves.add(wave.clone());
+                        this.waves.stream().forEach((wave) -> {
+                        newWaves.add(wave.clone());
+                    });
 			copy.waves = newWaves;
 			copy.wavelet = this.wavelet.clone();
 			return copy;
@@ -159,9 +154,9 @@ public class ExpressionFunction implements Cloneable {
 			receptorNames[receptorNamesIndex++] = String.valueOf(receptor
 					.hashCode());
 		this.wavelet = new CombinedWaveletFunction(receptorNames);
-		for (final WaveMultidimensionalFunction wave : this.waves) {
-			this.wavelet.addWave(wave);
-		}
+                this.waves.stream().forEach((wave) -> {
+                this.wavelet.addWave(wave);
+            });
 	}
 
 	/**
@@ -183,7 +178,7 @@ public class ExpressionFunction implements Cloneable {
 	public ExpressionFunction mutate(final double deviation) {
 		final ExpressionFunction copy = this.clone();
 		final double changePercentage = 0.1;
-		while (RANDOM.nextFloat() < (float) changePercentage) {
+		while (RANDOM.nextFloat() < changePercentage) {
 			// add a mutated copy of an existing wave
 			if (RANDOM.nextDouble() < changePercentage) {
 				// Signal newSignal = this.getRandomSignal();
@@ -219,21 +214,23 @@ public class ExpressionFunction implements Cloneable {
 					dimensionNames[dimensionNamesIndex++] = String
 							.valueOf(copyReceptor.hashCode());
 				copy.waves.clear();
-				for (final WaveMultidimensionalFunction wave : this.waves) {
-					final WaveMultidimensionalFunction newWave = new WaveMultidimensionalFunction(
-							dimensionNames);
-					newWave.setAmplitude(wave.getAmplitude());
-					newWave.setDistribution(wave.getDistribution());
-					newWave.setForm(wave.getForm());
-					newWave.setFrequency(wave.getFrequency());
-					newWave.setPhase(wave.getPhase());
-					for (final String dimension : dimensionNames) {
-						newWave.setCenter(dimension, wave.getCenter(dimension));
-						newWave.setDimension(dimension,
-								wave.getDimension(dimension));
-					}
-					copy.waves.add(newWave);
-				}
+                                this.waves.stream().map((wave) -> {
+                                final WaveMultidimensionalFunction newWave = new WaveMultidimensionalFunction(
+                                        dimensionNames);
+                                newWave.setAmplitude(wave.getAmplitude());
+                                newWave.setDistribution(wave.getDistribution());
+                                newWave.setForm(wave.getForm());
+                                newWave.setFrequency(wave.getFrequency());
+                                newWave.setPhase(wave.getPhase());
+                                for (final String dimension : dimensionNames) {
+                                    newWave.setCenter(dimension, wave.getCenter(dimension));
+                                    newWave.setDimension(dimension,
+                                            wave.getDimension(dimension));
+                                }
+                                return newWave;
+                            }).forEach((newWave) -> {
+                                copy.waves.add(newWave);
+                            });
 			}
 		}
 		return copy;
@@ -259,26 +256,28 @@ public class ExpressionFunction implements Cloneable {
 		copy.receptors.add(newReceptor);
 		if (copy.receptors.size() > this.receptors.size()) {
 			copy.waves.clear();
-			for (final WaveMultidimensionalFunction wave : this.waves) {
-				final String[] names = new String[wave.getDimensionNames().length + 1];
-				int index = 0;
-				for (final String dimensionName : wave.getDimensionNames())
-					names[index++] = dimensionName;
-				names[index] = String.valueOf(newReceptor.hashCode());
-				final WaveMultidimensionalFunction newWave = new WaveMultidimensionalFunction(
-						names);
-				newWave.setAmplitude(wave.getAmplitude());
-				newWave.setDistribution(wave.getDistribution());
-				newWave.setForm(wave.getForm());
-				newWave.setFrequency(wave.getFrequency());
-				newWave.setPhase(wave.getPhase());
-				for (final String dimension : wave.getDimensionNames()) {
-					newWave.setCenter(dimension, wave.getCenter(dimension));
-					newWave.setDimension(dimension,
-							wave.getDimension(dimension));
-				}
-				copy.waves.add(newWave);
-			}
+                        this.waves.stream().map((wave) -> {
+                        final String[] names = new String[wave.getDimensionNames().length + 1];
+                        int index = 0;
+                        for (final String dimensionName : wave.getDimensionNames())
+                            names[index++] = dimensionName;
+                        names[index] = String.valueOf(newReceptor.hashCode());
+                        final WaveMultidimensionalFunction newWave = new WaveMultidimensionalFunction(
+                                names);
+                        newWave.setAmplitude(wave.getAmplitude());
+                        newWave.setDistribution(wave.getDistribution());
+                        newWave.setForm(wave.getForm());
+                        newWave.setFrequency(wave.getFrequency());
+                        newWave.setPhase(wave.getPhase());
+                        for (final String dimension : wave.getDimensionNames()) {
+                            newWave.setCenter(dimension, wave.getCenter(dimension));
+                            newWave.setDimension(dimension,
+                                    wave.getDimension(dimension));
+                        }
+                        return newWave;
+                    }).forEach((newWave) -> {
+                        copy.waves.add(newWave);
+                    });
 		}
 		return copy.mutate(1.0);
 	}

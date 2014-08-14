@@ -108,7 +108,7 @@ public class TestSignalProcessingWavelet {
 					population.values());
 			while (population.size() < POPULATION_SIZE) {
 				SignalProcessingWavelet processor;
-				if (RANDOM.nextFloat() < (float) 0.5)
+				if (RANDOM.nextFloat() < 0.5)
 					processor = populationArray.get(RANDOM
 							.nextInt(populationArray.size()));
 				else

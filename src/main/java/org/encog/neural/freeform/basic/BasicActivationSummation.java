@@ -83,12 +83,13 @@ public class BasicActivationSummation implements InputSummation, Serializable {
 		final double[] sumArray = new double[1];
 		this.sum = 0;
 
-		// sum the input connections
-		for (final FreeformConnection connection : this.inputs) {
-			connection.getSource().performCalculation();
-			this.sum += connection.getWeight()
-					* connection.getSource().getActivation();
-		}
+                this.inputs.stream().map((connection) -> {
+                connection.getSource().performCalculation();
+                return connection;
+            }).forEach((connection) -> {
+                this.sum += connection.getWeight()
+                        * connection.getSource().getActivation();
+            });
 
 		// perform the activation function
 		sumArray[0] = this.sum;

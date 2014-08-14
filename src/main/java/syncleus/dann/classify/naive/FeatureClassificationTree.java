@@ -48,4 +48,9 @@ public class FeatureClassificationTree<F, C> extends
 		}
 		return classification;
 	}
+
+    @Override
+    public Object clone() {
+        return super.clone(); //To change body of generated methods, choose Tools | Templates.
+    }
 }

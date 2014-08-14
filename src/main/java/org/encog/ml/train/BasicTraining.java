@@ -134,14 +134,9 @@ public abstract class BasicTraining implements MLTrain {
 	 */
 	@Override
 	public boolean isTrainingDone() {
-		for (final Strategy strategy : this.strategies) {
-			if (strategy instanceof EndTrainingStrategy) {
-				final EndTrainingStrategy end = (EndTrainingStrategy) strategy;
-				if (end.shouldStop()) {
-					return true;
-				}
-			}
-		}
+            if (this.strategies.stream().filter((strategy) -> (strategy instanceof EndTrainingStrategy)).map((strategy) -> (EndTrainingStrategy) strategy).anyMatch((end) -> (end.shouldStop()))) {
+                return true;
+            }
 
 		return false;
 	}
@@ -166,9 +161,9 @@ public abstract class BasicTraining implements MLTrain {
 	 * Call the strategies after an iteration.
 	 */
 	public void postIteration() {
-		for (final Strategy strategy : this.strategies) {
-			strategy.postIteration();
-		}
+            this.strategies.stream().forEach((strategy) -> {
+                strategy.postIteration();
+            });
 	}
 
 	/**
@@ -178,9 +173,9 @@ public abstract class BasicTraining implements MLTrain {
 
 		this.iteration++;
 
-		for (final Strategy strategy : this.strategies) {
-			strategy.preIteration();
-		}
+                this.strategies.stream().forEach((strategy) -> {
+                strategy.preIteration();
+            });
 	}
 
 	/**

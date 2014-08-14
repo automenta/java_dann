@@ -98,9 +98,9 @@ public class MutableByte extends MutableNumber<Byte> implements
 		else if (doubleDistributed < Byte.MIN_VALUE)
 			distributedRand = Byte.MIN_VALUE;
 		final byte result = (byte) (this.getNumber() + distributedRand);
-		if ((distributedRand > (byte) 0) && (result < this.getNumber()))
+		if ((distributedRand > 0) && (result < this.getNumber()))
 			return new MutableByte(Byte.MAX_VALUE);
-		else if ((distributedRand < (byte) 0) && (result > this.getNumber()))
+		else if ((distributedRand < 0) && (result > this.getNumber()))
 			return new MutableByte(Byte.MIN_VALUE);
 		return new MutableByte(result);
 	}

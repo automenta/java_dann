@@ -70,14 +70,18 @@ public class WaveletChromatid implements Chromatid<AbstractWaveletGene>,
 		this.localSignalGenes = new ArrayList<SignalGene>();
 		this.externalSignalGenes = new ArrayList<ExternalSignalGene>();
 
-		for (final AbstractWaveletGene currentGene : copy.sequencedGenes)
-			this.sequencedGenes.add(currentGene.clone());
-		for (final PromoterGene currentGene : copy.promoters)
-			this.promoters.add(currentGene.clone());
-		for (final SignalGene currentGene : copy.localSignalGenes)
-			this.localSignalGenes.add(currentGene.clone());
-		for (final ExternalSignalGene currentGene : copy.externalSignalGenes)
-			this.externalSignalGenes.add(currentGene.clone());
+                copy.sequencedGenes.stream().forEach((currentGene) -> {
+                this.sequencedGenes.add(currentGene.clone());
+            });
+            copy.promoters.stream().forEach((currentGene) -> {
+                this.promoters.add(currentGene.clone());
+            });
+            copy.localSignalGenes.stream().forEach((currentGene) -> {
+                this.localSignalGenes.add(currentGene.clone());
+            });
+            copy.externalSignalGenes.stream().forEach((currentGene) -> {
+                this.externalSignalGenes.add(currentGene.clone());
+            });
 	}
 
 	public static WaveletChromatid newRandomWaveletChromatid() {
@@ -95,58 +99,49 @@ public class WaveletChromatid implements Chromatid<AbstractWaveletGene>,
 	Set<SignalKey> getExpressedSignals(final boolean external) {
 		// calculate the signal concentrations
 		final HashSet<SignalKey> allSignals = new HashSet<SignalKey>();
-		for (final AbstractWaveletGene waveletGene : this.sequencedGenes) {
-			// if the current gene doesnt express a signal then skip it.
-			if (!(waveletGene instanceof SignalGene))
-				continue;
-			// convert the gene's type
-			final SignalGene gene = (SignalGene) waveletGene;
-
-			// check if the gene's signal is internal or external. continue if
-			// it doesnt match
-			final boolean outward = (gene instanceof ExternalSignalGene)
-					&& (((ExternalSignalGene) gene).isOutward());
-			if (external != outward) {
-				// we want external signals and the gene is pointing inwards,
-				// or vise versa -> uninteresting gene -> skip it
-				continue;
-			}
-
-			allSignals.add(gene.getOutputSignal());
-		}
+                this.sequencedGenes.stream().filter((waveletGene) -> !(!(waveletGene instanceof SignalGene))).map((waveletGene) -> (SignalGene) waveletGene).forEach((gene) -> {
+                final boolean outward = (gene instanceof ExternalSignalGene)
+                        && (((ExternalSignalGene) gene).isOutward());
+                if (!(external != outward)) {
+                    allSignals.add(gene.getOutputSignal());
+                }
+            });
 
 		return Collections.unmodifiableSet(allSignals);
 	}
 
 	public Set<AbstractKey> getKeys() {
 		final HashSet<AbstractKey> allKeys = new HashSet<AbstractKey>();
-		for (final AbstractWaveletGene gene : this.sequencedGenes)
-			allKeys.addAll(gene.getKeys());
+                this.sequencedGenes.stream().forEach((gene) -> {
+                allKeys.addAll(gene.getKeys());
+            });
 		return Collections.unmodifiableSet(allKeys);
 	}
 
 	public void preTick() {
-		for (final AbstractWaveletGene gene : this.sequencedGenes)
-			gene.preTick();
+            this.sequencedGenes.stream().forEach((gene) -> {
+                gene.preTick();
+            });
 	}
 
 	public void tick() {
 		// first we need to calculate the promotion of each site
 		final Map<Integer, Double> promotions = new HashMap<Integer, Double>();
-		for (final PromoterGene promoter : this.promoters) {
-			final int promoterIndex = this.sequencedGenes.indexOf(promoter);
-			final int promotedIndex = promoter.getTargetDistance()
-					+ promoterIndex;
-			if (promotedIndex < this.sequencedGenes.size()) {
-				double promotion = 0.0;
-				if (promotions.containsKey(promotedIndex))
-					promotion = promotions.get(promotedIndex);
-				final double newPromotion = promotion
-						+ promoter.expressionActivity();
-				if (newPromotion != 0.0)
-					promotions.put(promotedIndex, newPromotion);
-			}
-		}
+                this.promoters.stream().forEach((promoter) -> {
+                final int promoterIndex = this.sequencedGenes.indexOf(promoter);
+                final int promotedIndex = promoter.getTargetDistance()
+                        + promoterIndex;
+                if (promotedIndex < this.sequencedGenes.size()) {
+                    double promotion = 0.0;
+                    if (promotions.containsKey(promotedIndex))
+                        promotion = promotions.get(promotedIndex);
+                    final double newPromotion = promotion
+                            + promoter.expressionActivity();
+                    if (newPromotion != 0.0) {
+                        promotions.put(promotedIndex, newPromotion);
+                    }
+                }
+            });
 
 		for (int sequenceIndex = 0; sequenceIndex < this.sequencedGenes.size(); sequenceIndex++) {
 			this.sequencedGenes.get(sequenceIndex).tick(
@@ -233,25 +228,22 @@ public class WaveletChromatid implements Chromatid<AbstractWaveletGene>,
 					this.sequencedGenes.size());
 		}
 
-		// remove displaced genes from specific gene type lists
-		for (final AbstractWaveletGene oldGene : oldGenes) {
-			if (oldGene instanceof PromoterGene)
-				this.promoters.remove(oldGene);
-			else if (oldGene instanceof ExternalSignalGene)
-				this.externalSignalGenes.remove(oldGene);
-			else if (oldGene instanceof SignalGene)
-				this.localSignalGenes.remove(oldGene);
-		}
-
-		// add new genes to the specific gene type list
-		for (final AbstractWaveletGene newGene : geneticSegment) {
-			if (newGene instanceof PromoterGene)
-				this.promoters.add((PromoterGene) newGene);
-			else if (newGene instanceof ExternalSignalGene)
-				this.externalSignalGenes.add((ExternalSignalGene) newGene);
-			else if (newGene instanceof SignalGene)
-				this.localSignalGenes.add((SignalGene) newGene);
-		}
+                oldGenes.stream().forEach((oldGene) -> {
+                if (oldGene instanceof PromoterGene)
+                    this.promoters.remove(oldGene);
+                else if (oldGene instanceof ExternalSignalGene)
+                    this.externalSignalGenes.remove(oldGene);
+                else if (oldGene instanceof SignalGene)
+                    this.localSignalGenes.remove(oldGene);
+            });
+            geneticSegment.stream().forEach((newGene) -> {
+                if (newGene instanceof PromoterGene)
+                    this.promoters.add((PromoterGene) newGene);
+                else if (newGene instanceof ExternalSignalGene)
+                    this.externalSignalGenes.add((ExternalSignalGene) newGene);
+                else if (newGene instanceof SignalGene)
+                    this.localSignalGenes.add((SignalGene) newGene);
+            });
 
 		// update sequence genes to use the new genes
 		this.sequencedGenes = newGenes;
@@ -271,14 +263,18 @@ public class WaveletChromatid implements Chromatid<AbstractWaveletGene>,
 			copy.localSignalGenes = new ArrayList<SignalGene>();
 			copy.externalSignalGenes = new ArrayList<ExternalSignalGene>();
 
-			for (final AbstractWaveletGene currentGene : this.sequencedGenes)
-				copy.sequencedGenes.add(currentGene.clone());
-			for (final PromoterGene currentGene : this.promoters)
-				copy.promoters.add(currentGene.clone());
-			for (final SignalGene currentGene : this.localSignalGenes)
-				copy.localSignalGenes.add(currentGene.clone());
-			for (final ExternalSignalGene currentGene : this.externalSignalGenes)
-				copy.externalSignalGenes.add(currentGene.clone());
+                        this.sequencedGenes.stream().forEach((currentGene) -> {
+                        copy.sequencedGenes.add(currentGene.clone());
+                    });
+                    this.promoters.stream().forEach((currentGene) -> {
+                        copy.promoters.add(currentGene.clone());
+                    });
+                    this.localSignalGenes.stream().forEach((currentGene) -> {
+                        copy.localSignalGenes.add(currentGene.clone());
+                    });
+                    this.externalSignalGenes.stream().forEach((currentGene) -> {
+                        copy.externalSignalGenes.add(currentGene.clone());
+                    });
 
 			return copy;
 		} catch (final CloneNotSupportedException caught) {
@@ -344,9 +340,9 @@ public class WaveletChromatid implements Chromatid<AbstractWaveletGene>,
 			else
 				this.sequencedGenes.add(newGene);
 		}
-		// mutate each gene (the gene itself will handle if it actually mutates)
-		for (final AbstractWaveletGene currentGene : this.sequencedGenes)
-			currentGene.mutate(keyPool);
+                this.sequencedGenes.stream().forEach((currentGene) -> {
+                currentGene.mutate(keyPool);
+            });
 		// mutate the mutability factor.
 		if (Mutations.mutationEvent(this.mutability))
 			this.mutability = Mutations.mutabilityMutation(this.mutability);

@@ -90,4 +90,9 @@ public class BasicMLDataCentroid implements Centroid<MLData>, Cloneable {
 
 		return Math.sqrt(sum);
 	}
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone(); //To change body of generated methods, choose Tools | Templates.
+    }
 }

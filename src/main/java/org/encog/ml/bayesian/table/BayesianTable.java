@@ -185,10 +185,12 @@ public class BayesianTable implements Serializable {
 	@Override
 	public String toString() {
 		final StringBuilder result = new StringBuilder();
-		for (final TableLine line : this.lines) {
-			result.append(line.toString());
-			result.append("\n");
-		}
+                this.lines.stream().map((line) -> {
+                result.append(line.toString());
+                return line;
+            }).forEach((_item) -> {
+                result.append("\n");
+            });
 		return result.toString();
 	}
 

@@ -84,9 +84,9 @@ public class BPROPJob extends TrainingJob {
 			train.setThreadCount(0);
 		}
 
-		for (final Strategy strategy : getStrategies()) {
-			train.addStrategy(strategy);
-		}
+                getStrategies().stream().forEach((strategy) -> {
+                train.addStrategy(strategy);
+            });
 
 		setTrain(train);
 	}

@@ -197,8 +197,10 @@ public class GeneticAlgorithmChromosome implements
 	public GeneticAlgorithmChromosome mutate(final double deviation) {
 		final GeneticAlgorithmChromosome mutated = this.clone();
 		mutated.alleles.clear();
-		for (final AbstractValueGene allele : this.alleles)
-			mutated.alleles.add(allele.mutate(deviation));
+                this.alleles)
+			mutated.alleles.add..forEach((allele) -> {
+                am((allele.m            });
+utate(deviation));
 		return mutated;
 	}
 

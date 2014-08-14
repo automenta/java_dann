@@ -42,9 +42,9 @@ public abstract class AbstractDynamicGraphicalModel<N extends DynamicGraphicalMo
 
 	@Override
 	public void learnStates(final boolean updateHistory) {
-		for (final N node : this.getNodes()) {
-			node.learnState(updateHistory);
-		}
+            this.getNodes().stream().forEach((node) -> {
+                node.learnState(updateHistory);
+            });
 	}
 
 	@Override

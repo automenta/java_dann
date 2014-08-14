@@ -136,13 +136,11 @@ public class AnalyzeNetwork {
 			}
 		}
 
-		for (final Layer layer : network.getStructure().getLayers()) {
-			if (layer.hasBias()) {
-				for (int i = 0; i < layer.getNeuronCount(); i++) {
-
-				}
-			}
-		}
+                network.getStructure().getLayers().stream().filter((layer) -> (layer.hasBias())).forEach((layer) -> {
+                for (int i = 0; i < layer.getNeuronCount(); i++) {
+                    
+                }
+            });
 
 		this.disabledConnections = assignDisabled;
 		this.totalConnections = assignedTotal;

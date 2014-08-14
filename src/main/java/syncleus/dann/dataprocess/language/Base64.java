@@ -241,10 +241,10 @@ public class Base64 {
 	private final static int MAX_LINE_LENGTH = 76;
 
 	/** The equals sign (=) as a byte. */
-	private final static byte EQUALS_SIGN = (byte) '=';
+	private final static byte EQUALS_SIGN = '=';
 
 	/** The new line character (\n) as a byte. */
-	private final static byte NEW_LINE = (byte) '\n';
+	private final static byte NEW_LINE = '\n';
 
 	/** Preferred encoding. */
 	private final static String PREFERRED_ENCODING = "US-ASCII";

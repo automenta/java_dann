@@ -42,13 +42,16 @@ public class TestCounters {
 			letters.add(letter);
 		final Set<List<Character>> combinations = Counters
 				.everyCombination(letters);
-		for (final List<Character> combination : combinations) {
-			final StringBuilder combinationString = new StringBuilder(
-					combination.size());
-			for (final Character combinationChar : combination)
-				combinationString.append(combinationChar);
-			LOGGER.info("Combination Generated: " + combinationString);
-		}
+                combinations.stream().map((combination) -> {
+                final StringBuilder combinationString = new StringBuilder(
+                        combination.size());
+                combination.stream().forEach((combinationChar) -> {
+                    combinationString.append(combinationChar);
+                });
+                return combinationString;
+            }).forEach((combinationString) -> {
+                LOGGER.info("Combination Generated: " + combinationString);
+            });
 
 		Assert.assertTrue(
 				"Wrong number of combinations: " + combinations.size(),

@@ -101,28 +101,20 @@ public class LayeredBrainHyperassociativeMap
 
 		// populate initial associations based off edges
 		final Map<BackpropNeuron, Double> associations = new HashMap<BackpropNeuron, Double>();
-		for (final Synapse<BackpropNeuron> neighborEdge : getGraph()
-				.getAdjacentEdges(nodeToQuery)) {
-			final Double currentWeight = (isUsingWeights() ? neighborEdge
-					.getWeight() : getEquilibriumDistance());
-			for (final BackpropNeuron neighbor : neighborEdge.getNodes()) {
-				if (!neighbor.equals(nodeToQuery)) {
-					associations.put(neighbor, currentWeight);
-				}
-			}
-		}
-
-		// add aditional associations per layer.
-		for (final Set<BackpropNeuron> layer : getGraph().getLayers()) {
-			if (layer.contains(neuronToQuery)) {
-				for (final BackpropNeuron layerNeuron : layer) {
-					if (((neuronToQuery instanceof BackpropStaticNeuron) && (layerNeuron instanceof BackpropStaticNeuron))
-							|| (!(neuronToQuery instanceof BackpropStaticNeuron) && !(layerNeuron instanceof BackpropStaticNeuron))) {
-						associations.put(layerNeuron, getEquilibriumDistance());
-					}
-				}
-			}
-		}
+                getGraph()
+                        .getAdjacentEdges(nodeToQuery).stream().forEach((neighborEdge) -> {
+                                    final Double currentWeight = (isUsingWeights() ? neighborEdge
+                                            .getWeight() : getEquilibriumDistance());
+                neighborEdge.getNodes().stream().filter((neighbor) -> (!neighbor.equals(nodeToQuery))).forEach((neighbor) -> {
+                    associations.put(neighbor, currentWeight);
+                });
+            });
+            getGraph().getLayers().stream().filter((layer) -> (layer.contains(neuronToQuery))).forEach((layer) -> {
+                layer.stream().filter((layerNeuron) -> (((neuronToQuery instanceof BackpropStaticNeuron) && (layerNeuron instanceof BackpropStaticNeuron))
+                        || (!(neuronToQuery instanceof BackpropStaticNeuron) && !(layerNeuron instanceof BackpropStaticNeuron)))).forEach((layerNeuron) -> {
+                                                            associations.put(layerNeuron, getEquilibriumDistance());
+                });
+            });
 		associations.remove(nodeToQuery);
 
 		if (cached) {

@@ -37,12 +37,13 @@ public class Cell {
 
 		final Set<SignalKey> localSignals = this.nucleus
 				.getExpressedSignals(false);
-		for (final SignalKey localSignal : localSignals) {
-			final SignalKeyConcentration newConcentration = new SignalKeyConcentration(
-					localSignal);
-			this.localConcentrations.add(newConcentration);
-			this.nucleus.bind(newConcentration, false);
-		}
+                localSignals.stream().map((localSignal) -> new SignalKeyConcentration(
+                    localSignal)).map((newConcentration) -> {
+                                            this.localConcentrations.add(newConcentration);
+                return newConcentration;
+            }).forEach((newConcentration) -> {
+                this.nucleus.bind(newConcentration, false);
+            });
 	}
 
 	public static boolean bind(final SignalKeyConcentration concentration,

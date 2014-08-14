@@ -83,4 +83,9 @@ public class BasicMLDataPairCentroid implements Centroid<MLDataPair>, Cloneable 
 			value.setData(i, ((value.getData(i) * value.size()) + a[i])
 					/ (value.size() + 1));
 	}
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone(); //To change body of generated methods, choose Tools | Templates.
+    }
 }

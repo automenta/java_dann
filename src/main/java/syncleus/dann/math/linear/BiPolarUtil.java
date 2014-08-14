@@ -88,10 +88,7 @@ public final class BiPolarUtil {
 	 * @return A boolean value.
 	 */
 	public static boolean double2bipolar(final double d) {
-		if (d > 0) {
-			return true;
-		}
-		return false;
+		return d > 0;
 	}
 
 	/**

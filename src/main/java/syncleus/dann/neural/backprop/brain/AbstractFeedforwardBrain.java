@@ -28,6 +28,7 @@ import java.util.stream.Stream;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import syncleus.dann.graph.AbstractBidirectedAdjacencyGraph;
 
 import syncleus.dann.neural.AbstractLocalBrain;
 import syncleus.dann.neural.NeuronGroup;
@@ -106,13 +107,14 @@ public abstract class AbstractFeedforwardBrain<IN extends InputBackpropNeuron, O
 	@Override
 	public final List<Set<N>> getLayers() {
 		final List<Set<N>> layerList = new ArrayList<Set<N>>();
-		for (final NeuronGroup<N> layerGroup : this.neuronLayers) {
-			final Set<N> layer = new HashSet<N>();
-			layerGroup.getChildrenNeuronsRecursivly()
-					.forEach(n -> layer.add(n));
-
-			layerList.add(Collections.unmodifiableSet(layer));
-		}
+                this.neuronLayers.stream().map((layerGroup) -> {
+            final Set<N> layer = new HashSet<N>();
+            layerGroup.getChildrenNeuronsRecursivly()
+                    .forEach(n -> layer.add(n));
+            return layer;
+        }).forEach((layer) -> {
+            layerList.add(Collections.unmodifiableSet(layer));
+        });
 		return Collections.unmodifiableList(layerList);
 	}
 
@@ -129,49 +131,9 @@ public abstract class AbstractFeedforwardBrain<IN extends InputBackpropNeuron, O
 		if (!this.initialized)
 			throw new IllegalStateException(
 					"An implementation of AbstractFeedforwardBrain did not initialize network");
-		// step forward through all the layers, except the last (output)
-		for (final NeuronGroup<N> layer : this.neuronLayers) {
-			final Stream<N> layerNeurons = layer.getChildrenNeuronsRecursivly();
-			layerNeurons.parallel().forEach(n -> n.tick());
-
-			// if( this.getThreadExecutor() == null )
-			// {
-			// for(final syncleus.dann.neural.backprop.BackpropNeuron neuron :
-			// layerNeurons)
-			// neuron.tick();
-			// }
-			// else
-			// {
-			// //begin processing all neurons in one layer simultaniously
-			// final java.util.ArrayList<java.util.concurrent.Future> futures =
-			// new java.util.ArrayList<java.util.concurrent.Future>();
-			// for(final syncleus.dann.neural.backprop.BackpropNeuron neuron :
-			// layerNeurons)
-			// futures.add(this.getThreadExecutor().submit(new
-			// syncleus.dann.neural.backprop.brain.AbstractFeedforwardBrain.Propagate(neuron)));
-			// //wait until all neurons have propogated
-			// try
-			// {
-			// for(final java.util.concurrent.Future future : futures)
-			// future.get();
-			// }
-			// catch(final InterruptedException caught)
-			// {
-			// LOGGER.warn("Propagate was unexpectidy interupted", caught);
-			// throw new
-			// syncleus.dann.UnexpectedInterruptedException("Unexpected interuption. Get should block indefinately",
-			// caught);
-			// }
-			// catch(final java.util.concurrent.ExecutionException caught)
-			// {
-			// LOGGER.error("Propagate had an unexcepted problem executing.",
-			// caught);
-			// throw new
-			// syncleus.dann.UnexpectedDannError("Unexpected execution exception. Get should block indefinately",
-			// caught);
-			// }
-			// }
-		}
+                this.neuronLayers.stream().map((layer) -> layer.getChildrenNeuronsRecursivly()).forEach((layerNeurons) -> {
+            layerNeurons.parallel().forEach(n -> n.tick());
+        });
 	}
 
 	@Override
@@ -237,4 +199,9 @@ public abstract class AbstractFeedforwardBrain<IN extends InputBackpropNeuron, O
 	 * @since 2.0
 	 */
 	protected abstract N createNeuron(int layer, int index);
+
+    @Override
+    public AbstractBidirectedAdjacencyGraph<N, S> clone() {
+        return super.clone(); //To change body of generated methods, choose Tools | Templates.
+    }
 }

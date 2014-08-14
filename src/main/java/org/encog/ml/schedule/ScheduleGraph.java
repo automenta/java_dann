@@ -66,9 +66,9 @@ public class ScheduleGraph extends BasicGraph {
 			visited.put(node, node);
 			result.append(node.toString());
 			result.append("\n");
-			for (final BasicEdge edge : node.getConnections()) {
-				dumpNode(result, (ActionNode) edge.getTo(), visited);
-			}
+                        node.getConnections().stream().forEach((edge) -> {
+                        dumpNode(result, (ActionNode) edge.getTo(), visited);
+                    });
 		}
 	}
 

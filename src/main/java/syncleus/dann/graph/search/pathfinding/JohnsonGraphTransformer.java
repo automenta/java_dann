@@ -37,11 +37,10 @@ public class JohnsonGraphTransformer<N> implements
 	private static final Object BLANK_NODE = new Object();
 
 	private boolean containsInfinite(final Graph<N, ?> original) {
-		for (final Edge edge : original.getEdges()) {
-			if (edge instanceof Weighted
-					&& Double.isInfinite(((Weighted) edge).getWeight()))
-				return true;
-		}
+            if (original.getEdges().stream().anyMatch((edge) -> (edge instanceof Weighted
+                    && Double.isInfinite(((Weighted) edge).getWeight())))) {
+                return true;
+            }
 		return false;
 	}
 
@@ -55,15 +54,17 @@ public class JohnsonGraphTransformer<N> implements
 			throw new IllegalArgumentException(
 					"original can not contain infinite weights");
 		final Set<WeightedDirectedEdge<Object>> originalEdges = new HashSet<WeightedDirectedEdge<Object>>();
-		for (final WeightedDirectedEdge<N> originalEdge : original.getEdges())
-			originalEdges.add((WeightedDirectedEdge<Object>) originalEdge);
+                original.getEdges().stream().forEach((originalEdge) -> {
+                originalEdges.add((WeightedDirectedEdge<Object>) originalEdge);
+            });
 		final MutableDirectedAdjacencyGraph<Object, WeightedDirectedEdge<Object>> copyGraph = new MutableDirectedAdjacencyGraph<Object, WeightedDirectedEdge<Object>>(
 				new HashSet<Object>(original.getNodes()), originalEdges);
 		final Set<Object> originalNodes = copyGraph.getNodes();
 		copyGraph.add(BLANK_NODE);
-		for (final Object originalNode : originalNodes)
-			copyGraph.add(new ImmutableWeightedDirectedEdge<Object>(BLANK_NODE,
-					originalNode, 0.0));
+                originalNodes.stream().forEach((originalNode) -> {
+                copyGraph.add(new ImmutableWeightedDirectedEdge<Object>(BLANK_NODE,
+                        originalNode, 0.0));
+            });
 		final BellmanFordPathFinder<Object, WeightedDirectedEdge<Object>> pathFinder = new BellmanFordPathFinder<Object, WeightedDirectedEdge<Object>>(
 				copyGraph);
 		final MutableDirectedAdjacencyGraph johnsonGraph = new MutableDirectedAdjacencyGraph(
@@ -71,16 +72,16 @@ public class JohnsonGraphTransformer<N> implements
 						original.getEdges()));
 		final List<WeightedDirectedEdge<N>> edges = new ArrayList<WeightedDirectedEdge<N>>(
 				johnsonGraph.getEdges());
-		for (final WeightedDirectedEdge<N> edge : edges) {
-			final double newWeight = edge.getWeight()
-					+ getPathWeight(pathFinder.getBestPath(BLANK_NODE,
-							edge.getSourceNode(), false))
-					- getPathWeight(pathFinder.getBestPath(BLANK_NODE,
-							edge.getDestinationNode(), false));
-			johnsonGraph.remove(edge);
-			johnsonGraph.add(new SimpleWeightedDirectedEdge<N>(edge
-					.getSourceNode(), edge.getDestinationNode(), newWeight));
-		}
+                edges.stream().forEach((edge) -> {
+                final double newWeight = edge.getWeight()
+                        + getPathWeight(pathFinder.getBestPath(BLANK_NODE,
+                                edge.getSourceNode(), false))
+                        - getPathWeight(pathFinder.getBestPath(BLANK_NODE,
+                                edge.getDestinationNode(), false));
+                johnsonGraph.remove(edge);
+                johnsonGraph.add(new SimpleWeightedDirectedEdge<N>(edge
+                        .getSourceNode(), edge.getDestinationNode(), newWeight));
+            });
 
 		return johnsonGraph;
 	}
@@ -88,8 +89,7 @@ public class JohnsonGraphTransformer<N> implements
 	private static double getPathWeight(
 			final List<WeightedDirectedEdge<Object>> path) {
 		double weight = 0.0;
-		for (final WeightedDirectedEdge<Object> node : path)
-			weight += node.getWeight();
+                weight = path.stream().map((node) -> node.getWeight()).reduce(weight, (accumulator, _item) -> accumulator + _item);
 		return weight;
 	}
 }

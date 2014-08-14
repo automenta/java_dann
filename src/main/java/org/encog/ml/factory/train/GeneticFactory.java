@@ -72,7 +72,7 @@ public class GeneticFactory {
 		final MLTrain train = new MLMethodGeneticAlgorithm(new MethodFactory() {
 			@Override
 			public MLMethod factor() {
-				final MLMethod result = (MLMethod) ObjectCloner.deepCopy(method);
+				final MLMethod result = ObjectCloner.deepCopy(method);
 				((MLResettable) result).reset();
 				return result;
 			}

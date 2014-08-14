@@ -238,9 +238,7 @@ public class BayesianEvent implements Serializable {
 	public int calculateParameterCount() {
 		int result = this.getChoices().size() - 1;
 
-		for (final BayesianEvent parent : this.parents) {
-			result *= parent.getChoices().size();
-		}
+                result = this.parents.stream().map((parent) -> parent.getChoices().size()).reduce(result, (accumulator, _item) -> accumulator * _item);
 
 		return result;
 	}
@@ -266,14 +264,14 @@ public class BayesianEvent implements Serializable {
 		this.minimumChoice = Double.POSITIVE_INFINITY;
 		this.maximumChoice = Double.NEGATIVE_INFINITY;
 
-		for (final BayesianChoice choice : this.choices) {
-			if (choice.getMin() < this.minimumChoice) {
-				this.minimumChoice = choice.getMin();
-			}
-			if (choice.getMax() > this.maximumChoice) {
-				this.maximumChoice = choice.getMax();
-			}
-		}
+                this.choices.stream().map((choice) -> {
+                if (choice.getMin() < this.minimumChoice) {
+                    this.minimumChoice = choice.getMin();
+                }
+                return choice;
+            }).filter((choice) -> (choice.getMax() > this.maximumChoice)).forEach((choice) -> {
+                this.maximumChoice = choice.getMax();
+            });
 
 		// build truth table
 		if (this.table == null) {
@@ -313,7 +311,7 @@ public class BayesianEvent implements Serializable {
 		boolean done = false;
 		boolean eof = false;
 
-		if (this.parents.size() == 0) {
+		if (this.parents.isEmpty()) {
 			done = true;
 			eof = true;
 		}
@@ -388,11 +386,9 @@ public class BayesianEvent implements Serializable {
 	 * @return True if the event has the specified given.
 	 */
 	public boolean hasGiven(final String l) {
-		for (final BayesianEvent event : this.parents) {
-			if (event.getLabel().equals(l)) {
-				return true;
-			}
-		}
+            if (this.parents.stream().anyMatch((event) -> (event.getLabel().equals(l)))) {
+                return true;
+            }
 		return false;
 	}
 

@@ -74,7 +74,7 @@ public class BasicDiscreteCell implements DiscreteCell, Serializable {
 
 	@Override
 	public double getAvg() {
-		return (int) EngineArray.mean(this.data);
+		return EngineArray.mean(this.data);
 	}
 
 	@Override

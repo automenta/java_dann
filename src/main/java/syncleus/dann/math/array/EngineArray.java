@@ -251,7 +251,7 @@ public final class EngineArray {
 	public static double[] objectToDouble(final Double[] array) {
 		final double[] result = new double[array.length];
 		for (int i = 0; i < array.length; i++) {
-			result[i] = new Double(array[i]);
+			result[i] = array[i];
 		}
 		return result;
 	}

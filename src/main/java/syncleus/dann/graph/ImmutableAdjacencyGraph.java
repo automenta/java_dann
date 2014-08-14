@@ -51,20 +51,22 @@ public class ImmutableAdjacencyGraph<N, E extends Edge<N>> extends
 	@Override
 	protected Map<N, Set<E>> getInternalAdjacencyEdges() {
 		final Map<N, Set<E>> newAdjacentEdges = new HashMap<N, Set<E>>();
-		for (final Entry<N, Set<E>> neighborEdgeEntry : super
-				.getInternalAdjacencyEdges().entrySet())
-			newAdjacentEdges.put(neighborEdgeEntry.getKey(), new HashSet<E>(
-					neighborEdgeEntry.getValue()));
+                super
+                        .getInternalAdjacencyEdges().entrySet().stream().forEach((neighborEdgeEntry) -> {
+                                    newAdjacentEdges.put(neighborEdgeEntry.getKey(), new HashSet<E>(
+                                            neighborEdgeEntry.getValue()));
+            });
 		return newAdjacentEdges;
 	}
 
 	@Override
 	protected Map<N, List<N>> getInternalAdjacencyNodes() {
 		final Map<N, List<N>> newAdjacentNodes = new HashMap<N, List<N>>();
-		for (final Entry<N, List<N>> neighborNodeEntry : super
-				.getInternalAdjacencyNodes().entrySet())
-			newAdjacentNodes.put(neighborNodeEntry.getKey(), new ArrayList<N>(
-					neighborNodeEntry.getValue()));
+                super
+                        .getInternalAdjacencyNodes().entrySet().stream().forEach((neighborNodeEntry) -> {
+                                    newAdjacentNodes.put(neighborNodeEntry.getKey(), new ArrayList<N>(
+                                            neighborNodeEntry.getValue()));
+            });
 		return newAdjacentNodes;
 	}
 

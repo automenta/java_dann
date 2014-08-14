@@ -205,9 +205,7 @@ public class LuDecomposition2 {
 
 	public int[] getPivot() {
 		final int[] p = new int[m];
-		for (int i = 0; i < m; i++) {
-			p[i] = piv[i];
-		}
+            System.arraycopy(piv, 0, p, 0, m);
 		return p;
 	}
 

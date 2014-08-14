@@ -39,7 +39,7 @@ import syncleus.dann.math.array.EngineArray;
 /**
  * A basic implementation of the MLSequenceSet.
  */
-public class BasicMLSequenceSet implements Serializable, MLSequenceSet {
+public class BasicMLSequenceSet implements Serializable, MLSequenceSet, Cloneable {
 
 	/**
 	 * An iterator to be used with the BasicMLDataSet. This iterator does not
@@ -71,11 +71,7 @@ public class BasicMLSequenceSet implements Serializable, MLSequenceSet {
 
 			final MLDataSet seq = sequences.get(this.currentSequenceIndex);
 
-			if (this.currentIndex >= seq.getRecordCount()) {
-				return false;
-			}
-
-			return true;
+			return this.currentIndex < seq.getRecordCount();
 		}
 
 		/**
@@ -280,9 +276,7 @@ public class BasicMLSequenceSet implements Serializable, MLSequenceSet {
 	@Override
 	public long getRecordCount() {
 		long result = 0;
-		for (final MLDataSet ds : this.sequences) {
-			result += ds.getRecordCount();
-		}
+                result = this.sequences.stream().map((ds) -> ds.getRecordCount()).reduce(result, (accumulator, _item) -> accumulator + _item);
 		return result;
 	}
 

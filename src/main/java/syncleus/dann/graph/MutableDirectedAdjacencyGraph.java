@@ -56,16 +56,18 @@ public class MutableDirectedAdjacencyGraph<N, E extends DirectedEdge<N>>
 			return false;
 
 		if (this.getInternalEdges().add(newEdge)) {
-			for (final N currentNode : newEdge.getNodes()) {
-				this.getInternalAdjacencyEdges().get(currentNode).add(newEdge);
-
-				final List<N> newAdjacentNodes = new ArrayList<N>(
-						newEdge.getNodes());
-				newAdjacentNodes.remove(currentNode);
-				for (final N newAdjacentNode : newAdjacentNodes)
-					this.getInternalAdjacencyNodes().get(currentNode)
-							.add(newAdjacentNode);
-			}
+                    newEdge.getNodes().stream().map((currentNode) -> {
+                        this.getInternalAdjacencyEdges().get(currentNode).add(newEdge);
+                        return currentNode;
+                    }).forEach((currentNode) -> {
+                        final List<N> newAdjacentNodes = new ArrayList<N>(
+                                newEdge.getNodes());
+                        newAdjacentNodes.remove(currentNode);
+                        newAdjacentNodes.stream().forEach((newAdjacentNode) -> {
+                            this.getInternalAdjacencyNodes().get(currentNode)
+                                    .add(newAdjacentNode);
+                        });
+                    });
 			return true;
 		}
 
@@ -107,17 +109,19 @@ public class MutableDirectedAdjacencyGraph<N, E extends DirectedEdge<N>>
 		if (!this.getInternalEdges().remove(edgeToRemove))
 			return false;
 
-		for (final N removeNode : edgeToRemove.getNodes()) {
-			this.getInternalAdjacencyEdges().get(removeNode)
-					.remove(edgeToRemove);
-
-			final List<N> removeAdjacentNodes = new ArrayList<N>(
-					edgeToRemove.getNodes());
-			removeAdjacentNodes.remove(removeNode);
-			for (final N removeAdjacentNode : removeAdjacentNodes)
-				this.getInternalAdjacencyNodes().get(removeNode)
-						.remove(removeAdjacentNode);
-		}
+                edgeToRemove.getNodes().stream().map((removeNode) -> {
+                this.getInternalAdjacencyEdges().get(removeNode)
+                        .remove(edgeToRemove);
+                return removeNode;
+            }).forEach((removeNode) -> {
+                final List<N> removeAdjacentNodes = new ArrayList<N>(
+                        edgeToRemove.getNodes());
+                removeAdjacentNodes.remove(removeNode);
+                removeAdjacentNodes.stream().forEach((removeAdjacentNode) -> {
+                    this.getInternalAdjacencyNodes().get(removeNode)
+                            .remove(removeAdjacentNode);
+                });
+            });
 		return true;
 	}
 
@@ -138,24 +142,24 @@ public class MutableDirectedAdjacencyGraph<N, E extends DirectedEdge<N>>
 		final Set<E> removeEdges = this.getInternalAdjacencyEdges().get(
 				nodeToRemove);
 
-		// remove all the edges
-		for (final E removeEdge : removeEdges)
-			this.remove(removeEdge);
+                removeEdges.stream().forEach((removeEdge) -> {
+                this.remove(removeEdge);
+            });
 
 		// modify edges by removing the node to remove
 		final Set<E> newEdges = new HashSet<E>();
-		for (final E removeEdge : removeEdges) {
-			E newEdge = (E) removeEdge.disconnect(nodeToRemove);
-			while ((newEdge != null)
-					&& (newEdge.getNodes().contains(nodeToRemove)))
-				newEdge = (E) removeEdge.disconnect(nodeToRemove);
-			if (newEdge != null)
-				newEdges.add(newEdge);
-		}
-
-		// add the modified edges
-		for (final E newEdge : newEdges)
-			this.add(newEdge);
+                removeEdges.stream().map((removeEdge) -> {
+                E newEdge = (E) removeEdge.disconnect(nodeToRemove);
+                while ((newEdge != null)
+                        && (newEdge.getNodes().contains(nodeToRemove)))
+                    newEdge = (E) removeEdge.disconnect(nodeToRemove);
+                return newEdge;
+            }).filter((newEdge) -> (newEdge != null)).forEach((newEdge) -> {
+                newEdges.add(newEdge);
+            });
+            newEdges.stream().forEach((newEdge) -> {
+                this.add(newEdge);
+            });
 
 		// remove the node itself
 		this.getInternalAdjacencyEdges().remove(nodeToRemove);

@@ -270,7 +270,7 @@ public class EigenvalueDecomposition2 {
 				this.e[i] = 0.0;
 			}
 			for (int j = Math.max(i - 1, 0); j < nn; j++) {
-				norm = norm + Math.abs(this.h[i][j]);
+				norm += Math.abs(this.h[i][j]);
 			}
 		}
 
@@ -297,7 +297,7 @@ public class EigenvalueDecomposition2 {
 			// One root found
 
 			if (l == n) {
-				this.h[n][n] = this.h[n][n] + exshift;
+				this.h[n][n] += exshift;
 				this.d[n] = this.h[n][n];
 				this.e[n] = 0.0;
 				n--;
@@ -310,8 +310,8 @@ public class EigenvalueDecomposition2 {
 				p = (this.h[n - 1][n - 1] - this.h[n][n]) / 2.0;
 				q = p * p + w;
 				z = Math.sqrt(Math.abs(q));
-				this.h[n][n] = this.h[n][n] + exshift;
-				this.h[n - 1][n - 1] = this.h[n - 1][n - 1] + exshift;
+				this.h[n][n] += exshift;
+				this.h[n - 1][n - 1] += exshift;
 				x = this.h[n][n];
 
 				// Real pair
@@ -334,8 +334,8 @@ public class EigenvalueDecomposition2 {
 					p = x / s;
 					q = z / s;
 					r = Math.sqrt(p * p + q * q);
-					p = p / r;
-					q = q / r;
+					p /= r;
+					q /= r;
 
 					// Row modification
 
@@ -369,7 +369,7 @@ public class EigenvalueDecomposition2 {
 					this.e[n - 1] = z;
 					this.e[n] = -z;
 				}
-				n = n - 2;
+				n -= 2;
 				iter = 0;
 
 				// No convergence yet
@@ -418,7 +418,7 @@ public class EigenvalueDecomposition2 {
 					}
 				}
 
-				iter = iter + 1; // (Could check iteration count here.)
+				iter += 1; // (Could check iteration count here.)
 
 				// Look for two consecutive small sub-diagonal elements
 
@@ -431,9 +431,9 @@ public class EigenvalueDecomposition2 {
 					q = this.h[m + 1][m + 1] - z - r - s;
 					r = this.h[m + 2][m + 1];
 					s = Math.abs(p) + Math.abs(q) + Math.abs(r);
-					p = p / s;
-					q = q / s;
-					r = r / s;
+					p /= s;
+					q /= s;
+					r /= s;
 					if (m == l) {
 						break;
 					}
@@ -464,9 +464,9 @@ public class EigenvalueDecomposition2 {
 						r = (notlast ? this.h[k + 2][k - 1] : 0.0);
 						x = Math.abs(p) + Math.abs(q) + Math.abs(r);
 						if (x != 0.0) {
-							p = p / x;
-							q = q / x;
-							r = r / x;
+							p /= x;
+							q /= x;
+							r /= x;
 						}
 					}
 					if (x == 0.0) {
@@ -482,23 +482,23 @@ public class EigenvalueDecomposition2 {
 						} else if (l != m) {
 							this.h[k][k - 1] = -this.h[k][k - 1];
 						}
-						p = p + s;
+						p += s;
 						x = p / s;
 						y = q / s;
 						z = r / s;
-						q = q / p;
-						r = r / p;
+						q /= p;
+						r /= p;
 
 						// Row modification
 
 						for (int j = k; j < nn; j++) {
 							p = this.h[k][j] + q * this.h[k + 1][j];
 							if (notlast) {
-								p = p + r * this.h[k + 2][j];
-								this.h[k + 2][j] = this.h[k + 2][j] - p * z;
+								p += r * this.h[k + 2][j];
+								this.h[k + 2][j] -= p * z;
 							}
-							this.h[k][j] = this.h[k][j] - p * x;
-							this.h[k + 1][j] = this.h[k + 1][j] - p * y;
+							this.h[k][j] -= p * x;
+							this.h[k + 1][j] -= p * y;
 						}
 
 						// Column modification
@@ -506,11 +506,11 @@ public class EigenvalueDecomposition2 {
 						for (int i = 0; i <= Math.min(n, k + 3); i++) {
 							p = x * this.h[i][k] + y * this.h[i][k + 1];
 							if (notlast) {
-								p = p + z * this.h[i][k + 2];
-								this.h[i][k + 2] = this.h[i][k + 2] - p * r;
+								p += z * this.h[i][k + 2];
+								this.h[i][k + 2] -= p * r;
 							}
-							this.h[i][k] = this.h[i][k] - p;
-							this.h[i][k + 1] = this.h[i][k + 1] - p * q;
+							this.h[i][k] -= p;
+							this.h[i][k + 1] -= p * q;
 						}
 
 						// Accumulate transformations
@@ -518,11 +518,11 @@ public class EigenvalueDecomposition2 {
 						for (int i = low; i <= high; i++) {
 							p = x * this.v[i][k] + y * this.v[i][k + 1];
 							if (notlast) {
-								p = p + z * this.v[i][k + 2];
-								this.v[i][k + 2] = this.v[i][k + 2] - p * r;
+								p += z * this.v[i][k + 2];
+								this.v[i][k + 2] -= p * r;
 							}
-							this.v[i][k] = this.v[i][k] - p;
-							this.v[i][k + 1] = this.v[i][k + 1] - p * q;
+							this.v[i][k] -= p;
+							this.v[i][k + 1] -= p * q;
 						}
 					} // (s != 0)
 				} // k loop
@@ -548,7 +548,7 @@ public class EigenvalueDecomposition2 {
 					w = this.h[i][i] - p;
 					r = 0.0;
 					for (int j = l; j <= n; j++) {
-						r = r + this.h[i][j] * this.h[j][n];
+						r += this.h[i][j] * this.h[j][n];
 					}
 					if (this.e[i] < 0.0) {
 						z = w;
@@ -583,7 +583,7 @@ public class EigenvalueDecomposition2 {
 						t = Math.abs(this.h[i][n]);
 						if ((eps * t) * t > 1) {
 							for (int j = i; j <= n; j++) {
-								this.h[j][n] = this.h[j][n] / t;
+								this.h[j][n] /= t;
 							}
 						}
 					}
@@ -611,8 +611,8 @@ public class EigenvalueDecomposition2 {
 					ra = 0.0;
 					sa = 0.0;
 					for (int j = l; j <= n; j++) {
-						ra = ra + this.h[i][j] * this.h[j][n - 1];
-						sa = sa + this.h[i][j] * this.h[j][n];
+						ra += this.h[i][j] * this.h[j][n - 1];
+						sa += this.h[i][j] * this.h[j][n];
 					}
 					w = this.h[i][i] - p;
 
@@ -667,8 +667,8 @@ public class EigenvalueDecomposition2 {
 								Math.abs(this.h[i][n]));
 						if ((eps * t) * t > 1) {
 							for (int j = i; j <= n; j++) {
-								this.h[j][n - 1] = this.h[j][n - 1] / t;
-								this.h[j][n] = this.h[j][n] / t;
+								this.h[j][n - 1] /= t;
+								this.h[j][n] /= t;
 							}
 						}
 					}
@@ -690,7 +690,7 @@ public class EigenvalueDecomposition2 {
 			for (int i = low; i <= high; i++) {
 				z = 0.0;
 				for (int k = low; k <= Math.min(j, high); k++) {
-					z = z + this.v[i][k] * this.h[k][j];
+					z += this.v[i][k] * this.h[k][j];
 				}
 				this.v[i][j] = z;
 			}
@@ -713,7 +713,7 @@ public class EigenvalueDecomposition2 {
 
 			double scale = 0.0;
 			for (int i = m; i <= high; i++) {
-				scale = scale + Math.abs(this.h[i][m - 1]);
+				scale += Math.abs(this.h[i][m - 1]);
 			}
 			if (scale != 0.0) {
 
@@ -728,8 +728,8 @@ public class EigenvalueDecomposition2 {
 				if (this.ort[m] > 0) {
 					g = -g;
 				}
-				lh = lh - this.ort[m] * g;
-				this.ort[m] = this.ort[m] - g;
+				lh -= this.ort[m] * g;
+				this.ort[m] -= g;
 
 				// Apply Householder similarity transformation
 				// H = (I-u*u'/h)*H*(I-u*u')/h)
@@ -739,7 +739,7 @@ public class EigenvalueDecomposition2 {
 					for (int i = high; i >= m; i--) {
 						f += this.ort[i] * this.h[i][j];
 					}
-					f = f / lh;
+					f /= lh;
 					for (int i = m; i <= high; i++) {
 						this.h[i][j] -= f * this.ort[i];
 					}
@@ -750,7 +750,7 @@ public class EigenvalueDecomposition2 {
 					for (int j = high; j >= m; j--) {
 						f += this.ort[j] * this.h[i][j];
 					}
-					f = f / lh;
+					f /= lh;
 					for (int j = m; j <= high; j++) {
 						this.h[i][j] -= f * this.ort[j];
 					}
@@ -822,7 +822,7 @@ public class EigenvalueDecomposition2 {
 			if (m > l) {
 				int iter = 0;
 				do {
-					iter = iter + 1; // (Could check iteration count here.)
+					iter += 1; // (Could check iteration count here.)
 
 					// Compute implicit shift
 
@@ -839,7 +839,7 @@ public class EigenvalueDecomposition2 {
 					for (int i = l + 2; i < this.n; i++) {
 						this.d[i] -= h;
 					}
-					f = f + h;
+					f += h;
 
 					// Implicit QL transformation.
 
@@ -879,7 +879,7 @@ public class EigenvalueDecomposition2 {
 
 				} while (Math.abs(this.e[l]) > eps * tst1);
 			}
-			this.d[l] = this.d[l] + f;
+			this.d[l] += f;
 			this.e[l] = 0.0;
 		}
 
@@ -927,7 +927,7 @@ public class EigenvalueDecomposition2 {
 			double scale = 0.0;
 			double h = 0.0;
 			for (int k = 0; k < i; k++) {
-				scale = scale + Math.abs(this.d[k]);
+				scale += Math.abs(this.d[k]);
 			}
 			if (scale == 0.0) {
 				this.e[i] = this.d[i - 1];
@@ -950,7 +950,7 @@ public class EigenvalueDecomposition2 {
 					g = -g;
 				}
 				this.e[i] = scale * g;
-				h = h - f * g;
+				h -= f * g;
 				this.d[i - 1] = f - g;
 				Arrays.fill(this.e, 0, i, 0.0);
 

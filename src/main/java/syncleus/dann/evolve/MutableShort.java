@@ -98,9 +98,9 @@ public class MutableShort extends MutableNumber<Short> implements
 		else if (doubleDistributed < Short.MIN_VALUE)
 			distributedRand = Short.MIN_VALUE;
 		final short result = (short) (this.getNumber() + distributedRand);
-		if ((distributedRand > (short) 0) && (result < this.getNumber()))
+		if ((distributedRand > 0) && (result < this.getNumber()))
 			return new MutableShort(Short.MAX_VALUE);
-		else if ((distributedRand < (short) 0) && (result > this.getNumber()))
+		else if ((distributedRand < 0) && (result > this.getNumber()))
 			return new MutableShort(Short.MIN_VALUE);
 		return new MutableShort(result);
 	}

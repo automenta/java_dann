@@ -54,7 +54,7 @@ public class FrontierHolder {
 	}
 
 	public BasicPath pop() {
-		if (contents.size() == 0)
+		if (contents.isEmpty())
 			return null;
 
 		final BasicPath result = contents.get(0);
@@ -67,11 +67,9 @@ public class FrontierHolder {
 	}
 
 	public boolean containsDestination(final BasicNode node) {
-		for (final BasicPath path : this.contents) {
-			if (path.getDestinationNode().equals(node)) {
-				return true;
-			}
-		}
+            if (this.contents.stream().anyMatch((path) -> (path.getDestinationNode().equals(node)))) {
+                return true;
+            }
 		return false;
 	}
 

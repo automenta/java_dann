@@ -78,50 +78,47 @@ public class HyperNEATCODEC implements GeneticCODEC {
 		final double c = this.maxWeight / (1.0 - this.minWeight);
 		final MLData input = new BasicMLData(cppn.getInputCount());
 
-		// First create all of the non-bias links.
-		for (final SubstrateLink link : substrate.getLinks()) {
-			final SubstrateNode source = link.getSource();
-			final SubstrateNode target = link.getTarget();
-
-			int index = 0;
-			for (final double d : source.getLocation()) {
-				input.setData(index++, d);
-			}
-			for (final double d : target.getLocation()) {
-				input.setData(index++, d);
-			}
-			final MLData output = cppn.compute(input);
-
-			double weight = output.getData(0);
-			if (Math.abs(weight) > this.minWeight) {
-				weight = (Math.abs(weight) - this.minWeight) * c
-						* Math.signum(weight);
-				linkList.add(new NEATLink(source.getId(), target.getId(),
-						weight));
-			}
-		}
+                substrate.getLinks().stream().forEach((link) -> {
+                final SubstrateNode source = link.getSource();
+                final SubstrateNode target = link.getTarget();
+                int index = 0;
+                for (final double d : source.getLocation()) {
+                    input.setData(index++, d);
+                }
+                for (final double d : target.getLocation()) {
+                    input.setData(index++, d);
+                }
+                final MLData output = cppn.compute(input);
+                double weight = output.getData(0);
+                if (Math.abs(weight) > this.minWeight) {
+                    weight = (Math.abs(weight) - this.minWeight) * c
+                            * Math.signum(weight);
+                    linkList.add(new NEATLink(source.getId(), target.getId(),
+                            weight));
+                }
+            });
 
 		// now create biased links
 		input.clear();
 		final int d = substrate.getDimensions();
 		final List<SubstrateNode> biasedNodes = substrate.getBiasedNodes();
-		for (final SubstrateNode target : biasedNodes) {
-			for (int i = 0; i < d; i++) {
-				input.setData(d + i, target.getLocation()[i]);
-			}
-
-			final MLData output = cppn.compute(input);
-
-			double biasWeight = output.getData(1);
-			if (Math.abs(biasWeight) > this.minWeight) {
-				biasWeight = (Math.abs(biasWeight) - this.minWeight) * c
-						* Math.signum(biasWeight);
-				linkList.add(new NEATLink(0, target.getId(), biasWeight));
-			}
-		}
+                biasedNodes.stream().map((target) -> {
+                for (int i = 0; i < d; i++) {
+                    input.setData(d + i, target.getLocation()[i]);
+                }
+                return target;
+            }).forEach((target) -> {
+                final MLData output = cppn.compute(input);
+                double biasWeight = output.getData(1);
+                if (Math.abs(biasWeight) > this.minWeight) {
+                    biasWeight = (Math.abs(biasWeight) - this.minWeight) * c
+                            * Math.signum(biasWeight);
+                    linkList.add(new NEATLink(0, target.getId(), biasWeight));
+                }
+            });
 
 		// check for invalid neural network
-		if (linkList.size() == 0) {
+		if (linkList.isEmpty()) {
 			return null;
 		}
 

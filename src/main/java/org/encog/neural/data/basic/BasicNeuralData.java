@@ -25,6 +25,7 @@ package org.encog.neural.data.basic;
 
 import org.encog.ml.data.basic.BasicMLData;
 import org.encog.neural.data.NeuralData;
+import syncleus.dann.dataprocess.MLData;
 
 /**
  * This is an alias class for Encog 2.5 compatibility. This class aliases
@@ -66,5 +67,10 @@ public class BasicNeuralData extends BasicMLData {
 	public BasicNeuralData(final NeuralData d) {
 		super(d);
 	}
+
+    @Override
+    public MLData clone() {
+        return super.clone(); //To change body of generated methods, choose Tools | Templates.
+    }
 
 }

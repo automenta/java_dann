@@ -142,13 +142,10 @@ public final class Trees {
 		// TODO make this more efficient
 		final Set<Graph<N, E>> components = Topography
 				.getMaximallyConnectedComponents(graph);
-		for (final Graph<N, E> component : components) {
-			final DirectedGraph<N, E> directedComponent = new ImmutableDirectedAdjacencyGraph<N, E>(
-					component);
-			if (!Trees.isRootedTree(directedComponent)) {
-				return false;
-			}
-		}
+            if (!components.stream().map((component) -> new ImmutableDirectedAdjacencyGraph<N, E>(
+                    component)).noneMatch((directedComponent) -> (!Trees.isRootedTree(directedComponent)))) {
+                return false;
+            }
 		return true;
 	}
 }

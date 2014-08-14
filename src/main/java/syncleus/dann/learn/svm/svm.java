@@ -256,7 +256,7 @@ abstract class Kernel extends QMatrix {
 		for (int t = times; t > 0; t /= 2) {
 			if (t % 2 == 1)
 				ret *= tmp;
-			tmp = tmp * tmp;
+			tmp *= tmp;
 		}
 		return ret;
 	}
@@ -1326,7 +1326,7 @@ public class svm {
 	public static final int LIBSVM_VERSION = 311;
 	public static final Random rand = new Random();
 
-	private static svm_print_interface svm_print_stdout = new svm_print_interface() {
+	private static final svm_print_interface svm_print_stdout = new svm_print_interface() {
 		@Override
 		public void print(final String s) {
 			// System.out.print(s);
@@ -1665,7 +1665,7 @@ public class svm {
 					fval = newf;
 					break;
 				} else
-					stepsize = stepsize / 2.0;
+					stepsize /= 2.0;
 			}
 
 			if (stepsize < min_step) {
@@ -1847,7 +1847,7 @@ public class svm {
 		mae = 0;
 		for (i = 0; i < prob.l; i++)
 			if (Math.abs(ymv[i]) > 5 * std)
-				count = count + 1;
+				count += 1;
 			else
 				mae += Math.abs(ymv[i]);
 		mae /= (prob.l - count);
@@ -2256,8 +2256,7 @@ public class svm {
 
 	public static void svm_get_labels(final svm_model model, final int[] label) {
 		if (model.label != null)
-			for (int i = 0; i < model.nr_class; i++)
-				label[i] = model.label[i];
+			System.arraycopy(model.label, 0, label, 0, model.nr_class);
 	}
 
 	public static double svm_get_svr_probability(final svm_model model) {

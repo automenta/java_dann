@@ -181,10 +181,9 @@ public class EncogProgram extends BasicGenome implements MLRegression, MLError {
 		this.context = theContext;
 		this.variables = theVariables;
 
-		// define variables
-		for (final VariableMapping v : this.context.getDefinedVariables()) {
-			this.variables.defineVariable(v);
-		}
+                this.context.getDefinedVariables().stream().forEach((v) -> {
+                this.variables.defineVariable(v);
+            });
 	}
 
 	/**
@@ -439,14 +438,14 @@ public class EncogProgram extends BasicGenome implements MLRegression, MLError {
 			final List<ValueType> desiredTypes) {
 		List<VariableMapping> selectionSet = this.context
 				.findVariablesByTypes(desiredTypes);
-		if (selectionSet.size() == 0
+		if (selectionSet.isEmpty()
 				&& desiredTypes.contains(ValueType.intType)) {
 			final List<ValueType> floatList = new ArrayList<ValueType>();
 			floatList.add(ValueType.floatingType);
 			selectionSet = this.context.findVariablesByTypes(floatList);
 		}
 
-		if (selectionSet.size() == 0) {
+		if (selectionSet.isEmpty()) {
 			return -1;
 		}
 

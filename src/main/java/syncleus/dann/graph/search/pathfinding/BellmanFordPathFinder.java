@@ -60,27 +60,25 @@ public class BellmanFordPathFinder<N, E extends DirectedEdge<N>> implements
 		this.pathedSteps = new HashMap<N, PathedStep>(nodes.size());
 		// relax edges
 		for (int lcv = 0; lcv < (nodes.size() - 1); lcv++) {
-			for (final E edge : edges) {
-				if (edge.getDestinationNode() == begin)
-					continue;
-				PathedStep sourcePathedStep = pathedSteps.get(edge
-						.getSourceNode());
-				if (sourcePathedStep == null) {
-					sourcePathedStep = new PathedStep(edge.getSourceNode(),
-							(edge.getSourceNode().equals(begin) ? 0.0
-									: Double.POSITIVE_INFINITY));
-					pathedSteps.put(edge.getSourceNode(), sourcePathedStep);
-				}
-				PathedStep destinationPathedStep = pathedSteps.get(edge
-						.getDestinationNode());
-				if (destinationPathedStep == null) {
-					destinationPathedStep = new PathedStep(
-							edge.getDestinationNode(), Double.POSITIVE_INFINITY);
-					pathedSteps.put(edge.getDestinationNode(),
-							destinationPathedStep);
-				}
-				destinationPathedStep.updateParent(sourcePathedStep, edge);
-			}
+                    edges.stream().filter((edge) -> !(edge.getDestinationNode() == begin)).forEach((edge) -> {
+                        PathedStep sourcePathedStep = pathedSteps.get(edge
+                                .getSourceNode());
+                        if (sourcePathedStep == null) {
+                            sourcePathedStep = new PathedStep(edge.getSourceNode(),
+                                    (edge.getSourceNode().equals(begin) ? 0.0
+                                            : Double.POSITIVE_INFINITY));
+                            pathedSteps.put(edge.getSourceNode(), sourcePathedStep);
+                        }
+                        PathedStep destinationPathedStep = pathedSteps.get(edge
+                                .getDestinationNode());
+                        if (destinationPathedStep == null) {
+                            destinationPathedStep = new PathedStep(
+                                    edge.getDestinationNode(), Double.POSITIVE_INFINITY);
+                            pathedSteps.put(edge.getDestinationNode(),
+                                    destinationPathedStep);
+                        }
+                        destinationPathedStep.updateParent(sourcePathedStep, edge);
+                    });
 		}
 		// check for negative cycles
 		for (final E edge : edges) {

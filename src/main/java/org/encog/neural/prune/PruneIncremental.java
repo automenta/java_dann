@@ -382,9 +382,7 @@ public class PruneIncremental extends ConcurrentJob {
 	public int loadWorkload() {
 		int result = 1;
 
-		for (final HiddenLayerParams param : this.hidden) {
-			result *= (param.getMax() - param.getMin()) + 1;
-		}
+                result = this.hidden.stream().map((param) -> (param.getMax() - param.getMin()) + 1).reduce(result, (accumulator, _item) -> accumulator * _item);
 
 		init();
 
@@ -401,7 +399,7 @@ public class PruneIncremental extends ConcurrentJob {
 	@Override
 	public void performJobUnit(final JobUnitContext context) {
 
-		final BasicNetwork network = (BasicNetwork) context.getJobUnit();
+		final BasicNetwork network = context.getJobUnit();
 		BufferedMLDataSet buffer = null;
 		MLDataSet useTraining = this.training;
 
@@ -487,7 +485,7 @@ public class PruneIncremental extends ConcurrentJob {
 	@Override
 	public void process() {
 
-		if (this.hidden.size() == 0) {
+		if (this.hidden.isEmpty()) {
 			throw new RuntimeException(
 					"To calculate the optimal hidden size, at least "
 							+ "one hidden layer must be defined.");

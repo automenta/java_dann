@@ -83,8 +83,9 @@ public class TestPrimMinimumSpanningTreeFinder {
 				graph.getNodes(), mstEdges);
 
 		LOGGER.info("mst edges:");
-		for (final Edge edge : mst.getEdges())
-			LOGGER.info(edge);
+                mst.getEdges().stream().forEach((edge) -> {
+                LOGGER.info(edge);
+            });
 
 		final CycleDetector detector = new ColoredDepthFirstSearchDetector();
 		LOGGER.info("mst is cyclic: " + detector.hasCycle(mst));
