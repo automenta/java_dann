@@ -152,8 +152,8 @@ public class TestMagicSquare {
                             + solutions[n - 3][0] + " on matrix: " + currentMatrix,
                     checkValues(t, solutions[n - 3][0]));
             final EigenvalueDecomposition currentEigen = Decompositions
-                    .createEigenvalueDecomposition(currentMatrix.add(
-                            currentMatrix.transpose()).multiply(0.5));
+                    .createEigenvalueDecomposition(
+                            currentMatrix.add((RealMatrix)currentMatrix.transpose()).multiply(0.5));
             final List<RealNumber> d = currentEigen.getRealEigenvalues();
             Assert.assertTrue(
                     "incorrect maximum eigen! obtained: "

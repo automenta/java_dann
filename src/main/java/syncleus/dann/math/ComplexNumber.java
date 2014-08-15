@@ -27,7 +27,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.apache.commons.math3.complex.Complex;
 
 //TODO subclass http://commons.apache.org/proper/commons-math/javadocs/api-3.3/org/apache/commons/math3/complex/Complex.html
 
@@ -276,13 +275,6 @@ public class ComplexNumber extends org.apache.commons.math3.complex.Complex impl
                 * Math.sin(i));
     }
 
-    public final double getImaginary() {
-        return getImaginary();
-    }
-
-    public final double getReal() {
-        return getReal();
-    }
 
     @Override
     public int hashCode() {
