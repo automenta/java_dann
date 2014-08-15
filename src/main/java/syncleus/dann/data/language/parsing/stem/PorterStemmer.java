@@ -473,7 +473,7 @@ public class PorterStemmer implements Stemmer {
                     break;
                 if (ends("ment"))
                     break;
-			/* element etc. not stripped before the countConsonantsInStem */
+            /* element etc. not stripped before the countConsonantsInStem */
                 if (ends("ent"))
                     break;
                 return;

@@ -21,13 +21,14 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package org.encog.neural.freeform.training;
-
-import java.io.Serializable;
+package syncleus.dann.neural.freeform.training;
 
 import syncleus.dann.learn.ml.MLDataSet;
-import syncleus.dann.neural.freeform.FreeformConnection;
-import syncleus.dann.neural.freeform.FreeformNetwork;
+
+import java.io.Serializable;
+import org.encog.neural.freeform.FreeformConnection;
+import org.encog.neural.freeform.FreeformNetwork;
+import org.encog.neural.freeform.training.FreeformPropagationTraining;
 import syncleus.dann.neural.networks.training.propagation.TrainingContinuation;
 
 /**
@@ -89,7 +90,7 @@ public class FreeformBackPropagation extends FreeformPropagationTraining
      * {@inheritDoc}
      */
     @Override
-    public TrainingContinuation pause() {
+    public static TrainingContinuation pause() {
         // TODO Auto-generated method stub
         return null;
     }

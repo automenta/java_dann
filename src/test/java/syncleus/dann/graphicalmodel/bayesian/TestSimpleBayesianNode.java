@@ -20,7 +20,6 @@ package syncleus.dann.graphicalmodel.bayesian;
 
 import org.junit.Assert;
 import org.junit.Test;
-
 import syncleus.dann.graph.DirectedEdge;
 import syncleus.dann.graph.ImmutableDirectedEdge;
 import syncleus.dann.learn.bayesian.MutableBayesianAdjacencyNetwork;

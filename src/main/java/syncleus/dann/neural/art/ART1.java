@@ -194,7 +194,7 @@ public class ART1 extends ART implements MLResettable, MLClassification {
         final BiPolarNeuralData output = new BiPolarNeuralData(this.f2Count);
 
         if (input.size() != input2.size()) {
-            throw new NeuralNetworkError("Input array size does not match.");
+            throw new RuntimeException("Input array size does not match.");
         }
 
         for (int i = 0; i < input2.size(); i++) {
@@ -259,7 +259,7 @@ public class ART1 extends ART implements MLResettable, MLClassification {
      */
     public MLData compute(final MLData input) {
         if (!(input instanceof BiPolarNeuralData)) {
-            throw new NeuralNetworkError(
+            throw new RuntimeException(
                     "Input to ART1 logic network must be BiPolarNeuralData.");
         }
 

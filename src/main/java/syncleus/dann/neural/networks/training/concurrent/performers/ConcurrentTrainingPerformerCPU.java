@@ -23,11 +23,9 @@
  */
 package org.encog.neural.networks.training.concurrent.performers;
 
-import java.util.concurrent.atomic.AtomicBoolean;
-
 import syncleus.dann.learn.train.MLTrain;
-import syncleus.dann.neural.networks.training.concurrent.ConcurrentTrainingManager;
-import syncleus.dann.neural.networks.training.concurrent.jobs.TrainingJob;
+
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * This performer allows jobs to be performed by the CPU.
@@ -82,7 +80,7 @@ public class ConcurrentTrainingPerformerCPU implements
     @Override
     public void perform(final TrainingJob job) {
         if (!this.ready.get()) {
-            throw new NeuralNetworkError(
+            throw new RuntimeException(
                     "Performer is already performing a job.");
         }
 

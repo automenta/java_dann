@@ -23,6 +23,7 @@
  */
 package syncleus.dann.learn.svm.training;
 
+import org.encog.neural.networks.training.propagation.TrainingContinuation;
 import syncleus.dann.learn.ml.MLDataSet;
 import syncleus.dann.learn.ml.MLMethod;
 import syncleus.dann.learn.ml.TrainingImplementationType;
@@ -34,7 +35,6 @@ import syncleus.dann.learn.train.BasicTraining;
 import syncleus.dann.math.EncogMath;
 import syncleus.dann.math.Format;
 import syncleus.dann.math.statistics.ErrorCalculation;
-import syncleus.dann.neural.networks.training.propagation.TrainingContinuation;
 
 /**
  * Provides training for Support Vector Machine networks.
@@ -104,8 +104,8 @@ public class SVMTrain extends BasicTraining {
      * @param target The output values from the SVN.
      * @return The calculated error.
      */
-    private double evaluate(final svm_parameter param, final svm_problem prob,
-                            final double[] target) {
+    private static double evaluate(final svm_parameter param, final svm_problem prob,
+                                   final double[] target) {
         int totalCorrect = 0;
 
         final ErrorCalculation error = new ErrorCalculation();

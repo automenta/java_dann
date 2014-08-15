@@ -23,11 +23,11 @@
  */
 package syncleus.dann.neural.networks.structure;
 
-import java.util.Arrays;
-
 import syncleus.dann.learn.ml.MLEncodable;
 import syncleus.dann.learn.ml.MLMethod;
 import syncleus.dann.neural.networks.BasicNetwork;
+
+import java.util.Arrays;
 
 /**
  * This class will extract the "long term memory" of a neural network, that is

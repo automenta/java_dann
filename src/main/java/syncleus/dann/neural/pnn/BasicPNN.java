@@ -25,12 +25,7 @@ package org.encog.neural.pnn;
 
 import syncleus.dann.data.basic.BasicMLData;
 import syncleus.dann.data.basic.BasicMLDataSet;
-import syncleus.dann.learn.ml.MLClassification;
-import syncleus.dann.learn.ml.MLData;
-import syncleus.dann.learn.ml.MLDataPair;
-import syncleus.dann.learn.ml.MLDataSet;
-import syncleus.dann.learn.ml.MLError;
-import syncleus.dann.learn.ml.MLRegression;
+import syncleus.dann.learn.ml.*;
 import syncleus.dann.math.EncogUtility;
 import syncleus.dann.math.array.EngineArray;
 
@@ -229,7 +224,7 @@ public class BasicPNN extends AbstractPNN implements MLRegression, MLError,
             for (final MLDataPair pair : samples) {
                 final int i = (int) pair.getIdeal().getData(0);
                 if (i >= this.countPer.length) {
-                    throw new NeuralNetworkError(
+                    throw new RuntimeException(
                             "Training data contains more classes than neural network has output neurons to hold.");
                 }
                 this.countPer[i]++;

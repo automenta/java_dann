@@ -18,12 +18,12 @@
  ******************************************************************************/
 package syncleus.dann.graph.context;
 
+import syncleus.dann.graph.Graph;
+
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
-
-import syncleus.dann.graph.Graph;
 
 public abstract class AbstractContextGraphElement<G extends Graph<?, ?>>
         implements ContextGraphElement<G>, Serializable {

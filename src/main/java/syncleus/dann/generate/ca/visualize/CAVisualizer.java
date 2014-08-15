@@ -23,7 +23,7 @@
  */
 package syncleus.dann.generate.ca.visualize;
 
-import java.awt.Image;
+import java.awt.*;
 
 public interface CAVisualizer {
 

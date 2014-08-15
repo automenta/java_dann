@@ -18,17 +18,11 @@
  ******************************************************************************/
 package syncleus.dann.graph.search;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import syncleus.dann.graph.AbstractBidirectedAdjacencyGraph;
 import syncleus.dann.graph.DirectedEdge;
 import syncleus.dann.graph.ImmutableDirectedEdge;
+
+import java.util.*;
 
 public class DirectedGrid extends
         AbstractBidirectedAdjacencyGraph<GridNode, DirectedEdge<GridNode>> {

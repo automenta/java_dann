@@ -23,16 +23,15 @@
  */
 package org.encog.neural.rbf;
 
+import syncleus.dann.data.file.csv.CSVFormat;
+import syncleus.dann.math.rbf.RadialBasisFunction;
+import syncleus.dann.neural.activation.EncogActivationFunction;
+import syncleus.dann.neural.networks.BasicNetwork;
+
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.List;
 import java.util.Map;
-
-import syncleus.dann.data.file.csv.CSVFormat;
-import syncleus.dann.math.rbf.RadialBasisFunction;
-import syncleus.dann.neural.activation.EncogActivationFunction;
-import syncleus.dann.neural.flat.FlatNetworkRBF;
-import syncleus.dann.neural.networks.BasicNetwork;
 
 /**
  * Persist a RBF network.
@@ -43,7 +42,7 @@ public class PersistRBFNetwork implements EncogPersistor {
      * {@inheritDoc}
      */
     @Override
-    public final int getFileVersion() {
+    public static final int getFileVersion() {
         return 1;
     }
 
@@ -51,7 +50,7 @@ public class PersistRBFNetwork implements EncogPersistor {
      * {@inheritDoc}
      */
     @Override
-    public final String getPersistClassString() {
+    public static final String getPersistClassString() {
         return "RBFNetwork";
     }
 

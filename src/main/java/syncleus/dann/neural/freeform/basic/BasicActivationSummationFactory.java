@@ -21,11 +21,11 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package org.encog.neural.freeform.basic;
-
-import java.io.Serializable;
+package syncleus.dann.neural.freeform.basic;
 
 import syncleus.dann.neural.activation.EncogActivationFunction;
+
+import java.io.Serializable;
 import syncleus.dann.neural.freeform.InputSummation;
 import syncleus.dann.neural.freeform.factory.InputSummationFactory;
 
@@ -44,7 +44,7 @@ public class BasicActivationSummationFactory implements InputSummationFactory,
      * {@inheritDoc}
      */
     @Override
-    public InputSummation factor(final EncogActivationFunction theEncogActivationFunction) {
+    public static InputSummation factor(final EncogActivationFunction theEncogActivationFunction) {
         return new BasicActivationSummation(theEncogActivationFunction);
     }
 

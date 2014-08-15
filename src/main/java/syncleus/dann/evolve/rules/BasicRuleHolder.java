@@ -23,10 +23,10 @@
  */
 package syncleus.dann.evolve.rules;
 
+import syncleus.dann.evolve.genome.Genome;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import syncleus.dann.evolve.genome.Genome;
 
 /**
  * Basic implementation of a rule holder.

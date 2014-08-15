@@ -23,13 +23,12 @@
  */
 package org.encog.ml.prg.train;
 
-import java.io.Serializable;
-
 import syncleus.dann.data.basic.BasicMLData;
-import syncleus.dann.evolve.gp.EncogProgram;
 import syncleus.dann.learn.ml.CalculateScore;
 import syncleus.dann.learn.ml.MLData;
 import syncleus.dann.learn.ml.MLMethod;
+
+import java.io.Serializable;
 
 /**
  * This is a very simple evaluation function that simply passes in all zeros for

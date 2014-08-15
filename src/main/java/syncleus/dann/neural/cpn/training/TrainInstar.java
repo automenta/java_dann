@@ -30,9 +30,6 @@ import syncleus.dann.learn.ml.TrainingImplementationType;
 import syncleus.dann.learn.train.BasicTraining;
 import syncleus.dann.math.BoundMath;
 import syncleus.dann.math.array.EngineArray;
-import syncleus.dann.neural.cpn.CPN;
-import syncleus.dann.neural.networks.training.LearningRate;
-import syncleus.dann.neural.networks.training.propagation.TrainingContinuation;
 
 /**
  * Used for Instar training of a CPN neural network. A CPN network is a hybrid
@@ -112,7 +109,7 @@ public class TrainInstar extends BasicTraining implements LearningRate {
     private void initWeights() {
 
         if (this.training.getRecordCount() != this.network.getInstarCount()) {
-            throw new NeuralNetworkError(
+            throw new RuntimeException(
                     "If the weights are to be set from the "
                             + "training data, then there must be one instar "
                             + "neuron for each training element.");

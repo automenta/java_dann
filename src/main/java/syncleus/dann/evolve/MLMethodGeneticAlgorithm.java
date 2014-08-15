@@ -23,6 +23,7 @@
  */
 package syncleus.dann.evolve;
 
+import org.encog.neural.networks.training.propagation.TrainingContinuation;
 import syncleus.dann.evolve.crossover.Splice;
 import syncleus.dann.evolve.genome.Genome;
 import syncleus.dann.evolve.mutate.MutatePerturb;
@@ -33,13 +34,8 @@ import syncleus.dann.evolve.sort.MaximizeScoreComp;
 import syncleus.dann.evolve.sort.MinimizeScoreComp;
 import syncleus.dann.evolve.species.Species;
 import syncleus.dann.evolve.train.basic.TrainEA;
-import syncleus.dann.learn.ml.CalculateScore;
-import syncleus.dann.learn.ml.MLEncodable;
-import syncleus.dann.learn.ml.MLMethod;
-import syncleus.dann.learn.ml.MethodFactory;
-import syncleus.dann.learn.ml.TrainingImplementationType;
+import syncleus.dann.learn.ml.*;
 import syncleus.dann.learn.train.BasicTraining;
-import syncleus.dann.neural.networks.training.propagation.TrainingContinuation;
 
 /**
  * Implements a genetic algorithm that allows an MLMethod that is encodable
@@ -66,7 +62,7 @@ public class MLMethodGeneticAlgorithm extends BasicTraining /*implements MultiTh
      *
      * @author jheaton
      */
-    public class MLMethodGeneticAlgorithmHelper extends TrainEA {
+    public static class MLMethodGeneticAlgorithmHelper extends TrainEA {
         /**
          * The serial id.
          */
@@ -209,7 +205,7 @@ public class MLMethodGeneticAlgorithm extends BasicTraining /*implements MultiTh
     }
 
 /*	@Override
-	public void setThreadCount(final int numThreads) {
+    public void setThreadCount(final int numThreads) {
 		this.genetic.setThreadCount(numThreads);
 
 	}*/

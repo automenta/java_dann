@@ -23,12 +23,12 @@
  */
 package syncleus.dann.evolve;
 
-import java.io.Serializable;
-
 import syncleus.dann.evolve.codec.GeneticCODEC;
 import syncleus.dann.evolve.genome.Genome;
 import syncleus.dann.learn.ml.MLEncodable;
 import syncleus.dann.learn.ml.MLMethod;
+
+import java.io.Serializable;
 
 /**
  * A CODEC for IMLEncodable classes.

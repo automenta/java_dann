@@ -21,15 +21,9 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package org.encog.neural.som;
+package syncleus.dann.neural.som;
 
-import syncleus.dann.learn.ml.BasicML;
-import syncleus.dann.learn.ml.MLClassification;
-import syncleus.dann.learn.ml.MLData;
-import syncleus.dann.learn.ml.MLDataPair;
-import syncleus.dann.learn.ml.MLDataSet;
-import syncleus.dann.learn.ml.MLError;
-import syncleus.dann.learn.ml.MLResettable;
+import syncleus.dann.learn.ml.*;
 import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.math.matrix.SimpleRealMatrix;
 import syncleus.dann.neural.som.training.basic.BestMatchingUnit;
@@ -70,7 +64,7 @@ public class SOM extends BasicML implements MLClassification, MLResettable,
      * @param outputCount Number of output neurons
      */
     public SOM(final int inputCount, final int outputCount) {
-        this.weights = new Matrix(outputCount, inputCount);
+        this.weights = new SimpleRealMatrix(outputCount, inputCount);
     }
 
     /**
@@ -99,7 +93,7 @@ public class SOM extends BasicML implements MLClassification, MLResettable,
     @Override
     public int classify(final MLData input) {
         if (input.size() > getInputCount()) {
-            throw new NeuralNetworkError(
+            throw new RuntimeException(
                     "Can't classify SOM with input size of " + getInputCount()
                             + " with input data of count " + input.size());
         }

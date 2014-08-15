@@ -18,11 +18,11 @@
  ******************************************************************************/
 package syncleus.dann.graph.path.pathfinding;
 
-import java.util.List;
-
 import syncleus.dann.graph.BidirectedGraph;
 import syncleus.dann.graph.WeightedDirectedEdge;
 import syncleus.dann.graph.path.PathFinder;
+
+import java.util.List;
 
 public class JohnsonPathFinder<N, E extends WeightedDirectedEdge<N>> implements
         PathFinder<N, WeightedDirectedEdge<N>> {

@@ -23,9 +23,6 @@
  */
 package org.encog.ml.prg.species;
 
-import syncleus.dann.evolve.gp.EncogProgram;
-import syncleus.dann.evolve.gp.ProgramNode;
-
 /**
  * Compare two Encog programs for speciation. Count the nodes that are the
  * different, the higher the compare value, the more different two genomes are.
@@ -55,8 +52,8 @@ public class CompareEncogProgram {
      * @param node2  The second node to compare.
      * @return The result.
      */
-    private double compareNode(final double result, final ProgramNode node1,
-                               final ProgramNode node2) {
+    private static double compareNode(final double result, final ProgramNode node1,
+                                      final ProgramNode node2) {
         double newResult = result;
 
         if (node1.getTemplate() != node2.getTemplate()) {

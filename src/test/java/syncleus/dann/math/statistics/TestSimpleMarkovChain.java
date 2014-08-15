@@ -18,19 +18,12 @@
  ******************************************************************************/
 package syncleus.dann.math.statistics;
 
-import java.util.ArrayList;
-import java.util.EnumMap;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-import java.util.Set;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Test;
+
+import java.util.*;
 
 public class TestSimpleMarkovChain {
     private static enum WeatherState {
@@ -107,7 +100,7 @@ public class TestSimpleMarkovChain {
         final Map<List<WeatherState>, Map<WeatherState, Double>> transitionProbabilities = new HashMap<>();
 
 		/*
-		 * final List<WeatherState> initialState = new
+         * final List<WeatherState> initialState = new
 		 * ArrayList<WeatherState>(); final Map<WeatherState, Double>
 		 * initialTransitions = new HashMap<WeatherState, Double>();
 		 * initialTransitions.put(WeatherState.SUNNY, 0.83333333333);

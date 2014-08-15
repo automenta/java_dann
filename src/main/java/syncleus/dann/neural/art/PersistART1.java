@@ -36,7 +36,7 @@ public class PersistART1 implements EncogPersistor {
      * {@inheritDoc}
      */
     @Override
-    public int getFileVersion() {
+    public static int getFileVersion() {
         return 1;
     }
 
@@ -44,7 +44,7 @@ public class PersistART1 implements EncogPersistor {
      * {@inheritDoc}
      */
     @Override
-    public String getPersistClassString() {
+    public static String getPersistClassString() {
         return "ART1";
     }
 

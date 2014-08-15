@@ -23,9 +23,9 @@
  */
 package syncleus.dann.data.buffer;
 
-import java.io.File;
-
 import syncleus.dann.data.buffer.codec.DataSetCODEC;
+
+import java.io.File;
 
 /**
  * This class is used, together with a CODEC, to move data to/from the Encog

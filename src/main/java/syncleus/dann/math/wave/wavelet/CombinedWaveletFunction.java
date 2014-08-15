@@ -18,15 +18,10 @@
  ******************************************************************************/
 package syncleus.dann.math.wave.wavelet;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
-
 import syncleus.dann.math.AbstractFunction;
 import syncleus.dann.math.wave.WaveMultidimensionalFunction;
+
+import java.util.*;
 
 public class CombinedWaveletFunction extends AbstractFunction {
     private Set<String> dimensions = new TreeSet<>();

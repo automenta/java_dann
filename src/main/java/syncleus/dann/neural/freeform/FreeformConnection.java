@@ -23,6 +23,9 @@
  */
 package org.encog.neural.freeform;
 
+import syncleus.dann.neural.freeform.FreeformNeuron;
+import syncleus.dann.neural.freeform.TempTrainingData;
+
 /**
  * Defines a freeform connection between neurons.
  */

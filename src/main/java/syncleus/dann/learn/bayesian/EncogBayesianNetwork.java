@@ -23,14 +23,6 @@
  */
 package syncleus.dann.learn.bayesian;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import syncleus.dann.data.file.csv.CSVFormat;
 import syncleus.dann.learn.bayesian.parse.ParseProbability;
 import syncleus.dann.learn.bayesian.parse.ParsedEvent;
@@ -38,14 +30,11 @@ import syncleus.dann.learn.bayesian.parse.ParsedProbability;
 import syncleus.dann.learn.bayesian.query.BayesianQuery;
 import syncleus.dann.learn.bayesian.query.enumerate.EnumerationQuery;
 import syncleus.dann.learn.bayesian.query.sample.EventState;
-import syncleus.dann.learn.ml.BasicML;
-import syncleus.dann.learn.ml.MLClassification;
-import syncleus.dann.learn.ml.MLData;
-import syncleus.dann.learn.ml.MLDataPair;
-import syncleus.dann.learn.ml.MLDataSet;
-import syncleus.dann.learn.ml.MLError;
-import syncleus.dann.learn.ml.MLResettable;
+import syncleus.dann.learn.ml.*;
 import syncleus.dann.math.array.EngineArray;
+
+import java.io.Serializable;
+import java.util.*;
 
 /**
  * The Bayesian Network is a machine learning method that is based on
@@ -243,8 +232,8 @@ public class EncogBayesianNetwork extends BasicML implements MLClassification,
      * @param childEvent  The child event.
      * @return True if a dependency exists.
      */
-    private boolean hasDependency(final BayesianEvent parentEvent,
-                                  final BayesianEvent childEvent) {
+    private static boolean hasDependency(final BayesianEvent parentEvent,
+                                         final BayesianEvent childEvent) {
         return (parentEvent.getChildren().contains(childEvent));
     }
 
@@ -254,8 +243,8 @@ public class EncogBayesianNetwork extends BasicML implements MLClassification,
      * @param parentEvent The parent event.
      * @param children    The child events.
      */
-    public void createDependency(final BayesianEvent parentEvent,
-                                 final BayesianEvent... children) {
+    public static void createDependency(final BayesianEvent parentEvent,
+                                        final BayesianEvent... children) {
         for (final BayesianEvent childEvent : children) {
             parentEvent.addChild(childEvent);
             childEvent.addParent(parentEvent);
@@ -357,8 +346,8 @@ public class EncogBayesianNetwork extends BasicML implements MLClassification,
      * @param parent The parent event.
      * @param child  The child event.
      */
-    private void removeDependency(final BayesianEvent parent,
-                                  final BayesianEvent child) {
+    private static void removeDependency(final BayesianEvent parent,
+                                         final BayesianEvent child) {
         parent.getChildren().remove(child);
         child.getParents().remove(parent);
 
@@ -431,7 +420,7 @@ public class EncogBayesianNetwork extends BasicML implements MLClassification,
      * @param e     See if e is amoung given.
      * @return True if e is amoung given.
      */
-    private boolean isGiven(final BayesianEvent[] given, final BayesianEvent e) {
+    private static boolean isGiven(final BayesianEvent[] given, final BayesianEvent e) {
         for (final BayesianEvent e2 : given) {
             if (e == e2)
                 return true;
@@ -447,7 +436,7 @@ public class EncogBayesianNetwork extends BasicML implements MLClassification,
      * @param b The event that has children.
      * @return True if a is amoung b's children.
      */
-    public boolean isDescendant(final BayesianEvent a, final BayesianEvent b) {
+    public static boolean isDescendant(final BayesianEvent a, final BayesianEvent b) {
         if (a == b)
             return true;
 
@@ -824,7 +813,7 @@ public class EncogBayesianNetwork extends BasicML implements MLClassification,
                 .getValue()));
     }
 
-    private int parseInt(final String str) {
+    private static int parseInt(final String str) {
         if (str == null) {
             return 0;
         }

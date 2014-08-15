@@ -20,7 +20,6 @@ package syncleus.dann.genetics.wavelets;
 
 import org.junit.Assert;
 import org.junit.Test;
-
 import syncleus.dann.evolve.wavelets.ReceptorKey;
 import syncleus.dann.evolve.wavelets.SignalKey;
 

@@ -18,26 +18,11 @@
  ******************************************************************************/
 package syncleus.dann.graph.topological;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.SortedSet;
-import java.util.TreeSet;
-
-import syncleus.dann.graph.BidirectedEdge;
-import syncleus.dann.graph.BidirectedGraph;
-import syncleus.dann.graph.Edge;
-import syncleus.dann.graph.Graph;
-import syncleus.dann.graph.HyperEdge;
-import syncleus.dann.graph.HyperGraph;
-import syncleus.dann.graph.ImmutableAdjacencyGraph;
-import syncleus.dann.graph.ImmutableHyperEdge;
+import syncleus.dann.graph.*;
 import syncleus.dann.math.counting.Counters;
+
+import java.io.Serializable;
+import java.util.*;
 
 public final class Topography {
     // this is an utility class so we cant instantiate it, make default

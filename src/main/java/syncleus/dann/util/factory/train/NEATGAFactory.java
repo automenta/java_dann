@@ -28,9 +28,6 @@ import syncleus.dann.learn.ml.CalculateScore;
 import syncleus.dann.learn.ml.MLDataSet;
 import syncleus.dann.learn.ml.MLMethod;
 import syncleus.dann.learn.train.MLTrain;
-import syncleus.dann.neural.neat.NEATPopulation;
-import syncleus.dann.neural.neat.NEATUtil;
-import syncleus.dann.neural.networks.training.TrainingSetScore;
 
 /**
  * A factory to create genetic algorithm trainers.

@@ -24,8 +24,6 @@
 package org.encog.ml.prg.train;
 
 import syncleus.dann.evolve.genome.Genome;
-import syncleus.dann.evolve.gp.EncogProgram;
-import syncleus.dann.evolve.gp.EncogProgramContext;
 import syncleus.dann.evolve.population.BasicPopulation;
 import syncleus.dann.evolve.species.Species;
 import syncleus.dann.learn.ml.MLData;

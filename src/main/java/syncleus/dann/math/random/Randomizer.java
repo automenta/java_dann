@@ -23,10 +23,10 @@
  */
 package syncleus.dann.math.random;
 
-import java.util.Random;
-
 import syncleus.dann.learn.ml.MLMethod;
 import syncleus.dann.math.matrix.SimpleRealMatrix;
+
+import java.util.Random;
 
 /**
  * Defines the interface for a class that is capable of randomizing the weights

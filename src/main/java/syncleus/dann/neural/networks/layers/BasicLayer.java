@@ -23,12 +23,12 @@
  */
 package syncleus.dann.neural.networks.layers;
 
-import java.io.Serializable;
-
+import org.encog.neural.flat.FlatLayer;
 import syncleus.dann.neural.activation.ActivationTANH;
 import syncleus.dann.neural.activation.EncogActivationFunction;
-import syncleus.dann.neural.flat.FlatLayer;
 import syncleus.dann.neural.networks.BasicNetwork;
+
+import java.io.Serializable;
 
 /**
  * Basic functionality that most of the neural layers require. The basic layer

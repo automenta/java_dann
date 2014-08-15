@@ -24,10 +24,6 @@
 package org.encog.ml.prg.train.rewrite;
 
 import syncleus.dann.evolve.genome.Genome;
-import syncleus.dann.evolve.gp.EncogProgram;
-import syncleus.dann.evolve.gp.ProgramNode;
-import syncleus.dann.evolve.gp.expvalue.ExpressionValue;
-import syncleus.dann.evolve.gp.extension.StandardExtensions;
 import syncleus.dann.evolve.rules.RewriteRule;
 import syncleus.dann.math.EncogMath;
 
@@ -50,7 +46,7 @@ public class RewriteAlgebraic implements RewriteRule {
      * @param v   The value that the constant represents.
      * @return The newly created node.
      */
-    private ProgramNode createNumericConst(final EncogProgram prg, final int v) {
+    private static ProgramNode createNumericConst(final EncogProgram prg, final int v) {
         final ProgramNode result = prg.getFunctions().factorProgramNode(
                 "#const", prg, new ProgramNode[]{});
         result.getData()[0] = new ExpressionValue(v);
@@ -147,7 +143,7 @@ public class RewriteAlgebraic implements RewriteRule {
      * @param parent The parent node to attempt to rewrite.
      * @return The rewritten node, if it was rewritten.
      */
-    private ProgramNode tryMinusMinus(ProgramNode parent) {
+    private static ProgramNode tryMinusMinus(ProgramNode parent) {
         if (parent.getName().equals("-") && parent.getChildNodes().size() == 2) {
             final ProgramNode child1 = parent.getChildNode(0);
             final ProgramNode child2 = parent.getChildNode(1);
@@ -226,7 +222,7 @@ public class RewriteAlgebraic implements RewriteRule {
      * @param parent The parent node to attempt to rewrite.
      * @return The rewritten node, if it was rewritten.
      */
-    private ProgramNode tryPlusNeg(ProgramNode parent) {
+    private static ProgramNode tryPlusNeg(ProgramNode parent) {
         if (parent.getName().equals("+") && parent.getChildNodes().size() == 2) {
             final ProgramNode child1 = parent.getChildNode(0);
             final ProgramNode child2 = parent.getChildNode(1);

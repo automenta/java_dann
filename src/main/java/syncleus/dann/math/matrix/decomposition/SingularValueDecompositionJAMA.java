@@ -525,7 +525,7 @@ public class SingularValueDecompositionJAMA {
     }
 
 	/*
-	 * ------------------------ Public Methods ------------------------
+     * ------------------------ Public Methods ------------------------
 	 */
 
     /**

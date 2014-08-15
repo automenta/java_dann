@@ -23,14 +23,14 @@
  */
 package syncleus.dann.learn.bayesian.table;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-
 import syncleus.dann.learn.bayesian.BayesianError;
 import syncleus.dann.learn.bayesian.BayesianEvent;
 import syncleus.dann.learn.bayesian.query.enumerate.EnumerationQuery;
 import syncleus.dann.math.EncogMath;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Holds a Bayesian truth table.
@@ -177,7 +177,7 @@ public class BayesianTable implements Serializable {
         this.lines.stream().map((line) -> {
             result.append(line.toString());
             return line;
-        }).forEach((_item) -> result.append("\n"));
+        }).forEach((_item) -> result.append('\n'));
         return result.toString();
     }
 

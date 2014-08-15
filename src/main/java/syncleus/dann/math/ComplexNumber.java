@@ -31,9 +31,9 @@ import java.util.List;
 //TODO subclass http://commons.apache.org/proper/commons-math/javadocs/api-3.3/org/apache/commons/math3/complex/Complex.html
 
 public class ComplexNumber extends org.apache.commons.math3.complex.Complex implements TrigonometricAlgebraic<ComplexNumber> {
-    
-  
-	public static final class Field implements syncleus.dann.math.OrderedField<ComplexNumber> {
+
+
+    public static final class Field implements syncleus.dann.math.OrderedField<ComplexNumber> {
         public static final Field FIELD = new Field();
 
         public static ComplexNumber getImaginaryUnit() {
@@ -102,17 +102,16 @@ public class ComplexNumber extends org.apache.commons.math3.complex.Complex impl
     }
 
 
-
     public ComplexNumber(final double imaginary) {
-    	super(0, imaginary);
+        super(0, imaginary);
     }
 
     public ComplexNumber(ComplexNumber c) {
-    	this(c.getReal(), c.getImaginary());    	
+        this(c.getReal(), c.getImaginary());
     }
-    
+
     public ComplexNumber(final double real, final double imaginary) {
-    	super(real, imaginary);
+        super(real, imaginary);
     }
 
 
@@ -132,17 +131,17 @@ public class ComplexNumber extends org.apache.commons.math3.complex.Complex impl
                 getImaginary() + value.getImaginary());
     }
 
-	@Override
-	public ComplexNumber add(ComplexNumber value) {
+    @Override
+    public ComplexNumber add(ComplexNumber value) {
         return new ComplexNumber(getReal() + value.getReal(),
                 getImaginary() + value.getImaginary());
-	}
+    }
 
-	@Override
-	public ComplexNumber algebraicAbsolute() {
+    @Override
+    public ComplexNumber algebraicAbsolute() {
         return new ComplexNumber(this.absScalar(), 0.0);
-	}
-    
+    }
+
     public final ComplexNumber add(final double value) {
         return this.add(new ComplexNumber(value, 0.0));
     }
@@ -221,7 +220,7 @@ public class ComplexNumber extends org.apache.commons.math3.complex.Complex impl
     }
 
     // Real cosh function (used to compute complex trig functions)
-    private double cosh(final double theta) {
+    private static double cosh(final double theta) {
         return (Math.exp(theta) + Math.exp(-theta)) / 2;
     }
 
@@ -233,8 +232,8 @@ public class ComplexNumber extends org.apache.commons.math3.complex.Complex impl
      * @return new Complex number z/w where z is this Complex number
      */
     public ComplexNumber div(final ComplexNumber w) {
-    	final double i = getImaginary();
-    	final double r = getReal();
+        final double i = getImaginary();
+        final double r = getReal();
         final double den = Math.pow(w.mod(), 2);
         return new ComplexNumber(
                 (r * w.getReal() + i * w.getImaginary()) / den, (i
@@ -255,7 +254,7 @@ public class ComplexNumber extends org.apache.commons.math3.complex.Complex impl
     public boolean equals(final Object compareObject) {
         if (!(compareObject instanceof org.apache.commons.math3.complex.Complex))
             return false;
-        
+
         final org.apache.commons.math3.complex.Complex compareComplex = (org.apache.commons.math3.complex.Complex) compareObject;
         if (compareComplex.getReal() != getReal())
             return false;
@@ -270,7 +269,7 @@ public class ComplexNumber extends org.apache.commons.math3.complex.Complex impl
      */
     @Override
     public ComplexNumber exp() {
-    	final double r = getReal(), i	= getImaginary();    	
+        final double r = getReal(), i = getImaginary();
         return new ComplexNumber(Math.exp(r) * Math.cos(i), Math.exp(r)
                 * Math.sin(i));
     }
@@ -324,7 +323,7 @@ public class ComplexNumber extends org.apache.commons.math3.complex.Complex impl
      * @return z-w where z is this Complex number.
      */
     public ComplexNumber minus(final ComplexNumber w) {
-    	final double r = getReal(), i	= getImaginary();    	
+        final double r = getReal(), i = getImaginary();
         return new ComplexNumber(r - w.getReal(), i - w.getImaginary());
     }
 
@@ -335,7 +334,7 @@ public class ComplexNumber extends org.apache.commons.math3.complex.Complex impl
      * @return |z| where z is this Complex number.
      */
     public double mod() {
-    	final double r = getReal(), i	= getImaginary();    	
+        final double r = getReal(), i = getImaginary();
         if (r != 0 || i != 0) {
             return Math.sqrt(r * r + i * i);
         } else {
@@ -345,7 +344,7 @@ public class ComplexNumber extends org.apache.commons.math3.complex.Complex impl
 
     @Override
     public final ComplexNumber multiply(final ComplexNumber value) {
-    	final double r = getReal(), i	= getImaginary();
+        final double r = getReal(), i = getImaginary();
         final double imaginary = getReal() * value.getImaginary()
                 + getImaginary() * value.getReal();
         final double real = getReal() * value.getReal()
@@ -376,8 +375,8 @@ public class ComplexNumber extends org.apache.commons.math3.complex.Complex impl
      * @return z+w where z is this Complex number.
      */
     public ComplexNumber plus(final ComplexNumber w) {
-    	final double r = getReal();
-    	final double i	= getImaginary();
+        final double r = getReal();
+        final double i = getImaginary();
         return new ComplexNumber(r + w.getReal(), i + w.getImaginary());
     }
 
@@ -428,8 +427,8 @@ public class ComplexNumber extends org.apache.commons.math3.complex.Complex impl
      */
     @Override
     public ComplexNumber sin() {
-    	final double r = getReal();
-    	final double i	= getImaginary();    	
+        final double r = getReal();
+        final double i = getImaginary();
         return new ComplexNumber(cosh(i) * Math.sin(r), sinh(i) * Math.cos(r));
     }
 
@@ -442,13 +441,13 @@ public class ComplexNumber extends org.apache.commons.math3.complex.Complex impl
      */
     @Override
     public ComplexNumber sinh() {
-    	final double r = getReal();
-    	final double i	= getImaginary();    	
+        final double r = getReal();
+        final double i = getImaginary();
         return new ComplexNumber(sinh(r) * Math.cos(i), cosh(r) * Math.sin(i));
     }
 
     // Real sinh function (used to compute complex trig functions)
-    private double sinh(final double theta) {
+    private static double sinh(final double theta) {
         return (Math.exp(theta) - Math.exp(-theta)) / 2;
     }
 
@@ -486,8 +485,8 @@ public class ComplexNumber extends org.apache.commons.math3.complex.Complex impl
 
     @Override
     public final ComplexNumber subtract(final ComplexNumber value) {
-    	final double r = getReal();
-    	final double i	= getImaginary();
+        final double r = getReal();
+        final double i = getImaginary();
         return new ComplexNumber(getReal() - value.getReal(),
                 getImaginary() - value.getImaginary());
     }
@@ -522,8 +521,8 @@ public class ComplexNumber extends org.apache.commons.math3.complex.Complex impl
      * @return z*w where z is this Complex number.
      */
     public ComplexNumber times(final ComplexNumber w) {
-    	final double r = getReal();
-    	final double i	= getImaginary();
+        final double r = getReal();
+        final double i = getImaginary();
         return new ComplexNumber(r * w.getReal() - i * w.getImaginary(), r
                 * w.getImaginary() + i * w.getReal());
     }
@@ -545,9 +544,9 @@ public class ComplexNumber extends org.apache.commons.math3.complex.Complex impl
      * @return x+i*y, x-i*y, x, or i*y as appropriate.
      */
     public String toString2() {
-    	final double r = getReal();
-    	final double i	= getImaginary();
-    	
+        final double r = getReal();
+        final double i = getImaginary();
+
         if (r != 0 && i > 0) {
             return r + " + " + i + 'i';
         }
@@ -565,13 +564,10 @@ public class ComplexNumber extends org.apache.commons.math3.complex.Complex impl
 
     }
 
-	@Override
-	public syncleus.dann.math.Field<ComplexNumber> field() {
-		return Field.FIELD;
-	}
-
-
-
+    @Override
+    public syncleus.dann.math.Field<ComplexNumber> field() {
+        return Field.FIELD;
+    }
 
 
 }

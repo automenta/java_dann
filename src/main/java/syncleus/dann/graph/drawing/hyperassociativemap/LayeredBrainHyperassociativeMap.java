@@ -18,16 +18,16 @@
  ******************************************************************************/
 package syncleus.dann.graph.drawing.hyperassociativemap;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.ExecutorService;
-
 import syncleus.dann.neural.Synapse;
 import syncleus.dann.neural.backprop.BackpropNeuron;
 import syncleus.dann.neural.backprop.BackpropStaticNeuron;
 import syncleus.dann.neural.backprop.InputBackpropNeuron;
 import syncleus.dann.neural.backprop.OutputBackpropNeuron;
 import syncleus.dann.neural.backprop.brain.FeedforwardBackpropBrain;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.ExecutorService;
 
 public class LayeredBrainHyperassociativeMap
         extends
@@ -107,9 +107,7 @@ public class LayeredBrainHyperassociativeMap
             neighborEdge.getNodes().stream().filter((neighbor) -> (!neighbor.equals(nodeToQuery))).forEach((neighbor) -> associations.put(neighbor, currentWeight));
         });
         getGraph().getLayers().stream().filter((layer) -> (layer.contains(neuronToQuery))).forEach((layer) -> layer.stream().filter((layerNeuron) -> (((neuronToQuery instanceof BackpropStaticNeuron) && (layerNeuron instanceof BackpropStaticNeuron))
-                || (!(neuronToQuery instanceof BackpropStaticNeuron) && !(layerNeuron instanceof BackpropStaticNeuron)))).forEach((layerNeuron) -> {
-            associations.put(layerNeuron, getEquilibriumDistance());
-        }));
+                || (!(neuronToQuery instanceof BackpropStaticNeuron) && !(layerNeuron instanceof BackpropStaticNeuron)))).forEach((layerNeuron) -> associations.put(layerNeuron, getEquilibriumDistance())));
         associations.remove(nodeToQuery);
 
         if (cached) {

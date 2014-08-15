@@ -23,17 +23,13 @@
  */
 package org.encog.ml.prg.extension;
 
+import syncleus.dann.evolve.exception.EACompileError;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import syncleus.dann.evolve.exception.EACompileError;
-import syncleus.dann.evolve.gp.EncogProgram;
-import syncleus.dann.evolve.gp.EncogProgramContext;
-import syncleus.dann.evolve.gp.ProgramNode;
-import syncleus.dann.evolve.gp.expvalue.ValueType;
 
 /**
  * A function factory maps the opcodes contained in the EncogOpcodeRegistry into
@@ -102,8 +98,8 @@ public class FunctionFactory implements Serializable {
      * @param args    The arguments for this node.
      * @return The newly created ProgramNode.
      */
-    public ProgramNode factorProgramNode(final ProgramExtensionTemplate temp,
-                                         final EncogProgram program, final ProgramNode[] args) {
+    public static ProgramNode factorProgramNode(final ProgramExtensionTemplate temp,
+                                                final EncogProgram program, final ProgramNode[] args) {
         return new ProgramNode(program, temp, args);
     }
 

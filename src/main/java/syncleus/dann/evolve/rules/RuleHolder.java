@@ -23,9 +23,9 @@
  */
 package syncleus.dann.evolve.rules;
 
-import java.util.List;
-
 import syncleus.dann.evolve.genome.Genome;
+
+import java.util.List;
 
 /**
  * Holds a set of rules for an EA.

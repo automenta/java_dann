@@ -25,7 +25,6 @@ package org.encog.neural.pattern;
 
 import syncleus.dann.learn.ml.MLMethod;
 import syncleus.dann.neural.activation.EncogActivationFunction;
-import syncleus.dann.neural.thermal.HopfieldNetwork;
 
 /**
  * Create a Hopfield pattern. A Hopfield neural network has a single layer that
@@ -50,7 +49,7 @@ public class HopfieldPattern implements NeuralNetworkPattern {
      * @param count The number of neurons.
      */
     @Override
-    public void addHiddenLayer(final int count) {
+    public static void addHiddenLayer(final int count) {
         throw new PatternError("A Hopfield network has no hidden layers.");
     }
 
@@ -79,7 +78,7 @@ public class HopfieldPattern implements NeuralNetworkPattern {
      * @param activation The activation function to use.
      */
     @Override
-    public void setEncogActivationFunction(final EncogActivationFunction activation) {
+    public static void setEncogActivationFunction(final EncogActivationFunction activation) {
         throw new PatternError(
                 "A Hopfield network will use the BiPolar activation "
                         + "function, no activation function needs to be specified.");
@@ -105,7 +104,7 @@ public class HopfieldPattern implements NeuralNetworkPattern {
      * @param count The number of neurons.
      */
     @Override
-    public void setOutputNeurons(final int count) {
+    public static void setOutputNeurons(final int count) {
         throw new PatternError(
                 "A Hopfield network has a single layer, so no need "
                         + "to specify the output count.");

@@ -23,10 +23,10 @@
  */
 package syncleus.dann.evolve.species;
 
-import java.util.List;
-
 import syncleus.dann.evolve.genome.Genome;
 import syncleus.dann.evolve.train.EvolutionaryAlgorithm;
+
+import java.util.List;
 
 /**
  * Defines a speciation strategy.

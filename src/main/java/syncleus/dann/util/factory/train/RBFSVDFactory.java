@@ -26,8 +26,6 @@ package syncleus.dann.util.factory.train;
 import syncleus.dann.learn.ml.MLDataSet;
 import syncleus.dann.learn.ml.MLMethod;
 import syncleus.dann.learn.train.MLTrain;
-import syncleus.dann.neural.rbf.RBFNetwork;
-import syncleus.dann.neural.rbf.training.SVDTraining;
 
 /**
  * This factory is used to create a SVD trainer for an RBF network.
@@ -42,8 +40,8 @@ public class RBFSVDFactory {
      * @param args     The arguments to use.
      * @return The newly created trainer.
      */
-    public MLTrain create(final MLMethod method, final MLDataSet training,
-                          final String args) {
+    public static MLTrain create(final MLMethod method, final MLDataSet training,
+                                 final String args) {
 
         if (!(method instanceof RBFNetwork)) {
             throw new RuntimeException(

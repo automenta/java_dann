@@ -23,17 +23,11 @@
  */
 package org.encog.neural.neat.training.opp;
 
-import java.util.Random;
-
 import syncleus.dann.evolve.genome.Genome;
 import syncleus.dann.math.random.RangeRandomizer;
 import syncleus.dann.neural.activation.EncogActivationFunction;
-import syncleus.dann.neural.neat.NEATNeuronType;
-import syncleus.dann.neural.neat.NEATPopulation;
-import syncleus.dann.neural.neat.training.NEATGenome;
-import syncleus.dann.neural.neat.training.NEATInnovation;
-import syncleus.dann.neural.neat.training.NEATLinkGene;
-import syncleus.dann.neural.neat.training.NEATNeuronGene;
+
+import java.util.Random;
 
 /**
  * Mutate a genome by adding a new node. To do this a random link is chosen. The

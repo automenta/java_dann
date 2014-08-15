@@ -24,19 +24,11 @@
 package org.encog.neural.som.training.basic;
 
 import syncleus.dann.data.basic.BasicMLData;
-import syncleus.dann.learn.ml.MLData;
-import syncleus.dann.learn.ml.MLDataPair;
-import syncleus.dann.learn.ml.MLDataSet;
-import syncleus.dann.learn.ml.MLMethod;
-import syncleus.dann.learn.ml.TrainingImplementationType;
+import syncleus.dann.learn.ml.*;
 import syncleus.dann.learn.train.BasicTraining;
 import syncleus.dann.math.Format;
 import syncleus.dann.math.matrix.MatrixMath;
 import syncleus.dann.math.matrix.SimpleRealMatrix;
-import syncleus.dann.neural.networks.training.LearningRate;
-import syncleus.dann.neural.networks.training.propagation.TrainingContinuation;
-import syncleus.dann.neural.som.SOM;
-import syncleus.dann.neural.som.training.basic.neighborhood.NeighborhoodFunction;
 
 /**
  * This class implements competitive training, which would be used in a
@@ -553,7 +545,7 @@ public class BasicTrainSOM extends BasicTraining implements LearningRate {
      * @param input The input pattern.
      * @return The output activation of each output neuron.
      */
-    private MLData compute(final SOM som, final MLData input) {
+    private static MLData compute(final SOM som, final MLData input) {
 
         final MLData result = new BasicMLData(som.getOutputCount());
 

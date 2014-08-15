@@ -56,7 +56,7 @@ public class HessianCR extends BasicHessian {
 
         // create worker(s)
         /*final DetermineWorkload determine = new DetermineWorkload(
-				this.numThreads, (int) this.training.getRecordCount());*/
+                this.numThreads, (int) this.training.getRecordCount());*/
 
         this.workers = new ChainRuleWorker[1 /*determine.getThreadCount()*/];
 

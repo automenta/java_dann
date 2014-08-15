@@ -28,7 +28,6 @@ import syncleus.dann.learn.ml.MLMethod;
 import syncleus.dann.learn.train.MLTrain;
 import syncleus.dann.neural.networks.BasicNetwork;
 import syncleus.dann.neural.networks.ContainsFlat;
-import syncleus.dann.neural.networks.training.propagation.scg.ScaledConjugateGradient;
 
 /**
  * A factory used to create SCG trainers.
@@ -43,8 +42,8 @@ public class SCGFactory {
      * @param args     The arguments to use.
      * @return The newly created trainer.
      */
-    public MLTrain create(final MLMethod method, final MLDataSet training,
-                          final String args) {
+    public static MLTrain create(final MLMethod method, final MLDataSet training,
+                                 final String args) {
 
         if (!(method instanceof BasicNetwork)) {
             throw new RuntimeException(

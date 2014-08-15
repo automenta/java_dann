@@ -59,7 +59,7 @@ public class MarketDataDescription extends TemporalDataDescription {
      */
     public MarketDataDescription(final TickerSymbol ticker,
                                  final MarketDataType dataType, final Type type,
-                                 final EncogActivationFunction 	activationFunction, final boolean input,
+                                 final EncogActivationFunction activationFunction, final boolean input,
                                  final boolean predict) {
         super(activationFunction, type, input, predict);
         this.ticker = ticker;

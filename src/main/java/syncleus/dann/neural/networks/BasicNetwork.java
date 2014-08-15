@@ -23,28 +23,18 @@
  */
 package syncleus.dann.neural.networks;
 
+import org.encog.neural.flat.FlatNetwork;
 import syncleus.dann.data.basic.BasicMLData;
 import syncleus.dann.data.file.csv.CSVFormat;
 import syncleus.dann.data.language.NumberList;
-import syncleus.dann.learn.ml.BasicML;
-import syncleus.dann.learn.ml.MLClassification;
-import syncleus.dann.learn.ml.MLContext;
-import syncleus.dann.learn.ml.MLData;
-import syncleus.dann.learn.ml.MLDataSet;
-import syncleus.dann.learn.ml.MLEncodable;
-import syncleus.dann.learn.ml.MLError;
-import syncleus.dann.learn.ml.MLFactory;
-import syncleus.dann.learn.ml.MLRegression;
-import syncleus.dann.learn.ml.MLResettable;
+import syncleus.dann.learn.ml.*;
 import syncleus.dann.math.EncogMath;
 import syncleus.dann.math.EncogUtility;
 import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.math.random.NguyenWidrowRandomizer;
 import syncleus.dann.math.random.Randomizer;
 import syncleus.dann.math.random.RangeRandomizer;
-import syncleus.dann.neural.Brain;
 import syncleus.dann.neural.activation.EncogActivationFunction;
-import syncleus.dann.neural.flat.FlatNetwork;
 import syncleus.dann.neural.networks.layers.Layer;
 import syncleus.dann.neural.networks.structure.NetworkCODEC;
 import syncleus.dann.neural.networks.structure.NeuralStructure;
@@ -236,7 +226,7 @@ public class BasicNetwork extends BasicML implements ContainsFlat, MLContext,
      */
     @Override
     public Object clone() {
-        final BasicNetwork result = (BasicNetwork)ObjectCloner.deepCopy(this);
+        final BasicNetwork result = (BasicNetwork) ObjectCloner.deepCopy(this);
         return result;
     }
 

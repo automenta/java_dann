@@ -24,12 +24,7 @@
 package syncleus.dann.learn.svm;
 
 import syncleus.dann.data.basic.BasicMLData;
-import syncleus.dann.learn.ml.BasicML;
-import syncleus.dann.learn.ml.MLClassification;
-import syncleus.dann.learn.ml.MLData;
-import syncleus.dann.learn.ml.MLDataSet;
-import syncleus.dann.learn.ml.MLError;
-import syncleus.dann.learn.ml.MLRegression;
+import syncleus.dann.learn.ml.*;
 import syncleus.dann.math.EncogUtility;
 
 /**
@@ -50,8 +45,7 @@ import syncleus.dann.math.EncogUtility;
  * neural network training classes will work. This class must be trained using
  * SVMTrain.
  */
-public class SVM extends BasicML implements MLRegression, MLClassification,
-        MLError {
+public class SVM extends BasicML implements MLRegression, MLClassification, MLError {
 
     /**
      * The default degree.
@@ -158,7 +152,7 @@ public class SVM extends BasicML implements MLRegression, MLClassification,
                 this.params.svm_type = svm_parameter.NU_SVR;
                 break;
             default:
-                throw new NeuralNetworkError("Invalid svm type");
+                throw new RuntimeException("Invalid SVM type");
         }
 
         switch (kernelType) {
@@ -178,7 +172,7 @@ public class SVM extends BasicML implements MLRegression, MLClassification,
                 this.params.kernel_type = svm_parameter.PRECOMPUTED;
                 break;
             default:
-                throw new NeuralNetworkError("Invalid kernel type");
+                throw new RuntimeException("Invalid kernel type");
         }
 
         // params[i].kernel_type = svm_parameter.RBF;
@@ -357,7 +351,7 @@ public class SVM extends BasicML implements MLRegression, MLClassification,
      * @param data The data to convert.
      * @return The SVM sparse data.
      */
-    public svm_node[] makeSparse(final MLData data) {
+    public static svm_node[] makeSparse(final MLData data) {
         final svm_node[] result = new svm_node[data.size()];
         for (int i = 0; i < data.size(); i++) {
             result[i] = new svm_node();

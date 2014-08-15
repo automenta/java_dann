@@ -20,7 +20,6 @@ package syncleus.dann.graphicalmodel;
 
 import org.junit.Assert;
 import org.junit.Test;
-
 import syncleus.dann.learn.StateEvidence;
 
 public class TestStateEvidence {

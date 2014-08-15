@@ -23,16 +23,16 @@
  */
 package syncleus.dann.neural.networks.structure;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-
+import org.encog.neural.flat.FlatLayer;
+import org.encog.neural.flat.FlatNetwork;
 import syncleus.dann.neural.activation.ActivationLinear;
-import syncleus.dann.neural.flat.FlatLayer;
-import syncleus.dann.neural.flat.FlatNetwork;
 import syncleus.dann.neural.networks.BasicNetwork;
 import syncleus.dann.neural.networks.layers.BasicLayer;
 import syncleus.dann.neural.networks.layers.Layer;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Holds "cached" information about the structure of the neural network. This is

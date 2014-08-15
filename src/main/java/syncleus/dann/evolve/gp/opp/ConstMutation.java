@@ -23,16 +23,11 @@
  */
 package syncleus.dann.evolve.gp.opp;
 
-import java.util.Random;
-
 import syncleus.dann.evolve.genome.Genome;
-import syncleus.dann.evolve.gp.EncogProgram;
-import syncleus.dann.evolve.gp.EncogProgramContext;
-import syncleus.dann.evolve.gp.ProgramNode;
-import syncleus.dann.evolve.gp.expvalue.ExpressionValue;
-import syncleus.dann.evolve.gp.extension.StandardExtensions;
 import syncleus.dann.evolve.opp.EvolutionaryOperator;
 import syncleus.dann.evolve.train.EvolutionaryAlgorithm;
+
+import java.util.Random;
 
 /**
  * Mutate the constant nodes of an Encog program. This mutation only changes

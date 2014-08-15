@@ -21,14 +21,14 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package org.encog.neural.freeform.basic;
+package syncleus.dann.neural.freeform.basic;
+
+import syncleus.dann.neural.activation.EncogActivationFunction;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
-import syncleus.dann.neural.activation.EncogActivationFunction;
-import syncleus.dann.neural.freeform.FreeformConnection;
+import org.encog.neural.freeform.FreeformConnection;
 import syncleus.dann.neural.freeform.InputSummation;
 
 /**
@@ -91,8 +91,7 @@ public class BasicActivationSummation implements InputSummation, Serializable {
 
         // perform the activation function
         sumArray[0] = this.sum;
-        this.activationFunction
-                .activationFunction(sumArray, 0, sumArray.length);
+        this.activationFunction.activate(sumArray, 0, sumArray.length);
 
         return sumArray[0];
     }
@@ -101,7 +100,7 @@ public class BasicActivationSummation implements InputSummation, Serializable {
      * {@inheritDoc}
      */
     @Override
-    public EncogActivationFunction getEncogActivationFunction() {
+    public EncogActivationFunction getActivationFunction() {
         return this.activationFunction;
     }
 

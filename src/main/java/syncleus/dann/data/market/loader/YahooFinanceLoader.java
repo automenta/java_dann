@@ -23,21 +23,17 @@
  */
 package syncleus.dann.data.market.loader;
 
+import syncleus.dann.data.file.csv.CSVFormat;
+import syncleus.dann.data.file.csv.ReadCSV;
+import syncleus.dann.data.market.MarketDataType;
+import syncleus.dann.data.market.TickerSymbol;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collection;
-import java.util.Date;
-import java.util.Set;
-
-import syncleus.dann.data.file.csv.CSVFormat;
-import syncleus.dann.data.file.csv.ReadCSV;
-import syncleus.dann.data.market.MarketDataType;
-import syncleus.dann.data.market.TickerSymbol;
+import java.util.*;
 
 /**
  * This class loads financial data from Yahoo. One caution on Yahoo data.
@@ -56,8 +52,8 @@ public class YahooFinanceLoader implements MarketLoader {
      * @return The UEL
      * @throws IOException An error accessing the data.
      */
-    private URL buildURL(final TickerSymbol ticker, final Date from,
-                         final Date to) throws IOException {
+    private static URL buildURL(final TickerSymbol ticker, final Date from,
+                                final Date to) throws IOException {
         // process the dates
         final Calendar calendarFrom = Calendar.getInstance();
         calendarFrom.setTime(from);

@@ -46,7 +46,7 @@ public class VectorAlgebra {
      * @param v1 an array of doubles
      * @param v2 an array of doubles
      */
-    public void add(final double[] v1, final double[] v2) {
+    public static void add(final double[] v1, final double[] v2) {
         for (int i = 0; i < v1.length; i++) {
             v1[i] += v2[i];
         }
@@ -58,7 +58,7 @@ public class VectorAlgebra {
      * @param v1 an array of doubles
      * @param v2 an array of doubles
      */
-    public void sub(final double[] v1, final double[] v2) {
+    public static void sub(final double[] v1, final double[] v2) {
         for (int i = 0; i < v1.length; i++) {
             v1[i] -= v2[i];
         }
@@ -69,7 +69,7 @@ public class VectorAlgebra {
      *
      * @param v an array of doubles
      */
-    public void neg(final double[] v) {
+    public static void neg(final double[] v) {
         for (int i = 0; i < v.length; i++) {
             v[i] = -v[i];
         }
@@ -85,7 +85,7 @@ public class VectorAlgebra {
      * @param v an array of doubles.
      * @param k a scalar.
      */
-    public void mulRand(final double[] v, final double k) {
+    public static void mulRand(final double[] v, final double k) {
         for (int i = 0; i < v.length; i++) {
             v[i] *= k * rand.nextDouble();
         }
@@ -99,7 +99,7 @@ public class VectorAlgebra {
      * @param v an array of doubles.
      * @param k a scalar.
      */
-    public void mul(final double[] v, final double k) {
+    public static void mul(final double[] v, final double k) {
         for (int i = 0; i < v.length; i++) {
             v[i] *= k;
         }
@@ -111,7 +111,7 @@ public class VectorAlgebra {
      * @param dst an array of doubles
      * @param src an array of doubles
      */
-    public void copy(final double[] dst, final double[] src) {
+    public static void copy(final double[] dst, final double[] src) {
         System.arraycopy(src, 0, dst, 0, src.length);
     }
 
@@ -132,7 +132,7 @@ public class VectorAlgebra {
      *
      * @param v an array of doubles
      */
-    public void randomise(final double[] v, final double maxValue) {
+    public static void randomise(final double[] v, final double maxValue) {
         for (int i = 0; i < v.length; i++) {
             v[i] = (2 * rand.nextDouble() - 1) * maxValue;
         }
@@ -145,7 +145,7 @@ public class VectorAlgebra {
      * @param v        an array of doubles
      * @param maxValue if -1 this function does nothing
      */
-    public void clampComponents(final double[] v, final double maxValue) {
+    public static void clampComponents(final double[] v, final double maxValue) {
         if (maxValue != -1) {
             for (int i = 0; i < v.length; i++) {
                 if (v[i] > maxValue)
@@ -163,7 +163,7 @@ public class VectorAlgebra {
      * @param v2 The second vector.
      * @return The dot product.
      */
-    public double dotProduct(final double[] v1, final double[] v2) {
+    public static double dotProduct(final double[] v1, final double[] v2) {
         double d = 0;
         for (int i = 0; i < v1.length; i++) {
             d += v1[i] * v2[i];

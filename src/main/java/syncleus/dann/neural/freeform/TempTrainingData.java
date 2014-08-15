@@ -21,7 +21,7 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package org.encog.neural.freeform;
+package syncleus.dann.neural.freeform;
 
 /**
  * Some training methods require that temp data be stored during the training

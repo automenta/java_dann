@@ -18,13 +18,12 @@
  ******************************************************************************/
 package syncleus.dann.dataprocessing.signal.transform;
 
-import java.util.Random;
-
 import org.junit.Assert;
 import org.junit.Test;
-
 import syncleus.dann.data.signal.transform.DiscreteFourierTransform;
 import syncleus.dann.math.ComplexNumber;
+
+import java.util.Random;
 
 public class TestDiscreteFourierTransform {
     private static final Random RANDOM = new Random();

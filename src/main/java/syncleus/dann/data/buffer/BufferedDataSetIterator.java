@@ -23,11 +23,11 @@
  */
 package syncleus.dann.data.buffer;
 
-import java.util.Iterator;
-
 import syncleus.dann.data.basic.BasicMLDataPair;
 import syncleus.dann.learn.ml.MLDataError;
 import syncleus.dann.learn.ml.MLDataPair;
+
+import java.util.Iterator;
 
 /**
  * An iterator for the BufferedNeuralDataSet.

@@ -26,10 +26,6 @@ package org.encog.neural.networks.training.propagation.quick;
 import syncleus.dann.learn.ml.MLDataSet;
 import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.neural.networks.ContainsFlat;
-import syncleus.dann.neural.networks.training.LearningRate;
-import syncleus.dann.neural.networks.training.TrainingError;
-import syncleus.dann.neural.networks.training.propagation.Propagation;
-import syncleus.dann.neural.networks.training.propagation.TrainingContinuation;
 
 /**
  * QPROP is an efficient training method that is based on Newton's Method. QPROP
@@ -113,7 +109,7 @@ public class QuickPropagation extends Propagation implements LearningRate {
      * {@inheritDoc}
      */
     @Override
-    public boolean canContinue() {
+    public static boolean canContinue() {
         return false;
     }
 

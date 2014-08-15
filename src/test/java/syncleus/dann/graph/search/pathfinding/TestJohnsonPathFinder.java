@@ -18,16 +18,15 @@
  ******************************************************************************/
 package syncleus.dann.graph.search.pathfinding;
 
-import java.util.List;
-
 import org.junit.Assert;
 import org.junit.Test;
-
 import syncleus.dann.graph.BidirectedEdge;
 import syncleus.dann.graph.WeightedDirectedEdge;
 import syncleus.dann.graph.path.pathfinding.JohnsonPathFinder;
 import syncleus.dann.graph.search.GridNode;
 import syncleus.dann.graph.search.WeightedDirectedGrid;
+
+import java.util.List;
 
 public class TestJohnsonPathFinder {
     private static final double INF = Double.MAX_VALUE;

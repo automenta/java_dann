@@ -21,10 +21,9 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package org.encog.neural.freeform.basic;
+package syncleus.dann.neural.freeform.basic;
 
 import java.io.Serializable;
-
 import syncleus.dann.neural.freeform.FreeformLayer;
 import syncleus.dann.neural.freeform.factory.FreeformLayerFactory;
 
@@ -43,7 +42,7 @@ public class BasicFreeformLayerFactory implements FreeformLayerFactory,
      * {@inheritDoc}
      */
     @Override
-    public FreeformLayer factor() {
+    public static FreeformLayer factor() {
         return new BasicFreeformLayer();
     }
 

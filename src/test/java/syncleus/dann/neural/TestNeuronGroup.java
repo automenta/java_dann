@@ -18,12 +18,11 @@
  ******************************************************************************/
 package syncleus.dann.neural;
 
-import java.util.stream.Collectors;
-
 import org.junit.Assert;
 import org.junit.Test;
-
 import syncleus.dann.neural.backprop.SimpleBackpropNeuron;
+
+import java.util.stream.Collectors;
 
 public class TestNeuronGroup {
     private static class TestBrain extends AbstractLocalBrain {

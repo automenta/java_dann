@@ -23,12 +23,11 @@
  */
 package syncleus.dann.util.factory.method;
 
-import java.util.List;
-
 import syncleus.dann.learn.ml.MLMethod;
-import syncleus.dann.neural.pattern.SOMPattern;
 import syncleus.dann.util.factory.parse.ArchitectureLayer;
 import syncleus.dann.util.factory.parse.ArchitectureParse;
+
+import java.util.List;
 
 /**
  * A factory that is used to produce self-organizing maps.
@@ -42,8 +41,8 @@ public class SOMFactory {
      * @param output       The output count.
      * @return The newly created SOM.
      */
-    public MLMethod create(final String architecture, final int input,
-                           final int output) {
+    public static MLMethod create(final String architecture, final int input,
+                                  final int output) {
 
         final List<String> layers = ArchitectureParse.parseLayers(architecture);
         if (layers.size() != 2) {

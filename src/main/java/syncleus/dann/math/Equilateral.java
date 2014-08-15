@@ -96,7 +96,7 @@ public class Equilateral implements Serializable {
      * @return One row for each set, the columns are the activations for that
      * set.
      */
-    private double[][] equilat(final int n, final double high, final double low) {
+    private static double[][] equilat(final int n, final double high, final double low) {
         double r, f;
         final double[][] result = new double[n][n - 1];
 

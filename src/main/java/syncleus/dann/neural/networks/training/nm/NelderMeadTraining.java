@@ -31,7 +31,6 @@ import syncleus.dann.math.EncogMath;
 import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.neural.networks.BasicNetwork;
 import syncleus.dann.neural.networks.structure.NetworkCODEC;
-import syncleus.dann.neural.networks.training.propagation.TrainingContinuation;
 
 /**
  * The Nelder-Mead method is a commonly used parameter optimization method that
@@ -202,7 +201,7 @@ public class NelderMeadTraining extends BasicTraining {
             this.start[j] = x;
         }
         /*
-		 * The simplex construction is complete.
+         * The simplex construction is complete.
 		 * 
 		 * Find highest and lowest Y values. YNEWLO = Y(IHI) indicates the
 		 * vertex of the simplex to be replaced.

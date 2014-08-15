@@ -327,7 +327,7 @@ public class GlobalMinimumSearch {
         }
 
 		/*
-		 * At this point we have a minimum (within low,high) at (x2,y2). Compute
+         * At this point we have a minimum (within low,high) at (x2,y2). Compute
 		 * x1 and x3, its neighbors. We already know y1 and y3 (unless the
 		 * minimum is at an endpoint!).
 		 */

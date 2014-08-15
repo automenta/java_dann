@@ -18,16 +18,16 @@
  ******************************************************************************/
 package syncleus.dann.graph.path.pathfinding;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import syncleus.dann.graph.Edge;
 import syncleus.dann.graph.Graph;
 import syncleus.dann.graph.Weighted;
 import syncleus.dann.graph.WeightedEdge;
 import syncleus.dann.graph.path.PathFinder;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class FloydWarshallPathFinder<N, E extends Edge<N>> implements
         PathFinder<N, E> {
@@ -72,23 +72,21 @@ public class FloydWarshallPathFinder<N, E extends Edge<N>> implements
     }
 
     private void calculatePaths() {
-        this.graph.getNodes().stream().forEach((nodeK) -> this.graph.getNodes().stream().forEach((nodeX) -> {
-            this.graph.getNodes().stream().filter((nodeY) -> (!Double.isInfinite(this.walkWeight.get(nodeX)
-                    .get(nodeK))
-                    && !Double.isInfinite(this.walkWeight.get(nodeK)
-                    .get(nodeY))
-                    && this.walkWeight.get(nodeX).get(nodeK)
-                    + this.walkWeight.get(nodeK).get(nodeY) < this.walkWeight
-                    .get(nodeX).get(nodeY))).map((nodeY) -> {
-                final double newWeight = this.walkWeight.get(nodeX)
-                        .get(nodeK)
-                        + this.walkWeight.get(nodeK).get(nodeY);
-                this.walkWeight.get(nodeX).put(nodeY, newWeight);
-                return nodeY;
-            }).forEach((nodeY) -> {
-                this.nextNode.get(nodeX).put(nodeY, nodeK);
-            });
-        }));
+        this.graph.getNodes().stream().forEach((nodeK) -> this.graph.getNodes().stream().forEach((nodeX) -> this.graph.getNodes().stream().filter((nodeY) -> (!Double.isInfinite(this.walkWeight.get(nodeX)
+                .get(nodeK))
+                && !Double.isInfinite(this.walkWeight.get(nodeK)
+                .get(nodeY))
+                && this.walkWeight.get(nodeX).get(nodeK)
+                + this.walkWeight.get(nodeK).get(nodeY) < this.walkWeight
+                .get(nodeX).get(nodeY))).map((nodeY) -> {
+            final double newWeight = this.walkWeight.get(nodeX)
+                    .get(nodeK)
+                    + this.walkWeight.get(nodeK).get(nodeY);
+            this.walkWeight.get(nodeX).put(nodeY, newWeight);
+            return nodeY;
+        }).forEach((nodeY) -> {
+            this.nextNode.get(nodeX).put(nodeY, nodeK);
+        })));
     }
 
     @Override

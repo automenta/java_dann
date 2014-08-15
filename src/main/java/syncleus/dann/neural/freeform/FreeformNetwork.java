@@ -21,29 +21,24 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package org.encog.neural.freeform;
+package syncleus.dann.neural.freeform;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-
-import syncleus.dann.data.basic.BasicMLData;
-import syncleus.dann.learn.ml.BasicML;
-import syncleus.dann.learn.ml.MLClassification;
-import syncleus.dann.learn.ml.MLContext;
-import syncleus.dann.learn.ml.MLData;
-import syncleus.dann.learn.ml.MLDataSet;
-import syncleus.dann.learn.ml.MLEncodable;
-import syncleus.dann.learn.ml.MLError;
-import syncleus.dann.learn.ml.MLRegression;
-import syncleus.dann.learn.ml.MLResettable;
-import syncleus.dann.math.EncogMath;
+import syncleus.dann.learn.ml.*;
 import syncleus.dann.math.EncogUtility;
 import syncleus.dann.math.array.EngineArray;
+import syncleus.dann.neural.activation.EncogActivationFunction;
+import syncleus.dann.neural.networks.BasicNetwork;
+
+import java.util.Set;
+import org.encog.neural.freeform.FreeformConnection;
+
+import syncleus.dann.data.basic.BasicMLData;
+import syncleus.dann.math.EncogMath;
 import syncleus.dann.math.random.ConsistentRandomizer;
 import syncleus.dann.neural.activation.ActivationTANH;
-import syncleus.dann.neural.activation.EncogActivationFunction;
 import syncleus.dann.neural.freeform.basic.BasicActivationSummationFactory;
 import syncleus.dann.neural.freeform.basic.BasicFreeformConnectionFactory;
 import syncleus.dann.neural.freeform.basic.BasicFreeformLayerFactory;
@@ -54,7 +49,7 @@ import syncleus.dann.neural.freeform.factory.FreeformNeuronFactory;
 import syncleus.dann.neural.freeform.factory.InputSummationFactory;
 import syncleus.dann.neural.freeform.task.ConnectionTask;
 import syncleus.dann.neural.freeform.task.NeuronTask;
-import syncleus.dann.neural.networks.BasicNetwork;
+import syncleus.dann.util.ObjectCloner;
 
 /**
  * Implements a freefrom neural network. A freeform neural network can represent
@@ -275,7 +270,7 @@ public class FreeformNetwork extends BasicML implements MLContext, Cloneable,
      */
     @Override
     public Object clone() {
-        final BasicNetwork result = ObjectCloner.deepCopy(this);
+        final BasicNetwork result = (BasicNetwork)ObjectCloner.deepCopy(this);
         return result;
     }
 
@@ -322,11 +317,11 @@ public class FreeformNetwork extends BasicML implements MLContext, Cloneable,
     /**
      * Connect two layers.
      *
-     * @param source                The source layer.
-     * @param target                The target layer.
+     * @param source                     The source layer.
+     * @param target                     The target layer.
      * @param theEncogActivationFunction The activation function to use.
-     * @param biasActivation        The bias activation to use.
-     * @param isRecurrent           True, if this is a recurrent connection.
+     * @param biasActivation             The bias activation to use.
+     * @param isRecurrent                True, if this is a recurrent connection.
      */
     public void connectLayers(final FreeformLayer source,
                               final FreeformLayer target,
@@ -366,8 +361,8 @@ public class FreeformNetwork extends BasicML implements MLContext, Cloneable,
      * Connect two layers, assume bias activation of 1.0 and non-recurrent
      * connection.
      *
-     * @param source                The source layer.
-     * @param target                The target layer.
+     * @param source                     The source layer.
+     * @param target                     The target layer.
      * @param theEncogActivationFunction The activation function.
      */
     public void ConnectLayers(final FreeformLayer source,
@@ -432,8 +427,7 @@ public class FreeformNetwork extends BasicML implements MLContext, Cloneable,
                     "A layer cannot have a context layer connected if there are no other outbound connections from the source layer.  Please connect the source layer somewhere else first.");
         }
 
-        activatonFunction = source.getNeurons().get(0).getInputSummation()
-                .getEncogActivationFunction();
+        activatonFunction = source.getNeurons().get(0).getInputSummation().getActivationFunction();
 
         // first create the context layer
         final FreeformLayer result = this.layerFactory.factor();
@@ -729,9 +723,7 @@ public class FreeformNetwork extends BasicML implements MLContext, Cloneable,
             neuron.allocateTempTraining(neuronSize);
             if (neuron.getInputSummation() != null) {
                 neuron
-                        .getInputSummation().list().stream().forEach((connection) -> {
-                    connection.allocateTempTraining(connectionSize);
-                });
+                        .getInputSummation().list().stream().forEach((connection) -> connection.allocateTempTraining(connectionSize));
             }
         });
     }
@@ -744,9 +736,7 @@ public class FreeformNetwork extends BasicML implements MLContext, Cloneable,
             neuron.clearTempTraining();
             if (neuron.getInputSummation() != null) {
                 neuron
-                        .getInputSummation().list().stream().forEach((connection) -> {
-                    connection.clearTempTraining();
-                });
+                        .getInputSummation().list().stream().forEach((connection) -> connection.clearTempTraining());
             }
         });
     }

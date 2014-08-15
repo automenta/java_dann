@@ -32,33 +32,33 @@ import java.io.Serializable;
  * @param <T> The type of object to hold.
  */
 public class ObjectHolder<T> implements Serializable {
-	
-	/**
-	 * The object to hold.
-	 */
-	private final T obj;
-	
-	/**
-	 * The probability.
-	 */
-	private final double probability;
-	
-	public ObjectHolder(final T theObj, final double probability) {
-		this.obj = theObj;
-		this.probability = probability;
-	}
 
-	/**
-	 * @return the opp
-	 */
-	public T getObj() {
-		return this.obj;
-	}
+    /**
+     * The object to hold.
+     */
+    private final T obj;
 
-	/**
-	 * @return the probability
-	 */
-	public double getProbability() {
-		return probability;
-	}
+    /**
+     * The probability.
+     */
+    private final double probability;
+
+    public ObjectHolder(final T theObj, final double probability) {
+        this.obj = theObj;
+        this.probability = probability;
+    }
+
+    /**
+     * @return the opp
+     */
+    public T getObj() {
+        return this.obj;
+    }
+
+    /**
+     * @return the probability
+     */
+    public double getProbability() {
+        return probability;
+    }
 }

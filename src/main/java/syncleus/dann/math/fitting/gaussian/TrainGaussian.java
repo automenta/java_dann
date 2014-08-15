@@ -23,13 +23,13 @@
  */
 package syncleus.dann.math.fitting.gaussian;
 
+import org.encog.neural.networks.training.propagation.TrainingContinuation;
 import syncleus.dann.learn.ml.MLDataPair;
 import syncleus.dann.learn.ml.MLDataSet;
 import syncleus.dann.learn.ml.MLMethod;
 import syncleus.dann.learn.ml.TrainingImplementationType;
 import syncleus.dann.learn.train.BasicTraining;
 import syncleus.dann.math.array.EngineArray;
-import syncleus.dann.neural.networks.training.propagation.TrainingContinuation;
 
 public class TrainGaussian extends BasicTraining {
 

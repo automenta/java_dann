@@ -1,15 +1,10 @@
 package syncleus.dann.plan.qlearning;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
-
 import syncleus.dann.math.Randoms;
 import syncleus.dann.math.Sigmoids;
 import syncleus.dann.neural.Brain;
+
+import java.io.*;
 
 /**
  * Main class of the framework, contains the whole Connectionist Q-learning
@@ -210,7 +205,7 @@ public class QBrain implements Serializable {
             a = Randoms.pickBestIndex(boltzValues);
         }
         /*
-		 * if(a != aMax) { String qstr = ""; for (int i = 0; i < Q.length; i++)
+         * if(a != aMax) { String qstr = ""; for (int i = 0; i < Q.length; i++)
 		 * { qstr += ", " + Q[i]; } System.out.println("a(" + a + ") != aMax(" +
 		 * aMax + ") " + qstr); }
 		 */
@@ -487,7 +482,7 @@ public class QBrain implements Serializable {
      * @param neuronsNo
      * @return
      */
-    private double[][] createActivationTable(final int[] neuronsNo) {
+    private static double[][] createActivationTable(final int[] neuronsNo) {
         final double[][] ret = new double[neuronsNo.length][];
         for (int l = 0; l < ret.length; l++) {
             ret[l] = new double[neuronsNo[l]];

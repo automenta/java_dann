@@ -23,14 +23,14 @@
  */
 package org.encog.neural.networks.training.concurrent.jobs;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import syncleus.dann.learn.ml.MLDataSet;
 import syncleus.dann.learn.train.MLTrain;
 import syncleus.dann.learn.train.strategy.Strategy;
 import syncleus.dann.learn.train.strategy.end.EndTrainingStrategy;
 import syncleus.dann.neural.networks.BasicNetwork;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Base class for all concurrent training jobs.

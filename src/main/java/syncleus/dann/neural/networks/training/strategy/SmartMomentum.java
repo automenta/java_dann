@@ -25,7 +25,6 @@ package org.encog.neural.networks.training.strategy;
 
 import syncleus.dann.learn.train.MLTrain;
 import syncleus.dann.learn.train.strategy.Strategy;
-import syncleus.dann.neural.networks.training.Momentum;
 
 /**
  * Attempt to automatically set a momentum in a training algorithm that supports

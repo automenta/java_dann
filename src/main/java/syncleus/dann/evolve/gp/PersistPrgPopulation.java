@@ -23,16 +23,14 @@
  */
 package org.encog.ml.prg;
 
+import syncleus.dann.data.file.csv.CSVFormat;
+import syncleus.dann.evolve.species.BasicSpecies;
+import syncleus.dann.evolve.species.Species;
+
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.List;
 import java.util.Map;
-
-import syncleus.dann.data.file.csv.CSVFormat;
-import syncleus.dann.evolve.gp.expvalue.ValueType;
-import syncleus.dann.evolve.gp.train.PrgPopulation;
-import syncleus.dann.evolve.species.BasicSpecies;
-import syncleus.dann.evolve.species.Species;
 
 /**
  * Persist the Encog population.
@@ -43,7 +41,7 @@ public class PersistPrgPopulation implements EncogPersistor {
      * {@inheritDoc}
      */
     @Override
-    public int getFileVersion() {
+    public static int getFileVersion() {
         return 1;
     }
 
@@ -51,7 +49,7 @@ public class PersistPrgPopulation implements EncogPersistor {
      * {@inheritDoc}
      */
     @Override
-    public String getPersistClassString() {
+    public static String getPersistClassString() {
         return "PrgPopulation";
     }
 

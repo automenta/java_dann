@@ -23,9 +23,9 @@
  */
 package syncleus.dann.math.matrix.decomposition;
 
-import java.io.Serializable;
-
 import syncleus.dann.math.matrix.SimpleRealMatrix;
+
+import java.io.Serializable;
 
 /**
  * Cholesky Decomposition.
@@ -177,7 +177,7 @@ public class CholeskyDecomposition2 implements Serializable {
         return new SimpleRealMatrix(ic);
     }
 
-    private double[][] lowerTriangularInverse(final double[][] m) {
+    private static double[][] lowerTriangularInverse(final double[][] m) {
 
         final double[][] lti = new double[m.length][m.length];
 

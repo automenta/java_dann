@@ -23,21 +23,15 @@
  */
 package syncleus.dann.util.factory.train;
 
-import syncleus.dann.evolve.gp.PrgCODEC;
 import syncleus.dann.evolve.gp.opp.ConstMutation;
 import syncleus.dann.evolve.gp.opp.SubtreeCrossover;
 import syncleus.dann.evolve.gp.opp.SubtreeMutation;
-import syncleus.dann.evolve.gp.species.PrgSpeciation;
-import syncleus.dann.evolve.gp.train.PrgPopulation;
-import syncleus.dann.evolve.gp.train.rewrite.RewriteAlgebraic;
-import syncleus.dann.evolve.gp.train.rewrite.RewriteConstants;
 import syncleus.dann.evolve.score.adjust.ComplexityAdjustedScore;
 import syncleus.dann.evolve.train.basic.TrainEA;
 import syncleus.dann.learn.ml.CalculateScore;
 import syncleus.dann.learn.ml.MLDataSet;
 import syncleus.dann.learn.ml.MLMethod;
 import syncleus.dann.learn.train.MLTrain;
-import syncleus.dann.neural.networks.training.TrainingSetScore;
 
 public class EPLGAFactory {
     /**
@@ -48,8 +42,8 @@ public class EPLGAFactory {
      * @param argsStr  The arguments to use.
      * @return The newly created trainer.
      */
-    public MLTrain create(final MLMethod method, final MLDataSet training,
-                          final String argsStr) {
+    public static MLTrain create(final MLMethod method, final MLDataSet training,
+                                 final String argsStr) {
 
         final PrgPopulation pop = (PrgPopulation) method;
 

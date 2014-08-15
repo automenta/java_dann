@@ -25,10 +25,6 @@ package org.encog.neural.networks.training.propagation.manhattan;
 
 import syncleus.dann.learn.ml.MLDataSet;
 import syncleus.dann.neural.networks.ContainsFlat;
-import syncleus.dann.neural.networks.training.LearningRate;
-import syncleus.dann.neural.networks.training.propagation.Propagation;
-import syncleus.dann.neural.networks.training.propagation.TrainingContinuation;
-import syncleus.dann.neural.networks.training.propagation.resilient.RPROPConst;
 
 /**
  * One problem that the backpropagation technique has is that the magnitude of
@@ -103,7 +99,7 @@ public class ManhattanPropagation extends Propagation implements LearningRate {
      * @return Always returns false.
      */
     @Override
-    public boolean canContinue() {
+    public static boolean canContinue() {
         return false;
     }
 
@@ -113,7 +109,7 @@ public class ManhattanPropagation extends Propagation implements LearningRate {
      * @return Always returns null.
      */
     @Override
-    public TrainingContinuation pause() {
+    public static TrainingContinuation pause() {
         return null;
     }
 

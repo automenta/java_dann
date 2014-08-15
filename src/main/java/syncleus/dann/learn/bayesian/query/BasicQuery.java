@@ -23,17 +23,17 @@
  */
 package syncleus.dann.learn.bayesian.query;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import syncleus.dann.learn.bayesian.BayesianError;
 import syncleus.dann.learn.bayesian.BayesianEvent;
 import syncleus.dann.learn.bayesian.EncogBayesianNetwork;
 import syncleus.dann.learn.bayesian.EventType;
 import syncleus.dann.learn.bayesian.query.sample.EventState;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Provides basic functionality for a Bayesian query. This class is abstract,
@@ -168,14 +168,14 @@ public abstract class BasicQuery implements BayesianQuery, Serializable {
      * needed case. This is used for sampling.
      */
     protected boolean isNeededEvidence() {
-        return this.evidenceEvents.stream().map((evidenceEvent) -> getEventState(evidenceEvent)).noneMatch((state) -> (!state.isSatisfied()));
+        return this.evidenceEvents.stream().map(this::getEventState).noneMatch((state) -> (!state.isSatisfied()));
     }
 
     /**
      * @return True, if the current state satisifies the desired outcome.
      */
     protected boolean satisfiesDesiredOutcome() {
-        return this.outcomeEvents.stream().map((outcomeEvent) -> getEventState(outcomeEvent)).noneMatch((state) -> (!state.isSatisfied()));
+        return this.outcomeEvents.stream().map(this::getEventState).noneMatch((state) -> (!state.isSatisfied()));
     }
 
     /**

@@ -23,20 +23,20 @@
  */
 package syncleus.dann.data.temporal;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
-
+import org.encog.neural.data.basic.BasicNeuralData;
+import org.encog.neural.data.basic.BasicNeuralDataSet;
 import syncleus.dann.data.basic.BasicMLData;
 import syncleus.dann.data.basic.BasicMLDataPair;
 import syncleus.dann.data.language.time.TimeSpan;
 import syncleus.dann.data.language.time.TimeUnit;
 import syncleus.dann.learn.ml.MLData;
 import syncleus.dann.learn.ml.MLDataPair;
-import syncleus.dann.neural.data.basic.BasicNeuralData;
-import syncleus.dann.neural.data.basic.BasicNeuralDataSet;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
 
 /**
  * This class implements a temporal neural data set. A temporal neural dataset

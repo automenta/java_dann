@@ -232,8 +232,8 @@ public class DeriveMinimum {
      * @param h    The "h" value, used for CJ algorithm.
      * @param grad The gradients.
      */
-    private void findNewDir(final int n, final double gam, final double[] g,
-                            final double[] h, final double[] grad) {
+    private static void findNewDir(final int n, final double gam, final double[] g,
+                                   final double[] h, final double[] grad) {
         int i;
 
         System.arraycopy(grad, 0, g, 0, n);
@@ -250,7 +250,7 @@ public class DeriveMinimum {
      * @param grad The gradients.
      * @return The correction for the next iteration.
      */
-    private double gamma(final int n, final double[] g, final double[] grad) {
+    private static double gamma(final int n, final double[] g, final double[] grad) {
         int i;
         double denom, numer;
 

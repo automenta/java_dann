@@ -25,9 +25,6 @@ package org.encog.ml.prg.opp;
 
 import java.util.List;
 
-import syncleus.dann.evolve.gp.ProgramNode;
-import syncleus.dann.evolve.gp.expvalue.ValueType;
-
 /**
  * The level holder class is passed down as a tree is mutated. The level holder
  * class is initially given the desired output of the program and tracks the

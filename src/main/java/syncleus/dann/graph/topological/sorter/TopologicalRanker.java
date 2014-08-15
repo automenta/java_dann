@@ -18,11 +18,11 @@
  ******************************************************************************/
 package syncleus.dann.graph.topological.sorter;
 
-import java.util.List;
-import java.util.Set;
-
 import syncleus.dann.graph.BidirectedGraph;
 import syncleus.dann.graph.DirectedEdge;
+
+import java.util.List;
+import java.util.Set;
 
 public interface TopologicalRanker<N> extends TopologicalSorter<N> {
     List<Set<N>> rank(

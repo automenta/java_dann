@@ -23,15 +23,12 @@
  */
 package org.encog.ml.prg.extension;
 
+import syncleus.dann.data.language.SimpleParser;
+import syncleus.dann.evolve.exception.EACompileError;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
-import syncleus.dann.data.language.SimpleParser;
-import syncleus.dann.evolve.exception.EACompileError;
-import syncleus.dann.evolve.gp.EncogProgramContext;
-import syncleus.dann.evolve.gp.ProgramNode;
-import syncleus.dann.evolve.gp.expvalue.ValueType;
 
 /**
  * A basic template.
@@ -250,7 +247,7 @@ public abstract class BasicTemplate implements ProgramExtensionTemplate {
      * @param parser The parser to use.
      * @return The parsed parameter.
      */
-    private ParamTemplate readParam(final SimpleParser parser) {
+    private static ParamTemplate readParam(final SimpleParser parser) {
         final ParamTemplate result = new ParamTemplate();
 
         if (!parser.lookAhead("{")) {

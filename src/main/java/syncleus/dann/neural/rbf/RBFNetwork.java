@@ -24,24 +24,12 @@
 package org.encog.neural.rbf;
 
 import syncleus.dann.data.basic.BasicMLData;
-import syncleus.dann.learn.ml.BasicML;
-import syncleus.dann.learn.ml.MLData;
-import syncleus.dann.learn.ml.MLDataSet;
-import syncleus.dann.learn.ml.MLEncodable;
-import syncleus.dann.learn.ml.MLError;
-import syncleus.dann.learn.ml.MLRegression;
-import syncleus.dann.learn.ml.MLResettable;
+import syncleus.dann.learn.ml.*;
 import syncleus.dann.math.EncogUtility;
 import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.math.random.ConsistentRandomizer;
 import syncleus.dann.math.random.RangeRandomizer;
-import syncleus.dann.math.rbf.GaussianFunction;
-import syncleus.dann.math.rbf.InverseMultiquadricFunction;
-import syncleus.dann.math.rbf.MultiquadricFunction;
-import syncleus.dann.math.rbf.RBFEnum;
-import syncleus.dann.math.rbf.RadialBasisFunction;
-import syncleus.dann.neural.flat.FlatNetwork;
-import syncleus.dann.neural.flat.FlatNetworkRBF;
+import syncleus.dann.math.rbf.*;
 import syncleus.dann.neural.networks.ContainsFlat;
 
 /**
@@ -79,7 +67,7 @@ public class RBFNetwork extends BasicML implements MLError, MLRegression,
                       final int outputCount, final RBFEnum t) {
 
         if (hiddenCount == 0) {
-            throw new NeuralNetworkError(
+            throw new RuntimeException(
                     "RBF network cannot have zero hidden neurons.");
         }
 
@@ -239,7 +227,7 @@ public class RBFNetwork extends BasicML implements MLError, MLRegression,
         final double cmp = Math.pow(totalNumHiddenNeurons, 1.0 / dimensions);
 
         if (expectedSideLength != cmp) {
-            throw new NeuralNetworkError(
+            throw new RuntimeException(
                     "Total number of RBF neurons must be some integer to the power of 'dimensions'.\n"
                             + Format.formatDouble(expectedSideLength, 5)
                             + " <> " + Format.formatDouble(cmp, 5));

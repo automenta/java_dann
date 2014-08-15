@@ -33,8 +33,6 @@ import syncleus.dann.math.random.NguyenWidrowRandomizer;
 import syncleus.dann.math.random.Randomizer;
 import syncleus.dann.neural.networks.BasicNetwork;
 import syncleus.dann.neural.networks.structure.NetworkCODEC;
-import syncleus.dann.neural.networks.training.TrainingSetScore;
-import syncleus.dann.neural.networks.training.propagation.TrainingContinuation;
 
 /**
  * Iteratively trains a population of neural networks by applying particle swarm

@@ -51,7 +51,7 @@ public class NguyenWidrowRandomizer extends BasicRandomizer {
 
     }
 
-    private double calculateRange(final EncogActivationFunction af, final double r) {
+    private static double calculateRange(final EncogActivationFunction af, final double r) {
         final double[] d = {r};
         af.activate(d, 0, 1);
         return d[0];

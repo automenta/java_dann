@@ -23,14 +23,14 @@
  */
 package syncleus.dann.math.array;
 
+import syncleus.dann.math.EncogMath;
+import syncleus.dann.math.Equilateral;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import syncleus.dann.math.EncogMath;
-import syncleus.dann.math.Equilateral;
 
 
 /**
@@ -252,7 +252,7 @@ public class NormalizedField implements Serializable {
      * @param classNumber The class number to encode.
      * @return The encoded columns.
      */
-    public final String encodeSingleField(final int classNumber) {
+    public static final String encodeSingleField(final int classNumber) {
         final StringBuilder result = new StringBuilder();
         result.append(classNumber);
         return result.toString();

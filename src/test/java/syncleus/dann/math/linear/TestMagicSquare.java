@@ -23,20 +23,14 @@
  */
 package syncleus.dann.math.linear;
 
-import java.util.List;
-
 import org.junit.Assert;
 import org.junit.Test;
-
 import syncleus.dann.math.RealNumber;
 import syncleus.dann.math.matrix.RealMatrix;
 import syncleus.dann.math.matrix.SimpleRealMatrix;
-import syncleus.dann.math.matrix.decomposition.Decompositions;
-import syncleus.dann.math.matrix.decomposition.DoolittleLuDecomposition;
-import syncleus.dann.math.matrix.decomposition.EigenvalueDecomposition;
-import syncleus.dann.math.matrix.decomposition.HouseholderQrDecomposition;
-import syncleus.dann.math.matrix.decomposition.LuDecomposition;
-import syncleus.dann.math.matrix.decomposition.QrDecomposition;
+import syncleus.dann.math.matrix.decomposition.*;
+
+import java.util.List;
 
 public class TestMagicSquare {
     public static SimpleRealMatrix magic(final int n) {
@@ -104,7 +98,7 @@ public class TestMagicSquare {
     @Test
     public void testMagicSquare() {
         /*
-		 * | Tests LU, QR, SVD and symmetric Eig decompositions. | | n = order
+         * | Tests LU, QR, SVD and symmetric Eig decompositions. | | n = order
 		 * of magic square. | trace = diagonal sum, should be the magic sum,
 		 * (n^3 + n)/2. | max_eig = maximum eigenvalue of (A + A')/2, should
 		 * equal trace. | rank = linear algebraic rank, | should equal n if n is
@@ -153,7 +147,7 @@ public class TestMagicSquare {
                     checkValues(t, solutions[n - 3][0]));
             final EigenvalueDecomposition currentEigen = Decompositions
                     .createEigenvalueDecomposition(
-                            currentMatrix.add((RealMatrix)currentMatrix.transpose()).multiply(0.5));
+                            currentMatrix.add((RealMatrix) currentMatrix.transpose()).multiply(0.5));
             final List<RealNumber> d = currentEigen.getRealEigenvalues();
             Assert.assertTrue(
                     "incorrect maximum eigen! obtained: "

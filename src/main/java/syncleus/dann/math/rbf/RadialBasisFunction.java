@@ -23,9 +23,9 @@
  */
 package syncleus.dann.math.rbf;
 
-import java.io.Serializable;
-
 import syncleus.dann.math.ArrayToScalarFunction;
+
+import java.io.Serializable;
 
 /**
  * A multi-dimension RBF.
@@ -39,7 +39,7 @@ public interface RadialBasisFunction extends Serializable, ArrayToScalarFunction
      * @return The RBF value.
      */
     @Override
-	double apply(double[] x);
+    double apply(double[] x);
 
     /**
      * Get the center of this RBD.

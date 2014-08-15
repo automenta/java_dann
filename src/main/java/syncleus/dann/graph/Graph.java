@@ -18,13 +18,13 @@
  ******************************************************************************/
 package syncleus.dann.graph;
 
+import syncleus.dann.graph.context.ContextReporter;
+
 import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
-import syncleus.dann.graph.context.ContextReporter;
 
 // TODO consider making all nodes extend from a connectable interface so you can embed other graphs as nodes if they too are connectable.
 
@@ -41,10 +41,10 @@ import syncleus.dann.graph.context.ContextReporter;
  * @author Jeffrey Phillips Freeman
  * @since 2.0
  */
-public interface Graph<N, E extends Edge<N>> extends ImplicitGraph<N,E>, Serializable, Cloneable,
+public interface Graph<N, E extends Edge<N>> extends ImplicitGraph<N, E>, Serializable, Cloneable,
         ContextReporter {
 
-	
+
     /**
      * Get a set of all nodes in the graph.
      *
@@ -54,7 +54,7 @@ public interface Graph<N, E extends Edge<N>> extends ImplicitGraph<N,E>, Seriali
     default Set<N> getNodes() {
         return streamNodes().collect(Collectors.toSet());
     }
-	
+
     /**
      * Get a set of all edges in the graph. Two edges in the set, and in the
      * graph, may have the same end points unless equals in the edges used by
@@ -80,9 +80,9 @@ public interface Graph<N, E extends Edge<N>> extends ImplicitGraph<N,E>, Seriali
      * @return A list of all nodes adjacent to the specified node, empty set if
      * the node has no edges.
      * @since 2.0
-     */    
+     */
     default List<N> getAdjacentNodes(N node) {
-    	return streamAdjacentNodes(node).collect(Collectors.toList());
+        return streamAdjacentNodes(node).collect(Collectors.toList());
     }
 
 

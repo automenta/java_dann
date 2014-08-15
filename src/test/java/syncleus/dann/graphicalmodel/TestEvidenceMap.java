@@ -18,17 +18,16 @@
  ******************************************************************************/
 package syncleus.dann.graphicalmodel;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import org.junit.Assert;
 import org.junit.Test;
-
 import syncleus.dann.learn.EvidenceMap;
 import syncleus.dann.learn.StateEvidence;
 import syncleus.dann.learn.bayesian.MutableBayesianAdjacencyNetwork;
 import syncleus.dann.learn.graphical.GraphicalModelNode;
 import syncleus.dann.learn.graphical.SimpleGraphicalModelNode;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public class TestEvidenceMap {
     private static enum TestEnum {

@@ -21,7 +21,7 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package org.encog.neural.som.training.basic;
+package syncleus.dann.neural.som.training.basic;
 
 import syncleus.dann.learn.ml.MLData;
 import syncleus.dann.math.BoundMath;
@@ -73,7 +73,7 @@ public class BestMatchingUnit {
         int result = 0;
 
         if (input.size() > this.som.getInputCount()) {
-            throw new NeuralNetworkError("Can't train SOM with input size of "
+            throw new RuntimeException("Can't train SOM with input size of "
                     + som.getInputCount() + " with input data of count "
                     + input.size());
         }
@@ -110,13 +110,13 @@ public class BestMatchingUnit {
      * @param outputNeuron The neuron we are calculating the distance for.
      * @return The Euclidean distance.
      */
-    public double calculateEuclideanDistance(final SimpleRealMatrix matrix,
-                                             final MLData input, final int outputNeuron) {
+    public static double calculateEuclideanDistance(final SimpleRealMatrix matrix,
+                                                    final MLData input, final int outputNeuron) {
         double result = 0;
 
         // Loop over all input data.
         for (int i = 0; i < input.size(); i++) {
-            final double diff = input.getData(i) - matrix.getNumber(outputNeuron, i);
+            final double diff = input.getData(i) - matrix.get(outputNeuron, i);
             result += diff * diff;
         }
         return BoundMath.sqrt(result);

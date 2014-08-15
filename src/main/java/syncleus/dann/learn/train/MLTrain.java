@@ -23,13 +23,13 @@
  */
 package syncleus.dann.learn.train;
 
-import java.util.List;
-
 import syncleus.dann.learn.ml.MLDataSet;
 import syncleus.dann.learn.ml.MLMethod;
 import syncleus.dann.learn.ml.TrainingImplementationType;
 import syncleus.dann.learn.train.strategy.Strategy;
-import syncleus.dann.neural.networks.training.propagation.TrainingContinuation;
+
+import java.util.List;
+import org.encog.neural.networks.training.propagation.TrainingContinuation;
 
 /**
  * Defines a training method for a machine learning method. Most MLMethod

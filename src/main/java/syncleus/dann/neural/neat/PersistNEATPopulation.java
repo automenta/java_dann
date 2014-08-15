@@ -23,23 +23,15 @@
  */
 package org.encog.neural.neat;
 
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.List;
-import java.util.Map;
-
 import syncleus.dann.data.file.csv.CSVFormat;
 import syncleus.dann.evolve.species.BasicSpecies;
 import syncleus.dann.evolve.species.Species;
 import syncleus.dann.neural.activation.EncogActivationFunction;
-import syncleus.dann.neural.hyperneat.FactorHyperNEATGenome;
-import syncleus.dann.neural.hyperneat.HyperNEATCODEC;
-import syncleus.dann.neural.hyperneat.HyperNEATGenome;
-import syncleus.dann.neural.neat.training.NEATGenome;
-import syncleus.dann.neural.neat.training.NEATInnovation;
-import syncleus.dann.neural.neat.training.NEATInnovationList;
-import syncleus.dann.neural.neat.training.NEATLinkGene;
-import syncleus.dann.neural.neat.training.NEATNeuronGene;
+
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Persist a NEAT or HyperNEAT network.
@@ -104,12 +96,12 @@ public class PersistNEATPopulation implements EncogPersistor {
     }
 
     @Override
-    public int getFileVersion() {
+    public static int getFileVersion() {
         return 1;
     }
 
     @Override
-    public String getPersistClassString() {
+    public static String getPersistClassString() {
         return NEATPopulation.class.getSimpleName();
     }
 
@@ -310,7 +302,7 @@ public class PersistNEATPopulation implements EncogPersistor {
         out.flush();
     }
 
-    private void saveSpecies(final EncogWriteHelper out, final Species species) {
+    private static void saveSpecies(final EncogWriteHelper out, final Species species) {
         out.addColumn("s");
         out.addColumn(species.getAge());
         out.addColumn(species.getBestScore());
@@ -366,9 +358,7 @@ public class PersistNEATPopulation implements EncogPersistor {
                 }).map((neatLinkGene) -> {
                     out.addColumn(neatLinkGene.getInnovationId());
                     return neatLinkGene;
-                }).forEach((_item) -> {
-                    out.writeLine();
-                }));
+                }).forEach((_item) -> out.writeLine()));
 
     }
 }

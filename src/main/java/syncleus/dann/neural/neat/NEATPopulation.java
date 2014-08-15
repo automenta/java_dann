@@ -23,9 +23,6 @@
  */
 package org.encog.neural.neat;
 
-import java.io.Serializable;
-import java.util.Random;
-
 import syncleus.dann.evolve.codec.GeneticCODEC;
 import syncleus.dann.evolve.genome.Genome;
 import syncleus.dann.evolve.population.BasicPopulation;
@@ -37,13 +34,10 @@ import syncleus.dann.learn.ml.MLRegression;
 import syncleus.dann.math.random.RandomFactory;
 import syncleus.dann.neural.activation.ActivationSteepenedSigmoid;
 import syncleus.dann.neural.activation.EncogActivationFunction;
-import syncleus.dann.neural.hyperneat.FactorHyperNEATGenome;
-import syncleus.dann.neural.hyperneat.HyperNEATCODEC;
-import syncleus.dann.neural.hyperneat.HyperNEATGenome;
-import syncleus.dann.neural.hyperneat.substrate.Substrate;
-import syncleus.dann.neural.neat.training.NEATGenome;
-import syncleus.dann.neural.neat.training.NEATInnovationList;
 import syncleus.dann.util.ChooseObject;
+
+import java.io.Serializable;
+import java.util.Random;
 
 /**
  * A population for a NEAT or HyperNEAT system. This population holds the
@@ -180,7 +174,7 @@ public class NEATPopulation extends BasicPopulation implements Serializable,
     /**
      * The activation functions that we can choose from.
      */
-    private final ChooseObject<EncogActivationFunction> activationFunctions = new ChooseObject<EncogActivationFunction>();
+    private final ChooseObject<EncogActivationFunction> activationFunctions = new ChooseObject<>();
 
     /**
      * The CODEC used to decode the NEAT genomes into networks. Different
@@ -224,7 +218,7 @@ public class NEATPopulation extends BasicPopulation implements Serializable,
         setNEATEncogActivationFunction(new ActivationSteepenedSigmoid());
 
         if (populationSize == 0) {
-            throw new NeuralNetworkError(
+            throw new RuntimeException(
                     "Population must have more than zero genomes.");
         }
 
@@ -374,7 +368,7 @@ public class NEATPopulation extends BasicPopulation implements Serializable,
     /**
      * @return the weightRange
      */
-    public double getWeightRange() {
+    public static double getWeightRange() {
         return NEATPopulation.weightRange;
     }
 

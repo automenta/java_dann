@@ -24,12 +24,7 @@
 package org.encog.neural.som.training.basic.neighborhood;
 
 import syncleus.dann.math.array.EngineArray;
-import syncleus.dann.math.rbf.GaussianFunction;
-import syncleus.dann.math.rbf.InverseMultiquadricFunction;
-import syncleus.dann.math.rbf.MexicanHatFunction;
-import syncleus.dann.math.rbf.MultiquadricFunction;
-import syncleus.dann.math.rbf.RBFEnum;
-import syncleus.dann.math.rbf.RadialBasisFunction;
+import syncleus.dann.math.rbf.*;
 
 /**
  * Implements a multi-dimensional RBF neighborhood function.

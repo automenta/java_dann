@@ -23,14 +23,14 @@
  */
 package syncleus.dann.plan.grid;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import syncleus.dann.math.EncogMath;
 import syncleus.dann.plan.Action;
 import syncleus.dann.plan.State;
 import syncleus.dann.plan.basic.BasicAction;
 import syncleus.dann.plan.basic.BasicWorld;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class GridWorld extends BasicWorld {
 
@@ -160,8 +160,8 @@ public class GridWorld extends BasicWorld {
         return Math.sqrt(d);
     }
 
-    public GridState findClosestStateTo(final List<GridState> states,
-                                        final GridState goalState) {
+    public static GridState findClosestStateTo(final List<GridState> states,
+                                               final GridState goalState) {
         double min = Double.POSITIVE_INFINITY;
         GridState minState = null;
 
@@ -176,8 +176,8 @@ public class GridWorld extends BasicWorld {
         return minState;
     }
 
-    public Action determineActionToState(final GridState currentState,
-                                         final GridState targetState) {
+    public static Action determineActionToState(final GridState currentState,
+                                                final GridState targetState) {
         final int rowDiff = currentState.getRow() - targetState.getRow();
         final int colDiff = currentState.getColumn() - targetState.getColumn();
 

@@ -23,12 +23,12 @@
  */
 package syncleus.dann.math.probablity;
 
+import syncleus.dann.learn.bayesian.BayesianError;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import syncleus.dann.learn.bayesian.BayesianError;
 
 public class VariableList {
     private final List<RandomVariable> variables = new ArrayList<>();

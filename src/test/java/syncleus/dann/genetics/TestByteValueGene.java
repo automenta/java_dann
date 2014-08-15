@@ -20,7 +20,6 @@ package syncleus.dann.genetics;
 
 import org.junit.Assert;
 import org.junit.Test;
-
 import syncleus.dann.evolve.ByteValueGene;
 import syncleus.dann.evolve.MutableByte;
 import syncleus.dann.evolve.ValueGene;

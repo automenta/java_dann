@@ -18,14 +18,9 @@
  ******************************************************************************/
 package syncleus.dann.data.language.parsing.stem;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import syncleus.dann.data.language.parsing.BasicWordParser;
+
+import java.util.*;
 
 /**
  * A StemmingWordParser parses Strings into their stems.

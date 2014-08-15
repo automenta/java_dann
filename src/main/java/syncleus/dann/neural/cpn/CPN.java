@@ -24,12 +24,7 @@
 package org.encog.neural.cpn;
 
 import syncleus.dann.data.basic.BasicMLData;
-import syncleus.dann.learn.ml.BasicML;
-import syncleus.dann.learn.ml.MLData;
-import syncleus.dann.learn.ml.MLDataSet;
-import syncleus.dann.learn.ml.MLError;
-import syncleus.dann.learn.ml.MLRegression;
-import syncleus.dann.learn.ml.MLResettable;
+import syncleus.dann.learn.ml.*;
 import syncleus.dann.math.EncogMath;
 import syncleus.dann.math.EncogUtility;
 import syncleus.dann.math.matrix.SimpleRealMatrix;

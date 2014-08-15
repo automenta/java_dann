@@ -29,6 +29,6 @@ public interface RandomFactory {
     Random factor();
 
     RandomFactory factorFactory();
-    
+
     public static final RandomFactory randomFactory = new BasicRandomFactory();
 }

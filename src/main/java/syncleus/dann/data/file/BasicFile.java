@@ -23,14 +23,14 @@
  */
 package syncleus.dann.data.file;
 
+import syncleus.dann.data.file.csv.CSVFormat;
+import syncleus.dann.math.EncogMath;
+import syncleus.dann.math.array.QuantError;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-
-import syncleus.dann.data.file.csv.CSVFormat;
-import syncleus.dann.math.EncogMath;
-import syncleus.dann.math.array.QuantError;
 
 /**
  * Many of the Encog quant CSV processors are based upon this class. This class
@@ -118,7 +118,6 @@ public class BasicFile /* implements QuantTask*/ {
      */
     private boolean produceOutputHeaders;
 
-    
 
     /**
      * The Encog script to use.

@@ -23,12 +23,12 @@
  */
 package syncleus.dann.classify.kmeans;
 
+import syncleus.dann.math.cluster.CentroidFactory;
+import syncleus.dann.math.cluster.Cluster;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-
-import syncleus.dann.math.cluster.CentroidFactory;
-import syncleus.dann.math.cluster.Cluster;
 
 /**
  * Generic KMeans clustering object.

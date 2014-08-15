@@ -20,7 +20,6 @@ package syncleus.dann.genetics;
 
 import org.junit.Assert;
 import org.junit.Test;
-
 import syncleus.dann.evolve.LongValueGene;
 import syncleus.dann.evolve.MutableLong;
 import syncleus.dann.evolve.ValueGene;

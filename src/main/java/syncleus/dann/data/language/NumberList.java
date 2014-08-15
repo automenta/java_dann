@@ -23,9 +23,9 @@
  */
 package syncleus.dann.data.language;
 
-import java.util.StringTokenizer;
-
 import syncleus.dann.data.file.csv.CSVFormat;
+
+import java.util.StringTokenizer;
 
 /**
  * Class used to handle lists of numbers.

@@ -26,11 +26,6 @@ package org.encog.ml.prg.generator;
 import java.util.List;
 import java.util.Random;
 
-import syncleus.dann.evolve.gp.EncogProgram;
-import syncleus.dann.evolve.gp.EncogProgramContext;
-import syncleus.dann.evolve.gp.ProgramNode;
-import syncleus.dann.evolve.gp.expvalue.ValueType;
-
 /**
  * The grow generator creates a random program by choosing a random node from
  * both the "function and terminal" sets until the maximum depth is reached.

@@ -27,7 +27,6 @@ import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.math.random.Distort;
 import syncleus.dann.math.random.Randomizer;
 import syncleus.dann.math.random.RangeRandomizer;
-import syncleus.dann.neural.flat.FlatNetwork;
 import syncleus.dann.neural.networks.BasicNetwork;
 
 /**
@@ -70,7 +69,7 @@ public class PruneSelective {
     public void changeNeuronCount(final int layer, final int neuronCount) {
 
         if (neuronCount == 0) {
-            throw new NeuralNetworkError("Can't decrease to zero neurons.");
+            throw new RuntimeException("Can't decrease to zero neurons.");
         }
 
         final int currentCount = this.network.getLayerNeuronCount(layer);
@@ -202,11 +201,11 @@ public class PruneSelective {
 
         // check for errors
         if (targetLayer > this.network.getLayerCount()) {
-            throw new NeuralNetworkError("Invalid layer " + targetLayer);
+            throw new RuntimeException("Invalid layer " + targetLayer);
         }
 
         if (neuronCount <= 0) {
-            throw new NeuralNetworkError("Invalid neuron count " + neuronCount);
+            throw new RuntimeException("Invalid neuron count " + neuronCount);
         }
 
         final int oldNeuronCount = this.network
@@ -214,7 +213,7 @@ public class PruneSelective {
         final int increaseBy = neuronCount - oldNeuronCount;
 
         if (increaseBy <= 0) {
-            throw new NeuralNetworkError(
+            throw new RuntimeException(
                     "New neuron count is either a decrease or no change: "
                             + neuronCount);
         }
@@ -298,7 +297,7 @@ public class PruneSelective {
 
         // don't empty a layer
         if (this.network.getLayerNeuronCount(targetLayer) <= 1) {
-            throw new NeuralNetworkError(
+            throw new RuntimeException(
                     "A layer must have at least a single neuron.  If you want to remove the entire layer you must create a new network.");
         }
 

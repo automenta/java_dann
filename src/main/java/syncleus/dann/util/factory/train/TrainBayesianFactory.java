@@ -23,8 +23,6 @@
  */
 package syncleus.dann.util.factory.train;
 
-import java.util.Map;
-
 import syncleus.dann.learn.bayesian.BayesianError;
 import syncleus.dann.learn.bayesian.EncogBayesianNetwork;
 import syncleus.dann.learn.bayesian.training.BayesianInit;
@@ -41,6 +39,8 @@ import syncleus.dann.learn.train.MLTrain;
 import syncleus.dann.util.factory.MLTrainFactory;
 import syncleus.dann.util.factory.parse.ArchitectureParse;
 
+import java.util.Map;
+
 public class TrainBayesianFactory {
     /**
      * Create a K2 trainer.
@@ -50,8 +50,8 @@ public class TrainBayesianFactory {
      * @param argsStr  The arguments to use.
      * @return The newly created trainer.
      */
-    public MLTrain create(final MLMethod method, final MLDataSet training,
-                          final String argsStr) {
+    public static MLTrain create(final MLMethod method, final MLDataSet training,
+                                 final String argsStr) {
         final Map<String, String> args = ArchitectureParse.parseParams(argsStr);
         final ParamsHolder holder = new ParamsHolder(args);
 

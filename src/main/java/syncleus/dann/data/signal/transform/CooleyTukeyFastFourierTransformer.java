@@ -23,9 +23,9 @@
  */
 package syncleus.dann.data.signal.transform;
 
-import java.util.Arrays;
-
 import syncleus.dann.math.ComplexNumber;
+
+import java.util.Arrays;
 
 /**
  * A CooleyTukeyFastFourierTransformer implements a fast fourier transform to

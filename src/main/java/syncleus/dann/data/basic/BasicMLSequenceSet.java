@@ -23,19 +23,15 @@
  */
 package syncleus.dann.data.basic;
 
+import syncleus.dann.learn.ml.*;
+import syncleus.dann.math.array.EngineArray;
+import syncleus.dann.util.ObjectCloner;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
-
-import syncleus.dann.learn.ml.MLData;
-import syncleus.dann.learn.ml.MLDataError;
-import syncleus.dann.learn.ml.MLDataPair;
-import syncleus.dann.learn.ml.MLDataSet;
-import syncleus.dann.learn.ml.MLSequenceSet;
-import syncleus.dann.math.array.EngineArray;
-import syncleus.dann.util.ObjectCloner;
 
 /**
  * A basic implementation of the MLSequenceSet.

@@ -18,35 +18,24 @@
  ******************************************************************************/
 package syncleus.dann.neural.som.brain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Future;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import syncleus.dann.graph.AbstractBidirectedAdjacencyGraph;
 import syncleus.dann.math.Vector;
 import syncleus.dann.neural.AbstractLocalBrain;
 import syncleus.dann.neural.InputNeuron;
 import syncleus.dann.neural.SimpleSynapse;
 import syncleus.dann.neural.Synapse;
-import syncleus.dann.neural.som.SimpleSomInputNeuron;
-import syncleus.dann.neural.som.SimpleSomNeuron;
-import syncleus.dann.neural.som.SomInputNeuron;
-import syncleus.dann.neural.som.SomNeuron;
-import syncleus.dann.neural.som.SomOutputNeuron;
+import syncleus.dann.neural.som.*;
 import syncleus.dann.util.UnexpectedDannError;
 import syncleus.dann.util.UnexpectedInterruptedException;
+
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Future;
 
 /**
  * A SomBrain acts as the parent class for all brains that use traditional SOM

@@ -27,11 +27,6 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Random;
 
-import syncleus.dann.evolve.gp.EncogProgramContext;
-import syncleus.dann.evolve.gp.ProgramNode;
-import syncleus.dann.evolve.gp.expvalue.ExpressionValue;
-import syncleus.dann.evolve.gp.expvalue.ValueType;
-
 /**
  * Defines an opcode. Opcodes are used to extend Encog programs.
  */

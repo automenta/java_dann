@@ -23,14 +23,14 @@
  */
 package syncleus.dann.evolve.score.parallel;
 
-import java.util.List;
-
 import syncleus.dann.evolve.exception.EARuntimeError;
 import syncleus.dann.evolve.genome.Genome;
 import syncleus.dann.evolve.score.AdjustScore;
 import syncleus.dann.evolve.train.basic.BasicEA;
 import syncleus.dann.learn.ml.CalculateScore;
 import syncleus.dann.learn.ml.MLMethod;
+
+import java.util.List;
 
 /**
  * An individual threadable task for the parallel score calculation.

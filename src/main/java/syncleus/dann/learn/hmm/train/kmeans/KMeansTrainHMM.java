@@ -23,21 +23,20 @@
  */
 package syncleus.dann.learn.hmm.train.kmeans;
 
-import java.util.Collection;
-import java.util.List;
-
+import java.util.ArrayList;
 import syncleus.dann.data.basic.BasicMLDataSet;
 import syncleus.dann.learn.hmm.HiddenMarkovModel;
 import syncleus.dann.learn.hmm.alog.ViterbiCalculator;
 import syncleus.dann.learn.hmm.distributions.StateDistribution;
-import syncleus.dann.learn.ml.MLDataPair;
-import syncleus.dann.learn.ml.MLDataSet;
-import syncleus.dann.learn.ml.MLMethod;
-import syncleus.dann.learn.ml.MLSequenceSet;
-import syncleus.dann.learn.ml.TrainingImplementationType;
+import syncleus.dann.learn.ml.*;
 import syncleus.dann.learn.train.MLTrain;
 import syncleus.dann.learn.train.strategy.Strategy;
-import syncleus.dann.neural.networks.training.propagation.TrainingContinuation;
+
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import org.encog.neural.networks.training.propagation.TrainingContinuation;
+import syncleus.dann.classify.kmeans.KMeansUtil;
 
 /**
  * Train a Hidden Markov Model (HMM) with the KMeans algorithm. Makes use of
@@ -50,7 +49,7 @@ import syncleus.dann.neural.networks.training.propagation.TrainingContinuation;
  * Faber, Clustering and the Continuous k-Means Algorithm, Los Alamos Science,
  * no. 22, 1994.
  */
-public class TrainKMeans implements MLTrain {
+public class KMeansTrainHMM implements MLTrain {
     private final Clusters clusters;
     private final int states;
     private final MLSequenceSet sequnces;
@@ -60,7 +59,7 @@ public class TrainKMeans implements MLTrain {
     private HiddenMarkovModel method;
     private final MLSequenceSet training;
 
-    public TrainKMeans(final HiddenMarkovModel method,
+    public KMeansTrainHMM(final HiddenMarkovModel method,
                        final MLSequenceSet sequences) {
         this.method = method;
         this.modelHMM = method;
@@ -238,9 +237,6 @@ public class TrainKMeans implements MLTrain {
         return null;
     }
 
-    @Override
-    public void resume(final TrainingContinuation state) {
-    }
 
     @Override
     public void setError(final double error) {
@@ -251,4 +247,59 @@ public class TrainKMeans implements MLTrain {
     public void setIteration(final int iteration) {
         this.iteration = iteration;
     }
+
+    @Override
+    public void resume(TrainingContinuation state) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+    
+    static class Clusters {
+        private final HashMap<MLDataPair, Integer> clustersHash;
+        private final ArrayList<Collection<MLDataPair>> clusters;
+
+        public Clusters(final int k, final MLDataSet observations) {
+
+            this.clustersHash = new HashMap<>();
+            this.clusters = new ArrayList<>();
+
+            final List<MLDataPair> list = new ArrayList<>();
+            for (final MLDataPair pair : observations) {
+                list.add(pair);
+            }
+            final KMeansUtil<MLDataPair> kmc = new KMeansUtil<>(k, list);
+            kmc.process();
+
+            for (int i = 0; i < k; i++) {
+                final Collection<MLDataPair> cluster = kmc.get(i);
+                this.clusters.add(cluster);
+
+                for (final MLDataPair element : cluster) {
+                    this.clustersHash.put(element, i);
+                }
+            }
+        }
+
+        public Collection<MLDataPair> cluster(final int clusterNb) {
+            return this.clusters.get(clusterNb);
+        }
+
+        public int cluster(final MLDataPair o) {
+            return this.clustersHash.get(o);
+        }
+
+        public boolean isInCluster(final MLDataPair o, final int x) {
+            return cluster(o) == x;
+        }
+
+        public void put(final MLDataPair o, final int clusterNb) {
+            this.clustersHash.put(o, clusterNb);
+            this.clusters.get(clusterNb).add(o);
+        }
+
+        public void remove(final MLDataPair o, final int clusterNb) {
+            this.clustersHash.put(o, -1);
+            this.clusters.get(clusterNb).remove(o);
+        }
+    }
+    
 }

@@ -23,15 +23,10 @@
  */
 package org.encog.neural.neat.training.opp;
 
+import syncleus.dann.evolve.genome.Genome;
+
 import java.util.List;
 import java.util.Random;
-
-import syncleus.dann.evolve.genome.Genome;
-import syncleus.dann.neural.neat.NEATPopulation;
-import syncleus.dann.neural.neat.training.NEATGenome;
-import syncleus.dann.neural.neat.training.NEATLinkGene;
-import syncleus.dann.neural.neat.training.opp.links.MutateLinkWeight;
-import syncleus.dann.neural.neat.training.opp.links.SelectLinks;
 
 /**
  * Mutate the weights of a genome. A method is select the links for mutation.

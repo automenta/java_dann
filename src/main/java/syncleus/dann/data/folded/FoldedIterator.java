@@ -23,11 +23,11 @@
  */
 package syncleus.dann.data.folded;
 
-import java.util.Iterator;
-
 import syncleus.dann.data.basic.BasicMLDataPair;
 import syncleus.dann.learn.ml.MLDataError;
 import syncleus.dann.learn.ml.MLDataPair;
+
+import java.util.Iterator;
 
 /**
  * Used to iterate over a folded data set.

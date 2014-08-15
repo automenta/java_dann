@@ -25,13 +25,6 @@ package org.encog.neural.networks.training.propagation.back;
 
 import syncleus.dann.learn.ml.MLDataSet;
 import syncleus.dann.neural.networks.ContainsFlat;
-import syncleus.dann.neural.networks.training.LearningRate;
-import syncleus.dann.neural.networks.training.Momentum;
-import syncleus.dann.neural.networks.training.TrainingError;
-import syncleus.dann.neural.networks.training.propagation.Propagation;
-import syncleus.dann.neural.networks.training.propagation.TrainingContinuation;
-import syncleus.dann.neural.networks.training.strategy.SmartLearningRate;
-import syncleus.dann.neural.networks.training.strategy.SmartMomentum;
 
 /**
  * This class implements a backpropagation training algorithm for feed forward
@@ -116,7 +109,7 @@ public class Backpropagation extends Propagation implements Momentum,
      * {@inheritDoc}
      */
     @Override
-    public boolean canContinue() {
+    public static boolean canContinue() {
         return false;
     }
 

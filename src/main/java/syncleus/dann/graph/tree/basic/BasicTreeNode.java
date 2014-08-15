@@ -23,17 +23,16 @@
  */
 package syncleus.dann.graph.tree.basic;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Stream;
-
 import syncleus.dann.graph.DirectedEdge;
 import syncleus.dann.graph.Graph;
 import syncleus.dann.graph.tree.TreeNode;
 import syncleus.dann.graph.tree.traverse.tasks.TaskCountNodes;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Stream;
 
 public class BasicTreeNode implements TreeNode, Serializable {
     private final List<TreeNode> childNodes = new ArrayList<>();
@@ -61,22 +60,21 @@ public class BasicTreeNode implements TreeNode, Serializable {
 
         return result;
     }
-    
-    
-    @Override public Stream<TreeNode> streamAdjacentNodes(final TreeNode node) {
-    	if (this == node) {
-    		return childNodes.stream();
-    	}
-    	else if (childNodes.contains(node)) {
-    		ArrayList<TreeNode> adjacent = new ArrayList(1);
-    		adjacent.add(this);
-    		return Stream.concat(adjacent.stream(), node.streamAdjacentNodes(node));    		
-    	}
-    	else {
-    		//TODO recurse children
-    		return Stream.empty();
-    	}
-    }    
+
+
+    @Override
+    public Stream<TreeNode> streamAdjacentNodes(final TreeNode node) {
+        if (this == node) {
+            return childNodes.stream();
+        } else if (childNodes.contains(node)) {
+            ArrayList<TreeNode> adjacent = new ArrayList(1);
+            adjacent.add(this);
+            return Stream.concat(adjacent.stream(), node.streamAdjacentNodes(node));
+        } else {
+            //TODO recurse children
+            return Stream.empty();
+        }
+    }
 
     @Override
     public boolean isLeaf() {
@@ -113,5 +111,5 @@ public class BasicTreeNode implements TreeNode, Serializable {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-  
+
 }

@@ -117,6 +117,6 @@ public class TickerSymbol {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(this.symbol,this.exchange);
+        return Objects.hash(this.symbol, this.exchange);
     }
 }

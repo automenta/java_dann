@@ -26,8 +26,6 @@ package syncleus.dann.util.factory.train;
 import syncleus.dann.learn.ml.MLDataSet;
 import syncleus.dann.learn.ml.MLMethod;
 import syncleus.dann.learn.train.MLTrain;
-import syncleus.dann.neural.som.SOM;
-import syncleus.dann.neural.som.training.clustercopy.SOMClusterCopyTraining;
 
 /**
  * Create a trainer that uses the SOM cluster training method.
@@ -42,8 +40,8 @@ public class ClusterSOMFactory {
      * @param argsStr  The arguments to use.
      * @return The newly created trainer.
      */
-    public MLTrain create(final MLMethod method, final MLDataSet training,
-                          final String argsStr) {
+    public static MLTrain create(final MLMethod method, final MLDataSet training,
+                                 final String argsStr) {
 
         if (!(method instanceof SOM)) {
             throw new RuntimeException(

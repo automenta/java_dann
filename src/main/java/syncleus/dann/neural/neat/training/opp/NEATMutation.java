@@ -27,12 +27,6 @@ import syncleus.dann.evolve.genome.Genome;
 import syncleus.dann.evolve.opp.EvolutionaryOperator;
 import syncleus.dann.evolve.train.EvolutionaryAlgorithm;
 import syncleus.dann.math.random.RangeRandomizer;
-import syncleus.dann.neural.neat.NEATNeuronType;
-import syncleus.dann.neural.neat.NEATPopulation;
-import syncleus.dann.neural.neat.training.NEATGenome;
-import syncleus.dann.neural.neat.training.NEATInnovation;
-import syncleus.dann.neural.neat.training.NEATLinkGene;
-import syncleus.dann.neural.neat.training.NEATNeuronGene;
 
 /**
  * This class represents a NEAT mutation. NEAT supports several different types
@@ -67,8 +61,8 @@ public abstract class NEATMutation implements EvolutionaryOperator {
      *                     the input and bias.
      * @return The random neuron.
      */
-    public NEATNeuronGene chooseRandomNeuron(final NEATGenome target,
-                                             final boolean choosingFrom) {
+    public static NEATNeuronGene chooseRandomNeuron(final NEATGenome target,
+                                                    final boolean choosingFrom) {
         int start;
 
         if (choosingFrom) {
@@ -110,8 +104,8 @@ public abstract class NEATMutation implements EvolutionaryOperator {
      * @param neuron2ID The id of the target neuron.
      * @param weight    The weight of this new link.
      */
-    public void createLink(final NEATGenome target, final long neuron1ID,
-                           final long neuron2ID, final double weight) {
+    public static void createLink(final NEATGenome target, final long neuron1ID,
+                                  final long neuron2ID, final double weight) {
 
         // first, does this link exist? (and if so, hopefully disabled,
         // otherwise we have a problem)
@@ -142,7 +136,7 @@ public abstract class NEATMutation implements EvolutionaryOperator {
      * @param neuronID The neuron id to check for.
      * @return The index.
      */
-    public int getElementPos(final NEATGenome target, final long neuronID) {
+    public static int getElementPos(final NEATGenome target, final long neuronID) {
 
         for (int i = 0; i < target.getNeuronsChromosome().size(); i++) {
             final NEATNeuronGene neuronGene = target.getNeuronsChromosome()
@@ -177,8 +171,8 @@ public abstract class NEATMutation implements EvolutionaryOperator {
      * @param toNeuronID   The to neuron id.
      * @return True if this is a duplicate link.
      */
-    public boolean isDuplicateLink(final NEATGenome target,
-                                   final long fromNeuronID, final long toNeuronID) {
+    public static boolean isDuplicateLink(final NEATGenome target,
+                                          final long fromNeuronID, final long toNeuronID) {
         return target.getLinksChromosome().stream().anyMatch((linkGene) -> ((linkGene.isEnabled())
                 && (linkGene.getFromNeuronID() == fromNeuronID)
                 && (linkGene.getToNeuronID() == toNeuronID)));
@@ -257,7 +251,7 @@ public abstract class NEATMutation implements EvolutionaryOperator {
      * @param target   The target genome.
      * @param neuronID The neuron to remove.
      */
-    public void removeNeuron(final NEATGenome target, final long neuronID) {
+    public static void removeNeuron(final NEATGenome target, final long neuronID) {
         for (final NEATNeuronGene gene : target.getNeuronsChromosome()) {
             if (gene.getId() == neuronID) {
                 target.getNeuronsChromosome().remove(gene);

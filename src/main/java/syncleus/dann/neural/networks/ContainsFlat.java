@@ -24,7 +24,6 @@
 package syncleus.dann.neural.networks;
 
 import syncleus.dann.learn.ml.MLMethod;
-import syncleus.dann.neural.flat.FlatNetwork;
 
 /**
  * Interface that specifies that a machine learning method contains a flat

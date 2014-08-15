@@ -23,10 +23,10 @@
  */
 package syncleus.dann.evolve.genome;
 
-import java.io.Serializable;
-
 import syncleus.dann.evolve.population.Population;
 import syncleus.dann.evolve.species.Species;
+
+import java.io.Serializable;
 
 /**
  * A basic abstract genome. Provides base functionality.

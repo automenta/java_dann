@@ -27,7 +27,6 @@ import syncleus.dann.learn.ml.MLDataSet;
 import syncleus.dann.learn.ml.MLMethod;
 import syncleus.dann.learn.train.MLTrain;
 import syncleus.dann.neural.networks.BasicNetwork;
-import syncleus.dann.neural.networks.training.nm.NelderMeadTraining;
 
 public class NelderMeadFactory {
     /**
@@ -38,8 +37,8 @@ public class NelderMeadFactory {
      * @param argsStr  The arguments to use.
      * @return The newly created trainer.
      */
-    public MLTrain create(final MLMethod method, final MLDataSet training,
-                          final String argsStr) {
+    public static MLTrain create(final MLMethod method, final MLDataSet training,
+                                 final String argsStr) {
         return new NelderMeadTraining((BasicNetwork) method, training);
     }
 }

@@ -26,7 +26,6 @@ package org.encog.neural.pattern;
 import syncleus.dann.learn.ml.MLMethod;
 import syncleus.dann.math.rbf.RBFEnum;
 import syncleus.dann.neural.activation.EncogActivationFunction;
-import syncleus.dann.neural.rbf.RBFNetwork;
 
 /**
  * A radial basis function (RBF) network uses several radial basis functions to
@@ -102,7 +101,7 @@ public class RadialBasisPattern implements NeuralNetworkPattern {
      * @param activation The new activation function.
      */
     @Override
-    public void setEncogActivationFunction(final EncogActivationFunction activation) {
+    public static void setEncogActivationFunction(final EncogActivationFunction activation) {
         throw new PatternError("Can't set the activation function for "
                 + "a radial basis function network.");
     }

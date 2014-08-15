@@ -23,9 +23,9 @@
  */
 package syncleus.dann.learn.fitness;
 
-import java.io.Serializable;
-
 import syncleus.dann.learn.ml.CalculateScore;
+
+import java.io.Serializable;
 
 /**
  * A fitness objective.

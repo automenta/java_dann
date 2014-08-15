@@ -145,7 +145,7 @@ public class BagOfWords {
             result.append(',');
             result.append(i);
             return key;
-        }).forEach((_item) -> result.append("\n"));
+        }).forEach((_item) -> result.append('\n'));
 
         return result.toString();
     }

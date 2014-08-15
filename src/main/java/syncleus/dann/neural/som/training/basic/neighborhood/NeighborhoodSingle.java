@@ -40,7 +40,7 @@ public class NeighborhoodSingle implements NeighborhoodFunction {
      * @return The ratio for this neuron's adjustment.
      */
     @Override
-    public double function(final int currentNeuron, final int bestNeuron) {
+    public static double function(final int currentNeuron, final int bestNeuron) {
         if (currentNeuron == bestNeuron) {
             return 1.0;
         } else {
@@ -54,7 +54,7 @@ public class NeighborhoodSingle implements NeighborhoodFunction {
      * @return The radius.
      */
     @Override
-    public double getRadius() {
+    public static double getRadius() {
         return 1;
     }
 

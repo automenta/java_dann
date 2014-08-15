@@ -23,17 +23,13 @@
  */
 package syncleus.dann.evolve.gp.opp;
 
+import syncleus.dann.evolve.genome.Genome;
+import syncleus.dann.evolve.opp.EvolutionaryOperator;
+import syncleus.dann.evolve.train.EvolutionaryAlgorithm;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
-import syncleus.dann.evolve.genome.Genome;
-import syncleus.dann.evolve.gp.EncogProgram;
-import syncleus.dann.evolve.gp.EncogProgramContext;
-import syncleus.dann.evolve.gp.ProgramNode;
-import syncleus.dann.evolve.gp.expvalue.ValueType;
-import syncleus.dann.evolve.opp.EvolutionaryOperator;
-import syncleus.dann.evolve.train.EvolutionaryAlgorithm;
 
 /**
  * Perform a type-safe subtree crossover. The crossover points will be chosen
@@ -53,8 +49,8 @@ public class SubtreeCrossover implements EvolutionaryOperator {
      * @param types      The desired node
      * @param holder     The level holder.
      */
-    private void findNode(final Random rnd, final ProgramNode parentNode,
-                          final List<ValueType> types, final LevelHolder holder) {
+    private static void findNode(final Random rnd, final ProgramNode parentNode,
+                                 final List<ValueType> types, final LevelHolder holder) {
         if (holder.getCurrentLevel() == 0) {
             holder.decreaseLevel();
             holder.setTypes(types);

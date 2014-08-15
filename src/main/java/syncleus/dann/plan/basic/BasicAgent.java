@@ -23,14 +23,9 @@
  */
 package syncleus.dann.plan.basic;
 
-import java.util.Set;
+import syncleus.dann.plan.*;
 
-import syncleus.dann.plan.Action;
-import syncleus.dann.plan.AgentPolicy;
-import syncleus.dann.plan.State;
-import syncleus.dann.plan.SuccessorState;
-import syncleus.dann.plan.World;
-import syncleus.dann.plan.WorldAgent;
+import java.util.Set;
 
 public class BasicAgent implements WorldAgent {
 

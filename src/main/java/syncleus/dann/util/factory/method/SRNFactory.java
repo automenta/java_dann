@@ -23,13 +23,12 @@
  */
 package syncleus.dann.util.factory.method;
 
-import java.util.List;
-
 import syncleus.dann.learn.ml.MLMethod;
 import syncleus.dann.math.rbf.RBFEnum;
-import syncleus.dann.neural.rbf.RBFNetwork;
 import syncleus.dann.util.factory.parse.ArchitectureLayer;
 import syncleus.dann.util.factory.parse.ArchitectureParse;
+
+import java.util.List;
 
 /**
  * A factory that creates simple recurrent neural networks (SRN's), i.e. Elmann
@@ -50,8 +49,8 @@ public class SRNFactory {
      * @param output       The output count.
      * @return The newly created SRN.
      */
-    public MLMethod create(final String architecture, final int input,
-                           final int output) {
+    public static MLMethod create(final String architecture, final int input,
+                                  final int output) {
 
         final List<String> layers = ArchitectureParse.parseLayers(architecture);
         if (layers.size() != MAX_LAYERS) {

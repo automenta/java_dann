@@ -21,7 +21,7 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package org.encog.neural.thermal;
+package syncleus.dann.neural.thermal;
 
 import syncleus.dann.data.specific.BiPolarNeuralData;
 import syncleus.dann.learn.ml.BasicML;
@@ -87,7 +87,7 @@ public abstract class ThermalNetwork extends BasicML implements MLMethod,
                           final double value) {
         final int index = (toNeuron * this.neuronCount) + fromNeuron;
         if (index >= this.weights.length) {
-            throw new NeuralNetworkError("Out of range: fromNeuron:"
+            throw new RuntimeException("Out of range: fromNeuron:"
                     + fromNeuron + ", toNeuron: " + toNeuron);
         }
         this.weights[index] += value;
@@ -163,12 +163,12 @@ public abstract class ThermalNetwork extends BasicML implements MLMethod,
     public void init(final int neuronCount, final double[] weights,
                      final double[] output) {
         if (neuronCount != output.length) {
-            throw new NeuralNetworkError("Neuron count(" + neuronCount
+            throw new RuntimeException("Neuron count(" + neuronCount
                     + ") must match output count(" + output.length + ").");
         }
 
         if ((neuronCount * neuronCount) != weights.length) {
-            throw new NeuralNetworkError("Weight count(" + weights.length
+            throw new RuntimeException("Weight count(" + weights.length
                     + ") must be the square of the neuron count(" + neuronCount
                     + ").");
         }

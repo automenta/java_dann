@@ -23,16 +23,10 @@
  */
 package org.encog.neural.networks.training.simple;
 
-import syncleus.dann.learn.ml.MLData;
-import syncleus.dann.learn.ml.MLDataPair;
-import syncleus.dann.learn.ml.MLDataSet;
-import syncleus.dann.learn.ml.MLMethod;
-import syncleus.dann.learn.ml.TrainingImplementationType;
+import syncleus.dann.learn.ml.*;
 import syncleus.dann.learn.train.BasicTraining;
 import syncleus.dann.math.statistics.ErrorCalculation;
 import syncleus.dann.neural.networks.BasicNetwork;
-import syncleus.dann.neural.networks.training.LearningRate;
-import syncleus.dann.neural.networks.training.propagation.TrainingContinuation;
 
 /**
  * Train an ADALINE neural network.
@@ -65,7 +59,7 @@ public class TrainAdaline extends BasicTraining implements LearningRate {
                         final double learningRate) {
         super(TrainingImplementationType.Iterative);
         if (network.getLayerCount() > 2) {
-            throw new NeuralNetworkError(
+            throw new RuntimeException(
                     "An ADALINE network only has two layers.");
         }
         this.network = network;

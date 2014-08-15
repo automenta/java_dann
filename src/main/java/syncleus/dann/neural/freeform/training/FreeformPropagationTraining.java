@@ -21,23 +21,19 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package org.encog.neural.freeform.training;
+package syncleus.dann.neural.freeform.training;
+
+import syncleus.dann.learn.ml.*;
+import syncleus.dann.learn.train.BasicTraining;
+import syncleus.dann.math.statistics.ErrorCalculation;
+import syncleus.dann.neural.activation.ActivationSigmoid;
 
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
-
-import syncleus.dann.learn.ml.MLData;
-import syncleus.dann.learn.ml.MLDataPair;
-import syncleus.dann.learn.ml.MLDataSet;
-import syncleus.dann.learn.ml.MLMethod;
-import syncleus.dann.learn.ml.TrainingImplementationType;
-import syncleus.dann.learn.train.BasicTraining;
-import syncleus.dann.math.statistics.ErrorCalculation;
-import syncleus.dann.neural.activation.ActivationSigmoid;
-import syncleus.dann.neural.freeform.FreeformConnection;
-import syncleus.dann.neural.freeform.FreeformNetwork;
-import syncleus.dann.neural.freeform.FreeformNeuron;
+import org.encog.neural.freeform.FreeformConnection;
+import org.encog.neural.freeform.FreeformNetwork;
+import org.encog.neural.freeform.FreeformNeuron;
 
 /**
  * Provides basic propagation functions to other trainers.
@@ -140,11 +136,11 @@ public abstract class FreeformPropagationTraining extends BasicTraining
                 final double neuronOutput = fromNeuron.getActivation();
                 final double neuronSum = fromNeuron.getSum();
                 double deriv = toNeuron.getInputSummation()
-                        .getEncogActivationFunction()
-                        .derivativeFunction(neuronSum, neuronOutput);
+                        .getActivationFunction()
+                        .derivative(neuronSum, neuronOutput);
                 if (this.fixFlatSopt
                         && (toNeuron.getInputSummation()
-                        .getEncogActivationFunction() instanceof ActivationSigmoid)) {
+                        .getActivationFunction() instanceof ActivationSigmoid)) {
                     deriv += FreeformPropagationTraining.FLAT_SPOT_CONST;
                 }
                 final double layerDelta = sum * deriv;
@@ -168,10 +164,10 @@ public abstract class FreeformPropagationTraining extends BasicTraining
                                       final double diff) {
         final double neuronOutput = neuron.getActivation();
         final double neuronSum = neuron.getInputSummation().getSum();
-        double deriv = neuron.getInputSummation().getEncogActivationFunction()
-                .derivativeFunction(neuronSum, neuronOutput);
+        double deriv = neuron.getInputSummation().getActivationFunction()
+                .derivative(neuronSum, neuronOutput);
         if (this.fixFlatSopt
-                && (neuron.getInputSummation().getEncogActivationFunction() instanceof ActivationSigmoid)) {
+                && (neuron.getInputSummation().getActivationFunction() instanceof ActivationSigmoid)) {
             deriv += FreeformPropagationTraining.FLAT_SPOT_CONST;
         }
         final double layerDelta = deriv * diff;

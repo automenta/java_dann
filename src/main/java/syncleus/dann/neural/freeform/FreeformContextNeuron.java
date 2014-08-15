@@ -21,7 +21,8 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package org.encog.neural.freeform;
+package syncleus.dann.neural.freeform;
+
 
 import syncleus.dann.neural.freeform.basic.BasicFreeformNeuron;
 

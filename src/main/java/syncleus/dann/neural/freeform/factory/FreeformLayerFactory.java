@@ -21,7 +21,7 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package org.encog.neural.freeform.factory;
+package syncleus.dann.neural.freeform.factory;
 
 import syncleus.dann.neural.freeform.FreeformLayer;
 

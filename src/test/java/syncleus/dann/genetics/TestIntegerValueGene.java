@@ -20,7 +20,6 @@ package syncleus.dann.genetics;
 
 import org.junit.Assert;
 import org.junit.Test;
-
 import syncleus.dann.evolve.IntegerValueGene;
 import syncleus.dann.evolve.MutableInteger;
 import syncleus.dann.evolve.ValueGene;

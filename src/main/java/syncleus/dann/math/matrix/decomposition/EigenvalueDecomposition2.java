@@ -23,10 +23,10 @@
  */
 package syncleus.dann.math.matrix.decomposition;
 
-import java.util.Arrays;
-
 import syncleus.dann.math.EncogMath;
 import syncleus.dann.math.matrix.SimpleRealMatrix;
+
+import java.util.Arrays;
 
 /**
  * Eigenvalues and eigenvectors of a real matrix.
@@ -817,7 +817,7 @@ public class EigenvalueDecomposition2 {
 
             if (m > l) {
                 do {
-                    
+
 
                     // Compute implicit shift
 

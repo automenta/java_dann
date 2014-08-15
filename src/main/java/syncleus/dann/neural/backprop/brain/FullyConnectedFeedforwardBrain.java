@@ -18,17 +18,12 @@
  ******************************************************************************/
 package syncleus.dann.neural.backprop.brain;
 
-import java.util.concurrent.ExecutorService;
-
 import syncleus.dann.graph.AbstractBidirectedAdjacencyGraph;
 import syncleus.dann.neural.Synapse;
 import syncleus.dann.neural.activation.DannActivationFunction;
-import syncleus.dann.neural.backprop.BackpropNeuron;
-import syncleus.dann.neural.backprop.InputBackpropNeuron;
-import syncleus.dann.neural.backprop.OutputBackpropNeuron;
-import syncleus.dann.neural.backprop.SimpleBackpropNeuron;
-import syncleus.dann.neural.backprop.SimpleInputBackpropNeuron;
-import syncleus.dann.neural.backprop.SimpleOutputBackpropNeuron;
+import syncleus.dann.neural.backprop.*;
+
+import java.util.concurrent.ExecutorService;
 
 public final class FullyConnectedFeedforwardBrain<IN extends InputBackpropNeuron, ON extends OutputBackpropNeuron, N extends BackpropNeuron, S extends Synapse<N>>
         extends AbstractFullyConnectedFeedforwardBrain<IN, ON, N, S> {

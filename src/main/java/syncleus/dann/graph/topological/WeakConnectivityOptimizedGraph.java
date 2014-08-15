@@ -18,10 +18,10 @@
  ******************************************************************************/
 package syncleus.dann.graph.topological;
 
-import java.util.Set;
-
 import syncleus.dann.graph.Edge;
 import syncleus.dann.graph.Graph;
+
+import java.util.Set;
 
 public interface WeakConnectivityOptimizedGraph<N, E extends Edge<N>> extends
         Graph<N, E> {

@@ -23,9 +23,9 @@
  */
 package syncleus.dann.learn.train.strategy.end;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
 import syncleus.dann.learn.train.MLTrain;
+
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class EndMinutesStrategy implements EndTrainingStrategy {
 

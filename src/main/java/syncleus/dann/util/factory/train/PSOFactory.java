@@ -23,8 +23,6 @@
  */
 package syncleus.dann.util.factory.train;
 
-import java.util.Map;
-
 import syncleus.dann.learn.ml.CalculateScore;
 import syncleus.dann.learn.ml.MLDataSet;
 import syncleus.dann.learn.ml.MLMethod;
@@ -32,10 +30,10 @@ import syncleus.dann.learn.train.MLTrain;
 import syncleus.dann.math.random.NguyenWidrowRandomizer;
 import syncleus.dann.math.random.Randomizer;
 import syncleus.dann.neural.networks.BasicNetwork;
-import syncleus.dann.neural.networks.training.TrainingSetScore;
-import syncleus.dann.neural.networks.training.pso.NeuralPSO;
 import syncleus.dann.util.factory.MLTrainFactory;
 import syncleus.dann.util.factory.parse.ArchitectureParse;
+
+import java.util.Map;
 
 /**
  * A factory for quick propagation training.
@@ -50,8 +48,8 @@ public class PSOFactory {
      * @param argsStr  The arguments to use.
      * @return The newly created trainer.
      */
-    public MLTrain create(final MLMethod method, final MLDataSet training,
-                          final String argsStr) {
+    public static MLTrain create(final MLMethod method, final MLDataSet training,
+                                 final String argsStr) {
 
         final Map<String, String> args = ArchitectureParse.parseParams(argsStr);
         final ParamsHolder holder = new ParamsHolder(args);

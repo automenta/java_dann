@@ -23,8 +23,6 @@
  */
 package syncleus.dann.util.factory.train;
 
-import java.util.Map;
-
 import syncleus.dann.learn.ml.MLDataSet;
 import syncleus.dann.learn.ml.MLInput;
 import syncleus.dann.learn.ml.MLMethod;
@@ -33,6 +31,8 @@ import syncleus.dann.learn.svm.training.SVMTrain;
 import syncleus.dann.learn.train.MLTrain;
 import syncleus.dann.util.factory.MLTrainFactory;
 import syncleus.dann.util.factory.parse.ArchitectureParse;
+
+import java.util.Map;
 
 /**
  * A factory to create SVM trainers.
@@ -47,8 +47,8 @@ public class SVMFactory {
      * @param argsStr  The arguments to use.
      * @return The newly created trainer.
      */
-    public MLTrain create(final MLMethod method, final MLDataSet training,
-                          final String argsStr) {
+    public static MLTrain create(final MLMethod method, final MLDataSet training,
+                                 final String argsStr) {
 
         if (!(method instanceof SVM)) {
             throw new RuntimeException(

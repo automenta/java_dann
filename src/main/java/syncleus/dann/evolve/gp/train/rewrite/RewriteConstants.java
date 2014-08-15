@@ -24,9 +24,6 @@
 package org.encog.ml.prg.train.rewrite;
 
 import syncleus.dann.evolve.genome.Genome;
-import syncleus.dann.evolve.gp.EncogProgram;
-import syncleus.dann.evolve.gp.ProgramNode;
-import syncleus.dann.evolve.gp.expvalue.ExpressionValue;
 import syncleus.dann.evolve.rules.RewriteRule;
 import syncleus.dann.math.EncogMath;
 
@@ -93,7 +90,7 @@ public class RewriteConstants implements RewriteRule {
      * @param parentNode The node to attempt rewrite.
      * @return The rewritten node, or original node, if no rewrite could happen.
      */
-    private ProgramNode tryNodeRewrite(final ProgramNode parentNode) {
+    private static ProgramNode tryNodeRewrite(final ProgramNode parentNode) {
         ProgramNode result = null;
 
         if (parentNode.isLeaf()) {

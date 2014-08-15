@@ -23,12 +23,12 @@
  */
 package syncleus.dann.learn.fitness;
 
+import syncleus.dann.learn.ml.CalculateScore;
+import syncleus.dann.learn.ml.MLMethod;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
-import syncleus.dann.learn.ml.CalculateScore;
-import syncleus.dann.learn.ml.MLMethod;
 
 /**
  * A multi-objective fitness function.

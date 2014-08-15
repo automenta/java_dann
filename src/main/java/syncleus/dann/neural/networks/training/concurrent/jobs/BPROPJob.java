@@ -25,8 +25,6 @@ package org.encog.neural.networks.training.concurrent.jobs;
 
 import syncleus.dann.learn.ml.MLDataSet;
 import syncleus.dann.neural.networks.BasicNetwork;
-import syncleus.dann.neural.networks.training.propagation.Propagation;
-import syncleus.dann.neural.networks.training.propagation.back.Backpropagation;
 
 /**
  * A training definition for BPROP training.

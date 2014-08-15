@@ -18,12 +18,12 @@
  ******************************************************************************/
 package syncleus.dann.graph;
 
+import syncleus.dann.graph.context.ContextGraphElement;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import syncleus.dann.graph.context.ContextGraphElement;
 
 public class MutableHyperAdjacencyGraph<N, E extends HyperEdge<N>> extends
         AbstractHyperAdjacencyGraph<N, E> implements MutableHyperGraph<N, E> {

@@ -27,8 +27,6 @@ import syncleus.dann.learn.ml.MLDataSet;
 import syncleus.dann.math.BoundNumbers;
 import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.neural.networks.ContainsFlat;
-import syncleus.dann.neural.networks.training.propagation.Propagation;
-import syncleus.dann.neural.networks.training.propagation.TrainingContinuation;
 
 /**
  * This is a training class that makes use of scaled conjugate gradient methods.
@@ -153,7 +151,7 @@ public class ScaledConjugateGradient extends Propagation {
      * @return Always returns false.
      */
     @Override
-    public boolean canContinue() {
+    public static boolean canContinue() {
         return false;
     }
 
@@ -163,7 +161,7 @@ public class ScaledConjugateGradient extends Propagation {
      * @return Always returns null.
      */
     @Override
-    public TrainingContinuation pause() {
+    public static TrainingContinuation pause() {
         return null;
     }
 
@@ -376,8 +374,8 @@ public class ScaledConjugateGradient extends Propagation {
      * @return The new weight value.
      */
     @Override
-    public double updateWeight(final double[] gradients,
-                               final double[] lastGradient, final int index) {
+    public static double updateWeight(final double[] gradients,
+                                      final double[] lastGradient, final int index) {
         return 0;
     }
 

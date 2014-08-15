@@ -18,14 +18,14 @@
  ******************************************************************************/
 package syncleus.dann.classify.naive.bayes;
 
+import syncleus.dann.classify.naive.FeatureExtractor;
+import syncleus.dann.classify.naive.SimpleNaiveClassifier;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
-
-import syncleus.dann.classify.naive.FeatureExtractor;
-import syncleus.dann.classify.naive.SimpleNaiveClassifier;
 
 /**
  * A SimpleNaiveBayesClassifier is a simple, naive implementation of a Bayes

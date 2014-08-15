@@ -23,10 +23,10 @@
  */
 package syncleus.dann.plan.schedule;
 
+import syncleus.dann.graph.path.PathGraph;
+
 import java.util.HashMap;
 import java.util.Map;
-
-import syncleus.dann.graph.path.PathGraph;
 
 public class ScheduleGraph extends PathGraph {
 
@@ -59,8 +59,8 @@ public class ScheduleGraph extends PathGraph {
         return finishNode;
     }
 
-    public void dumpNode(final StringBuilder result, final ActionNode node,
-                         final Map<ActionNode, ActionNode> visited) {
+    public static void dumpNode(final StringBuilder result, final ActionNode node,
+                                final Map<ActionNode, ActionNode> visited) {
         if (!visited.containsKey(node)) {
             visited.put(node, node);
             result.append(node.toString());

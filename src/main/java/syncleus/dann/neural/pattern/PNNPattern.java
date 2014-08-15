@@ -25,9 +25,6 @@ package org.encog.neural.pattern;
 
 import syncleus.dann.learn.ml.MLMethod;
 import syncleus.dann.neural.activation.EncogActivationFunction;
-import syncleus.dann.neural.pnn.BasicPNN;
-import syncleus.dann.neural.pnn.PNNKernelType;
-import syncleus.dann.neural.pnn.PNNOutputMode;
 
 /**
  * Pattern to create a PNN.
@@ -61,7 +58,7 @@ public class PNNPattern implements NeuralNetworkPattern {
      * @param count The number of hidden neurons.
      */
     @Override
-    public void addHiddenLayer(final int count) {
+    public static void addHiddenLayer(final int count) {
         throw new PatternError("A PNN network does not have hidden layers.");
     }
 
@@ -119,7 +116,7 @@ public class PNNPattern implements NeuralNetworkPattern {
      * @param activation The activation function to use.
      */
     @Override
-    public void setEncogActivationFunction(final EncogActivationFunction activation) {
+    public static void setEncogActivationFunction(final EncogActivationFunction activation) {
         throw new PatternError(
                 "A SOM network can't define an activation function.");
 

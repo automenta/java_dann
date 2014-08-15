@@ -36,8 +36,8 @@ public abstract class GridAbstractProbability implements ActionProbability {
         this.world = theWorld;
     }
 
-    public Action determineResultingAction(final GridState s1,
-                                           final GridState s2) {
+    public static Action determineResultingAction(final GridState s1,
+                                                  final GridState s2) {
 
         if ((s1.getRow() - 1) == s2.getRow()
                 && s1.getColumn() == s2.getColumn()) {

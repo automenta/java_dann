@@ -23,18 +23,14 @@
  */
 package org.encog.neural.neat.training.opp;
 
+import syncleus.dann.evolve.genome.Genome;
+import syncleus.dann.evolve.opp.EvolutionaryOperator;
+import syncleus.dann.evolve.train.EvolutionaryAlgorithm;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
-
-import syncleus.dann.evolve.genome.Genome;
-import syncleus.dann.evolve.opp.EvolutionaryOperator;
-import syncleus.dann.evolve.train.EvolutionaryAlgorithm;
-import syncleus.dann.neural.neat.NEATGenomeFactory;
-import syncleus.dann.neural.neat.training.NEATGenome;
-import syncleus.dann.neural.neat.training.NEATLinkGene;
-import syncleus.dann.neural.neat.training.NEATNeuronGene;
 
 /**
  * Crossover is performed by mixing the link genes between the parents to
@@ -164,8 +160,8 @@ public class NEATCrossover implements EvolutionaryOperator {
      *                is the 2nd best of 2.
      * @return The best neuron genome by id.
      */
-    private NEATNeuronGene findBestNeuron(final long nodeID,
-                                          final NEATGenome best, final NEATGenome notBest) {
+    private static NEATNeuronGene findBestNeuron(final long nodeID,
+                                                 final NEATGenome best, final NEATGenome notBest) {
         NEATNeuronGene result = best.findNeuron(nodeID);
         if (result == null) {
             result = notBest.findNeuron(nodeID);

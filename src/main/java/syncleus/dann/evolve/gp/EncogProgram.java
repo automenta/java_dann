@@ -23,22 +23,11 @@
  */
 package org.encog.ml.prg;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-
 import syncleus.dann.data.basic.BasicMLData;
 import syncleus.dann.evolve.exception.EACompileError;
 import syncleus.dann.evolve.exception.EARuntimeError;
 import syncleus.dann.evolve.genome.BasicGenome;
 import syncleus.dann.evolve.genome.Genome;
-import syncleus.dann.evolve.gp.expvalue.ExpressionValue;
-import syncleus.dann.evolve.gp.expvalue.ValueType;
-import syncleus.dann.evolve.gp.extension.FunctionFactory;
-import syncleus.dann.evolve.gp.extension.StandardExtensions;
-import syncleus.dann.evolve.gp.train.PrgPopulation;
 import syncleus.dann.graph.tree.traverse.tasks.TaskGetNodeIndex;
 import syncleus.dann.graph.tree.traverse.tasks.TaskReplaceNode;
 import syncleus.dann.learn.ml.MLData;
@@ -46,6 +35,8 @@ import syncleus.dann.learn.ml.MLDataSet;
 import syncleus.dann.learn.ml.MLError;
 import syncleus.dann.learn.ml.MLRegression;
 import syncleus.dann.math.EncogUtility;
+
+import java.util.*;
 
 /**
  * Holds an Encog Programming Language (EPL) program. A Encog program is

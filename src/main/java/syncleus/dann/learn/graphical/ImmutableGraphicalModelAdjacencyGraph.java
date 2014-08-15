@@ -18,15 +18,9 @@
  ******************************************************************************/
 package syncleus.dann.learn.graphical;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import syncleus.dann.graph.BidirectedEdge;
+
+import java.util.*;
 
 public class ImmutableGraphicalModelAdjacencyGraph<N extends GraphicalModelNode, E extends BidirectedEdge<N>>
         extends AbstractGraphicalModelAdjacencyGraph<N, E> {
@@ -39,7 +33,7 @@ public class ImmutableGraphicalModelAdjacencyGraph<N extends GraphicalModelNode,
     // TODO we cant copy because right now each bayesian node is hard linked to
     // a parent graph, this should be fixed
     /*
-	 * public ImmutableMarkovRandomFieldAdjacencyGraph(final Graph<N, E>
+     * public ImmutableMarkovRandomFieldAdjacencyGraph(final Graph<N, E>
 	 * copyGraph) { super(copyGraph.getNodes(), copyGraph.getEdges()); }
 	 */
 

@@ -23,15 +23,14 @@
  */
 package syncleus.dann.util.factory.train;
 
-import java.util.Map;
-
 import syncleus.dann.learn.ml.MLDataSet;
 import syncleus.dann.learn.ml.MLMethod;
 import syncleus.dann.learn.train.MLTrain;
 import syncleus.dann.neural.networks.ContainsFlat;
-import syncleus.dann.neural.networks.training.propagation.quick.QuickPropagation;
 import syncleus.dann.util.factory.MLTrainFactory;
 import syncleus.dann.util.factory.parse.ArchitectureParse;
+
+import java.util.Map;
 
 /**
  * A factory for quick propagation training.
@@ -46,8 +45,8 @@ public class QuickPropFactory {
      * @param argsStr  The arguments to use.
      * @return The newly created trainer.
      */
-    public MLTrain create(final MLMethod method, final MLDataSet training,
-                          final String argsStr) {
+    public static MLTrain create(final MLMethod method, final MLDataSet training,
+                                 final String argsStr) {
 
         final Map<String, String> args = ArchitectureParse.parseParams(argsStr);
         final ParamsHolder holder = new ParamsHolder(args);

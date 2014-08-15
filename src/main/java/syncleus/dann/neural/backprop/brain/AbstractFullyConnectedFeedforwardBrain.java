@@ -18,8 +18,6 @@
  ******************************************************************************/
 package syncleus.dann.neural.backprop.brain;
 
-import java.util.concurrent.ExecutorService;
-
 import syncleus.dann.graph.AbstractBidirectedAdjacencyGraph;
 import syncleus.dann.neural.NeuronGroup;
 import syncleus.dann.neural.SimpleSynapse;
@@ -28,6 +26,8 @@ import syncleus.dann.neural.backprop.BackpropNeuron;
 import syncleus.dann.neural.backprop.BackpropStaticNeuron;
 import syncleus.dann.neural.backprop.InputBackpropNeuron;
 import syncleus.dann.neural.backprop.OutputBackpropNeuron;
+
+import java.util.concurrent.ExecutorService;
 
 // TODO rename bad camel-casing
 public abstract class AbstractFullyConnectedFeedforwardBrain<IN extends InputBackpropNeuron, ON extends OutputBackpropNeuron, N extends BackpropNeuron, S extends Synapse<N>>

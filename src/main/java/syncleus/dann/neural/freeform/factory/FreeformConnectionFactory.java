@@ -21,9 +21,9 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package org.encog.neural.freeform.factory;
+package syncleus.dann.neural.freeform.factory;
 
-import syncleus.dann.neural.freeform.FreeformConnection;
+import org.encog.neural.freeform.FreeformConnection;
 import syncleus.dann.neural.freeform.FreeformNeuron;
 
 /**
@@ -37,6 +37,5 @@ public interface FreeformConnectionFactory {
      * @param targetNeuron The target neuron.
      * @return The newly created connection.
      */
-    FreeformConnection factor(FreeformNeuron sourceNeuron,
-                              FreeformNeuron targetNeuron);
+    FreeformConnection factor(FreeformNeuron sourceNeuron, FreeformNeuron targetNeuron);
 }

@@ -21,11 +21,12 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package org.encog.neural.freeform;
-
-import java.util.List;
+package syncleus.dann.neural.freeform;
 
 import syncleus.dann.neural.activation.EncogActivationFunction;
+
+import java.util.List;
+import org.encog.neural.freeform.FreeformConnection;
 
 /**
  * Specifies how the inputs to a neuron are to be summed.
@@ -49,7 +50,7 @@ public interface InputSummation {
     /**
      * @return The activation function
      */
-    EncogActivationFunction getEncogActivationFunction();
+    EncogActivationFunction getActivationFunction();
 
     /**
      * @return The preactivation sum.

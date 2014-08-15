@@ -23,21 +23,13 @@
  */
 package syncleus.dann.data.buffer.codec;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Enumeration;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipException;
-import java.util.zip.ZipFile;
-import java.util.zip.ZipInputStream;
-import java.util.zip.ZipOutputStream;
-
 import syncleus.dann.data.buffer.BufferedDataError;
 import syncleus.dann.data.file.csv.CSVFormat;
 import syncleus.dann.math.EncogMath;
+
+import java.io.*;
+import java.util.Enumeration;
+import java.util.zip.*;
 
 /**
  * A CODEC that can read/write Microsoft Excel (*.XLSX) files.
@@ -365,7 +357,7 @@ public class ExcelCODEC implements DataSetCODEC {
      * @param index The numeric index.
      * @return The column, i.e. A or AA.
      */
-    private String toColumn(final int index) {
+    private static String toColumn(final int index) {
         final StringBuilder result = new StringBuilder();
         final int first = index / 26;
         final int second = index % 26;

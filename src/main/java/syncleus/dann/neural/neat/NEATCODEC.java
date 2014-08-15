@@ -23,21 +23,14 @@
  */
 package org.encog.neural.neat;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import syncleus.dann.evolve.GeneticError;
 import syncleus.dann.evolve.codec.GeneticCODEC;
 import syncleus.dann.evolve.genome.Genome;
 import syncleus.dann.learn.ml.MLMethod;
 import syncleus.dann.neural.activation.EncogActivationFunction;
-import syncleus.dann.neural.neat.training.NEATGenome;
-import syncleus.dann.neural.neat.training.NEATLinkGene;
-import syncleus.dann.neural.neat.training.NEATNeuronGene;
+
+import java.io.Serializable;
+import java.util.*;
 
 /**
  * This CODEC is used to create phenomes (NEATNetwork) objects using a genome
@@ -79,7 +72,7 @@ public class NEATCODEC implements GeneticCODEC, Serializable {
                 .getLinksChromosome();
 
         if (neuronsChromosome.get(0).getNeuronType() != NEATNeuronType.Bias) {
-            throw new NeuralNetworkError(
+            throw new RuntimeException(
                     "The first neuron must be the bias neuron, this genome is invalid.");
         }
 

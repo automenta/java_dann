@@ -23,11 +23,10 @@
  */
 package org.encog.neural.data.basic;
 
-import java.util.List;
-
 import syncleus.dann.data.basic.BasicMLDataSet;
 import syncleus.dann.learn.ml.MLDataPair;
-import syncleus.dann.neural.data.NeuralDataSet;
+
+import java.util.List;
 
 /**
  * This is an alias class for Encog 2.5 compatibility. This class aliases

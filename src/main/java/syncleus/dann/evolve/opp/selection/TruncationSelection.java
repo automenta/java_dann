@@ -23,11 +23,11 @@
  */
 package syncleus.dann.evolve.opp.selection;
 
-import java.io.Serializable;
-import java.util.Random;
-
 import syncleus.dann.evolve.species.Species;
 import syncleus.dann.evolve.train.EvolutionaryAlgorithm;
+
+import java.io.Serializable;
+import java.util.Random;
 
 /**
  * Truncation selection chooses a random genome from the top genomes in the

@@ -33,53 +33,52 @@ import java.io.ObjectOutputStream;
  * A simple Object cloner that uses serialization. Actually works really well
  * for the somewhat complex nature of BasicNetwork. Performs a deep copy without
  * all the headache of programming a custom clone.
- * 
+ * <p/>
  * Original by Dave Miller here:
  * http://www.javaworld.com/javaworld/javatips/jw-javatip76.html?page=2
  */
 public final class ObjectCloner {
 
-	/**
-	 * Perform a deep copy.
-	 * 
-	 * @param oldObj
-	 *            The old object.
-	 * @return The new object.
-	 */
-	public static Object deepCopy(final Object oldObj) {
-		ObjectOutputStream oos = null;
-		ObjectInputStream ois = null;
-		try {
-			final ByteArrayOutputStream bos = new ByteArrayOutputStream(); // A
-			oos = new ObjectOutputStream(bos); // B
-			// serialize and pass the object
-			oos.writeObject(oldObj); // C
-			oos.flush(); // D
-			final ByteArrayInputStream bin = new ByteArrayInputStream(bos
-					.toByteArray()); // E
-			ois = new ObjectInputStream(bin); // F
-			// return the new object
-			return ois.readObject(); // G
-		} catch (final Exception e) {
-			throw new RuntimeException(e);
-		} finally {
-			try {
-				if (oos != null) {
-					oos.close();
-				}
-				if (ois != null) {
-					ois.close();
-				}
-			} catch (final Exception e) {
-				throw new RuntimeException(e);
-			}
-		}
-	}
+    /**
+     * Perform a deep copy.
+     *
+     * @param oldObj The old object.
+     * @return The new object.
+     */
+    public static Object deepCopy(final Object oldObj) {
+        ObjectOutputStream oos = null;
+        ObjectInputStream ois = null;
+        try {
+            final ByteArrayOutputStream bos = new ByteArrayOutputStream(); // A
+            oos = new ObjectOutputStream(bos); // B
+            // serialize and pass the object
+            oos.writeObject(oldObj); // C
+            oos.flush(); // D
+            final ByteArrayInputStream bin = new ByteArrayInputStream(bos
+                    .toByteArray()); // E
+            ois = new ObjectInputStream(bin); // F
+            // return the new object
+            return ois.readObject(); // G
+        } catch (final Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                if (oos != null) {
+                    oos.close();
+                }
+                if (ois != null) {
+                    ois.close();
+                }
+            } catch (final Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
 
-	/**
-	 * Private constructor.
-	 */
-	private ObjectCloner() {
-	}
+    /**
+     * Private constructor.
+     */
+    private ObjectCloner() {
+    }
 
 }

@@ -21,19 +21,17 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package org.encog.neural.freeform.basic;
+package syncleus.dann.neural.freeform.basic;
 
 import java.io.Serializable;
-
-import syncleus.dann.neural.freeform.FreeformConnection;
+import org.encog.neural.freeform.FreeformConnection;
 import syncleus.dann.neural.freeform.FreeformNeuron;
 import syncleus.dann.neural.freeform.factory.FreeformConnectionFactory;
 
 /*
  * A factory that creates basic freeform connection objects.
  */
-public class BasicFreeformConnectionFactory implements
-        FreeformConnectionFactory, Serializable {
+public class BasicFreeformConnectionFactory implements FreeformConnectionFactory, Serializable {
 
     /**
      * Serial id.
@@ -45,7 +43,7 @@ public class BasicFreeformConnectionFactory implements
      */
     @Override
     public FreeformConnection factor(final FreeformNeuron theSourceNeuron,
-                                     final FreeformNeuron theTargetNeuron) {
+                                            final FreeformNeuron theTargetNeuron) {
         return new BasicFreeformConnection(theSourceNeuron, theTargetNeuron);
     }
 

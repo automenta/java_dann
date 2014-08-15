@@ -23,11 +23,11 @@
  */
 package org.encog.neural.cpn;
 
+import syncleus.dann.math.matrix.SimpleRealMatrix;
+
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Map;
-
-import syncleus.dann.math.matrix.SimpleRealMatrix;
 
 /**
  * Persist a CPN network.
@@ -53,7 +53,7 @@ public class PersistCPN implements EncogPersistor {
      * {@inheritDoc}
      */
     @Override
-    public int getFileVersion() {
+    public static int getFileVersion() {
         return 1;
     }
 
@@ -61,7 +61,7 @@ public class PersistCPN implements EncogPersistor {
      * {@inheritDoc}
      */
     @Override
-    public String getPersistClassString() {
+    public static String getPersistClassString() {
         return "CPN";
     }
 

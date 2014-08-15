@@ -116,7 +116,7 @@ public class Vector implements Serializable {
      */
     public Vector clone(final double newCoordinateValue, final int whichDimension) {
         /*
-		 * if( dimension <= 0 ) throw new
+         * if( dimension <= 0 ) throw new
 		 * IllegalArgumentException(DIMENSIONS_BELOW_ONE); if( dimension >
 		 * this.coordinates.length ) throw new IllegalArgumentException(
 		 * "dimensions is larger than the dimensionality of this point");

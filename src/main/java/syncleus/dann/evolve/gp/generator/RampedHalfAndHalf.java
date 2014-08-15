@@ -26,11 +26,6 @@ package org.encog.ml.prg.generator;
 import java.util.List;
 import java.util.Random;
 
-import syncleus.dann.evolve.gp.EncogProgram;
-import syncleus.dann.evolve.gp.EncogProgramContext;
-import syncleus.dann.evolve.gp.ProgramNode;
-import syncleus.dann.evolve.gp.expvalue.ValueType;
-
 /**
  * Because neither the grow or full method provide a very wide array of sizes or
  * shapes on their own, Koza (1992) proposed a combination called ramped

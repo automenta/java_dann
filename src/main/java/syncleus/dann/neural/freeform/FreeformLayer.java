@@ -21,9 +21,10 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package org.encog.neural.freeform;
+package syncleus.dann.neural.freeform;
 
 import java.util.List;
+
 
 /**
  * Defines a freeform layer. A layer is a group of similar neurons.

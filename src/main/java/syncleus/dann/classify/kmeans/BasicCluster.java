@@ -23,16 +23,16 @@
  */
 package syncleus.dann.classify.kmeans;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import syncleus.dann.data.basic.BasicMLDataPair;
-import syncleus.dann.data.basic.BasicMLDataPairCentroid;
 import syncleus.dann.data.basic.BasicMLDataSet;
 import syncleus.dann.learn.ml.MLCluster;
 import syncleus.dann.learn.ml.MLData;
 import syncleus.dann.learn.ml.MLDataSet;
 import syncleus.dann.math.cluster.Centroid;
+
+import java.util.ArrayList;
+import java.util.List;
+import syncleus.dann.learn.ml.MLDataPair;
+import syncleus.dann.math.cluster.Cluster;
 
 /**
  * Holds a cluster of MLData items that have been clustered by the
@@ -43,19 +43,21 @@ public class BasicCluster implements MLCluster {
     /**
      * The centroid.
      */
-    private BasicMLDataPairCentroid centroid;
+    //private BasicMLDataPairCentroid centroid;
 
     /**
      * The contents of the cluster.
      */
     private final List<MLData> data = new ArrayList<>();
+    private Centroid<? super MLDataPair> centroid;
+    
 
     /**
      * Construct a cluster from another.
      *
      * @param cluster The other cluster.
      */
-    public BasicCluster(final Cluster<BasicMLDataPair> cluster) {
+    public BasicCluster(final Cluster<MLDataPair> cluster) {
         this.centroid = cluster.centroid();
         cluster.getContents().stream().forEach((pair) -> this.data.add(pair.getInput()));
     }
@@ -120,7 +122,7 @@ public class BasicCluster implements MLCluster {
      *
      * @param c The new centroid.
      */
-    public final void setCentroid(final BasicMLDataPairCentroid c) {
+    public final void setCentroid(final Centroid<? super MLDataPair> c) {
         this.centroid = c;
     }
 

@@ -23,14 +23,11 @@
  */
 package syncleus.dann.util.factory.method;
 
-import java.util.List;
-
 import syncleus.dann.learn.ml.MLMethod;
-import syncleus.dann.neural.pnn.BasicPNN;
-import syncleus.dann.neural.pnn.PNNKernelType;
-import syncleus.dann.neural.pnn.PNNOutputMode;
 import syncleus.dann.util.factory.parse.ArchitectureLayer;
 import syncleus.dann.util.factory.parse.ArchitectureParse;
+
+import java.util.List;
 
 /**
  * A factory to create PNN networks.
@@ -80,7 +77,7 @@ public class PNNFactory {
         } else if (pnnLayer.getName().equalsIgnoreCase("u")) {
             outmodel = PNNOutputMode.Unsupervised;
         } else {
-            throw new NeuralNetworkError("Unknown model: " + pnnLayer.getName());
+            throw new RuntimeException("Unknown model: " + pnnLayer.getName());
         }
 
         final ParamsHolder holder = new ParamsHolder(pnnLayer.getParams());
@@ -92,7 +89,7 @@ public class PNNFactory {
         } else if (kernelStr.equalsIgnoreCase("reciprocal")) {
             kernel = PNNKernelType.Reciprocal;
         } else {
-            throw new NeuralNetworkError("Unknown kernel: " + kernelStr);
+            throw new RuntimeException("Unknown kernel: " + kernelStr);
         }
 
         final BasicPNN result = new BasicPNN(kernel, outmodel, inputCount,

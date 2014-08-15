@@ -23,12 +23,10 @@
  */
 package org.encog.neural.neat.training.opp;
 
-import java.util.Random;
-
 import syncleus.dann.evolve.genome.Genome;
 import syncleus.dann.math.random.RangeRandomizer;
-import syncleus.dann.neural.neat.training.NEATGenome;
-import syncleus.dann.neural.neat.training.NEATLinkGene;
+
+import java.util.Random;
 
 /**
  * Mutate a genome by removing a random link. Do not remove links from genomes

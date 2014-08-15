@@ -23,14 +23,14 @@
  */
 package syncleus.dann.classify.kmeans;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import syncleus.dann.data.basic.BasicMLDataPair;
 import syncleus.dann.learn.ml.MLCluster;
 import syncleus.dann.learn.ml.MLClustering;
 import syncleus.dann.learn.ml.MLDataPair;
 import syncleus.dann.learn.ml.MLDataSet;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This class performs a basic K-Means clustering. This class can be used on
@@ -44,7 +44,7 @@ public class KMeansClustering implements MLClustering {
     /**
      * The kmeans utility.
      */
-    private final KMeansUtil<BasicMLDataPair> kmeans;
+    private final KMeansUtil<MLDataPair> kmeans;
 
     /**
      * The clusters

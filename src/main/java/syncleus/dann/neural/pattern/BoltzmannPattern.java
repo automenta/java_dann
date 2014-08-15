@@ -59,7 +59,7 @@ public class BoltzmannPattern implements NeuralNetworkPattern {
      * @param count Not used.
      */
     @Override
-    public void addHiddenLayer(final int count) {
+    public static void addHiddenLayer(final int count) {
         throw new PatternError("A Boltzmann network has no hidden layers.");
     }
 
@@ -113,7 +113,7 @@ public class BoltzmannPattern implements NeuralNetworkPattern {
      * @param activation Not used.
      */
     @Override
-    public void setEncogActivationFunction(final EncogActivationFunction activation) {
+    public static void setEncogActivationFunction(final EncogActivationFunction activation) {
         throw new PatternError(
                 "A Boltzmann network will use the BiPolar activation "
                         + "function, no activation function needs to be specified.");

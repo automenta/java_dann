@@ -25,11 +25,7 @@ package org.encog.neural.networks.training.lma;
 
 import syncleus.dann.data.basic.BasicMLData;
 import syncleus.dann.data.basic.BasicMLDataPair;
-import syncleus.dann.learn.ml.MLData;
-import syncleus.dann.learn.ml.MLDataPair;
-import syncleus.dann.learn.ml.MLDataSet;
-import syncleus.dann.learn.ml.MLMethod;
-import syncleus.dann.learn.ml.TrainingImplementationType;
+import syncleus.dann.learn.ml.*;
 import syncleus.dann.learn.train.BasicTraining;
 import syncleus.dann.math.matrix.decomposition.LuDecomposition2;
 import syncleus.dann.math.matrix.hessian.ComputeHessian;
@@ -37,8 +33,6 @@ import syncleus.dann.math.matrix.hessian.HessianCR;
 import syncleus.dann.math.statistics.ErrorCalculation;
 import syncleus.dann.neural.networks.BasicNetwork;
 import syncleus.dann.neural.networks.structure.NetworkCODEC;
-import syncleus.dann.neural.networks.training.TrainingError;
-import syncleus.dann.neural.networks.training.propagation.TrainingContinuation;
 
 /**
  * Trains a neural network using a Levenberg Marquardt algorithm (LMA). This

@@ -18,23 +18,16 @@
  ******************************************************************************/
 package syncleus.dann.graph;
 
+import org.apache.logging.log4j.Logger;
+import syncleus.dann.graph.context.ContextGraphElement;
+import syncleus.dann.util.UnexpectedDannError;
+
+import java.util.*;
+import java.util.stream.Stream;
+
 import static java.util.Collections.unmodifiableList;
 import static java.util.Collections.unmodifiableSet;
 import static org.apache.logging.log4j.LogManager.getLogger;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.stream.Stream;
-
-import org.apache.logging.log4j.Logger;
-
-import syncleus.dann.graph.context.ContextGraphElement;
-import syncleus.dann.util.UnexpectedDannError;
 
 /**
  * An AbstractAdjacencyGraph is a Graph implemented using adjacency lists.
@@ -271,11 +264,12 @@ public abstract class AbstractAdjacencyGraph<N, E extends Edge<N>> implements
         return unmodifiableList(new ArrayList<>(this.adjacentNodes
                 .get(node)));
     }
-    
-    @Override public Stream<N> streamAdjacentNodes(final N node) {
-    	return getAdjacentNodes(node).stream();
+
+    @Override
+    public Stream<N> streamAdjacentNodes(final N node) {
+        return getAdjacentNodes(node).stream();
     }
-    
+
 
     /**
      * Gets the traversable nodes adjacent to the given node.

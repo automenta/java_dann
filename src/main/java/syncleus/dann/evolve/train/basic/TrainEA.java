@@ -23,9 +23,6 @@
  */
 package syncleus.dann.evolve.train.basic;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import syncleus.dann.evolve.exception.EAError;
 import syncleus.dann.evolve.population.Population;
 import syncleus.dann.learn.ml.CalculateScore;
@@ -34,8 +31,9 @@ import syncleus.dann.learn.ml.MLMethod;
 import syncleus.dann.learn.ml.TrainingImplementationType;
 import syncleus.dann.learn.train.MLTrain;
 import syncleus.dann.learn.train.strategy.Strategy;
-import syncleus.dann.neural.networks.training.TrainingSetScore;
-import syncleus.dann.neural.networks.training.propagation.TrainingContinuation;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Provides a MLTrain compatible class that can be used to train genomes.

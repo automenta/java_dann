@@ -21,13 +21,12 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package org.encog.neural.thermal;
+package syncleus.dann.neural.thermal;
 
 import syncleus.dann.data.specific.BiPolarNeuralData;
 import syncleus.dann.learn.ml.MLData;
 import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.math.matrix.BiPolarUtil;
-import syncleus.dann.math.matrix.Matrix;
 import syncleus.dann.math.matrix.MatrixMath;
 import syncleus.dann.math.matrix.SimpleRealMatrix;
 
@@ -67,13 +66,13 @@ public class HopfieldNetwork extends ThermalNetwork {
     public void addPattern(final MLData pattern) {
 
         if (pattern.size() != getNeuronCount()) {
-            throw new NeuralNetworkError("Network with " + getNeuronCount()
+            throw new RuntimeException("Network with " + getNeuronCount()
                     + " neurons, cannot learn a pattern of size "
                     + pattern.size());
         }
 
         // Create a row matrix from the input, convert boolean to bipolar
-        final SimpleRealMatrix m2 = Matrix.createRowMatrix(pattern.getData());
+        final SimpleRealMatrix m2 = SimpleRealMatrix.createRowMatrix(pattern.getData());
         // Transpose the matrix and multiply by the original input matrix
         final SimpleRealMatrix m1 = MatrixMath.transpose(m2);
         final SimpleRealMatrix m3 = MatrixMath.multiply(m1, m2);
@@ -123,7 +122,7 @@ public class HopfieldNetwork extends ThermalNetwork {
         // add the new weight matrix to what is there already
         for (int row = 0; row < delta.getRows(); row++) {
             for (int col = 0; col < delta.getRows(); col++) {
-                addWeight(row, col, delta.getNumber(row, col));
+                addWeight(row, col, delta.get(row, col));
             }
         }
     }

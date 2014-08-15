@@ -29,10 +29,6 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-import syncleus.dann.neural.networks.training.concurrent.jobs.TrainingJob;
-import syncleus.dann.neural.networks.training.concurrent.performers.ConcurrentTrainingPerformer;
-import syncleus.dann.neural.networks.training.concurrent.performers.ConcurrentTrainingPerformerCPU;
-
 /**
  * Concurrent training manager. This class allows you to queue up network
  * training tasks to be executed either by the CPU cores or OpenCL devices. This
@@ -248,7 +244,7 @@ public final class ConcurrentTrainingManager implements Runnable {
     private void reportErrors() {
         for (final TrainingJob job : this.queue) {
             if (job.getError() != null) {
-                throw new NeuralNetworkError(job.getError());
+                throw new RuntimeException(job.getError());
             }
         }
     }

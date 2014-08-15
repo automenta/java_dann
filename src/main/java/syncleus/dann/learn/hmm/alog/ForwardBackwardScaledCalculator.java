@@ -23,13 +23,13 @@
  */
 package syncleus.dann.learn.hmm.alog;
 
-import java.util.Arrays;
-import java.util.EnumSet;
-import java.util.Iterator;
-
 import syncleus.dann.learn.hmm.HiddenMarkovModel;
 import syncleus.dann.learn.ml.MLDataPair;
 import syncleus.dann.learn.ml.MLDataSet;
+
+import java.util.Arrays;
+import java.util.EnumSet;
+import java.util.Iterator;
 
 /**
  * The forward-backward algorithm is an inference algorithm for hidden Markov
@@ -120,8 +120,8 @@ public class ForwardBackwardScaledCalculator extends ForwardBackwardCalculator {
         return this.lnProbability;
     }
 
-    private void scale(final double[] ctFactors, final double[][] array,
-                       final int t) {
+    private static void scale(final double[] ctFactors, final double[][] array,
+                              final int t) {
         final double[] table = array[t];
         double sum = 0.;
 

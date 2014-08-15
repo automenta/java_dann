@@ -52,7 +52,7 @@ public class ADALINEPattern implements NeuralNetworkPattern {
      * @param count The neuron count.
      */
     @Override
-    public void addHiddenLayer(final int count) {
+    public static void addHiddenLayer(final int count) {
         throw new PatternError("An ADALINE network has no hidden layers.");
     }
 
@@ -94,7 +94,7 @@ public class ADALINEPattern implements NeuralNetworkPattern {
      * @param activation Not used.
      */
     @Override
-    public void setEncogActivationFunction(final EncogActivationFunction activation) {
+    public static void setEncogActivationFunction(final EncogActivationFunction activation) {
         throw new PatternError(
                 "A ADALINE network can't specify a custom activation function.");
     }

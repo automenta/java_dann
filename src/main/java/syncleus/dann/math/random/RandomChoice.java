@@ -23,10 +23,10 @@
  */
 package syncleus.dann.math.random;
 
+import syncleus.dann.math.array.EngineArray;
+
 import java.io.Serializable;
 import java.util.Random;
-
-import syncleus.dann.math.array.EngineArray;
 
 /**
  * Generate random choices unevenly. This class is used to select random choices

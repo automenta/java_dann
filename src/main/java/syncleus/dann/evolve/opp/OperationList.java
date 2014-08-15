@@ -24,9 +24,10 @@
 package syncleus.dann.evolve.opp;
 
 
-import java.util.Random;
-
 import syncleus.dann.util.ChooseObject;
+import syncleus.dann.util.ObjectHolder;
+
+import java.util.Random;
 
 /**
  * This class holds a list of evolutionary operators. Each operator is given a
@@ -81,7 +82,7 @@ public class OperationList extends ChooseObject<EvolutionaryOperator> {
 
         // determine the total probability of eligible operators
         double total = 0;
-        total = getList().stream().filter((holder) -> (holder.getObj().parentsNeeded() <= maxParents)).map((holder) -> holder.getProbability()).reduce(total, (accumulator, _item) -> accumulator + _item);
+        total = getList().stream().filter((holder) -> (holder.getObj().parentsNeeded() <= maxParents)).map(ObjectHolder::getProbability).reduce(total, (accumulator, _item) -> accumulator + _item);
 
         // choose an operator
         final double r = rnd.nextDouble() * total;

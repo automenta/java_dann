@@ -23,11 +23,10 @@
  */
 package org.encog.neural.neat.training.opp.links;
 
-import java.util.Random;
-
 import syncleus.dann.evolve.train.EvolutionaryAlgorithm;
 import syncleus.dann.math.random.RangeRandomizer;
-import syncleus.dann.neural.neat.training.NEATLinkGene;
+
+import java.util.Random;
 
 /**
  * Mutate weight links by reseting the weight to an entirely new value. The
@@ -72,8 +71,8 @@ public class MutateResetLinkWeight implements MutateLinkWeight {
      * {@inheritDoc}
      */
     @Override
-    public void mutateWeight(final Random rnd, final NEATLinkGene linkGene,
-                             final double weightRange) {
+    public static void mutateWeight(final Random rnd, final NEATLinkGene linkGene,
+                                    final double weightRange) {
         linkGene.setWeight(RangeRandomizer.randomize(rnd, -weightRange,
                 weightRange));
     }

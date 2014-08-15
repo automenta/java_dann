@@ -27,7 +27,6 @@ import syncleus.dann.learn.ml.MLDataSet;
 import syncleus.dann.learn.ml.MLMethod;
 import syncleus.dann.learn.train.MLTrain;
 import syncleus.dann.neural.networks.BasicNetwork;
-import syncleus.dann.neural.networks.training.lma.LevenbergMarquardtTraining;
 
 /**
  * This class is a factory to create the LMA training method.
@@ -42,8 +41,8 @@ public class LMAFactory {
      * @param argsStr  The arguments to use.
      * @return The newly created trainer.
      */
-    public MLTrain create(final MLMethod method, final MLDataSet training,
-                          final String argsStr) {
+    public static MLTrain create(final MLMethod method, final MLDataSet training,
+                                 final String argsStr) {
 
         if (!(method instanceof BasicNetwork)) {
             throw new RuntimeException(

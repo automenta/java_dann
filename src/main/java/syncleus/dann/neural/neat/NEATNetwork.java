@@ -23,9 +23,6 @@
  */
 package org.encog.neural.neat;
 
-import java.io.Serializable;
-import java.util.List;
-
 import syncleus.dann.data.basic.BasicMLData;
 import syncleus.dann.learn.ml.MLData;
 import syncleus.dann.learn.ml.MLDataSet;
@@ -34,6 +31,9 @@ import syncleus.dann.learn.ml.MLRegression;
 import syncleus.dann.math.EncogUtility;
 import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.neural.activation.EncogActivationFunction;
+
+import java.io.Serializable;
+import java.util.List;
 
 /**
  * NEAT networks relieve the programmer of the need to define the hidden layer
@@ -131,9 +131,9 @@ public class NEATNetwork implements MLRegression, MLError, Serializable {
      * Construct a NEAT network. The links that are passed in also define the
      * neurons.
      *
-     * @param inputNeuronCount       The input neuron count.
-     * @param outputNeuronCount      The output neuron count.
-     * @param connectionArray        The links.
+     * @param inputNeuronCount            The input neuron count.
+     * @param outputNeuronCount           The output neuron count.
+     * @param connectionArray             The links.
      * @param theEncogActivationFunctions The activation functions.
      */
     public NEATNetwork(final int inputNeuronCount, final int outputNeuronCount,

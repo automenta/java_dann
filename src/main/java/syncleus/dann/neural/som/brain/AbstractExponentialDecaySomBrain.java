@@ -18,13 +18,13 @@
  ******************************************************************************/
 package syncleus.dann.neural.som.brain;
 
-import java.util.concurrent.ExecutorService;
-
 import syncleus.dann.graph.AbstractBidirectedAdjacencyGraph;
 import syncleus.dann.neural.Synapse;
 import syncleus.dann.neural.som.SomInputNeuron;
 import syncleus.dann.neural.som.SomNeuron;
 import syncleus.dann.neural.som.SomOutputNeuron;
+
+import java.util.concurrent.ExecutorService;
 
 public abstract class AbstractExponentialDecaySomBrain<IN extends SomInputNeuron, ON extends SomOutputNeuron, N extends SomNeuron, S extends Synapse<N>>
         extends AbstractSomBrain<IN, ON, N, S> {

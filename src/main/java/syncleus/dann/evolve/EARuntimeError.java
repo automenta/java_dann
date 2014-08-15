@@ -23,38 +23,42 @@
  */
 package syncleus.dann.evolve;
 
+import syncleus.dann.evolve.exception.EAError;
+
 /**
  * An error has occurred while running a phenotype (or genome).
- *
  */
 public class EARuntimeError extends EAError {
-	/**
-	 * The serial ID.
-	 */
-	private static final long serialVersionUID = 1L;
+    /**
+     * The serial ID.
+     */
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * Construct an error.
-	 * @param msg The message.
-	 */
-	public EARuntimeError(final String msg) {
-		super(msg);
-	}
+    /**
+     * Construct an error.
+     *
+     * @param msg The message.
+     */
+    public EARuntimeError(final String msg) {
+        super(msg);
+    }
 
-	/**
-	 * Construct an error.
-	 * @param msg The message.
-	 * @param t The error.
-	 */
-	public EARuntimeError(final String msg, final Throwable t) {
-		super(msg, t);
-	}
+    /**
+     * Construct an error.
+     *
+     * @param msg The message.
+     * @param t   The error.
+     */
+    public EARuntimeError(final String msg, final Throwable t) {
+        super(msg, t);
+    }
 
-	/**
-	 * Construct an error.
-	 * @param t The error
-	 */
-	public EARuntimeError(final Throwable t) {
-		super(t);
-	}
+    /**
+     * Construct an error.
+     *
+     * @param t The error
+     */
+    public EARuntimeError(final Throwable t) {
+        super(t);
+    }
 }

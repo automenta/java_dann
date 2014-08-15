@@ -101,7 +101,7 @@ public class TemporalDataDescription {
      * @param input              Used for input?
      * @param predict            Used for prediction?
      */
-    public TemporalDataDescription(final EncogActivationFunction  activationFunction,
+    public TemporalDataDescription(final EncogActivationFunction activationFunction,
                                    final double low, final double high, final Type type,
                                    final boolean input, final boolean predict) {
         this.low = low;
@@ -146,7 +146,7 @@ public class TemporalDataDescription {
 
     /**
      * @return the high
-     */	
+     */
     public double getHigh() {
         return this.high;
     }

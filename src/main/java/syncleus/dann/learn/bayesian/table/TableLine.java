@@ -23,10 +23,11 @@
  */
 package syncleus.dann.learn.bayesian.table;
 
-import java.io.Serializable;
-
 import syncleus.dann.math.EncogMath;
 import syncleus.dann.math.array.EngineArray;
+
+import java.io.Serializable;
+import syncleus.dann.math.Format;
 
 /**
  * A line from a Bayesian truth table.

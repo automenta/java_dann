@@ -23,18 +23,14 @@
  */
 package org.encog.ml.prg;
 
+import syncleus.dann.data.file.csv.CSVFormat;
+import syncleus.dann.evolve.exception.EARuntimeError;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import syncleus.dann.data.file.csv.CSVFormat;
-import syncleus.dann.evolve.exception.EARuntimeError;
-import syncleus.dann.evolve.gp.expvalue.ExpressionValue;
-import syncleus.dann.evolve.gp.expvalue.ValueType;
-import syncleus.dann.evolve.gp.extension.FunctionFactory;
-import syncleus.dann.evolve.gp.extension.StandardExtensions;
 
 /**
  * Every EncogProgram must belong to a context. When programs are in a
@@ -139,8 +135,8 @@ public class EncogProgramContext implements Serializable {
      * @param sourceBranch  The branch to clone, from the source program.
      * @return The cloned branch.
      */
-    public ProgramNode cloneBranch(final EncogProgram targetProgram,
-                                   final ProgramNode sourceBranch) {
+    public static ProgramNode cloneBranch(final EncogProgram targetProgram,
+                                          final ProgramNode sourceBranch) {
         if (sourceBranch == null) {
             throw new RuntimeException("Can't clone null branch.");
         }

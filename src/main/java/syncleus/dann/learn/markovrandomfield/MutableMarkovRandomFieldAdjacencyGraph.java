@@ -18,15 +18,15 @@
  ******************************************************************************/
 package syncleus.dann.learn.markovrandomfield;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import syncleus.dann.graph.Graph;
 import syncleus.dann.graph.UndirectedEdge;
 import syncleus.dann.graph.context.ContextGraphElement;
 import syncleus.dann.learn.graphical.GraphicalModelNode;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class MutableMarkovRandomFieldAdjacencyGraph<N extends GraphicalModelNode, E extends UndirectedEdge<N>>
         extends AbstractMarkovRandomFieldAdjacencyGraph<N, E> implements

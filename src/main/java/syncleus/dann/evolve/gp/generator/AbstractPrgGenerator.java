@@ -23,30 +23,26 @@
  */
 package org.encog.ml.prg.generator;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Random;
-import java.util.Set;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
-
+import org.encog.ml.prg.EncogProgram;
+import org.encog.ml.prg.EncogProgramContext;
+import org.encog.ml.prg.ProgramNode;
+import org.encog.ml.prg.expvalue.ValueType;
+import org.encog.ml.prg.extension.ProgramExtensionTemplate;
+import org.encog.ml.prg.train.PrgPopulation;
+import org.encog.ml.prg.train.ZeroEvalScoreFunction;
 import syncleus.dann.evolve.GeneticError;
 import syncleus.dann.evolve.exception.EACompileError;
 import syncleus.dann.evolve.exception.EARuntimeError;
-import syncleus.dann.evolve.gp.EncogProgram;
-import syncleus.dann.evolve.gp.EncogProgramContext;
-import syncleus.dann.evolve.gp.ProgramNode;
-import syncleus.dann.evolve.gp.expvalue.ValueType;
-import syncleus.dann.evolve.gp.extension.ProgramExtensionTemplate;
-import syncleus.dann.evolve.gp.train.PrgPopulation;
-import syncleus.dann.evolve.gp.train.ZeroEvalScoreFunction;
 import syncleus.dann.evolve.population.Population;
 import syncleus.dann.evolve.species.Species;
 import syncleus.dann.learn.ml.CalculateScore;
 import syncleus.dann.math.random.BasicRandomFactory;
 import syncleus.dann.math.random.RandomFactory;
+
+import java.util.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 /**
  * The abstract base for Full and Grow program generation.
@@ -344,8 +340,8 @@ public abstract class AbstractPrgGenerator implements PrgGenerator,
      * @param opcodes The opcodes to choose from.
      * @return The selected opcode.
      */
-    public ProgramExtensionTemplate generateRandomOpcode(final Random rnd,
-                                                         final List<ProgramExtensionTemplate> opcodes) {
+    public static ProgramExtensionTemplate generateRandomOpcode(final Random rnd,
+                                                                final List<ProgramExtensionTemplate> opcodes) {
         final int maxOpCode = opcodes.size();
 
         if (maxOpCode == 0) {

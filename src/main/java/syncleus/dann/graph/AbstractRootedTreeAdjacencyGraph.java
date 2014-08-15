@@ -18,12 +18,12 @@
  ******************************************************************************/
 package syncleus.dann.graph;
 
-import java.util.Set;
-
 import syncleus.dann.graph.topological.sorter.SimpleTopologicalRanker;
 import syncleus.dann.graph.topological.sorter.TopologicalSorter;
 import syncleus.dann.graph.tree.TreeOptimizedDirectedGraph;
 import syncleus.dann.graph.tree.Trees;
+
+import java.util.Set;
 
 /**
  * An AbstractRootedTreeAdjacencyGraph is a RootedTreeGraph implemented using

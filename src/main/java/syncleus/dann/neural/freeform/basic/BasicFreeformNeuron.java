@@ -21,15 +21,15 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package org.encog.neural.freeform.basic;
+package syncleus.dann.neural.freeform.basic;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
-import syncleus.dann.neural.freeform.FreeformConnection;
+import org.encog.neural.freeform.FreeformConnection;
 import syncleus.dann.neural.freeform.FreeformNeuron;
 import syncleus.dann.neural.freeform.InputSummation;
+
 
 /**
  * This class provides a basic implementation of a freeform neuron.

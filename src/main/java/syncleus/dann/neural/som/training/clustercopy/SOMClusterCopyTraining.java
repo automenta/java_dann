@@ -23,14 +23,8 @@
  */
 package org.encog.neural.som.training.clustercopy;
 
-import syncleus.dann.learn.ml.MLData;
-import syncleus.dann.learn.ml.MLDataPair;
-import syncleus.dann.learn.ml.MLDataSet;
-import syncleus.dann.learn.ml.MLMethod;
-import syncleus.dann.learn.ml.TrainingImplementationType;
+import syncleus.dann.learn.ml.*;
 import syncleus.dann.learn.train.BasicTraining;
-import syncleus.dann.neural.networks.training.propagation.TrainingContinuation;
-import syncleus.dann.neural.som.SOM;
 
 /**
  * SOM cluster copy is a very simple trainer for SOM's. Using this trainer all
@@ -63,7 +57,7 @@ public class SOMClusterCopyTraining extends BasicTraining {
         super(TrainingImplementationType.OnePass);
         this.network = network;
         if (this.network.getOutputCount() < training.getRecordCount()) {
-            throw new NeuralNetworkError(
+            throw new RuntimeException(
                     "To use cluster copy training you must have at least as many output neurons as training elements.");
         }
         setTraining(training);

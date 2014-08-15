@@ -6,15 +6,16 @@ import java.util.stream.Stream;
 
 /**
  * A graph implicit in the data structure of existing objects.
- * In other words, it is read-only except for its internal manipulation by 
+ * In other words, it is read-only except for its internal manipulation by
  * the implementing class.
- * 
+ *
  * @param <N> Node type
  * @param <E> Edge type
  */
 public interface ImplicitGraph<N, E extends Edge<N>> extends NodeSet<N> {
 
     Stream<E> streamEdges();
+
     Stream<N> streamAdjacentNodes(N node);
 
     /**
@@ -28,7 +29,7 @@ public interface ImplicitGraph<N, E extends Edge<N>> extends NodeSet<N> {
      * @throws IllegalArgumentException if specified node is not in the graph.
      * @see Graph#getTraversableEdges
      * @since 2.0
-     */    
+     */
     default Set<E> getAdjacentEdges(final N node) {
         return streamAdjacentEdges(node).collect(Collectors.toSet());
     }

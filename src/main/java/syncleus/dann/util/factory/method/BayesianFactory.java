@@ -39,8 +39,8 @@ public class BayesianFactory {
      * @param output       The output neuron count.
      * @return The new bayesian network.
      */
-    public MLMethod create(final String architecture, final int input,
-                           final int output) {
+    public static MLMethod create(final String architecture, final int input,
+                                  final int output) {
         final EncogBayesianNetwork method = new EncogBayesianNetwork();
         method.setContents(architecture);
         return method;

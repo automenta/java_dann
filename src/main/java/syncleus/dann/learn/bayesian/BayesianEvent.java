@@ -23,13 +23,13 @@
  */
 package syncleus.dann.learn.bayesian;
 
+import syncleus.dann.learn.bayesian.table.BayesianTable;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
-
-import syncleus.dann.learn.bayesian.table.BayesianTable;
 
 /**
  * Events make up a Bayesian network. Each evidence or outcome event usually

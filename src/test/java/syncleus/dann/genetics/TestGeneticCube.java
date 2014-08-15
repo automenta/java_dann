@@ -18,20 +18,19 @@
  ******************************************************************************/
 package syncleus.dann.genetics;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import org.junit.Assert;
 import org.junit.Test;
-
 import syncleus.dann.evolve.AbstractGeneticAlgorithmFitnessFunction;
 import syncleus.dann.evolve.AbstractGeneticAlgorithmPopulation;
 import syncleus.dann.evolve.AbstractValueGene;
 import syncleus.dann.evolve.GeneticAlgorithmChromosome;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 public class TestGeneticCube {
-    private class VolumeAreaCubeFitness extends
+    private static class VolumeAreaCubeFitness extends
             AbstractGeneticAlgorithmFitnessFunction {
         private static final double IDEAL_AREA = 2200d;
         private static final double IDEAL_VOLUME = 6000d;

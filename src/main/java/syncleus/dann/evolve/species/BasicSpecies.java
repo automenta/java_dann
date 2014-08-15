@@ -23,12 +23,12 @@
  */
 package syncleus.dann.evolve.species;
 
+import syncleus.dann.evolve.genome.Genome;
+import syncleus.dann.evolve.population.Population;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
-import syncleus.dann.evolve.genome.Genome;
-import syncleus.dann.evolve.population.Population;
 
 /**
  * Provides basic functionality for a species.

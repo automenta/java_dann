@@ -1,9 +1,9 @@
 package syncleus.dann.plan.qlearning.curiosity;
 
-import java.io.Serializable;
-
 import syncleus.dann.plan.qlearning.ErrorBackpropagationNN;
 import syncleus.dann.plan.qlearning.Perception;
+
+import java.io.Serializable;
 
 public class Curiosity implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -46,7 +46,7 @@ public class Curiosity implements Serializable {
         desOutputBkp = new double[nn.getDesiredOutput().length];
     }
 
-    private void arraycopy(final double[] src, final double[] dest, final boolean check) {
+    private static void arraycopy(final double[] src, final double[] dest, final boolean check) {
         if (check && src.length != dest.length) {
             System.out.println("src.length != dest.length");
         }

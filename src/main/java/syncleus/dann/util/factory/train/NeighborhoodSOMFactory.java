@@ -23,23 +23,16 @@
  */
 package syncleus.dann.util.factory.train;
 
-import java.util.Map;
-
 import syncleus.dann.data.file.csv.CSVFormat;
 import syncleus.dann.data.language.NumberList;
 import syncleus.dann.learn.ml.MLDataSet;
 import syncleus.dann.learn.ml.MLMethod;
 import syncleus.dann.learn.train.MLTrain;
 import syncleus.dann.math.rbf.RBFEnum;
-import syncleus.dann.neural.som.SOM;
-import syncleus.dann.neural.som.training.basic.BasicTrainSOM;
-import syncleus.dann.neural.som.training.basic.neighborhood.NeighborhoodBubble;
-import syncleus.dann.neural.som.training.basic.neighborhood.NeighborhoodFunction;
-import syncleus.dann.neural.som.training.basic.neighborhood.NeighborhoodRBF;
-import syncleus.dann.neural.som.training.basic.neighborhood.NeighborhoodRBF1D;
-import syncleus.dann.neural.som.training.basic.neighborhood.NeighborhoodSingle;
 import syncleus.dann.util.factory.MLTrainFactory;
 import syncleus.dann.util.factory.parse.ArchitectureParse;
+
+import java.util.Map;
 
 /**
  * Train an SOM network with a neighborhood method.
@@ -54,8 +47,8 @@ public class NeighborhoodSOMFactory {
      * @param argsStr  The arguments to use.
      * @return The newly created trainer.
      */
-    public MLTrain create(final MLMethod method, final MLDataSet training,
-                          final String argsStr) {
+    public static MLTrain create(final MLMethod method, final MLDataSet training,
+                                 final String argsStr) {
 
         if (!(method instanceof SOM)) {
             throw new RuntimeException(

@@ -18,9 +18,9 @@
  ******************************************************************************/
 package syncleus.dann.evolve.wavelets;
 
-import java.util.Set;
-
 import syncleus.dann.evolve.MutableInteger;
+
+import java.util.Set;
 
 public class PromoterGene extends AbstractWaveletGene {
     private MutableInteger targetDistance;

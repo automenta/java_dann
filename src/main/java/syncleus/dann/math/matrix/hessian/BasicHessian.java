@@ -23,10 +23,10 @@
  */
 package syncleus.dann.math.matrix.hessian;
 
+import org.encog.neural.flat.FlatNetwork;
 import syncleus.dann.learn.ml.MLDataSet;
 import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.math.matrix.SimpleRealMatrix;
-import syncleus.dann.neural.flat.FlatNetwork;
 import syncleus.dann.neural.networks.BasicNetwork;
 
 /**

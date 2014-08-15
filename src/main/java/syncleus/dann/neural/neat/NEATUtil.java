@@ -27,17 +27,6 @@ import syncleus.dann.evolve.opp.CompoundOperator;
 import syncleus.dann.evolve.opp.selection.TruncationSelection;
 import syncleus.dann.evolve.train.basic.TrainEA;
 import syncleus.dann.learn.ml.CalculateScore;
-import syncleus.dann.neural.hyperneat.HyperNEATCODEC;
-import syncleus.dann.neural.neat.training.opp.NEATCrossover;
-import syncleus.dann.neural.neat.training.opp.NEATMutateAddLink;
-import syncleus.dann.neural.neat.training.opp.NEATMutateAddNode;
-import syncleus.dann.neural.neat.training.opp.NEATMutateRemoveLink;
-import syncleus.dann.neural.neat.training.opp.NEATMutateWeights;
-import syncleus.dann.neural.neat.training.opp.links.MutatePerturbLinkWeight;
-import syncleus.dann.neural.neat.training.opp.links.MutateResetLinkWeight;
-import syncleus.dann.neural.neat.training.opp.links.SelectFixed;
-import syncleus.dann.neural.neat.training.opp.links.SelectProportion;
-import syncleus.dann.neural.neat.training.species.OriginalNEATSpeciation;
 
 /**
  * NEAT does not make use of a special trainer. Typically the generic TrainEA

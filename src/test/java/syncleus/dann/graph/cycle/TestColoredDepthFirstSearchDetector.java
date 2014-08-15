@@ -18,20 +18,12 @@
  ******************************************************************************/
 package syncleus.dann.graph.cycle;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import org.junit.Assert;
 import org.junit.Test;
+import syncleus.dann.graph.*;
 
-import syncleus.dann.graph.BidirectedEdge;
-import syncleus.dann.graph.BidirectedGraph;
-import syncleus.dann.graph.DirectedEdge;
-import syncleus.dann.graph.Graph;
-import syncleus.dann.graph.ImmutableAdjacencyGraph;
-import syncleus.dann.graph.ImmutableDirectedAdjacencyGraph;
-import syncleus.dann.graph.ImmutableDirectedEdge;
-import syncleus.dann.graph.ImmutableUndirectedEdge;
+import java.util.HashSet;
+import java.util.Set;
 
 public class TestColoredDepthFirstSearchDetector {
     @Test

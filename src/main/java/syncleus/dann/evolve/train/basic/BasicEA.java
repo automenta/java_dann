@@ -23,15 +23,6 @@
  */
 package syncleus.dann.evolve.train.basic;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
-
-import syncleus.dann.evolve.GeneticError;
 import syncleus.dann.evolve.codec.GeneticCODEC;
 import syncleus.dann.evolve.codec.GenomeAsPhenomeCODEC;
 import syncleus.dann.evolve.genome.Genome;
@@ -44,11 +35,7 @@ import syncleus.dann.evolve.rules.BasicRuleHolder;
 import syncleus.dann.evolve.rules.RuleHolder;
 import syncleus.dann.evolve.score.AdjustScore;
 import syncleus.dann.evolve.score.parallel.ParallelScore;
-import syncleus.dann.evolve.sort.GenomeComparator;
-import syncleus.dann.evolve.sort.MaximizeAdjustedScoreComp;
-import syncleus.dann.evolve.sort.MaximizeScoreComp;
-import syncleus.dann.evolve.sort.MinimizeAdjustedScoreComp;
-import syncleus.dann.evolve.sort.MinimizeScoreComp;
+import syncleus.dann.evolve.sort.*;
 import syncleus.dann.evolve.species.SingleSpeciation;
 import syncleus.dann.evolve.species.Speciation;
 import syncleus.dann.evolve.species.Species;
@@ -57,6 +44,14 @@ import syncleus.dann.learn.ml.CalculateScore;
 import syncleus.dann.learn.ml.MLContext;
 import syncleus.dann.learn.ml.MLMethod;
 import syncleus.dann.math.random.RandomFactory;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Provides a basic implementation of a multi-threaded Evolutionary Algorithm.
@@ -238,10 +233,8 @@ public class BasicEA implements EvolutionaryAlgorithm, /* MultiThreadable,
             this.bestComparator = new MaximizeScoreComp();
         }
 
-        thePopulation.getSpecies().stream().forEach((species) -> species.getMembers().stream().forEach((genome) -> {
-            setIteration(Math.max(getIteration(),
-                    genome.getBirthGeneration()));
-        }));
+        thePopulation.getSpecies().stream().forEach((species) -> species.getMembers().stream().forEach((genome) -> setIteration(Math.max(getIteration(),
+                genome.getBirthGeneration()))));
 
         // Set a best genome, just so it is not null.
         // We won't know the true best genome until the first iteration.

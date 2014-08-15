@@ -23,14 +23,14 @@
  */
 package syncleus.dann.neural.pattern;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import syncleus.dann.learn.ml.MLMethod;
 import syncleus.dann.neural.activation.EncogActivationFunction;
 import syncleus.dann.neural.networks.BasicNetwork;
 import syncleus.dann.neural.networks.layers.BasicLayer;
 import syncleus.dann.neural.networks.layers.Layer;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Used to create feedforward neural networks. A feedforward network has an

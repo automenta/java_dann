@@ -20,7 +20,6 @@ package syncleus.dann.graphicalmodel.markovrandomfield;
 
 import org.junit.Assert;
 import org.junit.Test;
-
 import syncleus.dann.graph.ImmutableUndirectedEdge;
 import syncleus.dann.graph.UndirectedEdge;
 import syncleus.dann.learn.graphical.GraphicalModelNode;

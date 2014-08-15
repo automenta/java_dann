@@ -25,7 +25,6 @@ package org.encog.neural.pattern;
 
 import syncleus.dann.learn.ml.MLMethod;
 import syncleus.dann.neural.activation.EncogActivationFunction;
-import syncleus.dann.neural.cpn.CPN;
 
 /**
  * Pattern that creates a CPN neural network.
@@ -64,7 +63,7 @@ public class CPNPattern implements NeuralNetworkPattern {
      * @param count NOT USED
      */
     @Override
-    public void addHiddenLayer(final int count) {
+    public static void addHiddenLayer(final int count) {
         throw new PatternError(
                 "A CPN already has a predefined hidden layer.  No additional"
                         + "specification is needed.");
@@ -97,7 +96,7 @@ public class CPNPattern implements NeuralNetworkPattern {
      * @param activation NOT USED
      */
     @Override
-    public void setEncogActivationFunction(final EncogActivationFunction activation) {
+    public static void setEncogActivationFunction(final EncogActivationFunction activation) {
         throw new PatternError(
                 "A CPN network will use the BiPolar & competitive activation "
                         + "functions, no activation function needs to be specified.");

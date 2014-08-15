@@ -23,19 +23,11 @@
  */
 package org.encog.neural.hyperneat;
 
+import syncleus.dann.neural.activation.*;
+import syncleus.dann.util.ChooseObject;
+
 import java.util.List;
 import java.util.Random;
-
-import syncleus.dann.neural.activation.ActivationBipolarSteepenedSigmoid;
-import syncleus.dann.neural.activation.ActivationClippedLinear;
-import syncleus.dann.neural.activation.ActivationGaussian;
-import syncleus.dann.neural.activation.ActivationSIN;
-import syncleus.dann.neural.activation.EncogActivationFunction;
-import syncleus.dann.neural.neat.NEATPopulation;
-import syncleus.dann.neural.neat.training.NEATGenome;
-import syncleus.dann.neural.neat.training.NEATLinkGene;
-import syncleus.dann.neural.neat.training.NEATNeuronGene;
-import syncleus.dann.util.ChooseObject;
 
 /**
  * A HyperNEAT genome.

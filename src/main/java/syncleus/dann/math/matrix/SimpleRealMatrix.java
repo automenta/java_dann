@@ -23,23 +23,19 @@
  */
 package syncleus.dann.math.matrix;
 
-import java.io.Serializable;
-import java.util.Arrays;
 import org.apache.commons.math3.linear.Array2DRowRealMatrix;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import syncleus.dann.math.EncogMath;
 import syncleus.dann.math.RealNumber;
-import syncleus.dann.math.matrix.decomposition.DoolittleLuDecomposition;
-import syncleus.dann.math.matrix.decomposition.HouseholderQrDecomposition;
-import syncleus.dann.math.matrix.decomposition.LuDecomposition2;
-import syncleus.dann.math.matrix.decomposition.QrDecomposition2;
-import syncleus.dann.math.matrix.decomposition.StewartSingularValueDecomposition;
+import syncleus.dann.math.matrix.decomposition.*;
 import syncleus.dann.math.random.RangeRandomizer;
 
+import java.io.Serializable;
+import java.util.Arrays;
+
 //TODO subclass http://commons.apache.org/proper/commons-math/javadocs/api-3.3/org/apache/commons/math3/linear/Array2DRowRealMatrix.html
+
 /**
  * The Java SimpleRealMatrix Class provides the fundamental operations of
  * numerical linear algebra. Various constructors create Matrices from two
@@ -72,9 +68,9 @@ public class SimpleRealMatrix extends Array2DRowRealMatrix implements Cloneable,
     private static final Logger LOGGER = LogManager
             .getLogger(SimpleRealMatrix.class);
 
-    
+
     public final double[][] matrixElements;
-    
+
     /**
      * Construct an height-by-height matrix of zeros.
      *
@@ -122,11 +118,11 @@ public class SimpleRealMatrix extends Array2DRowRealMatrix implements Cloneable,
     public SimpleRealMatrix(final double[] packedMatrixElements,
                             final int height) {
         this(height, (height == 0) ? 0 : (packedMatrixElements.length / height));
-        
+
         if (getRows() * getCols() != packedMatrixElements.length)
             throw new IllegalArgumentException(
                     "Array length must be a multiple of m.");
-        
+
         for (int i = 0; i < getRows(); i++)
             for (int j = 0; j < getCols(); j++)
                 this.matrixElements[i][j] = packedMatrixElements[i + j * height];
@@ -160,9 +156,8 @@ public class SimpleRealMatrix extends Array2DRowRealMatrix implements Cloneable,
     }
 
 
-
     @Override
-    public SimpleRealMatrix clone() {        
+    public SimpleRealMatrix clone() {
         return new SimpleRealMatrix(getArrayCopy());
     }
 
@@ -462,7 +457,7 @@ public class SimpleRealMatrix extends Array2DRowRealMatrix implements Cloneable,
        /*public SimpleRealMatrix add(Array2DRowRealMatrix m)  {
            return add((RealMatrix)new SimpleRealMatrix(m.getData()));
        }*/
-       
+
     @Override
     public SimpleRealMatrix add(final RealMatrix operand) {
         checkMatrixDimensions(operand);
@@ -762,7 +757,7 @@ public class SimpleRealMatrix extends Array2DRowRealMatrix implements Cloneable,
             identityValues[index][index] = 1.0;
         return new SimpleRealMatrix(identityValues);
         /*
-		 * SimpleRealMatrix A = new SimpleRealMatrix(height, width); double[][]
+         * SimpleRealMatrix A = new SimpleRealMatrix(height, width); double[][]
 		 * fillMatrix = A.matrixElements; for(int heightIndex = 0; heightIndex <
 		 * height; heightIndex++) for(int widthIndex = 0; widthIndex < width;
 		 * widthIndex++) fillMatrix[heightIndex][widthIndex] = (heightIndex ==
@@ -1403,7 +1398,7 @@ public class SimpleRealMatrix extends Array2DRowRealMatrix implements Cloneable,
     }
 
     @Override
-	public boolean isSquare() {
+    public boolean isSquare() {
         return getRows() == getCols();
     }
 }

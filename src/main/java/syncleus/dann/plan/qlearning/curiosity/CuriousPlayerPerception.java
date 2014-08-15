@@ -28,7 +28,7 @@ public abstract class CuriousPlayerPerception extends Perception {
         return R - P + offset;
     }
 
-    private double func(final double n, final double min, final double max, final double slope) {
+    private static double func(final double n, final double min, final double max, final double slope) {
         return max / (1 + Math.exp(-slope * (n - min)));
     }
 

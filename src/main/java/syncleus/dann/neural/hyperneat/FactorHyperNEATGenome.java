@@ -23,15 +23,10 @@
  */
 package org.encog.neural.hyperneat;
 
+import syncleus.dann.evolve.genome.Genome;
+
 import java.util.List;
 import java.util.Random;
-
-import syncleus.dann.evolve.genome.Genome;
-import syncleus.dann.neural.neat.NEATGenomeFactory;
-import syncleus.dann.neural.neat.NEATPopulation;
-import syncleus.dann.neural.neat.training.NEATGenome;
-import syncleus.dann.neural.neat.training.NEATLinkGene;
-import syncleus.dann.neural.neat.training.NEATNeuronGene;
 
 /**
  * Create a Genome for use with HyperNEAT.
@@ -42,7 +37,7 @@ public class FactorHyperNEATGenome implements NEATGenomeFactory {
      * {@inheritDoc}
      */
     @Override
-    public NEATGenome factor() {
+    public static NEATGenome factor() {
         return new HyperNEATGenome();
     }
 
@@ -50,7 +45,7 @@ public class FactorHyperNEATGenome implements NEATGenomeFactory {
      * {@inheritDoc}
      */
     @Override
-    public Genome factor(final Genome other) {
+    public static Genome factor(final Genome other) {
         return new HyperNEATGenome((HyperNEATGenome) other);
     }
 
@@ -58,9 +53,9 @@ public class FactorHyperNEATGenome implements NEATGenomeFactory {
      * {@inheritDoc}
      */
     @Override
-    public NEATGenome factor(final List<NEATNeuronGene> neurons,
-                             final List<NEATLinkGene> links, final int inputCount,
-                             final int outputCount) {
+    public static NEATGenome factor(final List<NEATNeuronGene> neurons,
+                                    final List<NEATLinkGene> links, final int inputCount,
+                                    final int outputCount) {
         return new HyperNEATGenome(neurons, links, inputCount, outputCount);
     }
 
@@ -68,9 +63,9 @@ public class FactorHyperNEATGenome implements NEATGenomeFactory {
      * {@inheritDoc}
      */
     @Override
-    public NEATGenome factor(final Random rnd, final NEATPopulation pop,
-                             final int inputCount, final int outputCount,
-                             final double connectionDensity) {
+    public static NEATGenome factor(final Random rnd, final NEATPopulation pop,
+                                    final int inputCount, final int outputCount,
+                                    final double connectionDensity) {
         return new HyperNEATGenome(rnd, pop, inputCount, outputCount,
                 connectionDensity);
     }

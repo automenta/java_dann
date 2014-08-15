@@ -125,8 +125,8 @@ public class BAM extends BasicML {
      * @param input NOT USED
      * @return NOT USED
      */
-    public MLData compute(final MLData input) {
-        throw new NeuralNetworkError(
+    public static MLData compute(final MLData input) {
+        throw new RuntimeException(
                 "Compute on BasicNetwork cannot be used, rather call"
                         + " the compute(NeuralData) method on the BAMLogic.");
 
@@ -178,8 +178,8 @@ public class BAM extends BasicML {
      *               input)
      * @return The value from the matrix.
      */
-    private double getWeight(final SimpleRealMatrix matrix, final MLData input,
-                             final int x, final int y) {
+    private static double getWeight(final SimpleRealMatrix matrix, final MLData input,
+                                    final int x, final int y) {
         if (matrix.getRows() != input.size()) {
             return matrix.getNumber(x, y);
         } else {

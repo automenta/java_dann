@@ -125,7 +125,7 @@ public class FanInRandomizer extends BasicRandomizer {
     /**
      * Throw an error if this class is used improperly.
      */
-    private void causeError() {
+    private static void causeError() {
         throw new RuntimeException(FanInRandomizer.ERROR);
     }
 

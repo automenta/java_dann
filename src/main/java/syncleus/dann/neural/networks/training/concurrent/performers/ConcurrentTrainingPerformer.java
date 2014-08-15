@@ -23,9 +23,6 @@
  */
 package org.encog.neural.networks.training.concurrent.performers;
 
-import syncleus.dann.neural.networks.training.concurrent.ConcurrentTrainingManager;
-import syncleus.dann.neural.networks.training.concurrent.jobs.TrainingJob;
-
 /**
  * Performers actually perform the training. Currently there are performers for
  * OpenCL and CPU.

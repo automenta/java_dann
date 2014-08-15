@@ -23,16 +23,15 @@
  */
 package syncleus.dann.learn.bayesian.bif;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
-
 import syncleus.dann.learn.bayesian.BayesianChoice;
 import syncleus.dann.learn.bayesian.BayesianEvent;
 import syncleus.dann.learn.bayesian.EncogBayesianNetwork;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Handler, used to parse the XML BIF files.

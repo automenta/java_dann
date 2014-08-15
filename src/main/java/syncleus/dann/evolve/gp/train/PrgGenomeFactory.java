@@ -23,13 +23,10 @@
  */
 package org.encog.ml.prg.train;
 
-import java.io.Serializable;
-
 import syncleus.dann.evolve.genome.Genome;
 import syncleus.dann.evolve.genome.GenomeFactory;
-import syncleus.dann.evolve.gp.EncogProgram;
-import syncleus.dann.evolve.gp.EncogProgramContext;
-import syncleus.dann.evolve.gp.EncogProgramVariables;
+
+import java.io.Serializable;
 
 /**
  * A GenomeFactory that creates EncogProgram genomes.

@@ -23,12 +23,10 @@
  */
 package org.encog.ml.prg;
 
-import java.io.Serializable;
-
-import syncleus.dann.evolve.gp.expvalue.ExpressionValue;
-import syncleus.dann.evolve.gp.extension.ProgramExtensionTemplate;
 import syncleus.dann.graph.tree.TreeNode;
 import syncleus.dann.graph.tree.basic.BasicTreeNode;
+
+import java.io.Serializable;
 
 /**
  * Represents a program node in an EPL program.

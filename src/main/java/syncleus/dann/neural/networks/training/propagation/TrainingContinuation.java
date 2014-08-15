@@ -21,7 +21,7 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package org.encog.neural.networks.training.propagation;
+package syncleus.dann.neural.networks.training.propagation;
 
 import java.io.Serializable;
 import java.util.HashMap;

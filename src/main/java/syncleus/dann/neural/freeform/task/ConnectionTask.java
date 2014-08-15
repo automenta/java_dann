@@ -21,9 +21,9 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package org.encog.neural.freeform.task;
+package syncleus.dann.neural.freeform.task;
 
-import syncleus.dann.neural.freeform.FreeformConnection;
+import org.encog.neural.freeform.FreeformConnection;
 
 /**
  * Implements a task that will be performed for every connection.

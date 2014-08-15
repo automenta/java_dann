@@ -23,20 +23,14 @@
  */
 package syncleus.dann.data.market;
 
-import java.util.Collection;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-
 import syncleus.dann.data.language.time.TimeUnit;
 import syncleus.dann.data.market.loader.LoadedMarketData;
 import syncleus.dann.data.market.loader.MarketLoader;
 import syncleus.dann.data.temporal.TemporalDataDescription;
 import syncleus.dann.data.temporal.TemporalMLDataSet;
 import syncleus.dann.data.temporal.TemporalPoint;
-import syncleus.dann.neural.data.NeuralData;
+
+import java.util.*;
 
 /**
  * A data set that is designed to hold market data. This class is based on the
@@ -121,7 +115,7 @@ public class MarketMLDataSet extends TemporalMLDataSet {
      * @param date NOT USED
      * @return NOT USED
      */
-    public NeuralData generateInputForPrediction(final Date date) {
+    public static NeuralData generateInputForPrediction(final Date date) {
         return null;
     }
 

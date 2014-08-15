@@ -21,11 +21,10 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package org.encog.neural.freeform.basic;
+package syncleus.dann.neural.freeform.basic;
 
 import java.io.Serializable;
-
-import syncleus.dann.neural.freeform.FreeformConnection;
+import org.encog.neural.freeform.FreeformConnection;
 import syncleus.dann.neural.freeform.FreeformNeuron;
 
 /**

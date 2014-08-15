@@ -23,13 +23,12 @@
  */
 package syncleus.dann.util.factory.method;
 
-import java.util.List;
-
 import syncleus.dann.learn.ml.MLMethod;
 import syncleus.dann.math.rbf.RBFEnum;
-import syncleus.dann.neural.rbf.RBFNetwork;
 import syncleus.dann.util.factory.parse.ArchitectureLayer;
 import syncleus.dann.util.factory.parse.ArchitectureParse;
+
+import java.util.List;
 
 /**
  * A factory to create RBF networks.
@@ -49,8 +48,8 @@ public class RBFNetworkFactory {
      * @param output       The output count.
      * @return The RBF network.
      */
-    public MLMethod create(final String architecture, final int input,
-                           final int output) {
+    public static MLMethod create(final String architecture, final int input,
+                                  final int output) {
 
         final List<String> layers = ArchitectureParse.parseLayers(architecture);
         if (layers.size() != MAX_LAYERS) {
@@ -80,7 +79,7 @@ public class RBFNetworkFactory {
         } else if (rbfLayer.getName().equalsIgnoreCase("MexicanHat")) {
             t = RBFEnum.MexicanHat;
         } else {
-            throw new NeuralNetworkError("Unknown RBF: " + rbfLayer.getName());
+            throw new RuntimeException("Unknown RBF: " + rbfLayer.getName());
         }
 
         final ParamsHolder holder = new ParamsHolder(rbfLayer.getParams());

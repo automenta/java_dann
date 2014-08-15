@@ -27,7 +27,7 @@ package syncleus.dann.evolve;
 /**
  * An error raised by the genetic algorithm.
  */
-public class GeneticError extends EncogError {
+public class GeneticError extends RuntimeException {
 
     /**
      *

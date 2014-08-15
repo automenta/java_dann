@@ -18,15 +18,10 @@
  ******************************************************************************/
 package syncleus.dann.graph.cycle;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import syncleus.dann.graph.Edge;
 import syncleus.dann.graph.Graph;
+
+import java.util.*;
 
 public class ColoredDepthFirstSearchDetector implements CycleDetector {
     @Override

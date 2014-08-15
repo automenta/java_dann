@@ -23,13 +23,12 @@
  */
 package syncleus.dann.data.folded;
 
-import java.util.Iterator;
-
 import syncleus.dann.data.basic.BasicMLDataPair;
 import syncleus.dann.learn.ml.MLData;
 import syncleus.dann.learn.ml.MLDataPair;
 import syncleus.dann.learn.ml.MLDataSet;
-import syncleus.dann.neural.networks.training.TrainingError;
+
+import java.util.Iterator;
 
 /**
  * A folded data set allows you to "fold" the data into several equal(or nearly

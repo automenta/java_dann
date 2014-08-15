@@ -25,9 +25,6 @@ package org.encog.neural.networks.training.concurrent.jobs;
 
 import syncleus.dann.learn.ml.MLDataSet;
 import syncleus.dann.neural.networks.BasicNetwork;
-import syncleus.dann.neural.networks.training.propagation.Propagation;
-import syncleus.dann.neural.networks.training.propagation.resilient.RPROPConst;
-import syncleus.dann.neural.networks.training.propagation.resilient.ResilientPropagation;
 
 /**
  * A training definition for RPROP training.

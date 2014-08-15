@@ -18,11 +18,11 @@
  ******************************************************************************/
 package syncleus.dann.graph;
 
-import java.util.Set;
-
 import syncleus.dann.graph.topological.Topography;
 import syncleus.dann.graph.tree.TreeOptimizedGraph;
 import syncleus.dann.graph.tree.Trees;
+
+import java.util.Set;
 
 /**
  * An AbstractTreeAdjacencyGraph is a TreeGraph implemented using adjacency

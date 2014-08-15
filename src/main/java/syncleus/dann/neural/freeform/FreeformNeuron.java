@@ -21,9 +21,11 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package org.encog.neural.freeform;
+package syncleus.dann.neural.freeform;
 
 import java.util.List;
+import org.encog.neural.freeform.FreeformConnection;
+
 
 /**
  * This interface defines a freeform neuron. By freeform that this neuron is not

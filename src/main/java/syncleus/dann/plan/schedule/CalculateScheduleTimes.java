@@ -27,7 +27,7 @@ import syncleus.dann.graph.DirectedEdge;
 
 public class CalculateScheduleTimes {
 
-    public void forward(final ActionNode node) {
+    public static void forward(final ActionNode node) {
 
         // find the max
         double m = Double.NEGATIVE_INFINITY;
@@ -42,7 +42,7 @@ public class CalculateScheduleTimes {
         node.getConnections().stream().forEach((edge) -> forward((ActionNode) edge.getDestinationNode()));
     }
 
-    public void backward(final ActionNode node) {
+    public static void backward(final ActionNode node) {
         // find the min
         double m = Double.POSITIVE_INFINITY;
         for (final DirectedEdge edge : node.getConnections()) {

@@ -23,13 +23,13 @@
  */
 package syncleus.dann.learn.bayesian.parse;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import syncleus.dann.data.file.csv.CSVFormat;
 import syncleus.dann.data.language.SimpleParser;
 import syncleus.dann.learn.bayesian.BayesianError;
 import syncleus.dann.learn.bayesian.EncogBayesianNetwork;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Used to parse probability strings for the Bayes networks.
@@ -51,8 +51,8 @@ public class ParseProbability {
      * @param results The events found.
      * @param delim   The delimiter to use.
      */
-    private void addEvents(final SimpleParser parser,
-                           final List<ParsedEvent> results, final String delim) {
+    private static void addEvents(final SimpleParser parser,
+                                  final List<ParsedEvent> results, final String delim) {
         boolean done = false;
         final StringBuilder l = new StringBuilder();
 

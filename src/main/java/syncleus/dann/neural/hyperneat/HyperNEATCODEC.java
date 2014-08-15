@@ -23,10 +23,6 @@
  */
 package org.encog.neural.hyperneat;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import syncleus.dann.data.basic.BasicMLData;
 import syncleus.dann.evolve.GeneticError;
 import syncleus.dann.evolve.codec.GeneticCODEC;
@@ -35,12 +31,10 @@ import syncleus.dann.learn.ml.MLData;
 import syncleus.dann.learn.ml.MLMethod;
 import syncleus.dann.neural.activation.ActivationSteepenedSigmoid;
 import syncleus.dann.neural.activation.EncogActivationFunction;
-import syncleus.dann.neural.hyperneat.substrate.Substrate;
-import syncleus.dann.neural.hyperneat.substrate.SubstrateNode;
-import syncleus.dann.neural.neat.NEATCODEC;
-import syncleus.dann.neural.neat.NEATLink;
-import syncleus.dann.neural.neat.NEATNetwork;
-import syncleus.dann.neural.neat.NEATPopulation;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class HyperNEATCODEC implements GeneticCODEC {
 

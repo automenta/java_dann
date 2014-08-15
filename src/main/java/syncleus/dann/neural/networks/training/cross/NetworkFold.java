@@ -24,7 +24,6 @@
 package org.encog.neural.networks.training.cross;
 
 import syncleus.dann.math.array.EngineArray;
-import syncleus.dann.neural.flat.FlatNetwork;
 
 /**
  * The network for one fold of a cross validation.

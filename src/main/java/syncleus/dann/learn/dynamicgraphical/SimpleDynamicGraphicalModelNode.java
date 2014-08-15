@@ -18,16 +18,12 @@
  ******************************************************************************/
 package syncleus.dann.learn.dynamicgraphical;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import syncleus.dann.graph.BidirectedEdge;
 import syncleus.dann.learn.graphical.GraphicalModel;
 import syncleus.dann.learn.graphical.GraphicalModelNode;
 import syncleus.dann.learn.graphical.SimpleGraphicalModelNode;
+
+import java.util.*;
 
 public class SimpleDynamicGraphicalModelNode<S> extends
         SimpleGraphicalModelNode<S> implements DynamicGraphicalModelNode<S> {

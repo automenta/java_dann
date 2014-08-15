@@ -23,15 +23,15 @@
  */
 package syncleus.dann.learn.hmm.train.bw;
 
-import java.util.EnumSet;
-import java.util.Iterator;
-
 import syncleus.dann.learn.hmm.HiddenMarkovModel;
 import syncleus.dann.learn.hmm.alog.ForwardBackwardCalculator;
 import syncleus.dann.learn.hmm.alog.ForwardBackwardScaledCalculator;
 import syncleus.dann.learn.ml.MLDataPair;
 import syncleus.dann.learn.ml.MLDataSet;
 import syncleus.dann.learn.ml.MLSequenceSet;
+
+import java.util.EnumSet;
+import java.util.Iterator;
 
 /**
  * Baum Welch Learning allows a HMM to be constructed from a series of sequence

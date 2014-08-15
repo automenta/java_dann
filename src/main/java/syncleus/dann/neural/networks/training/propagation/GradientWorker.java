@@ -30,7 +30,6 @@ import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.math.error.ErrorFunction;
 import syncleus.dann.math.statistics.ErrorCalculation;
 import syncleus.dann.neural.activation.EncogActivationFunction;
-import syncleus.dann.neural.flat.FlatNetwork;
 
 /**
  * Worker class for the mulithreaded training of flat networks.

@@ -25,9 +25,7 @@ package org.encog.neural.networks.training.cross;
 
 import syncleus.dann.data.folded.FoldedDataSet;
 import syncleus.dann.learn.train.MLTrain;
-import syncleus.dann.neural.flat.FlatNetwork;
 import syncleus.dann.neural.networks.BasicNetwork;
-import syncleus.dann.neural.networks.training.propagation.TrainingContinuation;
 
 /**
  * Train using K-Fold cross validation. Each iteration will train a number of
@@ -117,7 +115,7 @@ public class CrossValidationKFold extends CrossTraining {
      * {@inheritDoc}
      */
     @Override
-    public boolean canContinue() {
+    public static boolean canContinue() {
         return false;
     }
 
@@ -125,7 +123,7 @@ public class CrossValidationKFold extends CrossTraining {
      * {@inheritDoc}
      */
     @Override
-    public TrainingContinuation pause() {
+    public static TrainingContinuation pause() {
         return null;
     }
 

@@ -23,14 +23,14 @@
  */
 package syncleus.dann.util.factory.method;
 
-import java.util.List;
-
 import syncleus.dann.learn.ml.MLMethod;
 import syncleus.dann.learn.svm.KernelType;
 import syncleus.dann.learn.svm.SVM;
 import syncleus.dann.learn.svm.SVMType;
 import syncleus.dann.util.factory.parse.ArchitectureLayer;
 import syncleus.dann.util.factory.parse.ArchitectureParse;
+
+import java.util.List;
 
 /**
  * A factory that is used to create support vector machines (SVM).
@@ -50,8 +50,8 @@ public class SVMFactory {
      * @param output       The output count.
      * @return The newly created SVM.
      */
-    public MLMethod create(final String architecture, final int input,
-                           final int output) {
+    public static MLMethod create(final String architecture, final int input,
+                                  final int output) {
 
         final List<String> layers = ArchitectureParse.parseLayers(architecture);
         if (layers.size() != MAX_LAYERS) {

@@ -28,9 +28,6 @@ import syncleus.dann.learn.ml.TrainingImplementationType;
 import syncleus.dann.learn.train.BasicTraining;
 import syncleus.dann.math.ObjectPair;
 import syncleus.dann.math.rbf.RadialBasisFunction;
-import syncleus.dann.neural.networks.training.TrainingError;
-import syncleus.dann.neural.networks.training.propagation.TrainingContinuation;
-import syncleus.dann.neural.rbf.RBFNetwork;
 
 /**
  * Train a RBF neural network using a SVD.
@@ -67,8 +64,8 @@ public class SVDTraining extends BasicTraining {
         return false;
     }
 
-    public void flatToMatrix(final double[] flat, final int start,
-                             final double[][] matrix) {
+    public static void flatToMatrix(final double[] flat, final int start,
+                                    final double[][] matrix) {
         final int rows = matrix.length;
         final int cols = matrix[0].length;
 
@@ -119,8 +116,8 @@ public class SVDTraining extends BasicTraining {
      * @param flat   Flat array.
      * @param start  WHere to start.
      */
-    public void matrixToFlat(final double[][] matrix, final double[] flat,
-                             final int start) {
+    public static void matrixToFlat(final double[][] matrix, final double[] flat,
+                                    final int start) {
         final int rows = matrix.length;
         final int cols = matrix[0].length;
 

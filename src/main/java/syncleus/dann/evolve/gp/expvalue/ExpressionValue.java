@@ -23,9 +23,9 @@
  */
 package org.encog.ml.prg.expvalue;
 
-import java.io.Serializable;
-
 import syncleus.dann.evolve.exception.EARuntimeError;
+
+import java.io.Serializable;
 
 /**
  * An EncogProgram expression value. These is how Encog stores variables and

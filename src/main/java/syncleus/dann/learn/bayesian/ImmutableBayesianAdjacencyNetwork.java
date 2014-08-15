@@ -18,16 +18,10 @@
  ******************************************************************************/
 package syncleus.dann.learn.bayesian;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import syncleus.dann.graph.DirectedEdge;
 import syncleus.dann.learn.graphical.GraphicalModelNode;
+
+import java.util.*;
 
 public class ImmutableBayesianAdjacencyNetwork<N extends GraphicalModelNode, E extends DirectedEdge<N>>
         extends AbstractBayesianAdjacencyNetwork<N, E> {
@@ -40,7 +34,7 @@ public class ImmutableBayesianAdjacencyNetwork<N extends GraphicalModelNode, E e
     // TODO we cant copy because right now each bayesian node is hard linked to
     // a parent graph, this should be fixed
     /*
-	 * public ImmutableMarkovRandomFieldAdjacencyGraph(final Graph<N, E>
+     * public ImmutableMarkovRandomFieldAdjacencyGraph(final Graph<N, E>
 	 * copyGraph) { super(copyGraph.getNodes(), copyGraph.getEdges()); }
 	 */
 

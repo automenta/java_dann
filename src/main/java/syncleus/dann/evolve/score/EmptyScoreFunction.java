@@ -23,10 +23,10 @@
  */
 package syncleus.dann.evolve.score;
 
-import java.io.Serializable;
-
 import syncleus.dann.learn.ml.CalculateScore;
 import syncleus.dann.learn.ml.MLMethod;
+
+import java.io.Serializable;
 
 /**
  * An empty score function. Simply returns zero as the score, always.

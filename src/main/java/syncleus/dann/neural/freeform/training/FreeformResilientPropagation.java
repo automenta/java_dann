@@ -21,16 +21,16 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package org.encog.neural.freeform.training;
+package syncleus.dann.neural.freeform.training;
 
-import java.io.Serializable;
-
+import org.encog.neural.freeform.FreeformConnection;
+import org.encog.neural.freeform.FreeformNetwork;
+import org.encog.neural.networks.training.propagation.resilient.RPROPConst;
 import syncleus.dann.learn.ml.MLDataSet;
 import syncleus.dann.math.EncogMath;
-import syncleus.dann.neural.freeform.FreeformConnection;
-import syncleus.dann.neural.freeform.FreeformNetwork;
+
+import java.io.Serializable;
 import syncleus.dann.neural.networks.training.propagation.TrainingContinuation;
-import syncleus.dann.neural.networks.training.propagation.resilient.RPROPConst;
 
 public class FreeformResilientPropagation extends FreeformPropagationTraining
         implements Serializable {
@@ -92,7 +92,7 @@ public class FreeformResilientPropagation extends FreeformPropagationTraining
         this.maxStep = theMaxStep;
         theNetwork.tempTrainingAllocate(1, 4);
         theNetwork.performConnectionTask(c -> c.setTempTraining(FreeformResilientPropagation.TEMP_UPDATE,
-		        initialUpdate));
+                initialUpdate));
     }
 
     /**
@@ -169,7 +169,7 @@ public class FreeformResilientPropagation extends FreeformPropagationTraining
      * {@inheritDoc}
      */
     @Override
-    public TrainingContinuation pause() {
+    public static TrainingContinuation pause() {
         // TODO Auto-generated method stub
         return null;
     }

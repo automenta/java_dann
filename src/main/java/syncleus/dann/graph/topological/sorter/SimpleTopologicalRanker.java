@@ -18,15 +18,10 @@
  ******************************************************************************/
 package syncleus.dann.graph.topological.sorter;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import syncleus.dann.graph.BidirectedGraph;
 import syncleus.dann.graph.DirectedEdge;
+
+import java.util.*;
 
 public class SimpleTopologicalRanker<N> implements TopologicalRanker<N> {
     @Override

@@ -23,16 +23,11 @@
  */
 package syncleus.dann.learn.svm;
 
-import java.io.BufferedOutputStream;
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.IOException;
+import syncleus.dann.data.file.csv.CSVFormat;
+
+import java.io.*;
 import java.util.Random;
 import java.util.StringTokenizer;
-
-import syncleus.dann.data.file.csv.CSVFormat;
 
 /**
  * This class was taken from the libsvm package. We have made some modifications
@@ -79,7 +74,7 @@ class Cache {
     private final int l;
     private long size;
 
-    private final class head_t {
+    private static final class head_t {
         head_t prev, next; // a cicular list
         float[] data;
         int len; // data[0,len) is cached in this entry

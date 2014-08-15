@@ -21,10 +21,9 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package org.encog.neural.freeform.basic;
+package syncleus.dann.neural.freeform.basic;
 
 import java.io.Serializable;
-
 import syncleus.dann.neural.freeform.FreeformContextNeuron;
 import syncleus.dann.neural.freeform.FreeformNeuron;
 import syncleus.dann.neural.freeform.InputSummation;
@@ -45,7 +44,7 @@ public class BasicFreeformNeuronFactory implements FreeformNeuronFactory,
      * {@inheritDoc}
      */
     @Override
-    public FreeformNeuron factorContext(final FreeformNeuron neuron) {
+    public static FreeformNeuron factorContext(final FreeformNeuron neuron) {
         final FreeformNeuron result = new FreeformContextNeuron(neuron);
         return result;
     }
@@ -54,7 +53,7 @@ public class BasicFreeformNeuronFactory implements FreeformNeuronFactory,
      * {@inheritDoc}
      */
     @Override
-    public FreeformNeuron factorRegular(final InputSummation object) {
+    public static FreeformNeuron factorRegular(final InputSummation object) {
         return new BasicFreeformNeuron(object);
     }
 }

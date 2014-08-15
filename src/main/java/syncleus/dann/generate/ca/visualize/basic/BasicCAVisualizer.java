@@ -23,14 +23,14 @@
  */
 package syncleus.dann.generate.ca.visualize.basic;
 
-import java.awt.Image;
-import java.awt.image.BufferedImage;
-import java.awt.image.WritableRaster;
-
 import syncleus.dann.generate.ca.universe.DiscreteCell;
 import syncleus.dann.generate.ca.universe.Universe;
 import syncleus.dann.generate.ca.universe.UniverseCell;
 import syncleus.dann.generate.ca.visualize.CAVisualizer;
+
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.awt.image.WritableRaster;
 
 public class BasicCAVisualizer implements CAVisualizer {
     private final Universe universe;

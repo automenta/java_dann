@@ -18,25 +18,13 @@
  ******************************************************************************/
 package syncleus.dann.graph.tree.mst;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.PriorityQueue;
-import java.util.Queue;
-import java.util.Set;
-
-import syncleus.dann.graph.BidirectedGraph;
-import syncleus.dann.graph.DirectedEdge;
-import syncleus.dann.graph.Edge;
-import syncleus.dann.graph.Graph;
-import syncleus.dann.graph.Weighted;
+import syncleus.dann.graph.*;
 import syncleus.dann.graph.topological.sorter.SimpleTopologicalRanker;
 import syncleus.dann.graph.topological.sorter.TopologicalSorter;
+
+import java.io.Serializable;
+import java.util.*;
+import java.util.Map.Entry;
 
 public class PrimMinimumSpanningTreeFinder<N, E extends Edge<N>> implements
         RootedMinimumSpanningTreeFinder<N, E> {

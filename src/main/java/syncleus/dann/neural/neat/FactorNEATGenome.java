@@ -23,14 +23,11 @@
  */
 package org.encog.neural.neat;
 
+import syncleus.dann.evolve.genome.Genome;
+
 import java.io.Serializable;
 import java.util.List;
 import java.util.Random;
-
-import syncleus.dann.evolve.genome.Genome;
-import syncleus.dann.neural.neat.training.NEATGenome;
-import syncleus.dann.neural.neat.training.NEATLinkGene;
-import syncleus.dann.neural.neat.training.NEATNeuronGene;
 
 /**
  * This factory is used to create NEATGenomes.
@@ -58,7 +55,7 @@ public class FactorNEATGenome implements NEATGenomeFactory, Serializable {
      * {@inheritDoc}
      */
     @Override
-    public NEATGenome factor() {
+    public static NEATGenome factor() {
         return new NEATGenome();
     }
 
@@ -66,7 +63,7 @@ public class FactorNEATGenome implements NEATGenomeFactory, Serializable {
      * {@inheritDoc}
      */
     @Override
-    public Genome factor(final Genome other) {
+    public static Genome factor(final Genome other) {
         return new NEATGenome((NEATGenome) other);
     }
 
@@ -74,9 +71,9 @@ public class FactorNEATGenome implements NEATGenomeFactory, Serializable {
      * {@inheritDoc}
      */
     @Override
-    public NEATGenome factor(final List<NEATNeuronGene> neurons,
-                             final List<NEATLinkGene> links, final int inputCount,
-                             final int outputCount) {
+    public static NEATGenome factor(final List<NEATNeuronGene> neurons,
+                                    final List<NEATLinkGene> links, final int inputCount,
+                                    final int outputCount) {
         return new NEATGenome(neurons, links, inputCount, outputCount);
     }
 
@@ -84,9 +81,9 @@ public class FactorNEATGenome implements NEATGenomeFactory, Serializable {
      * {@inheritDoc}
      */
     @Override
-    public NEATGenome factor(final Random rnd, final NEATPopulation pop,
-                             final int inputCount, final int outputCount,
-                             final double connectionDensity) {
+    public static NEATGenome factor(final Random rnd, final NEATPopulation pop,
+                                    final int inputCount, final int outputCount,
+                                    final double connectionDensity) {
         return new NEATGenome(rnd, pop, inputCount, outputCount,
                 connectionDensity);
     }

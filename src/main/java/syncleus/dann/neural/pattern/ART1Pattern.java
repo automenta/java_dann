@@ -25,7 +25,6 @@ package org.encog.neural.pattern;
 
 import syncleus.dann.learn.ml.MLMethod;
 import syncleus.dann.neural.activation.EncogActivationFunction;
-import syncleus.dann.neural.art.ART1;
 
 /**
  * Pattern to create an ART-1 neural network.
@@ -78,7 +77,7 @@ public class ART1Pattern implements NeuralNetworkPattern {
      * @param count Not used.
      */
     @Override
-    public void addHiddenLayer(final int count) {
+    public static void addHiddenLayer(final int count) {
         throw new PatternError("A ART1 network has no hidden layers.");
     }
 
@@ -168,7 +167,7 @@ public class ART1Pattern implements NeuralNetworkPattern {
      * @param activation The activation function.
      */
     @Override
-    public void setEncogActivationFunction(final EncogActivationFunction activation) {
+    public static void setEncogActivationFunction(final EncogActivationFunction activation) {
         throw new PatternError("Can't set the activation function for an ART1.");
     }
 

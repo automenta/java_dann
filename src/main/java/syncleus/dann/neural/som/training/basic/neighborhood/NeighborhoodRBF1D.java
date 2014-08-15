@@ -23,12 +23,7 @@
  */
 package org.encog.neural.som.training.basic.neighborhood;
 
-import syncleus.dann.math.rbf.GaussianFunction;
-import syncleus.dann.math.rbf.InverseMultiquadricFunction;
-import syncleus.dann.math.rbf.MexicanHatFunction;
-import syncleus.dann.math.rbf.MultiquadricFunction;
-import syncleus.dann.math.rbf.RBFEnum;
-import syncleus.dann.math.rbf.RadialBasisFunction;
+import syncleus.dann.math.rbf.*;
 
 /**
  * A neighborhood function based on an RBF function.
@@ -74,7 +69,7 @@ public class NeighborhoodRBF1D implements NeighborhoodFunction {
                 this.radial = new MexicanHatFunction(1);
                 break;
             default:
-                throw new NeuralNetworkError("Unknown RBF type: " + type.toString());
+                throw new RuntimeException("Unknown RBF type: " + type.toString());
         }
 
         this.radial.setWidth(1.0);

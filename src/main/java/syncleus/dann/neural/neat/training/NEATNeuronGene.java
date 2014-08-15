@@ -23,10 +23,9 @@
  */
 package org.encog.neural.neat.training;
 
-import java.io.Serializable;
-
 import syncleus.dann.neural.activation.EncogActivationFunction;
-import syncleus.dann.neural.neat.NEATNeuronType;
+
+import java.io.Serializable;
 
 /**
  * Implements a NEAT neuron gene.
@@ -74,10 +73,10 @@ public class NEATNeuronGene extends NEATBaseGene implements Serializable {
     /**
      * Construct a neuron gene.
      *
-     * @param type                  The neuron type.
+     * @param type                       The neuron type.
      * @param theEncogActivationFunction The activation function.
-     * @param id                    The neuron id.
-     * @param innovationID          The innovation id.
+     * @param id                         The neuron id.
+     * @param innovationID               The innovation id.
      */
     public NEATNeuronGene(final NEATNeuronType type,
                           final EncogActivationFunction theEncogActivationFunction, final long id,

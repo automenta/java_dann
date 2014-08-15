@@ -23,14 +23,14 @@
  */
 package syncleus.dann.graph.path;
 
+import syncleus.dann.graph.DirectedGraph;
+import syncleus.dann.graph.Graph;
+import syncleus.dann.graph.WeightedDirectedEdge;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
-
-import syncleus.dann.graph.DirectedGraph;
-import syncleus.dann.graph.Graph;
-import syncleus.dann.graph.WeightedDirectedEdge;
 
 /**
  * Graph with an API optimized for pathfinding/searching
@@ -46,7 +46,7 @@ public class PathGraph implements DirectedGraph<PathNode, WeightedDirectedEdge<P
     }
 
     @Override
-	public Set<PathNode> getNodes() {
+    public Set<PathNode> getNodes() {
         return this.nodes;
     }
 
@@ -73,17 +73,17 @@ public class PathGraph implements DirectedGraph<PathNode, WeightedDirectedEdge<P
     public Stream<PathNode> streamNodes() {
         return nodes.stream();
     }
-	@Override
-	public Stream<PathNode> streamAdjacentNodes(PathNode node) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-    
-    
+
+    @Override
+    public Stream<PathNode> streamAdjacentNodes(PathNode node) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
 
     @Override
     public Stream<WeightedDirectedEdge<PathNode>> streamEdges() {
-        return nodes.stream().flatMap(p -> p.getConnections().stream()); 
+        return nodes.stream().flatMap(p -> p.getConnections().stream());
     }
 
     @Override

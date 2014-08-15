@@ -23,10 +23,10 @@
  */
 package syncleus.dann.data.file.csv;
 
+import syncleus.dann.data.language.SimpleParser;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import syncleus.dann.data.language.SimpleParser;
 
 public class ParseCSVLine {
 
@@ -44,7 +44,7 @@ public class ParseCSVLine {
         }
     }
 
-    private List<String> parseSpaceSep(final String line) {
+    private static List<String> parseSpaceSep(final String line) {
         final List<String> result = new ArrayList<>();
         final SimpleParser parse = new SimpleParser(line);
 

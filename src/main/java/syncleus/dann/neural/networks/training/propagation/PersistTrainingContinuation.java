@@ -36,7 +36,7 @@ public class PersistTrainingContinuation implements EncogPersistor {
      * {@inheritDoc}
      */
     @Override
-    public int getFileVersion() {
+    public static int getFileVersion() {
         return 1;
     }
 
@@ -44,7 +44,7 @@ public class PersistTrainingContinuation implements EncogPersistor {
      * {@inheritDoc}
      */
     @Override
-    public String getPersistClassString() {
+    public static String getPersistClassString() {
         return "TrainingContinuation";
     }
 
@@ -52,7 +52,7 @@ public class PersistTrainingContinuation implements EncogPersistor {
      * {@inheritDoc}
      */
     @Override
-    public Object read(final InputStream is) {
+    public static Object read(final InputStream is) {
         final TrainingContinuation result = new TrainingContinuation();
         final EncogReadHelper in = new EncogReadHelper(is);
         EncogFileSection section;
@@ -80,7 +80,7 @@ public class PersistTrainingContinuation implements EncogPersistor {
      * {@inheritDoc}
      */
     @Override
-    public void save(final OutputStream os, final Object obj) {
+    public static void save(final OutputStream os, final Object obj) {
         final EncogWriteHelper out = new EncogWriteHelper(os);
         final TrainingContinuation cont = (TrainingContinuation) obj;
         out.addSection("CONT");

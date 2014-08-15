@@ -23,13 +23,13 @@
  */
 package syncleus.dann.learn.hmm.distributions;
 
-import java.util.Arrays;
-
 import syncleus.dann.data.basic.BasicMLData;
 import syncleus.dann.data.basic.BasicMLDataPair;
 import syncleus.dann.learn.ml.MLData;
 import syncleus.dann.learn.ml.MLDataPair;
 import syncleus.dann.learn.ml.MLDataSet;
+
+import java.util.Arrays;
 
 /**
  * A discrete distribution is a distribution with a finite set of states that it

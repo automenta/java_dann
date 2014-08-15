@@ -25,7 +25,6 @@ package org.encog.neural.pattern;
 
 import syncleus.dann.learn.ml.MLMethod;
 import syncleus.dann.neural.activation.EncogActivationFunction;
-import syncleus.dann.neural.bam.BAM;
 
 /**
  * Construct a Bidirectional Access Memory (BAM) neural network. This neural
@@ -53,7 +52,7 @@ public class BAMPattern implements NeuralNetworkPattern {
      * @param count Not used.
      */
     @Override
-    public void addHiddenLayer(final int count) {
+    public static void addHiddenLayer(final int count) {
         throw new PatternError("A BAM network has no hidden layers.");
     }
 
@@ -82,7 +81,7 @@ public class BAMPattern implements NeuralNetworkPattern {
      * @param activation Not used.
      */
     @Override
-    public void setEncogActivationFunction(final EncogActivationFunction activation) {
+    public static void setEncogActivationFunction(final EncogActivationFunction activation) {
         throw new PatternError(
                 "A BAM network can't specify a custom activation function.");
     }
@@ -115,7 +114,7 @@ public class BAMPattern implements NeuralNetworkPattern {
      * @param count The number of input neurons.
      */
     @Override
-    public void setInputNeurons(final int count) {
+    public static void setInputNeurons(final int count) {
         throw new PatternError(
                 "A BAM network has no input layer, consider setting F1 layer.");
     }
@@ -126,7 +125,7 @@ public class BAMPattern implements NeuralNetworkPattern {
      * @param count The output neuron count.
      */
     @Override
-    public void setOutputNeurons(final int count) {
+    public static void setOutputNeurons(final int count) {
         throw new PatternError(
                 "A BAM network has no output layer, consider setting F2 layer.");
     }
