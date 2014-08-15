@@ -27,28 +27,25 @@ package syncleus.dann.math.cluster;
  * A centroid.
  */
 public interface Centroid<O> {
-	/**
-	 * Add an element to the centroid.
-	 * 
-	 * @param e
-	 *            The element to add.
-	 */
-	public void add(O e);
+    /**
+     * Add an element to the centroid.
+     *
+     * @param e The element to add.
+     */
+    public void add(O e);
 
-	/**
-	 * Remove an element from the centroid.
-	 * 
-	 * @param o
-	 *            The element to remove.
-	 */
-	public void remove(O o);
+    /**
+     * Remove an element from the centroid.
+     *
+     * @param o The element to remove.
+     */
+    public void remove(O o);
 
-	/**
-	 * The distance between this centroid and an element.
-	 * 
-	 * @param o
-	 *            The element.
-	 * @return The distance.
-	 */
-	public double distance(O o);
+    /**
+     * The distance between this centroid and an element.
+     *
+     * @param o The element.
+     * @return The distance.
+     */
+    public double distance(O o);
 }

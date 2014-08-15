@@ -23,55 +23,54 @@
  */
 package syncleus.dann.graph.tree.basic;
 
+import syncleus.dann.graph.DirectedEdge;
+import syncleus.dann.graph.Graph;
+import syncleus.dann.graph.tree.TreeNode;
+import syncleus.dann.graph.tree.traverse.tasks.TaskCountNodes;
+
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
 
-import syncleus.dann.graph.tree.TreeNode;
-import syncleus.dann.graph.tree.traverse.tasks.TaskCountNodes;
-import syncleus.dann.graph.DirectedEdge;
-import syncleus.dann.graph.Graph;
-
 public class BasicTreeNode implements TreeNode, Serializable {
-	private final List<TreeNode> childNodes = new ArrayList<TreeNode>();
+    private final List<TreeNode> childNodes = new ArrayList<>();
 
-	@Override
-	public List<TreeNode> getChildNodes() {
-		return this.childNodes;
-	}
+    @Override
+    public List<TreeNode> getChildNodes() {
+        return this.childNodes;
+    }
 
-	@Override
-	public void addChildNodes(final TreeNode[] args) {
-		for (final TreeNode pn : args) {
-			this.childNodes.add(pn);
-		}
-	}
+    @Override
+    public void addChildNodes(final TreeNode[] args) {
+        Collections.addAll(this.childNodes, args);
+    }
 
-	@Override
-	public boolean allLeafChildren() {
-		boolean result = true;
+    @Override
+    public boolean allLeafChildren() {
+        boolean result = true;
 
-		for (final TreeNode node : this.childNodes) {
-			if (!node.isLeaf()) {
-				result = false;
-				break;
-			}
-		}
+        for (final TreeNode node : this.childNodes) {
+            if (!node.isLeaf()) {
+                result = false;
+                break;
+            }
+        }
 
-		return result;
-	}
+        return result;
+    }
 
-	@Override
-	public boolean isLeaf() {
-		return this.childNodes.isEmpty();
-	}
+    @Override
+    public boolean isLeaf() {
+        return this.childNodes.isEmpty();
+    }
 
-	@Override
-	public int size() {
-		return TaskCountNodes.process(this);
-	}
+    @Override
+    public int size() {
+        return TaskCountNodes.process(this);
+    }
 
     @Override
     public boolean isSpanningTree(Graph<TreeNode, DirectedEdge<TreeNode>> subGraph) {

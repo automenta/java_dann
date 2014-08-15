@@ -27,106 +27,103 @@ package syncleus.dann.math.array;
  * Normalization is the process where data is adjusted to be inside a range.
  * This range is typically -1 to 1. For more information about normalization,
  * refer to the following page.
- *
+ * <p/>
  * http://www.heatonresearch.com/content/really-simple-introduction-
  * normalization
- *
+ * <p/>
  * This class is used to normalize an array. Sometimes you would like to
  * normalize an array, rather than an entire CSV file. If you would like to
  * normalize an entire CSV file, you should make use of the class NormalizeCSV.
  */
 public class NormalizeArray {
 
-	/**
-	 * Contains stats about the array normalized.
-	 */
-	private NormalizedField stats;
+    /**
+     * Contains stats about the array normalized.
+     */
+    private NormalizedField stats;
 
-	/**
-	 * The high end of the range that the values are normalized into. Typically
-	 * 1.
-	 */
-	private double normalizedHigh;
+    /**
+     * The high end of the range that the values are normalized into. Typically
+     * 1.
+     */
+    private double normalizedHigh;
 
-	/**
-	 * The low end of the range that the values are normalized into. Typically
-	 * 1.
-	 */
-	private double normalizedLow;
+    /**
+     * The low end of the range that the values are normalized into. Typically
+     * 1.
+     */
+    private double normalizedLow;
 
-	/**
-	 * Construct the object, default NormalizedHigh and NormalizedLow to 1 and
-	 * -1.
-	 */
-	public NormalizeArray() {
-		this.normalizedHigh = 1;
-		this.normalizedLow = -1;
-	}
+    /**
+     * Construct the object, default NormalizedHigh and NormalizedLow to 1 and
+     * -1.
+     */
+    public NormalizeArray() {
+        this.normalizedHigh = 1;
+        this.normalizedLow = -1;
+    }
 
-	/**
-	 * @return The high value to normalize to.
-	 */
-	public final double getNormalizedHigh() {
-		return this.normalizedHigh;
-	}
+    /**
+     * @return The high value to normalize to.
+     */
+    public final double getNormalizedHigh() {
+        return this.normalizedHigh;
+    }
 
-	/**
-	 * @return The low value to normalize to.
-	 */
-	public final double getNormalizedLow() {
-		return this.normalizedLow;
-	}
+    /**
+     * @return The low value to normalize to.
+     */
+    public final double getNormalizedLow() {
+        return this.normalizedLow;
+    }
 
-	/**
-	 * @return Contains stats about the array normalized.
-	 */
-	public final NormalizedField getStats() {
-		return this.stats;
-	}
+    /**
+     * @return Contains stats about the array normalized.
+     */
+    public final NormalizedField getStats() {
+        return this.stats;
+    }
 
-	/**
-	 * Normalize the array. Return the new normalized array.
-	 *
-	 * @param inputArray
-	 *            The input array.
-	 * @return The normalized array.
-	 */
-	public final double[] process(final double[] inputArray) {
-		this.stats = new NormalizedField();
-		this.stats.setNormalizedHigh(this.normalizedHigh);
-		this.stats.setNormalizedLow(this.normalizedLow);
+    /**
+     * Normalize the array. Return the new normalized array.
+     *
+     * @param inputArray The input array.
+     * @return The normalized array.
+     */
+    public final double[] process(final double[] inputArray) {
+        this.stats = new NormalizedField();
+        this.stats.setNormalizedHigh(this.normalizedHigh);
+        this.stats.setNormalizedLow(this.normalizedLow);
 
-		for (final double element : inputArray) {
-			this.stats.analyze(element);
-		}
+        for (final double element : inputArray) {
+            this.stats.analyze(element);
+        }
 
-		final double[] result = new double[inputArray.length];
+        final double[] result = new double[inputArray.length];
 
-		for (int i = 0; i < inputArray.length; i++) {
-			result[i] = this.stats.normalize(inputArray[i]);
-		}
+        for (int i = 0; i < inputArray.length; i++) {
+            result[i] = this.stats.normalize(inputArray[i]);
+        }
 
-		return result;
-	}
+        return result;
+    }
 
-	/**
-	 * Set the high value to normalize to.
-	 * 
-	 * @param theNormalizedHigh
-	 *            The high value to normalize to.
-	 */
-	public final void setNormalizedHigh(final double theNormalizedHigh) {
-		this.normalizedHigh = theNormalizedHigh;
-	}
+    /**
+     * Set the high value to normalize to.
+     *
+     * @param theNormalizedHigh The high value to normalize to.
+     */
+    public final void setNormalizedHigh(final double theNormalizedHigh) {
+        this.normalizedHigh = theNormalizedHigh;
+    }
 
-	/**
-	 * Set the low value to normalize to.
-	 * 
-	 * @param theNormalizedLow
-	 *            The low value to normalize to.
-	 */
-	public final void setNormalizedLow(final double theNormalizedLow) {
-		this.normalizedLow = theNormalizedLow;
-	}
+    /**
+     * Set the low value to normalize to.
+     *
+     * @param theNormalizedLow The low value to normalize to.
+     */
+    public final void setNormalizedLow(final double theNormalizedLow) {
+        this.normalizedLow = theNormalizedLow;
+    }
 
 }

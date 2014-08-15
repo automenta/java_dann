@@ -24,5 +24,5 @@
 package syncleus.dann.generate.ca.universe;
 
 public interface UniverseListener {
-	void iterationComplete();
+    void iterationComplete();
 }

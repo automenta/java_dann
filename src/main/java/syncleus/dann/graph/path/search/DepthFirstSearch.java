@@ -23,22 +23,22 @@
  */
 package syncleus.dann.graph.path.search;
 
-import syncleus.dann.graph.path.PathGraphSearch;
-import syncleus.dann.graph.path.PathGraph;
-import syncleus.dann.graph.path.PathNode;
 import syncleus.dann.graph.path.BasicPath;
+import syncleus.dann.graph.path.PathGraph;
+import syncleus.dann.graph.path.PathGraphSearch;
+import syncleus.dann.graph.path.PathNode;
 
 public class DepthFirstSearch extends PathGraphSearch {
 
-	public DepthFirstSearch(final PathGraph theGraph,
-			final PathNode startingPoint, final SearchGoal theGoal) {
-		super(theGraph, startingPoint, theGoal);
-	}
+    public DepthFirstSearch(final PathGraph theGraph,
+                            final PathNode startingPoint, final SearchGoal theGoal) {
+        super(theGraph, startingPoint, theGoal);
+    }
 
-	@Override
-	public boolean isHigherPriority(final BasicPath first,
-			final BasicPath second) {
-		return first.size() > second.size();
-	}
+    @Override
+    public boolean isHigherPriority(final BasicPath first,
+                                    final BasicPath second) {
+        return first.size() > second.size();
+    }
 
 }

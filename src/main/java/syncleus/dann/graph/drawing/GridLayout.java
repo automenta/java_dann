@@ -7,9 +7,8 @@
 package syncleus.dann.graph.drawing;
 
 /**
- *
  * @author me
  */
 public class GridLayout {
-    
+
 }

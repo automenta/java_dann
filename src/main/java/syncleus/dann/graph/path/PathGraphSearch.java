@@ -23,71 +23,69 @@
  */
 package syncleus.dann.graph.path;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import syncleus.dann.graph.path.search.FrontierHolder;
 import syncleus.dann.graph.path.search.GraphSearch;
 import syncleus.dann.graph.path.search.SearchGoal;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public abstract class PathGraphSearch implements GraphSearch {
 
-	private final PathGraph graph;
-	private final SearchGoal goal;
-	private final FrontierHolder frontier = new FrontierHolder(this);
-	private final Set<PathNode> explored = new HashSet<PathNode>();
-	private BasicPath solution;
+    private final PathGraph graph;
+    private final SearchGoal goal;
+    private final FrontierHolder frontier = new FrontierHolder(this);
+    private final Set<PathNode> explored = new HashSet<>();
+    private BasicPath solution;
 
-	public PathGraphSearch(final PathGraph theGraph,
-			final PathNode startingPoint, final SearchGoal theGoal) {
-		this.graph = theGraph;
-		this.goal = theGoal;
-		frontier.add(new BasicPath(startingPoint));
-	}
+    public PathGraphSearch(final PathGraph theGraph,
+                           final PathNode startingPoint, final SearchGoal theGoal) {
+        this.graph = theGraph;
+        this.goal = theGoal;
+        frontier.add(new BasicPath(startingPoint));
+    }
 
-	@Override
-	public PathGraph getGraph() {
-		return graph;
-	}
+    @Override
+    public PathGraph getGraph() {
+        return graph;
+    }
 
-	@Override
-	public SearchGoal getGoal() {
-		return goal;
-	}
+    @Override
+    public SearchGoal getGoal() {
+        return goal;
+    }
 
-	@Override
-	public void iteration() {
-		if (solution == null) {
+    @Override
+    public void iteration() {
+        if (solution == null) {
 
-			if (this.frontier.size() == 0) {
-				throw new RuntimeException("Frontier is empty, cannot find solution.");
-			}
+            if (this.frontier.size() == 0) {
+                throw new RuntimeException("Frontier is empty, cannot find solution.");
+            }
 
-			final BasicPath path = this.frontier.pop();
+            final BasicPath path = this.frontier.pop();
 
-			if (this.goal.isGoalMet(path)) {
-				this.solution = path;
-				return;
-			}
+            if (this.goal.isGoalMet(path)) {
+                this.solution = path;
+                return;
+            }
 
-			final PathNode state = path.getDestinationNode();
-			this.explored.add(state);
+            final PathNode state = path.getDestinationNode();
+            this.explored.add(state);
 
-                        state.getConnections().stream().filter((connection) -> (!this.explored.contains(connection.getDestinationNode())
-                            && !this.frontier.containsDestination(connection
-                                    .getDestinationNode()))).map((connection) -> new BasicPath(path,
-                                                                        connection.getDestinationNode())).forEach((path2) -> {
-                                                            this.frontier.add(path2);
-                    });
-		}
-	}
+            state.getConnections().stream().filter((connection) -> (!this.explored.contains(connection.getDestinationNode())
+                    && !this.frontier.containsDestination(connection
+                    .getDestinationNode()))).map((connection) -> new BasicPath(path,
+                    connection.getDestinationNode())).forEach(this.frontier::add);
+        }
+    }
 
-	/**
-	 * @return the solution
-	 */
-	@Override
-	public BasicPath getSolution() {
-		return solution;
-	}
+    /**
+     * @return the solution
+     */
+    @Override
+    public BasicPath getSolution() {
+        return solution;
+    }
 
 }

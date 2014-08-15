@@ -21,7 +21,7 @@ package syncleus.dann.graph.context;
 import syncleus.dann.graph.Edge;
 
 public interface ContextNode<N, E extends Edge<N>> {
-	boolean connectingEdge(E edge);
+    boolean connectingEdge(E edge);
 
-	boolean disconnectingEdge(E edge);
+    boolean disconnectingEdge(E edge);
 }

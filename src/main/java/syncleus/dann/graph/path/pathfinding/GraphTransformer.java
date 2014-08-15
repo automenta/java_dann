@@ -21,5 +21,5 @@ package syncleus.dann.graph.path.pathfinding;
 import syncleus.dann.graph.Graph;
 
 public interface GraphTransformer<G extends Graph<?, ?>> {
-	G transform(G original);
+    G transform(G original);
 }

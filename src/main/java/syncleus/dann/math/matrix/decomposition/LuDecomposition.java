@@ -38,14 +38,14 @@ import syncleus.dann.math.matrix.Matrix;
  * isNonsingular() returns false.
  */
 public interface LuDecomposition<M extends Matrix<M, F>, F extends OrderedAlgebraic<F>>
-		extends java.io.Serializable, SolvableDecomposition<M> {
-	F getDeterminant();
+        extends java.io.Serializable, SolvableDecomposition<M> {
+    F getDeterminant();
 
-	M getLowerTriangularFactor();
+    M getLowerTriangularFactor();
 
-	M getUpperTriangularFactor();
+    M getUpperTriangularFactor();
 
-	boolean isNonsingular();
+    boolean isNonsingular();
 
-	int[] getPivot();
+    int[] getPivot();
 }

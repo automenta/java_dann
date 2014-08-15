@@ -24,14 +24,11 @@ import syncleus.dann.classify.TrainableClassifier;
  * A TrainableNaiveClassifier is a NaiveClassifier that's also a
  * TrainableClassifier.
  *
- * @param <I>
- *            The item to classify
- * @param <F>
- *            The features of the item
- * @param <C>
- *            The categories of the item
+ * @param <I> The item to classify
+ * @param <F> The features of the item
+ * @param <C> The categories of the item
  * @author Jeffrey Phillips Freeman
  */
 public interface TrainableNaiveClassifier<I, F, C> extends
-		NaiveClassifier<I, F, C>, TrainableClassifier<I, C> {
+        NaiveClassifier<I, F, C>, TrainableClassifier<I, C> {
 }

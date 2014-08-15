@@ -26,10 +26,10 @@ package syncleus.dann.neural.activation;
 /**
  * Computationally efficient alternative to ActivationTANH. Its output is in the
  * range [-1, 1], and it is derivable.
- *
+ * <p/>
  * It will approach the -1 and 1 more slowly than Tanh so it might be more
  * suitable to classification tasks than predictions tasks.
- *
+ * <p/>
  * Elliott, D.L. "A better activation function for artificial neural networks",
  * 1993
  * http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.46.7204&rep=rep1
@@ -37,85 +37,85 @@ package syncleus.dann.neural.activation;
  */
 public class ActivationElliottSymmetric implements EncogActivationFunction {
 
-	/**
-	 * The parameters.
-	 */
-	private final double[] params;
+    /**
+     * The parameters.
+     */
+    private final double[] params;
 
-	/**
-	 * Construct a basic HTAN activation function, with a slope of 1.
-	 */
-	public ActivationElliottSymmetric() {
-		this.params = new double[1];
-		this.params[0] = 1.0;
-	}
+    /**
+     * Construct a basic HTAN activation function, with a slope of 1.
+     */
+    public ActivationElliottSymmetric() {
+        this.params = new double[1];
+        this.params[0] = 1.0;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public final void activate(final double[] x, final int start,
-			final int size) {
-		for (int i = start; i < start + size; i++) {
-			final double s = params[0];
-			x[i] = (x[i] * s) / (1 + Math.abs(x[i] * s));
-		}
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final void activate(final double[] x, final int start,
+                               final int size) {
+        for (int i = start; i < start + size; i++) {
+            final double s = params[0];
+            x[i] = (x[i] * s) / (1 + Math.abs(x[i] * s));
+        }
+    }
 
-	/**
-	 * @return The object cloned;
-	 */
-	@Override
-	public final IterativeDerivative clone() {
-		return new ActivationElliottSymmetric();
-	}
+    /**
+     * @return The object cloned;
+     */
+    @Override
+    public final IterativeDerivative clone() {
+        return new ActivationElliottSymmetric();
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public final double derivative(final double b, final double a) {
-		final double s = params[0];
-		final double d = (1.0 + Math.abs(b * s));
-		return (s * 1.0) / (d * d);
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final double derivative(final double b, final double a) {
+        final double s = params[0];
+        final double d = (1.0 + Math.abs(b * s));
+        return (s * 1.0) / (d * d);
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public final String[] getParamNames() {
-		final String[] result = { "Slope" };
-		return result;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final String[] getParamNames() {
+        final String[] result = {"Slope"};
+        return result;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public final double[] getParams() {
-		return this.params;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final double[] getParams() {
+        return this.params;
+    }
 
-	/**
-	 * @return Return true, Elliott activation has a derivative.
-	 */
-	@Override
-	public final boolean hasDerivative() {
-		return true;
-	}
+    /**
+     * @return Return true, Elliott activation has a derivative.
+     */
+    @Override
+    public final boolean hasDerivative() {
+        return true;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public final void setParam(final int index, final double value) {
-		this.params[index] = value;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final void setParam(final int index, final double value) {
+        this.params[index] = value;
+    }
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -4168390710543901641L;
+    /**
+     *
+     */
+    private static final long serialVersionUID = -4168390710543901641L;
 
 }

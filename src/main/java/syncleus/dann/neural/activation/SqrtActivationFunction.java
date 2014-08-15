@@ -25,50 +25,48 @@ package syncleus.dann.neural.activation;
  * @since 2.0
  */
 public class SqrtActivationFunction implements DannActivationFunction {
-	private static final long serialVersionUID = -7384243647996712000L;
-	private static final double UPPER_LIMIT = Double.MAX_VALUE;
-	private static final double LOWER_LIMIT = 0.0;
+    private static final long serialVersionUID = -7384243647996712000L;
+    private static final double UPPER_LIMIT = Double.MAX_VALUE;
+    private static final double LOWER_LIMIT = 0.0;
 
-	/**
-	 * The activation function.
-	 *
-	 * @param activity
-	 *            the neuron's current activity.
-	 * @return The result of the activation function. Usually a bound value
-	 *         between 1 and -1 or 1 and 0. However this bound range is not
-	 *         required.
-	 * @since 2.0
-	 */
-	@Override
-	public double activate(final double activity) {
-		return Math.sqrt(activity);
-	}
+    /**
+     * The activation function.
+     *
+     * @param activity the neuron's current activity.
+     * @return The result of the activation function. Usually a bound value
+     * between 1 and -1 or 1 and 0. However this bound range is not
+     * required.
+     * @since 2.0
+     */
+    @Override
+    public double activate(final double activity) {
+        return Math.sqrt(activity);
+    }
 
-	/**
-	 * The derivative of the activation function.
-	 *
-	 * @param activity
-	 *            The neuron's current activity.
-	 * @return The result of the derivative of the activation function.
-	 * @since 2.0
-	 */
-	@Override
-	public double activateDerivative(final double activity) {
-		return 1.0 / (2.0 * Math.sqrt(activity));
-	}
+    /**
+     * The derivative of the activation function.
+     *
+     * @param activity The neuron's current activity.
+     * @return The result of the derivative of the activation function.
+     * @since 2.0
+     */
+    @Override
+    public double activateDerivative(final double activity) {
+        return 1.0 / (2.0 * Math.sqrt(activity));
+    }
 
-	@Override
-	public boolean isBound() {
-		return false;
-	}
+    @Override
+    public boolean isBound() {
+        return false;
+    }
 
-	@Override
-	public double getUpperLimit() {
-		return UPPER_LIMIT;
-	}
+    @Override
+    public double getUpperLimit() {
+        return UPPER_LIMIT;
+    }
 
-	@Override
-	public double getLowerLimit() {
-		return LOWER_LIMIT;
-	}
+    @Override
+    public double getLowerLimit() {
+        return LOWER_LIMIT;
+    }
 }

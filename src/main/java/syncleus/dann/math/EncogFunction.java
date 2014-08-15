@@ -27,7 +27,7 @@ package syncleus.dann.math;
  * A generic single or multivariate function.
  */
 public interface EncogFunction {
-	double fn(double[] x);
+    double fn(double[] x);
 
-	int size();
+    int size();
 }

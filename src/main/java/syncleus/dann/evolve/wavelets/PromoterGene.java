@@ -18,43 +18,43 @@
  ******************************************************************************/
 package syncleus.dann.evolve.wavelets;
 
-import java.util.Set;
-
 import syncleus.dann.evolve.MutableInteger;
 
+import java.util.Set;
+
 public class PromoterGene extends AbstractWaveletGene {
-	private MutableInteger targetDistance;
+    private MutableInteger targetDistance;
 
-	public PromoterGene(final ReceptorKey initialReceptor,
-			final int initialDistance) {
-		super(initialReceptor);
+    public PromoterGene(final ReceptorKey initialReceptor,
+                        final int initialDistance) {
+        super(initialReceptor);
 
-		this.targetDistance = new MutableInteger(initialDistance);
-	}
+        this.targetDistance = new MutableInteger(initialDistance);
+    }
 
-	public PromoterGene(final PromoterGene copy) {
-		super(copy);
+    public PromoterGene(final PromoterGene copy) {
+        super(copy);
 
-		this.targetDistance = copy.targetDistance;
-	}
+        this.targetDistance = copy.targetDistance;
+    }
 
-	public int getTargetDistance() {
-		return this.targetDistance.intValue();
-	}
+    public int getTargetDistance() {
+        return this.targetDistance.intValue();
+    }
 
-	@Override
-	public PromoterGene clone() {
-		final PromoterGene copy = (PromoterGene) super.clone();
+    @Override
+    public PromoterGene clone() {
+        final PromoterGene copy = (PromoterGene) super.clone();
 
-		copy.targetDistance = this.targetDistance.clone();
+        copy.targetDistance = this.targetDistance.clone();
 
-		return copy;
-	}
+        return copy;
+    }
 
-	@Override
-	public void mutate(final Set<AbstractKey> keyPool) {
-		super.mutate(keyPool);
+    @Override
+    public void mutate(final Set<AbstractKey> keyPool) {
+        super.mutate(keyPool);
 
-		this.targetDistance = this.targetDistance.mutate(this.getMutability());
-	}
+        this.targetDistance = this.targetDistance.mutate(this.getMutability());
+    }
 }

@@ -25,50 +25,48 @@ package syncleus.dann.neural.activation;
  * @since 1.0
  */
 public class GausianActivationFunction implements DannActivationFunction {
-	private static final long serialVersionUID = -6299865430397526530L;
-	private static final double UPPER_LIMIT = 1.0;
-	private static final double LOWER_LIMIT = 0.0;
+    private static final long serialVersionUID = -6299865430397526530L;
+    private static final double UPPER_LIMIT = 1.0;
+    private static final double LOWER_LIMIT = 0.0;
 
-	/**
-	 * The gausian activation function.
-	 *
-	 * @param activity
-	 *            the neuron's current activity.
-	 * @return The result of the gausian activation function bound between 0 and
-	 *         1.
-	 * @since 1.0
-	 */
-	@Override
-	public double activate(final double activity) {
-		return Math.pow(Math.E, (-1.0 * Math.pow(activity, 2)));
-	}
+    /**
+     * The gausian activation function.
+     *
+     * @param activity the neuron's current activity.
+     * @return The result of the gausian activation function bound between 0 and
+     * 1.
+     * @since 1.0
+     */
+    @Override
+    public double activate(final double activity) {
+        return Math.pow(Math.E, (-1.0 * Math.pow(activity, 2)));
+    }
 
-	/**
-	 * The derivative of the gausian activation function.
-	 *
-	 * @param activity
-	 *            The neuron's current activity.
-	 * @return The result of the derivative of the gausian activation function.
-	 * @since 1.0
-	 */
-	@Override
-	public double activateDerivative(final double activity) {
-		return (-2.0 * Math.log10(Math.E) * activity)
-				/ Math.pow(Math.E, Math.pow(activity, 2));
-	}
+    /**
+     * The derivative of the gausian activation function.
+     *
+     * @param activity The neuron's current activity.
+     * @return The result of the derivative of the gausian activation function.
+     * @since 1.0
+     */
+    @Override
+    public double activateDerivative(final double activity) {
+        return (-2.0 * Math.log10(Math.E) * activity)
+                / Math.pow(Math.E, Math.pow(activity, 2));
+    }
 
-	@Override
-	public boolean isBound() {
-		return true;
-	}
+    @Override
+    public boolean isBound() {
+        return true;
+    }
 
-	@Override
-	public double getUpperLimit() {
-		return UPPER_LIMIT;
-	}
+    @Override
+    public double getUpperLimit() {
+        return UPPER_LIMIT;
+    }
 
-	@Override
-	public double getLowerLimit() {
-		return LOWER_LIMIT;
-	}
+    @Override
+    public double getLowerLimit() {
+        return LOWER_LIMIT;
+    }
 }

@@ -18,43 +18,43 @@
  ******************************************************************************/
 package syncleus.dann.learn.markovrandomfield;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import syncleus.dann.graph.Graph;
 import syncleus.dann.graph.UndirectedEdge;
 import syncleus.dann.learn.AbstractGraphicalModelAdjacencyGraph;
 import syncleus.dann.learn.GraphicalModelNode;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public abstract class AbstractMarkovRandomFieldAdjacencyGraph<N extends GraphicalModelNode, E extends UndirectedEdge<N>>
-		extends AbstractGraphicalModelAdjacencyGraph<N, E> {
-	protected AbstractMarkovRandomFieldAdjacencyGraph() {
-		super();
-	}
+        extends AbstractGraphicalModelAdjacencyGraph<N, E> {
+    protected AbstractMarkovRandomFieldAdjacencyGraph() {
+        super();
+    }
 
-	protected AbstractMarkovRandomFieldAdjacencyGraph(
-			final Graph<N, E> copyGraph) {
-		super(copyGraph.getNodes(), copyGraph.getEdges());
-	}
+    protected AbstractMarkovRandomFieldAdjacencyGraph(
+            final Graph<N, E> copyGraph) {
+        super(copyGraph.getNodes(), copyGraph.getEdges());
+    }
 
-	protected AbstractMarkovRandomFieldAdjacencyGraph(final Set<N> nodes,
-			final Set<E> edges) {
-		super(nodes, edges);
-	}
+    protected AbstractMarkovRandomFieldAdjacencyGraph(final Set<N> nodes,
+                                                      final Set<E> edges) {
+        super(nodes, edges);
+    }
 
-	@Override
-	public double jointProbability() {
-		final Set<N> seenNodes = new HashSet<N>();
-		double probabilityProduct = 1.0;
-		for (final N node : this.getNodes()) {
-			assert !seenNodes.contains(node);
+    @Override
+    public double jointProbability() {
+        final Set<N> seenNodes = new HashSet<>();
+        double probabilityProduct = 1.0;
+        for (final N node : this.getNodes()) {
+            assert !seenNodes.contains(node);
 
-			probabilityProduct *= node.stateProbability(seenNodes);
+            probabilityProduct *= node.stateProbability(seenNodes);
 
-			seenNodes.add(node);
-		}
-		return probabilityProduct;
-	}
+            seenNodes.add(node);
+        }
+        return probabilityProduct;
+    }
 
     @Override
     public AbstractGraphicalModelAdjacencyGraph<N, E> clone() {

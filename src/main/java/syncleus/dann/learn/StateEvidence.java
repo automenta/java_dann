@@ -22,44 +22,44 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class StateEvidence<S> extends HashMap<S, Integer> {
-	private static final long serialVersionUID = 4276706788994272957L;
-	private long totalEvidence;
+    private static final long serialVersionUID = 4276706788994272957L;
+    private long totalEvidence;
 
-	public long getTotalEvidence() {
-		return this.totalEvidence;
-	}
+    public long getTotalEvidence() {
+        return this.totalEvidence;
+    }
 
-	public double getPercentage(final S key) {
-		final Integer stateEvidence = this.get(key);
-		if (stateEvidence == null)
-			return 0.0;
-		else
-			return this.get(key).doubleValue() / (this.totalEvidence);
-	}
+    public double getPercentage(final S key) {
+        final Integer stateEvidence = this.get(key);
+        if (stateEvidence == null)
+            return 0.0;
+        else
+            return this.get(key).doubleValue() / (this.totalEvidence);
+    }
 
-	@Override
-	public Integer put(final S key, final Integer value) {
-		final Integer old = super.put(key, value);
-		if (old != null)
-			this.totalEvidence -= old;
-		this.totalEvidence += value;
+    @Override
+    public Integer put(final S key, final Integer value) {
+        final Integer old = super.put(key, value);
+        if (old != null)
+            this.totalEvidence -= old;
+        this.totalEvidence += value;
 
-		return old;
-	}
+        return old;
+    }
 
-	@Override
-	public void putAll(final Map<? extends S, ? extends Integer> map) {
-		final Map<S, Integer> oldMap = new HashMap<S, Integer>(this);
-		super.putAll(map);
+    @Override
+    public void putAll(final Map<? extends S, ? extends Integer> map) {
+        final Map<S, Integer> oldMap = new HashMap<>(this);
+        super.putAll(map);
 
-                map
-                        .entrySet().stream().forEach((entry) -> {
-                                    final Integer oldEvidence = oldMap.get(entry.getKey());
-                                    final Integer newEvidence = this.get(entry.getKey());
-                                    this.totalEvidence = (this.totalEvidence - oldEvidence)
-                                            + newEvidence;
+        map
+                .entrySet().stream().forEach((entry) -> {
+            final Integer oldEvidence = oldMap.get(entry.getKey());
+            final Integer newEvidence = this.get(entry.getKey());
+            this.totalEvidence = (this.totalEvidence - oldEvidence)
+                    + newEvidence;
         });
-	}
+    }
 
     @Override
     public Object clone() {

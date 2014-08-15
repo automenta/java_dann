@@ -32,11 +32,11 @@ import syncleus.dann.math.matrix.Matrix;
  * isSpd() method.
  */
 public interface CholeskyDecomposition<M extends Matrix<M, F>, F extends OrderedAlgebraic<F>>
-		extends java.io.Serializable, SolvableDecomposition<M> {
-	/**
-	 * Is the matrix symmetric and positive definite?
-	 *
-	 * @return true if A is symmetric and positive definite.
-	 */
-	boolean isSpd();
+        extends java.io.Serializable, SolvableDecomposition<M> {
+    /**
+     * Is the matrix symmetric and positive definite?
+     *
+     * @return true if A is symmetric and positive definite.
+     */
+    boolean isSpd();
 }

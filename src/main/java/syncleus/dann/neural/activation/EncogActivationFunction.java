@@ -29,57 +29,57 @@ import java.io.Serializable;
  * This interface allows various activation functions to be used with the neural
  * network. Activation functions are applied to the output from each layer of a
  * neural network. Activation functions scale the output into the desired range.
- *
+ * <p/>
  * Methods are provided both to process the activation function, as well as the
  * derivative of the function. Some training algorithms, particularly back
  * propagation, require that it be possible to take the derivative of the
  * activation function.
- *
+ * <p/>
  * Not all activation functions support derivatives. If you implement an
  * activation function that is not derivable then an exception should be thrown
  * inside of the derivativeFunction method implementation.
- *
+ * <p/>
  * Non-derivable activation functions are perfectly valid, they simply cannot be
  * used with every training algorithm.
  */
 public interface EncogActivationFunction extends AbstractActivationFunction, Serializable, Cloneable, IterativeDerivative {
 
-	
-	@Deprecated default double activate(double... activity) {		
-		activate(activity,0,1);
+
+    //double activate(double... activity);  
+    /* {
+        activate(activity,0,1);
 		return activity[0];
-	}
-	
-	@Override
-	@Deprecated default double activate(double activity) {
-		return activate(activity);
-	}
-	
+	}*/
 
-	/**
-	 * @return The params for this activation function.
-	 */
-	double[] getParams();
+    @Override
+    @Deprecated
+    default double activate(double activity) {
+        return activate(activity);
+    }
 
-	/**
-	 * Set one of the params for this activation function.
-	 * 
-	 * @param index
-	 *            The index of the param to set.
-	 * @param value
-	 *            The value to set.
-	 */
-	void setParam(int index, double value);
 
-	/**
-	 * @return The names of the parameters.
-	 */
-	String[] getParamNames();
+    /**
+     * @return The params for this activation function.
+     */
+    double[] getParams();
 
-	/**
-	 * @return A cloned copy of this activation function.
-	 */
-	public IterativeDerivative clone();
+    /**
+     * Set one of the params for this activation function.
+     *
+     * @param index The index of the param to set.
+     * @param value The value to set.
+     */
+    void setParam(int index, double value);
+
+    /**
+     * @return The names of the parameters.
+     */
+    String[] getParamNames();
+
+    /**
+     * @return A cloned copy of this activation function.
+     */
+    public IterativeDerivative clone();
 
 
 }

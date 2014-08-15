@@ -18,34 +18,34 @@
  ******************************************************************************/
 package syncleus.dann.learn.bayesian;
 
-import java.util.Set;
-
 import syncleus.dann.graph.DirectedEdge;
 import syncleus.dann.graph.Graph;
 import syncleus.dann.learn.AbstractGraphicalModelAdjacencyGraph;
 import syncleus.dann.learn.GraphicalModelNode;
 
+import java.util.Set;
+
 public abstract class AbstractBayesianAdjacencyNetwork<N extends GraphicalModelNode, E extends DirectedEdge<N>>
-		extends AbstractGraphicalModelAdjacencyGraph<N, E> {
-	protected AbstractBayesianAdjacencyNetwork() {
-		super();
-	}
+        extends AbstractGraphicalModelAdjacencyGraph<N, E> {
+    protected AbstractBayesianAdjacencyNetwork() {
+        super();
+    }
 
-	protected AbstractBayesianAdjacencyNetwork(final Graph<N, E> copyGraph) {
-		super(copyGraph.getNodes(), copyGraph.getEdges());
-	}
+    protected AbstractBayesianAdjacencyNetwork(final Graph<N, E> copyGraph) {
+        super(copyGraph.getNodes(), copyGraph.getEdges());
+    }
 
-	protected AbstractBayesianAdjacencyNetwork(final Set<N> nodes,
-			final Set<E> edges) {
-		super(nodes, edges);
-	}
+    protected AbstractBayesianAdjacencyNetwork(final Set<N> nodes,
+                                               final Set<E> edges) {
+        super(nodes, edges);
+    }
 
-	@Override
-	public double jointProbability() {
-		double probabilityProduct = 1.0;
-                probabilityProduct = this.getNodes().stream().map((node) -> node.stateProbability()).reduce(probabilityProduct, (accumulator, _item) -> accumulator * _item);
-		return probabilityProduct;
-	}
+    @Override
+    public double jointProbability() {
+        double probabilityProduct = 1.0;
+        probabilityProduct = this.getNodes().stream().map((node) -> node.stateProbability()).reduce(probabilityProduct, (accumulator, _item) -> accumulator * _item);
+        return probabilityProduct;
+    }
 
     @Override
     public AbstractGraphicalModelAdjacencyGraph<N, E> clone() {

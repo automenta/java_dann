@@ -29,172 +29,161 @@ package syncleus.dann.math;
  */
 public final class EncogMath {
 
-	/**
-	 * The default precision to use for compares.
-	 */
-	public static final int DEFAULT_PRECISION = 10;
+    /**
+     * The default precision to use for compares.
+     */
+    public static final int DEFAULT_PRECISION = 10;
 
-	/**
-	 * Default point at which two doubles are equal.
-	 */
-	public static final double DEFAULT_EPSILON = 0.0000000000001;
+    /**
+     * Default point at which two doubles are equal.
+     */
+    public static final double DEFAULT_EPSILON = 0.0000000000001;
 
-	
-	/**
-	 * Convert degrees to radians.
-	 *
-	 * @param deg
-	 *            Degrees.
-	 * @return Radians.
-	 */
-	public static double deg2rad(final double deg) {
-		return deg * (Math.PI / MathConst.DEG_SEMICIRCLE);
-	}
 
-	/**
-	 * Determine if one double equals another, within the default percision.
-	 *
-	 * @param d1
-	 *            The first number.
-	 * @param d2
-	 *            The second number.
-	 * @return True if the two doubles are equal.
-	 */
-	public static boolean doubleEquals(final double d1, final double d2) {
-		return Math.abs(d1 - d2) < DEFAULT_EPSILON;
-	}
+    /**
+     * Convert degrees to radians.
+     *
+     * @param deg Degrees.
+     * @return Radians.
+     */
+    public static double deg2rad(final double deg) {
+        return deg * (Math.PI / MathConst.DEG_SEMICIRCLE);
+    }
 
-	/**
-	 * sqrt(a^2 + b^2) without under/overflow.
-	 *
-	 * @param a
-	 *            First param.
-	 * @param b
-	 *            Second param.
-	 * @return The result.
-	 */
-	public static double hypot(final double a, final double b) {
-		double r;
-		if (Math.abs(a) > Math.abs(b)) {
-			r = b / a;
-			r = Math.abs(a) * Math.sqrt(1 + r * r);
-		} else if (b != 0) {
-			r = a / b;
-			r = Math.abs(b) * Math.sqrt(1 + r * r);
-		} else {
-			r = 0.0;
-		}
-		return r;
-	}
+    /**
+     * Determine if one double equals another, within the default percision.
+     *
+     * @param d1 The first number.
+     * @param d2 The second number.
+     * @return True if the two doubles are equal.
+     */
+    public static boolean doubleEquals(final double d1, final double d2) {
+        return Math.abs(d1 - d2) < DEFAULT_EPSILON;
+    }
 
-	/**
-	 * Get the index to the greatest number in a double array.
-	 *
-	 * @param array
-	 *            The array to search.
-	 * @return The index of the greatest value, or -1 if empty.
-	 */
-	public static int maxIndex(final double[] array) {
-		int result = -1;
+    /**
+     * sqrt(a^2 + b^2) without under/overflow.
+     *
+     * @param a First param.
+     * @param b Second param.
+     * @return The result.
+     */
+    public static double hypot(final double a, final double b) {
+        double r;
+        if (Math.abs(a) > Math.abs(b)) {
+            r = b / a;
+            r = Math.abs(a) * Math.sqrt(1 + r * r);
+        } else if (b != 0) {
+            r = a / b;
+            r = Math.abs(b) * Math.sqrt(1 + r * r);
+        } else {
+            r = 0.0;
+        }
+        return r;
+    }
 
-		for (int i = 0; i < array.length; i++) {
-			if ((result == -1) || (array[result] < array[i])) {
-				result = i;
-			}
-		}
+    /**
+     * Get the index to the greatest number in a double array.
+     *
+     * @param array The array to search.
+     * @return The index of the greatest value, or -1 if empty.
+     */
+    public static int maxIndex(final double[] array) {
+        int result = -1;
 
-		return result;
-	}
+        for (int i = 0; i < array.length; i++) {
+            if ((result == -1) || (array[result] < array[i])) {
+                result = i;
+            }
+        }
 
-	/**
-	 * Get the index to the smallest number in a double array.
-	 *
-	 * @param array
-	 *            The array to search.
-	 * @return The index of the smallest value, or -1 if empty.
-	 */
-	public static int minIndex(final double[] array) {
-		int result = -1;
+        return result;
+    }
 
-		for (int i = 0; i < array.length; i++) {
-			if ((result == -1) || (array[result] > array[i])) {
-				result = i;
-			}
-		}
+    /**
+     * Get the index to the smallest number in a double array.
+     *
+     * @param array The array to search.
+     * @return The index of the smallest value, or -1 if empty.
+     */
+    public static int minIndex(final double[] array) {
+        int result = -1;
 
-		return result;
-	}
+        for (int i = 0; i < array.length; i++) {
+            if ((result == -1) || (array[result] > array[i])) {
+                result = i;
+            }
+        }
 
-	/**
-	 * Convert radians to degrees.
-	 *
-	 * @param rad
-	 *            Radians
-	 * @return Degrees.
-	 */
-	public static double rad2deg(final double rad) {
-		return rad * (MathConst.DEG_SEMICIRCLE / Math.PI);
-	}
+        return result;
+    }
 
-	/**
-	 * Calculate x!.
-	 *
-	 * @param x
-	 *            The number to calculate for.
-	 * @return The factorial of x.
-	 */
-	public static double factorial(final int x) {
-		double result = 1.0;
+    /**
+     * Convert radians to degrees.
+     *
+     * @param rad Radians
+     * @return Degrees.
+     */
+    public static double rad2deg(final double rad) {
+        return rad * (MathConst.DEG_SEMICIRCLE / Math.PI);
+    }
 
-		for (int i = 1; i <= x; i++) {
-			result *= i;
-		}
+    /**
+     * Calculate x!.
+     *
+     * @param x The number to calculate for.
+     * @return The factorial of x.
+     */
+    public static double factorial(final int x) {
+        double result = 1.0;
 
-		return result;
-	}
+        for (int i = 1; i <= x; i++) {
+            result *= i;
+        }
 
-	/**
-	 * Private constructor.
-	 */
-	private EncogMath() {
+        return result;
+    }
 
-	}
+    /**
+     * Private constructor.
+     */
+    private EncogMath() {
 
-	public static double square(final double d) {
-		return d * d;
-	}
+    }
 
-	/**
-	 * Determine the sign of the value.
-	 *
-	 * @param value
-	 *            The value to check.
-	 * @return -1 if less than zero, 1 if greater, or 0 if zero.
-	 */
-	public static int sign(final double value) {
-		if (Math.abs(value) < DEFAULT_EPSILON) {
-			return 0;
-		} else if (value > 0) {
-			return 1;
-		} else {
-			return -1;
-		}
-	}
+    public static double square(final double d) {
+        return d * d;
+    }
 
-	/**
-	 * Transform a number in the range (-1,1) to a tri-state value indicated by
-	 * -1, 0 or 1.
-	 *
-	 * @param value
-	 *            The value to consider.
-	 * @return -1 if the value is below 1/3, 1 if above 1/3, zero otherwise.
-	 */
-	public static int thirds(final double value) {
-		if (value < -(1.0 / 3.0))
-			return -1;
-		else if (value > (1.0 / 3.0))
-			return 1;
-		else
-			return 0;
-	}
+    /**
+     * Determine the sign of the value.
+     *
+     * @param value The value to check.
+     * @return -1 if less than zero, 1 if greater, or 0 if zero.
+     */
+    public static int sign(final double value) {
+        if (Math.abs(value) < DEFAULT_EPSILON) {
+            return 0;
+        } else if (value > 0) {
+            return 1;
+        } else {
+            return -1;
+        }
+    }
+
+    /**
+     * Transform a number in the range (-1,1) to a tri-state value indicated by
+     * -1, 0 or 1.
+     *
+     * @param value The value to consider.
+     * @return -1 if the value is below 1/3, 1 if above 1/3, zero otherwise.
+     */
+    public static int thirds(final double value) {
+        if (value < -(1.0 / 3.0))
+            return -1;
+        else if (value > (1.0 / 3.0))
+            return 1;
+        else
+            return 0;
+    }
 }

@@ -21,45 +21,44 @@ package syncleus.dann.neural;
 import org.junit.Assert;
 import org.junit.Test;
 import syncleus.dann.graph.AbstractBidirectedAdjacencyGraph;
-
 import syncleus.dann.neural.backprop.SimpleBackpropNeuron;
 
 public class TestSynapse {
-	private static class TestBrain extends AbstractLocalBrain {
-		private static final long serialVersionUID = -7579268135961655455L;
+    private static class TestBrain extends AbstractLocalBrain {
+        private static final long serialVersionUID = -7579268135961655455L;
 
-		@Override
-		public boolean add(final Neuron newNeuron) {
-			return super.add(newNeuron);
-		}
+        @Override
+        public boolean add(final Neuron newNeuron) {
+            return super.add(newNeuron);
+        }
 
         @Override
         public AbstractBidirectedAdjacencyGraph clone() {
             return super.clone(); //To change body of generated methods, choose Tools | Templates.
         }
-	}
+    }
 
-	private static final double INITIAL_WEIGHT = 0.01;
-	private static final double TEST_INPUT = 2.0;
-	private static final double TEST_WEIGHT = 3.0;
+    private static final double INITIAL_WEIGHT = 0.01;
+    private static final double TEST_INPUT = 2.0;
+    private static final double TEST_WEIGHT = 3.0;
 
-	@Test
-	public void testAccessors() {
-		final TestBrain brain = new TestBrain();
+    @Test
+    public void testAccessors() {
+        final TestBrain brain = new TestBrain();
 
-		final SimpleBackpropNeuron sourceNeuron = new SimpleBackpropNeuron(
-				brain);
-		final SimpleBackpropNeuron destinationNeuron = new SimpleBackpropNeuron(
-				brain);
+        final SimpleBackpropNeuron sourceNeuron = new SimpleBackpropNeuron(
+                brain);
+        final SimpleBackpropNeuron destinationNeuron = new SimpleBackpropNeuron(
+                brain);
 
-		final SimpleSynapse testSynapse = new SimpleSynapse(sourceNeuron,
-				destinationNeuron, INITIAL_WEIGHT);
+        final SimpleSynapse testSynapse = new SimpleSynapse(sourceNeuron,
+                destinationNeuron, INITIAL_WEIGHT);
 
-		testSynapse.setInput(TEST_INPUT);
-		Assert.assertTrue(Math.abs(testSynapse.getInput() - TEST_INPUT) < 0.000001);
-		testSynapse.setWeight(TEST_WEIGHT);
-		Assert.assertTrue(Math.abs(testSynapse.getWeight() - TEST_WEIGHT) < 0.000001);
-		Assert.assertTrue(testSynapse.getSourceNode() == sourceNeuron);
-		Assert.assertTrue(testSynapse.getDestinationNode() == destinationNeuron);
-	}
+        testSynapse.setInput(TEST_INPUT);
+        Assert.assertTrue(Math.abs(testSynapse.getInput() - TEST_INPUT) < 0.000001);
+        testSynapse.setWeight(TEST_WEIGHT);
+        Assert.assertTrue(Math.abs(testSynapse.getWeight() - TEST_WEIGHT) < 0.000001);
+        Assert.assertTrue(testSynapse.getSourceNode() == sourceNeuron);
+        Assert.assertTrue(testSynapse.getDestinationNode() == destinationNeuron);
+    }
 }

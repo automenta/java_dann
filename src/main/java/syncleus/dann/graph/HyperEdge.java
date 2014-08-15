@@ -21,20 +21,20 @@ package syncleus.dann.graph;
 import java.util.List;
 
 public interface HyperEdge<N> extends Edge<N> {
-	int getDegree();
+    int getDegree();
 
-	boolean isSymmetric(HyperEdge symmetricEdge);
+    boolean isSymmetric(HyperEdge symmetricEdge);
 
-	HyperEdge<N> connect(N node);
+    HyperEdge<N> connect(N node);
 
-	HyperEdge<N> connect(List<N> node);
+    HyperEdge<N> connect(List<N> node);
 
-	@Override
-	HyperEdge<N> disconnect(N node);
+    @Override
+    HyperEdge<N> disconnect(N node);
 
-	@Override
-	HyperEdge<N> disconnect(List<N> node);
+    @Override
+    HyperEdge<N> disconnect(List<N> node);
 
-	@Override
-	HyperEdge<N> clone();
+    @Override
+    HyperEdge<N> clone();
 }

@@ -26,62 +26,62 @@ package syncleus.dann.math;
 import java.io.Serializable;
 
 public class IntPair implements Cloneable, Serializable {
-	private int x;
-	private int y;
+    private int x;
+    private int y;
 
-	public IntPair(final int theX, final int theY) {
-		this.x = theX;
-		this.y = theY;
-	}
+    public IntPair(final int theX, final int theY) {
+        this.x = theX;
+        this.y = theY;
+    }
 
-	public int getX() {
-		return x;
-	}
+    public int getX() {
+        return x;
+    }
 
-	public void setX(final int x) {
-		this.x = x;
-	}
+    public void setX(final int x) {
+        this.x = x;
+    }
 
-	public int getY() {
-		return y;
-	}
+    public int getY() {
+        return y;
+    }
 
-	public void setY(final int y) {
-		this.y = y;
-	}
+    public void setY(final int y) {
+        this.y = y;
+    }
 
-	public void add(final int v) {
-		this.x += v;
-		this.y += v;
-	}
+    public void add(final int v) {
+        this.x += v;
+        this.y += v;
+    }
 
-	public void addX(final int v) {
-		this.x += v;
-	}
+    public void addX(final int v) {
+        this.x += v;
+    }
 
-	public void addY(final int v) {
-		this.y += v;
-	}
+    public void addY(final int v) {
+        this.y += v;
+    }
 
-	public void add(final int addX, final int addY) {
-		this.x += addX;
-		this.y += addY;
-	}
+    public void add(final int addX, final int addY) {
+        this.x += addX;
+        this.y += addY;
+    }
 
-	@Override
-	public Object clone() {
-		return new IntPair(this.x, this.y);
-	}
+    @Override
+    public Object clone() {
+        return new IntPair(this.x, this.y);
+    }
 
-	@Override
-	public String toString() {
-		final StringBuilder result = new StringBuilder();
-		result.append("[IntPair:");
-		result.append(this.x);
-		result.append(";");
-		result.append(this.y);
-		result.append("]");
-		return result.toString();
-	}
+    @Override
+    public String toString() {
+        final StringBuilder result = new StringBuilder();
+        result.append("[IntPair:");
+        result.append(this.x);
+        result.append(';');
+        result.append(this.y);
+        result.append(']');
+        return result.toString();
+    }
 
 }

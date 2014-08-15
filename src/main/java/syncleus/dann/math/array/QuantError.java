@@ -26,31 +26,28 @@ package syncleus.dann.math.array;
 
 /**
  * Used to represent any error that occurs in the quant part of Encog.
- *
  */
 public class QuantError extends RuntimeException {
-	/**
-	 *
-	 */
-	private static final long serialVersionUID = 4280940104791165511L;
+    /**
+     *
+     */
+    private static final long serialVersionUID = 4280940104791165511L;
 
-	/**
-	 * Construct a message exception.
-	 *
-	 * @param msg
-	 *            The exception message.
-	 */
-	public QuantError(final String msg) {
-		super(msg);
-	}
+    /**
+     * Construct a message exception.
+     *
+     * @param msg The exception message.
+     */
+    public QuantError(final String msg) {
+        super(msg);
+    }
 
-	/**
-	 * Construct an exception that holds another exception.
-	 *
-	 * @param t
-	 *            The other exception.
-	 */
-	public QuantError(final Throwable t) {
-		super(t);
-	}
+    /**
+     * Construct an exception that holds another exception.
+     *
+     * @param t The other exception.
+     */
+    public QuantError(final Throwable t) {
+        super(t);
+    }
 }

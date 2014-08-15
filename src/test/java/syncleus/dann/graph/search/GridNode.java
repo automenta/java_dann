@@ -22,39 +22,39 @@ import syncleus.dann.graph.Weighted;
 import syncleus.dann.math.Vector;
 
 public class GridNode extends Vector implements Weighted {
-	private final double weight;
-	private static final long serialVersionUID = 3733460419806813102L;
+    private final double weight;
+    private static final long serialVersionUID = 3733460419806813102L;
 
-	public GridNode(final int x, final int y, final double weight) {
-		super(x, y);
-		this.weight = weight;
-	}
+    public GridNode(final int x, final int y, final double weight) {
+        super(x, y);
+        this.weight = weight;
+    }
 
-	@Override
-	public double getWeight() {
-		return this.weight;
-	}
+    @Override
+    public double getWeight() {
+        return this.weight;
+    }
 
-	public int getX() {
-		return (int) this.get(1);
-	}
+    public int getX() {
+        return (int) this.get(1);
+    }
 
-	public int getY() {
-		return (int) this.get(2);
-	}
+    public int getY() {
+        return (int) this.get(2);
+    }
 
-	@Override
-	public int hashCode() {
-		return (this.getX() * this.getY()) + this.getY();
-	}
+    @Override
+    public int hashCode() {
+        return (this.getX() * this.getY()) + this.getY();
+    }
 
-	@Override
-	public boolean equals(final Object compareToObj) {
-		if (!(compareToObj instanceof GridNode))
-			return false;
+    @Override
+    public boolean equals(final Object compareToObj) {
+        if (!(compareToObj instanceof GridNode))
+            return false;
 
-		final GridNode compareTo = (GridNode) compareToObj;
-		return ((compareTo.getX() == this.getX()) && (compareTo.getY() == this
-				.getY()));
-	}
+        final GridNode compareTo = (GridNode) compareToObj;
+        return ((compareTo.getX() == this.getX()) && (compareTo.getY() == this
+                .getY()));
+    }
 }

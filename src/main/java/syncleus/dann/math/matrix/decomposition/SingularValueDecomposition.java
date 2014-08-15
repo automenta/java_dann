@@ -18,10 +18,10 @@
  ******************************************************************************/
 package syncleus.dann.math.matrix.decomposition;
 
-import java.util.List;
-
 import syncleus.dann.math.RealNumber;
 import syncleus.dann.math.matrix.RealMatrix;
+
+import java.util.List;
 
 /**
  * Singular Value Decomposition.
@@ -38,15 +38,15 @@ import syncleus.dann.math.matrix.RealMatrix;
  * computed from this decomposition.<br/>
  */
 public interface SingularValueDecomposition extends Decomposition<RealMatrix> {
-	RealMatrix getLeftSingularMatrix();
+    RealMatrix getLeftSingularMatrix();
 
-	RealMatrix getRightSingularMatrix();
+    RealMatrix getRightSingularMatrix();
 
-	List<RealNumber> getSingularValues();
+    List<RealNumber> getSingularValues();
 
-	RealNumber norm2();
+    RealNumber norm2();
 
-	RealNumber norm2Condition();
+    RealNumber norm2Condition();
 
-	int rank();
+    int rank();
 }

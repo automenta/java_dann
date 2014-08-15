@@ -23,54 +23,51 @@
  */
 package syncleus.dann.graph.path.search;
 
+import syncleus.dann.graph.path.BasicPath;
+import syncleus.dann.graph.path.PathNode;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import syncleus.dann.graph.path.PathNode;
-import syncleus.dann.graph.path.BasicPath;
-
 public class FrontierHolder {
 
-	private final List<BasicPath> contents = new ArrayList<BasicPath>();
-	private final Prioritizer prioritizer;
+    private final List<BasicPath> contents = new ArrayList<>();
+    private final Prioritizer prioritizer;
 
-	public FrontierHolder(final Prioritizer thePrioritizer) {
-		this.prioritizer = thePrioritizer;
-	}
+    public FrontierHolder(final Prioritizer thePrioritizer) {
+        this.prioritizer = thePrioritizer;
+    }
 
-	public List<BasicPath> getContents() {
-		return contents;
-	}
+    public List<BasicPath> getContents() {
+        return contents;
+    }
 
-	public void add(final BasicPath path) {
-		for (int i = 0; i < this.contents.size(); i++) {
-			if (this.prioritizer.isHigherPriority(path, this.contents.get(i))) {
-				this.contents.add(i, path);
-				return;
-			}
-		}
-		// must be lowest priority, or the list is empty
-		this.contents.add(path);
-	}
-
-	public BasicPath pop() {
-		if (contents.isEmpty())
-			return null;
-
-		final BasicPath result = contents.get(0);
-		contents.remove(0);
-		return result;
-	}
-
-	public int size() {
-		return this.contents.size();
-	}
-
-	public boolean containsDestination(final PathNode node) {
-            if (this.contents.stream().anyMatch((path) -> (path.getDestinationNode().equals(node)))) {
-                return true;
+    public void add(final BasicPath path) {
+        for (int i = 0; i < this.contents.size(); i++) {
+            if (this.prioritizer.isHigherPriority(path, this.contents.get(i))) {
+                this.contents.add(i, path);
+                return;
             }
-		return false;
-	}
+        }
+        // must be lowest priority, or the list is empty
+        this.contents.add(path);
+    }
+
+    public BasicPath pop() {
+        if (contents.isEmpty())
+            return null;
+
+        final BasicPath result = contents.get(0);
+        contents.remove(0);
+        return result;
+    }
+
+    public int size() {
+        return this.contents.size();
+    }
+
+    public boolean containsDestination(final PathNode node) {
+        return this.contents.stream().anyMatch((path) -> (path.getDestinationNode().equals(node)));
+    }
 
 }

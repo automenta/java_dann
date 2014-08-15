@@ -23,58 +23,59 @@
  */
 package syncleus.dann.graph.path;
 
-import java.util.ArrayList;
-import java.util.List;
 import syncleus.dann.graph.SimpleWeightedDirectedEdge;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class PathNode {
-	private final List<SimpleWeightedDirectedEdge<PathNode>> connections = new ArrayList<>();
-	private final List<SimpleWeightedDirectedEdge<PathNode>> backConnections = new ArrayList<>();
-	private final String label;
+    private final List<SimpleWeightedDirectedEdge<PathNode>> connections = new ArrayList<>();
+    private final List<SimpleWeightedDirectedEdge<PathNode>> backConnections = new ArrayList<>();
+    private final String label;
 
-	public PathNode(final String label) {
-		super();
-		this.label = label;
-	}
+    public PathNode(final String label) {
+        super();
+        this.label = label;
+    }
 
-	public List<SimpleWeightedDirectedEdge<PathNode>> getConnections() {
-		return connections;
-	}
+    public List<SimpleWeightedDirectedEdge<PathNode>> getConnections() {
+        return connections;
+    }
 
-	public String getLabel() {
-		return label;
-	}
+    public String getLabel() {
+        return label;
+    }
 
-	public void connect(final PathNode newNode, final double cost) {
-		SimpleWeightedDirectedEdge<PathNode> edge;
-		this.connections.add(edge = new SimpleWeightedDirectedEdge<PathNode>(this, newNode, cost));
-		newNode.getBackConnections().add(edge);
-	}
+    public void connect(final PathNode newNode, final double cost) {
+        SimpleWeightedDirectedEdge<PathNode> edge;
+        this.connections.add(edge = new SimpleWeightedDirectedEdge<>(this, newNode, cost));
+        newNode.getBackConnections().add(edge);
+    }
 
-	/**
-	 * @return the backConnections
-	 */
-	public List<SimpleWeightedDirectedEdge<PathNode>> getBackConnections() {
-		return backConnections;
-	}
+    /**
+     * @return the backConnections
+     */
+    public List<SimpleWeightedDirectedEdge<PathNode>> getBackConnections() {
+        return backConnections;
+    }
 
-	@Override
-	public String toString() {
-		final StringBuilder result = new StringBuilder();
-		result.append("[BasicNode: ");
-		result.append(this.label);
-		result.append("]");
-		return result.toString();
-	}
+    @Override
+    public String toString() {
+        final StringBuilder result = new StringBuilder();
+        result.append("[BasicNode: ");
+        result.append(this.label);
+        result.append(']');
+        return result.toString();
+    }
 
-	public double getCost(final PathNode node) {
-		for (final SimpleWeightedDirectedEdge<PathNode> edge : this.connections) {
-			if (edge.getDestinationNode().equals(node)) {
-				return edge.getWeight();
-			}
-		}
+    public double getCost(final PathNode node) {
+        for (final SimpleWeightedDirectedEdge<PathNode> edge : this.connections) {
+            if (edge.getDestinationNode().equals(node)) {
+                return edge.getWeight();
+            }
+        }
 
-		throw new RuntimeException("Nodes are not connected");
-	}
+        throw new RuntimeException("Nodes are not connected");
+    }
 
 }

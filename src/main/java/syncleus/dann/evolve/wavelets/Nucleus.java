@@ -18,16 +18,11 @@
  ******************************************************************************/
 package syncleus.dann.evolve.wavelets;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import syncleus.dann.util.UnexpectedDannError;
+
+import java.util.*;
 
 /**
  * A Nucleus is a collection of Chromosomes with a known mutability.
@@ -35,118 +30,101 @@ import syncleus.dann.util.UnexpectedDannError;
  * @see com.syncleus.dann.genetics.wavelets.Chromosome
  */
 public class Nucleus implements Cloneable {
-	private List<Chromosome> chromosomes;
-	private static final Logger LOGGER = LogManager.getLogger(Nucleus.class);
-	private static final double MUTABILITY_ADJUSTMENT = 10.0;
+    private List<Chromosome> chromosomes;
+    private static final Logger LOGGER = LogManager.getLogger(Nucleus.class);
+    private static final double MUTABILITY_ADJUSTMENT = 10.0;
 
-	/**
-	 * Creates a new Nucleus with at least one chromosome. Additional
-	 * chromosomes could be added based on the random mutability factor.
-	 */
-	public Nucleus() {
-		this.chromosomes = new ArrayList<Chromosome>();
-		final double mutability = Mutations.getRandom().nextDouble()
-				* MUTABILITY_ADJUSTMENT;
-		// make sure there is at least one starting chromosome.
-		this.chromosomes.add(new Chromosome());
-		// there is a chance more chromosomes can be created
-		while (Mutations.mutationEvent(mutability))
-			this.chromosomes.add(new Chromosome());
-	}
+    /**
+     * Creates a new Nucleus with at least one chromosome. Additional
+     * chromosomes could be added based on the random mutability factor.
+     */
+    public Nucleus() {
+        this.chromosomes = new ArrayList<>();
+        final double mutability = Mutations.getRandom().nextDouble()
+                * MUTABILITY_ADJUSTMENT;
+        // make sure there is at least one starting chromosome.
+        this.chromosomes.add(new Chromosome());
+        // there is a chance more chromosomes can be created
+        while (Mutations.mutationEvent(mutability))
+            this.chromosomes.add(new Chromosome());
+    }
 
-	/**
-	 * Creates a new Nucleus as a copy of the old Nucleus.
-	 *
-	 * @param copy
-	 *            The Nucleus to copy
-	 */
-	public Nucleus(final Nucleus copy) {
-		this.chromosomes = new ArrayList<Chromosome>(copy.getChromosomes());
-	}
+    /**
+     * Creates a new Nucleus as a copy of the old Nucleus.
+     *
+     * @param copy The Nucleus to copy
+     */
+    public Nucleus(final Nucleus copy) {
+        this.chromosomes = new ArrayList<>(copy.getChromosomes());
+    }
 
-	/**
-	 * Gets all chromosomes associated with this object.
-	 *
-	 * @return A list of chromosomes
-	 */
-	protected List<Chromosome> getChromosomes() {
-		return Collections.unmodifiableList(this.chromosomes);
-	}
+    /**
+     * Gets all chromosomes associated with this object.
+     *
+     * @return A list of chromosomes
+     */
+    protected List<Chromosome> getChromosomes() {
+        return Collections.unmodifiableList(this.chromosomes);
+    }
 
-	/**
-	 * Performs a preTick() operation on each Chromosome.
-	 *
-	 * @see Chromosome#preTick()
-	 */
-	public void preTick() {
-            this.chromosomes.stream().forEach((chromosome) -> {
-                chromosome.preTick();
-            });
-	}
+    /**
+     * Performs a preTick() operation on each Chromosome.
+     *
+     * @see Chromosome#preTick()
+     */
+    public void preTick() {
+        this.chromosomes.stream().forEach(Chromosome::preTick);
+    }
 
-	/**
-	 * Performs a tick() operation on each Chromosome.
-	 *
-	 * @see Chromosome#tick()
-	 */
-	public void tick() {
-            this.chromosomes.stream().forEach((chromosome) -> {
-                chromosome.tick();
-            });
-	}
+    /**
+     * Performs a tick() operation on each Chromosome.
+     *
+     * @see Chromosome#tick()
+     */
+    public void tick() {
+        this.chromosomes.stream().forEach(Chromosome::tick);
+    }
 
-	public boolean bind(final SignalKeyConcentration concentration,
-			final boolean isExternal) {
-		boolean bound = true;
-		for (final Chromosome chromosome : this.chromosomes)
-			if (chromosome.bind(concentration, isExternal))
-				bound = true;
-		return bound;
-	}
+    public boolean bind(final SignalKeyConcentration concentration,
+                        final boolean isExternal) {
+        boolean bound = true;
+        for (final Chromosome chromosome : this.chromosomes)
+            if (chromosome.bind(concentration, isExternal))
+                bound = true;
+        return bound;
+    }
 
-	@Override
-	public Nucleus clone() {
-		try {
-			final Nucleus copy = (Nucleus) super.clone();
-			copy.chromosomes = new ArrayList<Chromosome>();
-                        this.chromosomes.stream().forEach((chromosome) -> {
-                        copy.chromosomes.add(chromosome.clone());
-                    });
-			return copy;
-		} catch (final CloneNotSupportedException caught) {
-			LOGGER.error("CloneNotSupportedException caught but not expected!",
-					caught);
-			throw new UnexpectedDannError(
-					"CloneNotSupportedException caught but not expected",
-					caught);
-		}
-	}
+    @Override
+    public Nucleus clone() {
+        try {
+            final Nucleus copy = (Nucleus) super.clone();
+            copy.chromosomes = new ArrayList<>();
+            this.chromosomes.stream().forEach((chromosome) -> copy.chromosomes.add(chromosome.clone()));
+            return copy;
+        } catch (final CloneNotSupportedException caught) {
+            LOGGER.error("CloneNotSupportedException caught but not expected!",
+                    caught);
+            throw new UnexpectedDannError(
+                    "CloneNotSupportedException caught but not expected",
+                    caught);
+        }
+    }
 
-	public void mutate() {
-		final Set<AbstractKey> allKeys = new HashSet<AbstractKey>();
-                this.chromosomes.stream().forEach((chromosome) -> {
-                allKeys.addAll(chromosome.getKeys());
-            });
-            this.chromosomes.stream().forEach((chromosome) -> {
-                chromosome.mutate(allKeys);
-            });
-	}
+    public void mutate() {
+        final Set<AbstractKey> allKeys = new HashSet<>();
+        this.chromosomes.stream().forEach((chromosome) -> allKeys.addAll(chromosome.getKeys()));
+        this.chromosomes.stream().forEach((chromosome) -> chromosome.mutate(allKeys));
+    }
 
-	public void mutate(final Set<AbstractKey> keyPool) {
-		final Set<AbstractKey> allKeys = new HashSet<AbstractKey>(keyPool);
-                this.chromosomes.stream().forEach((chromosome) -> {
-                allKeys.addAll(chromosome.getKeys());
-            });
-            this.chromosomes.stream().forEach((chromosome) -> {
-                chromosome.mutate(allKeys);
-            });
-	}
+    public void mutate(final Set<AbstractKey> keyPool) {
+        final Set<AbstractKey> allKeys = new HashSet<>(keyPool);
+        this.chromosomes.stream().forEach((chromosome) -> allKeys.addAll(chromosome.getKeys()));
+        this.chromosomes.stream().forEach((chromosome) -> chromosome.mutate(allKeys));
+    }
 
-	Set<SignalKey> getExpressedSignals(final boolean external) {
-		final Set<SignalKey> allSignals = new HashSet<SignalKey>();
-                this.chromosomes.stream().forEach((chromosome) -> {
-                allSignals.addAll(chromosome.getExpressedSignals(external));
-            });
-		return Collections.unmodifiableSet(allSignals);
-	}
+    Set<SignalKey> getExpressedSignals(final boolean external) {
+        final Set<SignalKey> allSignals = new HashSet<>();
+        this.chromosomes.stream().forEach((chromosome) -> allSignals.addAll(chromosome.getExpressedSignals(external)));
+        return Collections.unmodifiableSet(allSignals);
+    }
 }

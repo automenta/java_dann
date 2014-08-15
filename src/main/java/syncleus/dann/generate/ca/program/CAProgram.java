@@ -27,19 +27,19 @@ import syncleus.dann.generate.ca.universe.Universe;
 
 public interface CAProgram {
 
-	void iteration();
+    void iteration();
 
-	void randomize();
+    void randomize();
 
-	/**
-	 * @return the sourceUniverse
-	 */
-	Universe getSourceUniverse();
+    /**
+     * @return the sourceUniverse
+     */
+    Universe getSourceUniverse();
 
-	void setSourceUniverse(Universe sourceUniverse);
+    void setSourceUniverse(Universe sourceUniverse);
 
-	Universe getTargetUniverse();
+    Universe getTargetUniverse();
 
-	void setTargetUniverse(Universe targetUniverse);
+    void setTargetUniverse(Universe targetUniverse);
 
 }

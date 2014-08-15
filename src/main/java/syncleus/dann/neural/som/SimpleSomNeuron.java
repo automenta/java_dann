@@ -20,8 +20,6 @@ package syncleus.dann.neural.som;
 
 import syncleus.dann.neural.AbstractNeuron;
 import syncleus.dann.neural.Brain;
-import syncleus.dann.neural.Neuron;
-import syncleus.dann.neural.Synapse;
 import syncleus.dann.neural.activation.AbstractActivationFunction;
 import syncleus.dann.neural.activation.SqrtActivationFunction;
 
@@ -33,66 +31,62 @@ import syncleus.dann.neural.activation.SqrtActivationFunction;
  * @since 2.0
  */
 public class SimpleSomNeuron extends AbstractNeuron implements SomOutputNeuron {
-	private static final long serialVersionUID = -4237625154747173055L;
-	private static final AbstractActivationFunction ACTIVATION_FUNCTION = new SqrtActivationFunction();
-	private final AbstractActivationFunction activationFunction;
-	private double output = 0.0;
+    private static final long serialVersionUID = -4237625154747173055L;
+    private static final AbstractActivationFunction ACTIVATION_FUNCTION = new SqrtActivationFunction();
+    private final AbstractActivationFunction activationFunction;
+    private double output = 0.0;
 
-	/**
-	 * Creates a default SimpleSomNeuron.
-	 *
-	 * @since 2.0
-	 */
-	public SimpleSomNeuron(final Brain brain) {
-		super(brain);
-		this.activationFunction = ACTIVATION_FUNCTION;
-	}
+    /**
+     * Creates a default SimpleSomNeuron.
+     *
+     * @since 2.0
+     */
+    public SimpleSomNeuron(final Brain brain) {
+        super(brain);
+        this.activationFunction = ACTIVATION_FUNCTION;
+    }
 
-	/**
-	 * Trains the neuron to be closer to the input vector according to the
-	 * specified parameters.
-	 *
-	 * @since 2.0
-	 */
-	@Override
-	public void train(final double learningRate,
-			final double neighborhoodAdjustment) {
-            getBrain().getInEdges(this).stream().forEach((source) -> {
-                source.setWeight(source.getWeight()
-                        + (learningRate * neighborhoodAdjustment * (source
-                                .getInput() - source.getWeight())));
-            });
-	}
+    /**
+     * Trains the neuron to be closer to the input vector according to the
+     * specified parameters.
+     *
+     * @since 2.0
+     */
+    @Override
+    public void train(final double learningRate,
+                      final double neighborhoodAdjustment) {
+        getBrain().getInEdges(this).stream().forEach((source) -> source.setWeight(source.getWeight()
+                + (learningRate * neighborhoodAdjustment * (source
+                .getInput() - source.getWeight()))));
+    }
 
-	/**
-	 * Propagates all the inputs to determine to calculate the output.
-	 *
-	 * @since 2.0
-	 */
-	@Override
-	public void tick() {
-		// calculate the current input activity
-		double activity = 0.0;
-                activity = getBrain().getInEdges(this).stream().map((currentSynapse) -> Math
-                    .pow(currentSynapse.getInput() - currentSynapse.getWeight(),
-                            2.0)).reduce(activity, (accumulator, _item) -> accumulator + _item);
+    /**
+     * Propagates all the inputs to determine to calculate the output.
+     *
+     * @since 2.0
+     */
+    @Override
+    public void tick() {
+        // calculate the current input activity
+        double activity = 0.0;
+        activity = getBrain().getInEdges(this).stream().map((currentSynapse) -> Math
+                .pow(currentSynapse.getInput() - currentSynapse.getWeight(),
+                        2.0)).reduce(activity, (accumulator, _item) -> accumulator + _item);
 
-		// calculate the activity function and set the result as the output
-		output = activationFunction.activate(activity);
-                getBrain().getTraversableEdges(
-                        this).stream().forEach((current) -> {
-                                    current.setInput(output);
-            });
-	}
+        // calculate the activity function and set the result as the output
+        output = activationFunction.activate(activity);
+        getBrain().getTraversableEdges(
+                this).stream().forEach((current) -> current.setInput(output));
+    }
 
-	/**
-	 * Obtains the current output for this neuron.
-	 *
-	 * @return The current output of the neuron.
-	 * @since 2.0
-	 */
-	@Override
-	public double getOutput() {
-		return this.output;
-	}
+    /**
+     * Obtains the current output for this neuron.
+     *
+     * @return The current output of the neuron.
+     * @since 2.0
+     */
+    @Override
+    public double getOutput() {
+        return this.output;
+    }
 }

@@ -18,67 +18,63 @@
  ******************************************************************************/
 package syncleus.dann.graph.context;
 
+import syncleus.dann.graph.Edge;
+import syncleus.dann.graph.Graph;
+
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-import syncleus.dann.graph.Edge;
-import syncleus.dann.graph.Graph;
-
 public abstract class AbstractContextNode<N, E extends Edge<N>, G extends Graph<N, E>>
-		extends AbstractContextGraphElement<G> implements ContextNode<N, E> {
-	private final Set<E> connectedEdges = new HashSet<E>();
-	private final Set<ContextEdge<N, E, G>> contextEdges = new HashSet<ContextEdge<N, E, G>>();
+        extends AbstractContextGraphElement<G> implements ContextNode<N, E> {
+    private final Set<E> connectedEdges = new HashSet<>();
+    private final Set<ContextEdge<N, E, G>> contextEdges = new HashSet<>();
 
-	protected AbstractContextNode(final boolean allowJoiningMultipleGraphs) {
-		super(allowJoiningMultipleGraphs);
-	}
+    protected AbstractContextNode(final boolean allowJoiningMultipleGraphs) {
+        super(allowJoiningMultipleGraphs);
+    }
 
-	@Override
-	public boolean joiningGraph(final G graph) {
-		if (super.joiningGraph(graph)) {
-                    contextEdges.stream().forEach((contextEdge) -> {
-                        contextEdge.nodeJoiningGraph(graph, (N) this);
-                    });
-			return true;
-		} else
-			return false;
-	}
+    @Override
+    public boolean joiningGraph(final G graph) {
+        if (super.joiningGraph(graph)) {
+            contextEdges.stream().forEach((contextEdge) -> contextEdge.nodeJoiningGraph(graph, (N) this));
+            return true;
+        } else
+            return false;
+    }
 
-	@Override
-	public boolean leavingGraph(final G graph) {
-		if (super.leavingGraph(graph)) {
-                    contextEdges.stream().forEach((contextEdge) -> {
-                        contextEdge.nodeLeavingGraph(graph, (N) this);
-                    });
-			return true;
-		} else
-			return false;
-	}
+    @Override
+    public boolean leavingGraph(final G graph) {
+        if (super.leavingGraph(graph)) {
+            contextEdges.stream().forEach((contextEdge) -> contextEdge.nodeLeavingGraph(graph, (N) this));
+            return true;
+        } else
+            return false;
+    }
 
-	@Override
-	public boolean connectingEdge(final E edge) {
-		if (edge == null)
-			throw new IllegalArgumentException("edge can not be null");
+    @Override
+    public boolean connectingEdge(final E edge) {
+        if (edge == null)
+            throw new IllegalArgumentException("edge can not be null");
 
-		this.connectedEdges.add(edge);
-		if (edge instanceof ContextEdge)
-			this.contextEdges.add((ContextEdge) edge);
-		return true;
-	}
+        this.connectedEdges.add(edge);
+        if (edge instanceof ContextEdge)
+            this.contextEdges.add((ContextEdge) edge);
+        return true;
+    }
 
-	@Override
-	public boolean disconnectingEdge(final E edge) {
-		if (edge == null)
-			throw new IllegalArgumentException("edge can not be null");
+    @Override
+    public boolean disconnectingEdge(final E edge) {
+        if (edge == null)
+            throw new IllegalArgumentException("edge can not be null");
 
-		// remove all references to this edge
-		this.connectedEdges.remove(edge);
-		this.contextEdges.remove(edge);
-		return true;
-	}
+        // remove all references to this edge
+        this.connectedEdges.remove(edge);
+        this.contextEdges.remove(edge);
+        return true;
+    }
 
-	public final Set<E> getConnectedEdges() {
-		return Collections.unmodifiableSet(connectedEdges);
-	}
+    public final Set<E> getConnectedEdges() {
+        return Collections.unmodifiableSet(connectedEdges);
+    }
 }

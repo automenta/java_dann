@@ -23,20 +23,20 @@
  */
 package syncleus.dann.graph.path.search;
 
-import syncleus.dann.graph.path.PathGraph;
 import syncleus.dann.graph.path.BasicPath;
+import syncleus.dann.graph.path.PathGraph;
 
 public interface GraphSearch extends Prioritizer {
 
-	public PathGraph getGraph();
+    public PathGraph getGraph();
 
-	public SearchGoal getGoal();
+    public SearchGoal getGoal();
 
-	public void iteration();
+    public void iteration();
 
-	/**
-	 * @return the solution
-	 */
-	public BasicPath getSolution();
+    /**
+     * @return the solution
+     */
+    public BasicPath getSolution();
 
 }

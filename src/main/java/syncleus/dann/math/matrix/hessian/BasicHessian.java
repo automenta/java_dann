@@ -25,7 +25,6 @@ package syncleus.dann.math.matrix.hessian;
 
 import org.encog.neural.flat.FlatNetwork;
 import org.encog.neural.networks.BasicNetwork;
-
 import syncleus.dann.learn.MLDataSet;
 import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.math.matrix.SimpleRealMatrix;
@@ -35,112 +34,112 @@ import syncleus.dann.math.matrix.SimpleRealMatrix;
  */
 public abstract class BasicHessian implements ComputeHessian {
 
-	/**
-	 * The training data that provides the ideal values.
-	 */
-	protected MLDataSet training;
+    /**
+     * The training data that provides the ideal values.
+     */
+    protected MLDataSet training;
 
-	/**
-	 * The neural network that we would like to train.
-	 */
-	protected BasicNetwork network;
+    /**
+     * The neural network that we would like to train.
+     */
+    protected BasicNetwork network;
 
-	/**
-	 * The sum of square error.
-	 */
-	protected double sse;
+    /**
+     * The sum of square error.
+     */
+    protected double sse;
 
-	/**
-	 * The gradients of the Hessian.
-	 */
-	protected double[] gradients;
+    /**
+     * The gradients of the Hessian.
+     */
+    protected double[] gradients;
 
-	/**
-	 * The Hessian matrix.
-	 */
-	protected SimpleRealMatrix hessianMatrix;
+    /**
+     * The Hessian matrix.
+     */
+    protected SimpleRealMatrix hessianMatrix;
 
-	/**
-	 * The Hessian 2d array.
-	 */
-	protected double[][] hessian;
+    /**
+     * The Hessian 2d array.
+     */
+    protected double[][] hessian;
 
-	/**
-	 * The flat network.
-	 */
-	protected FlatNetwork flat;
+    /**
+     * The flat network.
+     */
+    protected FlatNetwork flat;
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void init(final BasicNetwork theNetwork, final MLDataSet theTraining) {
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void init(final BasicNetwork theNetwork, final MLDataSet theTraining) {
 
-		final int weightCount = theNetwork.getStructure().getFlat()
-				.getWeights().length;
-		this.flat = theNetwork.getFlat();
-		this.training = theTraining;
-		this.network = theNetwork;
-		this.gradients = new double[weightCount];
-		this.hessianMatrix = new SimpleRealMatrix(weightCount, weightCount);
-		this.hessian = this.hessianMatrix.getData();
-	}
+        final int weightCount = theNetwork.getStructure().getFlat()
+                .getWeights().length;
+        this.flat = theNetwork.getFlat();
+        this.training = theTraining;
+        this.network = theNetwork;
+        this.gradients = new double[weightCount];
+        this.hessianMatrix = new SimpleRealMatrix(weightCount, weightCount);
+        this.hessian = this.hessianMatrix.getData();
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public double[] getGradients() {
-		return gradients;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public double[] getGradients() {
+        return gradients;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public SimpleRealMatrix getHessianMatrix() {
-		return hessianMatrix;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public SimpleRealMatrix getHessianMatrix() {
+        return hessianMatrix;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public double[][] getHessian() {
-		return hessian;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public double[][] getHessian() {
+        return hessian;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void clear() {
-		EngineArray.fill(this.gradients, 0);
-		this.hessianMatrix.clear();
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void clear() {
+        EngineArray.fill(this.gradients, 0);
+        this.hessianMatrix.clear();
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public double getSSE() {
-		return sse;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public double getSSE() {
+        return sse;
+    }
 
-	/**
-	 * Update the Hessian, sum's with what is in the Hessian already. Call clear
-	 * to clear out old Hessian.
-	 * 
-	 * @param d
-	 */
-	public void updateHessian(final double[] d) {
-		// update the hessian
-		final int weightCount = this.network.getFlat().getWeights().length;
-		for (int i = 0; i < weightCount; i++) {
-			for (int j = 0; j < weightCount; j++) {
-				this.hessian[i][j] += d[i] * d[j];
-			}
-		}
-	}
+    /**
+     * Update the Hessian, sum's with what is in the Hessian already. Call clear
+     * to clear out old Hessian.
+     *
+     * @param d
+     */
+    public void updateHessian(final double[] d) {
+        // update the hessian
+        final int weightCount = this.network.getFlat().getWeights().length;
+        for (int i = 0; i < weightCount; i++) {
+            for (int j = 0; j < weightCount; j++) {
+                this.hessian[i][j] += d[i] * d[j];
+            }
+        }
+    }
 
 }

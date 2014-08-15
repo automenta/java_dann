@@ -25,156 +25,156 @@ package syncleus.dann.data.language;
 
 public class SimpleParser {
 
-	private final String line;
-	private int currentPosition;
-	private int marked;
+    private final String line;
+    private int currentPosition;
+    private int marked;
 
-	public SimpleParser(final String line) {
-		this.line = line;
-	}
+    public SimpleParser(final String line) {
+        this.line = line;
+    }
 
-	public int remaining() {
-		return Math.max(this.line.length() - this.currentPosition, 0);
-	}
+    public int remaining() {
+        return Math.max(this.line.length() - this.currentPosition, 0);
+    }
 
-	public boolean parseThroughComma() {
-		eatWhiteSpace();
-		if (!eol()) {
-			if (peek() == ',') {
-				advance();
-				return true;
-			}
-		}
+    public boolean parseThroughComma() {
+        eatWhiteSpace();
+        if (!eol()) {
+            if (peek() == ',') {
+                advance();
+                return true;
+            }
+        }
 
-		return false;
-	}
+        return false;
+    }
 
-	public boolean isIdentifier() {
-		if (eol())
-			return false;
+    public boolean isIdentifier() {
+        if (eol())
+            return false;
 
-		return Character.isLetterOrDigit(peek()) || peek() == '_';
-	}
+        return Character.isLetterOrDigit(peek()) || peek() == '_';
+    }
 
-	public char peek() {
-		if (eol())
-			return 0;
-		else if (currentPosition >= this.line.length())
-			return 0;
-		else
-			return this.line.charAt(this.currentPosition);
-	}
+    public char peek() {
+        if (eol())
+            return 0;
+        else if (currentPosition >= this.line.length())
+            return 0;
+        else
+            return this.line.charAt(this.currentPosition);
+    }
 
-	public void advance() {
-		if (currentPosition < this.line.length()) {
-			currentPosition++;
-		}
-	}
+    public void advance() {
+        if (currentPosition < this.line.length()) {
+            currentPosition++;
+        }
+    }
 
-	public boolean isWhiteSpace() {
-		return " \t\n\r".indexOf(peek()) != -1;
-	}
+    public boolean isWhiteSpace() {
+        return " \t\n\r".indexOf(peek()) != -1;
+    }
 
-	public boolean eol() {
-		return (this.currentPosition >= this.line.length());
-	}
+    public boolean eol() {
+        return (this.currentPosition >= this.line.length());
+    }
 
-	public void eatWhiteSpace() {
-		while (!eol() && isWhiteSpace())
-			advance();
-	}
+    public void eatWhiteSpace() {
+        while (!eol() && isWhiteSpace())
+            advance();
+    }
 
-	public char readChar() {
-		if (eol())
-			return 0;
+    public char readChar() {
+        if (eol())
+            return 0;
 
-		final char ch = peek();
-		advance();
-		return ch;
-	}
+        final char ch = peek();
+        advance();
+        return ch;
+    }
 
-	public String readToWhiteSpace() {
-		final StringBuilder result = new StringBuilder();
+    public String readToWhiteSpace() {
+        final StringBuilder result = new StringBuilder();
 
-		while (!isWhiteSpace() && !eol()) {
-			result.append(readChar());
-		}
+        while (!isWhiteSpace() && !eol()) {
+            result.append(readChar());
+        }
 
-		return result.toString();
-	}
+        return result.toString();
+    }
 
-	public boolean lookAhead(final String str, final boolean ignoreCase) {
-		if (remaining() < str.length())
-			return false;
-		for (int i = 0; i < str.length(); i++) {
-			char c1 = str.charAt(i);
-			char c2 = this.line.charAt(this.currentPosition + i);
+    public boolean lookAhead(final String str, final boolean ignoreCase) {
+        if (remaining() < str.length())
+            return false;
+        for (int i = 0; i < str.length(); i++) {
+            char c1 = str.charAt(i);
+            char c2 = this.line.charAt(this.currentPosition + i);
 
-			if (ignoreCase) {
-				c1 = Character.toLowerCase(c1);
-				c2 = Character.toLowerCase(c2);
-			}
+            if (ignoreCase) {
+                c1 = Character.toLowerCase(c1);
+                c2 = Character.toLowerCase(c2);
+            }
 
-			if (c1 != c2)
-				return false;
-		}
+            if (c1 != c2)
+                return false;
+        }
 
-		return true;
-	}
+        return true;
+    }
 
-	public void advance(final int p) {
-		this.currentPosition = Math
-				.min(line.length(), this.currentPosition + p);
-	}
+    public void advance(final int p) {
+        this.currentPosition = Math
+                .min(line.length(), this.currentPosition + p);
+    }
 
-	public void mark() {
-		this.marked = this.currentPosition;
-	}
+    public void mark() {
+        this.marked = this.currentPosition;
+    }
 
-	public void reset() {
-		this.currentPosition = this.marked;
-	}
+    public void reset() {
+        this.currentPosition = this.marked;
+    }
 
-	public String readQuotedString() {
+    public String readQuotedString() {
 
-		if (peek() != '\"')
-			return "";
+        if (peek() != '\"')
+            return "";
 
-		final StringBuilder result = new StringBuilder();
+        final StringBuilder result = new StringBuilder();
 
-		advance();
-		while (peek() != '\"' && !this.eol()) {
-			result.append(readChar());
-		}
-		advance();
+        advance();
+        while (peek() != '\"' && !this.eol()) {
+            result.append(readChar());
+        }
+        advance();
 
-		return result.toString();
-	}
+        return result.toString();
+    }
 
-	public String readToChars(final String chs) {
-		final StringBuilder result = new StringBuilder();
+    public String readToChars(final String chs) {
+        final StringBuilder result = new StringBuilder();
 
-		while (chs.indexOf(this.peek()) == -1 && !eol()) {
-			result.append(readChar());
-		}
+        while (chs.indexOf(this.peek()) == -1 && !eol()) {
+            result.append(readChar());
+        }
 
-		return result.toString();
-	}
+        return result.toString();
+    }
 
-	public String getLine() {
-		return this.line;
-	}
+    public String getLine() {
+        return this.line;
+    }
 
-	public boolean lookAhead(final String c) {
-		return lookAhead(c, false);
-	}
+    public boolean lookAhead(final String c) {
+        return lookAhead(c, false);
+    }
 
-	@Override
-	public String toString() {
-		final StringBuilder result = new StringBuilder();
-		result.append("[Parser: ");
-		result.append(this.line.substring(this.currentPosition));
-		result.append("]");
-		return result.toString();
-	}
+    @Override
+    public String toString() {
+        final StringBuilder result = new StringBuilder();
+        result.append("[Parser: ");
+        result.append(this.line.substring(this.currentPosition));
+        result.append(']');
+        return result.toString();
+    }
 }

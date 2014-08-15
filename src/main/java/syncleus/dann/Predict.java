@@ -7,24 +7,30 @@
 package syncleus.dann;
 
 /**
- * 
+ *
  */
 public interface Predict<P> {
-    
+
     public interface PredictionCallback<S> {
         public void onPrediction(S s);
     }
-    
-    /** get next best prediction */
+
+    /**
+     * get next best prediction
+     */
     default P predictImmediate() {
         return predictImmediate(0);
     }
-    
-    /** get next best prediction at time dt in the future */
+
+    /**
+     * get next best prediction at time dt in the future
+     */
     public P predictImmediate(double dt);
-    
-    /** asynchronous prediction events */
+
+    /**
+     * asynchronous prediction events
+     */
     public void onPrediction(PredictionCallback<P> c);
-    
-    
+
+
 }

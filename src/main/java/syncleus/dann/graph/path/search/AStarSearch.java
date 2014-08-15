@@ -23,56 +23,56 @@
  */
 package syncleus.dann.graph.path.search;
 
-import syncleus.dann.graph.path.PathGraphSearch;
-import syncleus.dann.graph.path.PathGraph;
-import syncleus.dann.graph.path.PathNode;
 import syncleus.dann.graph.path.BasicPath;
+import syncleus.dann.graph.path.PathGraph;
+import syncleus.dann.graph.path.PathGraphSearch;
+import syncleus.dann.graph.path.PathNode;
 
 public class AStarSearch extends PathGraphSearch {
 
-	private final CostEstimator estimator;
+    private final CostEstimator estimator;
 
-	public AStarSearch(final PathGraph theGraph,
-			final PathNode startingPoint, final SearchGoal theGoal,
-			final CostEstimator theEstimator) {
-		super(theGraph, startingPoint, theGoal);
-		this.estimator = theEstimator;
-	}
+    public AStarSearch(final PathGraph theGraph,
+                       final PathNode startingPoint, final SearchGoal theGoal,
+                       final CostEstimator theEstimator) {
+        super(theGraph, startingPoint, theGoal);
+        this.estimator = theEstimator;
+    }
 
-	/**
-	 * @return the estimator
-	 */
-	public CostEstimator getEstimator() {
-		return estimator;
-	}
+    /**
+     * @return the estimator
+     */
+    public CostEstimator getEstimator() {
+        return estimator;
+    }
 
-	public double calculatePathCost(final BasicPath path) {
+    public double calculatePathCost(final BasicPath path) {
 
-		double result = 0;
-		PathNode lastNode = null;
+        double result = 0;
+        PathNode lastNode = null;
 
-		for (final PathNode node : path.getNodes()) {
-			final double hc = this.estimator.estimateCost(node, getGoal());
-			double stepCost = 0;
+        for (final PathNode node : path.getNodes()) {
+            final double hc = this.estimator.estimateCost(node, getGoal());
+            double stepCost = 0;
 
-			if (lastNode != null) {
-				stepCost = lastNode.getCost(node);
-			}
+            if (lastNode != null) {
+                stepCost = lastNode.getCost(node);
+            }
 
-			result += (hc + stepCost);
+            result += (hc + stepCost);
 
-			lastNode = node;
-		}
+            lastNode = node;
+        }
 
-		return result;
-	}
+        return result;
+    }
 
-	@Override
-	public boolean isHigherPriority(final BasicPath first,
-			final BasicPath second) {
-		final double firstCost = calculatePathCost(first);
-		final double secondCost = calculatePathCost(second);
-		return firstCost < secondCost;
-	}
+    @Override
+    public boolean isHigherPriority(final BasicPath first,
+                                    final BasicPath second) {
+        final double firstCost = calculatePathCost(first);
+        final double secondCost = calculatePathCost(second);
+        return firstCost < secondCost;
+    }
 
 }

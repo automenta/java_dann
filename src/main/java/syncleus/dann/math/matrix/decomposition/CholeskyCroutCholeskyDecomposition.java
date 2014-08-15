@@ -27,140 +27,136 @@ import syncleus.dann.math.OrderedAlgebraic;
 import syncleus.dann.math.matrix.Matrix;
 
 public class CholeskyCroutCholeskyDecomposition<M extends Matrix<M, F>, F extends OrderedAlgebraic<F>>
-		implements CholeskyDecomposition<M, F> {
-	private static final long serialVersionUID = 7049307071684305093L;
-	private final M matrix;
-	/**
-	 * Symmetric and positive definite flag.
-	 */
-	private final boolean isSpd;
+        implements CholeskyDecomposition<M, F> {
+    private static final long serialVersionUID = 7049307071684305093L;
+    private final M matrix;
+    /**
+     * Symmetric and positive definite flag.
+     */
+    private final boolean isSpd;
 
-	/**
-	 * Right Triangular Cholesky Decomposition.
-	 * <p/>
-	 * Cholesky algorithm for symmetric and positive definite matrix.
-	 * <p/>
-	 * For a symmetric, positive definite matrix A, the Right Cholesky
-	 * decomposition is an upper triangular matrix R so that A = R'*R. This
-	 * constructor computes R with the Fortran inspired column oriented
-	 * algorithm used in LINPACK and MATLAB. In Java, we suspect a row oriented,
-	 * lower triangular decomposition is faster. We have temporarily included
-	 * this constructor here until timing experiments confirm this suspicion.
-	 *
-	 * @param matrixToDecompose
-	 *            Square, symmetric matrix.
-	 * @param rightflag
-	 *            Actual value, ignored.
-	 */
-	public CholeskyCroutCholeskyDecomposition(final M matrixToDecompose,
-			final int rightflag) {
-		// Initialize.
-		M newMatrix = matrixToDecompose;
-		boolean checkIsSpd = true;
-		// Main loop.
-		for (int j = 0; j < matrixToDecompose.getWidth(); j++) {
-			F d = newMatrix.getElementField().getZero();
-			for (int k = 0; k < j; k++) {
-				F s = matrixToDecompose.getNumber(k, j);
-				for (int i = 0; i < k; i++)
-					s = s.subtract(newMatrix.getNumber(i, k).multiply(
-							newMatrix.getNumber(i, j)));
-				s = s.divide(newMatrix.getNumber(k, k));
-				newMatrix = newMatrix.set(k, j, s);
-				d = d.add(s.multiply(s));
-				checkIsSpd = checkIsSpd
-						&& (matrixToDecompose.getNumber(k, j)
-								.equals(matrixToDecompose.getNumber(j, k)));
-			}
-			d = matrixToDecompose.getNumber(j, j).subtract(d);
-			checkIsSpd = checkIsSpd
-					&& (d.compareTo(d.getField().getZero()) > 0);
-			newMatrix = newMatrix.set(j, j, d.max(d.getField().getZero())
-					.sqrt());
-			for (int k = j + 1; k < matrixToDecompose.getWidth(); k++)
-				newMatrix = newMatrix.set(k, j, newMatrix.getElementField()
-						.getZero());
-		}
-		this.isSpd = checkIsSpd;
-		this.matrix = newMatrix;
-	}
+    /**
+     * Right Triangular Cholesky Decomposition.
+     * <p/>
+     * Cholesky algorithm for symmetric and positive definite matrix.
+     * <p/>
+     * For a symmetric, positive definite matrix A, the Right Cholesky
+     * decomposition is an upper triangular matrix R so that A = R'*R. This
+     * constructor computes R with the Fortran inspired column oriented
+     * algorithm used in LINPACK and MATLAB. In Java, we suspect a row oriented,
+     * lower triangular decomposition is faster. We have temporarily included
+     * this constructor here until timing experiments confirm this suspicion.
+     *
+     * @param matrixToDecompose Square, symmetric matrix.
+     * @param rightflag         Actual value, ignored.
+     */
+    public CholeskyCroutCholeskyDecomposition(final M matrixToDecompose,
+                                              final int rightflag) {
+        // Initialize.
+        M newMatrix = matrixToDecompose;
+        boolean checkIsSpd = true;
+        // Main loop.
+        for (int j = 0; j < matrixToDecompose.getWidth(); j++) {
+            F d = newMatrix.getElementField().getZero();
+            for (int k = 0; k < j; k++) {
+                F s = matrixToDecompose.getNumber(k, j);
+                for (int i = 0; i < k; i++)
+                    s = s.subtract(newMatrix.getNumber(i, k).multiply(
+                            newMatrix.getNumber(i, j)));
+                s = s.divide(newMatrix.getNumber(k, k));
+                newMatrix = newMatrix.set(k, j, s);
+                d = d.add(s.multiply(s));
+                checkIsSpd = checkIsSpd
+                        && (matrixToDecompose.getNumber(k, j)
+                        .equals(matrixToDecompose.getNumber(j, k)));
+            }
+            d = matrixToDecompose.getNumber(j, j).subtract(d);
+            checkIsSpd = checkIsSpd
+                    && (d.compareTo(d.getField().getZero()) > 0);
+            newMatrix = newMatrix.set(j, j, d.max(d.getField().getZero())
+                    .sqrt());
+            for (int k = j + 1; k < matrixToDecompose.getWidth(); k++)
+                newMatrix = newMatrix.set(k, j, newMatrix.getElementField()
+                        .getZero());
+        }
+        this.isSpd = checkIsSpd;
+        this.matrix = newMatrix;
+    }
 
-	public int getWidth() {
-		return this.matrix.getWidth();
-	}
+    public int getWidth() {
+        return this.matrix.getWidth();
+    }
 
-	public int getHeight() {
-		return this.matrix.getHeight();
-	}
+    public int getHeight() {
+        return this.matrix.getHeight();
+    }
 
-	/**
-	 * Is the matrix symmetric and positive definite?
-	 *
-	 * @return true if A is symmetric and positive definite.
-	 */
-	@Override
-	public boolean isSpd() {
-		return this.isSpd;
-	}
+    /**
+     * Is the matrix symmetric and positive definite?
+     *
+     * @return true if A is symmetric and positive definite.
+     */
+    @Override
+    public boolean isSpd() {
+        return this.isSpd;
+    }
 
-	/**
-	 * Return triangular factor.
-	 *
-	 * @return L
-	 */
-	@Override
-	public M getMatrix() {
-		return this.matrix;
-	}
+    /**
+     * Return triangular factor.
+     *
+     * @return L
+     */
+    @Override
+    public M getMatrix() {
+        return this.matrix;
+    }
 
-	/**
-	 * Solve A*X = solutionMatrix.
-	 *
-	 * @param matrixToSolve
-	 *            A SimpleRealMatrix with as many rows as A and any number of
-	 *            columns.
-	 * @return X so that L*L'*X = matrixToSolve
-	 * @throws IllegalArgumentException
-	 *             SimpleRealMatrix row dimensions must agree or
-	 *             SimpleRealMatrix is not symmetric positive definite.
-	 */
-	@Override
-	public M solve(final M matrixToSolve) {
-		M solutionMatrix = matrixToSolve;
-		if (solutionMatrix.getHeight() != this.matrix.getHeight())
-			throw new IllegalArgumentException(
-					"matrixToSolve row dimensions must agree.");
-		if (!this.isSpd)
-			throw new ArithmeticException(
-					"this is not symmetric positive definite.");
-		// Solve L*Y = solutionMatrix;
-		for (int k = 0; k < this.matrix.getHeight(); k++)
-			for (int j = 0; j < solutionMatrix.getWidth(); j++) {
-				for (int i = 0; i < k; i++)
-					solutionMatrix = solutionMatrix.set(
-							k,
-							j,
-							solutionMatrix.getNumber(k, j).subtract(
-									solutionMatrix.getNumber(i, j).multiply(
-											this.matrix.getNumber(k, i))));
-				solutionMatrix = solutionMatrix.set(k, j,
-						solutionMatrix.getNumber(k, j).divide(this.matrix.getNumber(k, k)));
-			}
+    /**
+     * Solve A*X = solutionMatrix.
+     *
+     * @param matrixToSolve A SimpleRealMatrix with as many rows as A and any number of
+     *                      columns.
+     * @return X so that L*L'*X = matrixToSolve
+     * @throws IllegalArgumentException SimpleRealMatrix row dimensions must agree or
+     *                                  SimpleRealMatrix is not symmetric positive definite.
+     */
+    @Override
+    public M solve(final M matrixToSolve) {
+        M solutionMatrix = matrixToSolve;
+        if (solutionMatrix.getHeight() != this.matrix.getHeight())
+            throw new IllegalArgumentException(
+                    "matrixToSolve row dimensions must agree.");
+        if (!this.isSpd)
+            throw new ArithmeticException(
+                    "this is not symmetric positive definite.");
+        // Solve L*Y = solutionMatrix;
+        for (int k = 0; k < this.matrix.getHeight(); k++)
+            for (int j = 0; j < solutionMatrix.getWidth(); j++) {
+                for (int i = 0; i < k; i++)
+                    solutionMatrix = solutionMatrix.set(
+                            k,
+                            j,
+                            solutionMatrix.getNumber(k, j).subtract(
+                                    solutionMatrix.getNumber(i, j).multiply(
+                                            this.matrix.getNumber(k, i))));
+                solutionMatrix = solutionMatrix.set(k, j,
+                        solutionMatrix.getNumber(k, j).divide(this.matrix.getNumber(k, k)));
+            }
 
-		// Solve L'*X = Y;
-		for (int k = this.matrix.getHeight() - 1; k >= 0; k--)
-			for (int j = 0; j < solutionMatrix.getWidth(); j++) {
-				for (int i = k + 1; i < this.matrix.getHeight(); i++)
-					solutionMatrix = solutionMatrix.set(
-							k,
-							j,
-							solutionMatrix.getNumber(k, j).subtract(
-									solutionMatrix.getNumber(i, j).multiply(
-											this.matrix.getNumber(i, k))));
-				solutionMatrix = solutionMatrix.set(k, j,
-						solutionMatrix.getNumber(k, j).divide(this.matrix.getNumber(k, k)));
-			}
+        // Solve L'*X = Y;
+        for (int k = this.matrix.getHeight() - 1; k >= 0; k--)
+            for (int j = 0; j < solutionMatrix.getWidth(); j++) {
+                for (int i = k + 1; i < this.matrix.getHeight(); i++)
+                    solutionMatrix = solutionMatrix.set(
+                            k,
+                            j,
+                            solutionMatrix.getNumber(k, j).subtract(
+                                    solutionMatrix.getNumber(i, j).multiply(
+                                            this.matrix.getNumber(i, k))));
+                solutionMatrix = solutionMatrix.set(k, j,
+                        solutionMatrix.getNumber(k, j).divide(this.matrix.getNumber(k, k)));
+            }
 
-		return solutionMatrix;
-	}
+        return solutionMatrix;
+    }
 }

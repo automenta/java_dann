@@ -23,49 +23,49 @@
  */
 package syncleus.dann.math.probablity;
 
+import org.encog.ml.bayesian.BayesianError;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.encog.ml.bayesian.BayesianError;
-
 public class VariableList {
-	private final List<RandomVariable> variables = new ArrayList<RandomVariable>();
-	private final Map<String, RandomVariable> map = new HashMap<String, RandomVariable>();
+    private final List<RandomVariable> variables = new ArrayList<>();
+    private final Map<String, RandomVariable> map = new HashMap<>();
 
-	public void add(final RandomVariable v) {
-		this.map.put(v.getLabel(), v);
-		this.variables.add(v);
-	}
+    public void add(final RandomVariable v) {
+        this.map.put(v.getLabel(), v);
+        this.variables.add(v);
+    }
 
-	public List<RandomVariable> contents() {
-		return this.variables;
-	}
+    public List<RandomVariable> contents() {
+        return this.variables;
+    }
 
-	public RandomVariable get(final String label) {
-		return this.map.get(label);
-	}
+    public RandomVariable get(final String label) {
+        return this.map.get(label);
+    }
 
-	public int indexOf(final RandomVariable s) {
-		return this.variables.indexOf(s);
-	}
+    public int indexOf(final RandomVariable s) {
+        return this.variables.indexOf(s);
+    }
 
-	public int size() {
-		return this.variables.size();
-	}
+    public int size() {
+        return this.variables.size();
+    }
 
-	public RandomVariable get(final int i) {
-		return this.variables.get(i);
-	}
+    public RandomVariable get(final int i) {
+        return this.variables.get(i);
+    }
 
-	public RandomVariable requireEvent(final String label) {
-		final RandomVariable result = this.map.get(label);
-		if (result == null) {
-			throw new BayesianError("The variable " + label
-					+ " is not defined.");
-		}
-		return result;
-	}
+    public RandomVariable requireEvent(final String label) {
+        final RandomVariable result = this.map.get(label);
+        if (result == null) {
+            throw new BayesianError("The variable " + label
+                    + " is not defined.");
+        }
+        return result;
+    }
 
 }

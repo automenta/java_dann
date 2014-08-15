@@ -24,7 +24,6 @@
 package syncleus.dann.math.matrix.hessian;
 
 import org.encog.neural.networks.BasicNetwork;
-
 import syncleus.dann.learn.MLDataSet;
 import syncleus.dann.math.matrix.SimpleRealMatrix;
 
@@ -32,54 +31,52 @@ import syncleus.dann.math.matrix.SimpleRealMatrix;
  * Compute (estimate) the Hessian matrix. The Hessian matrix is a matrix of the
  * second derivatives of the neural network. This is a square matrix with rows
  * and columns equal to the number of weights in the neural network.
- *
+ * <p/>
  * A Hessian matrix is useful for several neural network functions. It is also
  * used by the Levenberg Marquardt training method.
- *
+ * <p/>
  * http://en.wikipedia.org/wiki/Hessian_matrix
  */
 public interface ComputeHessian {
 
-	/**
-	 * Init the class.
-	 * 
-	 * @param theNetwork
-	 *            The neural network to train.
-	 * @param theTraining
-	 *            The training set to train with.
-	 */
-	void init(BasicNetwork theNetwork, MLDataSet theTraining);
+    /**
+     * Init the class.
+     *
+     * @param theNetwork  The neural network to train.
+     * @param theTraining The training set to train with.
+     */
+    void init(BasicNetwork theNetwork, MLDataSet theTraining);
 
-	/**
-	 * Compute the Hessian.
-	 */
-	void compute();
+    /**
+     * Compute the Hessian.
+     */
+    void compute();
 
-	/**
-	 * The gradeints.
-	 * 
-	 * @return The gradients for the Hessian.
-	 */
-	double[] getGradients();
+    /**
+     * The gradeints.
+     *
+     * @return The gradients for the Hessian.
+     */
+    double[] getGradients();
 
-	/**
-	 * @return The sum of squares error over all of the training elements.
-	 */
-	double getSSE();
+    /**
+     * @return The sum of squares error over all of the training elements.
+     */
+    double getSSE();
 
-	/**
-	 * Clear the Hessian and gradients.
-	 */
-	void clear();
+    /**
+     * Clear the Hessian and gradients.
+     */
+    void clear();
 
-	/**
-	 * @return The Hessian matrix.
-	 */
-	public SimpleRealMatrix getHessianMatrix();
+    /**
+     * @return The Hessian matrix.
+     */
+    public SimpleRealMatrix getHessianMatrix();
 
-	/**
-	 * @return Get the Hessian as a 2d array.
-	 */
-	public double[][] getHessian();
+    /**
+     * @return Get the Hessian as a 2d array.
+     */
+    public double[][] getHessian();
 
 }

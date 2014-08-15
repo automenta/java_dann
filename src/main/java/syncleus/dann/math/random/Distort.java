@@ -27,36 +27,33 @@ package syncleus.dann.math.random;
  * A randomizer that distorts what is already present in the neural network.
  *
  * @author jheaton
- *
  */
 public class Distort extends BasicRandomizer {
 
-	/**
-	 * The factor to use to distort the numbers.
-	 */
-	private final double factor;
+    /**
+     * The factor to use to distort the numbers.
+     */
+    private final double factor;
 
-	/**
-	 * Construct a distort randomizer for the specified factor.
-	 *
-	 * @param factor
-	 *            The randomizer factor.
-	 */
-	public Distort(final double factor) {
-		this.factor = factor;
-	}
+    /**
+     * Construct a distort randomizer for the specified factor.
+     *
+     * @param factor The randomizer factor.
+     */
+    public Distort(final double factor) {
+        this.factor = factor;
+    }
 
-	/**
-	 * Distort the random number by the factor that was specified in the
-	 * constructor.
-	 *
-	 * @param d
-	 *            The number to distort.
-	 * @return The result.
-	 */
-	@Override
-	public double randomize(final double d) {
-		return d + (this.factor - (nextDouble() * this.factor * 2));
-	}
+    /**
+     * Distort the random number by the factor that was specified in the
+     * constructor.
+     *
+     * @param d The number to distort.
+     * @return The result.
+     */
+    @Override
+    public double randomize(final double d) {
+        return d + (this.factor - (nextDouble() * this.factor * 2));
+    }
 
 }

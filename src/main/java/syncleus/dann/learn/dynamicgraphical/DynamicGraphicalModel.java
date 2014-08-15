@@ -22,6 +22,6 @@ import syncleus.dann.graph.BidirectedEdge;
 import syncleus.dann.learn.GraphicalModel;
 
 public interface DynamicGraphicalModel<N extends DynamicGraphicalModelNode, E extends BidirectedEdge<N>>
-		extends GraphicalModel<N, E> {
-	void learnStates(boolean updateHistory);
+        extends GraphicalModel<N, E> {
+    void learnStates(boolean updateHistory);
 }

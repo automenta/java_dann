@@ -26,5 +26,5 @@ package syncleus.dann.graph.path.search;
 import syncleus.dann.graph.path.BasicPath;
 
 public interface Prioritizer {
-	boolean isHigherPriority(BasicPath first, BasicPath second);
+    boolean isHigherPriority(BasicPath first, BasicPath second);
 }

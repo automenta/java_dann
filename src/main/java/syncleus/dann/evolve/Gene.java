@@ -26,24 +26,24 @@ package syncleus.dann.evolve;
  * @since 2.0
  */
 public interface Gene extends Cloneable {
-	/**
-	 * All children of this class should override this method and return their
-	 * own class type even if it is abstract. It should return a copy without
-	 * any mutation.
-	 *
-	 * @return an exact copy of this object.
-	 * @since 2.0
-	 */
-	Gene clone();
+    /**
+     * All children of this class should override this method and return their
+     * own class type even if it is abstract. It should return a copy without
+     * any mutation.
+     *
+     * @return an exact copy of this object.
+     * @since 2.0
+     */
+    Gene clone();
 
-	/**
-	 * The current expression activity. The meaning of this value depends on the
-	 * type of gene and the genetic system being used.
-	 *
-	 * @return The current expression activity.
-	 * @since 2.0
-	 */
-	double expressionActivity();
+    /**
+     * The current expression activity. The meaning of this value depends on the
+     * type of gene and the genetic system being used.
+     *
+     * @return The current expression activity.
+     * @since 2.0
+     */
+    double expressionActivity();
 
-	// TODO put mutate method here
+    // TODO put mutate method here
 }

@@ -25,24 +25,24 @@ package syncleus.dann.generate.ca.universe;
 
 public interface Universe {
 
-	int getRows();
+    int getRows();
 
-	int getColumns();
+    int getColumns();
 
-	UniverseCell get(int otherRow, int otherCol);
+    UniverseCell get(int otherRow, int otherCol);
 
-	boolean isValid(int otherRow, int otherCol);
+    boolean isValid(int otherRow, int otherCol);
 
-	Object clone();
+    Object clone();
 
-	void copy(Universe world);
+    void copy(Universe world);
 
-	double compare(Universe world);
+    double compare(Universe world);
 
-	void randomize();
+    void randomize();
 
-	UniverseCellFactory getCellFactory();
+    UniverseCellFactory getCellFactory();
 
-	double calculatePercentInvalid();
+    double calculatePercentInvalid();
 
 }

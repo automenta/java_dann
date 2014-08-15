@@ -24,49 +24,46 @@
 package syncleus.dann.math.matrix.hessian;
 
 import org.encog.neural.networks.BasicNetwork;
-
 import syncleus.dann.learn.MLDataSet;
-import syncleus.dann.math.IntRange;
 import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.math.matrix.SimpleRealMatrix;
 
 /**
  * Calculate the Hessian matrix using the chain rule method.
- *
  */
-public class HessianCR extends BasicHessian  {
+public class HessianCR extends BasicHessian {
 
-	/**
-	 * The number of threads to use.
-	 */
-	private int numThreads;
+    /**
+     * The number of threads to use.
+     */
+    private int numThreads;
 
-	/**
-	 * The workers.
-	 */
-	private ChainRuleWorker[] workers;
+    /**
+     * The workers.
+     */
+    private ChainRuleWorker[] workers;
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void init(final BasicNetwork theNetwork, final MLDataSet theTraining) {
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void init(final BasicNetwork theNetwork, final MLDataSet theTraining) {
 
-		super.init(theNetwork, theTraining);
-		final int weightCount = theNetwork.getStructure().getFlat()
-				.getWeights().length;
+        super.init(theNetwork, theTraining);
+        final int weightCount = theNetwork.getStructure().getFlat()
+                .getWeights().length;
 
-		this.training = theTraining;
-		this.network = theNetwork;
+        this.training = theTraining;
+        this.network = theNetwork;
 
-		this.hessianMatrix = new SimpleRealMatrix(weightCount, weightCount);
-		this.hessian = this.hessianMatrix.getData();
+        this.hessianMatrix = new SimpleRealMatrix(weightCount, weightCount);
+        this.hessian = this.hessianMatrix.getData();
 
-		// create worker(s)
-		/*final DetermineWorkload determine = new DetermineWorkload(
+        // create worker(s)
+        /*final DetermineWorkload determine = new DetermineWorkload(
 				this.numThreads, (int) this.training.getRecordCount());*/
 
-		this.workers = new ChainRuleWorker[1 /*determine.getThreadCount()*/];
+        this.workers = new ChainRuleWorker[1 /*determine.getThreadCount()*/];
 
 		/*
 		 * int index = 0;
@@ -74,26 +71,26 @@ public class HessianCR extends BasicHessian  {
 			this.workers[index++] = new ChainRuleWorker(this.flat.clone(),
 					this.training.openAdditional(), r.getLow(), r.getHigh());
 		}*/
-		this.workers[0] = new ChainRuleWorker(this.flat.clone(),
-				this.training.openAdditional(), 0, training.getInputSize()); // r.getLow(), r.getHigh());
+        this.workers[0] = new ChainRuleWorker(this.flat.clone(),
+                this.training.openAdditional(), 0, training.getInputSize()); // r.getLow(), r.getHigh());
 
-	}
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void compute() {
-		clear();
-		double e = 0;
-		final int weightCount = this.network.getFlat().getWeights().length;
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void compute() {
+        clear();
+        double e = 0;
+        final int weightCount = this.network.getFlat().getWeights().length;
 
-		for (int outputNeuron = 0; outputNeuron < this.network.getOutputCount(); outputNeuron++) {
+        for (int outputNeuron = 0; outputNeuron < this.network.getOutputCount(); outputNeuron++) {
 
-			// handle context
-			if (this.flat.getHasContext()) {
-				this.workers[0].getNetwork().clearContext();
-			}
+            // handle context
+            if (this.flat.getHasContext()) {
+                this.workers[0].getNetwork().clearContext();
+            }
 
 			/*if (this.workers.length > 1) {
 
@@ -106,24 +103,25 @@ public class HessianCR extends BasicHessian  {
 				}
 
 				group.waitForComplete();
-			} else*/ {
-				this.workers[0].setOutputNeuron(outputNeuron);
-				this.workers[0].run();
-			}
+			} else*/
+            {
+                this.workers[0].setOutputNeuron(outputNeuron);
+                this.workers[0].run();
+            }
 
-			// aggregate workers
+            // aggregate workers
 
-			for (final ChainRuleWorker worker : this.workers) {
-				e += worker.getError();
-				for (int i = 0; i < weightCount; i++) {
-					this.gradients[i] += worker.getGradients()[i];
-				}
-				EngineArray.arrayAdd(this.getHessian(), worker.getHessian());
-			}
-		}
+            for (final ChainRuleWorker worker : this.workers) {
+                e += worker.getError();
+                for (int i = 0; i < weightCount; i++) {
+                    this.gradients[i] += worker.getGradients()[i];
+                }
+                EngineArray.arrayAdd(this.getHessian(), worker.getHessian());
+            }
+        }
 
-		sse = e / 2;
-	}
+        sse = e / 2;
+    }
 
 //	/**
 //	 * Set the number of threads. Specify zero to tell Encog to automatically

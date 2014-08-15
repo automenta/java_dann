@@ -24,96 +24,94 @@
 package syncleus.dann.neural.activation;
 
 
-
 /**
  * BiPolar activation function. This will scale the neural data into the bipolar
  * range. Greater than zero becomes 1, less than or equal to zero becomes -1.
  *
  * @author jheaton
- *
  */
 public class ActivationBiPolar implements EncogActivationFunction {
 
-	/**
-	 * The serial id.
-	 */
-	private static final long serialVersionUID = -7166136514935838114L;
+    /**
+     * The serial id.
+     */
+    private static final long serialVersionUID = -7166136514935838114L;
 
-	/**
-	 * The parameters.
-	 */
-	private final double[] params;
+    /**
+     * The parameters.
+     */
+    private final double[] params;
 
-	/**
-	 * Construct the bipolar activation function.
-	 */
-	public ActivationBiPolar() {
-		this.params = new double[0];
-	}
+    /**
+     * Construct the bipolar activation function.
+     */
+    public ActivationBiPolar() {
+        this.params = new double[0];
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public final void activate(final double[] x, final int start,
-			final int size) {
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final void activate(final double[] x, final int start,
+                               final int size) {
 
-		for (int i = start; i < start + size; i++) {
-			if (x[i] > 0) {
-				x[i] = 1;
-			} else {
-				x[i] = -1;
-			}
-		}
-	}
+        for (int i = start; i < start + size; i++) {
+            if (x[i] > 0) {
+                x[i] = 1;
+            } else {
+                x[i] = -1;
+            }
+        }
+    }
 
-	/**
-	 * @return The object cloned.
-	 */
-	@Override
-	public final IterativeDerivative clone() {
-		return new ActivationBiPolar();
-	}
+    /**
+     * @return The object cloned.
+     */
+    @Override
+    public final IterativeDerivative clone() {
+        return new ActivationBiPolar();
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public final double derivative(final double b, final double a) {
-		return 1;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final double derivative(final double b, final double a) {
+        return 1;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public final String[] getParamNames() {
-		final String[] result = {};
-		return result;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final String[] getParamNames() {
+        final String[] result = {};
+        return result;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public final double[] getParams() {
-		return this.params;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final double[] getParams() {
+        return this.params;
+    }
 
-	/**
-	 * @return Return true, bipolar has a 1 for derivative.
-	 */
-	@Override
-	public final boolean hasDerivative() {
-		return true;
-	}
+    /**
+     * @return Return true, bipolar has a 1 for derivative.
+     */
+    @Override
+    public final boolean hasDerivative() {
+        return true;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public final void setParam(final int index, final double value) {
-		this.params[index] = value;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final void setParam(final int index, final double value) {
+        this.params[index] = value;
+    }
 
 }

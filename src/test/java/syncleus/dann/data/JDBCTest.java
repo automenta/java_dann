@@ -7,7 +7,6 @@
 package syncleus.dann.data;
 
 /**
- *
  * @author me
  */
 public class JDBCTest {

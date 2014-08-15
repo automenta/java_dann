@@ -26,5 +26,5 @@ package syncleus.dann.graph.path.search;
 import syncleus.dann.graph.path.PathNode;
 
 public interface CostEstimator {
-	double estimateCost(PathNode startingNode, SearchGoal goal);
+    double estimateCost(PathNode startingNode, SearchGoal goal);
 }

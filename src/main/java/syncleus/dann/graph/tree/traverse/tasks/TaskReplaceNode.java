@@ -32,78 +32,75 @@ import syncleus.dann.graph.tree.traverse.TreeTraversalTask;
  */
 public class TaskReplaceNode implements TreeTraversalTask {
 
-	/**
-	 * Node to replace.
-	 */
-	private final TreeNode replaceThisNode;
+    /**
+     * Node to replace.
+     */
+    private final TreeNode replaceThisNode;
 
-	/**
-	 * Node to replace with.
-	 */
-	private final TreeNode replaceWith;
+    /**
+     * Node to replace with.
+     */
+    private final TreeNode replaceWith;
 
-	/**
-	 * Are we done?
-	 */
-	private boolean done;
+    /**
+     * Are we done?
+     */
+    private boolean done;
 
-	public TaskReplaceNode(final TreeNode theReplaceThisNode,
-			final TreeNode theReplaceWith) {
-		this.replaceThisNode = theReplaceThisNode;
-		this.replaceWith = theReplaceWith;
-		this.done = false;
-	}
+    public TaskReplaceNode(final TreeNode theReplaceThisNode,
+                           final TreeNode theReplaceWith) {
+        this.replaceThisNode = theReplaceThisNode;
+        this.replaceWith = theReplaceWith;
+        this.done = false;
+    }
 
-	/**
-	 * @return The node to replace.
-	 */
-	public TreeNode getReplaceThisNode() {
-		return replaceThisNode;
-	}
+    /**
+     * @return The node to replace.
+     */
+    public TreeNode getReplaceThisNode() {
+        return replaceThisNode;
+    }
 
-	/**
-	 * @return What to replace with.
-	 */
-	public TreeNode getReplaceWith() {
-		return replaceWith;
-	}
+    /**
+     * @return What to replace with.
+     */
+    public TreeNode getReplaceWith() {
+        return replaceWith;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public boolean task(final TreeNode node) {
-		if (done) {
-			return false;
-		}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean task(final TreeNode node) {
+        if (done) {
+            return false;
+        }
 
-		for (int i = 0; i < node.getChildNodes().size(); i++) {
-			final TreeNode childNode = node.getChildNodes().get(i);
-			if (childNode == replaceThisNode) {
-				node.getChildNodes().set(i, this.replaceWith);
-				done = true;
-				return false;
-			}
-		}
-		return true;
-	}
+        for (int i = 0; i < node.getChildNodes().size(); i++) {
+            final TreeNode childNode = node.getChildNodes().get(i);
+            if (childNode == replaceThisNode) {
+                node.getChildNodes().set(i, this.replaceWith);
+                done = true;
+                return false;
+            }
+        }
+        return true;
+    }
 
-	/**
-	 * Replace one node with another.
-	 * 
-	 * @param rootNode
-	 *            The root node.
-	 * @param replaceThisNode
-	 *            The node to replace.
-	 * @param replaceWith
-	 *            What to replace with.
-	 */
-	public static void process(final TreeNode rootNode,
-			final TreeNode replaceThisNode, final TreeNode replaceWith) {
-		final TaskReplaceNode task = new TaskReplaceNode(replaceThisNode,
-				replaceWith);
-		final DepthFirstTraversal trav = new DepthFirstTraversal();
-		trav.traverse(rootNode, task);
-	}
+    /**
+     * Replace one node with another.
+     *
+     * @param rootNode        The root node.
+     * @param replaceThisNode The node to replace.
+     * @param replaceWith     What to replace with.
+     */
+    public static void process(final TreeNode rootNode,
+                               final TreeNode replaceThisNode, final TreeNode replaceWith) {
+        final TaskReplaceNode task = new TaskReplaceNode(replaceThisNode,
+                replaceWith);
+        final DepthFirstTraversal trav = new DepthFirstTraversal();
+        trav.traverse(rootNode, task);
+    }
 
 }

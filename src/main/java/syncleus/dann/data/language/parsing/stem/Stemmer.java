@@ -25,12 +25,11 @@ package syncleus.dann.data.language.parsing.stem;
  * @author Jeffrey Phillips Freeman
  */
 public interface Stemmer {
-	/**
-	 * Gets the word stem from the given word.
-	 *
-	 * @param word
-	 *            The word to get the stem from
-	 * @return The stem for the given word
-	 */
-	String stemWord(String word);
+    /**
+     * Gets the word stem from the given word.
+     *
+     * @param word The word to get the stem from
+     * @return The stem for the given word
+     */
+    String stemWord(String word);
 }

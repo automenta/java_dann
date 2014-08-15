@@ -26,5 +26,5 @@ package syncleus.dann.graph.path.search;
 import syncleus.dann.graph.path.BasicPath;
 
 public interface SearchGoal {
-	boolean isGoalMet(BasicPath path);
+    boolean isGoalMet(BasicPath path);
 }

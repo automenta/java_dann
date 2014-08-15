@@ -23,40 +23,40 @@ import java.util.Collections;
 import java.util.List;
 
 public class SimpleWalk<N, E extends Edge<N>> extends AbstractWalk<N, E> {
-	private static final double DEFAULT_WEIGHT = 0.0;
+    private static final double DEFAULT_WEIGHT = 0.0;
 
-	private final List<E> steps;
-	private final List<N> nodeSteps;
-	private final double totalWeight;
+    private final List<E> steps;
+    private final List<N> nodeSteps;
+    private final double totalWeight;
 
-	public SimpleWalk(final List<E> ourSteps, final List<N> ourNodeSteps,
-			final double defaultWeight) {
-		if (!this.verify(ourNodeSteps, ourSteps))
-			throw new IllegalArgumentException(
-					"Steps and ourNodeSteps is not consistent with a walk");
+    public SimpleWalk(final List<E> ourSteps, final List<N> ourNodeSteps,
+                      final double defaultWeight) {
+        if (!this.verify(ourNodeSteps, ourSteps))
+            throw new IllegalArgumentException(
+                    "Steps and ourNodeSteps is not consistent with a walk");
 
-		this.steps = Collections.unmodifiableList(new ArrayList<E>(ourSteps));
-		this.nodeSteps = Collections.unmodifiableList(new ArrayList<N>(
-				ourNodeSteps));
-		this.totalWeight = calculateWeight(defaultWeight);
-	}
+        this.steps = Collections.unmodifiableList(new ArrayList<>(ourSteps));
+        this.nodeSteps = Collections.unmodifiableList(new ArrayList<>(
+                ourNodeSteps));
+        this.totalWeight = calculateWeight(defaultWeight);
+    }
 
-	public SimpleWalk(final List<E> ourSteps, final List<N> ourNodeSteps) {
-		this(ourSteps, ourNodeSteps, DEFAULT_WEIGHT);
-	}
+    public SimpleWalk(final List<E> ourSteps, final List<N> ourNodeSteps) {
+        this(ourSteps, ourNodeSteps, DEFAULT_WEIGHT);
+    }
 
-	@Override
-	public final List<E> getSteps() {
-		return this.steps;
-	}
+    @Override
+    public final List<E> getSteps() {
+        return this.steps;
+    }
 
-	@Override
-	public final List<N> getNodeSteps() {
-		return this.nodeSteps;
-	}
+    @Override
+    public final List<N> getNodeSteps() {
+        return this.nodeSteps;
+    }
 
-	@Override
-	public final double getWeight() {
-		return this.totalWeight;
-	}
+    @Override
+    public final double getWeight() {
+        return this.totalWeight;
+    }
 }

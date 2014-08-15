@@ -18,45 +18,43 @@
  ******************************************************************************/
 package syncleus.dann.graph;
 
+import syncleus.dann.graph.context.ContextReporter;
+
 import java.io.Serializable;
 import java.util.List;
 import java.util.stream.Stream;
 
-import syncleus.dann.graph.context.ContextReporter;
-
 public interface Edge<N> extends Serializable, Cloneable, ContextReporter {
-	List<N> getNodes();
+    List<N> getNodes();
 
-	List<N> getTraversableNodes(N node);
+    List<N> getTraversableNodes(N node);
 
-	boolean isTraversable(N node);
+    boolean isTraversable(N node);
 
-	default Stream<N> streamNodes() {
-		return getNodes().stream();
-	}
+    default Stream<N> streamNodes() {
+        return getNodes().stream();
+    }
 
-	/**
-	 * Returns an edge with the specified node disconnected.
-	 *
-	 * @param node
-	 *            node to remove from the returned edge.
-	 * @return an edge with the specified node disconnected, <tt>null</tt> if
-	 *         the entire edge should be deleted as a result of removing the
-	 *         specified node.
-	 * @since 2.0
-	 */
-	Edge<N> disconnect(N node);
+    /**
+     * Returns an edge with the specified node disconnected.
+     *
+     * @param node node to remove from the returned edge.
+     * @return an edge with the specified node disconnected, <tt>null</tt> if
+     * the entire edge should be deleted as a result of removing the
+     * specified node.
+     * @since 2.0
+     */
+    Edge<N> disconnect(N node);
 
-	/**
-	 * Returns an edge with the specified nodes disconnected.
-	 *
-	 * @param node
-	 *            node to remove from the returned edge.
-	 * @return an edge with the specified nodes disconnected, <tt>null</tt> if
-	 *         the entire edge should be deleted as a result of removing the
-	 *         specified nodes.
-	 */
-	Edge<N> disconnect(List<N> node);
+    /**
+     * Returns an edge with the specified nodes disconnected.
+     *
+     * @param node node to remove from the returned edge.
+     * @return an edge with the specified nodes disconnected, <tt>null</tt> if
+     * the entire edge should be deleted as a result of removing the
+     * specified nodes.
+     */
+    Edge<N> disconnect(List<N> node);
 
-	Edge<N> clone();
+    Edge<N> clone();
 }

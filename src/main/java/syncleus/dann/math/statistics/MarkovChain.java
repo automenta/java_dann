@@ -18,40 +18,40 @@
  ******************************************************************************/
 package syncleus.dann.math.statistics;
 
+import syncleus.dann.math.matrix.RealMatrix;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import syncleus.dann.math.matrix.RealMatrix;
-
 public interface MarkovChain<S> {
-	int getOrder();
+    int getOrder();
 
-	Set<S> getStates();
+    Set<S> getStates();
 
-	void transition(S nextState);
+    void transition(S nextState);
 
-	S generateTransition();
+    S generateTransition();
 
-	S generateTransition(boolean step);
+    S generateTransition(boolean step);
 
-	S getCurrentState();
+    S getCurrentState();
 
-	List<S> getStateHistory();
+    List<S> getStateHistory();
 
-	void reset();
+    void reset();
 
-	Map<S, Double> getProbability(int steps);
+    Map<S, Double> getProbability(int steps);
 
-	Map<S, Double> getSteadyStateProbability();
+    Map<S, Double> getSteadyStateProbability();
 
-	double getProbability(S futureState, int steps);
+    double getProbability(S futureState, int steps);
 
-	double getSteadyStateProbability(S futureState);
+    double getSteadyStateProbability(S futureState);
 
-	List<S> getTransitionProbabilityColumns();
+    List<S> getTransitionProbabilityColumns();
 
-	List<List<S>> getTransitionProbabilityRows();
+    List<List<S>> getTransitionProbabilityRows();
 
-	RealMatrix getTransitionProbabilityMatrix();
+    RealMatrix getTransitionProbabilityMatrix();
 }

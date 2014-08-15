@@ -23,28 +23,28 @@
  */
 package syncleus.dann.graph.path.search;
 
-import syncleus.dann.graph.path.PathNode;
 import syncleus.dann.graph.path.EuclideanNode;
+import syncleus.dann.graph.path.PathNode;
 
 public class EuclideanCostEstimator implements CostEstimator {
 
-	@Override
-	public double estimateCost(final PathNode startingNode,
-			final SearchGoal goal) {
+    @Override
+    public double estimateCost(final PathNode startingNode,
+                               final SearchGoal goal) {
 
-		if (!(startingNode instanceof EuclideanNode)) {
-			throw new RuntimeException("Starting node must be EuclideanNode.");
-		}
+        if (!(startingNode instanceof EuclideanNode)) {
+            throw new RuntimeException("Starting node must be EuclideanNode.");
+        }
 
-		if (!(goal instanceof SimpleDestinationGoal)) {
-			throw new RuntimeException("Goal must be SimpleDistanceGoal.");
-		}
+        if (!(goal instanceof SimpleDestinationGoal)) {
+            throw new RuntimeException("Goal must be SimpleDistanceGoal.");
+        }
 
-		final SimpleDestinationGoal sdg = (SimpleDestinationGoal) goal;
-		final EuclideanNode endingNode = (EuclideanNode) sdg
-				.getGoalDestination();
+        final SimpleDestinationGoal sdg = (SimpleDestinationGoal) goal;
+        final EuclideanNode endingNode = (EuclideanNode) sdg
+                .getGoalDestination();
 
-		return EuclideanNode.distance((EuclideanNode) startingNode, endingNode);
-	}
+        return EuclideanNode.distance((EuclideanNode) startingNode, endingNode);
+    }
 
 }

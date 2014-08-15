@@ -21,16 +21,16 @@ package syncleus.dann.graph;
 import java.util.List;
 
 public interface DirectedEdge<N> extends BidirectedEdge<N> {
-	N getSourceNode();
+    N getSourceNode();
 
-	N getDestinationNode();
+    N getDestinationNode();
 
-	@Override
-	DirectedEdge<N> disconnect(N node);
+    @Override
+    DirectedEdge<N> disconnect(N node);
 
-	@Override
-	DirectedEdge<N> disconnect(List<N> node);
+    @Override
+    DirectedEdge<N> disconnect(List<N> node);
 
-	@Override
-	DirectedEdge<N> clone();
+    @Override
+    DirectedEdge<N> clone();
 }

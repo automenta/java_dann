@@ -32,82 +32,82 @@ import syncleus.dann.math.BoundMath;
  */
 public class ActivationSigmoid implements EncogActivationFunction {
 
-	/**
-	 * Serial id for this class.
-	 */
-	private static final long serialVersionUID = 5622349801036468572L;
+    /**
+     * Serial id for this class.
+     */
+    private static final long serialVersionUID = 5622349801036468572L;
 
-	/**
-	 * The parameters.
-	 */
-	private final double[] params;
+    /**
+     * The parameters.
+     */
+    private final double[] params;
 
-	/**
-	 * Construct a basic sigmoid function, with a slope of 1.
-	 */
-	public ActivationSigmoid() {
-		this.params = new double[0];
-	}
+    /**
+     * Construct a basic sigmoid function, with a slope of 1.
+     */
+    public ActivationSigmoid() {
+        this.params = new double[0];
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public final void activate(final double[] x, final int start,
-			final int size) {
-		for (int i = start; i < start + size; i++) {
-			x[i] = 1.0 / (1.0 + BoundMath.exp(-1 * x[i]));
-		}
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final void activate(final double[] x, final int start,
+                               final int size) {
+        for (int i = start; i < start + size; i++) {
+            x[i] = 1.0 / (1.0 + BoundMath.exp(-1 * x[i]));
+        }
+    }
 
-	/**
-	 * @return The object cloned;
-	 */
-	@Override
-	public final IterativeDerivative clone() {
-		return new ActivationSigmoid();
-	}
+    /**
+     * @return The object cloned;
+     */
+    @Override
+    public final IterativeDerivative clone() {
+        return new ActivationSigmoid();
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public final double derivative(final double b, final double a) {
-		return a * (1.0 - a);
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final double derivative(final double b, final double a) {
+        return a * (1.0 - a);
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public final String[] getParamNames() {
-		final String[] results = {};
-		return results;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final String[] getParamNames() {
+        final String[] results = {};
+        return results;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public final double[] getParams() {
-		return this.params;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final double[] getParams() {
+        return this.params;
+    }
 
-	/**
-	 * @return True, sigmoid has a derivative.
-	 */
-	@Override
-	public final boolean hasDerivative() {
-		return true;
-	}
+    /**
+     * @return True, sigmoid has a derivative.
+     */
+    @Override
+    public final boolean hasDerivative() {
+        return true;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public final void setParam(final int index, final double value) {
-		this.params[index] = value;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final void setParam(final int index, final double value) {
+        this.params[index] = value;
+    }
 
 
 }

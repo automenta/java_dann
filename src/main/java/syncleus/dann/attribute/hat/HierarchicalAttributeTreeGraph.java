@@ -22,5 +22,5 @@ import syncleus.dann.graph.DirectedEdge;
 import syncleus.dann.graph.TreeGraph;
 
 public interface HierarchicalAttributeTreeGraph<N extends HierarchicalAttributePool<T>, E extends DirectedEdge<N>, T>
-		extends TreeGraph<N, E> {
+        extends TreeGraph<N, E> {
 }

@@ -29,26 +29,26 @@ import syncleus.dann.generate.ca.universe.UniverseListener;
 
 public interface CARunner {
 
-	void addListener(UniverseListener worldViewer);
+    void addListener(UniverseListener worldViewer);
 
-	void iteration();
+    void iteration();
 
-	void start();
+    void start();
 
-	void stop();
+    void stop();
 
-	void reset();
+    void reset();
 
-	boolean isRunning();
+    boolean isRunning();
 
-	Universe getUniverse();
+    Universe getUniverse();
 
-	CAProgram getPhysics();
+    CAProgram getPhysics();
 
-	void init(Universe universe, CAProgram physics);
+    void init(Universe universe, CAProgram physics);
 
-	int runToConverge(int i, double desiredScore);
+    int runToConverge(int i, double desiredScore);
 
-	double getScore();
+    double getScore();
 
 }

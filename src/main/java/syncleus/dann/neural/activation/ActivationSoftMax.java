@@ -32,87 +32,87 @@ import syncleus.dann.math.BoundMath;
  */
 public class ActivationSoftMax implements EncogActivationFunction {
 
-	/**
-	 * The serial id.
-	 */
-	private static final long serialVersionUID = -960489243250457611L;
+    /**
+     * The serial id.
+     */
+    private static final long serialVersionUID = -960489243250457611L;
 
-	/**
-	 * The parameters.
-	 */
-	private final double[] params;
+    /**
+     * The parameters.
+     */
+    private final double[] params;
 
-	/**
-	 * Construct the soft-max activation function.
-	 */
-	public ActivationSoftMax() {
-		this.params = new double[0];
-	}
+    /**
+     * Construct the soft-max activation function.
+     */
+    public ActivationSoftMax() {
+        this.params = new double[0];
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public final void activate(final double[] x, final int start,
-			final int size) {
-		double sum = 0;
-		for (int i = start; i < start + size; i++) {
-			x[i] = BoundMath.exp(x[i]);
-			sum += x[i];
-		}
-		for (int i = start; i < start + size; i++) {
-			x[i] /= sum;
-		}
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final void activate(final double[] x, final int start,
+                               final int size) {
+        double sum = 0;
+        for (int i = start; i < start + size; i++) {
+            x[i] = BoundMath.exp(x[i]);
+            sum += x[i];
+        }
+        for (int i = start; i < start + size; i++) {
+            x[i] /= sum;
+        }
+    }
 
-	/**
-	 * @return The object cloned;
-	 */
-	@Override
-	public final IterativeDerivative clone() {
-		return new ActivationSoftMax();
-	}
+    /**
+     * @return The object cloned;
+     */
+    @Override
+    public final IterativeDerivative clone() {
+        return new ActivationSoftMax();
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public final double derivative(final double b, final double a) {
-		return 1.0;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final double derivative(final double b, final double a) {
+        return 1.0;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public final String[] getParamNames() {
-		final String[] result = {};
-		return result;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final String[] getParamNames() {
+        final String[] result = {};
+        return result;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public final double[] getParams() {
-		return this.params;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final double[] getParams() {
+        return this.params;
+    }
 
-	/**
-	 * @return Return false, softmax has no derivative.
-	 */
-	@Override
-	public final boolean hasDerivative() {
-		return true;
-	}
+    /**
+     * @return Return false, softmax has no derivative.
+     */
+    @Override
+    public final boolean hasDerivative() {
+        return true;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public final void setParam(final int index, final double value) {
-		this.params[index] = value;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final void setParam(final int index, final double value) {
+        this.params[index] = value;
+    }
 
 
 }

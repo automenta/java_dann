@@ -26,7 +26,7 @@ package syncleus.dann.math.random;
 import java.util.Random;
 
 public interface RandomFactory {
-	Random factor();
+    Random factor();
 
-	RandomFactory factorFactory();
+    RandomFactory factorFactory();
 }

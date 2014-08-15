@@ -27,33 +27,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CalcProbability {
-	private final List<Integer> classes = new ArrayList<Integer>();
-	private final int laplacianSmoothing;
-	private int total;
+    private final List<Integer> classes = new ArrayList<>();
+    private final int laplacianSmoothing;
+    private int total;
 
-	public CalcProbability(final int k) {
-		super();
-		this.laplacianSmoothing = k;
-	}
+    public CalcProbability(final int k) {
+        super();
+        this.laplacianSmoothing = k;
+    }
 
-	public CalcProbability() {
-		this(0);
-	}
+    public CalcProbability() {
+        this(0);
+    }
 
-	public void addClass(final int items) {
-		total += items;
-		this.classes.add(items);
-	}
+    public void addClass(final int items) {
+        total += items;
+        this.classes.add(items);
+    }
 
-	public int getClassCount() {
-		return this.classes.size();
-	}
+    public int getClassCount() {
+        return this.classes.size();
+    }
 
-	public double calculate(final int classNumber) {
-		final double classItems = this.classes.get(classNumber);
-		final double totalItems = this.total;
-		final double d = (this.laplacianSmoothing * classes
-                        .size());
-		return (classItems + (this.laplacianSmoothing)) / (totalItems + d);
-	}
+    public double calculate(final int classNumber) {
+        final double classItems = this.classes.get(classNumber);
+        final double totalItems = this.total;
+        final double d = (this.laplacianSmoothing * classes
+                .size());
+        return (classItems + (this.laplacianSmoothing)) / (totalItems + d);
+    }
 }

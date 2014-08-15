@@ -27,78 +27,78 @@ package syncleus.dann.neural.activation;
  * The bipolar sigmoid activation function is like the regular sigmoid
  * activation function, except Bipolar sigmoid activation function. TheOutput
  * range is -1 to 1 instead of the more normal 0 to 1.
- *
+ * <p/>
  * This activation is typically part of a CPPN neural network, such as
  * HyperNEAT.
- *
+ * <p/>
  * The idea for this activation function was developed by Ken Stanley, of the
  * University of Texas at Austin. http://www.cs.ucf.edu/~kstanley/
  */
 public class ActivationBipolarSteepenedSigmoid implements EncogActivationFunction {
 
-	/**
-	 * The serial id.
-	 */
-	private static final long serialVersionUID = 1L;
+    /**
+     * The serial id.
+     */
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void activate(final double[] d, final int start,
-			final int size) {
-		for (int i = start; i < start + size; i++) {
-			d[i] = (2.0 / (1.0 + Math.exp(-4.9 * d[i]))) - 1.0;
-		}
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void activate(final double[] d, final int start,
+                         final int size) {
+        for (int i = start; i < start + size; i++) {
+            d[i] = (2.0 / (1.0 + Math.exp(-4.9 * d[i]))) - 1.0;
+        }
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public double derivative(final double b, final double a) {
-		return 1;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public double derivative(final double b, final double a) {
+        return 1;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public boolean hasDerivative() {
-		return true;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean hasDerivative() {
+        return true;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public double[] getParams() {
-		return ActivationLinear.P;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public double[] getParams() {
+        return ActivationLinear.P;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setParam(final int index, final double value) {
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setParam(final int index, final double value) {
 
-	}
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public String[] getParamNames() {
-		return ActivationLinear.N;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String[] getParamNames() {
+        return ActivationLinear.N;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public final IterativeDerivative clone() {
-		return new ActivationBipolarSteepenedSigmoid();
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final IterativeDerivative clone() {
+        return new ActivationBipolarSteepenedSigmoid();
+    }
 
 
 }

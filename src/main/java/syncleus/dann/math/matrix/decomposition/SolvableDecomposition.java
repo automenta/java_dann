@@ -22,6 +22,6 @@ import syncleus.dann.math.FieldElement;
 import syncleus.dann.math.matrix.Matrix;
 
 public interface SolvableDecomposition<M extends Matrix<M, ? extends FieldElement<?>>>
-		extends Decomposition<M> {
-	M solve(M solutionMatrix);
+        extends Decomposition<M> {
+    M solve(M solutionMatrix);
 }

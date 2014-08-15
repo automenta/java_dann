@@ -22,8 +22,8 @@ import syncleus.dann.graph.DirectedEdge;
 import syncleus.dann.graph.DirectedGraph;
 
 public interface TreeOptimizedDirectedGraph<N, E extends DirectedEdge<N>>
-		extends DirectedGraph<N, E> {
-	boolean isRootedTree();
+        extends DirectedGraph<N, E> {
+    boolean isRootedTree();
 
-	boolean isRootedForest();
+    boolean isRootedForest();
 }

@@ -22,8 +22,8 @@ import syncleus.dann.neural.AbstractInputNeuron;
 import syncleus.dann.neural.Brain;
 
 public abstract class AbstractSomInputNeuron extends AbstractInputNeuron
-		implements SomInputNeuron {
-	protected AbstractSomInputNeuron(final Brain brain) {
-		super(brain);
-	}
+        implements SomInputNeuron {
+    protected AbstractSomInputNeuron(final Brain brain) {
+        super(brain);
+    }
 }

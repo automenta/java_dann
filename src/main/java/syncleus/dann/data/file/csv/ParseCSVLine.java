@@ -23,91 +23,90 @@
  */
 package syncleus.dann.data.file.csv;
 
+import syncleus.dann.data.language.SimpleParser;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import syncleus.dann.data.language.SimpleParser;
-
 public class ParseCSVLine {
 
-	private final CSVFormat format;
+    private final CSVFormat format;
 
-	public ParseCSVLine(final CSVFormat theFormat) {
-		this.format = theFormat;
-	}
+    public ParseCSVLine(final CSVFormat theFormat) {
+        this.format = theFormat;
+    }
 
-	public List<String> parse(final String line) {
-		if (this.format.getSeparator() == ' ') {
-			return parseSpaceSep(line);
-		} else {
-			return parseCharSep(line);
-		}
-	}
+    public List<String> parse(final String line) {
+        if (this.format.getSeparator() == ' ') {
+            return parseSpaceSep(line);
+        } else {
+            return parseCharSep(line);
+        }
+    }
 
-	private List<String> parseSpaceSep(final String line) {
-		final List<String> result = new ArrayList<String>();
-		final SimpleParser parse = new SimpleParser(line);
+    private List<String> parseSpaceSep(final String line) {
+        final List<String> result = new ArrayList<>();
+        final SimpleParser parse = new SimpleParser(line);
 
-		while (!parse.eol()) {
-			if (parse.peek() == '\"') {
-				result.add(parse.readQuotedString());
-			} else {
-				result.add(parse.readToWhiteSpace());
-			}
-			parse.eatWhiteSpace();
-		}
+        while (!parse.eol()) {
+            if (parse.peek() == '\"') {
+                result.add(parse.readQuotedString());
+            } else {
+                result.add(parse.readToWhiteSpace());
+            }
+            parse.eatWhiteSpace();
+        }
 
-		return result;
-	}
+        return result;
+    }
 
-	/**
-	 * Parse the line into a list of values.
-	 *
-	 * @param line
-	 *            The line to parse.
-	 * @return The elements on this line.
-	 */
-	private List<String> parseCharSep(final String line) {
-		final StringBuilder item = new StringBuilder();
-		final List<String> result = new ArrayList<String>();
-		boolean quoted = false;
-		boolean hadQuotes = false;
+    /**
+     * Parse the line into a list of values.
+     *
+     * @param line The line to parse.
+     * @return The elements on this line.
+     */
+    private List<String> parseCharSep(final String line) {
+        final StringBuilder item = new StringBuilder();
+        final List<String> result = new ArrayList<>();
+        boolean quoted = false;
+        boolean hadQuotes = false;
 
-		for (int i = 0; i < line.length(); i++) {
-			final char ch = line.charAt(i);
-			if ((ch == this.format.getSeparator()) && !quoted) {
-				String s = item.toString();
-				if (!hadQuotes) {
-					s = s.trim();
-				}
-				result.add(s);
-				item.setLength(0);
-				quoted = false;
-				hadQuotes = false;
-			} else if ((ch == '\"') && quoted) {
-				if ((i + 1) < line.length() && line.charAt(i + 1) == '\"') {
-					i++;
-					item.append("\"");
-				} else {
-					quoted = false;
-				}
-			} else if ((ch == '\"') && (item.length() == 0)) {
-				hadQuotes = true;
-				quoted = true;
-			} else {
-				item.append(ch);
-			}
-		}
+        for (int i = 0; i < line.length(); i++) {
+            final char ch = line.charAt(i);
+            if ((ch == this.format.getSeparator()) && !quoted) {
+                String s = item.toString();
+                if (!hadQuotes) {
+                    s = s.trim();
+                }
+                result.add(s);
+                item.setLength(0);
+                quoted = false;
+                hadQuotes = false;
+            } else if ((ch == '\"') && quoted) {
+                if ((i + 1) < line.length() && line.charAt(i + 1) == '\"') {
+                    i++;
+                    item.append('"');
+                } else {
+                    quoted = false;
+                }
+            } else if ((ch == '\"') && (item.length() == 0)) {
+                hadQuotes = true;
+                quoted = true;
+            } else {
+                item.append(ch);
+            }
+        }
 
-		if (item.length() > 0) {
-			String s = item.toString();
-			if (!hadQuotes) {
-				s = s.trim();
-			}
-			result.add(s);
-		}
+        if (item.length() > 0) {
+            String s = item.toString();
+            if (!hadQuotes) {
+                s = s.trim();
+            }
+            result.add(s);
+        }
 
-		return result;
-	}
+        return result;
+    }
 
 }

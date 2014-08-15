@@ -30,30 +30,27 @@ package syncleus.dann.data.language.time;
  */
 public interface TimeUnitNames {
 
-	/**
-	 * Get the code for the specified time unit.
-	 *
-	 * @param unit
-	 *            The time unit.
-	 * @return Return the code for the specified time unit.
-	 */
-	String code(TimeUnit unit);
+    /**
+     * Get the code for the specified time unit.
+     *
+     * @param unit The time unit.
+     * @return Return the code for the specified time unit.
+     */
+    String code(TimeUnit unit);
 
-	/**
-	 * Get the plural name for the specified time unit.
-	 *
-	 * @param unit
-	 *            The time unit.
-	 * @return Return the plural name for the specified unit.
-	 */
-	String plural(TimeUnit unit);
+    /**
+     * Get the plural name for the specified time unit.
+     *
+     * @param unit The time unit.
+     * @return Return the plural name for the specified unit.
+     */
+    String plural(TimeUnit unit);
 
-	/**
-	 * Get the singular form of the specified time unit.
-	 *
-	 * @param unit
-	 *            The time unit.
-	 * @return The singular form of the specified time unit.
-	 */
-	String singular(TimeUnit unit);
+    /**
+     * Get the singular form of the specified time unit.
+     *
+     * @param unit The time unit.
+     * @return The singular form of the specified time unit.
+     */
+    String singular(TimeUnit unit);
 }

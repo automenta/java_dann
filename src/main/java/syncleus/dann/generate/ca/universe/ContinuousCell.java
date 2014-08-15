@@ -25,13 +25,13 @@ package syncleus.dann.generate.ca.universe;
 
 public interface ContinuousCell extends UniverseCell {
 
-	void add(UniverseCell x);
+    void add(UniverseCell x);
 
-	void multiply(UniverseCell mult);
+    void multiply(UniverseCell mult);
 
-	@Override
-	void set(int i, double[] d);
+    @Override
+    void set(int i, double[] d);
 
-	void clamp(double low, double high);
+    void clamp(double low, double high);
 
 }

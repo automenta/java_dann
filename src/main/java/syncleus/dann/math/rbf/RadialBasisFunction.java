@@ -23,76 +23,71 @@
  */
 package syncleus.dann.math.rbf;
 
-import java.io.Serializable;
-
 import syncleus.dann.math.ArrayToScalarFunction;
+
+import java.io.Serializable;
 
 /**
  * A multi-dimension RBF.
  */
 public interface RadialBasisFunction extends Serializable, ArrayToScalarFunction {
 
-	/**
-	 * Calculate the RBF result for the specified value.
-	 *
-	 * @param x
-	 *            The value to be passed into the RBF.
-	 * @return The RBF value.
-	 */
-	double apply(double[] x);
+    /**
+     * Calculate the RBF result for the specified value.
+     *
+     * @param x The value to be passed into the RBF.
+     * @return The RBF value.
+     */
+    double apply(double[] x);
 
-	/**
-	 * Get the center of this RBD.
-	 * 
-	 * @param dimension
-	 *            The dimension to get the center for.
-	 * @return The center of the RBF.
-	 */
-	double getCenter(int dimension);
+    /**
+     * Get the center of this RBD.
+     *
+     * @param dimension The dimension to get the center for.
+     * @return The center of the RBF.
+     */
+    double getCenter(int dimension);
 
-	/**
-	 * Get the center of this RBD.
-	 * 
-	 * @return The center of the RBF.
-	 */
-	double getPeak();
+    /**
+     * Get the center of this RBD.
+     *
+     * @return The center of the RBF.
+     */
+    double getPeak();
 
-	/**
-	 * Set the peak.
-	 * 
-	 * @param peak
-	 *            The peak.
-	 */
-	void setPeak(double peak);
+    /**
+     * Set the peak.
+     *
+     * @param peak The peak.
+     */
+    void setPeak(double peak);
 
-	/**
-	 * @return The width of the RBF.
-	 */
-	double getWidth();
+    /**
+     * @return The width of the RBF.
+     */
+    double getWidth();
 
-	/**
-	 * @return The dimensions in this RBF.
-	 */
-	int getDimensions();
+    /**
+     * @return The dimensions in this RBF.
+     */
+    int getDimensions();
 
-	/**
-	 * Set the width.
-	 * 
-	 * @param radius
-	 *            The width.
-	 */
-	void setWidth(double radius);
+    /**
+     * Set the width.
+     *
+     * @param radius The width.
+     */
+    void setWidth(double radius);
 
-	/**
-	 * @return Get the centers.
-	 */
-	double[] getCenters();
+    /**
+     * @return Get the centers.
+     */
+    double[] getCenters();
 
-	/**
-	 * Set the centers.
-	 * 
-	 * @param center
-	 *            The centers.
-	 */
-	void setCenters(double[] center);
+    /**
+     * Set the centers.
+     *
+     * @param center The centers.
+     */
+    void setCenters(double[] center);
 }

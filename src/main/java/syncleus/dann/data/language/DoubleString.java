@@ -27,96 +27,96 @@ import java.io.UnsupportedEncodingException;
 
 public class DoubleString {
 
-	public static final String DEFAULT_ENCODING = "UTF-8";
+    public static final String DEFAULT_ENCODING = "UTF-8";
 
-	public final static double FRAC_SHIFT = 100000000.0;
-	public final static int[] MULT = { 0x10000, 0x100, 0x01 };
+    public final static double FRAC_SHIFT = 100000000.0;
+    public final static int[] MULT = {0x10000, 0x100, 0x01};
 
-	public static String convertDoubleToString(final double[] target,
-			final int index) throws UnsupportedEncodingException {
-		boolean wholeMode = true;
-		int currentIndex = index;
-		int multIndex = 0;
-		final int len = (int) target[currentIndex];
-		final int encodedLen = (int) ((target[currentIndex] - len) * FRAC_SHIFT);
-		final byte[] encoded = new byte[encodedLen];
+    public static String convertDoubleToString(final double[] target,
+                                               final int index) throws UnsupportedEncodingException {
+        boolean wholeMode = true;
+        int currentIndex = index;
+        int multIndex = 0;
+        final int len = (int) target[currentIndex];
+        final int encodedLen = (int) ((target[currentIndex] - len) * FRAC_SHIFT);
+        final byte[] encoded = new byte[encodedLen];
 
-		currentIndex++;
-		int assembled = (int) target[currentIndex];
+        currentIndex++;
+        int assembled = (int) target[currentIndex];
 
-		for (int i = 0; i < encoded.length; i++) {
-			encoded[i] = (byte) (assembled / MULT[multIndex]);
-			assembled -= target[currentIndex] * MULT[multIndex];
-			multIndex++;
-			if (multIndex == MULT.length) {
-				multIndex = 0;
-				if (wholeMode) {
-					final double dec = (encoded[currentIndex] - (encoded[currentIndex]));
-					assembled = (int) (dec * FRAC_SHIFT);
-					wholeMode = false;
-				} else {
-					wholeMode = true;
-					assembled = (int) target[currentIndex++];
-				}
-			}
-		}
+        for (int i = 0; i < encoded.length; i++) {
+            encoded[i] = (byte) (assembled / MULT[multIndex]);
+            assembled -= target[currentIndex] * MULT[multIndex];
+            multIndex++;
+            if (multIndex == MULT.length) {
+                multIndex = 0;
+                if (wholeMode) {
+                    final double dec = (encoded[currentIndex] - (encoded[currentIndex]));
+                    assembled = (int) (dec * FRAC_SHIFT);
+                    wholeMode = false;
+                } else {
+                    wholeMode = true;
+                    assembled = (int) target[currentIndex++];
+                }
+            }
+        }
 
-		
-		return new String(encoded, DEFAULT_ENCODING);
-		
-	}
 
-	public static int convertStringToDouble(final String str,
-			final double[] target, final int targetIndex) throws UnsupportedEncodingException {
-		
+        return new String(encoded, DEFAULT_ENCODING);
 
-			int multIndex = 0;
-			int assemble = 0;
-			boolean wholeMode = true;
+    }
 
-			final byte[] encoded = str.getBytes(DEFAULT_ENCODING);
-			int outputIndex = targetIndex;
+    public static int convertStringToDouble(final String str,
+                                            final double[] target, final int targetIndex) throws UnsupportedEncodingException {
 
-			int len = (encoded.length / 6);
-			if ((encoded.length % 6) > 0) {
-				len++;
-			}
 
-			target[outputIndex++] = (encoded.length / FRAC_SHIFT) + len;
+        int multIndex = 0;
+        int assemble = 0;
+        boolean wholeMode = true;
 
-			for (int i = 0; i < encoded.length; i++) {
-				assemble += encoded[i] * MULT[multIndex++];
-				if (multIndex >= 3) {
-					if (wholeMode) {
-						target[outputIndex] = assemble;
-					} else {
-						target[outputIndex++] += assemble / FRAC_SHIFT;
-					}
-					multIndex = 0;
-					wholeMode = !wholeMode;
-					assemble = 0;
-				}
-			}
+        final byte[] encoded = str.getBytes(DEFAULT_ENCODING);
+        int outputIndex = targetIndex;
 
-			if (wholeMode) {
-				target[outputIndex] = assemble;
-			} else {
-				target[outputIndex++] += assemble / FRAC_SHIFT;
-			}
+        int len = (encoded.length / 6);
+        if ((encoded.length % 6) > 0) {
+            len++;
+        }
 
-			return (outputIndex - targetIndex) + 1;
-		
-	}
+        target[outputIndex++] = (encoded.length / FRAC_SHIFT) + len;
 
-	public static void main(final String[] args) throws Exception {
-		final String str = "This is a test";
-		final double[] target = new double[1024];
+        for (int i = 0; i < encoded.length; i++) {
+            assemble += encoded[i] * MULT[multIndex++];
+            if (multIndex >= 3) {
+                if (wholeMode) {
+                    target[outputIndex] = assemble;
+                } else {
+                    target[outputIndex++] += assemble / FRAC_SHIFT;
+                }
+                multIndex = 0;
+                wholeMode = !wholeMode;
+                assemble = 0;
+            }
+        }
 
-		final int len = DoubleString.convertStringToDouble(str, target, 0);
-		for (int i = 0; i < len; i++) {
-			System.out.println(target[i]);
-		}
+        if (wholeMode) {
+            target[outputIndex] = assemble;
+        } else {
+            target[outputIndex++] += assemble / FRAC_SHIFT;
+        }
 
-		System.out.println(DoubleString.convertDoubleToString(target, 0));
-	}
+        return (outputIndex - targetIndex) + 1;
+
+    }
+
+    public static void main(final String[] args) throws Exception {
+        final String str = "This is a test";
+        final double[] target = new double[1024];
+
+        final int len = DoubleString.convertStringToDouble(str, target, 0);
+        for (int i = 0; i < len; i++) {
+            System.out.println(target[i]);
+        }
+
+        System.out.println(DoubleString.convertDoubleToString(target, 0));
+    }
 }

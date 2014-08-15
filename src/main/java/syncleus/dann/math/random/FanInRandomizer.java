@@ -24,196 +24,186 @@
 package syncleus.dann.math.random;
 
 import org.encog.neural.networks.BasicNetwork;
-
 import syncleus.dann.math.matrix.SimpleRealMatrix;
 
 /**
  * A randomizer that attempts to create starting weight values that are
  * conducive to propagation training.
- *
+ * <p/>
  * This is one of the best randomizers offered in Encog, however, the Nguyen
  * Widrow method generally performs better.
- *
+ * <p/>
  * From:
- *
+ * <p/>
  * Neural Networks - A Comprehensive Foundation, Haykin, chapter 6.7
  *
  * @author jheaton
- *
  */
 public class FanInRandomizer extends BasicRandomizer {
 
-	/**
-	 * Error message. Can't use fan-in on a single number.
-	 */
-	static final String ERROR = "To use FanInRandomizer you must "
-			+ "present a Matrix or 2D array type value.";
+    /**
+     * Error message. Can't use fan-in on a single number.
+     */
+    static final String ERROR = "To use FanInRandomizer you must "
+            + "present a Matrix or 2D array type value.";
 
-	/**
-	 * The default boundary.
-	 */
-	private static final double DEFAULT_BOUNDARY = 2.4;
+    /**
+     * The default boundary.
+     */
+    private static final double DEFAULT_BOUNDARY = 2.4;
 
-	/** The lower bound. */
-	private final double lowerBound;
+    /**
+     * The lower bound.
+     */
+    private final double lowerBound;
 
-	/** The upper bound. */
-	private final double upperBound;
+    /**
+     * The upper bound.
+     */
+    private final double upperBound;
 
-	/**
-	 * Should the square root of the number of rows be used?
-	 */
-	private final boolean sqrt;
+    /**
+     * Should the square root of the number of rows be used?
+     */
+    private final boolean sqrt;
 
-	/**
-	 * Create a fan-in randomizer with default values.
-	 */
-	public FanInRandomizer() {
-		this(-FanInRandomizer.DEFAULT_BOUNDARY,
-				FanInRandomizer.DEFAULT_BOUNDARY, false);
-	}
+    /**
+     * Create a fan-in randomizer with default values.
+     */
+    public FanInRandomizer() {
+        this(-FanInRandomizer.DEFAULT_BOUNDARY,
+                FanInRandomizer.DEFAULT_BOUNDARY, false);
+    }
 
-	/**
-	 * Construct a fan-in randomizer along the specified boundary. The min will
-	 * be -boundary and the max will be boundary.
-	 *
-	 * @param boundary
-	 *            The boundary for the fan-in.
-	 * @param sqrt
-	 *            Should the square root of the rows to be used in the
-	 *            calculation.
-	 */
-	public FanInRandomizer(final double boundary, final boolean sqrt) {
-		this(-boundary, boundary, sqrt);
+    /**
+     * Construct a fan-in randomizer along the specified boundary. The min will
+     * be -boundary and the max will be boundary.
+     *
+     * @param boundary The boundary for the fan-in.
+     * @param sqrt     Should the square root of the rows to be used in the
+     *                 calculation.
+     */
+    public FanInRandomizer(final double boundary, final boolean sqrt) {
+        this(-boundary, boundary, sqrt);
 
-	}
+    }
 
-	/**
-	 * Construct a fan-in randomizer. Use the specified bounds.
-	 *
-	 * @param aLowerBound
-	 *            The lower bound.
-	 * @param anUpperBound
-	 *            The upper bound.
-	 * @param sqrt
-	 *            True if the square root of the rows should be used in the
-	 *            calculation.
-	 */
-	public FanInRandomizer(final double aLowerBound, final double anUpperBound,
-			final boolean sqrt) {
-		this.lowerBound = aLowerBound;
-		this.upperBound = anUpperBound;
-		this.sqrt = sqrt;
-	}
+    /**
+     * Construct a fan-in randomizer. Use the specified bounds.
+     *
+     * @param aLowerBound  The lower bound.
+     * @param anUpperBound The upper bound.
+     * @param sqrt         True if the square root of the rows should be used in the
+     *                     calculation.
+     */
+    public FanInRandomizer(final double aLowerBound, final double anUpperBound,
+                           final boolean sqrt) {
+        this.lowerBound = aLowerBound;
+        this.upperBound = anUpperBound;
+        this.sqrt = sqrt;
+    }
 
-	/**
-	 * Calculate the fan-in value.
-	 *
-	 * @param rows
-	 *            The number of rows.
-	 * @return The fan-in value.
-	 */
-	private double calculateValue(final int rows) {
-		double rowValue;
+    /**
+     * Calculate the fan-in value.
+     *
+     * @param rows The number of rows.
+     * @return The fan-in value.
+     */
+    private double calculateValue(final int rows) {
+        double rowValue;
 
-		if (this.sqrt) {
-			rowValue = Math.sqrt(rows);
-		} else {
-			rowValue = rows;
-		}
+        if (this.sqrt) {
+            rowValue = Math.sqrt(rows);
+        } else {
+            rowValue = rows;
+        }
 
-		return (this.lowerBound / rowValue) + nextDouble()
-				* ((this.upperBound - this.lowerBound) / rowValue);
-	}
+        return (this.lowerBound / rowValue) + nextDouble()
+                * ((this.upperBound - this.lowerBound) / rowValue);
+    }
 
-	/**
-	 * Throw an error if this class is used improperly.
-	 */
-	private void causeError() {
-		throw new RuntimeException(FanInRandomizer.ERROR);
-	}
+    /**
+     * Throw an error if this class is used improperly.
+     */
+    private void causeError() {
+        throw new RuntimeException(FanInRandomizer.ERROR);
+    }
 
-	/**
-	 * Starting with the specified number, randomize it to the degree specified
-	 * by this randomizer. This could be a totally new random number, or it
-	 * could be based on the specified number.
-	 *
-	 * @param d
-	 *            The number to randomize.
-	 * @return A randomized number.
-	 */
-	@Override
-	public double randomize(final double d) {
-		causeError();
-		return 0;
-	}
+    /**
+     * Starting with the specified number, randomize it to the degree specified
+     * by this randomizer. This could be a totally new random number, or it
+     * could be based on the specified number.
+     *
+     * @param d The number to randomize.
+     * @return A randomized number.
+     */
+    @Override
+    public double randomize(final double d) {
+        causeError();
+        return 0;
+    }
 
-	/**
-	 * Randomize the array based on an array, modify the array. Previous values
-	 * may be used, or they may be discarded, depending on the randomizer.
-	 *
-	 * @param d
-	 *            An array to randomize.
-	 */
-	@Override
-	public void randomize(final double[] d) {
-		for (int i = 0; i < d.length; i++) {
-			d[i] = calculateValue(1);
-		}
-	}
+    /**
+     * Randomize the array based on an array, modify the array. Previous values
+     * may be used, or they may be discarded, depending on the randomizer.
+     *
+     * @param d An array to randomize.
+     */
+    @Override
+    public void randomize(final double[] d) {
+        for (int i = 0; i < d.length; i++) {
+            d[i] = calculateValue(1);
+        }
+    }
 
-	/**
-	 * Randomize the 2d array based on an array, modify the array. Previous
-	 * values may be used, or they may be discarded, depending on the
-	 * randomizer.
-	 *
-	 * @param d
-	 *            An array to randomize.
-	 */
-	@Override
-	public void randomize(final double[][] d) {
-		for (int row = 0; row < d.length; row++) {
-			for (int col = 0; col < d[0].length; col++) {
-				d[row][col] = calculateValue(d.length);
-			}
-		}
-	}
+    /**
+     * Randomize the 2d array based on an array, modify the array. Previous
+     * values may be used, or they may be discarded, depending on the
+     * randomizer.
+     *
+     * @param d An array to randomize.
+     */
+    @Override
+    public void randomize(final double[][] d) {
+        for (int row = 0; row < d.length; row++) {
+            for (int col = 0; col < d[0].length; col++) {
+                d[row][col] = calculateValue(d.length);
+            }
+        }
+    }
 
-	/**
-	 * Randomize the matrix based on an array, modify the array. Previous values
-	 * may be used, or they may be discarded, depending on the randomizer.
-	 *
-	 * @param m
-	 *            A matrix to randomize.
-	 */
-	@Override
-	public void randomize(final SimpleRealMatrix m) {
-		for (int row = 0; row < m.getRows(); row++) {
-			for (int col = 0; col < m.getCols(); col++) {
-				m.set(row, col, calculateValue(m.getRows()));
-			}
-		}
-	}
+    /**
+     * Randomize the matrix based on an array, modify the array. Previous values
+     * may be used, or they may be discarded, depending on the randomizer.
+     *
+     * @param m A matrix to randomize.
+     */
+    @Override
+    public void randomize(final SimpleRealMatrix m) {
+        for (int row = 0; row < m.getRows(); row++) {
+            for (int col = 0; col < m.getCols(); col++) {
+                m.set(row, col, calculateValue(m.getRows()));
+            }
+        }
+    }
 
-	/**
-	 * Randomize one level of a neural network.
-	 * 
-	 * @param network
-	 *            The network to randomize
-	 * @param fromLayer
-	 *            The from level to randomize.
-	 */
-	@Override
-	public void randomize(final BasicNetwork network, final int fromLayer) {
-		final int fromCount = network.getLayerTotalNeuronCount(fromLayer);
-		final int toCount = network.getLayerNeuronCount(fromLayer + 1);
+    /**
+     * Randomize one level of a neural network.
+     *
+     * @param network   The network to randomize
+     * @param fromLayer The from level to randomize.
+     */
+    @Override
+    public void randomize(final BasicNetwork network, final int fromLayer) {
+        final int fromCount = network.getLayerTotalNeuronCount(fromLayer);
+        final int toCount = network.getLayerNeuronCount(fromLayer + 1);
 
-		for (int fromNeuron = 0; fromNeuron < fromCount; fromNeuron++) {
-			for (int toNeuron = 0; toNeuron < toCount; toNeuron++) {
-				double v = network.getWeight(fromLayer, fromNeuron, toNeuron);
-				v = calculateValue(toCount);
-				network.setWeight(fromLayer, fromNeuron, toNeuron, v);
-			}
-		}
-	}
+        for (int fromNeuron = 0; fromNeuron < fromCount; fromNeuron++) {
+            for (int toNeuron = 0; toNeuron < toCount; toNeuron++) {
+                double v = network.getWeight(fromLayer, fromNeuron, toNeuron);
+                v = calculateValue(toCount);
+                network.setWeight(fromLayer, fromNeuron, toNeuron, v);
+            }
+        }
+    }
 }

@@ -27,89 +27,84 @@ package syncleus.dann.math;
  * Specifies a constraint for dimensions, using a lower and upper bound.
  *
  * @author jheaton
- *
  */
 public class DimensionConstraint {
 
-	/**
-	 * The lower bound for each dimension.
-	 */
-	private final MultiDimension lower;
+    /**
+     * The lower bound for each dimension.
+     */
+    private final MultiDimension lower;
 
-	/**
-	 * The upper bound for each dimension.
-	 */
-	private final MultiDimension upper;
+    /**
+     * The upper bound for each dimension.
+     */
+    private final MultiDimension upper;
 
-	/**
-	 * Construct the constraint.
-	 *
-	 * @param n
-	 *            The number of dimensions.
-	 * @param theLower
-	 * @param theUpper
-	 */
-	public DimensionConstraint(final int n, final int theLower,
-			final int theUpper) {
-		this.lower = new MultiDimension(n);
-		this.upper = new MultiDimension(n);
+    /**
+     * Construct the constraint.
+     *
+     * @param n        The number of dimensions.
+     * @param theLower
+     * @param theUpper
+     */
+    public DimensionConstraint(final int n, final int theLower,
+                               final int theUpper) {
+        this.lower = new MultiDimension(n);
+        this.upper = new MultiDimension(n);
 
-		for (int i = 0; i < n; i++) {
-			this.lower.setDimension(i, theLower);
-			this.upper.setDimension(i, theUpper);
-		}
-	}
+        for (int i = 0; i < n; i++) {
+            this.lower.setDimension(i, theLower);
+            this.upper.setDimension(i, theUpper);
+        }
+    }
 
-	/**
-	 * @return The lower bound for each dimension.
-	 */
-	public MultiDimension getLower() {
-		return lower;
-	}
+    /**
+     * @return The lower bound for each dimension.
+     */
+    public MultiDimension getLower() {
+        return lower;
+    }
 
-	/**
-	 * @return The upper bound for each dimension.
-	 */
-	public MultiDimension getUpper() {
-		return upper;
-	}
+    /**
+     * @return The upper bound for each dimension.
+     */
+    public MultiDimension getUpper() {
+        return upper;
+    }
 
-	/**
-	 * Get the lower bound for a specific dimension.
-	 *
-	 * @param d
-	 *            The dimension.
-	 * @return The lower bound for the specified dimension.
-	 */
-	public int getLower(final int d) {
-		return lower.getDimension(d);
-	}
+    /**
+     * Get the lower bound for a specific dimension.
+     *
+     * @param d The dimension.
+     * @return The lower bound for the specified dimension.
+     */
+    public int getLower(final int d) {
+        return lower.getDimension(d);
+    }
 
-	/**
-	 * Get the upper bound for a specific dimension.
-	 *
-	 * @param d
-	 *            The dimension.
-	 * @return The upper bound for the specified dimension.
-	 */
-	public int getUpper(final int d) {
-		return upper.getDimension(d);
-	}
+    /**
+     * Get the upper bound for a specific dimension.
+     *
+     * @param d The dimension.
+     * @return The upper bound for the specified dimension.
+     */
+    public int getUpper(final int d) {
+        return upper.getDimension(d);
+    }
 
-	/**
-	 * Get the range (between upper and lower bound) for the specified
-	 * dimension.
-	 *
-	 * @param d
-	 *            The dimension.
-	 * @return The range for the specified dimension.
-	 */
-	public int getRange(final int d) {
-		return (upper.getDimension(d) - lower.getDimension(d)) + 1;
-	}
+    /**
+     * Get the range (between upper and lower bound) for the specified
+     * dimension.
+     *
+     * @param d The dimension.
+     * @return The range for the specified dimension.
+     */
+    public int getRange(final int d) {
+        return (upper.getDimension(d) - lower.getDimension(d)) + 1;
+    }
 
-	public int getMiddle(final int d) {
-		return getRange(d) / 2;
-	}
+    public int getMiddle(final int d) {
+        return getRange(d) / 2;
+    }
 
 }

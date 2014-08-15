@@ -27,22 +27,20 @@ import java.util.Set;
  * @author Jeffrey Phillips Freeman
  */
 public interface WordParser {
-	/**
-	 * Gets all words from the given String.
-	 *
-	 * @param text
-	 *            The string to use
-	 * @return The list of all words
-	 */
-	List<String> getWords(String text);
+    /**
+     * Gets all words from the given String.
+     *
+     * @param text The string to use
+     * @return The list of all words
+     */
+    List<String> getWords(String text);
 
-	/**
-	 * Gets the unique words from the given String.
-	 *
-	 * @param text
-	 *            The string to use
-	 * @return The set of all unique words
-	 * @see WordParser#getWords(String)
-	 */
-	Set<String> getUniqueWords(String text);
+    /**
+     * Gets the unique words from the given String.
+     *
+     * @param text The string to use
+     * @return The set of all unique words
+     * @see WordParser#getWords(String)
+     */
+    Set<String> getUniqueWords(String text);
 }

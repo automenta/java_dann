@@ -32,112 +32,111 @@ import syncleus.dann.math.array.EngineArray;
 /**
  * Basic radial basis function. Defines centers for each of the RBF's. All RBF's
  * have a common radius and peak.
- *
  */
 public abstract class BasicRBF implements RadialBasisFunction {
 
-	/**
-	 * Serial id.
-	 */
-	private static final long serialVersionUID = 1L;
+    /**
+     * Serial id.
+     */
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * The center of the RBF.
-	 */
-	private double[] center;
+    /**
+     * The center of the RBF.
+     */
+    private double[] center;
 
-	/**
-	 * The peak of the RBF.
-	 */
-	private double peak;
+    /**
+     * The peak of the RBF.
+     */
+    private double peak;
 
-	/**
-	 * The width of the RBF.
-	 */
-	private double width;
+    /**
+     * The width of the RBF.
+     */
+    private double width;
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public final double getCenter(final int dimension) {
-		return this.center[dimension];
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final double getCenter(final int dimension) {
+        return this.center[dimension];
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public final double[] getCenters() {
-		return this.center;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final double[] getCenters() {
+        return this.center;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public final int getDimensions() {
-		return this.center.length;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final int getDimensions() {
+        return this.center.length;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public final double getPeak() {
-		return this.peak;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final double getPeak() {
+        return this.peak;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public final double getWidth() {
-		return this.width;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final double getWidth() {
+        return this.width;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public final void setCenters(final double[] centers) {
-		this.center = EngineArray.arrayCopy(centers);
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final void setCenters(final double[] centers) {
+        this.center = EngineArray.arrayCopy(centers);
 
-	}
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public final void setPeak(final double thePeak) {
-		this.peak = thePeak;
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final void setPeak(final double thePeak) {
+        this.peak = thePeak;
 
-	}
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public final void setWidth(final double theWidth) {
-		this.width = theWidth;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final void setWidth(final double theWidth) {
+        this.width = theWidth;
+    }
 
-	@Override
-	public String toString() {
-		final StringBuilder result = new StringBuilder();
-		result.append("[");
-		result.append(this.getClass().getSimpleName());
-		result.append(":width=");
-		result.append(Format.formatDouble(this.getWidth(),
-				EncogMath.DEFAULT_PRECISION));
-		result.append(",peak=");
-		result.append(Format.formatDouble(this.getPeak(),
-				EncogMath.DEFAULT_PRECISION));
-		result.append(",center=");
-		final StringBuilder list = new StringBuilder();
-		NumberList.toList(CSVFormat.EG_FORMAT, list, this.getCenters());
-		result.append(list);
-		result.append("]");
-		return result.toString();
-	}
+    @Override
+    public String toString() {
+        final StringBuilder result = new StringBuilder();
+        result.append('[');
+        result.append(this.getClass().getSimpleName());
+        result.append(":width=");
+        result.append(Format.formatDouble(this.getWidth(),
+                EncogMath.DEFAULT_PRECISION));
+        result.append(",peak=");
+        result.append(Format.formatDouble(this.getPeak(),
+                EncogMath.DEFAULT_PRECISION));
+        result.append(",center=");
+        final StringBuilder list = new StringBuilder();
+        NumberList.toList(CSVFormat.EG_FORMAT, list, this.getCenters());
+        result.append(list);
+        result.append(']');
+        return result.toString();
+    }
 }

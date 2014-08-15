@@ -18,110 +18,109 @@
  ******************************************************************************/
 package syncleus.dann.graph.search.pathfinding;
 
-import syncleus.dann.graph.path.pathfinding.DijkstraPathFinder;
-import java.util.List;
-
 import org.junit.Assert;
 import org.junit.Test;
-
 import syncleus.dann.graph.BidirectedEdge;
+import syncleus.dann.graph.path.pathfinding.DijkstraPathFinder;
 import syncleus.dann.graph.search.Grid;
 import syncleus.dann.graph.search.GridNode;
 
+import java.util.List;
+
 public class TestDijkstraPathFinder {
-	private static final double INF = Double.POSITIVE_INFINITY;
-	private static final double[][] HARD_GRID = {
-			{ 1.0, 1.0, 1000.0, 1.0, 1.0, 1.0, 1.0, 1.0 },
-			{ 1.0, 1.0, 1.0, 1.0, 10.0, 10.0, 1.0, 1.0 },
-			{ INF, INF, INF, INF, INF, 1.0, 1.0, 1.0 },
-			{ 11.0, 1.0, 1.0, 1.0, 1.0, 10.0, 2.0, 1.0 },
-			{ 1.0, 10.0, INF, 1.0, INF, INF, INF, INF },
-			{ 1.0, INF, INF, INF, INF, 1.0, 1.0, 1.0 },
-			{ 1.0, INF, 1.0, 1.0, 1.0, 1.0, INF, 1.0 },
-			{ 1.0, 1.0, 1.0, INF, INF, 4.0, 1.0, 1.0 } };
-	private static final int[] HARD_GRID_START = { 1, 0 };
-	private static final int[] HARD_GRID_END = { 7, 7 };
-	private static final int[][] HARD_GRID_SOLUTION = { { 1, 0 }, { 1, 1 },
-			{ 2, 1 }, { 3, 1 }, { 3, 0 }, { 4, 0 }, { 5, 0 }, { 6, 0 },
-			{ 6, 1 }, { 6, 2 }, { 5, 2 }, { 5, 3 }, { 4, 3 }, { 3, 3 },
-			{ 2, 3 }, { 1, 3 }, { 1, 4 }, { 0, 4 }, { 0, 5 }, { 0, 6 },
-			{ 0, 7 }, { 1, 7 }, { 2, 7 }, { 2, 6 }, { 3, 6 }, { 4, 6 },
-			{ 5, 6 }, { 5, 5 }, { 6, 5 }, { 7, 5 }, { 7, 6 }, { 7, 7 } };
-	private static final double[][] EASY_GRID = {
-			{ INF, INF, INF, 1.0, 1.0, 1.0, 1.0, INF },
-			{ INF, 1.0, 1.0, 1.0, INF, INF, 1.0, INF },
-			{ INF, INF, INF, INF, INF, 1.0, 1.0, INF },
-			{ INF, 1.0, 1.0, 1.0, 1.0, 10.0, INF, INF },
-			{ 1.0, 10.0, INF, INF, INF, INF, INF, INF },
-			{ 1.0, INF, INF, INF, INF, 1.0, 1.0, 1.0 },
-			{ 1.0, INF, 1.0, 1.0, 1.0, 1.0, INF, 1.0 },
-			{ 1.0, 1.0, 1.0, INF, INF, INF, INF, 1.0 } };
-	private static final int[] EASY_GRID_START = { 1, 0 };
-	private static final int[] EASY_GRID_END = { 7, 7 };
-	private static final int[][] EASY_GRID_SOLUTION = { { 1, 0 }, { 1, 1 },
-			{ 2, 1 }, { 3, 1 }, { 3, 0 }, { 4, 0 }, { 5, 0 }, { 6, 0 },
-			{ 6, 1 }, { 6, 2 }, { 5, 2 }, { 5, 3 }, { 4, 3 }, { 3, 3 },
-			{ 2, 3 }, { 1, 3 }, { 1, 4 }, { 0, 4 }, { 0, 5 }, { 0, 6 },
-			{ 0, 7 }, { 1, 7 }, { 2, 7 }, { 2, 6 }, { 3, 6 }, { 4, 6 },
-			{ 5, 6 }, { 5, 5 }, { 6, 5 }, { 7, 5 }, { 7, 6 }, { 7, 7 } };
+    private static final double INF = Double.POSITIVE_INFINITY;
+    private static final double[][] HARD_GRID = {
+            {1.0, 1.0, 1000.0, 1.0, 1.0, 1.0, 1.0, 1.0},
+            {1.0, 1.0, 1.0, 1.0, 10.0, 10.0, 1.0, 1.0},
+            {INF, INF, INF, INF, INF, 1.0, 1.0, 1.0},
+            {11.0, 1.0, 1.0, 1.0, 1.0, 10.0, 2.0, 1.0},
+            {1.0, 10.0, INF, 1.0, INF, INF, INF, INF},
+            {1.0, INF, INF, INF, INF, 1.0, 1.0, 1.0},
+            {1.0, INF, 1.0, 1.0, 1.0, 1.0, INF, 1.0},
+            {1.0, 1.0, 1.0, INF, INF, 4.0, 1.0, 1.0}};
+    private static final int[] HARD_GRID_START = {1, 0};
+    private static final int[] HARD_GRID_END = {7, 7};
+    private static final int[][] HARD_GRID_SOLUTION = {{1, 0}, {1, 1},
+            {2, 1}, {3, 1}, {3, 0}, {4, 0}, {5, 0}, {6, 0},
+            {6, 1}, {6, 2}, {5, 2}, {5, 3}, {4, 3}, {3, 3},
+            {2, 3}, {1, 3}, {1, 4}, {0, 4}, {0, 5}, {0, 6},
+            {0, 7}, {1, 7}, {2, 7}, {2, 6}, {3, 6}, {4, 6},
+            {5, 6}, {5, 5}, {6, 5}, {7, 5}, {7, 6}, {7, 7}};
+    private static final double[][] EASY_GRID = {
+            {INF, INF, INF, 1.0, 1.0, 1.0, 1.0, INF},
+            {INF, 1.0, 1.0, 1.0, INF, INF, 1.0, INF},
+            {INF, INF, INF, INF, INF, 1.0, 1.0, INF},
+            {INF, 1.0, 1.0, 1.0, 1.0, 10.0, INF, INF},
+            {1.0, 10.0, INF, INF, INF, INF, INF, INF},
+            {1.0, INF, INF, INF, INF, 1.0, 1.0, 1.0},
+            {1.0, INF, 1.0, 1.0, 1.0, 1.0, INF, 1.0},
+            {1.0, 1.0, 1.0, INF, INF, INF, INF, 1.0}};
+    private static final int[] EASY_GRID_START = {1, 0};
+    private static final int[] EASY_GRID_END = {7, 7};
+    private static final int[][] EASY_GRID_SOLUTION = {{1, 0}, {1, 1},
+            {2, 1}, {3, 1}, {3, 0}, {4, 0}, {5, 0}, {6, 0},
+            {6, 1}, {6, 2}, {5, 2}, {5, 3}, {4, 3}, {3, 3},
+            {2, 3}, {1, 3}, {1, 4}, {0, 4}, {0, 5}, {0, 6},
+            {0, 7}, {1, 7}, {2, 7}, {2, 6}, {3, 6}, {4, 6},
+            {5, 6}, {5, 5}, {6, 5}, {7, 5}, {7, 6}, {7, 7}};
 
-	private static boolean checkNode(final GridNode node, final int[] coords) {
-		return ((node.getX() == coords[0]) && (node.getY() == coords[1]));
-	}
+    private static boolean checkNode(final GridNode node, final int[] coords) {
+        return ((node.getX() == coords[0]) && (node.getY() == coords[1]));
+    }
 
-	private static boolean checkSolution(final GridNode start,
-			final List<BidirectedEdge<GridNode>> path, final int[][] solution) {
-		int solutionIndex = 0;
-		GridNode lastNode = start;
-		if (!checkNode(lastNode, solution[solutionIndex]))
-			return false;
+    private static boolean checkSolution(final GridNode start,
+                                         final List<BidirectedEdge<GridNode>> path, final int[][] solution) {
+        int solutionIndex = 0;
+        GridNode lastNode = start;
+        if (!checkNode(lastNode, solution[solutionIndex]))
+            return false;
 
-		for (final BidirectedEdge<GridNode> edge : path) {
-			solutionIndex++;
+        for (final BidirectedEdge<GridNode> edge : path) {
+            solutionIndex++;
 
-			final GridNode currentNode = (edge.getLeftNode().equals(lastNode) ? edge
-					.getRightNode() : edge.getLeftNode());
-			if (!checkNode(currentNode, solution[solutionIndex]))
-				return false;
-			lastNode = currentNode;
-		}
+            final GridNode currentNode = (edge.getLeftNode().equals(lastNode) ? edge
+                    .getRightNode() : edge.getLeftNode());
+            if (!checkNode(currentNode, solution[solutionIndex]))
+                return false;
+            lastNode = currentNode;
+        }
 
-		return true;
-	}
+        return true;
+    }
 
-	@Test
-	public void testHardGrid() {
-		final Grid hardGrid = new Grid(HARD_GRID);
-		final DijkstraPathFinder<GridNode, BidirectedEdge<GridNode>> pathFinder = new DijkstraPathFinder<GridNode, BidirectedEdge<GridNode>>(
-				hardGrid);
+    @Test
+    public void testHardGrid() {
+        final Grid hardGrid = new Grid(HARD_GRID);
+        final DijkstraPathFinder<GridNode, BidirectedEdge<GridNode>> pathFinder = new DijkstraPathFinder<>(
+                hardGrid);
 
-		final GridNode startNode = hardGrid.getNode(HARD_GRID_START[0],
-				HARD_GRID_START[1]);
-		final GridNode endNode = hardGrid.getNode(HARD_GRID_END[0],
-				HARD_GRID_END[1]);
+        final GridNode startNode = hardGrid.getNode(HARD_GRID_START[0],
+                HARD_GRID_START[1]);
+        final GridNode endNode = hardGrid.getNode(HARD_GRID_END[0],
+                HARD_GRID_END[1]);
 
-		final List<BidirectedEdge<GridNode>> path = pathFinder.getBestPath(
-				startNode, endNode);
+        final List<BidirectedEdge<GridNode>> path = pathFinder.getBestPath(
+                startNode, endNode);
 
-		Assert.assertTrue("incorrect path found!",
-				checkSolution(startNode, path, HARD_GRID_SOLUTION));
-	}
+        Assert.assertTrue("incorrect path found!",
+                checkSolution(startNode, path, HARD_GRID_SOLUTION));
+    }
 
-	@Test
-	public void testInfinityGrid() {
-		final Grid infinityGrid = new Grid(EASY_GRID);
-		final DijkstraPathFinder<GridNode, BidirectedEdge<GridNode>> pathFinder = new DijkstraPathFinder<GridNode, BidirectedEdge<GridNode>>(
-				infinityGrid);
+    @Test
+    public void testInfinityGrid() {
+        final Grid infinityGrid = new Grid(EASY_GRID);
+        final DijkstraPathFinder<GridNode, BidirectedEdge<GridNode>> pathFinder = new DijkstraPathFinder<>(
+                infinityGrid);
 
-		final GridNode startNode = infinityGrid.getNode(EASY_GRID_START[0],
-				EASY_GRID_START[1]);
-		final GridNode endNode = infinityGrid.getNode(EASY_GRID_END[0],
-				EASY_GRID_END[1]);
+        final GridNode startNode = infinityGrid.getNode(EASY_GRID_START[0],
+                EASY_GRID_START[1]);
+        final GridNode endNode = infinityGrid.getNode(EASY_GRID_END[0],
+                EASY_GRID_END[1]);
 
-		final List<BidirectedEdge<GridNode>> path = pathFinder.getBestPath(
-				startNode, endNode);
+        final List<BidirectedEdge<GridNode>> path = pathFinder.getBestPath(
+                startNode, endNode);
 
-		Assert.assertTrue("incorrect path found!",
-				checkSolution(startNode, path, EASY_GRID_SOLUTION));
-	}
+        Assert.assertTrue("incorrect path found!",
+                checkSolution(startNode, path, EASY_GRID_SOLUTION));
+    }
 }

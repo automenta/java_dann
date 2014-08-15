@@ -30,90 +30,82 @@ import java.util.Random;
  * a specified range.
  *
  * @author jheaton
- *
  */
 public class RangeRandomizer extends BasicRandomizer {
 
-	/**
-	 * Returns a random number in the range between min and max.
-	 * 
-	 * @param min
-	 *            The minimum desired random number.
-	 * @param max
-	 *            The maximum desired random number.
-	 * @return The random number.
-	 */
-	public static int randomInt(final int min, final int max) {
-		return (int) RangeRandomizer.randomize(min, max + 1);
-	}
+    /**
+     * Returns a random number in the range between min and max.
+     *
+     * @param min The minimum desired random number.
+     * @param max The maximum desired random number.
+     * @return The random number.
+     */
+    public static int randomInt(final int min, final int max) {
+        return (int) RangeRandomizer.randomize(min, max + 1);
+    }
 
-	/**
-	 * Generate a random number in the specified range.
-	 *
-	 * @param min
-	 *            The minimum value.
-	 * @param max
-	 *            The maximum value.
-	 * @return A random number.
-	 */
-	public static double randomize(final double min, final double max) {
-		final double range = max - min;
-		return (range * Math.random()) + min;
-	}
+    /**
+     * Generate a random number in the specified range.
+     *
+     * @param min The minimum value.
+     * @param max The maximum value.
+     * @return A random number.
+     */
+    public static double randomize(final double min, final double max) {
+        final double range = max - min;
+        return (range * Math.random()) + min;
+    }
 
-	public static double randomize(final Random r, final double min,
-			final double max) {
-		final double range = max - min;
-		return (range * r.nextDouble()) + min;
-	}
+    public static double randomize(final Random r, final double min,
+                                   final double max) {
+        final double range = max - min;
+        return (range * r.nextDouble()) + min;
+    }
 
-	/**
-	 * The minimum value for the random range.
-	 */
-	private final double min;
+    /**
+     * The minimum value for the random range.
+     */
+    private final double min;
 
-	/**
-	 * The maximum value for the random range.
-	 */
-	private final double max;
+    /**
+     * The maximum value for the random range.
+     */
+    private final double max;
 
-	/**
-	 * Construct a range randomizer.
-	 *
-	 * @param min
-	 *            The minimum random value.
-	 * @param max
-	 *            The maximum random value.
-	 */
-	public RangeRandomizer(final double min, final double max) {
-		this.max = max;
-		this.min = min;
-	}
+    /**
+     * Construct a range randomizer.
+     *
+     * @param min The minimum random value.
+     * @param max The maximum random value.
+     */
+    public RangeRandomizer(final double min, final double max) {
+        this.max = max;
+        this.min = min;
+    }
 
-	/**
-	 * Generate a random number based on the range specified in the constructor.
-	 *
-	 * @param d
-	 *            The range randomizer ignores this value.
-	 * @return The random number.
-	 */
-	@Override
-	public double randomize(final double d) {
-		return nextDouble(this.min, this.max);
-	}
+    /**
+     * Generate a random number based on the range specified in the constructor.
+     *
+     * @param d The range randomizer ignores this value.
+     * @return The random number.
+     */
+    @Override
+    public double randomize(final double d) {
+        return nextDouble(this.min, this.max);
+    }
 
-	/**
-	 * @return the min
-	 */
-	public double getMin() {
-		return min;
-	}
+    /**
+     * @return the min
+     */
+    public double getMin() {
+        return min;
+    }
 
-	/**
-	 * @return the max
-	 */
-	public double getMax() {
-		return max;
-	}
+    /**
+     * @return the max
+     */
+    public double getMax() {
+        return max;
+    }
 
 }

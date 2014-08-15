@@ -24,88 +24,88 @@ import java.util.List;
 import java.util.Set;
 
 public abstract class AbstractPath<N, E extends Edge<N>> extends
-		AbstractWalk<N, E> implements Path<N, E> {
-	@Override
-	protected boolean verify(final List<N> nodeSteps, final List<E> edgeSteps) {
-		return ((super.verify(nodeSteps, edgeSteps)) && (verifyUtility(
-				nodeSteps, edgeSteps)));
-	}
+        AbstractWalk<N, E> implements Path<N, E> {
+    @Override
+    protected boolean verify(final List<N> nodeSteps, final List<E> edgeSteps) {
+        return ((super.verify(nodeSteps, edgeSteps)) && (verifyUtility(
+                nodeSteps, edgeSteps)));
+    }
 
-	static <N, E extends Edge<N>> boolean verifyUtility(
-			final List<N> nodeSteps, final List<E> edgeSteps) {
-		if (nodeSteps.size() < 2)
-			throw new IllegalArgumentException("Wrong number of nodes or steps");
-		return !(nodeSteps.get(0).equals(nodeSteps.get(nodeSteps.size() - 1)));
-	}
+    static <N, E extends Edge<N>> boolean verifyUtility(
+            final List<N> nodeSteps, final List<E> edgeSteps) {
+        if (nodeSteps.size() < 2)
+            throw new IllegalArgumentException("Wrong number of nodes or steps");
+        return !(nodeSteps.get(0).equals(nodeSteps.get(nodeSteps.size() - 1)));
+    }
 
-	@Override
-	public boolean isChain() {
-		return isChain(this);
-	}
+    @Override
+    public boolean isChain() {
+        return isChain(this);
+    }
 
-	protected static <N, E extends Edge<N>> boolean isChain(
-			final Path<N, E> path) {
-		final Set<N> uniqueNodes = new HashSet<N>(path.getNodeSteps());
-		final Set<E> uniqueEdges = new HashSet<E>(path.getSteps());
-		if (uniqueNodes.size() < path.getNodeSteps().size())
-			return false;
-		return !(uniqueEdges.size() < path.getSteps().size());
-	}
+    protected static <N, E extends Edge<N>> boolean isChain(
+            final Path<N, E> path) {
+        final Set<N> uniqueNodes = new HashSet<>(path.getNodeSteps());
+        final Set<E> uniqueEdges = new HashSet<>(path.getSteps());
+        if (uniqueNodes.size() < path.getNodeSteps().size())
+            return false;
+        return !(uniqueEdges.size() < path.getSteps().size());
+    }
 
-	@Override
-	public boolean isIndependent(final Path<N, E> path) {
-		return AbstractPath.isIndependentUtility(this, path);
-	}
+    @Override
+    public boolean isIndependent(final Path<N, E> path) {
+        return AbstractPath.isIndependentUtility(this, path);
+    }
 
-	static <N, E extends Edge<N>> boolean isIndependentUtility(
-			final Path<N, E> firstPath, final Path<N, E> secondPath) {
-		if (!firstPath.getFirstNode().equals(secondPath.getFirstNode()))
-			return false;
-		if (!firstPath.getLastNode().equals(secondPath.getLastNode()))
-			return false;
-		final List<N> exclusiveFirstNodes = new ArrayList<N>(
-				firstPath.getNodeSteps());
-		exclusiveFirstNodes.remove(exclusiveFirstNodes.size() - 1);
-		exclusiveFirstNodes.remove(0);
-		final List<N> secondNodes = new ArrayList<N>(secondPath.getNodeSteps());
-		secondNodes.remove(secondNodes.size() - 1);
-		secondNodes.remove(0);
-		exclusiveFirstNodes.removeAll(secondNodes);
-		return !(exclusiveFirstNodes.size() < firstPath.getNodeSteps().size());
-	}
+    static <N, E extends Edge<N>> boolean isIndependentUtility(
+            final Path<N, E> firstPath, final Path<N, E> secondPath) {
+        if (!firstPath.getFirstNode().equals(secondPath.getFirstNode()))
+            return false;
+        if (!firstPath.getLastNode().equals(secondPath.getLastNode()))
+            return false;
+        final List<N> exclusiveFirstNodes = new ArrayList<>(
+                firstPath.getNodeSteps());
+        exclusiveFirstNodes.remove(exclusiveFirstNodes.size() - 1);
+        exclusiveFirstNodes.remove(0);
+        final List<N> secondNodes = new ArrayList<>(secondPath.getNodeSteps());
+        secondNodes.remove(secondNodes.size() - 1);
+        secondNodes.remove(0);
+        exclusiveFirstNodes.removeAll(secondNodes);
+        return !(exclusiveFirstNodes.size() < firstPath.getNodeSteps().size());
+    }
 
-	@Override
-	public boolean isCycle() {
-		return false;
-	}
+    @Override
+    public boolean isCycle() {
+        return false;
+    }
 
-	static int hashCodeUtility(final Path path) {
-		return (path.getNodeSteps().hashCode() + path.getSteps().hashCode())
-				* path.getSteps().hashCode();
-	}
+    static int hashCodeUtility(final Path path) {
+        return (path.getNodeSteps().hashCode() + path.getSteps().hashCode())
+                * path.getSteps().hashCode();
+    }
 
-	static boolean equalsUtility(final Path path, final Object object) {
-		if ((path == null) || (object == null))
-			return false;
-		final Path secondPath = (Path) object;
-		if (!(secondPath.getNodeSteps().equals(path.getNodeSteps())))
-			return false;
-		return secondPath.getSteps().equals(path.getSteps());
-	}
+    static boolean equalsUtility(final Path path, final Object object) {
+        if ((path == null) || (object == null))
+            return false;
+        final Path secondPath = (Path) object;
+        if (!(secondPath.getNodeSteps().equals(path.getNodeSteps())))
+            return false;
+        return secondPath.getSteps().equals(path.getSteps());
+    }
 
-	@Override
-	public int hashCode() {
-		return AbstractPath.hashCodeUtility(this);
-	}
+    @Override
+    public int hashCode() {
+        return AbstractPath.hashCodeUtility(this);
+    }
 
-	@Override
-	public boolean equals(final Object object) {
-		if (object == null)
-			return false;
+    @Override
+    public boolean equals(final Object object) {
+        if (object == null)
+            return false;
 
-		if (!(object instanceof Path))
-			return false;
+        if (!(object instanceof Path))
+            return false;
 
-		return AbstractPath.equalsUtility(this, object);
-	}
+        return AbstractPath.equalsUtility(this, object);
+    }
 }

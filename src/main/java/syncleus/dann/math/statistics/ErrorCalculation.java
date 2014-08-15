@@ -29,159 +29,154 @@ package syncleus.dann.math.statistics;
  */
 public class ErrorCalculation {
 
-	/**
-	 * The current error calculation mode.
-	 */
-	private static ErrorCalculationMode mode = ErrorCalculationMode.MSE;
+    /**
+     * The current error calculation mode.
+     */
+    private static ErrorCalculationMode mode = ErrorCalculationMode.MSE;
 
-	/**
-	 * get the error calculation mode, this is static and therefore global to
-	 * all Enocg training. If a particular training method only supports a
-	 * particular error calculation method, it may override this value. It will
-	 * not change the value set here, rather the training will occur with its
-	 * preferred training method. Currently the only training method that does
-	 * this is Levenberg Marquardt (LMA).
-	 *
-	 * The default error mode for Encog is MSE.
-	 *
-	 * @return The current mode.
-	 */
-	public static ErrorCalculationMode getMode() {
-		return ErrorCalculation.mode;
-	}
+    /**
+     * get the error calculation mode, this is static and therefore global to
+     * all Enocg training. If a particular training method only supports a
+     * particular error calculation method, it may override this value. It will
+     * not change the value set here, rather the training will occur with its
+     * preferred training method. Currently the only training method that does
+     * this is Levenberg Marquardt (LMA).
+     * <p/>
+     * The default error mode for Encog is MSE.
+     *
+     * @return The current mode.
+     */
+    public static ErrorCalculationMode getMode() {
+        return ErrorCalculation.mode;
+    }
 
-	/**
-	 * Set the error calculation mode, this is static and therefore global to
-	 * all Enocg training. If a particular training method only supports a
-	 * particular error calculation method, it may override this value. It will
-	 * not change the value set here, rather the training will occur with its
-	 * preferred training method. Currently the only training method that does
-	 * this is Levenberg Marquardt (LMA).
-	 *
-	 * @param theMode
-	 *            The new mode.
-	 */
-	public static void setMode(final ErrorCalculationMode theMode) {
-		ErrorCalculation.mode = theMode;
-	}
+    /**
+     * Set the error calculation mode, this is static and therefore global to
+     * all Enocg training. If a particular training method only supports a
+     * particular error calculation method, it may override this value. It will
+     * not change the value set here, rather the training will occur with its
+     * preferred training method. Currently the only training method that does
+     * this is Levenberg Marquardt (LMA).
+     *
+     * @param theMode The new mode.
+     */
+    public static void setMode(final ErrorCalculationMode theMode) {
+        ErrorCalculation.mode = theMode;
+    }
 
-	/**
-	 * The overall error.
-	 */
-	private double globalError;
+    /**
+     * The overall error.
+     */
+    private double globalError;
 
-	/**
-	 * The size of a set.
-	 */
-	private int setSize;
+    /**
+     * The size of a set.
+     */
+    private int setSize;
 
-	/**
-	 * Returns the root mean square error for a complete training set.
-	 *
-	 * @return The current error for the neural network.
-	 */
-	public final double calculate() {
-		if (this.setSize == 0) {
-			return 0;
-		}
+    /**
+     * Returns the root mean square error for a complete training set.
+     *
+     * @return The current error for the neural network.
+     */
+    public final double calculate() {
+        if (this.setSize == 0) {
+            return 0;
+        }
 
-		switch (ErrorCalculation.getMode()) {
-		case RMS:
-			return calculateRMS();
-		case MSE:
-			return calculateMSE();
-		case ESS:
-			return calculateESS();
-		default:
-			return calculateMSE();
-		}
+        switch (ErrorCalculation.getMode()) {
+            case RMS:
+                return calculateRMS();
+            case MSE:
+                return calculateMSE();
+            case ESS:
+                return calculateESS();
+            default:
+                return calculateMSE();
+        }
 
-	}
+    }
 
-	/**
-	 * Calculate the error with MSE.
-	 *
-	 * @return The current error for the neural network.
-	 */
-	public final double calculateMSE() {
-		if (this.setSize == 0) {
-			return 0;
-		}
-		final double err = this.globalError / this.setSize;
-		return err;
+    /**
+     * Calculate the error with MSE.
+     *
+     * @return The current error for the neural network.
+     */
+    public final double calculateMSE() {
+        if (this.setSize == 0) {
+            return 0;
+        }
+        final double err = this.globalError / this.setSize;
+        return err;
 
-	}
+    }
 
-	/**
-	 * Calculate the error with SSE.
-	 *
-	 * @return The current error for the neural network.
-	 */
-	public final double calculateESS() {
-		if (this.setSize == 0) {
-			return 0;
-		}
-		final double err = this.globalError / 2;
-		return err;
+    /**
+     * Calculate the error with SSE.
+     *
+     * @return The current error for the neural network.
+     */
+    public final double calculateESS() {
+        if (this.setSize == 0) {
+            return 0;
+        }
+        final double err = this.globalError / 2;
+        return err;
 
-	}
+    }
 
-	/**
-	 * Calculate the error with RMS.
-	 *
-	 * @return The current error for the neural network.
-	 */
-	public final double calculateRMS() {
-		if (this.setSize == 0) {
-			return 0;
-		}
-		final double err = Math.sqrt(this.globalError / this.setSize);
-		return err;
-	}
+    /**
+     * Calculate the error with RMS.
+     *
+     * @return The current error for the neural network.
+     */
+    public final double calculateRMS() {
+        if (this.setSize == 0) {
+            return 0;
+        }
+        final double err = Math.sqrt(this.globalError / this.setSize);
+        return err;
+    }
 
-	/**
-	 * Reset the error accumulation to zero.
-	 */
-	public final void reset() {
-		this.globalError = 0;
-		this.setSize = 0;
-	}
+    /**
+     * Reset the error accumulation to zero.
+     */
+    public final void reset() {
+        this.globalError = 0;
+        this.setSize = 0;
+    }
 
-	/**
-	 * Update the error with single values.
-	 *
-	 * @param actual
-	 *            The actual value.
-	 * @param ideal
-	 *            The ideal value.
-	 */
-	public final void updateError(final double actual, final double ideal) {
+    /**
+     * Update the error with single values.
+     *
+     * @param actual The actual value.
+     * @param ideal  The ideal value.
+     */
+    public final void updateError(final double actual, final double ideal) {
 
-		final double delta = ideal - actual;
+        final double delta = ideal - actual;
 
-		this.globalError += delta * delta;
+        this.globalError += delta * delta;
 
-		this.setSize++;
+        this.setSize++;
 
-	}
+    }
 
-	/**
-	 * Called to update for each number that should be checked.
-	 *
-	 * @param actual
-	 *            The actual number.
-	 * @param ideal
-	 *            The ideal number.
-	 */
-	public final void updateError(final double[] actual, final double[] ideal,
-			final double significance) {
-		for (int i = 0; i < actual.length; i++) {
-			final double delta = (ideal[i] - actual[i]) * significance;
+    /**
+     * Called to update for each number that should be checked.
+     *
+     * @param actual The actual number.
+     * @param ideal  The ideal number.
+     */
+    public final void updateError(final double[] actual, final double[] ideal,
+                                  final double significance) {
+        for (int i = 0; i < actual.length; i++) {
+            final double delta = (ideal[i] - actual[i]) * significance;
 
-			this.globalError += delta * delta;
-		}
+            this.globalError += delta * delta;
+        }
 
-		this.setSize += ideal.length;
-	}
+        this.setSize += ideal.length;
+    }
 
 }

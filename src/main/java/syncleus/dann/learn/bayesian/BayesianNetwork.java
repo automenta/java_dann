@@ -23,5 +23,5 @@ import syncleus.dann.learn.GraphicalModel;
 import syncleus.dann.learn.GraphicalModelNode;
 
 public interface BayesianNetwork<N extends GraphicalModelNode, E extends DirectedEdge<N>>
-		extends GraphicalModel<N, E> {
+        extends GraphicalModel<N, E> {
 }

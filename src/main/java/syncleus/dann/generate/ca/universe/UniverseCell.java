@@ -25,18 +25,18 @@ package syncleus.dann.generate.ca.universe;
 
 public interface UniverseCell {
 
-	void randomize();
+    void randomize();
 
-	void copy(UniverseCell universeCell);
+    void copy(UniverseCell universeCell);
 
-	double getAvg();
+    double getAvg();
 
-	double get(int i);
+    double get(int i);
 
-	void set(int i, double d);
+    void set(int i, double d);
 
-	void set(int i, double[] d);
+    void set(int i, double[] d);
 
-	int size();
+    int size();
 
 }

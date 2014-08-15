@@ -28,33 +28,32 @@ package syncleus.dann.neural.activation;
  * @since 1.0
  */
 public interface DannActivationFunction extends java.io.Serializable, AbstractActivationFunction {
-	/* (non-Javadoc)
-	 * @see syncleus.dann.neural.activation.AbstractActivationFunction#activate(double[], int, int)
-	 */	
-	@Override
-	default void activate(final double[] d, final int start, final int size) {
-		for (int i = start; i < start+size; i++) {
-			d[i] = activate(d[i]);
-		}
-	}
+    /* (non-Javadoc)
+     * @see syncleus.dann.neural.activation.AbstractActivationFunction#activate(double[], int, int)
+     */
+    @Override
+    default void activate(final double[] d, final int start, final int size) {
+        for (int i = start; i < start + size; i++) {
+            d[i] = activate(d[i]);
+        }
+    }
 
-	/**
-	 * The derivative of the activation function.
-	 *
-	 * @param activity
-	 *            The neuron's current activity.
-	 * @return The result of the derivative of the activation function.
-	 * @since 1.0
-	 */
-	double activateDerivative(double activity);
+    /**
+     * The derivative of the activation function.
+     *
+     * @param activity The neuron's current activity.
+     * @return The result of the derivative of the activation function.
+     * @since 1.0
+     */
+    double activateDerivative(double activity);
 
-	default boolean hasDerivative() {
-		return true;
-	}
-	
-	boolean isBound();
+    default boolean hasDerivative() {
+        return true;
+    }
 
-	double getUpperLimit();
+    boolean isBound();
 
-	double getLowerLimit();
+    double getUpperLimit();
+
+    double getLowerLimit();
 }

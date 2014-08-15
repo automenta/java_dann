@@ -26,49 +26,45 @@ package syncleus.dann.math;
 /**
  * A pair of objects.
  *
- * @param <A>
- *            The first object type.
- * @param <B>
- *            The second object type.
+ * @param <A> The first object type.
+ * @param <B> The second object type.
  */
 public class ObjectPair<A, B> {
 
-	/**
-	 * The first object.
-	 */
-	private final A a;
+    /**
+     * The first object.
+     */
+    private final A a;
 
-	/**
-	 * The second object.
-	 */
-	private final B b;
+    /**
+     * The second object.
+     */
+    private final B b;
 
-	/**
-	 * Construct an object pair.
-	 * 
-	 * @param a
-	 *            The first object.
-	 * @param b
-	 *            The second object.
-	 */
-	public ObjectPair(final A a, final B b) {
-		super();
-		this.a = a;
-		this.b = b;
-	}
+    /**
+     * Construct an object pair.
+     *
+     * @param a The first object.
+     * @param b The second object.
+     */
+    public ObjectPair(final A a, final B b) {
+        super();
+        this.a = a;
+        this.b = b;
+    }
 
-	/**
-	 * @return The first object.
-	 */
-	public A getA() {
-		return this.a;
-	}
+    /**
+     * @return The first object.
+     */
+    public A getA() {
+        return this.a;
+    }
 
-	/**
-	 * @return The second object.
-	 */
-	public B getB() {
-		return this.b;
-	}
+    /**
+     * @return The second object.
+     */
+    public B getB() {
+        return this.b;
+    }
 
 }

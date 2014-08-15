@@ -19,32 +19,29 @@
 package syncleus.dann.neural.backprop;
 
 import syncleus.dann.neural.Brain;
-import syncleus.dann.neural.Synapse;
 
 public abstract class AbstractBackpropStaticNeuron extends
-		AbstractBackpropNeuron {
-	private static final long serialVersionUID = -20348709174097590L;
-	private final double output;
+        AbstractBackpropNeuron {
+    private static final long serialVersionUID = -20348709174097590L;
+    private final double output;
 
-	public AbstractBackpropStaticNeuron(final Brain brain,
-			final double constantOutput) {
-		super(brain);
-		this.output = constantOutput;
-	}
+    public AbstractBackpropStaticNeuron(final Brain brain,
+                                        final double constantOutput) {
+        super(brain);
+        this.output = constantOutput;
+    }
 
-	@Override
-	public void tick() {
-            getBrain().getTraversableEdges(this).stream().forEach((current) -> {
-                current.setInput(output);
-            });
-	}
+    @Override
+    public void tick() {
+        getBrain().getTraversableEdges(this).stream().forEach((current) -> current.setInput(output));
+    }
 
-	@Override
-	protected double getOutput() {
-		return this.output;
-	}
+    @Override
+    protected double getOutput() {
+        return this.output;
+    }
 
-	@Override
-	public void backPropagate() {
-	}
+    @Override
+    public void backPropagate() {
+    }
 }

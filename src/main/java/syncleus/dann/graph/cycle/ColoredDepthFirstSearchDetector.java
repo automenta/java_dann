@@ -18,65 +18,54 @@
  ******************************************************************************/
 package syncleus.dann.graph.cycle;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import syncleus.dann.graph.Edge;
 import syncleus.dann.graph.Graph;
 
+import java.util.*;
+
 public class ColoredDepthFirstSearchDetector implements CycleDetector {
-	@Override
-	public <N, E extends Edge<N>> boolean hasCycle(final Graph<N, E> graph) {
-		// A map of the current Node colors. Key is the node, value is null for
-		// white, false for grey, true for black.
-		final Map<N, Boolean> colorMap = new HashMap<N, Boolean>();
+    @Override
+    public <N, E extends Edge<N>> boolean hasCycle(final Graph<N, E> graph) {
+        // A map of the current Node colors. Key is the node, value is null for
+        // white, false for grey, true for black.
+        final Map<N, Boolean> colorMap = new HashMap<>();
 
-		final Set<E> traversedEdges = new HashSet<E>();
+        final Set<E> traversedEdges = new HashSet<>();
 
-            if (graph.getNodes().stream().anyMatch((node) -> (!colorMap.containsKey(node)
-                    && visit(graph, colorMap, traversedEdges, node)))) {
-                return true;
+        return graph.getNodes().stream().anyMatch((node) -> (!colorMap.containsKey(node)
+                && visit(graph, colorMap, traversedEdges, node)));
+
+    }
+
+    private static <N, E extends Edge<N>> boolean visit(
+            final Graph<N, E> graph, final Map<N, Boolean> colorMap,
+            final Set<E> traversedEdges, final N node) {
+        colorMap.put(node, Boolean.FALSE);
+
+        final Set<E> traversableEdges = graph.getTraversableEdges(node);
+        for (final E neighborEdge : traversableEdges) {
+            if (!ColoredDepthFirstSearchDetector.traversed(traversedEdges,
+                    neighborEdge)) {
+                traversedEdges.add(neighborEdge);
+                final List<N> neighborNodes = new ArrayList<>(
+                        neighborEdge.getNodes());
+                neighborNodes.remove(node);
+                for (final N neighborNode : neighborNodes) {
+                    if (colorMap.get(neighborNode) == Boolean.FALSE)
+                        return true;
+                    else if (!colorMap.containsKey(neighborNode)
+                            && visit(graph, colorMap, traversedEdges,
+                            neighborNode))
+                        return true;
+                }
             }
+        }
+        colorMap.put(node, Boolean.TRUE);
+        return false;
+    }
 
-		return false;
-	}
-
-	private static <N, E extends Edge<N>> boolean visit(
-			final Graph<N, E> graph, final Map<N, Boolean> colorMap,
-			final Set<E> traversedEdges, final N node) {
-		colorMap.put(node, Boolean.FALSE);
-
-		final Set<E> traversableEdges = graph.getTraversableEdges(node);
-		for (final E neighborEdge : traversableEdges) {
-			if (!ColoredDepthFirstSearchDetector.<E> traversed(traversedEdges,
-					neighborEdge)) {
-				traversedEdges.add(neighborEdge);
-				final List<N> neighborNodes = new ArrayList<N>(
-						neighborEdge.getNodes());
-				neighborNodes.remove(node);
-				for (final N neighborNode : neighborNodes) {
-					if (colorMap.get(neighborNode) == Boolean.FALSE)
-						return true;
-					else if (!colorMap.containsKey(neighborNode)
-							&& visit(graph, colorMap, traversedEdges,
-									neighborNode))
-						return true;
-				}
-			}
-		}
-		colorMap.put(node, Boolean.TRUE);
-		return false;
-	}
-
-	private static <E extends Edge> boolean traversed(
-			final Set<E> traversedEdges, final E edge) {
-            if (traversedEdges.stream().anyMatch((traversedEdge) -> (traversedEdge == edge))) {
-                return true;
-            }
-		return false;
-	}
+    private static <E extends Edge> boolean traversed(
+            final Set<E> traversedEdges, final E edge) {
+        return traversedEdges.stream().anyMatch((traversedEdge) -> (traversedEdge == edge));
+    }
 }

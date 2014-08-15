@@ -12,7 +12,7 @@ public class MutableVector extends Vector {
     public MutableVector(double[] c) {
         super(c);
     }
-    
+
     public MutableVector(Vector v) {
         this(v.coordinates);
     }

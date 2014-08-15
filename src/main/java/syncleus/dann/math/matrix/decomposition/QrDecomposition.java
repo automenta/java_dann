@@ -34,12 +34,12 @@ import syncleus.dann.math.matrix.Matrix;
  * simultaneous linear equations. This will fail if isFullRank() returns false.
  */
 public interface QrDecomposition<M extends Matrix<M, F>, F extends OrderedAlgebraic<F>>
-		extends SolvableDecomposition<M> {
-	M getHouseholderMatrix();
+        extends SolvableDecomposition<M> {
+    M getHouseholderMatrix();
 
-	M getOrthogonalFactor();
+    M getOrthogonalFactor();
 
-	M getUpperTriangularFactor();
+    M getUpperTriangularFactor();
 
-	boolean isFullRank();
+    boolean isFullRank();
 }

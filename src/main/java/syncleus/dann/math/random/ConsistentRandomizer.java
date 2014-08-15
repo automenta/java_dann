@@ -24,7 +24,6 @@
 package syncleus.dann.math.random;
 
 import org.encog.neural.networks.BasicNetwork;
-
 import syncleus.dann.math.LinearCongruentialGenerator;
 
 /**
@@ -32,77 +31,70 @@ import syncleus.dann.math.LinearCongruentialGenerator;
  */
 public class ConsistentRandomizer extends BasicRandomizer {
 
-	/**
-	 * The generator.
-	 */
-	private final LinearCongruentialGenerator rand;
+    /**
+     * The generator.
+     */
+    private final LinearCongruentialGenerator rand;
 
-	/**
-	 * The minimum value for the random range.
-	 */
-	private final double min;
+    /**
+     * The minimum value for the random range.
+     */
+    private final double min;
 
-	/**
-	 * The maximum value for the random range.
-	 */
-	private final double max;
+    /**
+     * The maximum value for the random range.
+     */
+    private final double max;
 
-	/**
-	 * The seed.
-	 */
-	private final int seed;
+    /**
+     * The seed.
+     */
+    private final int seed;
 
-	/**
-	 * Construct a range randomizer.
-	 *
-	 * @param min
-	 *            The minimum random value.
-	 * @param max
-	 *            The maximum random value.
-	 */
-	public ConsistentRandomizer(final double min, final double max) {
-		this(min, max, 1000);
-	}
+    /**
+     * Construct a range randomizer.
+     *
+     * @param min The minimum random value.
+     * @param max The maximum random value.
+     */
+    public ConsistentRandomizer(final double min, final double max) {
+        this(min, max, 1000);
+    }
 
-	/**
-	 * Construct a range randomizer.
-	 *
-	 * @param min
-	 *            The minimum random value.
-	 * @param max
-	 *            The maximum random value.
-	 * @param seed
-	 *            The seed value.
-	 */
-	public ConsistentRandomizer(final double min, final double max,
-			final int seed) {
-		this.max = max;
-		this.min = min;
-		this.seed = seed;
-		this.rand = new LinearCongruentialGenerator(seed);
-	}
+    /**
+     * Construct a range randomizer.
+     *
+     * @param min  The minimum random value.
+     * @param max  The maximum random value.
+     * @param seed The seed value.
+     */
+    public ConsistentRandomizer(final double min, final double max,
+                                final int seed) {
+        this.max = max;
+        this.min = min;
+        this.seed = seed;
+        this.rand = new LinearCongruentialGenerator(seed);
+    }
 
-	/**
-	 * Generate a random number based on the range specified in the constructor.
-	 *
-	 * @param d
-	 *            The range randomizer ignores this value.
-	 * @return The random number.
-	 */
-	@Override
-	public double randomize(final double d) {
-		return this.rand.range(this.min, this.max);
-	}
+    /**
+     * Generate a random number based on the range specified in the constructor.
+     *
+     * @param d The range randomizer ignores this value.
+     * @return The random number.
+     */
+    @Override
+    public double randomize(final double d) {
+        return this.rand.range(this.min, this.max);
+    }
 
-	/**
-	 * Randomize the network.
-	 * 
-	 * @param network
-	 *            The network to randomize.
-	 */
-	public void randomize(final BasicNetwork network) {
-		this.rand.setSeed(this.seed);
-		super.randomize(network);
-	}
+    /**
+     * Randomize the network.
+     *
+     * @param network The network to randomize.
+     */
+    public void randomize(final BasicNetwork network) {
+        this.rand.setSeed(this.seed);
+        super.randomize(network);
+    }
 
 }

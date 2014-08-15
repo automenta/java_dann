@@ -27,75 +27,73 @@ package syncleus.dann.math.array;
  * A class item.
  */
 public class ClassItem {
-	/**
-	 * The name of the class.
-	 */
-	private String name;
+    /**
+     * The name of the class.
+     */
+    private String name;
 
-	/**
-	 * The index of the class.
-	 */
-	private int index;
+    /**
+     * The index of the class.
+     */
+    private int index;
 
-	/**
-	 * Construct the object.
-	 *
-	 * @param theName
-	 *            The name of the class.
-	 * @param theIndex
-	 *            The index of the class.
-	 */
-	public ClassItem(final String theName, final int theIndex) {
-		this.name = theName;
-		this.index = theIndex;
-	}
+    /**
+     * Construct the object.
+     *
+     * @param theName  The name of the class.
+     * @param theIndex The index of the class.
+     */
+    public ClassItem(final String theName, final int theIndex) {
+        this.name = theName;
+        this.index = theIndex;
+    }
 
-	/**
-	 * @return The index of the class.
-	 */
-	public final int getIndex() {
-		return this.index;
-	}
+    /**
+     * @return The index of the class.
+     */
+    public final int getIndex() {
+        return this.index;
+    }
 
-	/**
-	 * @return The name of the class.
-	 */
-	public final String getName() {
-		return this.name;
-	}
+    /**
+     * @return The name of the class.
+     */
+    public final String getName() {
+        return this.name;
+    }
 
-	/**
-	 * Set the index of the class.
-	 *
-	 * @param theIndex
-	 *            The index of the class.
-	 */
-	public final void setIndex(final int theIndex) {
-		this.index = theIndex;
-	}
+    /**
+     * Set the index of the class.
+     *
+     * @param theIndex The index of the class.
+     */
+    public final void setIndex(final int theIndex) {
+        this.index = theIndex;
+    }
 
-	/**
-	 * Set the name of the class.
-	 *
-	 * @param theName
-	 *            The name of the class.
-	 */
-	public final void setName(final String theName) {
-		this.name = theName;
-	}
+    /**
+     * Set the name of the class.
+     *
+     * @param theName The name of the class.
+     */
+    public final void setName(final String theName) {
+        this.name = theName;
+    }
 
-	/** {@inheritDoc} */
-	@Override
-	public final String toString() {
-		final StringBuilder result = new StringBuilder("[");
-		result.append(getClass().getSimpleName());
-		result.append(" name=");
-		result.append(this.name);
-		result.append(", index=");
-		result.append(this.index);
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final String toString() {
+        final StringBuilder result = new StringBuilder("[");
+        result.append(getClass().getSimpleName());
+        result.append(" name=");
+        result.append(this.name);
+        result.append(", index=");
+        result.append(this.index);
 
-		result.append("]");
-		return result.toString();
-	}
+        result.append(']');
+        return result.toString();
+    }
 
 }

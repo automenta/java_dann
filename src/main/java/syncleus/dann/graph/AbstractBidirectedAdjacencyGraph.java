@@ -26,104 +26,99 @@ import java.util.Set;
  * An AbstractBidirectedAdjacencyGraph is a BidirectedGraph implemented using
  * adjacency lists.
  *
+ * @param <N> The node type
+ * @param <E> The type of edge for the given node type
  * @since 2.0
- * @param <N>
- *            The node type
- * @param <E>
- *            The type of edge for the given node type
  */
 public abstract class AbstractBidirectedAdjacencyGraph<N, E extends BidirectedEdge<N>>
-		extends AbstractAdjacencyGraph<N, E> implements BidirectedGraph<N, E> {
-	/**
-	 * Creates a new graph with no edges and no adjacencies. nodeContext and
-	 * edgeContext is enabled.
-	 */
-	protected AbstractBidirectedAdjacencyGraph() {
-		super();
-	}
+        extends AbstractAdjacencyGraph<N, E> implements BidirectedGraph<N, E> {
+    /**
+     * Creates a new graph with no edges and no adjacencies. nodeContext and
+     * edgeContext is enabled.
+     */
+    protected AbstractBidirectedAdjacencyGraph() {
+        super();
+    }
 
-	/**
-	 * Creates a new graph as a copy of the current Graph. nodeContext is
-	 * enabled.
-	 *
-	 * @param copyGraph
-	 *            The Graph to copy
-	 */
-	protected AbstractBidirectedAdjacencyGraph(final Graph<N, E> copyGraph) {
-		super(copyGraph.getNodes(), copyGraph.getEdges());
-	}
+    /**
+     * Creates a new graph as a copy of the current Graph. nodeContext is
+     * enabled.
+     *
+     * @param copyGraph The Graph to copy
+     */
+    protected AbstractBidirectedAdjacencyGraph(final Graph<N, E> copyGraph) {
+        super(copyGraph.getNodes(), copyGraph.getEdges());
+    }
 
-	/**
-	 * Creates a new graph from the given list of nodes, and the given list of
-	 * Edges. The adjacency lists are created from this structure. nodeContext
-	 * is enabled.
-	 *
-	 * @param nodes
-	 *            The set of all nodes
-	 * @param edges
-	 *            The set of all ourEdges
-	 */
-	protected AbstractBidirectedAdjacencyGraph(final Set<N> nodes,
-			final Set<E> edges) {
-		super(nodes, edges);
-	}
+    /**
+     * Creates a new graph from the given list of nodes, and the given list of
+     * Edges. The adjacency lists are created from this structure. nodeContext
+     * is enabled.
+     *
+     * @param nodes The set of all nodes
+     * @param edges The set of all ourEdges
+     */
+    protected AbstractBidirectedAdjacencyGraph(final Set<N> nodes,
+                                               final Set<E> edges) {
+        super(nodes, edges);
+    }
 
-	@Override
-	public Set<E> getInEdges(final N node) {
-		final Set<E> inEdges = new HashSet<E>();
-		this.streamEdges().forEach(
-				edge -> {
+    @Override
+    public Set<E> getInEdges(final N node) {
+        final Set<E> inEdges = new HashSet<>();
+        this.streamEdges().forEach(
+                edge -> {
 
-					final N adjacentNode = edge.getOtherNode(node);
+                    final N adjacentNode = edge.getOtherNode(node);
 
-					if (edge.isTraversable(adjacentNode)
-							&& edge.getTraversableNodes(adjacentNode).contains(
-									node))
-						inEdges.add(edge);
-				});
-		return Collections.unmodifiableSet(inEdges);
-	}
+                    if (edge.isTraversable(adjacentNode)
+                            && edge.getTraversableNodes(adjacentNode).contains(
+                            node))
+                        inEdges.add(edge);
+                });
+        return Collections.unmodifiableSet(inEdges);
+    }
 
-	@Override
-	public AbstractBidirectedAdjacencyGraph<N, E> cloneAdd(final E newEdge) {
-		return (AbstractBidirectedAdjacencyGraph<N, E>) super.cloneAdd(newEdge);
-	}
+    @Override
+    public AbstractBidirectedAdjacencyGraph<N, E> cloneAdd(final E newEdge) {
+        return (AbstractBidirectedAdjacencyGraph<N, E>) super.cloneAdd(newEdge);
+    }
 
-	@Override
-	public AbstractBidirectedAdjacencyGraph<N, E> cloneAdd(final N newNode) {
-		return (AbstractBidirectedAdjacencyGraph<N, E>) super.cloneAdd(newNode);
-	}
+    @Override
+    public AbstractBidirectedAdjacencyGraph<N, E> cloneAdd(final N newNode) {
+        return (AbstractBidirectedAdjacencyGraph<N, E>) super.cloneAdd(newNode);
+    }
 
-	@Override
-	public AbstractBidirectedAdjacencyGraph<N, E> cloneAdd(
-			final Set<N> newNodes, final Set<E> newEdges) {
-		return (AbstractBidirectedAdjacencyGraph<N, E>) super.cloneAdd(
-				newNodes, newEdges);
-	}
+    @Override
+    public AbstractBidirectedAdjacencyGraph<N, E> cloneAdd(
+            final Set<N> newNodes, final Set<E> newEdges) {
+        return (AbstractBidirectedAdjacencyGraph<N, E>) super.cloneAdd(
+                newNodes, newEdges);
+    }
 
-	@Override
-	public AbstractBidirectedAdjacencyGraph<N, E> cloneRemove(
-			final E edgeToRemove) {
-		return (AbstractBidirectedAdjacencyGraph<N, E>) super
-				.cloneRemove(edgeToRemove);
-	}
+    @Override
+    public AbstractBidirectedAdjacencyGraph<N, E> cloneRemove(
+            final E edgeToRemove) {
+        return (AbstractBidirectedAdjacencyGraph<N, E>) super
+                .cloneRemove(edgeToRemove);
+    }
 
-	@Override
-	public AbstractBidirectedAdjacencyGraph<N, E> cloneRemove(
-			final N nodeToRemove) {
-		return (AbstractBidirectedAdjacencyGraph<N, E>) super
-				.cloneRemove(nodeToRemove);
-	}
+    @Override
+    public AbstractBidirectedAdjacencyGraph<N, E> cloneRemove(
+            final N nodeToRemove) {
+        return (AbstractBidirectedAdjacencyGraph<N, E>) super
+                .cloneRemove(nodeToRemove);
+    }
 
-	@Override
-	public AbstractBidirectedAdjacencyGraph<N, E> cloneRemove(
-			final Set<N> deleteNodes, final Set<E> deleteEdges) {
-		return (AbstractBidirectedAdjacencyGraph<N, E>) super.cloneRemove(
-				deleteNodes, deleteEdges);
-	}
+    @Override
+    public AbstractBidirectedAdjacencyGraph<N, E> cloneRemove(
+            final Set<N> deleteNodes, final Set<E> deleteEdges) {
+        return (AbstractBidirectedAdjacencyGraph<N, E>) super.cloneRemove(
+                deleteNodes, deleteEdges);
+    }
 
-	@Override
-	public AbstractBidirectedAdjacencyGraph<N, E> clone() {
-		return (AbstractBidirectedAdjacencyGraph<N, E>) super.clone();
-	}
+    @Override
+    public AbstractBidirectedAdjacencyGraph<N, E> clone() {
+        return (AbstractBidirectedAdjacencyGraph<N, E>) super.clone();
+    }
 }

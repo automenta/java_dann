@@ -21,51 +21,47 @@ package syncleus.dann.graph.path.pathfinding;
 import syncleus.dann.util.DannRuntimeException;
 
 public class NegativeWeightCycleException extends DannRuntimeException {
-	private static final long serialVersionUID = -3399414912478441842L;
+    private static final long serialVersionUID = -3399414912478441842L;
 
-	/**
-	 * Creates a blank default exception.
-	 *
-	 * @since 2.0
-	 */
-	public NegativeWeightCycleException() {
-		super();
-	}
+    /**
+     * Creates a blank default exception.
+     *
+     * @since 2.0
+     */
+    public NegativeWeightCycleException() {
+        super();
+    }
 
-	/**
-	 * Creates an exception with a message describing the cause.
-	 *
-	 * @param msg
-	 *            A string describing the cause of the exception
-	 * @since 2.0
-	 */
-	public NegativeWeightCycleException(final String msg) {
-		super(msg);
-	}
+    /**
+     * Creates an exception with a message describing the cause.
+     *
+     * @param msg A string describing the cause of the exception
+     * @since 2.0
+     */
+    public NegativeWeightCycleException(final String msg) {
+        super(msg);
+    }
 
-	/**
-	 * Creates an exception with a message describing the cause as well as the
-	 * throwable which caused this exception to be thrown.
-	 *
-	 * @param msg
-	 *            A string describing the cause of the exception
-	 * @param cause
-	 *            The throwable which caused this exception
-	 * @since 2.0
-	 */
-	public NegativeWeightCycleException(final String msg, final Throwable cause) {
-		super(msg, cause);
-	}
+    /**
+     * Creates an exception with a message describing the cause as well as the
+     * throwable which caused this exception to be thrown.
+     *
+     * @param msg   A string describing the cause of the exception
+     * @param cause The throwable which caused this exception
+     * @since 2.0
+     */
+    public NegativeWeightCycleException(final String msg, final Throwable cause) {
+        super(msg, cause);
+    }
 
-	/**
-	 * Creates an exception containing the throwable which caused this exception
-	 * to be thrown.
-	 *
-	 * @param cause
-	 *            The throwable which caused this exception
-	 * @since 2.0
-	 */
-	public NegativeWeightCycleException(final Throwable cause) {
-		super(cause);
-	}
+    /**
+     * Creates an exception containing the throwable which caused this exception
+     * to be thrown.
+     *
+     * @param cause The throwable which caused this exception
+     * @since 2.0
+     */
+    public NegativeWeightCycleException(final Throwable cause) {
+        super(cause);
+    }
 }

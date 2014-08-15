@@ -23,46 +23,46 @@
  */
 package syncleus.dann.math.probablity;
 
-import java.io.Serializable;
-
 import org.encog.ml.bayesian.BayesianNetwork;
+
+import java.io.Serializable;
 
 public class RandomVariable implements Serializable {
 
-	private final String label;
-	private final String[] choices;
+    private final String label;
+    private final String[] choices;
 
-	public RandomVariable(final String theLabel, final String[] theChoices) {
-		this.label = theLabel;
-		this.choices = theChoices;
-	}
+    public RandomVariable(final String theLabel, final String[] theChoices) {
+        this.label = theLabel;
+        this.choices = theChoices;
+    }
 
-	public RandomVariable(final String theLabel) {
-		this(theLabel, BayesianNetwork.CHOICES_TRUE_FALSE);
-	}
+    public RandomVariable(final String theLabel) {
+        this(theLabel, BayesianNetwork.CHOICES_TRUE_FALSE);
+    }
 
-	/**
-	 * @return the label
-	 */
-	public String getLabel() {
-		return label;
-	}
+    /**
+     * @return the label
+     */
+    public String getLabel() {
+        return label;
+    }
 
-	@Override
-	public String toString() {
-		final StringBuilder result = new StringBuilder();
+    @Override
+    public String toString() {
+        final StringBuilder result = new StringBuilder();
 
-		return result.toString();
-	}
+        return result.toString();
+    }
 
-	/**
-	 * @return the choices
-	 */
-	public String[] getChoices() {
-		return choices;
-	}
+    /**
+     * @return the choices
+     */
+    public String[] getChoices() {
+        return choices;
+    }
 
-	public boolean isBoolean() {
-		return this.choices.length == 2;
-	}
+    public boolean isBoolean() {
+        return this.choices.length == 2;
+    }
 }

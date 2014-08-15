@@ -18,39 +18,38 @@
  ******************************************************************************/
 package syncleus.dann.neural;
 
-import java.util.stream.Collectors;
-
 import org.junit.Assert;
 import org.junit.Test;
-
 import syncleus.dann.neural.backprop.SimpleBackpropNeuron;
 
+import java.util.stream.Collectors;
+
 public class TestNeuronGroup {
-	private static class TestBrain extends AbstractLocalBrain {
-		private static final long serialVersionUID = 3393474496867875251L;
+    private static class TestBrain extends AbstractLocalBrain {
+        private static final long serialVersionUID = 3393474496867875251L;
 
-		@Override
-		public boolean add(final Neuron newNeuron) {
-			return super.add(newNeuron);
-		}
-	}
+        @Override
+        public boolean add(final Neuron newNeuron) {
+            return super.add(newNeuron);
+        }
+    }
 
-	@Test
-	public void testCollection() {
-		final TestBrain brain = new TestBrain();
+    @Test
+    public void testCollection() {
+        final TestBrain brain = new TestBrain();
 
-		final NeuronGroup<SimpleBackpropNeuron> newGroup = new NeuronGroup<SimpleBackpropNeuron>();
-		final NeuronGroup<SimpleBackpropNeuron> subGroup = new NeuronGroup<SimpleBackpropNeuron>();
-		final SimpleBackpropNeuron newNeuron = new SimpleBackpropNeuron(brain);
-		final SimpleBackpropNeuron subNeuron = new SimpleBackpropNeuron(brain);
+        final NeuronGroup<SimpleBackpropNeuron> newGroup = new NeuronGroup<>();
+        final NeuronGroup<SimpleBackpropNeuron> subGroup = new NeuronGroup<>();
+        final SimpleBackpropNeuron newNeuron = new SimpleBackpropNeuron(brain);
+        final SimpleBackpropNeuron subNeuron = new SimpleBackpropNeuron(brain);
 
-		subGroup.add(subNeuron);
-		newGroup.add(subGroup);
-		newGroup.add(newNeuron);
+        subGroup.add(subNeuron);
+        newGroup.add(subGroup);
+        newGroup.add(newNeuron);
 
-		Assert.assertTrue(newGroup.getChildrenNeurons().contains(newNeuron));
-		Assert.assertTrue(newGroup.getChildrenNeuronGroups().contains(subGroup));
-		Assert.assertTrue(newGroup.getChildrenNeuronsRecursivly()
-				.collect(Collectors.toSet()).contains(subNeuron));
-	}
+        Assert.assertTrue(newGroup.getChildrenNeurons().contains(newNeuron));
+        Assert.assertTrue(newGroup.getChildrenNeuronGroups().contains(subGroup));
+        Assert.assertTrue(newGroup.getChildrenNeuronsRecursivly()
+                .collect(Collectors.toSet()).contains(subNeuron));
+    }
 }

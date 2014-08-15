@@ -30,17 +30,15 @@ import syncleus.dann.graph.tree.TreeNode;
  */
 public class DepthFirstTraversal implements TreeTraversal {
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void traverse(final TreeNode treeNode, final TreeTraversalTask task) {
-		if (!task.task(treeNode))
-			return;
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void traverse(final TreeNode treeNode, final TreeTraversalTask task) {
+        if (!task.task(treeNode))
+            return;
 
-                treeNode.getChildNodes().stream().forEach((childNode) -> {
-                traverse(childNode, task);
-            });
-	}
+        treeNode.getChildNodes().stream().forEach((childNode) -> traverse(childNode, task));
+    }
 
 }

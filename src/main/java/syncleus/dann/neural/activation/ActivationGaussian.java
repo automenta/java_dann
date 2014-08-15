@@ -29,95 +29,95 @@ import syncleus.dann.math.BoundMath;
  * An activation function based on the Gaussian function. The output range is
  * between 0 and 1. This activation function is used mainly for the HyperNeat
  * implementation.
- *
+ * <p/>
  * A derivative is provided, so this activation function can be used with
  * propagation training. However, its primary intended purpose is for HyperNeat.
  * The derivative was obtained with the R statistical package.
- *
+ * <p/>
  * If you are looking to implement a RBF-based neural network, see the
  * RBFNetwork class.
- *
+ * <p/>
  * The idea for this activation function was developed by Ken Stanley, of the
  * University of Texas at Austin. http://www.cs.ucf.edu/~kstanley/
  */
 public class ActivationGaussian implements EncogActivationFunction {
 
-	/**
-	 * The parameters.
-	 */
-	private final double[] params;
+    /**
+     * The parameters.
+     */
+    private final double[] params;
 
-	/**
-	 * The serial id.
-	 */
-	private static final long serialVersionUID = -7166136514935838114L;
+    /**
+     * The serial id.
+     */
+    private static final long serialVersionUID = -7166136514935838114L;
 
-	public ActivationGaussian() {
-		this.params = new double[0];
-	}
+    public ActivationGaussian() {
+        this.params = new double[0];
+    }
 
-	/**
-	 * @return The object cloned.
-	 */
-	@Override
-	public final IterativeDerivative clone() {
-		return new ActivationGaussian();
-	}
+    /**
+     * @return The object cloned.
+     */
+    @Override
+    public final IterativeDerivative clone() {
+        return new ActivationGaussian();
+    }
 
-	/**
-	 * @return Return true, gaussian has a derivative.
-	 */
-	@Override
-	public final boolean hasDerivative() {
-		return true;
-	}
+    /**
+     * @return Return true, gaussian has a derivative.
+     */
+    @Override
+    public final boolean hasDerivative() {
+        return true;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public final void activate(final double[] x, final int start,
-			final int size) {
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final void activate(final double[] x, final int start,
+                               final int size) {
 
-		for (int i = start; i < start + size; i++) {
-			x[i] = BoundMath.exp(-Math.pow(2.5 * x[i], 2.0));
-		}
+        for (int i = start; i < start + size; i++) {
+            x[i] = BoundMath.exp(-Math.pow(2.5 * x[i], 2.0));
+        }
 
-	}
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public final double derivative(final double b, final double a) {
-		return Math.exp(Math.pow(2.5 * b, 2.0) * 12.5 * b);
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final double derivative(final double b, final double a) {
+        return Math.exp(Math.pow(2.5 * b, 2.0) * 12.5 * b);
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public final String[] getParamNames() {
-		final String[] result = {};
-		return result;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final String[] getParamNames() {
+        final String[] result = {};
+        return result;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public final double[] getParams() {
-		return params;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final double[] getParams() {
+        return params;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public final void setParam(final int index, final double value) {
-		this.params[index] = value;
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final void setParam(final int index, final double value) {
+        this.params[index] = value;
 
-	}
+    }
 
 
 }

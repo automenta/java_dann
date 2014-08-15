@@ -18,16 +18,16 @@
  ******************************************************************************/
 package syncleus.dann.learn;
 
-import java.util.Set;
-
 import syncleus.dann.graph.BidirectedEdge;
 import syncleus.dann.graph.Graph;
 
+import java.util.Set;
+
 public interface GraphicalModel<N extends GraphicalModelNode, E extends BidirectedEdge<N>>
-		extends Graph<N, E> {
-	void learnStates();
+        extends Graph<N, E> {
+    void learnStates();
 
-	double jointProbability();
+    double jointProbability();
 
-	double conditionalProbability(Set<N> goals, Set<N> influences);
+    double conditionalProbability(Set<N> goals, Set<N> influences);
 }

@@ -21,9 +21,9 @@ package syncleus.dann.neural;
 import syncleus.dann.graph.WeightedDirectedEdge;
 
 public interface Synapse<N> extends WeightedDirectedEdge<N> {
-	double getInput();
+    double getInput();
 
-	void setInput(double input);
+    void setInput(double input);
 
-	void setWeight(double weight);
+    void setWeight(double weight);
 }

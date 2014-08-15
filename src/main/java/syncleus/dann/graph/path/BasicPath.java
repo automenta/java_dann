@@ -28,45 +28,45 @@ import java.util.List;
 
 public class BasicPath {
 
-	private final List<PathNode> nodes = new ArrayList<PathNode>();
+    private final List<PathNode> nodes = new ArrayList<>();
 
-	public BasicPath(final PathNode startingPoint) {
-		this.nodes.add(startingPoint);
-	}
+    public BasicPath(final PathNode startingPoint) {
+        this.nodes.add(startingPoint);
+    }
 
-	public BasicPath(final BasicPath path, final PathNode newNode) {
-		this.nodes.addAll(path.getNodes());
-		this.nodes.add(newNode);
-	}
+    public BasicPath(final BasicPath path, final PathNode newNode) {
+        this.nodes.addAll(path.getNodes());
+        this.nodes.add(newNode);
+    }
 
-	public List<PathNode> getNodes() {
-		return nodes;
-	}
+    public List<PathNode> getNodes() {
+        return nodes;
+    }
 
-	public PathNode getDestinationNode() {
-		if (this.nodes.isEmpty())
-			return null;
-		return this.nodes.get(this.nodes.size() - 1);
-	}
+    public PathNode getDestinationNode() {
+        if (this.nodes.isEmpty())
+            return null;
+        return this.nodes.get(this.nodes.size() - 1);
+    }
 
-	public int size() {
-		return this.nodes.size();
-	}
+    public int size() {
+        return this.nodes.size();
+    }
 
-	@Override
-	public String toString() {
-		boolean first = true;
-		final StringBuilder result = new StringBuilder();
-		result.append("[BasicPath: ");
-		for (final PathNode node : this.nodes) {
-			if (!first) {
-				result.append(',');
-			}
-			result.append(node.toString());
-			first = false;
-		}
-		result.append("]");
-		return result.toString();
-	}
+    @Override
+    public String toString() {
+        boolean first = true;
+        final StringBuilder result = new StringBuilder();
+        result.append("[BasicPath: ");
+        for (final PathNode node : this.nodes) {
+            if (!first) {
+                result.append(',');
+            }
+            result.append(node.toString());
+            first = false;
+        }
+        result.append(']');
+        return result.toString();
+    }
 
 }

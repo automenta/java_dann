@@ -18,40 +18,39 @@
  ******************************************************************************/
 package syncleus.dann.graph.search.optimization;
 
-import syncleus.dann.graph.path.search.HillClimbingLocalSearch;
 import org.junit.Assert;
 import org.junit.Test;
-
+import syncleus.dann.graph.path.search.HillClimbingLocalSearch;
 import syncleus.dann.graph.search.Grid;
 import syncleus.dann.graph.search.GridNode;
 
 public class TestHillClimbingLocalSearch {
-	private static final double[][] EASY_GRID = {
-			{ 93.0, 94.0, 95.0, 96.0, 97.0, 98.9, 97.0, 96.0 },
-			{ 94.0, 95.0, 96.0, 97.0, 98.0, 99.0, 98.0, 97.0 },
-			{ 95.0, 96.0, 97.0, 98.0, 99.0, 100.0, 99.0, 98.0 },
-			{ 96.0, 97.0, 98.0, 99.0, 100.0, 101.0, 100.0, 99.9 },
-			{ 95.0, 96.0, 97.0, 98.0, 99.0, 100.0, 99.0, 98.0 },
-			{ 94.0, 95.0, 96.0, 97.0, 98.0, 99.0, 98.0, 97.0 },
-			{ 93.0, 94.0, 95.0, 96.0, 97.0, 98.0, 97.0, 96.0 },
-			{ 92.0, 93.0, 94.0, 95.0, 96.0, 97.0, 96.0, 95.0 } };
-	private static final int[] EASY_GRID_START = { 1, 0 };
-	private static final int[] EASY_GRID_SOLUTION = { 5, 3 };
+    private static final double[][] EASY_GRID = {
+            {93.0, 94.0, 95.0, 96.0, 97.0, 98.9, 97.0, 96.0},
+            {94.0, 95.0, 96.0, 97.0, 98.0, 99.0, 98.0, 97.0},
+            {95.0, 96.0, 97.0, 98.0, 99.0, 100.0, 99.0, 98.0},
+            {96.0, 97.0, 98.0, 99.0, 100.0, 101.0, 100.0, 99.9},
+            {95.0, 96.0, 97.0, 98.0, 99.0, 100.0, 99.0, 98.0},
+            {94.0, 95.0, 96.0, 97.0, 98.0, 99.0, 98.0, 97.0},
+            {93.0, 94.0, 95.0, 96.0, 97.0, 98.0, 97.0, 96.0},
+            {92.0, 93.0, 94.0, 95.0, 96.0, 97.0, 96.0, 95.0}};
+    private static final int[] EASY_GRID_START = {1, 0};
+    private static final int[] EASY_GRID_SOLUTION = {5, 3};
 
-	@Test
-	public void testEasyHill() {
-		final Grid easyHillGrid = new Grid(EASY_GRID);
-		final HillClimbingLocalSearch<Grid, GridNode> searcher = new HillClimbingLocalSearch<Grid, GridNode>(
-				easyHillGrid);
+    @Test
+    public void testEasyHill() {
+        final Grid easyHillGrid = new Grid(EASY_GRID);
+        final HillClimbingLocalSearch<Grid, GridNode> searcher = new HillClimbingLocalSearch<>(
+                easyHillGrid);
 
-		final GridNode startNode = easyHillGrid.getNode(EASY_GRID_START[0],
-				EASY_GRID_START[1]);
-		final GridNode expectedSolutionNode = easyHillGrid.getNode(
-				EASY_GRID_SOLUTION[0], EASY_GRID_SOLUTION[1]);
+        final GridNode startNode = easyHillGrid.getNode(EASY_GRID_START[0],
+                EASY_GRID_START[1]);
+        final GridNode expectedSolutionNode = easyHillGrid.getNode(
+                EASY_GRID_SOLUTION[0], EASY_GRID_SOLUTION[1]);
 
-		final GridNode obtainedSolutionNode = searcher.search(startNode);
+        final GridNode obtainedSolutionNode = searcher.search(startNode);
 
-		Assert.assertTrue("incorrect solution found!",
-				obtainedSolutionNode.equals(expectedSolutionNode));
-	}
+        Assert.assertTrue("incorrect solution found!",
+                obtainedSolutionNode.equals(expectedSolutionNode));
+    }
 }

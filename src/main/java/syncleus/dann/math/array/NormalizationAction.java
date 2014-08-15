@@ -27,43 +27,43 @@ package syncleus.dann.math.array;
  * Normalization actions desired.
  */
 public enum NormalizationAction {
-	/**
-	 * Do not normalize the column, just allow it to pass through. This allows
-	 * string fields to pass through as well.
-	 */
-	PassThrough,
+    /**
+     * Do not normalize the column, just allow it to pass through. This allows
+     * string fields to pass through as well.
+     */
+    PassThrough,
 
-	/**
-	 * Normalize this column.
-	 */
-	Normalize,
+    /**
+     * Normalize this column.
+     */
+    Normalize,
 
-	/**
-	 * Ignore this column, do not include in the output.
-	 */
-	Ignore,
+    /**
+     * Ignore this column, do not include in the output.
+     */
+    Ignore,
 
-	/**
-	 * Use the "one-of" classification method.
-	 */
-	OneOf,
+    /**
+     * Use the "one-of" classification method.
+     */
+    OneOf,
 
-	/**
-	 * Use the equilateral classification method.
-	 */
-	Equilateral,
+    /**
+     * Use the equilateral classification method.
+     */
+    Equilateral,
 
-	/**
-	 * Use a single-field classification method.
-	 */
-	SingleField;
+    /**
+     * Use a single-field classification method.
+     */
+    SingleField;
 
-	/**
-	 * @return True, if this is a classify.
-	 */
-	public boolean isClassify() {
-		return (this == OneOf) || (this == SingleField)
-				|| (this == Equilateral);
-	}
+    /**
+     * @return True, if this is a classify.
+     */
+    public boolean isClassify() {
+        return (this == OneOf) || (this == SingleField)
+                || (this == Equilateral);
+    }
 
 }

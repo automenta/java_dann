@@ -19,5 +19,5 @@
 package syncleus.dann.graph;
 
 public interface MutableTreeGraph<N, E extends BidirectedEdge<N>> extends
-		TreeGraph<N, E>, MutableBidirectedGraph<N, E> {
+        TreeGraph<N, E>, MutableBidirectedGraph<N, E> {
 }

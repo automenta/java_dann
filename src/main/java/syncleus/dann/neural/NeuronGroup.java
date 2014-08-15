@@ -25,6 +25,7 @@ import java.util.Set;
 import java.util.stream.Stream;
 
 //TODO get rid of this, it essentially plays the role of a sub-graph
+
 /**
  * A special NetworkNode which can contain other NetworkNodes as children.
  *
@@ -32,113 +33,110 @@ import java.util.stream.Stream;
  * @since 1.0
  */
 public class NeuronGroup<N extends Neuron> implements java.io.Serializable {
-	private static final long serialVersionUID = -7251026401945117794L;
-	/**
-	 * The RANDOM number generator used for this class.
-	 *
-	 * @since 1.0
-	 */
-	protected static final Random RANDOM = new Random();
-	// <editor-fold defaultstate="collapsed" desc="Attributes">
-	/**
-	 * This contains all the neurons considered to be a part of this layer. Any
-	 * one neuron can only belong to one layer. But one layer owns many neurons. <BR>
-	 *
-	 * @since 1.0
-	 */
-	private final Set<N> childrenNeurons;
-	/**
-	 * This contains all the neuronGroups considered to be a part of this layer.
-	 * Any one neuron can only belong to one layer. But one layer owns many
-	 * neurons. <BR>
-	 *
-	 * @since 1.0
-	 */
-	private final Set<NeuronGroup<? extends N>> childrenNeuronGroups;
+    private static final long serialVersionUID = -7251026401945117794L;
+    /**
+     * The RANDOM number generator used for this class.
+     *
+     * @since 1.0
+     */
+    protected static final Random RANDOM = new Random();
+    // <editor-fold defaultstate="collapsed" desc="Attributes">
+    /**
+     * This contains all the neurons considered to be a part of this layer. Any
+     * one neuron can only belong to one layer. But one layer owns many neurons. <BR>
+     *
+     * @since 1.0
+     */
+    private final Set<N> childrenNeurons;
+    /**
+     * This contains all the neuronGroups considered to be a part of this layer.
+     * Any one neuron can only belong to one layer. But one layer owns many
+     * neurons. <BR>
+     *
+     * @since 1.0
+     */
+    private final Set<NeuronGroup<? extends N>> childrenNeuronGroups;
 
-	// </editor-fold>
-	// <editor-fold defaultstate="collapsed" desc="Constructors">
+    // </editor-fold>
+    // <editor-fold defaultstate="collapsed" desc="Constructors">
 
-	/**
-	 * Creates a new empty instance of NeuronGroup.
-	 *
-	 * @since 1.0
-	 */
-	public NeuronGroup() {
-		this.childrenNeurons = new HashSet<N>();
-		this.childrenNeuronGroups = new HashSet<NeuronGroup<? extends N>>();
-	}
+    /**
+     * Creates a new empty instance of NeuronGroup.
+     *
+     * @since 1.0
+     */
+    public NeuronGroup() {
+        this.childrenNeurons = new HashSet<>();
+        this.childrenNeuronGroups = new HashSet<>();
+    }
 
-	/**
-	 * Creates a new NeuronGroup that is a copy of the specified group.
-	 *
-	 * @param copyGroup
-	 *            NeuronGroup to copy.
-	 * @since 1.0
-	 */
-	public NeuronGroup(final NeuronGroup<? extends N> copyGroup) {
-		this.childrenNeurons = new HashSet<N>(copyGroup.getChildrenNeurons());
-		this.childrenNeuronGroups = new HashSet<NeuronGroup<? extends N>>(
-				copyGroup.getChildrenNeuronGroups());
-	}
+    /**
+     * Creates a new NeuronGroup that is a copy of the specified group.
+     *
+     * @param copyGroup NeuronGroup to copy.
+     * @since 1.0
+     */
+    public NeuronGroup(final NeuronGroup<? extends N> copyGroup) {
+        this.childrenNeurons = new HashSet<>(copyGroup.getChildrenNeurons());
+        this.childrenNeuronGroups = new HashSet<>(
+                copyGroup.getChildrenNeuronGroups());
+    }
 
-	// </editor-fold>
+    // </editor-fold>
 
-	// <editor-fold defaultstate="collapsed" desc="Topology Manipulation">
+    // <editor-fold defaultstate="collapsed" desc="Topology Manipulation">
 
-	/**
-	 * Adds another Neuron to this layer.
-	 *
-	 * @param toAdd
-	 *            the Neuron to add.
-	 * @since 1.0
-	 */
-	public void add(final N toAdd) {
-		this.childrenNeurons.add(toAdd);
-	}
+    /**
+     * Adds another Neuron to this layer.
+     *
+     * @param toAdd the Neuron to add.
+     * @since 1.0
+     */
+    public void add(final N toAdd) {
+        this.childrenNeurons.add(toAdd);
+    }
 
-	/**
-	 * Adds another NeuronGroup to this layer.
-	 *
-	 * @param toAdd
-	 *            the NeuronGroup to add.
-	 * @since 1.0
-	 */
-	public void add(final NeuronGroup<? extends N> toAdd) {
-		this.childrenNeuronGroups.add(toAdd);
-	}
+    /**
+     * Adds another NeuronGroup to this layer.
+     *
+     * @param toAdd the NeuronGroup to add.
+     * @since 1.0
+     */
+    public void add(final NeuronGroup<? extends N> toAdd) {
+        this.childrenNeuronGroups.add(toAdd);
+    }
 
-	/**
-	 * Obtains all the Neurons directly owned by this NeuronGroup.
-	 *
-	 * @since 1.0
-	 */
-	public Set<N> getChildrenNeurons() {
-		return Collections.unmodifiableSet(this.childrenNeurons);
-	}
+    /**
+     * Obtains all the Neurons directly owned by this NeuronGroup.
+     *
+     * @since 1.0
+     */
+    public Set<N> getChildrenNeurons() {
+        return Collections.unmodifiableSet(this.childrenNeurons);
+    }
 
-	/**
-	 * Obtains all the NeuronGroups directly owned by this NeuronGroup.
-	 *
-	 * @since 1.0
-	 */
-	public Set<NeuronGroup<? extends N>> getChildrenNeuronGroups() {
-		return Collections.unmodifiableSet(this.childrenNeuronGroups);
-	}
+    /**
+     * Obtains all the NeuronGroups directly owned by this NeuronGroup.
+     *
+     * @since 1.0
+     */
+    public Set<NeuronGroup<? extends N>> getChildrenNeuronGroups() {
+        return Collections.unmodifiableSet(this.childrenNeuronGroups);
+    }
 
-	/**
-	 * Obtains all the NetworkNodes owned recursively excluding NeuronGroups.<BR>
-	 *
-	 * @since 1.0
-	 */
-	public Stream<N> getChildrenNeuronsRecursivly() {
-		return Stream.concat(childrenNeurons.stream(), childrenNeuronGroups
-				.stream().flatMap(g -> g.getChildrenNeuronsRecursivly()));
-		// returnList.addAll(this.childrenNeurons);
-		// for(final NeuronGroup<? extends N> currentChild :
-		// this.childrenNeuronGroups)
-		// returnList.addAll(currentChild.getChildrenNeuronsRecursivly());
+    /**
+     * Obtains all the NetworkNodes owned recursively excluding NeuronGroups.<BR>
+     *
+     * @since 1.0
+     */
+    public Stream<N> getChildrenNeuronsRecursivly() {
+        return Stream.concat(childrenNeurons.stream(), childrenNeuronGroups
+                .stream().flatMap(NeuronGroup::getChildrenNeuronsRecursivly));
+        // returnList.addAll(this.childrenNeurons);
+        // for(final NeuronGroup<? extends N> currentChild :
+        // this.childrenNeuronGroups)
+        // returnList.addAll(currentChild.getChildrenNeuronsRecursivly());
 
-	}
-	// </editor-fold>
+    }
+    // </editor-fold>
 }

@@ -19,21 +19,21 @@
 package syncleus.dann.neural;
 
 public abstract class AbstractOutputNeuron extends AbstractNeuron implements
-		OutputNeuron {
-	private static final long serialVersionUID = 913247029435234L;
-	private double output = 0.0;
+        OutputNeuron {
+    private static final long serialVersionUID = 913247029435234L;
+    private double output = 0.0;
 
-	protected AbstractOutputNeuron(
-			final Brain<InputNeuron, OutputNeuron, Neuron, Synapse<Neuron>> brain) {
-		super(brain);
-	}
+    protected AbstractOutputNeuron(
+            final Brain<InputNeuron, OutputNeuron, Neuron, Synapse<Neuron>> brain) {
+        super(brain);
+    }
 
-	@Override
-	public double getOutput() {
-		return this.output;
-	}
+    @Override
+    public double getOutput() {
+        return this.output;
+    }
 
-	protected void setOutput(final double output) {
-		this.output = output;
-	}
+    protected void setOutput(final double output) {
+        this.output = output;
+    }
 }

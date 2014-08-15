@@ -19,13 +19,13 @@
 package syncleus.dann.graph.drawing.hyperassociativemap;
 
 public class SimpleNode {
-	final int layer;
+    final int layer;
 
-	public SimpleNode(final int layer) {
-		this.layer = layer;
-	}
+    public SimpleNode(final int layer) {
+        this.layer = layer;
+    }
 
-	public int getLayer() {
-		return this.layer;
-	}
+    public int getLayer() {
+        return this.layer;
+    }
 }

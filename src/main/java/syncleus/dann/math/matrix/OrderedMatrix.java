@@ -21,10 +21,10 @@ package syncleus.dann.math.matrix;
 import syncleus.dann.math.OrderedFieldElement;
 
 public interface OrderedMatrix<M extends OrderedMatrix<? extends M, ? extends F>, F extends OrderedFieldElement<? extends F>>
-		extends Matrix<M, F> {
-	F norm1();
+        extends Matrix<M, F> {
+    F norm1();
 
-	F norm2();
+    F norm2();
 
-	F normInfinite();
+    F normInfinite();
 }

@@ -21,12 +21,12 @@ package syncleus.dann.graph;
 import java.util.List;
 
 public interface WeightedEdge<N> extends Edge<N>, Weighted {
-	@Override
-	WeightedEdge<N> disconnect(N node);
+    @Override
+    WeightedEdge<N> disconnect(N node);
 
-	@Override
-	WeightedEdge<N> disconnect(List<N> node);
+    @Override
+    WeightedEdge<N> disconnect(List<N> node);
 
-	@Override
-	WeightedEdge<N> clone();
+    @Override
+    WeightedEdge<N> clone();
 }

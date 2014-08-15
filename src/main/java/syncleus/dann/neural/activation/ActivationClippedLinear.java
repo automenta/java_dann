@@ -26,80 +26,80 @@ package syncleus.dann.neural.activation;
 /**
  * Linear activation function that bounds the output to [-1,+1]. This activation
  * is typically part of a CPPN neural network, such as HyperNEAT.
- *
+ * <p/>
  * The idea for this activation function was developed by Ken Stanley, of the
  * University of Texas at Austin. http://www.cs.ucf.edu/~kstanley/
  */
 public class ActivationClippedLinear implements EncogActivationFunction {
 
-	/**
-	 * The serial id.
-	 */
-	private static final long serialVersionUID = 1L;
+    /**
+     * The serial id.
+     */
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void activate(final double[] d, final int start,
-			final int size) {
-		for (int i = start; i < start + size; i++) {
-			if (d[i] < -1.0) {
-				d[i] = -1.0;
-			}
-			if (d[i] > 1.0) {
-				d[i] = 1.0;
-			}
-		}
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void activate(final double[] d, final int start,
+                         final int size) {
+        for (int i = start; i < start + size; i++) {
+            if (d[i] < -1.0) {
+                d[i] = -1.0;
+            }
+            if (d[i] > 1.0) {
+                d[i] = 1.0;
+            }
+        }
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public double derivative(final double b, final double a) {
-		return 1;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public double derivative(final double b, final double a) {
+        return 1;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public boolean hasDerivative() {
-		return true;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean hasDerivative() {
+        return true;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public double[] getParams() {
-		return ActivationLinear.P;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public double[] getParams() {
+        return ActivationLinear.P;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setParam(final int index, final double value) {
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setParam(final int index, final double value) {
 
-	}
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public String[] getParamNames() {
-		return ActivationLinear.N;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String[] getParamNames() {
+        return ActivationLinear.N;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public final IterativeDerivative clone() {
-		return new ActivationClippedLinear();
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final IterativeDerivative clone() {
+        return new ActivationClippedLinear();
+    }
 
 
 }

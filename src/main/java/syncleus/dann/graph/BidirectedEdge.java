@@ -21,47 +21,47 @@ package syncleus.dann.graph;
 import java.util.List;
 
 public interface BidirectedEdge<N> extends Edge<N> {
-	public enum EndState {
-		OUTWARD, INWARD, NONE
-	}
+    public enum EndState {
+        OUTWARD, INWARD, NONE
+    }
 
-	N getLeftNode();
+    N getLeftNode();
 
-	N getRightNode();
+    N getRightNode();
 
-	EndState getLeftEndState();
+    EndState getLeftEndState();
 
-	EndState getRightEndState();
+    EndState getRightEndState();
 
-	boolean isIntroverted();
+    boolean isIntroverted();
 
-	boolean isExtroverted();
+    boolean isExtroverted();
 
-	boolean isDirected();
+    boolean isDirected();
 
-	boolean isHalfEdge();
+    boolean isHalfEdge();
 
-	boolean isLooseEdge();
+    boolean isLooseEdge();
 
-	boolean isOrdinaryEdge();
+    boolean isOrdinaryEdge();
 
-	boolean isLoop();
+    boolean isLoop();
 
-	@Override
-	BidirectedEdge<N> disconnect(N node);
+    @Override
+    BidirectedEdge<N> disconnect(N node);
 
-	@Override
-	BidirectedEdge<N> disconnect(List<N> node);
+    @Override
+    BidirectedEdge<N> disconnect(List<N> node);
 
-	@Override
-	BidirectedEdge<N> clone();
+    @Override
+    BidirectedEdge<N> clone();
 
-	default N getOtherNode(final N n) {
-		if (getLeftNode().equals(n))
-			return getRightNode();
-		else if (getRightNode().equals(n))
-			return getLeftNode();
-		else
-			return null;
-	}
+    default N getOtherNode(final N n) {
+        if (getLeftNode().equals(n))
+            return getRightNode();
+        else if (getRightNode().equals(n))
+            return getLeftNode();
+        else
+            return null;
+    }
 }

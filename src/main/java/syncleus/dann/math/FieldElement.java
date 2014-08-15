@@ -19,17 +19,17 @@
 package syncleus.dann.math;
 
 public interface FieldElement<F extends FieldElement<? extends F>> {
-	Field<F> getField();
+    Field<F> getField();
 
-	F add(F value);
+    F add(F value);
 
-	F subtract(F value);
+    F subtract(F value);
 
-	F multiply(F value);
+    F multiply(F value);
 
-	F divide(F value);
+    F divide(F value);
 
-	F negate();
+    F negate();
 
-	F reciprocal();
+    F reciprocal();
 }

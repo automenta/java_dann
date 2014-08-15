@@ -23,5 +23,5 @@ import syncleus.dann.graph.MutableGraph;
 import syncleus.dann.learn.GraphicalModelNode;
 
 public interface MutableBayesianNetwork<N extends GraphicalModelNode, E extends DirectedEdge<N>>
-		extends BayesianNetwork<N, E>, MutableGraph<N, E> {
+        extends BayesianNetwork<N, E>, MutableGraph<N, E> {
 }

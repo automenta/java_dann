@@ -19,5 +19,5 @@
 package syncleus.dann.graph.path;
 
 public interface LocalSearch<N> {
-	N search(N startNode);
+    N search(N startNode);
 }

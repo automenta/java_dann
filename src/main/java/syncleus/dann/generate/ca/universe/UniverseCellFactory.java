@@ -25,8 +25,8 @@ package syncleus.dann.generate.ca.universe;
 
 public interface UniverseCellFactory {
 
-	UniverseCell factor();
+    UniverseCell factor();
 
-	int size();
+    int size();
 
 }

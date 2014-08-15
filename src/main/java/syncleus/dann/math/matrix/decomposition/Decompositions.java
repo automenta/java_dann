@@ -23,34 +23,34 @@ import syncleus.dann.math.matrix.Matrix;
 import syncleus.dann.math.matrix.RealMatrix;
 
 public final class Decompositions {
-	private Decompositions() {
-	}
+    private Decompositions() {
+    }
 
-	public static EigenvalueDecomposition createEigenvalueDecomposition(
-			final RealMatrix matrixToDecompose) {
-		if (matrixToDecompose.isSymmetric())
-			return new TridiagonalEignevalueDecomposition(matrixToDecompose);
-		else
-			return new SchurEigenvalueDecomposition(matrixToDecompose);
-	}
+    public static EigenvalueDecomposition createEigenvalueDecomposition(
+            final RealMatrix matrixToDecompose) {
+        if (matrixToDecompose.isSymmetric())
+            return new TridiagonalEignevalueDecomposition(matrixToDecompose);
+        else
+            return new SchurEigenvalueDecomposition(matrixToDecompose);
+    }
 
-	public static <M extends Matrix<M, F>, F extends OrderedAlgebraic<F>> CholeskyDecomposition<M, F> createCholeskyDecomposition(
-			final M matrix) {
-		return new CholeskyBanachiewiczCholeskyDecomposition<M, F>(matrix);
-	}
+    public static <M extends Matrix<M, F>, F extends OrderedAlgebraic<F>> CholeskyDecomposition<M, F> createCholeskyDecomposition(
+            final M matrix) {
+        return new CholeskyBanachiewiczCholeskyDecomposition<>(matrix);
+    }
 
-	public static <M extends Matrix<M, F>, F extends OrderedAlgebraic<F>> LuDecomposition<M, F> createLuDecomposition(
-			final M matrix) {
-		return new DoolittleLuDecomposition<M, F>(matrix);
-	}
+    public static <M extends Matrix<M, F>, F extends OrderedAlgebraic<F>> LuDecomposition<M, F> createLuDecomposition(
+            final M matrix) {
+        return new DoolittleLuDecomposition<>(matrix);
+    }
 
-	public static <M extends Matrix<M, F>, F extends OrderedAlgebraic<F>> QrDecomposition<M, F> createQrDecomposition(
-			final M matrix) {
-		return new HouseholderQrDecomposition<M, F>(matrix);
-	}
+    public static <M extends Matrix<M, F>, F extends OrderedAlgebraic<F>> QrDecomposition<M, F> createQrDecomposition(
+            final M matrix) {
+        return new HouseholderQrDecomposition<>(matrix);
+    }
 
-	public static SingularValueDecomposition createSingularValueDecomposition(
-			final RealMatrix matrix) {
-		return new StewartSingularValueDecomposition(matrix);
-	}
+    public static SingularValueDecomposition createSingularValueDecomposition(
+            final RealMatrix matrix) {
+        return new StewartSingularValueDecomposition(matrix);
+    }
 }

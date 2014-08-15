@@ -22,5 +22,5 @@ import syncleus.dann.graph.Edge;
 import syncleus.dann.graph.Graph;
 
 public interface CycleDetector {
-	<N, E extends Edge<N>> boolean hasCycle(Graph<N, E> graph);
+    <N, E extends Edge<N>> boolean hasCycle(Graph<N, E> graph);
 }

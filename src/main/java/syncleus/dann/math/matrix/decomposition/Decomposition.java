@@ -22,5 +22,5 @@ import syncleus.dann.math.FieldElement;
 import syncleus.dann.math.matrix.Matrix;
 
 public interface Decomposition<M extends Matrix<M, ? extends FieldElement<?>>> {
-	M getMatrix();
+    M getMatrix();
 }

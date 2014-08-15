@@ -25,13 +25,12 @@ package syncleus.dann.math.cluster;
 
 /**
  * An object that can create centroids.
- * 
- * @param <O>
- *            The element type for the centroid.
+ *
+ * @param <O> The element type for the centroid.
  */
 public interface CentroidFactory<O> {
-	/**
-	 * @return The centroid.
-	 */
-	public Centroid<O> createCentroid();
+    /**
+     * @return The centroid.
+     */
+    public Centroid<O> createCentroid();
 }

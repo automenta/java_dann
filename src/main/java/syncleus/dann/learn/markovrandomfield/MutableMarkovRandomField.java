@@ -23,5 +23,5 @@ import syncleus.dann.graph.UndirectedEdge;
 import syncleus.dann.learn.GraphicalModelNode;
 
 public interface MutableMarkovRandomField<N extends GraphicalModelNode, E extends UndirectedEdge<N>>
-		extends MarkovRandomField<N, E>, MutableGraph<N, E> {
+        extends MarkovRandomField<N, E>, MutableGraph<N, E> {
 }

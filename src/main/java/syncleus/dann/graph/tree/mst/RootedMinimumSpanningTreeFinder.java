@@ -18,12 +18,12 @@
  ******************************************************************************/
 package syncleus.dann.graph.tree.mst;
 
-import java.util.Set;
-
 import syncleus.dann.graph.Edge;
 import syncleus.dann.graph.Graph;
 
+import java.util.Set;
+
 public interface RootedMinimumSpanningTreeFinder<N, E extends Edge<N>> extends
-		MinimumSpanningTreeFinder<N, E> {
-	Set<E> findMinimumSpanningTree(Graph<N, E> graph, N startNode);
+        MinimumSpanningTreeFinder<N, E> {
+    Set<E> findMinimumSpanningTree(Graph<N, E> graph, N startNode);
 }

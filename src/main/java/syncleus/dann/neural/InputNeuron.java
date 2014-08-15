@@ -26,18 +26,17 @@ package syncleus.dann.neural;
  * @since 1.0
  */
 public interface InputNeuron extends Neuron {
-	/**
-	 * Sets the current input for this neuron.
-	 *
-	 * @param inputToSet
-	 *            The new input value you want to set.
-	 */
-	void setInput(double inputToSet);
+    /**
+     * Sets the current input for this neuron.
+     *
+     * @param inputToSet The new input value you want to set.
+     */
+    void setInput(double inputToSet);
 
-	/**
-	 * Obtains the current input for this neuron.
-	 *
-	 * @return The current input of the neuron.
-	 */
-	double getInput();
+    /**
+     * Obtains the current input for this neuron.
+     *
+     * @return The current input of the neuron.
+     */
+    double getInput();
 }

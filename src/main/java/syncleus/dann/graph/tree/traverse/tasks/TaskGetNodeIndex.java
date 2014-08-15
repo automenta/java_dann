@@ -31,63 +31,61 @@ import syncleus.dann.graph.tree.traverse.TreeTraversalTask;
  * Get a node by index.
  */
 public class TaskGetNodeIndex implements TreeTraversalTask {
-	/**
-	 * The running node count.
-	 */
-	private int nodeCount;
+    /**
+     * The running node count.
+     */
+    private int nodeCount;
 
-	/**
-	 * The index that we are seeking.
-	 */
-	private final int targetIndex;
+    /**
+     * The index that we are seeking.
+     */
+    private final int targetIndex;
 
-	/**
-	 * The resulting node at the specified index.
-	 */
-	private TreeNode result;
+    /**
+     * The resulting node at the specified index.
+     */
+    private TreeNode result;
 
-	public TaskGetNodeIndex(final int theIndex) {
-		this.targetIndex = theIndex;
-		this.nodeCount = 0;
-	}
+    public TaskGetNodeIndex(final int theIndex) {
+        this.targetIndex = theIndex;
+        this.nodeCount = 0;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public boolean task(final TreeNode node) {
-		if (this.nodeCount >= targetIndex) {
-			if (result == null) {
-				result = node;
-			}
-			return false;
-		}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean task(final TreeNode node) {
+        if (this.nodeCount >= targetIndex) {
+            if (result == null) {
+                result = node;
+            }
+            return false;
+        }
 
-		this.nodeCount++;
-		return true;
-	}
+        this.nodeCount++;
+        return true;
+    }
 
-	/**
-	 * @return The resulting tree node.
-	 */
-	public TreeNode getResult() {
-		return result;
-	}
+    /**
+     * @return The resulting tree node.
+     */
+    public TreeNode getResult() {
+        return result;
+    }
 
-	/**
-	 * Obtain the specified tree node for the specified index.
-	 * 
-	 * @param index
-	 *            The index.
-	 * @param node
-	 *            The tree node to search from.
-	 * @return The tree node for the specified index.
-	 */
-	public static TreeNode process(final int index, final TreeNode node) {
-		final TaskGetNodeIndex task = new TaskGetNodeIndex(index);
-		final DepthFirstTraversal trav = new DepthFirstTraversal();
-		trav.traverse(node, task);
-		return task.getResult();
-	}
+    /**
+     * Obtain the specified tree node for the specified index.
+     *
+     * @param index The index.
+     * @param node  The tree node to search from.
+     * @return The tree node for the specified index.
+     */
+    public static TreeNode process(final int index, final TreeNode node) {
+        final TaskGetNodeIndex task = new TaskGetNodeIndex(index);
+        final DepthFirstTraversal trav = new DepthFirstTraversal();
+        trav.traverse(node, task);
+        return task.getResult();
+    }
 
 }

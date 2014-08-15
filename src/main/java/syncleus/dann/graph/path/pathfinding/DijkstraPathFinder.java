@@ -22,26 +22,26 @@ import syncleus.dann.graph.Edge;
 import syncleus.dann.graph.Graph;
 
 public class DijkstraPathFinder<N, E extends Edge<N>> extends
-		AstarPathFinder<N, E> {
-	public static final class ZeroHeuristicPathCost<N> implements
-			HeuristicPathCost<N> {
-		@Override
-		public double getHeuristicPathCost(final N begin, final N end) {
-			return 0.0;
-		}
+        AstarPathFinder<N, E> {
+    public static final class ZeroHeuristicPathCost<N> implements
+            HeuristicPathCost<N> {
+        @Override
+        public double getHeuristicPathCost(final N begin, final N end) {
+            return 0.0;
+        }
 
-		@Override
-		public boolean isOptimistic() {
-			return true;
-		}
+        @Override
+        public boolean isOptimistic() {
+            return true;
+        }
 
-		@Override
-		public boolean isConsistent() {
-			return true;
-		}
-	}
+        @Override
+        public boolean isConsistent() {
+            return true;
+        }
+    }
 
-	public DijkstraPathFinder(final Graph<N, E> graph) {
-		super(graph, new ZeroHeuristicPathCost<N>());
-	}
+    public DijkstraPathFinder(final Graph<N, E> graph) {
+        super(graph, new ZeroHeuristicPathCost<>());
+    }
 }

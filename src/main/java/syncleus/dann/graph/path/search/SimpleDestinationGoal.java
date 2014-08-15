@@ -23,28 +23,28 @@
  */
 package syncleus.dann.graph.path.search;
 
-import syncleus.dann.graph.path.PathNode;
 import syncleus.dann.graph.path.BasicPath;
+import syncleus.dann.graph.path.PathNode;
 
 public class SimpleDestinationGoal implements SearchGoal {
 
-	private final PathNode goalDestination;
+    private final PathNode goalDestination;
 
-	public SimpleDestinationGoal(final PathNode goalDestination) {
-		super();
-		this.goalDestination = goalDestination;
-	}
+    public SimpleDestinationGoal(final PathNode goalDestination) {
+        super();
+        this.goalDestination = goalDestination;
+    }
 
-	@Override
-	public boolean isGoalMet(final BasicPath path) {
-		return path.getDestinationNode() == goalDestination;
-	}
+    @Override
+    public boolean isGoalMet(final BasicPath path) {
+        return path.getDestinationNode() == goalDestination;
+    }
 
-	/**
-	 * @return the goalDestination
-	 */
-	public PathNode getGoalDestination() {
-		return goalDestination;
-	}
+    /**
+     * @return the goalDestination
+     */
+    public PathNode getGoalDestination() {
+        return goalDestination;
+    }
 
 }

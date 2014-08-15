@@ -30,105 +30,98 @@ import java.util.List;
  * This class implements a simple sliding window. Arrays of doubles can be added
  * to the window. The sliding window will fill up to the specified size.
  * Additional entries will cause the oldest entries to fall off.
- *
  */
 public class WindowDouble {
 
-	/**
-	 * The size of the window.
-	 */
-	private final int size;
+    /**
+     * The size of the window.
+     */
+    private final int size;
 
-	/**
-	 * The data in the window.
-	 */
-	private final List<double[]> data = new ArrayList<double[]>();
+    /**
+     * The data in the window.
+     */
+    private final List<double[]> data = new ArrayList<>();
 
-	/**
-	 * Construct the window.
-	 *
-	 * @param theSize
-	 *            The size of the window.
-	 */
-	public WindowDouble(final int theSize) {
-		this.size = theSize;
-	}
+    /**
+     * Construct the window.
+     *
+     * @param theSize The size of the window.
+     */
+    public WindowDouble(final int theSize) {
+        this.size = theSize;
+    }
 
-	/**
-	 * Add an array to the window.
-	 *
-	 * @param a
-	 *            The array.
-	 */
-	public void add(final double[] a) {
-		this.data.add(0, a);
-		while (this.data.size() > this.size) {
-			this.data.remove(this.data.size() - 1);
-		}
-	}
+    /**
+     * Add an array to the window.
+     *
+     * @param a The array.
+     */
+    public void add(final double[] a) {
+        this.data.add(0, a);
+        while (this.data.size() > this.size) {
+            this.data.remove(this.data.size() - 1);
+        }
+    }
 
-	/**
-	 * Clear the contents of the window.
-	 */
-	public void clear() {
-		this.data.clear();
-	}
+    /**
+     * Clear the contents of the window.
+     */
+    public void clear() {
+        this.data.clear();
+    }
 
-	/**
-	 * @return True, if the window is full.
-	 */
-	public boolean isFull() {
-		return this.data.size() == this.size;
-	}
+    /**
+     * @return True, if the window is full.
+     */
+    public boolean isFull() {
+        return this.data.size() == this.size;
+    }
 
-	/**
-	 * Calculate the max value, for the specified index, over all of the data in
-	 * the window.
-	 *
-	 * @param index
-	 *            The index of the value to compare.
-	 * @param starting
-	 *            The starting position, inside the window to compare at.
-	 * @return THe max value.
-	 */
-	public double calculateMax(final int index, final int starting) {
-		double result = Double.NEGATIVE_INFINITY;
+    /**
+     * Calculate the max value, for the specified index, over all of the data in
+     * the window.
+     *
+     * @param index    The index of the value to compare.
+     * @param starting The starting position, inside the window to compare at.
+     * @return THe max value.
+     */
+    public double calculateMax(final int index, final int starting) {
+        double result = Double.NEGATIVE_INFINITY;
 
-		for (int i = starting; i < this.data.size(); i++) {
-			final double[] a = this.data.get(i);
-			result = Math.max(a[index], result);
-		}
+        for (int i = starting; i < this.data.size(); i++) {
+            final double[] a = this.data.get(i);
+            result = Math.max(a[index], result);
+        }
 
-		return result;
-	}
+        return result;
+    }
 
-	/**
-	 * Calculate the max value, for the specified index, over all of the data in
-	 * the window.
-	 *
-	 * @param index
-	 *            The index of the value to compare.
-	 * @param starting
-	 *            The starting position, inside the window to compare at.
-	 * @return THe max value.
-	 */
-	public double calculateMin(final int index, final int starting) {
-		double result = Double.POSITIVE_INFINITY;
+    /**
+     * Calculate the max value, for the specified index, over all of the data in
+     * the window.
+     *
+     * @param index    The index of the value to compare.
+     * @param starting The starting position, inside the window to compare at.
+     * @return THe max value.
+     */
+    public double calculateMin(final int index, final int starting) {
+        double result = Double.POSITIVE_INFINITY;
 
-		for (int i = starting; i < this.data.size(); i++) {
-			final double[] a = this.data.get(i);
-			result = Math.min(a[index], result);
-		}
+        for (int i = starting; i < this.data.size(); i++) {
+            final double[] a = this.data.get(i);
+            result = Math.min(a[index], result);
+        }
 
-		return result;
-	}
+        return result;
+    }
 
-	/**
-	 * Get the last value from the window. This is the most recent item added.
-	 *
-	 * @return The last value from the window.
-	 */
-	public double[] getLast() {
-		return this.data.get(0);
-	}
+    /**
+     * Get the last value from the window. This is the most recent item added.
+     *
+     * @return The last value from the window.
+     */
+    public double[] getLast() {
+        return this.data.get(0);
+    }
 }

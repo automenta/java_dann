@@ -19,11 +19,11 @@
 package syncleus.dann.graph;
 
 public interface Path<N, E extends Edge<N>> extends Walk<N, E> {
-	N getFirstNode();
+    N getFirstNode();
 
-	N getLastNode();
+    N getLastNode();
 
-	boolean isChain();
+    boolean isChain();
 
-	boolean isIndependent(Path<N, E> path);
+    boolean isIndependent(Path<N, E> path);
 }

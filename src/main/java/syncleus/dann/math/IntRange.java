@@ -28,62 +28,58 @@ package syncleus.dann.math;
  */
 public class IntRange {
 
-	/**
-	 * The low end of the range.
-	 */
-	private int high;
+    /**
+     * The low end of the range.
+     */
+    private int high;
 
-	/**
-	 * The high end of the range.
-	 */
-	private int low;
+    /**
+     * The high end of the range.
+     */
+    private int low;
 
-	/**
-	 * Construct an integer range.
-	 *
-	 * @param theHigh
-	 *            The high end of the range.
-	 * @param theLow
-	 *            The low end of the range.
-	 */
-	public IntRange(final int theHigh, final int theLow) {
-		super();
-		this.high = theHigh;
-		this.low = theLow;
-	}
+    /**
+     * Construct an integer range.
+     *
+     * @param theHigh The high end of the range.
+     * @param theLow  The low end of the range.
+     */
+    public IntRange(final int theHigh, final int theLow) {
+        super();
+        this.high = theHigh;
+        this.low = theLow;
+    }
 
-	/**
-	 * @return The high end of the range.
-	 */
-	public final int getHigh() {
-		return this.high;
-	}
+    /**
+     * @return The high end of the range.
+     */
+    public final int getHigh() {
+        return this.high;
+    }
 
-	/**
-	 * @return The low end of the range.
-	 */
-	public final int getLow() {
-		return this.low;
-	}
+    /**
+     * @return The low end of the range.
+     */
+    public final int getLow() {
+        return this.low;
+    }
 
-	/**
-	 * Set the high end of the range.
-	 *
-	 * @param theHigh
-	 *            The high end of the range.
-	 */
-	public final void setHigh(final int theHigh) {
-		this.high = theHigh;
-	}
+    /**
+     * Set the high end of the range.
+     *
+     * @param theHigh The high end of the range.
+     */
+    public final void setHigh(final int theHigh) {
+        this.high = theHigh;
+    }
 
-	/**
-	 * Set the low end of the range.
-	 *
-	 * @param theLow
-	 *            The low end of the range.
-	 */
-	public final void setLow(final int theLow) {
-		this.low = theLow;
-	}
+    /**
+     * Set the low end of the range.
+     *
+     * @param theLow The low end of the range.
+     */
+    public final void setLow(final int theLow) {
+        this.low = theLow;
+    }
 
 }

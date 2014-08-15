@@ -29,10 +29,9 @@ import syncleus.dann.graph.tree.TreeNode;
  * A task used to traverse the tree.
  */
 public interface TreeTraversalTask {
-	/**
-	 * @param node
-	 *            The node visiting.
-	 * @return True, if traversal should continue.
-	 */
-	boolean task(TreeNode node);
+    /**
+     * @param node The node visiting.
+     * @return True, if traversal should continue.
+     */
+    boolean task(TreeNode node);
 }

@@ -21,5 +21,5 @@ package syncleus.dann.attribute.hat;
 import syncleus.dann.attribute.AttributePool;
 
 public interface HierarchicalAttributePool<T> extends AttributePool<T> {
-	HierarchicalAttributePool<T> getParent();
+    HierarchicalAttributePool<T> getParent();
 }

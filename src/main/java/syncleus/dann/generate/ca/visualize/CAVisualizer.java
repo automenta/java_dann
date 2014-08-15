@@ -23,14 +23,14 @@
  */
 package syncleus.dann.generate.ca.visualize;
 
-import java.awt.Image;
+import java.awt.*;
 
 public interface CAVisualizer {
 
-	int getZoom();
+    int getZoom();
 
-	void setZoom(int z);
+    void setZoom(int z);
 
-	Image visualize();
+    Image visualize();
 
 }

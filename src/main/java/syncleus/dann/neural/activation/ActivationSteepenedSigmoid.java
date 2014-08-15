@@ -25,92 +25,92 @@ package syncleus.dann.neural.activation;
 
 /**
  * The Steepened Sigmoid is an activation function typically used with NEAT.
- *
+ * <p/>
  * Valid derivative calculated with the R package, so this does work with
  * non-NEAT networks too.
- *
+ * <p/>
  * It was developed by Ken Stanley while at The University of Texas at Austin.
  * http://www.cs.ucf.edu/~kstanley/
  */
 public class ActivationSteepenedSigmoid implements EncogActivationFunction {
 
-	/**
-	 * The serial id.
-	 */
-	private static final long serialVersionUID = 1L;
+    /**
+     * The serial id.
+     */
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * The parameters.
-	 */
-	private final double[] params;
+    /**
+     * The parameters.
+     */
+    private final double[] params;
 
-	/**
-	 * Construct a steepend sigmoid activation function.
-	 */
-	public ActivationSteepenedSigmoid() {
-		this.params = new double[0];
-	}
+    /**
+     * Construct a steepend sigmoid activation function.
+     */
+    public ActivationSteepenedSigmoid() {
+        this.params = new double[0];
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public final void activate(final double[] x, final int start,
-			final int size) {
-		for (int i = start; i < start + size; i++) {
-			x[i] = 1.0 / (1.0 + Math.exp(-4.9 * x[i]));
-		}
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final void activate(final double[] x, final int start,
+                               final int size) {
+        for (int i = start; i < start + size; i++) {
+            x[i] = 1.0 / (1.0 + Math.exp(-4.9 * x[i]));
+        }
+    }
 
-	/**
-	 * @return The object cloned;
-	 */
-	@Override
-	public final IterativeDerivative clone() {
-		return new ActivationSteepenedSigmoid();
-	}
+    /**
+     * @return The object cloned;
+     */
+    @Override
+    public final IterativeDerivative clone() {
+        return new ActivationSteepenedSigmoid();
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public final double derivative(final double b, final double a) {
-		final double s = Math.exp(-4.9 * a);
-		return Math.pow(s * 4.9 / (1 + s), 2);
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final double derivative(final double b, final double a) {
+        final double s = Math.exp(-4.9 * a);
+        return Math.pow(s * 4.9 / (1 + s), 2);
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public final String[] getParamNames() {
-		final String[] result = {};
-		return result;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final String[] getParamNames() {
+        final String[] result = {};
+        return result;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public final double[] getParams() {
-		return this.params;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final double[] getParams() {
+        return this.params;
+    }
 
-	/**
-	 * @return Return true, Elliott activation has a derivative.
-	 */
-	@Override
-	public final boolean hasDerivative() {
-		return true;
-	}
+    /**
+     * @return Return true, Elliott activation has a derivative.
+     */
+    @Override
+    public final boolean hasDerivative() {
+        return true;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public final void setParam(final int index, final double value) {
-		this.params[index] = value;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final void setParam(final int index, final double value) {
+        this.params[index] = value;
+    }
 
 
 }

@@ -21,53 +21,53 @@ package syncleus.dann.graph;
 import java.util.List;
 
 public abstract class AbstractUniqueEdge<N> extends AbstractEdge<N> {
-	protected AbstractUniqueEdge() {
-		super();
-	}
+    protected AbstractUniqueEdge() {
+        super();
+    }
 
-	protected AbstractUniqueEdge(final boolean allowJoiningMultipleGraphs,
-			final boolean contextEnabled) {
-		super(allowJoiningMultipleGraphs, contextEnabled);
-	}
+    protected AbstractUniqueEdge(final boolean allowJoiningMultipleGraphs,
+                                 final boolean contextEnabled) {
+        super(allowJoiningMultipleGraphs, contextEnabled);
+    }
 
-	protected AbstractUniqueEdge(final List<N> nodes) {
-		super(nodes);
-	}
+    protected AbstractUniqueEdge(final List<N> nodes) {
+        super(nodes);
+    }
 
-	protected AbstractUniqueEdge(final N... nodes) {
-		super(nodes);
-	}
+    protected AbstractUniqueEdge(final N... nodes) {
+        super(nodes);
+    }
 
-	protected AbstractUniqueEdge(final List<N> nodes,
-			final boolean allowJoiningMultipleGraphs,
-			final boolean contextEnabled) {
-		super(nodes, allowJoiningMultipleGraphs, contextEnabled);
-	}
+    protected AbstractUniqueEdge(final List<N> nodes,
+                                 final boolean allowJoiningMultipleGraphs,
+                                 final boolean contextEnabled) {
+        super(nodes, allowJoiningMultipleGraphs, contextEnabled);
+    }
 
-	protected AbstractUniqueEdge(final boolean allowJoiningMultipleGraphs,
-			final boolean contextEnabled, final N... nodes) {
-		super(allowJoiningMultipleGraphs, contextEnabled, nodes);
-	}
+    protected AbstractUniqueEdge(final boolean allowJoiningMultipleGraphs,
+                                 final boolean contextEnabled, final N... nodes) {
+        super(allowJoiningMultipleGraphs, contextEnabled, nodes);
+    }
 
-	@Override
-	public boolean equals(final Object compareToObj) {
-		if (compareToObj == null)
-			return false;
+    @Override
+    public boolean equals(final Object compareToObj) {
+        if (compareToObj == null)
+            return false;
 
-		if (!(compareToObj instanceof Edge))
-			return false;
+        if (!(compareToObj instanceof Edge))
+            return false;
 
-		final Edge compareTo = (Edge) compareToObj;
-		return (compareTo.getNodes().equals(this.getNodes()))
-				&& (this.getNodes().equals(compareTo.getNodes()));
-	}
+        final Edge compareTo = (Edge) compareToObj;
+        return (compareTo.getNodes().equals(this.getNodes()))
+                && (this.getNodes().equals(compareTo.getNodes()));
+    }
 
-	@Override
-	public int hashCode() {
-		int hash = 0;
-                hash = this.getNodes().stream().map((node) -> node.hashCode()).reduce(hash, Integer::sum);
-		return hash;
-	}
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash = this.getNodes().stream().map(Object::hashCode).reduce(hash, Integer::sum);
+        return hash;
+    }
 
     @Override
     public AbstractEdge<N> clone() {

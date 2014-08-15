@@ -23,130 +23,121 @@
  */
 package syncleus.dann.data.language;
 
-import java.util.StringTokenizer;
-
 import syncleus.dann.data.file.csv.CSVFormat;
+
+import java.util.StringTokenizer;
 
 /**
  * Class used to handle lists of numbers.
  */
 public final class NumberList {
 
-	/**
-	 * Get an array of double's from a string of comma separated text.
-	 * 
-	 * @param format
-	 *            The format to use.
-	 * @param str
-	 *            The string to parse.
-	 * @return An array of doubles parsed from the string.
-	 */
-	public static synchronized double[] fromList(final CSVFormat format,
-			final String str) {
-		// handle empty string
-		if (str.trim().length() == 0) {
-			return new double[0];
-		}
+    /**
+     * Get an array of double's from a string of comma separated text.
+     *
+     * @param format The format to use.
+     * @param str    The string to parse.
+     * @return An array of doubles parsed from the string.
+     */
+    public static synchronized double[] fromList(final CSVFormat format,
+                                                 final String str) {
+        // handle empty string
+        if (str.trim().length() == 0) {
+            return new double[0];
+        }
 
-		// first count the numbers
-		int count = 0;
-		final StringTokenizer tok = new StringTokenizer(str, ""
-				+ format.getSeparator());
-		while (tok.hasMoreTokens()) {
-			tok.nextToken();
-			count++;
-		}
+        // first count the numbers
+        int count = 0;
+        final StringTokenizer tok = new StringTokenizer(str, String.valueOf(format.getSeparator()));
+        while (tok.hasMoreTokens()) {
+            tok.nextToken();
+            count++;
+        }
 
-		// now allocate an object to hold that many numbers
-		final double[] result = new double[count];
+        // now allocate an object to hold that many numbers
+        final double[] result = new double[count];
 
-		// and finally parse the numbers
-		int index = 0;
-		final StringTokenizer tok2 = new StringTokenizer(str, ""
-				+ format.getSeparator());
-		while (tok2.hasMoreTokens()) {
-			final String num = tok2.nextToken();
-			final double value = format.parse(num);
-			result[index++] = value;
-		}
+        // and finally parse the numbers
+        int index = 0;
+        final StringTokenizer tok2 = new StringTokenizer(str, String.valueOf(format.getSeparator()));
+        while (tok2.hasMoreTokens()) {
+            final String num = tok2.nextToken();
+            final double value = format.parse(num);
+            result[index++] = value;
+        }
 
-		return result;
-	}
+        return result;
+    }
 
-	/**
-	 * Convert an array of doubles to a comma separated list.
-	 * 
-	 * @param format
-	 *            The format to use.
-	 * @param result
-	 *            This string will have the values appended to it.
-	 * @param data
-	 *            The array of doubles to use.
-	 */
-	public static void toList(final CSVFormat format,
-			final StringBuilder result, final double[] data) {
-		toList(format, 20, result, data);
-	}
+    /**
+     * Convert an array of doubles to a comma separated list.
+     *
+     * @param format The format to use.
+     * @param result This string will have the values appended to it.
+     * @param data   The array of doubles to use.
+     */
+    public static void toList(final CSVFormat format,
+                              final StringBuilder result, final double[] data) {
+        toList(format, 20, result, data);
+    }
 
-	/**
-	 * Private constructor.
-	 */
-	private NumberList() {
+    /**
+     * Private constructor.
+     */
+    private NumberList() {
 
-	}
+    }
 
-	public static int[] fromListInt(final CSVFormat format, final String str) {
+    public static int[] fromListInt(final CSVFormat format, final String str) {
 
-		// handle empty string
-		if (str.trim().length() == 0) {
-			return new int[0];
-		}
+        // handle empty string
+        if (str.trim().length() == 0) {
+            return new int[0];
+        }
 
-		// first count the numbers
-		int count = 0;
-		final StringTokenizer tok = new StringTokenizer(str, ""
-				+ format.getSeparator());
-		while (tok.hasMoreTokens()) {
-			tok.nextToken();
-			count++;
-		}
+        // first count the numbers
+        int count = 0;
+        final StringTokenizer tok = new StringTokenizer(str, String.valueOf(format.getSeparator()));
+        while (tok.hasMoreTokens()) {
+            tok.nextToken();
+            count++;
+        }
 
-		// now allocate an object to hold that many numbers
-		final int[] result = new int[count];
+        // now allocate an object to hold that many numbers
+        final int[] result = new int[count];
 
-		// and finally parse the numbers
-		int index = 0;
-		final StringTokenizer tok2 = new StringTokenizer(str, ""
-				+ format.getSeparator());
-		while (tok2.hasMoreTokens()) {
-			final String num = tok2.nextToken();
-			final int value = Integer.parseInt(num);
-			result[index++] = value;
-		}
+        // and finally parse the numbers
+        int index = 0;
+        final StringTokenizer tok2 = new StringTokenizer(str, String.valueOf(format.getSeparator()));
+        while (tok2.hasMoreTokens()) {
+            final String num = tok2.nextToken();
+            final int value = Integer.parseInt(num);
+            result[index++] = value;
+        }
 
-		return result;
-	}
+        return result;
+    }
 
-	public static synchronized void toList(final CSVFormat format,
-			final int precision, final StringBuilder result, final double[] data) {
-		result.setLength(0);
-		for (int i = 0; i < data.length; i++) {
-			if (i != 0) {
-				result.append(format.getSeparator());
-			}
-			result.append(format.format(data[i], precision));
-		}
+    public static synchronized void toList(final CSVFormat format,
+                                           final int precision, final StringBuilder result, final double[] data) {
+        result.setLength(0);
+        for (int i = 0; i < data.length; i++) {
+            if (i != 0) {
+                result.append(format.getSeparator());
+            }
+            result.append(format.format(data[i], precision));
+        }
 
-	}
+    }
 
-	public static void toListInt(final CSVFormat format,
-			final StringBuilder result, final int[] data) {
-		result.setLength(0);
-		for (int i = 0; i < data.length; i++) {
-			if (i != 0) {
-				result.append(format.getSeparator());
-			}
-			result.append("").append(data[i]);
-		}
-	}
+    public static void toListInt(final CSVFormat format,
+                                 final StringBuilder result, final int[] data) {
+        result.setLength(0);
+        for (int i = 0; i < data.length; i++) {
+            if (i != 0) {
+                result.append(format.getSeparator());
+            }
+            result.append("").append(data[i]);
+        }
+    }
 }

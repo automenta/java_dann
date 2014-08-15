@@ -31,50 +31,49 @@ import java.util.Random;
  */
 public class BasicRandomFactory implements RandomFactory, Serializable {
 
-	/**
-	 * Serial ID.
-	 */
-	private static final long serialVersionUID = 1L;
+    /**
+     * Serial ID.
+     */
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * A random generator to generate random seeds.
-	 */
-	private final Random seedProducer;
+    /**
+     * A random generator to generate random seeds.
+     */
+    private final Random seedProducer;
 
-	/**
-	 * Construct a random generator factory. No assigned seed.
-	 */
-	public BasicRandomFactory() {
-		this.seedProducer = new Random();
-	}
+    /**
+     * Construct a random generator factory. No assigned seed.
+     */
+    public BasicRandomFactory() {
+        this.seedProducer = new Random();
+    }
 
-	/**
-	 * Construct a random generator factory with the specified seed.
-	 * 
-	 * @param theSeed
-	 *            The seed.
-	 */
-	public BasicRandomFactory(final long theSeed) {
-		this.seedProducer = new Random(theSeed);
-	}
+    /**
+     * Construct a random generator factory with the specified seed.
+     *
+     * @param theSeed The seed.
+     */
+    public BasicRandomFactory(final long theSeed) {
+        this.seedProducer = new Random(theSeed);
+    }
 
-	/**
-	 * @return Factor a new random generator.
-	 */
-	@Override
-	public Random factor() {
-		synchronized (this) {
-			final long seed = this.seedProducer.nextLong();
-			return new Random(seed);
-		}
-	}
+    /**
+     * @return Factor a new random generator.
+     */
+    @Override
+    public Random factor() {
+        synchronized (this) {
+            final long seed = this.seedProducer.nextLong();
+            return new Random(seed);
+        }
+    }
 
-	/**
-	 * @return Factor a new random generator factor.
-	 */
-	@Override
-	public RandomFactory factorFactory() {
-		return new BasicRandomFactory(this.seedProducer.nextLong());
-	}
+    /**
+     * @return Factor a new random generator factor.
+     */
+    @Override
+    public RandomFactory factorFactory() {
+        return new BasicRandomFactory(this.seedProducer.nextLong());
+    }
 
 }

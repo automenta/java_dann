@@ -19,5 +19,5 @@
 package syncleus.dann.math;
 
 public interface OrderedField<F extends FieldElement<? extends F>> extends
-		Field<F> {
+        Field<F> {
 }

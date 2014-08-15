@@ -31,56 +31,54 @@ import syncleus.dann.graph.tree.traverse.TreeTraversalTask;
  * Count the nodes in an acyclic tree.
  */
 public class TaskCountNodes implements TreeTraversalTask {
-	/**
-	 * The count so far.
-	 */
-	private int nodeCount;
+    /**
+     * The count so far.
+     */
+    private int nodeCount;
 
-	/**
-	 * Construct the task.
-	 */
-	public TaskCountNodes() {
-		this.nodeCount = 0;
-	}
+    /**
+     * Construct the task.
+     */
+    public TaskCountNodes() {
+        this.nodeCount = 0;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public boolean task(final TreeNode node) {
-		this.nodeCount++;
-		return true;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean task(final TreeNode node) {
+        this.nodeCount++;
+        return true;
+    }
 
-	/**
-	 * @return The current node count.
-	 */
-	public int getNodeCount() {
-		return nodeCount;
-	}
+    /**
+     * @return The current node count.
+     */
+    public int getNodeCount() {
+        return nodeCount;
+    }
 
-	/**
-	 * Set the current node count.
-	 * 
-	 * @param nodeCount
-	 *            The node count.
-	 */
-	public void setNodeCount(final int nodeCount) {
-		this.nodeCount = nodeCount;
-	}
+    /**
+     * Set the current node count.
+     *
+     * @param nodeCount The node count.
+     */
+    public void setNodeCount(final int nodeCount) {
+        this.nodeCount = nodeCount;
+    }
 
-	/**
-	 * Count the nodes from this tree node.
-	 * 
-	 * @param node
-	 *            The tree node.
-	 * @return The node count.
-	 */
-	public static int process(final TreeNode node) {
-		final TaskCountNodes task = new TaskCountNodes();
-		final DepthFirstTraversal trav = new DepthFirstTraversal();
-		trav.traverse(node, task);
-		return task.getNodeCount();
-	}
+    /**
+     * Count the nodes from this tree node.
+     *
+     * @param node The tree node.
+     * @return The node count.
+     */
+    public static int process(final TreeNode node) {
+        final TaskCountNodes task = new TaskCountNodes();
+        final DepthFirstTraversal trav = new DepthFirstTraversal();
+        trav.traverse(node, task);
+        return task.getNodeCount();
+    }
 
 }

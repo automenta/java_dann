@@ -23,42 +23,45 @@
  */
 package syncleus.dann.graph.path;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Stream;
 import syncleus.dann.graph.DirectedGraph;
 import syncleus.dann.graph.Graph;
 import syncleus.dann.graph.WeightedDirectedEdge;
 
-/** Graph with an API optimized for pathfinding/searching */
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Stream;
+
+/**
+ * Graph with an API optimized for pathfinding/searching
+ */
 public class PathGraph implements DirectedGraph<PathNode, WeightedDirectedEdge<PathNode>> {
 
-	private final Set<PathNode> nodes = new HashSet<PathNode>();
-	private final PathNode root;
+    private final Set<PathNode> nodes = new HashSet<>();
+    private final PathNode root;
 
-	public PathGraph(final PathNode rootNode) {
-		this.root = rootNode;
-		nodes.add(rootNode);
-	}
+    public PathGraph(final PathNode rootNode) {
+        this.root = rootNode;
+        nodes.add(rootNode);
+    }
 
-	public Set<PathNode> getNodes() {
-		return this.nodes;
-	}
+    public Set<PathNode> getNodes() {
+        return this.nodes;
+    }
 
-	/**
-	 * @return the root
-	 */
-	public PathNode getRoot() {
-		return root;
-	}
+    /**
+     * @return the root
+     */
+    public PathNode getRoot() {
+        return root;
+    }
 
-	public PathNode connect(final PathNode baseNode, final PathNode newNode,
-			final double cost) {
-		this.nodes.add(newNode);
-		baseNode.connect(newNode, cost);
-		return newNode;
-	}
+    public PathNode connect(final PathNode baseNode, final PathNode newNode,
+                            final double cost) {
+        this.nodes.add(newNode);
+        baseNode.connect(newNode, cost);
+        return newNode;
+    }
 
     @Override
     public Set<WeightedDirectedEdge<PathNode>> getInEdges(PathNode node) {

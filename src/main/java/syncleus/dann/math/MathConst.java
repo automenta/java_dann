@@ -27,26 +27,25 @@ package syncleus.dann.math;
  * Math constants needed by Encog.
  *
  * @author jheaton
- *
  */
 public final class MathConst {
 
-	/**
-	 * Euler's number.
-	 */
-	public static final double EULERS_NUMBER =  Math.E; //2.718281828;
+    /**
+     * Euler's number.
+     */
+    public static final double EULERS_NUMBER = Math.E; //2.718281828;
 
-	/**
-	 * Degrees in a semicircle.
-	 */
-	public static final double DEG_SEMICIRCLE = 180.0;
+    /**
+     * Degrees in a semicircle.
+     */
+    public static final double DEG_SEMICIRCLE = 180.0;
 
-	/**
-	 * Degrees in a circle.
-	 */
-	public static final double DEG_CIRCLE = 360.0;
+    /**
+     * Degrees in a circle.
+     */
+    public static final double DEG_CIRCLE = 360.0;
 
-	private MathConst() {
+    private MathConst() {
 
-	}
+    }
 }

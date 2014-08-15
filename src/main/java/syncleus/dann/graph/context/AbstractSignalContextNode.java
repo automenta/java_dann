@@ -69,8 +69,7 @@ public abstract class AbstractSignalContextNode<N, E extends Edge<N>, S>
 		// lets notify all edges
 		for (final SignalingContextEdge edge : this.contextEdges) {
 			if (edge.isTraversable(this))
-                edge.nodeStateChanged(this, state);
+				edge.nodeStateChanged(this, state);
+		}
 	}
 }
-}
-

@@ -23,136 +23,136 @@
  */
 package syncleus.dann.generate.ca.universe.basic;
 
-import java.io.Serializable;
-
+import org.encog.ml.BasicML;
 import syncleus.dann.generate.ca.universe.Universe;
 import syncleus.dann.generate.ca.universe.UniverseCell;
 import syncleus.dann.generate.ca.universe.UniverseCellFactory;
-import org.encog.ml.BasicML;
+
+import java.io.Serializable;
 
 public class BasicUniverse extends BasicML implements Universe, Serializable, Cloneable {
-	/**
-	 *
-	 */
-	private static final long serialVersionUID = 1L;
-	public static final String ELEMENT_COUNT = "elementCount";
-	private final UniverseCell[][] data;
-	private final UniverseCellFactory cellFactory;
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
+    public static final String ELEMENT_COUNT = "elementCount";
+    private final UniverseCell[][] data;
+    private final UniverseCellFactory cellFactory;
 
-	public BasicUniverse(final int height, final int width,
-			final UniverseCellFactory theCellFactory) {
-		this.data = new UniverseCell[height][width];
-		this.cellFactory = theCellFactory;
-		for (int row = 0; row < getRows(); row++) {
-			for (int col = 0; col < getColumns(); col++) {
-				this.data[row][col] = this.cellFactory.factor();
-			}
-		}
-	}
+    public BasicUniverse(final int height, final int width,
+                         final UniverseCellFactory theCellFactory) {
+        this.data = new UniverseCell[height][width];
+        this.cellFactory = theCellFactory;
+        for (int row = 0; row < getRows(); row++) {
+            for (int col = 0; col < getColumns(); col++) {
+                this.data[row][col] = this.cellFactory.factor();
+            }
+        }
+    }
 
-	@Override
-	public Object clone() {
-		final BasicUniverse result = new BasicUniverse(getRows(), getColumns(),
-				this.cellFactory);
-		result.copy(this);
-		return result;
-	}
+    @Override
+    public Object clone() {
+        final BasicUniverse result = new BasicUniverse(getRows(), getColumns(),
+                this.cellFactory);
+        result.copy(this);
+        return result;
+    }
 
-	@Override
-	public void copy(final Universe source) {
-		if (!(source instanceof BasicUniverse)) {
-			throw new RuntimeException(
-					"Can only copy another BasicUniverse");
-		}
-		for (int row = 0; row < getRows(); row++) {
-			for (int col = 0; col < getColumns(); col++) {
-				this.data[row][col].copy(source.get(row, col));
-			}
-		}
-	}
+    @Override
+    public void copy(final Universe source) {
+        if (!(source instanceof BasicUniverse)) {
+            throw new RuntimeException(
+                    "Can only copy another BasicUniverse");
+        }
+        for (int row = 0; row < getRows(); row++) {
+            for (int col = 0; col < getColumns(); col++) {
+                this.data[row][col].copy(source.get(row, col));
+            }
+        }
+    }
 
-	@Override
-	public double compare(final Universe otherWorld) {
-		if (!(otherWorld instanceof BasicUniverse)) {
-			throw new RuntimeException(
-					"Can only compare another BasicUniverse");
-		}
+    @Override
+    public double compare(final Universe otherWorld) {
+        if (!(otherWorld instanceof BasicUniverse)) {
+            throw new RuntimeException(
+                    "Can only compare another BasicUniverse");
+        }
 
-		int result = 0;
-		int total = 0;
-		for (int row = 0; row < otherWorld.getRows(); row++) {
-			for (int col = 0; col < otherWorld.getColumns(); col++) {
-				final int d1 = Math.abs((int) (255 * get(row, col).getAvg()));
-				final int d2 = Math.abs((int) (255 * otherWorld.get(row, col)
-						.getAvg()));
-				if (Math.abs(d1 - d2) > 10) {
-					result++;
-				}
-				total++;
-			}
-		}
+        int result = 0;
+        int total = 0;
+        for (int row = 0; row < otherWorld.getRows(); row++) {
+            for (int col = 0; col < otherWorld.getColumns(); col++) {
+                final int d1 = Math.abs((int) (255 * get(row, col).getAvg()));
+                final int d2 = Math.abs((int) (255 * otherWorld.get(row, col)
+                        .getAvg()));
+                if (Math.abs(d1 - d2) > 10) {
+                    result++;
+                }
+                total++;
+            }
+        }
 
-		return result / total;
-	}
+        return result / total;
+    }
 
-	@Override
-	public int getColumns() {
-		return this.data[0].length;
-	}
+    @Override
+    public int getColumns() {
+        return this.data[0].length;
+    }
 
-	@Override
-	public int getRows() {
-		return this.data.length;
-	}
+    @Override
+    public int getRows() {
+        return this.data.length;
+    }
 
-	@Override
-	public void randomize() {
-		for (int row = 0; row < getRows(); row++) {
-			for (int col = 0; col < getColumns(); col++) {
-				for (int i = 0; i < 3; i++) {
-					this.data[row][col].randomize();
-				}
-			}
-		}
-	}
+    @Override
+    public void randomize() {
+        for (int row = 0; row < getRows(); row++) {
+            for (int col = 0; col < getColumns(); col++) {
+                for (int i = 0; i < 3; i++) {
+                    this.data[row][col].randomize();
+                }
+            }
+        }
+    }
 
-	@Override
-	public UniverseCell get(final int row, final int col) {
-		return this.data[row][col];
-	}
+    @Override
+    public UniverseCell get(final int row, final int col) {
+        return this.data[row][col];
+    }
 
-	@Override
-	public boolean isValid(final int row, final int col) {
-		return row >= 0 && col >= 0 && row < getRows() && col < getColumns();
-	}
+    @Override
+    public boolean isValid(final int row, final int col) {
+        return row >= 0 && col >= 0 && row < getRows() && col < getColumns();
+    }
 
-	@Override
-	public UniverseCellFactory getCellFactory() {
-		return cellFactory;
-	}
+    @Override
+    public UniverseCellFactory getCellFactory() {
+        return cellFactory;
+    }
 
-	@Override
-	public void updateProperties() {
-		// TODO Auto-generated method stub
+    @Override
+    public void updateProperties() {
+        // TODO Auto-generated method stub
 
-	}
+    }
 
-	@Override
-	public double calculatePercentInvalid() {
-		int result = 0;
-		int total = 0;
-		for (int row = 0; row < getRows(); row++) {
-			for (int col = 0; col < getColumns(); col++) {
-				final UniverseCell cell = get(row, col);
-				for (int i = 0; i < cell.size(); i++) {
-					if (cell.get(i) < -1 || cell.get(i) > 1) {
-						result++;
-					}
-					total++;
-				}
-			}
-		}
+    @Override
+    public double calculatePercentInvalid() {
+        int result = 0;
+        int total = 0;
+        for (int row = 0; row < getRows(); row++) {
+            for (int col = 0; col < getColumns(); col++) {
+                final UniverseCell cell = get(row, col);
+                for (int i = 0; i < cell.size(); i++) {
+                    if (cell.get(i) < -1 || cell.get(i) > 1) {
+                        result++;
+                    }
+                    total++;
+                }
+            }
+        }
 
-		return result / total;
-	}
+        return result / total;
+    }
 }

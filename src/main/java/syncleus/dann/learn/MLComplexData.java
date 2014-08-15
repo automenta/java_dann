@@ -35,43 +35,37 @@ import syncleus.dann.math.ComplexNumber;
  */
 public interface MLComplexData extends MLData {
 
-	/**
-	 * Add a complex number to the specified index.
-	 * 
-	 * @param index
-	 *            The index to use.
-	 * @param value
-	 *            The complex number value to add.
-	 */
-	void add(final int index, final ComplexNumber value);
+    /**
+     * Add a complex number to the specified index.
+     *
+     * @param index The index to use.
+     * @param value The complex number value to add.
+     */
+    void add(final int index, final ComplexNumber value);
 
-	/**
-	 * @return The complex numbers.
-	 */
-	ComplexNumber[] getComplexData();
+    /**
+     * @return The complex numbers.
+     */
+    ComplexNumber[] getComplexData();
 
-	/**
-	 * Get the complex data at the specified index.
-	 * 
-	 * @param index
-	 *            The index to get the complex data at.
-	 * @return The complex data.
-	 */
-	ComplexNumber getComplexData(final int index);
+    /**
+     * Get the complex data at the specified index.
+     *
+     * @param index The index to get the complex data at.
+     * @return The complex data.
+     */
+    ComplexNumber getComplexData(final int index);
 
-	/**
-	 * @param theData
-	 *            Set the complex data array.
-	 */
-	void setData(final ComplexNumber[] theData);
+    /**
+     * @param theData Set the complex data array.
+     */
+    void setData(final ComplexNumber[] theData);
 
-	/**
-	 * Set a data element to a complex number.
-	 * 
-	 * @param index
-	 *            The index to set.
-	 * @param d
-	 *            The complex number.
-	 */
-	void setData(final int index, final ComplexNumber d);
+    /**
+     * Set a data element to a complex number.
+     *
+     * @param index The index to set.
+     * @param d     The complex number.
+     */
+    void setData(final int index, final ComplexNumber d);
 }

@@ -19,13 +19,13 @@
 package syncleus.dann.graph;
 
 public interface MutableGraph<N, E extends Edge<N>> extends Graph<N, E> {
-	boolean add(E newEdge);
+    boolean add(E newEdge);
 
-	boolean add(N newNode);
+    boolean add(N newNode);
 
-	boolean remove(E edgeToRemove);
+    boolean remove(E edgeToRemove);
 
-	boolean remove(N nodeToRemove);
+    boolean remove(N nodeToRemove);
 
-	boolean clear();
+    boolean clear();
 }

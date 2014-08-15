@@ -19,19 +19,19 @@
 package syncleus.dann.math;
 
 public interface Function {
-	void setParameter(final int parameterIndex, final double value);
+    void setParameter(final int parameterIndex, final double value);
 
-	void setParameter(final String parameterName, final double value);
+    void setParameter(final String parameterName, final double value);
 
-	double getParameter(final int parameterIndex);
+    double getParameter(final int parameterIndex);
 
-	double getParameter(final String parameterName);
+    double getParameter(final String parameterName);
 
-	String getParameterName(final int parameterIndex);
+    String getParameterName(final int parameterIndex);
 
-	int getParameterNameIndex(final String parameterName);
+    int getParameterNameIndex(final String parameterName);
 
-	int getParameterCount();
+    int getParameterCount();
 
-	double calculate();
+    double calculate();
 }

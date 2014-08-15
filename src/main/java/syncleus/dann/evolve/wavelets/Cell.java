@@ -22,44 +22,41 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Cell {
-	private final Set<SignalKeyConcentration> localConcentrations;
-	private final Nucleus nucleus;
+    private final Set<SignalKeyConcentration> localConcentrations;
+    private final Nucleus nucleus;
 
-	public Cell(final Cell copy) {
-		this.nucleus = new Nucleus(copy.nucleus);
-		this.localConcentrations = new HashSet<SignalKeyConcentration>(
-				copy.localConcentrations);
-	}
+    public Cell(final Cell copy) {
+        this.nucleus = new Nucleus(copy.nucleus);
+        this.localConcentrations = new HashSet<>(
+                copy.localConcentrations);
+    }
 
-	public Cell() {
-		this.nucleus = new Nucleus();
-		this.localConcentrations = new HashSet<SignalKeyConcentration>();
+    public Cell() {
+        this.nucleus = new Nucleus();
+        this.localConcentrations = new HashSet<>();
 
-		final Set<SignalKey> localSignals = this.nucleus
-				.getExpressedSignals(false);
-                localSignals.stream().map((localSignal) -> new SignalKeyConcentration(
-                    localSignal)).map((newConcentration) -> {
-                                            this.localConcentrations.add(newConcentration);
-                return newConcentration;
-            }).forEach((newConcentration) -> {
-                this.nucleus.bind(newConcentration, false);
-            });
-	}
+        final Set<SignalKey> localSignals = this.nucleus
+                .getExpressedSignals(false);
+        localSignals.stream().map(SignalKeyConcentration::new).map((newConcentration) -> {
+            this.localConcentrations.add(newConcentration);
+            return newConcentration;
+        }).forEach((newConcentration) -> this.nucleus.bind(newConcentration, false));
+    }
 
-	public static boolean bind(final SignalKeyConcentration concentration,
-			final boolean isExternal) {
-		return false;
-	}
+    public static boolean bind(final SignalKeyConcentration concentration,
+                               final boolean isExternal) {
+        return false;
+    }
 
-	Set<SignalKey> getExpressedSignals() {
-		return this.nucleus.getExpressedSignals(true);
-	}
+    Set<SignalKey> getExpressedSignals() {
+        return this.nucleus.getExpressedSignals(true);
+    }
 
-	public void preTick() {
-		this.nucleus.preTick();
-	}
+    public void preTick() {
+        this.nucleus.preTick();
+    }
 
-	public void tick() {
-		this.nucleus.tick();
-	}
+    public void tick() {
+        this.nucleus.tick();
+    }
 }

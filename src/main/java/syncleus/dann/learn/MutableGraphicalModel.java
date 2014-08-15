@@ -22,5 +22,5 @@ import syncleus.dann.graph.BidirectedEdge;
 import syncleus.dann.graph.MutableGraph;
 
 public interface MutableGraphicalModel<N extends GraphicalModelNode, E extends BidirectedEdge<N>>
-		extends GraphicalModel<N, E>, MutableGraph<N, E> {
+        extends GraphicalModel<N, E>, MutableGraph<N, E> {
 }

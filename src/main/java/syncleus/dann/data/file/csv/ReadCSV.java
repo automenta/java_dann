@@ -23,387 +23,355 @@
  */
 package syncleus.dann.data.file.csv;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Read and parse CSV format files.
  */
 public class ReadCSV {
 
-	/**
-	 * Format a date.
-	 *
-	 * @param date
-	 *            The date to format.
-	 * @return The formatted date.
-	 */
-	public static String displayDate(final Date date) {
-		final DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		return sdf.format(date);
-	}
+    /**
+     * Format a date.
+     *
+     * @param date The date to format.
+     * @return The formatted date.
+     */
+    public static String displayDate(final Date date) {
+        final DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        return sdf.format(date);
+    }
 
-	/**
-	 * Parse a date.
-	 *
-	 * @param when
-	 *            The date string.
-	 * @return The parsed date.
-	 */
-	public static Date parseDate(final String when) {
-		try {
-			final DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			return sdf.parse(when);
-		} catch (final ParseException e) {
-			return null;
-		}
-	}
+    /**
+     * Parse a date.
+     *
+     * @param when The date string.
+     * @return The parsed date.
+     */
+    public static Date parseDate(final String when) {
+        try {
+            final DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            return sdf.parse(when);
+        } catch (final ParseException e) {
+            return null;
+        }
+    }
 
-	/**
-	 * The standard date format to be used.
-	 */
-	private final DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    /**
+     * The standard date format to be used.
+     */
+    private final DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
-	/**
-	 * The CSV format to use.
-	 */
-	private CSVFormat format;
+    /**
+     * The CSV format to use.
+     */
+    private CSVFormat format;
 
-	/**
-	 * The buffered reader to read the file.
-	 */
-	private final BufferedReader reader;
+    /**
+     * The buffered reader to read the file.
+     */
+    private final BufferedReader reader;
 
-	/**
-	 * The names of the columns.
-	 */
-	private final Map<String, Integer> columns = new HashMap<String, Integer>();
+    /**
+     * The names of the columns.
+     */
+    private final Map<String, Integer> columns = new HashMap<>();
 
-	/**
-	 * The data.
-	 */
-	private String[] data;
+    /**
+     * The data.
+     */
+    private String[] data;
 
-	/**
-	 * The column names.
-	 */
-	private final List<String> columnNames = new ArrayList<String>();
+    /**
+     * The column names.
+     */
+    private final List<String> columnNames = new ArrayList<>();
 
-	/**
-	 * Used to parse the CSV.
-	 */
-	private ParseCSVLine parseLine;
+    /**
+     * Used to parse the CSV.
+     */
+    private ParseCSVLine parseLine;
 
-	/**
-	 * Construct a CSV reader from an input stream. Allows a delimiter character
-	 * to be specified. Numbers will be parsed using the current locale.
-	 *
-	 * @param is
-	 *            The InputStream to read from.
-	 * @param headers
-	 *            Are headers present?
-	 * @param delim
-	 *            What is the delimiter.
-	 */
-	public ReadCSV(final InputStream is, final boolean headers, final char delim) {
-		final CSVFormat format = new CSVFormat(CSVFormat.getDecimalCharacter(),
-				delim);
-		this.parseLine = new ParseCSVLine(format);
-		this.reader = new BufferedReader(new InputStreamReader(is));
-		begin(headers, format);
-	}
+    /**
+     * Construct a CSV reader from an input stream. Allows a delimiter character
+     * to be specified. Numbers will be parsed using the current locale.
+     *
+     * @param is      The InputStream to read from.
+     * @param headers Are headers present?
+     * @param delim   What is the delimiter.
+     */
+    public ReadCSV(final InputStream is, final boolean headers, final char delim) {
+        final CSVFormat format = new CSVFormat(CSVFormat.getDecimalCharacter(),
+                delim);
+        this.parseLine = new ParseCSVLine(format);
+        this.reader = new BufferedReader(new InputStreamReader(is));
+        begin(headers, format);
+    }
 
-	/**
-	 * Construct a CSV reader from an input stream. The format parameter
-	 * specifies the separator character to use, as well as the number format.
-	 *
-	 * @param is
-	 *            The InputStream to read from.
-	 * @param headers
-	 *            Are headers present?
-	 * @param format
-	 *            What is the CSV format.
-	 */
-	public ReadCSV(final InputStream is, final boolean headers,
-			final CSVFormat format) {
-		this.reader = new BufferedReader(new InputStreamReader(is));
-		begin(headers, format);
-	}
+    /**
+     * Construct a CSV reader from an input stream. The format parameter
+     * specifies the separator character to use, as well as the number format.
+     *
+     * @param is      The InputStream to read from.
+     * @param headers Are headers present?
+     * @param format  What is the CSV format.
+     */
+    public ReadCSV(final InputStream is, final boolean headers,
+                   final CSVFormat format) {
+        this.reader = new BufferedReader(new InputStreamReader(is));
+        begin(headers, format);
+    }
 
-	/**
-	 * Construct a CSV reader from a filename. The format parameter specifies
-	 * the separator character to use, as well as the number format.
-	 *
-	 * @param filename
-	 *            The filename.
-	 * @param headers
-	 *            The headers.
-	 * @param delim
-	 *            The delimiter.
-	 */
-	public ReadCSV(final String filename, final boolean headers,
-			final char delim) {
-		try {
-			final CSVFormat format = new CSVFormat(
-					CSVFormat.getDecimalCharacter(), delim);
-			this.parseLine = new ParseCSVLine(format);
-			this.reader = new BufferedReader(new FileReader(filename));
-			begin(headers, format);
-		} catch (final IOException e) {
-			throw new RuntimeException(e);
-		}
-	}
+    /**
+     * Construct a CSV reader from a filename. The format parameter specifies
+     * the separator character to use, as well as the number format.
+     *
+     * @param filename The filename.
+     * @param headers  The headers.
+     * @param delim    The delimiter.
+     */
+    public ReadCSV(final String filename, final boolean headers,
+                   final char delim) {
+        try {
+            final CSVFormat format = new CSVFormat(
+                    CSVFormat.getDecimalCharacter(), delim);
+            this.parseLine = new ParseCSVLine(format);
+            this.reader = new BufferedReader(new FileReader(filename));
+            begin(headers, format);
+        } catch (final IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
-	/**
-	 * Construct a CSV reader from a filename. Allows a delimiter character to
-	 * be specified.
-	 *
-	 * @param filename
-	 *            The filename.
-	 * @param headers
-	 *            The headers.
-	 * @param format
-	 *            The format.
-	 */
-	public ReadCSV(final String filename, final boolean headers,
-			final CSVFormat format) {
-		try {
-			this.reader = new BufferedReader(new FileReader(filename));
-			this.parseLine = new ParseCSVLine(format);
-			begin(headers, format);
-		} catch (final IOException e) {
-			throw new RuntimeException(e);
-		}
-	}
+    /**
+     * Construct a CSV reader from a filename. Allows a delimiter character to
+     * be specified.
+     *
+     * @param filename The filename.
+     * @param headers  The headers.
+     * @param format   The format.
+     */
+    public ReadCSV(final String filename, final boolean headers,
+                   final CSVFormat format) {
+        try {
+            this.reader = new BufferedReader(new FileReader(filename));
+            this.parseLine = new ParseCSVLine(format);
+            begin(headers, format);
+        } catch (final IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
-	/**
-	 * Reader the headers.
-	 *
-	 * @param headers
-	 *            Are headers present.
-	 * @param format
-	 *            The format to use.
-	 */
-	private void begin(final boolean headers, final CSVFormat format) {
-		try {
-			this.parseLine = new ParseCSVLine(format);
-			this.format = format;
-			// read the column heads
-			if (headers) {
-				final String line = this.reader.readLine();
+    /**
+     * Reader the headers.
+     *
+     * @param headers Are headers present.
+     * @param format  The format to use.
+     */
+    private void begin(final boolean headers, final CSVFormat format) {
+        try {
+            this.parseLine = new ParseCSVLine(format);
+            this.format = format;
+            // read the column heads
+            if (headers) {
+                final String line = this.reader.readLine();
 
-				// Are we trying to parse an empty file?
-				if (line == null) {
-					this.columnNames.clear();
-					return;
-				}
+                // Are we trying to parse an empty file?
+                if (line == null) {
+                    this.columnNames.clear();
+                    return;
+                }
 
-				final List<String> tok = this.parseLine.parse(line);
+                final List<String> tok = this.parseLine.parse(line);
 
-				int i = 0;
-				this.columnNames.clear();
-				for (final String header : tok) {
-					this.columnNames.add(header.toLowerCase());
-					this.columns.put(header.toLowerCase(), i++);
-				}
-			}
+                int i = 0;
+                this.columnNames.clear();
+                for (final String header : tok) {
+                    this.columnNames.add(header.toLowerCase());
+                    this.columns.put(header.toLowerCase(), i++);
+                }
+            }
 
-			this.data = null;
-		} catch (final IOException e) {
-			throw new RuntimeException(e);
-		}
-	}
+            this.data = null;
+        } catch (final IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
-	/**
-	 * Close the file.
-	 *
-	 */
-	public void close() {
-		try {
-			this.reader.close();
-		} catch (final IOException e) {
-			throw new RuntimeException(e);
-		}
-	}
+    /**
+     * Close the file.
+     */
+    public void close() {
+        try {
+            this.reader.close();
+        } catch (final IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
-	/**
-	 * Get the specified column as a string.
-	 *
-	 * @param i
-	 *            The column index, starting at zero.
-	 * @return The column as a string.
-	 */
-	public String get(final int i) {
-		if (i >= this.data.length) {
-			throw new RuntimeException("Can't access column " + i
-					+ " in a file that has only " + data.length + " columns.");
-		}
-		return this.data[i];
-	}
+    /**
+     * Get the specified column as a string.
+     *
+     * @param i The column index, starting at zero.
+     * @return The column as a string.
+     */
+    public String get(final int i) {
+        if (i >= this.data.length) {
+            throw new RuntimeException("Can't access column " + i
+                    + " in a file that has only " + data.length + " columns.");
+        }
+        return this.data[i];
+    }
 
-	/**
-	 * Get the column by its string name, as a string. This will only work if
-	 * column headers were defined that have string names.
-	 *
-	 * @param column
-	 *            The column name.
-	 * @return The column data as a string.
-	 */
-	public String get(final String column) {
-		final Integer i = this.columns.get(column.toLowerCase());
-		if (i == null) {
-			return null;
-		}
-		return this.data[i.intValue()];
-	}
+    /**
+     * Get the column by its string name, as a string. This will only work if
+     * column headers were defined that have string names.
+     *
+     * @param column The column name.
+     * @return The column data as a string.
+     */
+    public String get(final String column) {
+        final Integer i = this.columns.get(column.toLowerCase());
+        if (i == null) {
+            return null;
+        }
+        return this.data[i];
+    }
 
-	/**
-	 * Get the column count.
-	 *
-	 * @return The column count.
-	 */
-	public int getColumnCount() {
-		if (this.data == null) {
-			return 0;
-		}
+    /**
+     * Get the column count.
+     *
+     * @return The column count.
+     */
+    public int getColumnCount() {
+        if (this.data == null) {
+            return 0;
+        }
 
-		return this.data.length;
-	}
+        return this.data.length;
+    }
 
-	/**
-	 * Get the column as a date.
-	 *
-	 * @param column
-	 *            The column header name.
-	 * @return The column as a date.
-	 */
-	public Date getDate(final String column) {
+    /**
+     * Get the column as a date.
+     *
+     * @param column The column header name.
+     * @return The column as a date.
+     */
+    public Date getDate(final String column) {
 
-		try {
-			final String str = get(column);
-			return this.sdf.parse(str);
-		} catch (final ParseException e) {
-			throw new RuntimeException(e);
-		}
+        try {
+            final String str = get(column);
+            return this.sdf.parse(str);
+        } catch (final ParseException e) {
+            throw new RuntimeException(e);
+        }
 
-	}
+    }
 
-	/**
-	 * Get the column as a double specified by index.
-	 *
-	 * @param index
-	 *            The column index, starting at zero.
-	 * @return The data at the specified column.
-	 */
-	public double getDouble(final int index) {
-		final String str = get(index);
-		return this.format.parse(str);
-	}
+    /**
+     * Get the column as a double specified by index.
+     *
+     * @param index The column index, starting at zero.
+     * @return The data at the specified column.
+     */
+    public double getDouble(final int index) {
+        final String str = get(index);
+        return this.format.parse(str);
+    }
 
-	/**
-	 * Get the specified column as a double.
-	 *
-	 * @param column
-	 *            The column name that we want to get.
-	 * @return The column data as a double.
-	 */
-	public double getDouble(final String column) {
-		final String str = get(column);
-		return this.format.parse(str);
-	}
+    /**
+     * Get the specified column as a double.
+     *
+     * @param column The column name that we want to get.
+     * @return The column data as a double.
+     */
+    public double getDouble(final String column) {
+        final String str = get(column);
+        return this.format.parse(str);
+    }
 
-	/**
-	 * Obtain a column as an integer referenced by a string.
-	 *
-	 * @param i
-	 *            The column header name being read.
-	 * @return The column data as an integer.
-	 */
-	public int getInt(final int i) {
-		final String str = get(i);
-		try {
-			return this.format.getNumberFormatter().parse(str).intValue();
-		} catch (final ParseException e) {
-			throw new RuntimeException(e);
-		}
-	}
+    /**
+     * Obtain a column as an integer referenced by a string.
+     *
+     * @param i The column header name being read.
+     * @return The column data as an integer.
+     */
+    public int getInt(final int i) {
+        final String str = get(i);
+        try {
+            return this.format.getNumberFormatter().parse(str).intValue();
+        } catch (final ParseException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
-	/**
-	 * Count the columns and create a an array to hold them.
-	 *
-	 * @param line
-	 *            One line from the file
-	 */
-	private void initData(final String line) {
-		final List<String> tok = this.parseLine.parse(line);
-		this.data = new String[tok.size()];
+    /**
+     * Count the columns and create a an array to hold them.
+     *
+     * @param line One line from the file
+     */
+    private void initData(final String line) {
+        final List<String> tok = this.parseLine.parse(line);
+        this.data = new String[tok.size()];
 
-	}
+    }
 
-	/**
-	 * Read the next line.
-	 *
-	 * @return True if there are more lines to read.
-	 */
-	public boolean next() {
+    /**
+     * Read the next line.
+     *
+     * @return True if there are more lines to read.
+     */
+    public boolean next() {
 
-		try {
-			String line = null;
-			do {
-				line = this.reader.readLine();
-			} while ((line != null) && line.trim().length() == 0);
+        try {
+            String line = null;
+            do {
+                line = this.reader.readLine();
+            } while ((line != null) && line.trim().length() == 0);
 
-			if (line == null) {
-				return false;
-			}
+            if (line == null) {
+                return false;
+            }
 
-			if (this.data == null) {
-				initData(line);
-			}
+            if (this.data == null) {
+                initData(line);
+            }
 
-			final List<String> tok = this.parseLine.parse(line);
+            final List<String> tok = this.parseLine.parse(line);
 
-			int i = 0;
-			for (final String str : tok) {
-				if (i < this.data.length) {
-					this.data[i++] = str;
-				}
-			}
+            int i = 0;
+            for (final String str : tok) {
+                if (i < this.data.length) {
+                    this.data[i++] = str;
+                }
+            }
 
-			return true;
-		} catch (final IOException e) {
-			throw new RuntimeException(e);
-		}
+            return true;
+        } catch (final IOException e) {
+            throw new RuntimeException(e);
+        }
 
-	}
+    }
 
-	public List<String> getColumnNames() {
-		return this.columnNames;
-	}
+    public List<String> getColumnNames() {
+        return this.columnNames;
+    }
 
-	public CSVFormat getFormat() {
-		return this.format;
-	}
+    public CSVFormat getFormat() {
+        return this.format;
+    }
 
-	public boolean hasMissing() {
-		for (int i = 0; i < this.data.length; i++) {
-			final String s = this.data[i].trim();
-			if (s.length() == 0 || s.equals("?")) {
-				return true;
-			}
-		}
-		return false;
-	}
+    public boolean hasMissing() {
+        for (int i = 0; i < this.data.length; i++) {
+            final String s = this.data[i].trim();
+            if (s.length() == 0 || s.equals("?")) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 }

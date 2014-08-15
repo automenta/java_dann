@@ -25,36 +25,36 @@ import syncleus.dann.graph.path.LocalSearch;
 // TODO implement optimizer approach
 
 public class HillClimbingLocalSearch<G extends Graph<N, ?>, N extends Weighted>
-		implements LocalSearch<N> {
-	private final G graph;
+        implements LocalSearch<N> {
+    private final G graph;
 
-	public HillClimbingLocalSearch(final G graph) {
-		if (graph == null)
-			throw new IllegalArgumentException("graph can not be null");
-		this.graph = graph;
-	}
+    public HillClimbingLocalSearch(final G graph) {
+        if (graph == null)
+            throw new IllegalArgumentException("graph can not be null");
+        this.graph = graph;
+    }
 
-	@Override
-	public N search(final N startNode) {
-		if (startNode == null)
-			throw new IllegalArgumentException("startNode can not be null");
+    @Override
+    public N search(final N startNode) {
+        if (startNode == null)
+            throw new IllegalArgumentException("startNode can not be null");
 
-		N currentNode = startNode;
-		do {
-			N nextNode = null;
-			for (final N neighbor : graph.getTraversableNodes(currentNode)) {
-				if ((nextNode == null)
-						|| (neighbor.getWeight() > nextNode.getWeight()))
-					nextNode = neighbor;
-			}
+        N currentNode = startNode;
+        do {
+            N nextNode = null;
+            for (final N neighbor : graph.getTraversableNodes(currentNode)) {
+                if ((nextNode == null)
+                        || (neighbor.getWeight() > nextNode.getWeight()))
+                    nextNode = neighbor;
+            }
 
-			if ((nextNode == null)
-					|| (currentNode.getWeight() > nextNode.getWeight()))
-				return currentNode;
+            if ((nextNode == null)
+                    || (currentNode.getWeight() > nextNode.getWeight()))
+                return currentNode;
 
-			currentNode = nextNode;
-		} while (currentNode != startNode);
+            currentNode = nextNode;
+        } while (currentNode != startNode);
 
-		return null;
-	}
+        return null;
+    }
 }

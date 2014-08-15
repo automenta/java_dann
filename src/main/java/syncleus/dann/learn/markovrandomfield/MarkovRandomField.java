@@ -23,5 +23,5 @@ import syncleus.dann.learn.GraphicalModel;
 import syncleus.dann.learn.GraphicalModelNode;
 
 public interface MarkovRandomField<N extends GraphicalModelNode, E extends UndirectedEdge<N>>
-		extends GraphicalModel<N, E> {
+        extends GraphicalModel<N, E> {
 }

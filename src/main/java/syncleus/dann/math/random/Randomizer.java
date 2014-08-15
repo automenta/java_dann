@@ -23,99 +23,89 @@
  */
 package syncleus.dann.math.random;
 
-import java.util.Random;
-
 import org.encog.ml.MLMethod;
-
 import syncleus.dann.math.matrix.SimpleRealMatrix;
+
+import java.util.Random;
 
 /**
  * Defines the interface for a class that is capable of randomizing the weights
  * and bias values of a neural network.
  *
  * @author jheaton
- *
  */
 public interface Randomizer {
 
-	/**
-	 * Randomize the synapses and bias values in the basic network based on an
-	 * array, modify the array. Previous values may be used, or they may be
-	 * discarded, depending on the randomizer.
-	 *
-	 * @param network
-	 *            A network to randomize.
-	 */
-	void randomize(MLMethod network);
+    /**
+     * Randomize the synapses and bias values in the basic network based on an
+     * array, modify the array. Previous values may be used, or they may be
+     * discarded, depending on the randomizer.
+     *
+     * @param network A network to randomize.
+     */
+    void randomize(MLMethod network);
 
-	/**
-	 * Starting with the specified number, randomize it to the degree specified
-	 * by this randomizer. This could be a totally new random number, or it
-	 * could be based on the specified number.
-	 *
-	 * @param d
-	 *            The number to randomize.
-	 * @return A randomized number.
-	 */
-	double randomize(double d);
+    /**
+     * Starting with the specified number, randomize it to the degree specified
+     * by this randomizer. This could be a totally new random number, or it
+     * could be based on the specified number.
+     *
+     * @param d The number to randomize.
+     * @return A randomized number.
+     */
+    double randomize(double d);
 
-	/**
-	 * Randomize the array based on an array, modify the array. Previous values
-	 * may be used, or they may be discarded, depending on the randomizer.
-	 *
-	 * @param d
-	 *            An array to randomize.
-	 */
-	void randomize(double[] d);
+    /**
+     * Randomize the array based on an array, modify the array. Previous values
+     * may be used, or they may be discarded, depending on the randomizer.
+     *
+     * @param d An array to randomize.
+     */
+    void randomize(double[] d);
 
-	/**
-	 * Randomize the 2d array based on an array, modify the array. Previous
-	 * values may be used, or they may be discarded, depending on the
-	 * randomizer.
-	 *
-	 * @param d
-	 *            An array to randomize.
-	 */
-	void randomize(double[][] d);
+    /**
+     * Randomize the 2d array based on an array, modify the array. Previous
+     * values may be used, or they may be discarded, depending on the
+     * randomizer.
+     *
+     * @param d An array to randomize.
+     */
+    void randomize(double[][] d);
 
-	/**
-	 * Randomize the matrix based on an array, modify the array. Previous values
-	 * may be used, or they may be discarded, depending on the randomizer.
-	 *
-	 * @param m
-	 *            A matrix to randomize.
-	 */
-	void randomize(SimpleRealMatrix m);
+    /**
+     * Randomize the matrix based on an array, modify the array. Previous values
+     * may be used, or they may be discarded, depending on the randomizer.
+     *
+     * @param m A matrix to randomize.
+     */
+    void randomize(SimpleRealMatrix m);
 
-	/**
-	 * Randomize an array.
-	 * 
-	 * @param d
-	 *            The array to randomize.
-	 * @param begin
-	 *            The beginning element.
-	 * @param size
-	 *            The size of the array.
-	 */
-	void randomize(final double[] d, int begin, int size);
+    /**
+     * Randomize an array.
+     *
+     * @param d     The array to randomize.
+     * @param begin The beginning element.
+     * @param size  The size of the array.
+     */
+    void randomize(final double[] d, int begin, int size);
 
-	/**
-	 * Explicitly set the Random source
-	 * 
-	 * @param theRandom
-	 */
-	void setRandom(Random theRandom);
+    /**
+     * Explicitly set the Random source
+     *
+     * @param theRandom
+     */
+    void setRandom(Random theRandom);
 
-	/**
-	 * @return Retrieve the Random generator.
-	 */
-	Random getRandom();
+    /**
+     * @return Retrieve the Random generator.
+     */
+    Random getRandom();
 
-	/**
-	 * Explicitly set the seed used for randomization
-	 * 
-	 * @param seed
-	 */
-	void setSeed(long seed);
+    /**
+     * Explicitly set the seed used for randomization
+     *
+     * @param seed
+     */
+    void setSeed(long seed);
 
 }

@@ -18,9 +18,6 @@
  ******************************************************************************/
 package syncleus.dann.neural.som.brain;
 
-import java.util.Map;
-import java.util.Set;
-
 import syncleus.dann.math.Vector;
 import syncleus.dann.neural.Brain;
 import syncleus.dann.neural.Synapse;
@@ -28,25 +25,28 @@ import syncleus.dann.neural.som.SomInputNeuron;
 import syncleus.dann.neural.som.SomNeuron;
 import syncleus.dann.neural.som.SomOutputNeuron;
 
+import java.util.Map;
+import java.util.Set;
+
 public interface SomBrain<IN extends SomInputNeuron, ON extends SomOutputNeuron, N extends SomNeuron, S extends Synapse<N>>
-		extends Brain<IN, ON, N, S> {
-	void createOutput(final Vector position);
+        extends Brain<IN, ON, N, S> {
+    void createOutput(final Vector position);
 
-	Set<Vector> getPositions();
+    Set<Vector> getPositions();
 
-	double getOutput(final Vector position);
+    double getOutput(final Vector position);
 
-	Vector getBestMatchingUnit();
+    Vector getBestMatchingUnit();
 
-	Vector getBestMatchingUnit(final boolean train);
+    Vector getBestMatchingUnit(final boolean train);
 
-	int getIterationsTrained();
+    int getIterationsTrained();
 
-	int getInputCount();
+    int getInputCount();
 
-	void setInput(final int inputIndex, final double inputValue);
+    void setInput(final int inputIndex, final double inputValue);
 
-	double getInput(final int index);
+    double getInput(final int index);
 
-	Map<Vector, double[]> getOutputWeightVectors();
+    Map<Vector, double[]> getOutputWeightVectors();
 }

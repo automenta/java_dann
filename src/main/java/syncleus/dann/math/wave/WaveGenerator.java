@@ -10,7 +10,6 @@ import syncleus.dann.Transform;
 import syncleus.dann.math.Vector;
 
 /**
- *
  * @author me
  */
 public class WaveGenerator implements Transform<WaveFunction, Vector> {
@@ -19,5 +18,5 @@ public class WaveGenerator implements Transform<WaveFunction, Vector> {
     public Vector apply(WaveFunction t) {
         return null;
     }
-    
+
 }

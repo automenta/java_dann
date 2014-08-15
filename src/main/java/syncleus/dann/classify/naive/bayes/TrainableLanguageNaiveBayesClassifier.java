@@ -24,11 +24,10 @@ import syncleus.dann.classify.naive.TrainableLanguageNaiveClassifier;
  * A TrainableLanguageNaiveBayesClassifier is a naive, trainable, Bayes' Theorem
  * classifier that operates on words.
  *
- * @param <C>
- *            The list of categories
+ * @param <C> The list of categories
  * @author Jeffrey Phillips Freeman
  */
 public interface TrainableLanguageNaiveBayesClassifier<C> extends
-		TrainableNaiveBayesClassifier<String, String, C>,
-		LanguageNaiveBayesClassifier<C>, TrainableLanguageNaiveClassifier<C> {
+        TrainableNaiveBayesClassifier<String, String, C>,
+        LanguageNaiveBayesClassifier<C>, TrainableLanguageNaiveClassifier<C> {
 }

@@ -21,8 +21,8 @@ package syncleus.dann.math.matrix.decomposition;
 import syncleus.dann.math.matrix.RealMatrix;
 
 public interface HessenbergDecomposition extends Decomposition<RealMatrix> {
-	RealMatrix getHessenbergMatrix();
+    RealMatrix getHessenbergMatrix();
 
-	@Override
-	RealMatrix getMatrix();
+    @Override
+    RealMatrix getMatrix();
 }

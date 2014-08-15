@@ -27,10 +27,10 @@ import syncleus.dann.math.BoundMath;
 
 /**
  * An activation function based on the sin function, with a double period.
- *
+ * <p/>
  * This activation is typically part of a CPPN neural network, such as
  * HyperNEAT.
- *
+ * <p/>
  * The idea for this activation function was developed by Ken Stanley, of the
  * University of Texas at Austin. http://www.cs.ucf.edu/~kstanley/
  *
@@ -38,82 +38,82 @@ import syncleus.dann.math.BoundMath;
  */
 public class ActivationSIN implements EncogActivationFunction {
 
-	/**
-	 *
-	 */
-	private static final long serialVersionUID = 5301501177778271284L;
+    /**
+     *
+     */
+    private static final long serialVersionUID = 5301501177778271284L;
 
-	/**
-	 * Construct the sin activation function.
-	 */
-	public ActivationSIN() {
-		this.params = new double[0];
-	}
+    /**
+     * Construct the sin activation function.
+     */
+    public ActivationSIN() {
+        this.params = new double[0];
+    }
 
-	/**
-	 * The parameters.
-	 */
-	private final double[] params;
+    /**
+     * The parameters.
+     */
+    private final double[] params;
 
-	/**
-	 * @return The object cloned;
-	 */
-	@Override
-	public final IterativeDerivative clone() {
-		return new ActivationSIN();
-	}
+    /**
+     * @return The object cloned;
+     */
+    @Override
+    public final IterativeDerivative clone() {
+        return new ActivationSIN();
+    }
 
-	/**
-	 * @return Return true, sin has a derivative.
-	 */
-	@Override
-	public final boolean hasDerivative() {
-		return true;
-	}
+    /**
+     * @return Return true, sin has a derivative.
+     */
+    @Override
+    public final boolean hasDerivative() {
+        return true;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public final void activate(final double[] x, final int start,
-			final int size) {
-		for (int i = start; i < start + size; i++) {
-			x[i] = BoundMath.sin(2.0 * x[i]);
-		}
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final void activate(final double[] x, final int start,
+                               final int size) {
+        for (int i = start; i < start + size; i++) {
+            x[i] = BoundMath.sin(2.0 * x[i]);
+        }
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public final double derivative(final double b, final double a) {
-		return BoundMath.cos(2.0 * b);
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final double derivative(final double b, final double a) {
+        return BoundMath.cos(2.0 * b);
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public final String[] getParamNames() {
-		final String[] result = {};
-		return result;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final String[] getParamNames() {
+        final String[] result = {};
+        return result;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public final double[] getParams() {
-		return this.params;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final double[] getParams() {
+        return this.params;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public final void setParam(final int index, final double value) {
-		this.params[index] = value;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final void setParam(final int index, final double value) {
+        this.params[index] = value;
+    }
 
 
 }

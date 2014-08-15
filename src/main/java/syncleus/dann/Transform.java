@@ -5,6 +5,6 @@ import java.util.function.Function;
 /**
  *
  */
-public interface Transform<I,O> extends Function<I, O> {
-    
+public interface Transform<I, O> extends Function<I, O> {
+
 }

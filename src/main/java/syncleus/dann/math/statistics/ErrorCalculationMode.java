@@ -27,19 +27,19 @@ package syncleus.dann.math.statistics;
  * Selects the error calculation mode for Encog.
  */
 public enum ErrorCalculationMode {
-	/**
-	 * Root mean square error.
-	 */
-	RMS,
+    /**
+     * Root mean square error.
+     */
+    RMS,
 
-	/**
-	 * Mean square error.
-	 */
-	MSE,
+    /**
+     * Mean square error.
+     */
+    MSE,
 
-	/**
-	 * Sum of Squares error.
-	 */
-	ESS
+    /**
+     * Sum of Squares error.
+     */
+    ESS
 
 }

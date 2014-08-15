@@ -27,125 +27,121 @@ package syncleus.dann.data.language.time;
  * Class used to get the English names for TimeUnits.
  *
  * @author jheaton
- *
  */
 public class EnglishTimeUnitNames implements TimeUnitNames {
 
-	/**
-	 * Get the code for a TimeUnit.
-	 *
-	 * @param unit
-	 *            The time unit.
-	 * @return The code for the specified time unit.
-	 */
-	@Override
-	public String code(final TimeUnit unit) {
-		switch (unit) {
-		case SECONDS:
-			return "sec";
-		case MINUTES:
-			return "min";
-		case HOURS:
-			return "hr";
-		case DAYS:
-			return "d";
-		case WEEKS:
-			return "w";
-		case FORTNIGHTS:
-			return "fn";
-		case MONTHS:
-			return "m";
-		case YEARS:
-			return "y";
-		case DECADES:
-			return "dec";
-		case SCORES:
-			return "sc";
-		case CENTURIES:
-			return "c";
-		case MILLENNIA:
-			return "m";
-		default:
-			return "unk";
-		}
-	}
+    /**
+     * Get the code for a TimeUnit.
+     *
+     * @param unit The time unit.
+     * @return The code for the specified time unit.
+     */
+    @Override
+    public String code(final TimeUnit unit) {
+        switch (unit) {
+            case SECONDS:
+                return "sec";
+            case MINUTES:
+                return "min";
+            case HOURS:
+                return "hr";
+            case DAYS:
+                return "d";
+            case WEEKS:
+                return "w";
+            case FORTNIGHTS:
+                return "fn";
+            case MONTHS:
+                return "m";
+            case YEARS:
+                return "y";
+            case DECADES:
+                return "dec";
+            case SCORES:
+                return "sc";
+            case CENTURIES:
+                return "c";
+            case MILLENNIA:
+                return "m";
+            default:
+                return "unk";
+        }
+    }
 
-	/**
-	 * Get the plural form for a TimeUnit.
-	 *
-	 * @param unit
-	 *            The time unit.
-	 * @return The plural form for the specified time unit.
-	 */
-	@Override
-	public String plural(final TimeUnit unit) {
-		switch (unit) {
-		case SECONDS:
-			return "seconds";
-		case MINUTES:
-			return "minutes";
-		case HOURS:
-			return "hours";
-		case DAYS:
-			return "days";
-		case WEEKS:
-			return "weeks";
-		case FORTNIGHTS:
-			return "fortnights";
-		case MONTHS:
-			return "months";
-		case YEARS:
-			return "years";
-		case DECADES:
-			return "decades";
-		case SCORES:
-			return "scores";
-		case CENTURIES:
-			return "centures";
-		case MILLENNIA:
-			return "millennia";
-		default:
-			return "unknowns";
-		}
-	}
+    /**
+     * Get the plural form for a TimeUnit.
+     *
+     * @param unit The time unit.
+     * @return The plural form for the specified time unit.
+     */
+    @Override
+    public String plural(final TimeUnit unit) {
+        switch (unit) {
+            case SECONDS:
+                return "seconds";
+            case MINUTES:
+                return "minutes";
+            case HOURS:
+                return "hours";
+            case DAYS:
+                return "days";
+            case WEEKS:
+                return "weeks";
+            case FORTNIGHTS:
+                return "fortnights";
+            case MONTHS:
+                return "months";
+            case YEARS:
+                return "years";
+            case DECADES:
+                return "decades";
+            case SCORES:
+                return "scores";
+            case CENTURIES:
+                return "centures";
+            case MILLENNIA:
+                return "millennia";
+            default:
+                return "unknowns";
+        }
+    }
 
-	/**
-	 * Get the singular form for a TimeUnit.
-	 *
-	 * @param unit
-	 *            The time unit.
-	 * @return The singular form for the specified time unit.
-	 */
-	@Override
-	public String singular(final TimeUnit unit) {
-		switch (unit) {
-		case SECONDS:
-			return "second";
-		case MINUTES:
-			return "minute";
-		case HOURS:
-			return "hour";
-		case DAYS:
-			return "day";
-		case WEEKS:
-			return "week";
-		case FORTNIGHTS:
-			return "fortnight";
-		case MONTHS:
-			return "month";
-		case YEARS:
-			return "year";
-		case DECADES:
-			return "decade";
-		case SCORES:
-			return "score";
-		case CENTURIES:
-			return "century";
-		case MILLENNIA:
-			return "millenium";
-		default:
-			return "unknown";
-		}
-	}
+    /**
+     * Get the singular form for a TimeUnit.
+     *
+     * @param unit The time unit.
+     * @return The singular form for the specified time unit.
+     */
+    @Override
+    public String singular(final TimeUnit unit) {
+        switch (unit) {
+            case SECONDS:
+                return "second";
+            case MINUTES:
+                return "minute";
+            case HOURS:
+                return "hour";
+            case DAYS:
+                return "day";
+            case WEEKS:
+                return "week";
+            case FORTNIGHTS:
+                return "fortnight";
+            case MONTHS:
+                return "month";
+            case YEARS:
+                return "year";
+            case DECADES:
+                return "decade";
+            case SCORES:
+                return "score";
+            case CENTURIES:
+                return "century";
+            case MILLENNIA:
+                return "millenium";
+            default:
+                return "unknown";
+        }
+    }
 
 }

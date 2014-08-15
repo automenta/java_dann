@@ -21,13 +21,13 @@ package syncleus.dann.math.statistics;
 import java.util.Set;
 
 public interface MarkovChainEvidence<S> {
-	void newChain();
+    void newChain();
 
-	void learnStep(S state);
+    void learnStep(S state);
 
-	Set<S> getObservedStates();
+    Set<S> getObservedStates();
 
-	int getOrder();
+    int getOrder();
 
-	MarkovChain<S> getMarkovChain();
+    MarkovChain<S> getMarkovChain();
 }

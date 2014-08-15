@@ -18,17 +18,17 @@
  ******************************************************************************/
 package syncleus.dann.neural.backprop.brain;
 
-import java.util.List;
-import java.util.Set;
-
 import syncleus.dann.neural.Synapse;
 import syncleus.dann.neural.backprop.BackpropNeuron;
 import syncleus.dann.neural.backprop.InputBackpropNeuron;
 import syncleus.dann.neural.backprop.OutputBackpropNeuron;
 
-public interface FeedforwardBackpropBrain<IN extends InputBackpropNeuron, ON extends OutputBackpropNeuron, N extends BackpropNeuron, S extends Synapse<N>>
-		extends BackpropBrain<IN, ON, N, S> {
-	int getLayerCount();
+import java.util.List;
+import java.util.Set;
 
-	List<Set<N>> getLayers();
+public interface FeedforwardBackpropBrain<IN extends InputBackpropNeuron, ON extends OutputBackpropNeuron, N extends BackpropNeuron, S extends Synapse<N>>
+        extends BackpropBrain<IN, ON, N, S> {
+    int getLayerCount();
+
+    List<Set<N>> getLayers();
 }

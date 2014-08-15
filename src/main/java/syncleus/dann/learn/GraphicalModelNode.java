@@ -21,17 +21,17 @@ package syncleus.dann.learn;
 import java.util.Set;
 
 public interface GraphicalModelNode<S> {
-	Set<S> getLearnedStates();
+    Set<S> getLearnedStates();
 
-	void setState(S currentState);
+    void setState(S currentState);
 
-	S getState();
+    S getState();
 
-	void learnState();
+    void learnState();
 
-	double stateProbability();
+    double stateProbability();
 
-	double stateProbability(Set<? extends GraphicalModelNode> ignoredInfluences);
+    double stateProbability(Set<? extends GraphicalModelNode> ignoredInfluences);
 
-	void reset();
+    void reset();
 }

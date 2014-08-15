@@ -23,185 +23,182 @@
  */
 package syncleus.dann.math.matrix.decomposition;
 
-import java.io.Serializable;
-
 import syncleus.dann.math.matrix.SimpleRealMatrix;
 
+import java.io.Serializable;
+
 /**
- *
  * Cholesky Decomposition.
- *
+ * <p/>
  * For a symmetric, positive definite matrix A, the Cholesky decomposition is an
  * lower triangular matrix L so that A = L*L'.
- *
+ * <p/>
  * If the matrix is not symmetric or positive definite, the constructor returns
  * a partial decomposition and sets an internal flag that may be queried by the
  * isSPD() method.
- *
+ * <p/>
  * This file based on a class from the public domain JAMA package.
  * http://math.nist.gov/javanumerics/jama/
  */
 public class CholeskyDecomposition2 implements Serializable {
 
-	/**
-	 * Array for internal storage of decomposition.
-	 */
-	private final double[][] l;
+    /**
+     * Array for internal storage of decomposition.
+     */
+    private final double[][] l;
 
-	/**
-	 * Row and column dimension (square matrix).
-	 */
-	private final int n;
+    /**
+     * Row and column dimension (square matrix).
+     */
+    private final int n;
 
-	/**
-	 * Symmetric and positive definite flag.
-	 */
-	private boolean isspd;
+    /**
+     * Symmetric and positive definite flag.
+     */
+    private boolean isspd;
 
-	/**
-	 * Cholesky algorithm for symmetric and positive definite matrix.
-	 *
-	 * @param matrix
-	 *            Square, symmetric matrix.
-	 */
+    /**
+     * Cholesky algorithm for symmetric and positive definite matrix.
+     *
+     * @param matrix Square, symmetric matrix.
+     */
 
-	public CholeskyDecomposition2(final SimpleRealMatrix matrix) {
+    public CholeskyDecomposition2(final SimpleRealMatrix matrix) {
 
-		// Initialize.
-		final double[][] a = matrix.getData();
-		n = matrix.getRows();
-		l = new double[n][n];
-		isspd = (matrix.getCols() == n);
-		// Main loop.
-		for (int j = 0; j < n; j++) {
-			final double[] lrowj = l[j];
-			double d = 0.0;
-			for (int k = 0; k < j; k++) {
-				final double[] lrowk = l[k];
-				double s = 0.0;
-				for (int i = 0; i < k; i++) {
-					s += lrowk[i] * lrowj[i];
-				}
-				s = (a[j][k] - s) / l[k][k];
-				lrowj[k] = s;
-				d += s * s;
-				isspd &= (a[k][j] == a[j][k]);
-			}
-			d = a[j][j] - d;
-			isspd &= (d > 0.0);
-			l[j][j] = Math.sqrt(Math.max(d, 0.0));
-			for (int k = j + 1; k < n; k++) {
-				l[j][k] = 0.0;
-			}
-		}
-	}
+        // Initialize.
+        final double[][] a = matrix.getData();
+        n = matrix.getRows();
+        l = new double[n][n];
+        isspd = (matrix.getCols() == n);
+        // Main loop.
+        for (int j = 0; j < n; j++) {
+            final double[] lrowj = l[j];
+            double d = 0.0;
+            for (int k = 0; k < j; k++) {
+                final double[] lrowk = l[k];
+                double s = 0.0;
+                for (int i = 0; i < k; i++) {
+                    s += lrowk[i] * lrowj[i];
+                }
+                s = (a[j][k] - s) / l[k][k];
+                lrowj[k] = s;
+                d += s * s;
+                isspd &= (a[k][j] == a[j][k]);
+            }
+            d = a[j][j] - d;
+            isspd &= (d > 0.0);
+            l[j][j] = Math.sqrt(Math.max(d, 0.0));
+            for (int k = j + 1; k < n; k++) {
+                l[j][k] = 0.0;
+            }
+        }
+    }
 
-	/**
-	 * Is the matrix symmetric and positive definite?
-	 *
-	 * @return true if A is symmetric and positive definite.
-	 */
+    /**
+     * Is the matrix symmetric and positive definite?
+     *
+     * @return true if A is symmetric and positive definite.
+     */
 
-	public final boolean isSPD() {
-		return isspd;
-	}
+    public final boolean isSPD() {
+        return isspd;
+    }
 
-	/**
-	 * Return triangular factor.
-	 *
-	 * @return L
-	 */
+    /**
+     * Return triangular factor.
+     *
+     * @return L
+     */
 
-	public final SimpleRealMatrix getL() {
-		return new SimpleRealMatrix(l);
-	}
+    public final SimpleRealMatrix getL() {
+        return new SimpleRealMatrix(l);
+    }
 
-	/**
-	 * Solve A*X = B.
-	 *
-	 * @param b
-	 *            A Matrix with as many rows as A and any number of columns.
-	 * @return X so that L*L'*X = b.
-	 */
-	public final SimpleRealMatrix solve(final SimpleRealMatrix b) {
-		if (b.getRows() != n) {
-			throw new RuntimeException("Matrix row dimensions must agree.");
-		}
-		if (!isspd) {
-			throw new RuntimeException(
-					"Matrix is not symmetric positive definite.");
-		}
+    /**
+     * Solve A*X = B.
+     *
+     * @param b A Matrix with as many rows as A and any number of columns.
+     * @return X so that L*L'*X = b.
+     */
+    public final SimpleRealMatrix solve(final SimpleRealMatrix b) {
+        if (b.getRows() != n) {
+            throw new RuntimeException("Matrix row dimensions must agree.");
+        }
+        if (!isspd) {
+            throw new RuntimeException(
+                    "Matrix is not symmetric positive definite.");
+        }
 
-		// Copy right hand side.
-		final double[][] x = b.getArrayCopy();
-		final int nx = b.getCols();
+        // Copy right hand side.
+        final double[][] x = b.getArrayCopy();
+        final int nx = b.getCols();
 
-		// Solve L*Y = B;
-		for (int k = 0; k < n; k++) {
-			for (int j = 0; j < nx; j++) {
-				for (int i = 0; i < k; i++) {
-					x[k][j] -= x[i][j] * l[k][i];
-				}
-				x[k][j] /= l[k][k];
-			}
-		}
+        // Solve L*Y = B;
+        for (int k = 0; k < n; k++) {
+            for (int j = 0; j < nx; j++) {
+                for (int i = 0; i < k; i++) {
+                    x[k][j] -= x[i][j] * l[k][i];
+                }
+                x[k][j] /= l[k][k];
+            }
+        }
 
-		// Solve L'*X = Y;
-		for (int k = n - 1; k >= 0; k--) {
-			for (int j = 0; j < nx; j++) {
-				for (int i = k + 1; i < n; i++) {
-					x[k][j] -= x[i][j] * l[i][k];
-				}
-				x[k][j] /= l[k][k];
-			}
-		}
+        // Solve L'*X = Y;
+        for (int k = n - 1; k >= 0; k--) {
+            for (int j = 0; j < nx; j++) {
+                for (int i = k + 1; i < n; i++) {
+                    x[k][j] -= x[i][j] * l[i][k];
+                }
+                x[k][j] /= l[k][k];
+            }
+        }
 
-		return new SimpleRealMatrix(x);
-	}
+        return new SimpleRealMatrix(x);
+    }
 
-	public double getDeterminant() {
-		double result = 1;
+    public double getDeterminant() {
+        double result = 1;
 
-		for (int i = 0; i < n; i++)
-			result *= l[i][i];
+        for (int i = 0; i < n; i++)
+            result *= l[i][i];
 
-		return result * result;
-	}
+        return result * result;
+    }
 
-	public SimpleRealMatrix inverseCholesky() {
-		final double[][] li = lowerTriangularInverse(l);
-		final double[][] ic = new double[n][n];
+    public SimpleRealMatrix inverseCholesky() {
+        final double[][] li = lowerTriangularInverse(l);
+        final double[][] ic = new double[n][n];
 
-		for (int r = 0; r < n; r++)
-			for (int c = 0; c < n; c++)
-				for (int i = 0; i < n; i++)
-					ic[r][c] += li[i][r] * li[i][c];
+        for (int r = 0; r < n; r++)
+            for (int c = 0; c < n; c++)
+                for (int i = 0; i < n; i++)
+                    ic[r][c] += li[i][r] * li[i][c];
 
-		return new SimpleRealMatrix(ic);
-	}
+        return new SimpleRealMatrix(ic);
+    }
 
-	private double[][] lowerTriangularInverse(final double[][] m) {
+    private double[][] lowerTriangularInverse(final double[][] m) {
 
-		final double[][] lti = new double[m.length][m.length];
+        final double[][] lti = new double[m.length][m.length];
 
-		for (int j = 0; j < m.length; j++) {
-			if (m[j][j] == 0)
-				throw new IllegalArgumentException(
-						"Error, the matrix is not full rank");
+        for (int j = 0; j < m.length; j++) {
+            if (m[j][j] == 0)
+                throw new IllegalArgumentException(
+                        "Error, the matrix is not full rank");
 
-			lti[j][j] = 1. / m[j][j];
+            lti[j][j] = 1. / m[j][j];
 
-			for (int i = j + 1; i < m.length; i++) {
-				double sum = 0.;
+            for (int i = j + 1; i < m.length; i++) {
+                double sum = 0.;
 
-				for (int k = j; k < i; k++)
-					sum -= m[i][k] * lti[k][j];
+                for (int k = j; k < i; k++)
+                    sum -= m[i][k] * lti[k][j];
 
-				lti[i][j] = sum / m[i][i];
-			}
-		}
+                lti[i][j] = sum / m[i][i];
+            }
+        }
 
-		return lti;
+        return lti;
 
-	}
+    }
 }

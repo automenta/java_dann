@@ -20,7 +20,7 @@ package syncleus.dann.evolve.wavelets;
 
 // TODO convert to an interface?
 public abstract class AbstractOrganism {
-	// private HashSet<Cell> cells;
+    // private HashSet<Cell> cells;
 
-	public abstract AbstractOrganism mate(AbstractOrganism partner);
+    public abstract AbstractOrganism mate(AbstractOrganism partner);
 }

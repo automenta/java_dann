@@ -9,10 +9,10 @@ import java.io.Serializable;
  * @author Elser http://www.elsy.gdan.pl
  */
 public abstract class Action implements Serializable {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * Here you implement what the agent should do, when performing the action.
-	 */
-	public abstract int execute();
+    /**
+     * Here you implement what the agent should do, when performing the action.
+     */
+    public abstract int execute();
 }

@@ -7,9 +7,8 @@
 package syncleus.dann;
 
 /**
- *
  * @author me
  */
-public interface Classify<I,O> extends Transform<I,O> {
-    
+public interface Classify<I, O> extends Transform<I, O> {
+
 }

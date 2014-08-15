@@ -27,56 +27,55 @@ package syncleus.dann.data.language.time;
  * Time units.
  *
  * @author jheaton
- *
  */
 public enum TimeUnit {
-	/**
-	 * Seconds.
-	 */
-	SECONDS,
-	/**
-	 * Minutes.
-	 */
-	MINUTES,
-	/**
-	 * Hours.
-	 */
-	HOURS,
-	/**
-	 * Days.
-	 */
-	DAYS,
-	/**
-	 * Weeks.
-	 */
-	WEEKS,
-	/**
-	 * Fortnights.
-	 */
-	FORTNIGHTS,
-	/**
-	 * Months.
-	 */
-	MONTHS,
-	/**
-	 * Years.
-	 */
-	YEARS,
-	/**
-	 * Decades.
-	 */
-	DECADES,
-	/**
-	 * Scores.
-	 */
-	SCORES,
-	/**
-	 * Centuries.
-	 */
-	CENTURIES,
-	/**
-	 * Millennia.
-	 */
-	MILLENNIA
+    /**
+     * Seconds.
+     */
+    SECONDS,
+    /**
+     * Minutes.
+     */
+    MINUTES,
+    /**
+     * Hours.
+     */
+    HOURS,
+    /**
+     * Days.
+     */
+    DAYS,
+    /**
+     * Weeks.
+     */
+    WEEKS,
+    /**
+     * Fortnights.
+     */
+    FORTNIGHTS,
+    /**
+     * Months.
+     */
+    MONTHS,
+    /**
+     * Years.
+     */
+    YEARS,
+    /**
+     * Decades.
+     */
+    DECADES,
+    /**
+     * Scores.
+     */
+    SCORES,
+    /**
+     * Centuries.
+     */
+    CENTURIES,
+    /**
+     * Millennia.
+     */
+    MILLENNIA
 
 }

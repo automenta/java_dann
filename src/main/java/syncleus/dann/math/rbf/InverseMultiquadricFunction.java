@@ -27,77 +27,69 @@ import syncleus.dann.math.BoundMath;
 
 /**
  * Multi-dimensional Inverse Multiquadric function.
- *
  */
 public class InverseMultiquadricFunction extends BasicRBF {
 
-	/**
-	 * Serial id.
-	 */
-	private static final long serialVersionUID = 1L;
+    /**
+     * Serial id.
+     */
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * Construct a single-dimension Inverse-Multiquadric function with the
-	 * specified peak, centers and widths.
-	 *
-	 * @param peak
-	 *            The peak for all dimensions.
-	 * @param center
-	 *            The centers for each dimension.
-	 * @param width
-	 *            The widths for each dimension.
-	 */
-	public InverseMultiquadricFunction(final double center, final double peak,
-			final double width) {
-		setCenters(new double[1]);
-		getCenters()[0] = center;
-		setPeak(peak);
-		setWidth(width);
-	}
+    /**
+     * Construct a single-dimension Inverse-Multiquadric function with the
+     * specified peak, centers and widths.
+     *
+     * @param peak   The peak for all dimensions.
+     * @param center The centers for each dimension.
+     * @param width  The widths for each dimension.
+     */
+    public InverseMultiquadricFunction(final double center, final double peak,
+                                       final double width) {
+        setCenters(new double[1]);
+        getCenters()[0] = center;
+        setPeak(peak);
+        setWidth(width);
+    }
 
-	/**
-	 * Construct a multi-dimension Inverse-Multiquadric function with the
-	 * specified peak, centers and widths.
-	 *
-	 * @param peak
-	 *            The peak for all dimensions.
-	 * @param center
-	 *            The centers for each dimension.
-	 * @param width
-	 *            The widths for each dimension.
-	 */
-	public InverseMultiquadricFunction(final double peak,
-			final double[] center, final double width) {
-		setCenters(center);
-		setPeak(peak);
-		setWidth(width);
-	}
+    /**
+     * Construct a multi-dimension Inverse-Multiquadric function with the
+     * specified peak, centers and widths.
+     *
+     * @param peak   The peak for all dimensions.
+     * @param center The centers for each dimension.
+     * @param width  The widths for each dimension.
+     */
+    public InverseMultiquadricFunction(final double peak,
+                                       final double[] center, final double width) {
+        setCenters(center);
+        setPeak(peak);
+        setWidth(width);
+    }
 
-	/**
-	 * Create centered at zero, width 0, and peak 0.
-	 *
-	 * @param dimensions
-	 *            The dimensions.
-	 */
-	public InverseMultiquadricFunction(final int dimensions) {
-		setCenters(new double[dimensions]);
-		setPeak(1.0);
-		setWidth(1.0);
-	}
+    /**
+     * Create centered at zero, width 0, and peak 0.
+     *
+     * @param dimensions The dimensions.
+     */
+    public InverseMultiquadricFunction(final int dimensions) {
+        setCenters(new double[dimensions]);
+        setPeak(1.0);
+        setWidth(1.0);
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public final double apply(final double[] x) {
-		double value = 0;
-		final double[] center = getCenters();
-		final double width = getWidth();
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final double apply(final double[] x) {
+        double value = 0;
+        final double[] center = getCenters();
+        final double width = getWidth();
 
-		for (int i = 0; i < center.length; i++) {
-			value += Math.pow(x[i] - center[i], 2) + (width * width);
-		}
-		return getPeak() / BoundMath.sqrt(value);
-	}
+        for (int i = 0; i < center.length; i++) {
+            value += Math.pow(x[i] - center[i], 2) + (width * width);
+        }
+        return getPeak() / BoundMath.sqrt(value);
+    }
 
 }

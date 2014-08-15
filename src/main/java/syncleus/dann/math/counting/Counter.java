@@ -21,13 +21,13 @@ package syncleus.dann.math.counting;
 import java.math.BigInteger;
 
 public interface Counter {
-	void reset();
+    void reset();
 
-	BigInteger getRemaining();
+    BigInteger getRemaining();
 
-	boolean hasMore();
+    boolean hasMore();
 
-	BigInteger getTotal();
+    BigInteger getTotal();
 
-	int[] getNext();
+    int[] getNext();
 }

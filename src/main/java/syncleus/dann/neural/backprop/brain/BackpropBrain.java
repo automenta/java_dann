@@ -25,8 +25,8 @@ import syncleus.dann.neural.backprop.InputBackpropNeuron;
 import syncleus.dann.neural.backprop.OutputBackpropNeuron;
 
 public interface BackpropBrain<IN extends InputBackpropNeuron, ON extends OutputBackpropNeuron, N extends BackpropNeuron, S extends Synapse<N>>
-		extends Brain<IN, ON, N, S> {
-	void propagate();
+        extends Brain<IN, ON, N, S> {
+    void propagate();
 
-	void backPropagate();
+    void backPropagate();
 }

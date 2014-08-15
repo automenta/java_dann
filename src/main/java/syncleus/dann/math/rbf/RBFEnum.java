@@ -25,26 +25,25 @@ package syncleus.dann.math.rbf;
 
 /**
  * The implemented function types of the RBFs.
- *
  */
 public enum RBFEnum {
-	/**
-	 * Gaussian.
-	 */
-	Gaussian,
+    /**
+     * Gaussian.
+     */
+    Gaussian,
 
-	/**
-	 * Multiquadric.
-	 */
-	Multiquadric,
+    /**
+     * Multiquadric.
+     */
+    Multiquadric,
 
-	/**
-	 * Inverse Multiquadric.
-	 */
-	InverseMultiquadric,
+    /**
+     * Inverse Multiquadric.
+     */
+    InverseMultiquadric,
 
-	/**
-	 * Mexican hat.
-	 */
-	MexicanHat
+    /**
+     * Mexican hat.
+     */
+    MexicanHat
 }
