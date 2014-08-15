@@ -19,7 +19,7 @@
 package syncleus.dann.learn.dynamicgraphical;
 
 import syncleus.dann.graph.BidirectedEdge;
-import syncleus.dann.learn.GraphicalModel;
+import syncleus.dann.learn.graphical.GraphicalModel;
 
 public interface DynamicGraphicalModel<N extends DynamicGraphicalModelNode, E extends BidirectedEdge<N>>
         extends GraphicalModel<N, E> {

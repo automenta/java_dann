@@ -19,8 +19,8 @@
 package syncleus.dann.learn.bayesian;
 
 import syncleus.dann.graph.DirectedEdge;
-import syncleus.dann.learn.GraphicalModel;
-import syncleus.dann.learn.GraphicalModelNode;
+import syncleus.dann.learn.graphical.GraphicalModel;
+import syncleus.dann.learn.graphical.GraphicalModelNode;
 
 public interface BayesianNetwork<N extends GraphicalModelNode, E extends DirectedEdge<N>>
         extends GraphicalModel<N, E> {

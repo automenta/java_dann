@@ -18,7 +18,7 @@
  ******************************************************************************/
 package syncleus.dann.learn.dynamicgraphical;
 
-import syncleus.dann.learn.GraphicalModelNode;
+import syncleus.dann.learn.graphical.GraphicalModelNode;
 
 import java.util.List;
 

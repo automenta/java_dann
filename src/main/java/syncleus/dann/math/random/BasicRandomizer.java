@@ -23,8 +23,8 @@
  */
 package syncleus.dann.math.random;
 
-import org.encog.ml.MLEncodable;
-import org.encog.ml.MLMethod;
+import syncleus.dann.learn.ml.MLEncodable;
+import syncleus.dann.learn.ml.MLMethod;
 import org.encog.neural.networks.BasicNetwork;
 import syncleus.dann.math.matrix.SimpleRealMatrix;
 

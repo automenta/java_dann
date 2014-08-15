@@ -20,7 +20,7 @@ package syncleus.dann.learn.bayesian;
 
 import syncleus.dann.graph.DirectedEdge;
 import syncleus.dann.graph.MutableGraph;
-import syncleus.dann.learn.GraphicalModelNode;
+import syncleus.dann.learn.graphical.GraphicalModelNode;
 
 public interface MutableBayesianNetwork<N extends GraphicalModelNode, E extends DirectedEdge<N>>
         extends BayesianNetwork<N, E>, MutableGraph<N, E> {

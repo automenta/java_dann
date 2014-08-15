@@ -19,7 +19,7 @@
 package syncleus.dann.learn.bayesian;
 
 import syncleus.dann.graph.DirectedEdge;
-import syncleus.dann.learn.GraphicalModelNode;
+import syncleus.dann.learn.graphical.GraphicalModelNode;
 
 import java.util.*;
 

@@ -21,8 +21,8 @@ package syncleus.dann.graphicalmodel.markovrandomfield;
 import org.junit.Assert;
 import org.junit.Test;
 import syncleus.dann.graph.ImmutableUndirectedEdge;
-import syncleus.dann.learn.GraphicalModelNode;
-import syncleus.dann.learn.SimpleGraphicalModelNode;
+import syncleus.dann.learn.graphical.GraphicalModelNode;
+import syncleus.dann.learn.graphical.SimpleGraphicalModelNode;
 import syncleus.dann.learn.markovrandomfield.MutableMarkovRandomFieldAdjacencyGraph;
 
 import javax.xml.bind.annotation.XmlRootElement;

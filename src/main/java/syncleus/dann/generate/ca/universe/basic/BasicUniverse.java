@@ -23,7 +23,7 @@
  */
 package syncleus.dann.generate.ca.universe.basic;
 
-import org.encog.ml.BasicML;
+import syncleus.dann.learn.ml.BasicML;
 import syncleus.dann.generate.ca.universe.Universe;
 import syncleus.dann.generate.ca.universe.UniverseCell;
 import syncleus.dann.generate.ca.universe.UniverseCellFactory;

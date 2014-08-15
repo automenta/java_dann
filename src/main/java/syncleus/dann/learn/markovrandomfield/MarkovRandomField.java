@@ -19,8 +19,8 @@
 package syncleus.dann.learn.markovrandomfield;
 
 import syncleus.dann.graph.UndirectedEdge;
-import syncleus.dann.learn.GraphicalModel;
-import syncleus.dann.learn.GraphicalModelNode;
+import syncleus.dann.learn.graphical.GraphicalModel;
+import syncleus.dann.learn.graphical.GraphicalModelNode;
 
 public interface MarkovRandomField<N extends GraphicalModelNode, E extends UndirectedEdge<N>>
         extends GraphicalModel<N, E> {

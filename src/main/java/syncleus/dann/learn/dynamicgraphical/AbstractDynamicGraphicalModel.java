@@ -20,7 +20,7 @@ package syncleus.dann.learn.dynamicgraphical;
 
 import syncleus.dann.graph.BidirectedEdge;
 import syncleus.dann.graph.Graph;
-import syncleus.dann.learn.AbstractGraphicalModelAdjacencyGraph;
+import syncleus.dann.learn.graphical.AbstractGraphicalModelAdjacencyGraph;
 
 import java.util.Set;
 

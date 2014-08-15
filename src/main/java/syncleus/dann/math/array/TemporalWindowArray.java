@@ -23,12 +23,12 @@
  */
 package syncleus.dann.math.array;
 
-import org.encog.ml.data.basic.BasicMLData;
-import org.encog.ml.data.basic.BasicMLDataPair;
-import org.encog.ml.data.basic.BasicMLDataSet;
-import syncleus.dann.learn.MLData;
-import syncleus.dann.learn.MLDataPair;
-import syncleus.dann.learn.MLDataSet;
+import syncleus.dann.data.basic.BasicMLData;
+import syncleus.dann.data.basic.BasicMLDataPair;
+import syncleus.dann.data.basic.BasicMLDataSet;
+import syncleus.dann.learn.ml.MLData;
+import syncleus.dann.learn.ml.MLDataPair;
+import syncleus.dann.learn.ml.MLDataSet;
 
 
 /**

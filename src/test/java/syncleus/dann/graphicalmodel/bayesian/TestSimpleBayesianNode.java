@@ -22,8 +22,8 @@ import org.junit.Assert;
 import org.junit.Test;
 import syncleus.dann.graph.DirectedEdge;
 import syncleus.dann.graph.ImmutableDirectedEdge;
-import syncleus.dann.learn.GraphicalModelNode;
-import syncleus.dann.learn.SimpleGraphicalModelNode;
+import syncleus.dann.learn.graphical.GraphicalModelNode;
+import syncleus.dann.learn.graphical.SimpleGraphicalModelNode;
 import syncleus.dann.learn.bayesian.MutableBayesianAdjacencyNetwork;
 
 public class TestSimpleBayesianNode {

@@ -19,9 +19,9 @@
 package syncleus.dann.learn.dynamicgraphical;
 
 import syncleus.dann.graph.BidirectedEdge;
-import syncleus.dann.learn.GraphicalModel;
-import syncleus.dann.learn.GraphicalModelNode;
-import syncleus.dann.learn.SimpleGraphicalModelNode;
+import syncleus.dann.learn.graphical.GraphicalModel;
+import syncleus.dann.learn.graphical.GraphicalModelNode;
+import syncleus.dann.learn.graphical.SimpleGraphicalModelNode;
 
 import java.util.*;
 

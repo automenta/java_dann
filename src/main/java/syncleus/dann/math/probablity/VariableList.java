@@ -23,7 +23,7 @@
  */
 package syncleus.dann.math.probablity;
 
-import org.encog.ml.bayesian.BayesianError;
+import syncleus.dann.learn.bayesian.BayesianError;
 
 import java.util.ArrayList;
 import java.util.HashMap;

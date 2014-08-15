@@ -23,7 +23,7 @@
  */
 package syncleus.dann.math.random;
 
-import org.encog.ml.MLMethod;
+import syncleus.dann.learn.ml.MLMethod;
 import syncleus.dann.math.matrix.SimpleRealMatrix;
 
 import java.util.Random;

@@ -18,6 +18,7 @@
  ******************************************************************************/
 package syncleus.dann.learn;
 
+import syncleus.dann.learn.graphical.GraphicalModelNode;
 import java.util.*;
 
 public class EvidenceMap<S> extends

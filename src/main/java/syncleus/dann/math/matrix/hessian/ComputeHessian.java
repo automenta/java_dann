@@ -24,7 +24,7 @@
 package syncleus.dann.math.matrix.hessian;
 
 import org.encog.neural.networks.BasicNetwork;
-import syncleus.dann.learn.MLDataSet;
+import syncleus.dann.learn.ml.MLDataSet;
 import syncleus.dann.math.matrix.SimpleRealMatrix;
 
 /**

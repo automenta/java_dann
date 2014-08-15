@@ -23,7 +23,7 @@
  */
 package syncleus.dann.math.probablity;
 
-import org.encog.ml.bayesian.BayesianNetwork;
+import syncleus.dann.learn.bayesian.EncogBayesianNetwork;
 
 import java.io.Serializable;
 
@@ -38,7 +38,7 @@ public class RandomVariable implements Serializable {
     }
 
     public RandomVariable(final String theLabel) {
-        this(theLabel, BayesianNetwork.CHOICES_TRUE_FALSE);
+        this(theLabel, EncogBayesianNetwork.CHOICES_TRUE_FALSE);
     }
 
     /**
