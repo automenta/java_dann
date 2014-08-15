@@ -21,34 +21,35 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package org.encog.neural.networks;
+package syncleus.dann.neural.networks;
 
-import syncleus.dann.learn.ml.MLResettable;
-import syncleus.dann.learn.ml.MLContext;
-import syncleus.dann.learn.ml.MLFactory;
-import syncleus.dann.learn.ml.MLError;
-import syncleus.dann.learn.ml.MLEncodable;
-import syncleus.dann.learn.ml.BasicML;
-import syncleus.dann.learn.ml.MLRegression;
-import syncleus.dann.learn.ml.MLClassification;
 import syncleus.dann.data.basic.BasicMLData;
-import syncleus.dann.util.factory.MLMethodFactory;
-import org.encog.neural.NeuralNetworkError;
-import org.encog.neural.flat.FlatNetwork;
-import org.encog.neural.networks.layers.Layer;
-import org.encog.neural.networks.structure.NetworkCODEC;
-import org.encog.neural.networks.structure.NeuralStructure;
 import syncleus.dann.data.file.csv.CSVFormat;
 import syncleus.dann.data.language.NumberList;
+import syncleus.dann.learn.ml.BasicML;
+import syncleus.dann.learn.ml.MLClassification;
+import syncleus.dann.learn.ml.MLContext;
 import syncleus.dann.learn.ml.MLData;
 import syncleus.dann.learn.ml.MLDataSet;
+import syncleus.dann.learn.ml.MLEncodable;
+import syncleus.dann.learn.ml.MLError;
+import syncleus.dann.learn.ml.MLFactory;
+import syncleus.dann.learn.ml.MLRegression;
+import syncleus.dann.learn.ml.MLResettable;
 import syncleus.dann.math.EncogMath;
 import syncleus.dann.math.EncogUtility;
 import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.math.random.NguyenWidrowRandomizer;
 import syncleus.dann.math.random.Randomizer;
 import syncleus.dann.math.random.RangeRandomizer;
+import syncleus.dann.neural.Brain;
 import syncleus.dann.neural.activation.EncogActivationFunction;
+import syncleus.dann.neural.flat.FlatNetwork;
+import syncleus.dann.neural.networks.layers.Layer;
+import syncleus.dann.neural.networks.structure.NetworkCODEC;
+import syncleus.dann.neural.networks.structure.NeuralStructure;
+import syncleus.dann.util.ObjectCloner;
+import syncleus.dann.util.factory.MLMethodFactory;
 
 /**
  * This class implements a neural network. This class works in conjunction the
@@ -235,7 +236,7 @@ public class BasicNetwork extends BasicML implements ContainsFlat, MLContext,
      */
     @Override
     public Object clone() {
-        final BasicNetwork result = ObjectCloner.deepCopy(this);
+        final BasicNetwork result = (BasicNetwork)ObjectCloner.deepCopy(this);
         return result;
     }
 
@@ -265,7 +266,7 @@ public class BasicNetwork extends BasicML implements ContainsFlat, MLContext,
             this.structure.getFlat().compute(input.getData(), result.getData());
             return result;
         } catch (final ArrayIndexOutOfBoundsException ex) {
-            throw new NeuralNetworkError(
+            throw new RuntimeException(
                     "Index exception: there was likely a mismatch between layer sizes, or the size of the input presented to the network.",
                     ex);
         }
@@ -279,7 +280,7 @@ public class BasicNetwork extends BasicML implements ContainsFlat, MLContext,
         this.structure.requireFlat();
         final double[] weights = this.structure.getFlat().getWeights();
         if (weights.length != encoded.length) {
-            throw new NeuralNetworkError(
+            throw new RuntimeException(
                     "Size mismatch, encoded array should be of length "
                             + weights.length);
         }
@@ -348,7 +349,7 @@ public class BasicNetwork extends BasicML implements ContainsFlat, MLContext,
         this.structure.requireFlat();
         final double[] weights = this.structure.getFlat().getWeights();
         if (weights.length != encoded.length) {
-            throw new NeuralNetworkError(
+            throw new RuntimeException(
                     "Size mismatch, encoded array should be of length "
                             + weights.length);
         }
@@ -398,7 +399,7 @@ public class BasicNetwork extends BasicML implements ContainsFlat, MLContext,
     public EncogActivationFunction getActivation(final int layer) {
         this.structure.requireFlat();
         final int layerNumber = getLayerCount() - layer - 1;
-        return this.structure.getFlat().getEncogActivationFunctions()[layerNumber];
+        return this.structure.getFlat().getActivationFunctions()[layerNumber];
     }
 
     /**
@@ -426,7 +427,7 @@ public class BasicNetwork extends BasicML implements ContainsFlat, MLContext,
      */
     public double getLayerBiasActivation(final int l) {
         if (!isLayerBiased(l)) {
-            throw new NeuralNetworkError(
+            throw new RuntimeException(
                     "Error, the specified layer does not have a bias: " + l);
         }
 
@@ -473,7 +474,7 @@ public class BasicNetwork extends BasicML implements ContainsFlat, MLContext,
                 + neuronNumber;
         final double[] output = this.structure.getFlat().getLayerOutput();
         if (index >= output.length) {
-            throw new NeuralNetworkError("The layer index: " + index
+            throw new RuntimeException("The layer index: " + index
                     + " specifies an output index larger than the network has.");
         }
         return output[index];
@@ -526,7 +527,7 @@ public class BasicNetwork extends BasicML implements ContainsFlat, MLContext,
         final int toLayerNumber = fromLayerNumber - 1;
 
         if (toLayerNumber < 0) {
-            throw new NeuralNetworkError(
+            throw new RuntimeException(
                     "The specified layer is not connected to another layer: "
                             + fromLayer);
         }
@@ -653,7 +654,7 @@ public class BasicNetwork extends BasicML implements ContainsFlat, MLContext,
      */
     public void setLayerBiasActivation(final int l, final double value) {
         if (!isLayerBiased(l)) {
-            throw new NeuralNetworkError(
+            throw new RuntimeException(
                     "Error, the specified layer does not have a bias: " + l);
         }
 
@@ -681,7 +682,7 @@ public class BasicNetwork extends BasicML implements ContainsFlat, MLContext,
         final int toLayerNumber = fromLayerNumber - 1;
 
         if (toLayerNumber < 0) {
-            throw new NeuralNetworkError(
+            throw new RuntimeException(
                     "The specified layer is not connected to another layer: "
                             + fromLayer);
         }
@@ -730,11 +731,11 @@ public class BasicNetwork extends BasicML implements ContainsFlat, MLContext,
      */
     public void validateNeuron(final int targetLayer, final int neuron) {
         if ((targetLayer < 0) || (targetLayer >= getLayerCount())) {
-            throw new NeuralNetworkError("Invalid layer count: " + targetLayer);
+            throw new RuntimeException("Invalid layer count: " + targetLayer);
         }
 
         if ((neuron < 0) || (neuron >= getLayerTotalNeuronCount(targetLayer))) {
-            throw new NeuralNetworkError("Invalid neuron number: " + neuron);
+            throw new RuntimeException("Invalid neuron number: " + neuron);
         }
     }
 
@@ -777,7 +778,7 @@ public class BasicNetwork extends BasicML implements ContainsFlat, MLContext,
             // handle activation function
             if (currentLayer > 0 && this.getActivation(currentLayer) != null) {
                 final EncogActivationFunction activationFunction = getActivation(currentLayer);
-                result.append(activationFunction.getFactoryCode());
+                result.append(activationFunction.toString()); // getFactoryCode());
                 result.append("->");
             }
 

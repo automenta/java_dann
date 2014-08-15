@@ -24,11 +24,11 @@
 package org.encog.ml.prg.train.rewrite;
 
 import syncleus.dann.evolve.genome.Genome;
+import syncleus.dann.evolve.gp.EncogProgram;
+import syncleus.dann.evolve.gp.ProgramNode;
+import syncleus.dann.evolve.gp.expvalue.ExpressionValue;
+import syncleus.dann.evolve.gp.extension.StandardExtensions;
 import syncleus.dann.evolve.rules.RewriteRule;
-import org.encog.ml.prg.EncogProgram;
-import org.encog.ml.prg.ProgramNode;
-import org.encog.ml.prg.expvalue.ExpressionValue;
-import org.encog.ml.prg.extension.StandardExtensions;
 
 /**
  * Basic rewrite rules for boolean expressions.

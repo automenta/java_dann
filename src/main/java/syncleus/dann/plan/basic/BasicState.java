@@ -23,12 +23,12 @@
  */
 package syncleus.dann.plan.basic;
 
-import syncleus.dann.plan.State;
-import syncleus.dann.math.array.EngineArray;
-
 import java.util.HashMap;
 import java.util.Map;
+
 import syncleus.dann.math.Format;
+import syncleus.dann.math.array.EngineArray;
+import syncleus.dann.plan.State;
 
 public class BasicState implements State {
 

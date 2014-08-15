@@ -23,16 +23,16 @@
  */
 package org.encog.ml.prg;
 
-import syncleus.dann.evolve.species.BasicSpecies;
-import syncleus.dann.evolve.species.Species;
-import org.encog.ml.prg.expvalue.ValueType;
-import org.encog.ml.prg.train.PrgPopulation;
-import syncleus.dann.data.file.csv.CSVFormat;
-
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.List;
 import java.util.Map;
+
+import syncleus.dann.data.file.csv.CSVFormat;
+import syncleus.dann.evolve.gp.expvalue.ValueType;
+import syncleus.dann.evolve.gp.train.PrgPopulation;
+import syncleus.dann.evolve.species.BasicSpecies;
+import syncleus.dann.evolve.species.Species;
 
 /**
  * Persist the Encog population.

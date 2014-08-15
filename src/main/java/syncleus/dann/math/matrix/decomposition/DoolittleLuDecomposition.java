@@ -23,13 +23,13 @@
  */
 package syncleus.dann.math.matrix.decomposition;
 
-import syncleus.dann.math.OrderedAlgebraic;
-import syncleus.dann.math.matrix.Matrix;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+
+import syncleus.dann.math.OrderedAlgebraic;
+import syncleus.dann.math.matrix.Matrix;
 
 /**
  * matrixToDecomposeElements Decomposition.
@@ -106,8 +106,8 @@ public class DoolittleLuDecomposition<M extends Matrix<M, F>, F extends OrderedA
             // Find pivot and exchange if necessary.
             int pivotIndex = j;
             for (int i = j + 1; i < height; i++)
-                if (matrixColumn.get(i).abs()
-                        .compareTo(matrixColumn.get(pivotIndex).abs()) > 0)
+                if (matrixColumn.get(i).algebraicAbsolute()
+                        .compareTo(matrixColumn.get(pivotIndex).algebraicAbsolute()) > 0)
                     pivotIndex = i;
             if (pivotIndex != j) {
                 for (int k = 0; k < width; k++) {

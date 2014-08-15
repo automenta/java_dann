@@ -1,9 +1,9 @@
 package syncleus.dann.plan.qlearning.curiosity;
 
+import java.io.Serializable;
+
 import syncleus.dann.plan.qlearning.ErrorBackpropagationNN;
 import syncleus.dann.plan.qlearning.Perception;
-
-import java.io.Serializable;
 
 public class Curiosity implements Serializable {
     private static final long serialVersionUID = 1L;

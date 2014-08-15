@@ -23,7 +23,8 @@
  */
 package org.encog.neural.freeform.factory;
 
-import org.encog.neural.freeform.InputSummation;
+import syncleus.dann.neural.activation.EncogActivationFunction;
+import syncleus.dann.neural.freeform.InputSummation;
 
 /**
  * Factory that creates input summations.

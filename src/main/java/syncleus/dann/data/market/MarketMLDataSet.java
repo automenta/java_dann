@@ -23,14 +23,20 @@
  */
 package syncleus.dann.data.market;
 
+import java.util.Collection;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+
+import syncleus.dann.data.language.time.TimeUnit;
 import syncleus.dann.data.market.loader.LoadedMarketData;
 import syncleus.dann.data.market.loader.MarketLoader;
 import syncleus.dann.data.temporal.TemporalDataDescription;
 import syncleus.dann.data.temporal.TemporalMLDataSet;
 import syncleus.dann.data.temporal.TemporalPoint;
-import org.encog.neural.data.NeuralData;
-
-import java.util.*;
+import syncleus.dann.neural.data.NeuralData;
 
 /**
  * A data set that is designed to hold market data. This class is based on the
@@ -55,7 +61,7 @@ public class MarketMLDataSet extends TemporalMLDataSet {
     /**
      * A map between the data points and actual data.
      */
-    private final Map<Integer, TemporalPoint> pointIndex = new HashMap<>();
+    private final Map<Long, TemporalPoint> pointIndex = new HashMap<>();
 
     /**
      * Construct a market data set object.
@@ -98,7 +104,7 @@ public class MarketMLDataSet extends TemporalMLDataSet {
      */
     @Override
     public TemporalPoint createPoint(final Date when) {
-        final int sequence = getSequenceFromDate(when);
+        final long sequence = getSequenceFromDate(when);
         TemporalPoint result = this.pointIndex.get(sequence);
 
         if (result == null) {

@@ -23,15 +23,16 @@
  */
 package org.encog.neural.rbf;
 
-import org.encog.neural.flat.FlatNetworkRBF;
-import org.encog.neural.networks.BasicNetwork;
-import syncleus.dann.data.file.csv.CSVFormat;
-import syncleus.dann.math.rbf.RadialBasisFunction;
-
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.List;
 import java.util.Map;
+
+import syncleus.dann.data.file.csv.CSVFormat;
+import syncleus.dann.math.rbf.RadialBasisFunction;
+import syncleus.dann.neural.activation.EncogActivationFunction;
+import syncleus.dann.neural.flat.FlatNetworkRBF;
+import syncleus.dann.neural.networks.BasicNetwork;
 
 /**
  * Persist a RBF network.

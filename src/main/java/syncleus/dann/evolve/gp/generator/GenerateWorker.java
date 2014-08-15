@@ -23,10 +23,10 @@
  */
 package org.encog.ml.prg.generator;
 
-import org.encog.ml.prg.EncogProgram;
-import org.encog.ml.prg.train.PrgPopulation;
-
 import java.util.Random;
+
+import syncleus.dann.evolve.gp.EncogProgram;
+import syncleus.dann.evolve.gp.train.PrgPopulation;
 
 /**
  * Used to thread the generation process.

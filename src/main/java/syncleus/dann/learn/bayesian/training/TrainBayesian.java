@@ -23,17 +23,17 @@
  */
 package syncleus.dann.learn.bayesian.training;
 
-import syncleus.dann.learn.ml.MLMethod;
-import syncleus.dann.learn.ml.TrainingImplementationType;
 import syncleus.dann.learn.bayesian.BayesianEvent;
 import syncleus.dann.learn.bayesian.EncogBayesianNetwork;
 import syncleus.dann.learn.bayesian.training.estimator.BayesEstimator;
 import syncleus.dann.learn.bayesian.training.estimator.SimpleEstimator;
 import syncleus.dann.learn.bayesian.training.search.k2.BayesSearch;
 import syncleus.dann.learn.bayesian.training.search.k2.SearchK2;
-import syncleus.dann.learn.train.BasicTraining;
-import org.encog.neural.networks.training.propagation.TrainingContinuation;
 import syncleus.dann.learn.ml.MLDataSet;
+import syncleus.dann.learn.ml.MLMethod;
+import syncleus.dann.learn.ml.TrainingImplementationType;
+import syncleus.dann.learn.train.BasicTraining;
+import syncleus.dann.neural.networks.training.propagation.TrainingContinuation;
 
 /**
  * Train a Bayesian network.

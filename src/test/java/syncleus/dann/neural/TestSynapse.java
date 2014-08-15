@@ -20,6 +20,7 @@ package syncleus.dann.neural;
 
 import org.junit.Assert;
 import org.junit.Test;
+
 import syncleus.dann.graph.AbstractBidirectedAdjacencyGraph;
 import syncleus.dann.neural.backprop.SimpleBackpropNeuron;
 

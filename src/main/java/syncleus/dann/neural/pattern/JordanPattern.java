@@ -24,8 +24,9 @@
 package org.encog.neural.pattern;
 
 import syncleus.dann.learn.ml.MLMethod;
-import org.encog.neural.networks.BasicNetwork;
-import org.encog.neural.networks.layers.BasicLayer;
+import syncleus.dann.neural.activation.EncogActivationFunction;
+import syncleus.dann.neural.networks.BasicNetwork;
+import syncleus.dann.neural.networks.layers.BasicLayer;
 
 /**
  * This class is used to generate an Jordan style recurrent neural network. This

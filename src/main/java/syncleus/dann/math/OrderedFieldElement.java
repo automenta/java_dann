@@ -21,7 +21,7 @@ package syncleus.dann.math;
 public interface OrderedFieldElement<F extends OrderedFieldElement<? extends F>>
         extends FieldElement<F>, Comparable<F> {
     @Override
-    OrderedField<F> getField();
+    OrderedField<F> field();
 
     /**
      * Returns a constant holding the maximum value a field of this type can

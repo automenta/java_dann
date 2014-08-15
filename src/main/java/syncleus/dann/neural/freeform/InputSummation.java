@@ -24,6 +24,7 @@
 package org.encog.neural.freeform;
 
 import java.util.List;
+
 import syncleus.dann.neural.activation.EncogActivationFunction;
 
 /**

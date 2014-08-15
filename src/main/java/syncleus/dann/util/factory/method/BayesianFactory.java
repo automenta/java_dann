@@ -23,8 +23,8 @@
  */
 package syncleus.dann.util.factory.method;
 
-import syncleus.dann.learn.ml.MLMethod;
 import syncleus.dann.learn.bayesian.EncogBayesianNetwork;
+import syncleus.dann.learn.ml.MLMethod;
 
 /**
  * Factory to create bayesian networks.

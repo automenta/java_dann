@@ -18,13 +18,13 @@
  ******************************************************************************/
 package syncleus.dann.graph;
 
-import syncleus.dann.graph.context.ContextReporter;
-
 import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import syncleus.dann.graph.context.ContextReporter;
 
 // TODO consider making all nodes extend from a connectable interface so you can embed other graphs as nodes if they too are connectable.
 
@@ -41,13 +41,10 @@ import java.util.stream.Stream;
  * @author Jeffrey Phillips Freeman
  * @since 2.0
  */
-public interface Graph<N, E extends Edge<N>> extends Serializable, Cloneable,
+public interface Graph<N, E extends Edge<N>> extends ImplicitGraph<N,E>, Serializable, Cloneable,
         ContextReporter {
 
-    Stream<N> streamNodes();
-
-    Stream<E> streamEdges();
-
+	
     /**
      * Get a set of all nodes in the graph.
      *
@@ -57,7 +54,7 @@ public interface Graph<N, E extends Edge<N>> extends Serializable, Cloneable,
     default Set<N> getNodes() {
         return streamNodes().collect(Collectors.toSet());
     }
-
+	
     /**
      * Get a set of all edges in the graph. Two edges in the set, and in the
      * graph, may have the same end points unless equals in the edges used by
@@ -83,29 +80,11 @@ public interface Graph<N, E extends Edge<N>> extends Serializable, Cloneable,
      * @return A list of all nodes adjacent to the specified node, empty set if
      * the node has no edges.
      * @since 2.0
-     */
-    List<N> getAdjacentNodes(N node);
-
-    /**
-     * Get a set of all edges which is connected to node (adjacent). You may not
-     * be able to traverse from the specified node to all of these edges
-     * returned. If you only want edges you can traverse then see
-     * getTraversableEdges.
-     *
-     * @param node the end point for all edges to retrieve.
-     * @return An unmodifiable set of all edges that has node as an end point.
-     * @throws IllegalArgumentException if specified node is not in the graph.
-     * @see Graph#getTraversableEdges
-     * @since 2.0
-     */
-
-    default Set<E> getAdjacentEdges(final N node) {
-        return streamAdjacentEdges(node).collect(Collectors.toSet());
+     */    
+    default List<N> getAdjacentNodes(N node) {
+    	return streamAdjacentNodes(node).collect(Collectors.toList());
     }
 
-    default Stream<E> streamAdjacentEdges(final N node) {
-        return streamEdges().filter(E -> E.getNodes().contains(node));
-    }
 
     /**
      * Get a list of all reachable nodes adjacent to node. All edges connected

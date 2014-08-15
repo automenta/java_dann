@@ -24,8 +24,8 @@
 package org.encog.neural.data.basic;
 
 import syncleus.dann.data.basic.BasicMLData;
-import org.encog.neural.data.NeuralData;
 import syncleus.dann.learn.ml.MLData;
+import syncleus.dann.neural.data.NeuralData;
 
 /**
  * This is an alias class for Encog 2.5 compatibility. This class aliases

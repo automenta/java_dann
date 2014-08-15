@@ -23,11 +23,11 @@
  */
 package syncleus.dann.learn.hmm.alog;
 
+import java.util.Iterator;
+
 import syncleus.dann.learn.hmm.HiddenMarkovModel;
 import syncleus.dann.learn.ml.MLDataPair;
 import syncleus.dann.learn.ml.MLDataSet;
-
-import java.util.Iterator;
 
 /**
  * The Viterbi algorithm is used to find the most likely sequence of hidden

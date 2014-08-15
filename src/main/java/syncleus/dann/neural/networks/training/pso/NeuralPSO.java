@@ -24,17 +24,17 @@
 package org.encog.neural.networks.training.pso;
 
 import syncleus.dann.learn.ml.CalculateScore;
+import syncleus.dann.learn.ml.MLDataSet;
 import syncleus.dann.learn.ml.MLMethod;
 import syncleus.dann.learn.ml.TrainingImplementationType;
 import syncleus.dann.learn.train.BasicTraining;
-import org.encog.neural.networks.BasicNetwork;
-import org.encog.neural.networks.structure.NetworkCODEC;
-import org.encog.neural.networks.training.TrainingSetScore;
-import org.encog.neural.networks.training.propagation.TrainingContinuation;
-import syncleus.dann.learn.ml.MLDataSet;
 import syncleus.dann.math.VectorAlgebra;
 import syncleus.dann.math.random.NguyenWidrowRandomizer;
 import syncleus.dann.math.random.Randomizer;
+import syncleus.dann.neural.networks.BasicNetwork;
+import syncleus.dann.neural.networks.structure.NetworkCODEC;
+import syncleus.dann.neural.networks.training.TrainingSetScore;
+import syncleus.dann.neural.networks.training.propagation.TrainingContinuation;
 
 /**
  * Iteratively trains a population of neural networks by applying particle swarm

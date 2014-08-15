@@ -24,11 +24,11 @@
 package syncleus.dann.math.matrix.hessian;
 
 import syncleus.dann.data.basic.BasicMLDataPair;
-import org.encog.neural.flat.FlatNetwork;
 import syncleus.dann.learn.ml.MLDataPair;
 import syncleus.dann.learn.ml.MLDataSet;
 import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.neural.activation.EncogActivationFunction;
+import syncleus.dann.neural.flat.FlatNetwork;
 
 /**
  * A threaded worker that is used to calculate the first derivatives of the

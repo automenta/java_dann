@@ -301,7 +301,6 @@ public class SingularValueDecompositionJAMA {
         // Main iteration loop for the singular values.
 
         final int pp = p - 1;
-        int iter = 0;
         final double eps = Math.pow(2.0, -52.0);
         final double tiny = Math.pow(2.0, -966.0);
         while (p > 0) {
@@ -475,7 +474,6 @@ public class SingularValueDecompositionJAMA {
                         }
                     }
                     e[p - 2] = f;
-                    iter += 1;
                 }
                 break;
 
@@ -519,7 +517,6 @@ public class SingularValueDecompositionJAMA {
                         }
                         k++;
                     }
-                    iter = 0;
                     p--;
                 }
                 break;

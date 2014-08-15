@@ -23,20 +23,15 @@
  */
 package syncleus.dann.math.matrix.hessian;
 
-import org.encog.neural.networks.BasicNetwork;
 import syncleus.dann.learn.ml.MLDataSet;
 import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.math.matrix.SimpleRealMatrix;
+import syncleus.dann.neural.networks.BasicNetwork;
 
 /**
  * Calculate the Hessian matrix using the chain rule method.
  */
 public class HessianCR extends BasicHessian {
-
-    /**
-     * The number of threads to use.
-     */
-    private int numThreads;
 
     /**
      * The workers.

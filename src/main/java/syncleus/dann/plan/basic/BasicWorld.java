@@ -23,15 +23,15 @@
  */
 package syncleus.dann.plan.basic;
 
-import syncleus.dann.plan.ActionProbability;
-import syncleus.dann.plan.WorldAgent;
-import syncleus.dann.plan.State;
-import syncleus.dann.plan.World;
-import syncleus.dann.plan.Action;
-import syncleus.dann.plan.grid.GridState;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import syncleus.dann.plan.Action;
+import syncleus.dann.plan.ActionProbability;
+import syncleus.dann.plan.State;
+import syncleus.dann.plan.World;
+import syncleus.dann.plan.WorldAgent;
+import syncleus.dann.plan.grid.GridState;
 
 public abstract class BasicWorld implements World {
     private final List<State> states = new ArrayList<>();

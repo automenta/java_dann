@@ -23,12 +23,12 @@
  */
 package syncleus.dann.learn.bayesian.query.sample;
 
+import java.io.Serializable;
+
 import syncleus.dann.learn.bayesian.BayesianError;
 import syncleus.dann.learn.bayesian.BayesianEvent;
 import syncleus.dann.learn.bayesian.EncogBayesianNetwork;
 import syncleus.dann.learn.bayesian.query.BasicQuery;
-
-import java.io.Serializable;
 
 /**
  * A sampling query allows probabilistic queries on a Bayesian network. Sampling

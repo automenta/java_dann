@@ -23,16 +23,16 @@
  */
 package syncleus.dann.classify.kmeans;
 
-import syncleus.dann.learn.ml.MLCluster;
+import java.util.ArrayList;
+import java.util.List;
+
 import syncleus.dann.data.basic.BasicMLDataPair;
 import syncleus.dann.data.basic.BasicMLDataPairCentroid;
 import syncleus.dann.data.basic.BasicMLDataSet;
+import syncleus.dann.learn.ml.MLCluster;
 import syncleus.dann.learn.ml.MLData;
 import syncleus.dann.learn.ml.MLDataSet;
 import syncleus.dann.math.cluster.Centroid;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Holds a cluster of MLData items that have been clustered by the

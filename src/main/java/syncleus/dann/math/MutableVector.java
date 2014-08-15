@@ -5,15 +5,15 @@ package syncleus.dann.math;
  */
 public class MutableVector extends Vector {
 
-    public MutableVector(int dimensions) {
+    public MutableVector(final int dimensions) {
         super(dimensions);
     }
 
-    public MutableVector(double[] c) {
+    public MutableVector(final double[] c) {
         super(c);
     }
 
-    public MutableVector(Vector v) {
+    public MutableVector(final Vector v) {
         this(v.coordinates);
     }
 

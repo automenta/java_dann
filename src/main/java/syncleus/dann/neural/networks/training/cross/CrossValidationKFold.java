@@ -25,9 +25,9 @@ package org.encog.neural.networks.training.cross;
 
 import syncleus.dann.data.folded.FoldedDataSet;
 import syncleus.dann.learn.train.MLTrain;
-import org.encog.neural.flat.FlatNetwork;
-import org.encog.neural.networks.BasicNetwork;
-import org.encog.neural.networks.training.propagation.TrainingContinuation;
+import syncleus.dann.neural.flat.FlatNetwork;
+import syncleus.dann.neural.networks.BasicNetwork;
+import syncleus.dann.neural.networks.training.propagation.TrainingContinuation;
 
 /**
  * Train using K-Fold cross validation. Each iteration will train a number of

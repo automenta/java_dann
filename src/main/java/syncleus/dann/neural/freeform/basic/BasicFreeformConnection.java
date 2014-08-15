@@ -23,10 +23,10 @@
  */
 package org.encog.neural.freeform.basic;
 
-import org.encog.neural.freeform.FreeformConnection;
-import org.encog.neural.freeform.FreeformNeuron;
-
 import java.io.Serializable;
+
+import syncleus.dann.neural.freeform.FreeformConnection;
+import syncleus.dann.neural.freeform.FreeformNeuron;
 
 /**
  * A basic freeform connection.

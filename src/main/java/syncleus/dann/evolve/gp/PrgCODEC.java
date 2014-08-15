@@ -23,9 +23,9 @@
  */
 package org.encog.ml.prg;
 
-import syncleus.dann.learn.ml.MLMethod;
 import syncleus.dann.evolve.codec.GeneticCODEC;
 import syncleus.dann.evolve.genome.Genome;
+import syncleus.dann.learn.ml.MLMethod;
 
 /**
  * Encode and decode an Encog program between genome and phenotypes. This is a

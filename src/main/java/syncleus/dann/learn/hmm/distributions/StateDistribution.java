@@ -23,10 +23,10 @@
  */
 package syncleus.dann.learn.hmm.distributions;
 
+import java.io.Serializable;
+
 import syncleus.dann.learn.ml.MLDataPair;
 import syncleus.dann.learn.ml.MLDataSet;
-
-import java.io.Serializable;
 
 /**
  * This class represents a "state distribution". This is the means by which the

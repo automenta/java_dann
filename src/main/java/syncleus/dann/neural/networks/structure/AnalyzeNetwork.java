@@ -21,14 +21,15 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package org.encog.neural.networks.structure;
-
-import org.encog.neural.networks.BasicNetwork;
-import syncleus.dann.math.NumericRange;
-import syncleus.dann.math.array.EngineArray;
+package syncleus.dann.neural.networks.structure;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import syncleus.dann.math.Format;
+import syncleus.dann.math.NumericRange;
+import syncleus.dann.math.array.EngineArray;
+import syncleus.dann.neural.networks.BasicNetwork;
 
 /**
  * Allows the weights and bias values of the neural network to be analyzed.

@@ -23,9 +23,9 @@
  */
 package syncleus.dann.math.matrix.hessian;
 
-import org.encog.neural.networks.BasicNetwork;
 import syncleus.dann.learn.ml.MLDataSet;
 import syncleus.dann.math.matrix.SimpleRealMatrix;
+import syncleus.dann.neural.networks.BasicNetwork;
 
 /**
  * Compute (estimate) the Hessian matrix. The Hessian matrix is a matrix of the

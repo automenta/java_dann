@@ -24,8 +24,8 @@
 package org.encog.neural.pattern;
 
 import syncleus.dann.learn.ml.MLMethod;
-import org.encog.neural.art.ART1;
 import syncleus.dann.neural.activation.EncogActivationFunction;
+import syncleus.dann.neural.art.ART1;
 
 /**
  * Pattern to create an ART-1 neural network.

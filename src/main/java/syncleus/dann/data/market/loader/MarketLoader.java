@@ -23,12 +23,12 @@
  */
 package syncleus.dann.data.market.loader;
 
-import syncleus.dann.data.market.MarketDataType;
-import syncleus.dann.data.market.TickerSymbol;
-
 import java.util.Collection;
 import java.util.Date;
 import java.util.Set;
+
+import syncleus.dann.data.market.MarketDataType;
+import syncleus.dann.data.market.TickerSymbol;
 
 /**
  * This interface defines a class that can be used to load external financial

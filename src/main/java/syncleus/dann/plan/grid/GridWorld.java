@@ -23,14 +23,14 @@
  */
 package syncleus.dann.plan.grid;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import syncleus.dann.math.EncogMath;
 import syncleus.dann.plan.Action;
 import syncleus.dann.plan.State;
 import syncleus.dann.plan.basic.BasicAction;
 import syncleus.dann.plan.basic.BasicWorld;
-import syncleus.dann.math.EncogMath;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class GridWorld extends BasicWorld {
 

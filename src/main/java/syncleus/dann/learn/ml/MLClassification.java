@@ -23,7 +23,6 @@
  */
 package syncleus.dann.learn.ml;
 
-import syncleus.dann.learn.ml.MLData;
 
 /**
  * This interface defines a MLMethod that is used for classification.

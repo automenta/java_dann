@@ -23,17 +23,17 @@
  */
 package syncleus.dann.learn.bayesian.query;
 
-import syncleus.dann.learn.bayesian.BayesianError;
-import syncleus.dann.learn.bayesian.BayesianEvent;
-import syncleus.dann.learn.bayesian.EncogBayesianNetwork;
-import syncleus.dann.learn.bayesian.EventType;
-import syncleus.dann.learn.bayesian.query.sample.EventState;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import syncleus.dann.learn.bayesian.BayesianError;
+import syncleus.dann.learn.bayesian.BayesianEvent;
+import syncleus.dann.learn.bayesian.EncogBayesianNetwork;
+import syncleus.dann.learn.bayesian.EventType;
+import syncleus.dann.learn.bayesian.query.sample.EventState;
 
 /**
  * Provides basic functionality for a Bayesian query. This class is abstract,

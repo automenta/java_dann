@@ -21,18 +21,18 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package org.encog.neural.networks.structure;
-
-import org.encog.neural.flat.FlatLayer;
-import org.encog.neural.flat.FlatNetwork;
-import org.encog.neural.networks.BasicNetwork;
-import org.encog.neural.networks.layers.BasicLayer;
-import org.encog.neural.networks.layers.Layer;
-import syncleus.dann.neural.activation.ActivationLinear;
+package syncleus.dann.neural.networks.structure;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
+import syncleus.dann.neural.activation.ActivationLinear;
+import syncleus.dann.neural.flat.FlatLayer;
+import syncleus.dann.neural.flat.FlatNetwork;
+import syncleus.dann.neural.networks.BasicNetwork;
+import syncleus.dann.neural.networks.layers.BasicLayer;
+import syncleus.dann.neural.networks.layers.Layer;
 
 /**
  * Holds "cached" information about the structure of the neural network. This is

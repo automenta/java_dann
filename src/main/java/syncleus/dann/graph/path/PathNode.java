@@ -23,10 +23,10 @@
  */
 package syncleus.dann.graph.path;
 
-import syncleus.dann.graph.SimpleWeightedDirectedEdge;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import syncleus.dann.graph.SimpleWeightedDirectedEdge;
 
 public class PathNode {
     private final List<SimpleWeightedDirectedEdge<PathNode>> connections = new ArrayList<>();

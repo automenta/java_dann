@@ -23,12 +23,11 @@
  */
 package org.encog.neural.thermal;
 
+import syncleus.dann.data.specific.BiPolarNeuralData;
 import syncleus.dann.learn.ml.BasicML;
 import syncleus.dann.learn.ml.MLAutoAssocation;
 import syncleus.dann.learn.ml.MLMethod;
 import syncleus.dann.learn.ml.MLResettable;
-import syncleus.dann.data.specific.BiPolarNeuralData;
-import org.encog.neural.NeuralNetworkError;
 import syncleus.dann.math.array.EngineArray;
 
 /**

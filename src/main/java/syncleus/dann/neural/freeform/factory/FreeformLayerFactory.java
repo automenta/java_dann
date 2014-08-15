@@ -23,7 +23,7 @@
  */
 package org.encog.neural.freeform.factory;
 
-import org.encog.neural.freeform.FreeformLayer;
+import syncleus.dann.neural.freeform.FreeformLayer;
 
 /**
  * A factory that creates layers.

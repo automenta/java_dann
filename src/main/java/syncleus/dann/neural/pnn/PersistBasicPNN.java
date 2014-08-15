@@ -23,6 +23,11 @@
  */
 package org.encog.neural.pnn;
 
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.List;
+import java.util.Map;
+
 import syncleus.dann.data.basic.BasicMLData;
 import syncleus.dann.data.basic.BasicMLDataPair;
 import syncleus.dann.data.basic.BasicMLDataSet;
@@ -30,11 +35,6 @@ import syncleus.dann.data.file.csv.CSVFormat;
 import syncleus.dann.learn.ml.MLData;
 import syncleus.dann.learn.ml.MLDataPair;
 import syncleus.dann.math.array.EngineArray;
-
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Persist a PNN.

@@ -24,7 +24,8 @@
 package org.encog.neural.pattern;
 
 import syncleus.dann.learn.ml.MLMethod;
-import org.encog.neural.bam.BAM;
+import syncleus.dann.neural.activation.EncogActivationFunction;
+import syncleus.dann.neural.bam.BAM;
 
 /**
  * Construct a Bidirectional Access Memory (BAM) neural network. This neural

@@ -28,8 +28,8 @@ import syncleus.dann.learn.ml.MLEncodable;
 import syncleus.dann.learn.ml.MLRegression;
 import syncleus.dann.learn.ml.TrainingImplementationType;
 import syncleus.dann.learn.train.BasicTraining;
-import org.encog.neural.networks.structure.NetworkCODEC;
-import org.encog.neural.networks.training.propagation.TrainingContinuation;
+import syncleus.dann.neural.networks.structure.NetworkCODEC;
+import syncleus.dann.neural.networks.training.propagation.TrainingContinuation;
 
 /**
  * This class implements a simulated annealing training algorithm for neural

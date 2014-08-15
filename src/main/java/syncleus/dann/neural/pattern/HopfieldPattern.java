@@ -24,7 +24,8 @@
 package org.encog.neural.pattern;
 
 import syncleus.dann.learn.ml.MLMethod;
-import org.encog.neural.thermal.HopfieldNetwork;
+import syncleus.dann.neural.activation.EncogActivationFunction;
+import syncleus.dann.neural.thermal.HopfieldNetwork;
 
 /**
  * Create a Hopfield pattern. A Hopfield neural network has a single layer that

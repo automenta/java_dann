@@ -18,12 +18,13 @@
  ******************************************************************************/
 package syncleus.dann.evolve;
 
+import java.util.Random;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
 import syncleus.dann.evolve.wavelets.Mutations;
 import syncleus.dann.util.UnexpectedDannError;
-
-import java.util.Random;
 
 /**
  * An abstract class representing a gene which expresses a constant value which

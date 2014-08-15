@@ -25,7 +25,7 @@ package org.encog.neural.neat.training.species;
 
 import syncleus.dann.evolve.genome.Genome;
 import syncleus.dann.evolve.species.ThresholdSpeciation;
-import org.encog.neural.neat.training.NEATGenome;
+import syncleus.dann.neural.neat.training.NEATGenome;
 
 /**
  * The original NEAT Speciation Strategy. This is currently the only speciation

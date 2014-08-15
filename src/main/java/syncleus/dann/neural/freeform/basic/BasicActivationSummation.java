@@ -23,12 +23,13 @@
  */
 package org.encog.neural.freeform.basic;
 
-import org.encog.neural.freeform.FreeformConnection;
-import org.encog.neural.freeform.InputSummation;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
+import syncleus.dann.neural.activation.EncogActivationFunction;
+import syncleus.dann.neural.freeform.FreeformConnection;
+import syncleus.dann.neural.freeform.InputSummation;
 
 /**
  * Provides a basic implementation of an input summation. The inputs are summed

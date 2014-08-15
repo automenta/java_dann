@@ -23,10 +23,10 @@
  */
 package syncleus.dann.generate.ca.universe.basic;
 
+import java.io.Serializable;
+
 import syncleus.dann.generate.ca.universe.UniverseCell;
 import syncleus.dann.generate.ca.universe.UniverseCellFactory;
-
-import java.io.Serializable;
 
 public class BasicCellFactory implements UniverseCellFactory, Serializable {
 

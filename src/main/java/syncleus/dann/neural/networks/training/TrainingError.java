@@ -23,7 +23,6 @@
  */
 package org.encog.neural.networks.training;
 
-import org.encog.neural.NeuralNetworkError;
 
 /**
  * Thrown when a training error occurs.

@@ -23,19 +23,19 @@
  */
 package syncleus.dann.evolve.train.basic;
 
-import syncleus.dann.learn.ml.CalculateScore;
-import syncleus.dann.learn.ml.MLMethod;
-import syncleus.dann.learn.ml.TrainingImplementationType;
-import syncleus.dann.evolve.population.Population;
-import syncleus.dann.learn.train.MLTrain;
-import syncleus.dann.learn.train.strategy.Strategy;
-import org.encog.neural.networks.training.TrainingError;
-import org.encog.neural.networks.training.TrainingSetScore;
-import org.encog.neural.networks.training.propagation.TrainingContinuation;
-import syncleus.dann.learn.ml.MLDataSet;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import syncleus.dann.evolve.exception.EAError;
+import syncleus.dann.evolve.population.Population;
+import syncleus.dann.learn.ml.CalculateScore;
+import syncleus.dann.learn.ml.MLDataSet;
+import syncleus.dann.learn.ml.MLMethod;
+import syncleus.dann.learn.ml.TrainingImplementationType;
+import syncleus.dann.learn.train.MLTrain;
+import syncleus.dann.learn.train.strategy.Strategy;
+import syncleus.dann.neural.networks.training.TrainingSetScore;
+import syncleus.dann.neural.networks.training.propagation.TrainingContinuation;
 
 /**
  * Provides a MLTrain compatible class that can be used to train genomes.
@@ -131,8 +131,7 @@ public class TrainEA extends BasicEA implements MLTrain {
      */
     @Override
     public void addStrategy(final Strategy strategy) {
-        throw new TrainingError(
-                "Strategies are not supported by this training method.");
+        throw new EAError("Strategies are not supported by this training method.");
     }
 
     /**

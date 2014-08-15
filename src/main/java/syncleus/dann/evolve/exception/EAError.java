@@ -27,7 +27,7 @@ package syncleus.dann.evolve.exception;
 /**
  * A general evolutionary algorithm error.
  */
-public class EAError extends EncogError {
+public class EAError extends RuntimeException {
 
     /**
      * The serial ID.

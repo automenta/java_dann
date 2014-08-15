@@ -23,8 +23,8 @@
  */
 package org.encog.neural.freeform.factory;
 
-import org.encog.neural.freeform.FreeformNeuron;
-import org.encog.neural.freeform.InputSummation;
+import syncleus.dann.neural.freeform.FreeformNeuron;
+import syncleus.dann.neural.freeform.InputSummation;
 
 /**
  * A factory that creates neurons.

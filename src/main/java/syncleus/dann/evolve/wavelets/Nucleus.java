@@ -18,11 +18,16 @@
  ******************************************************************************/
 package syncleus.dann.evolve.wavelets;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import syncleus.dann.util.UnexpectedDannError;
 
-import java.util.*;
+import syncleus.dann.util.UnexpectedDannError;
 
 /**
  * A Nucleus is a collection of Chromosomes with a known mutability.

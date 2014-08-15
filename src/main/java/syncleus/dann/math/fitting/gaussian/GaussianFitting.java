@@ -23,9 +23,9 @@
  */
 package syncleus.dann.math.fitting.gaussian;
 
-import syncleus.dann.learn.ml.MLRegression;
 import syncleus.dann.data.basic.BasicMLData;
 import syncleus.dann.learn.ml.MLData;
+import syncleus.dann.learn.ml.MLRegression;
 import syncleus.dann.math.matrix.MatrixMath;
 import syncleus.dann.math.matrix.SimpleRealMatrix;
 

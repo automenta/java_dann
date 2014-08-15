@@ -23,37 +23,38 @@
  */
 package org.encog.neural.freeform;
 
-import syncleus.dann.learn.ml.MLResettable;
-import syncleus.dann.learn.ml.MLContext;
-import syncleus.dann.learn.ml.MLError;
-import syncleus.dann.learn.ml.MLEncodable;
-import syncleus.dann.learn.ml.BasicML;
-import syncleus.dann.learn.ml.MLRegression;
-import syncleus.dann.learn.ml.MLClassification;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import syncleus.dann.data.basic.BasicMLData;
-import org.encog.neural.freeform.basic.BasicActivationSummationFactory;
-import org.encog.neural.freeform.basic.BasicFreeformConnectionFactory;
-import org.encog.neural.freeform.basic.BasicFreeformLayerFactory;
-import org.encog.neural.freeform.basic.BasicFreeformNeuronFactory;
-import org.encog.neural.freeform.factory.FreeformConnectionFactory;
-import org.encog.neural.freeform.factory.FreeformLayerFactory;
-import org.encog.neural.freeform.factory.FreeformNeuronFactory;
-import org.encog.neural.freeform.factory.InputSummationFactory;
-import org.encog.neural.freeform.task.ConnectionTask;
-import org.encog.neural.freeform.task.NeuronTask;
-import org.encog.neural.networks.BasicNetwork;
+import syncleus.dann.learn.ml.BasicML;
+import syncleus.dann.learn.ml.MLClassification;
+import syncleus.dann.learn.ml.MLContext;
 import syncleus.dann.learn.ml.MLData;
 import syncleus.dann.learn.ml.MLDataSet;
+import syncleus.dann.learn.ml.MLEncodable;
+import syncleus.dann.learn.ml.MLError;
+import syncleus.dann.learn.ml.MLRegression;
+import syncleus.dann.learn.ml.MLResettable;
 import syncleus.dann.math.EncogMath;
 import syncleus.dann.math.EncogUtility;
 import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.math.random.ConsistentRandomizer;
 import syncleus.dann.neural.activation.ActivationTANH;
-
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import syncleus.dann.neural.activation.EncogActivationFunction;
+import syncleus.dann.neural.freeform.basic.BasicActivationSummationFactory;
+import syncleus.dann.neural.freeform.basic.BasicFreeformConnectionFactory;
+import syncleus.dann.neural.freeform.basic.BasicFreeformLayerFactory;
+import syncleus.dann.neural.freeform.basic.BasicFreeformNeuronFactory;
+import syncleus.dann.neural.freeform.factory.FreeformConnectionFactory;
+import syncleus.dann.neural.freeform.factory.FreeformLayerFactory;
+import syncleus.dann.neural.freeform.factory.FreeformNeuronFactory;
+import syncleus.dann.neural.freeform.factory.InputSummationFactory;
+import syncleus.dann.neural.freeform.task.ConnectionTask;
+import syncleus.dann.neural.freeform.task.NeuronTask;
+import syncleus.dann.neural.networks.BasicNetwork;
 
 /**
  * Implements a freefrom neural network. A freeform neural network can represent

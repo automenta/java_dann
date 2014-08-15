@@ -20,8 +20,9 @@ package syncleus.dann.graph.tree;
 
 import syncleus.dann.graph.Edge;
 import syncleus.dann.graph.Graph;
+import syncleus.dann.graph.ImplicitGraph;
 
-public interface TreeOptimizedGraph<N, E extends Edge<N>> extends Graph<N, E> {
+public interface TreeOptimizedGraph<N, E extends Edge<N>> extends ImplicitGraph<N, E> {
     /**
      * Determines if the specified graph is a spanning tree of this graph. This
      * will return true if the specified graph contains all the nodes from this

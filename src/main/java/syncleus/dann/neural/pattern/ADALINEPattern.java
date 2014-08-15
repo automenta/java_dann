@@ -24,12 +24,12 @@
 package org.encog.neural.pattern;
 
 import syncleus.dann.learn.ml.MLMethod;
-import org.encog.neural.networks.BasicNetwork;
-import org.encog.neural.networks.layers.BasicLayer;
-import org.encog.neural.networks.layers.Layer;
 import syncleus.dann.math.random.RangeRandomizer;
 import syncleus.dann.neural.activation.ActivationLinear;
 import syncleus.dann.neural.activation.EncogActivationFunction;
+import syncleus.dann.neural.networks.BasicNetwork;
+import syncleus.dann.neural.networks.layers.BasicLayer;
+import syncleus.dann.neural.networks.layers.Layer;
 
 /**
  * Construct an ADALINE neural network.

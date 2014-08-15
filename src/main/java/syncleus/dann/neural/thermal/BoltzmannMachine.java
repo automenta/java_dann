@@ -21,7 +21,7 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package org.encog.neural.thermal;
+package syncleus.dann.neural.thermal;
 
 import syncleus.dann.data.specific.BiPolarNeuralData;
 import syncleus.dann.learn.ml.MLData;

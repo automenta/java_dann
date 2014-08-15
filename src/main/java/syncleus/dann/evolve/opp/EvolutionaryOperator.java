@@ -23,10 +23,10 @@
  */
 package syncleus.dann.evolve.opp;
 
+import java.util.Random;
+
 import syncleus.dann.evolve.genome.Genome;
 import syncleus.dann.evolve.train.EvolutionaryAlgorithm;
-
-import java.util.Random;
 
 /**
  * An evolutionary operator is used to create new offspring genomes based on

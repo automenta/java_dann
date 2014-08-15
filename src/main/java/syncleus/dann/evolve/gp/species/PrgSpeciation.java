@@ -24,8 +24,8 @@
 package org.encog.ml.prg.species;
 
 import syncleus.dann.evolve.genome.Genome;
+import syncleus.dann.evolve.gp.EncogProgram;
 import syncleus.dann.evolve.species.ThresholdSpeciation;
-import org.encog.ml.prg.EncogProgram;
 
 /**
  * Perform speciation for two Encog programs. This is a threshold based

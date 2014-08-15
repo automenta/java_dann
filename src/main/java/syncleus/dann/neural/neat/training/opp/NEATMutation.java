@@ -26,13 +26,13 @@ package org.encog.neural.neat.training.opp;
 import syncleus.dann.evolve.genome.Genome;
 import syncleus.dann.evolve.opp.EvolutionaryOperator;
 import syncleus.dann.evolve.train.EvolutionaryAlgorithm;
-import org.encog.neural.neat.NEATNeuronType;
-import org.encog.neural.neat.NEATPopulation;
-import org.encog.neural.neat.training.NEATGenome;
-import org.encog.neural.neat.training.NEATInnovation;
-import org.encog.neural.neat.training.NEATLinkGene;
-import org.encog.neural.neat.training.NEATNeuronGene;
 import syncleus.dann.math.random.RangeRandomizer;
+import syncleus.dann.neural.neat.NEATNeuronType;
+import syncleus.dann.neural.neat.NEATPopulation;
+import syncleus.dann.neural.neat.training.NEATGenome;
+import syncleus.dann.neural.neat.training.NEATInnovation;
+import syncleus.dann.neural.neat.training.NEATLinkGene;
+import syncleus.dann.neural.neat.training.NEATNeuronGene;
 
 /**
  * This class represents a NEAT mutation. NEAT supports several different types

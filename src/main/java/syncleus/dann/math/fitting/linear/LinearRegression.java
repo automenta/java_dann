@@ -23,11 +23,11 @@
  */
 package syncleus.dann.math.fitting.linear;
 
-import syncleus.dann.learn.ml.MLError;
-import syncleus.dann.learn.ml.MLRegression;
 import syncleus.dann.data.basic.BasicMLData;
 import syncleus.dann.learn.ml.MLData;
 import syncleus.dann.learn.ml.MLDataSet;
+import syncleus.dann.learn.ml.MLError;
+import syncleus.dann.learn.ml.MLRegression;
 import syncleus.dann.math.EncogUtility;
 
 public class LinearRegression implements MLRegression, MLError {

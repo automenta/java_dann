@@ -28,7 +28,7 @@ public interface Algebraic<F extends Algebraic<? extends F>> extends
      * @return the absolute value of this.
      * @see Math#abs(double)
      */
-    F abs();
+    F algebraicAbsolute();
 
     /**
      * Returns Euler's number <i>e</i> raised to the power of a this value.

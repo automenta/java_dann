@@ -23,8 +23,8 @@
  */
 package syncleus.dann.evolve;
 
-import syncleus.dann.learn.ml.MLEncodable;
 import syncleus.dann.evolve.genome.DoubleArrayGenome;
+import syncleus.dann.learn.ml.MLEncodable;
 
 /**
  * Implements a genome that allows a feedforward neural network to be trained

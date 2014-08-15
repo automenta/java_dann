@@ -23,8 +23,8 @@
  */
 package syncleus.dann.evolve.codec;
 
-import syncleus.dann.learn.ml.MLMethod;
 import syncleus.dann.evolve.genome.Genome;
+import syncleus.dann.learn.ml.MLMethod;
 
 /**
  * A CODEC defines how to transfer between a genome and phenome. Every CODEC

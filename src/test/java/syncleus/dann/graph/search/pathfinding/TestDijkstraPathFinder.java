@@ -18,14 +18,15 @@
  ******************************************************************************/
 package syncleus.dann.graph.search.pathfinding;
 
+import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Test;
+
 import syncleus.dann.graph.BidirectedEdge;
 import syncleus.dann.graph.path.pathfinding.DijkstraPathFinder;
 import syncleus.dann.graph.search.Grid;
 import syncleus.dann.graph.search.GridNode;
-
-import java.util.List;
 
 public class TestDijkstraPathFinder {
     private static final double INF = Double.POSITIVE_INFINITY;

@@ -23,10 +23,10 @@
  */
 package org.encog.neural.freeform.basic;
 
-import org.encog.neural.freeform.FreeformLayer;
-import org.encog.neural.freeform.factory.FreeformLayerFactory;
-
 import java.io.Serializable;
+
+import syncleus.dann.neural.freeform.FreeformLayer;
+import syncleus.dann.neural.freeform.factory.FreeformLayerFactory;
 
 /**
  * A factory that creates BasicFreeformLayer objects.

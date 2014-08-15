@@ -23,6 +23,8 @@
  */
 package syncleus.dann.data.market;
 
+import java.util.Objects;
+
 
 /**
  * Holds a ticker symbol and exchange. The exchange is for external use only and
@@ -115,7 +117,6 @@ public class TickerSymbol {
      */
     @Override
     public int hashCode() {
-        return ReflectionUtil.safeHashCode(this.symbol)
-                + ReflectionUtil.safeHashCode(this.exchange);
+        return Objects.hash(this.symbol,this.exchange);
     }
 }

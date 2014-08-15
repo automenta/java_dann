@@ -18,12 +18,17 @@
  ******************************************************************************/
 package syncleus.dann.graph.tree.mst;
 
+import java.io.Serializable;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.PriorityQueue;
+import java.util.Queue;
+import java.util.Set;
+
 import syncleus.dann.graph.Edge;
 import syncleus.dann.graph.Graph;
 import syncleus.dann.graph.Weighted;
-
-import java.io.Serializable;
-import java.util.*;
 
 /**
  * An implementation of <a

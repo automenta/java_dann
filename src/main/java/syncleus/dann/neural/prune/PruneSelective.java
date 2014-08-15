@@ -23,13 +23,12 @@
  */
 package org.encog.neural.prune;
 
-import org.encog.neural.NeuralNetworkError;
-import org.encog.neural.flat.FlatNetwork;
-import org.encog.neural.networks.BasicNetwork;
 import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.math.random.Distort;
 import syncleus.dann.math.random.Randomizer;
 import syncleus.dann.math.random.RangeRandomizer;
+import syncleus.dann.neural.flat.FlatNetwork;
+import syncleus.dann.neural.networks.BasicNetwork;
 
 /**
  * Prune a neural network selectively. This class allows you to either add or

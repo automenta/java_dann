@@ -23,13 +23,13 @@
  */
 package syncleus.dann.math.matrix.decomposition;
 
-import syncleus.dann.math.OrderedAlgebraic;
-import syncleus.dann.math.matrix.Matrix;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import syncleus.dann.math.OrderedAlgebraic;
+import syncleus.dann.math.matrix.Matrix;
 
 /**
  * QR Decomposition.

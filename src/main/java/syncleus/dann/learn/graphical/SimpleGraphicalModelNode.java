@@ -18,10 +18,18 @@
  ******************************************************************************/
 package syncleus.dann.learn.graphical;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
+
 import syncleus.dann.graph.BidirectedEdge;
 import syncleus.dann.graph.context.AbstractContextNode;
-
-import java.util.*;
 import syncleus.dann.learn.EvidenceMap;
 import syncleus.dann.learn.StateEvidence;
 

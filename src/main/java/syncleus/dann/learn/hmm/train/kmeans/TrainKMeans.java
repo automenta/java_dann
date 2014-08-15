@@ -23,21 +23,21 @@
  */
 package syncleus.dann.learn.hmm.train.kmeans;
 
-import syncleus.dann.learn.ml.MLMethod;
-import syncleus.dann.learn.ml.TrainingImplementationType;
+import java.util.Collection;
+import java.util.List;
+
 import syncleus.dann.data.basic.BasicMLDataSet;
 import syncleus.dann.learn.hmm.HiddenMarkovModel;
 import syncleus.dann.learn.hmm.alog.ViterbiCalculator;
 import syncleus.dann.learn.hmm.distributions.StateDistribution;
-import syncleus.dann.learn.train.MLTrain;
-import syncleus.dann.learn.train.strategy.Strategy;
-import org.encog.neural.networks.training.propagation.TrainingContinuation;
 import syncleus.dann.learn.ml.MLDataPair;
 import syncleus.dann.learn.ml.MLDataSet;
+import syncleus.dann.learn.ml.MLMethod;
 import syncleus.dann.learn.ml.MLSequenceSet;
-
-import java.util.Collection;
-import java.util.List;
+import syncleus.dann.learn.ml.TrainingImplementationType;
+import syncleus.dann.learn.train.MLTrain;
+import syncleus.dann.learn.train.strategy.Strategy;
+import syncleus.dann.neural.networks.training.propagation.TrainingContinuation;
 
 /**
  * Train a Hidden Markov Model (HMM) with the KMeans algorithm. Makes use of

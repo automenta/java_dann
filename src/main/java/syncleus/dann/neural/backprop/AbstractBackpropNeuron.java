@@ -18,15 +18,15 @@
  ******************************************************************************/
 package syncleus.dann.neural.backprop;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import syncleus.dann.graph.DirectedEdge;
 import syncleus.dann.neural.AbstractActivationNeuron;
 import syncleus.dann.neural.Brain;
 import syncleus.dann.neural.Neuron;
 import syncleus.dann.neural.Synapse;
 import syncleus.dann.neural.activation.DannActivationFunction;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public abstract class AbstractBackpropNeuron extends AbstractActivationNeuron
         implements BackpropNeuron {
@@ -110,7 +110,7 @@ public abstract class AbstractBackpropNeuron extends AbstractActivationNeuron
             if (sourceNeuron instanceof BackpropNeuron) {
                 final BackpropNeuron sourceBackpropNeuron = (BackpropNeuron) sourceNeuron;
                 if (sourceBackpropNeuron instanceof SimpleBackpropNeuron) {
-                    ((AbstractBackpropNeuron) sourceBackpropNeuron).getDeltaTrainDestinations().put((Synapse) currentSynapse, this.deltaTrain);
+                    ((AbstractBackpropNeuron) sourceBackpropNeuron).getDeltaTrainDestinations().put(currentSynapse, this.deltaTrain);
                 }
                 ((Synapse) currentSynapse).setWeight(currentSynapse.getWeight() + (this.deltaTrain * this.learningRate * ((Synapse) currentSynapse)
                         .getInput()));

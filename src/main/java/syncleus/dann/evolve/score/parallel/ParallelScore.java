@@ -23,18 +23,18 @@
  */
 package syncleus.dann.evolve.score.parallel;
 
-import syncleus.dann.learn.ml.CalculateScore;
+import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+
+import syncleus.dann.evolve.GeneticError;
 import syncleus.dann.evolve.codec.GeneticCODEC;
 import syncleus.dann.evolve.genome.Genome;
 import syncleus.dann.evolve.population.Population;
 import syncleus.dann.evolve.score.AdjustScore;
 import syncleus.dann.evolve.species.Species;
-import syncleus.dann.evolve.GeneticError;
-
-import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
+import syncleus.dann.learn.ml.CalculateScore;
 
 /**
  * This class is used to calculate the scores for an entire population. This is

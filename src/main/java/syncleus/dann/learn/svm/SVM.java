@@ -23,18 +23,13 @@
  */
 package syncleus.dann.learn.svm;
 
+import syncleus.dann.data.basic.BasicMLData;
 import syncleus.dann.learn.ml.BasicML;
 import syncleus.dann.learn.ml.MLClassification;
-import syncleus.dann.learn.ml.MLError;
-import syncleus.dann.learn.ml.MLRegression;
-import syncleus.dann.data.basic.BasicMLData;
-import org.encog.neural.NeuralNetworkError;
 import syncleus.dann.learn.ml.MLData;
 import syncleus.dann.learn.ml.MLDataSet;
-import syncleus.dann.learn.svm.svm;
-import syncleus.dann.learn.svm.svm_model;
-import syncleus.dann.learn.svm.svm_node;
-import syncleus.dann.learn.svm.svm_parameter;
+import syncleus.dann.learn.ml.MLError;
+import syncleus.dann.learn.ml.MLRegression;
 import syncleus.dann.math.EncogUtility;
 
 /**

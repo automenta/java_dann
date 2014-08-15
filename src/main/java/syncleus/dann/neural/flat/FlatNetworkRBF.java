@@ -23,12 +23,12 @@
  */
 package org.encog.neural.flat;
 
+import java.io.Serializable;
+import java.util.Arrays;
+
 import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.math.rbf.RadialBasisFunction;
 import syncleus.dann.neural.activation.ActivationLinear;
-
-import java.io.Serializable;
-import java.util.Arrays;
 
 /**
  * A flat network designed to handle an RBF.

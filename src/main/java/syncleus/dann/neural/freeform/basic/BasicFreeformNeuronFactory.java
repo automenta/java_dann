@@ -23,12 +23,12 @@
  */
 package org.encog.neural.freeform.basic;
 
-import org.encog.neural.freeform.FreeformContextNeuron;
-import org.encog.neural.freeform.FreeformNeuron;
-import org.encog.neural.freeform.InputSummation;
-import org.encog.neural.freeform.factory.FreeformNeuronFactory;
-
 import java.io.Serializable;
+
+import syncleus.dann.neural.freeform.FreeformContextNeuron;
+import syncleus.dann.neural.freeform.FreeformNeuron;
+import syncleus.dann.neural.freeform.InputSummation;
+import syncleus.dann.neural.freeform.factory.FreeformNeuronFactory;
 
 /**
  * A factory to create BasicFreeformNeuron objects.

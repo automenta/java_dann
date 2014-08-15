@@ -23,19 +23,20 @@
  */
 package syncleus.dann.data.temporal;
 
-import syncleus.dann.data.basic.BasicMLData;
-import syncleus.dann.data.basic.BasicMLDataPair;
-import org.encog.neural.data.basic.BasicNeuralData;
-import org.encog.neural.data.basic.BasicNeuralDataSet;
-import syncleus.dann.data.language.time.TimeSpan;
-import syncleus.dann.learn.ml.MLData;
-import syncleus.dann.learn.ml.MLDataPair;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+
+import syncleus.dann.data.basic.BasicMLData;
+import syncleus.dann.data.basic.BasicMLDataPair;
+import syncleus.dann.data.language.time.TimeSpan;
+import syncleus.dann.data.language.time.TimeUnit;
+import syncleus.dann.learn.ml.MLData;
+import syncleus.dann.learn.ml.MLDataPair;
+import syncleus.dann.neural.data.basic.BasicNeuralData;
+import syncleus.dann.neural.data.basic.BasicNeuralDataSet;
 
 /**
  * This class implements a temporal neural data set. A temporal neural dataset
@@ -279,7 +280,7 @@ public class TemporalMLDataSet extends BasicNeuralDataSet implements
      * @return The point TemporalPoint created.
      */
     public TemporalPoint createPoint(final Date when) {
-        final int sequence = getSequenceFromDate(when);
+        final long sequence = getSequenceFromDate(when);
         final TemporalPoint point = new TemporalPoint(this.descriptions.size());
         point.setSequence(sequence);
         this.points.add(point);
@@ -326,8 +327,7 @@ public class TemporalMLDataSet extends BasicNeuralDataSet implements
         }
 
         if (desc.getActivationFunction() != null) {
-            desc.getActivationFunction().activationFunction(result, 0,
-                    result.length);
+            desc.getActivationFunction().activate(result, 0, result.length);
         }
 
         return result[0];
@@ -526,14 +526,14 @@ public class TemporalMLDataSet extends BasicNeuralDataSet implements
 
     /**
      * Create a sequence number from a time. The first date will be zero, and
-     * subsequent dates will be increased according to the grandularity
+     * subsequent dates will be increased according to the granularity
      * specified.
      *
      * @param when The date to generate the sequence number for.
      * @return A sequence number.
      */
-    public int getSequenceFromDate(final Date when) {
-        int sequence;
+    public long getSequenceFromDate(final Date when) {
+        long sequence;
 
         if (this.startingPoint != null) {
             final TimeSpan span = new TimeSpan(this.startingPoint, when);

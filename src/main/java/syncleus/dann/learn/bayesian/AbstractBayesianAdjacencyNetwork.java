@@ -18,12 +18,12 @@
  ******************************************************************************/
 package syncleus.dann.learn.bayesian;
 
+import java.util.Set;
+
 import syncleus.dann.graph.DirectedEdge;
 import syncleus.dann.graph.Graph;
 import syncleus.dann.learn.graphical.AbstractGraphicalModelAdjacencyGraph;
 import syncleus.dann.learn.graphical.GraphicalModelNode;
-
-import java.util.Set;
 
 public abstract class AbstractBayesianAdjacencyNetwork<N extends GraphicalModelNode, E extends DirectedEdge<N>>
         extends AbstractGraphicalModelAdjacencyGraph<N, E> {

@@ -23,18 +23,18 @@
  */
 package syncleus.dann.util.factory.train;
 
+import java.util.Map;
+
+import syncleus.dann.evolve.MLMethodGeneticAlgorithm;
 import syncleus.dann.learn.ml.CalculateScore;
+import syncleus.dann.learn.ml.MLDataSet;
 import syncleus.dann.learn.ml.MLEncodable;
 import syncleus.dann.learn.ml.MLMethod;
 import syncleus.dann.learn.ml.MLResettable;
+import syncleus.dann.learn.train.MLTrain;
+import syncleus.dann.neural.networks.training.TrainingSetScore;
 import syncleus.dann.util.factory.MLTrainFactory;
 import syncleus.dann.util.factory.parse.ArchitectureParse;
-import syncleus.dann.evolve.MLMethodGeneticAlgorithm;
-import syncleus.dann.learn.train.MLTrain;
-import org.encog.neural.networks.training.TrainingSetScore;
-import syncleus.dann.learn.ml.MLDataSet;
-
-import java.util.Map;
 
 /**
  * A factory to create genetic algorithm trainers.

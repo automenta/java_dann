@@ -23,12 +23,12 @@
  */
 package syncleus.dann.learn.bayesian.parse;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import syncleus.dann.learn.bayesian.BayesianChoice;
 import syncleus.dann.learn.bayesian.BayesianError;
 import syncleus.dann.learn.bayesian.BayesianEvent;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A parsed event.

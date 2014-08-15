@@ -23,14 +23,14 @@
  */
 package org.encog.neural.neat;
 
-import syncleus.dann.evolve.genome.Genome;
-import org.encog.neural.neat.training.NEATGenome;
-import org.encog.neural.neat.training.NEATLinkGene;
-import org.encog.neural.neat.training.NEATNeuronGene;
-
 import java.io.Serializable;
 import java.util.List;
 import java.util.Random;
+
+import syncleus.dann.evolve.genome.Genome;
+import syncleus.dann.neural.neat.training.NEATGenome;
+import syncleus.dann.neural.neat.training.NEATLinkGene;
+import syncleus.dann.neural.neat.training.NEATNeuronGene;
 
 /**
  * This factory is used to create NEATGenomes.

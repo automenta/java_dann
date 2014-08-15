@@ -23,9 +23,15 @@
  */
 package syncleus.dann.evolve.train.basic;
 
-import syncleus.dann.learn.ml.CalculateScore;
-import syncleus.dann.learn.ml.MLContext;
-import syncleus.dann.learn.ml.MLMethod;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+
+import syncleus.dann.evolve.GeneticError;
 import syncleus.dann.evolve.codec.GeneticCODEC;
 import syncleus.dann.evolve.codec.GenomeAsPhenomeCODEC;
 import syncleus.dann.evolve.genome.Genome;
@@ -38,27 +44,26 @@ import syncleus.dann.evolve.rules.BasicRuleHolder;
 import syncleus.dann.evolve.rules.RuleHolder;
 import syncleus.dann.evolve.score.AdjustScore;
 import syncleus.dann.evolve.score.parallel.ParallelScore;
+import syncleus.dann.evolve.sort.GenomeComparator;
+import syncleus.dann.evolve.sort.MaximizeAdjustedScoreComp;
+import syncleus.dann.evolve.sort.MaximizeScoreComp;
+import syncleus.dann.evolve.sort.MinimizeAdjustedScoreComp;
+import syncleus.dann.evolve.sort.MinimizeScoreComp;
 import syncleus.dann.evolve.species.SingleSpeciation;
 import syncleus.dann.evolve.species.Speciation;
 import syncleus.dann.evolve.species.Species;
 import syncleus.dann.evolve.train.EvolutionaryAlgorithm;
-import syncleus.dann.evolve.GeneticError;
+import syncleus.dann.learn.ml.CalculateScore;
+import syncleus.dann.learn.ml.MLContext;
+import syncleus.dann.learn.ml.MLMethod;
 import syncleus.dann.math.random.RandomFactory;
-
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Provides a basic implementation of a multi-threaded Evolutionary Algorithm.
  * The EA works from a score function.
  */
-public class BasicEA implements EvolutionaryAlgorithm, MultiThreadable,
-        EncogShutdownTask, Serializable {
+public class BasicEA implements EvolutionaryAlgorithm, /* MultiThreadable,
+        EncogShutdownTask,*/ Serializable {
 
     /**
      * The serial id.
@@ -129,8 +134,7 @@ public class BasicEA implements EvolutionaryAlgorithm, MultiThreadable,
     /**
      * Random number factory.
      */
-    private RandomFactory randomNumberFactory = Encog.getInstance()
-            .getRandomFactory().factorFactory();
+    private RandomFactory randomNumberFactory = RandomFactory.randomFactory;
 
     /**
      * The validation mode.
@@ -345,13 +349,12 @@ public class BasicEA implements EvolutionaryAlgorithm, MultiThreadable,
         if (this.taskExecutor != null) {
             this.taskExecutor.shutdown();
             try {
-                this.taskExecutor.awaitTermination(Long.MAX_VALUE,
-                        TimeUnit.MINUTES);
+                this.taskExecutor.awaitTermination(Long.MAX_VALUE, TimeUnit.MINUTES);
             } catch (final InterruptedException e) {
-                throw new GeneticError(e);
+                throw new RuntimeException(e);
             } finally {
                 this.taskExecutor = null;
-                Encog.getInstance().removeShutdownTask(this);
+                //Encog.getInstance().removeShutdownTask(this);
             }
         }
     }
@@ -525,13 +528,13 @@ public class BasicEA implements EvolutionaryAlgorithm, MultiThreadable,
         return this.speciation;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public int getThreadCount() {
-        return this.threadCount;
-    }
+//    /**
+//     * {@inheritDoc}
+//     */
+//    @Override
+//    public int getThreadCount() {
+//        return this.threadCount;
+//    }
 
     /**
      * {@inheritDoc}
@@ -597,7 +600,7 @@ public class BasicEA implements EvolutionaryAlgorithm, MultiThreadable,
 
         // handle any errors that might have happened in the threads
         if (this.reportedError != null && !getShouldIgnoreExceptions()) {
-            throw new GeneticError(this.reportedError);
+            throw new RuntimeException(this.reportedError);
         }
 
         // validate, if requested
@@ -625,13 +628,13 @@ public class BasicEA implements EvolutionaryAlgorithm, MultiThreadable,
         this.population.purgeInvalidGenomes();
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void performShutdownTask() {
-        finishTraining();
-    }
+//    /**
+//     * {@inheritDoc}
+//     */
+//    @Override
+//    public void performShutdownTask() {
+//        finishTraining();
+//    }
 
     /**
      * Called before the first iteration. Determine the number of threads to
@@ -665,7 +668,7 @@ public class BasicEA implements EvolutionaryAlgorithm, MultiThreadable,
         }
 
         // register for shutdown
-        Encog.getInstance().addShutdownTask(this);
+        //Encog.getInstance().addShutdownTask(this);
 
         // just pick the first genome with a valid score as best, it will be
         // updated later.
@@ -808,13 +811,13 @@ public class BasicEA implements EvolutionaryAlgorithm, MultiThreadable,
         this.speciation = speciation;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setThreadCount(final int numThreads) {
-        this.threadCount = numThreads;
-    }
+//    /**
+//     * {@inheritDoc}
+//     */
+//    @Override
+//    public void setThreadCount(final int numThreads) {
+//        this.threadCount = numThreads;
+//    }
 
     /**
      * {@inheritDoc}

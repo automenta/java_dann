@@ -21,18 +21,18 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package org.encog.ml.prg.opp;
-
-import syncleus.dann.evolve.genome.Genome;
-import syncleus.dann.evolve.opp.EvolutionaryOperator;
-import syncleus.dann.evolve.train.EvolutionaryAlgorithm;
-import org.encog.ml.prg.EncogProgram;
-import org.encog.ml.prg.EncogProgramContext;
-import org.encog.ml.prg.ProgramNode;
-import org.encog.ml.prg.expvalue.ExpressionValue;
-import org.encog.ml.prg.extension.StandardExtensions;
+package syncleus.dann.evolve.gp.opp;
 
 import java.util.Random;
+
+import syncleus.dann.evolve.genome.Genome;
+import syncleus.dann.evolve.gp.EncogProgram;
+import syncleus.dann.evolve.gp.EncogProgramContext;
+import syncleus.dann.evolve.gp.ProgramNode;
+import syncleus.dann.evolve.gp.expvalue.ExpressionValue;
+import syncleus.dann.evolve.gp.extension.StandardExtensions;
+import syncleus.dann.evolve.opp.EvolutionaryOperator;
+import syncleus.dann.evolve.train.EvolutionaryAlgorithm;
 
 /**
  * Mutate the constant nodes of an Encog program. This mutation only changes

@@ -23,10 +23,10 @@
  */
 package syncleus.dann.data.file.csv;
 
-import syncleus.dann.data.language.SimpleParser;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import syncleus.dann.data.language.SimpleParser;
 
 public class ParseCSVLine {
 

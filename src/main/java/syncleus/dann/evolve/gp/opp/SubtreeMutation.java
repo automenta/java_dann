@@ -21,21 +21,21 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package org.encog.ml.prg.opp;
-
-import syncleus.dann.evolve.genome.Genome;
-import syncleus.dann.evolve.opp.EvolutionaryOperator;
-import syncleus.dann.evolve.train.EvolutionaryAlgorithm;
-import org.encog.ml.prg.EncogProgram;
-import org.encog.ml.prg.EncogProgramContext;
-import org.encog.ml.prg.ProgramNode;
-import org.encog.ml.prg.expvalue.ValueType;
-import org.encog.ml.prg.generator.PrgGenerator;
-import org.encog.ml.prg.generator.PrgGrowGenerator;
+package syncleus.dann.evolve.gp.opp;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+import syncleus.dann.evolve.genome.Genome;
+import syncleus.dann.evolve.gp.EncogProgram;
+import syncleus.dann.evolve.gp.EncogProgramContext;
+import syncleus.dann.evolve.gp.ProgramNode;
+import syncleus.dann.evolve.gp.expvalue.ValueType;
+import syncleus.dann.evolve.gp.generator.PrgGenerator;
+import syncleus.dann.evolve.gp.generator.PrgGrowGenerator;
+import syncleus.dann.evolve.opp.EvolutionaryOperator;
+import syncleus.dann.evolve.train.EvolutionaryAlgorithm;
 
 /**
  * Perform a type-safe subtree mutation. The mutation point is chosen randomly,

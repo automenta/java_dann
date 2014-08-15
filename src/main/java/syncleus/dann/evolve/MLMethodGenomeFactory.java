@@ -23,11 +23,11 @@
  */
 package syncleus.dann.evolve;
 
-import syncleus.dann.learn.ml.MLEncodable;
-import syncleus.dann.learn.ml.MethodFactory;
 import syncleus.dann.evolve.genome.Genome;
 import syncleus.dann.evolve.genome.GenomeFactory;
 import syncleus.dann.evolve.population.Population;
+import syncleus.dann.learn.ml.MLEncodable;
+import syncleus.dann.learn.ml.MethodFactory;
 
 /**
  * A factory to create MLMethod based genomes.

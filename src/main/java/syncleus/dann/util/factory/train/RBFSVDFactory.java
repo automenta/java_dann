@@ -23,11 +23,11 @@
  */
 package syncleus.dann.util.factory.train;
 
+import syncleus.dann.learn.ml.MLDataSet;
 import syncleus.dann.learn.ml.MLMethod;
 import syncleus.dann.learn.train.MLTrain;
-import org.encog.neural.rbf.RBFNetwork;
-import org.encog.neural.rbf.training.SVDTraining;
-import syncleus.dann.learn.ml.MLDataSet;
+import syncleus.dann.neural.rbf.RBFNetwork;
+import syncleus.dann.neural.rbf.training.SVDTraining;
 
 /**
  * This factory is used to create a SVD trainer for an RBF network.

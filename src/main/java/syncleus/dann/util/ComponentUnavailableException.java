@@ -18,9 +18,13 @@
  ******************************************************************************/
 package syncleus.dann.util;
 
-import javax.swing.*;
+import java.awt.BorderLayout;
+
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextPane;
 import javax.swing.border.EmptyBorder;
-import java.awt.*;
 
 public class ComponentUnavailableException extends Exception {
     private static final int BORDER_SPACE = 6;

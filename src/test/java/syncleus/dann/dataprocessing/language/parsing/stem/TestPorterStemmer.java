@@ -20,6 +20,7 @@ package syncleus.dann.dataprocessing.language.parsing.stem;
 
 import org.junit.Assert;
 import org.junit.Test;
+
 import syncleus.dann.data.language.parsing.stem.PorterStemmer;
 import syncleus.dann.data.language.parsing.stem.Stemmer;
 

@@ -23,10 +23,10 @@
  */
 package syncleus.dann.evolve.opp.selection;
 
+import java.util.Random;
+
 import syncleus.dann.evolve.species.Species;
 import syncleus.dann.evolve.train.EvolutionaryAlgorithm;
-
-import java.util.Random;
 
 /**
  * Provides the interface to a selection operator. This allows genomes to be

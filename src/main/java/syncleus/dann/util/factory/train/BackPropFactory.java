@@ -23,15 +23,15 @@
  */
 package syncleus.dann.util.factory.train;
 
+import java.util.Map;
+
+import syncleus.dann.learn.ml.MLDataSet;
 import syncleus.dann.learn.ml.MLMethod;
+import syncleus.dann.learn.train.MLTrain;
+import syncleus.dann.neural.networks.ContainsFlat;
+import syncleus.dann.neural.networks.training.propagation.back.Backpropagation;
 import syncleus.dann.util.factory.MLTrainFactory;
 import syncleus.dann.util.factory.parse.ArchitectureParse;
-import syncleus.dann.learn.train.MLTrain;
-import org.encog.neural.networks.ContainsFlat;
-import org.encog.neural.networks.training.propagation.back.Backpropagation;
-import syncleus.dann.learn.ml.MLDataSet;
-
-import java.util.Map;
 
 /**
  * A factory for backpropagation training.

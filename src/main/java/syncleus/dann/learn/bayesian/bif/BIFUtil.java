@@ -23,18 +23,25 @@
  */
 package syncleus.dann.learn.bayesian.bif;
 
-import syncleus.dann.learn.bayesian.BayesianError;
-import syncleus.dann.learn.bayesian.BayesianEvent;
-import syncleus.dann.learn.bayesian.EncogBayesianNetwork;
-import syncleus.dann.learn.bayesian.table.TableLine;
-import org.xml.sax.SAXException;
-import syncleus.dann.data.file.csv.CSVFormat;
-import syncleus.dann.math.EncogMath;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
-import java.io.*;
+
+import org.xml.sax.SAXException;
+
+import syncleus.dann.data.file.csv.CSVFormat;
+import syncleus.dann.learn.bayesian.BayesianError;
+import syncleus.dann.learn.bayesian.BayesianEvent;
+import syncleus.dann.learn.bayesian.EncogBayesianNetwork;
+import syncleus.dann.learn.bayesian.table.TableLine;
+import syncleus.dann.math.EncogMath;
 
 /**
  * A utility class to read and write Bayesian networks in BIF format.

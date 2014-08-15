@@ -23,13 +23,13 @@
  */
 package syncleus.dann.data.folded;
 
+import java.util.Iterator;
+
 import syncleus.dann.data.basic.BasicMLDataPair;
-import org.encog.neural.networks.training.TrainingError;
 import syncleus.dann.learn.ml.MLData;
 import syncleus.dann.learn.ml.MLDataPair;
 import syncleus.dann.learn.ml.MLDataSet;
-
-import java.util.Iterator;
+import syncleus.dann.neural.networks.training.TrainingError;
 
 /**
  * A folded data set allows you to "fold" the data into several equal(or nearly
@@ -104,7 +104,7 @@ public class FoldedDataSet implements MLDataSet {
      */
     @Override
     public void add(final MLData data1) {
-        throw new TrainingError(FoldedDataSet.ADD_NOT_SUPPORTED);
+        throw new RuntimeException(FoldedDataSet.ADD_NOT_SUPPORTED);
 
     }
 
@@ -116,7 +116,7 @@ public class FoldedDataSet implements MLDataSet {
      */
     @Override
     public void add(final MLData inputData, final MLData idealData) {
-        throw new TrainingError(FoldedDataSet.ADD_NOT_SUPPORTED);
+        throw new RuntimeException(FoldedDataSet.ADD_NOT_SUPPORTED);
 
     }
 
@@ -127,7 +127,7 @@ public class FoldedDataSet implements MLDataSet {
      */
     @Override
     public void add(final MLDataPair inputData) {
-        throw new TrainingError(FoldedDataSet.ADD_NOT_SUPPORTED);
+        throw new RuntimeException(FoldedDataSet.ADD_NOT_SUPPORTED);
 
     }
 
@@ -274,12 +274,12 @@ public class FoldedDataSet implements MLDataSet {
     public void setCurrentFold(final int theCurrentFold) {
 
         if (this.owner != null) {
-            throw new TrainingError(
+            throw new RuntimeException(
                     "Can't set the fold on a non-top-level set.");
         }
 
         if (theCurrentFold >= this.numFolds) {
-            throw new TrainingError(
+            throw new RuntimeException(
                     "Can't set the current fold to be greater than "
                             + "the number of folds.");
         }

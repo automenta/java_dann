@@ -23,13 +23,13 @@
  */
 package syncleus.dann.math.fitting.linear;
 
+import syncleus.dann.learn.ml.MLDataPair;
+import syncleus.dann.learn.ml.MLDataSet;
 import syncleus.dann.learn.ml.MLMethod;
 import syncleus.dann.learn.ml.TrainingImplementationType;
 import syncleus.dann.learn.train.BasicTraining;
-import org.encog.neural.networks.training.propagation.TrainingContinuation;
-import syncleus.dann.learn.ml.MLDataPair;
-import syncleus.dann.learn.ml.MLDataSet;
 import syncleus.dann.math.EncogUtility;
+import syncleus.dann.neural.networks.training.propagation.TrainingContinuation;
 
 public class TrainLinearRegression extends BasicTraining {
 

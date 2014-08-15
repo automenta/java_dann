@@ -18,13 +18,14 @@
  ******************************************************************************/
 package syncleus.dann.math;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import syncleus.dann.util.UnexpectedDannError;
-
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import syncleus.dann.util.UnexpectedDannError;
 
 public abstract class AbstractFunction implements Cloneable, Function {
     private double[] parameters;

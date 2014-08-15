@@ -23,14 +23,14 @@
  */
 package org.encog.ml.prg.extension;
 
-import org.encog.ml.prg.EncogProgramContext;
-import org.encog.ml.prg.ProgramNode;
-import org.encog.ml.prg.expvalue.ExpressionValue;
-import org.encog.ml.prg.expvalue.ValueType;
-
 import java.io.Serializable;
 import java.util.List;
 import java.util.Random;
+
+import syncleus.dann.evolve.gp.EncogProgramContext;
+import syncleus.dann.evolve.gp.ProgramNode;
+import syncleus.dann.evolve.gp.expvalue.ExpressionValue;
+import syncleus.dann.evolve.gp.expvalue.ValueType;
 
 /**
  * Defines an opcode. Opcodes are used to extend Encog programs.

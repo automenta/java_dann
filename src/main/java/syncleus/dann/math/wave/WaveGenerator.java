@@ -15,7 +15,7 @@ import syncleus.dann.math.Vector;
 public class WaveGenerator implements Transform<WaveFunction, Vector> {
 
     @Override
-    public Vector apply(WaveFunction t) {
+    public Vector apply(final WaveFunction t) {
         return null;
     }
 

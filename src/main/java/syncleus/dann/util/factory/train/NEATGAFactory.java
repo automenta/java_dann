@@ -23,14 +23,14 @@
  */
 package syncleus.dann.util.factory.train;
 
-import syncleus.dann.learn.ml.CalculateScore;
-import syncleus.dann.learn.ml.MLMethod;
 import syncleus.dann.evolve.train.basic.TrainEA;
-import syncleus.dann.learn.train.MLTrain;
-import org.encog.neural.neat.NEATPopulation;
-import org.encog.neural.neat.NEATUtil;
-import org.encog.neural.networks.training.TrainingSetScore;
+import syncleus.dann.learn.ml.CalculateScore;
 import syncleus.dann.learn.ml.MLDataSet;
+import syncleus.dann.learn.ml.MLMethod;
+import syncleus.dann.learn.train.MLTrain;
+import syncleus.dann.neural.neat.NEATPopulation;
+import syncleus.dann.neural.neat.NEATUtil;
+import syncleus.dann.neural.networks.training.TrainingSetScore;
 
 /**
  * A factory to create genetic algorithm trainers.

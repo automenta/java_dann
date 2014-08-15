@@ -23,10 +23,10 @@
  */
 package syncleus.dann.data.basic;
 
+import java.io.Serializable;
+
 import syncleus.dann.learn.ml.MLData;
 import syncleus.dann.math.cluster.Centroid;
-
-import java.io.Serializable;
 
 /**
  * Basic implementation of the MLData interface that stores the data in an

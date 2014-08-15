@@ -24,7 +24,8 @@
 package org.encog.neural.pattern;
 
 import syncleus.dann.learn.ml.MLMethod;
-import org.encog.neural.som.SOM;
+import syncleus.dann.neural.activation.EncogActivationFunction;
+import syncleus.dann.neural.som.SOM;
 
 /**
  * A self organizing map is a neural network pattern with an input and output

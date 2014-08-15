@@ -23,26 +23,27 @@
  */
 package org.encog.neural.neat;
 
-import syncleus.dann.learn.ml.MLError;
-import syncleus.dann.learn.ml.MLRegression;
+import java.io.Serializable;
+import java.util.Random;
+
 import syncleus.dann.evolve.codec.GeneticCODEC;
 import syncleus.dann.evolve.genome.Genome;
 import syncleus.dann.evolve.population.BasicPopulation;
 import syncleus.dann.evolve.species.BasicSpecies;
-import org.encog.neural.NeuralNetworkError;
-import org.encog.neural.hyperneat.FactorHyperNEATGenome;
-import org.encog.neural.hyperneat.HyperNEATCODEC;
-import org.encog.neural.hyperneat.HyperNEATGenome;
-import org.encog.neural.hyperneat.substrate.Substrate;
-import org.encog.neural.neat.training.NEATGenome;
-import org.encog.neural.neat.training.NEATInnovationList;
 import syncleus.dann.learn.ml.MLData;
 import syncleus.dann.learn.ml.MLDataSet;
+import syncleus.dann.learn.ml.MLError;
+import syncleus.dann.learn.ml.MLRegression;
 import syncleus.dann.math.random.RandomFactory;
 import syncleus.dann.neural.activation.ActivationSteepenedSigmoid;
-
-import java.io.Serializable;
-import java.util.Random;
+import syncleus.dann.neural.activation.EncogActivationFunction;
+import syncleus.dann.neural.hyperneat.FactorHyperNEATGenome;
+import syncleus.dann.neural.hyperneat.HyperNEATCODEC;
+import syncleus.dann.neural.hyperneat.HyperNEATGenome;
+import syncleus.dann.neural.hyperneat.substrate.Substrate;
+import syncleus.dann.neural.neat.training.NEATGenome;
+import syncleus.dann.neural.neat.training.NEATInnovationList;
+import syncleus.dann.util.ChooseObject;
 
 /**
  * A population for a NEAT or HyperNEAT system. This population holds the
@@ -374,7 +375,7 @@ public class NEATPopulation extends BasicPopulation implements Serializable,
      * @return the weightRange
      */
     public double getWeightRange() {
-        return this.weightRange;
+        return NEATPopulation.weightRange;
     }
 
     /**

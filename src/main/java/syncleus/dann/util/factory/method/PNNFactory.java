@@ -23,15 +23,14 @@
  */
 package syncleus.dann.util.factory.method;
 
+import java.util.List;
+
 import syncleus.dann.learn.ml.MLMethod;
+import syncleus.dann.neural.pnn.BasicPNN;
+import syncleus.dann.neural.pnn.PNNKernelType;
+import syncleus.dann.neural.pnn.PNNOutputMode;
 import syncleus.dann.util.factory.parse.ArchitectureLayer;
 import syncleus.dann.util.factory.parse.ArchitectureParse;
-import org.encog.neural.NeuralNetworkError;
-import org.encog.neural.pnn.BasicPNN;
-import org.encog.neural.pnn.PNNKernelType;
-import org.encog.neural.pnn.PNNOutputMode;
-
-import java.util.List;
 
 /**
  * A factory to create PNN networks.

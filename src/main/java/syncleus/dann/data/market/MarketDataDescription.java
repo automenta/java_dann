@@ -24,6 +24,7 @@
 package syncleus.dann.data.market;
 
 import syncleus.dann.data.temporal.TemporalDataDescription;
+import syncleus.dann.neural.activation.EncogActivationFunction;
 
 /**
  * This class is used to describe the type of financial data that is needed.
@@ -58,7 +59,7 @@ public class MarketDataDescription extends TemporalDataDescription {
      */
     public MarketDataDescription(final TickerSymbol ticker,
                                  final MarketDataType dataType, final Type type,
-                                 final ActivationFunction activationFunction, final boolean input,
+                                 final EncogActivationFunction 	activationFunction, final boolean input,
                                  final boolean predict) {
         super(activationFunction, type, input, predict);
         this.ticker = ticker;

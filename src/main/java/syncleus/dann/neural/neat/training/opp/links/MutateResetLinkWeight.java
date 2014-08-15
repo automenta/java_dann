@@ -23,11 +23,11 @@
  */
 package org.encog.neural.neat.training.opp.links;
 
-import syncleus.dann.evolve.train.EvolutionaryAlgorithm;
-import org.encog.neural.neat.training.NEATLinkGene;
-import syncleus.dann.math.random.RangeRandomizer;
-
 import java.util.Random;
+
+import syncleus.dann.evolve.train.EvolutionaryAlgorithm;
+import syncleus.dann.math.random.RangeRandomizer;
+import syncleus.dann.neural.neat.training.NEATLinkGene;
 
 /**
  * Mutate weight links by reseting the weight to an entirely new value. The

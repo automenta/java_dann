@@ -18,14 +18,20 @@
  ******************************************************************************/
 package syncleus.dann.graph.tree;
 
-import syncleus.dann.graph.*;
+import java.util.List;
+import java.util.Set;
+
+import syncleus.dann.graph.BidirectedEdge;
+import syncleus.dann.graph.BidirectedGraph;
+import syncleus.dann.graph.DirectedEdge;
+import syncleus.dann.graph.DirectedGraph;
+import syncleus.dann.graph.Edge;
+import syncleus.dann.graph.Graph;
+import syncleus.dann.graph.ImmutableDirectedAdjacencyGraph;
 import syncleus.dann.graph.cycle.Cycles;
 import syncleus.dann.graph.topological.Topography;
 import syncleus.dann.graph.topological.sorter.SimpleTopologicalRanker;
 import syncleus.dann.graph.topological.sorter.TopologicalRanker;
-
-import java.util.List;
-import java.util.Set;
 
 public final class Trees {
     /**

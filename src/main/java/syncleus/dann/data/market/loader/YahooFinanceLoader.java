@@ -23,17 +23,21 @@
  */
 package syncleus.dann.data.market.loader;
 
-import syncleus.dann.data.market.MarketDataType;
-import syncleus.dann.data.market.TickerSymbol;
-import syncleus.dann.data.file.csv.CSVFormat;
-import syncleus.dann.data.file.csv.ReadCSV;
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collection;
+import java.util.Date;
+import java.util.Set;
+
+import syncleus.dann.data.file.csv.CSVFormat;
+import syncleus.dann.data.file.csv.ReadCSV;
+import syncleus.dann.data.market.MarketDataType;
+import syncleus.dann.data.market.TickerSymbol;
 
 /**
  * This class loads financial data from Yahoo. One caution on Yahoo data.

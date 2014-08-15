@@ -23,20 +23,20 @@
  */
 package org.encog.neural.networks.training.propagation;
 
+import syncleus.dann.learn.ml.MLDataSet;
 import syncleus.dann.learn.ml.MLMethod;
 import syncleus.dann.learn.ml.TrainingImplementationType;
 import syncleus.dann.learn.train.BasicTraining;
-import syncleus.dann.math.error.ErrorFunction;
-import syncleus.dann.math.error.LinearErrorFunction;
-import org.encog.neural.flat.FlatNetwork;
-import org.encog.neural.networks.ContainsFlat;
-import org.encog.neural.networks.training.BatchSize;
-import org.encog.neural.networks.training.Train;
-import syncleus.dann.learn.ml.MLDataSet;
 import syncleus.dann.math.IntRange;
 import syncleus.dann.math.array.EngineArray;
+import syncleus.dann.math.error.ErrorFunction;
+import syncleus.dann.math.error.LinearErrorFunction;
 import syncleus.dann.neural.activation.ActivationSigmoid;
 import syncleus.dann.neural.activation.EncogActivationFunction;
+import syncleus.dann.neural.flat.FlatNetwork;
+import syncleus.dann.neural.networks.ContainsFlat;
+import syncleus.dann.neural.networks.training.BatchSize;
+import syncleus.dann.neural.networks.training.Train;
 
 /**
  * Implements basic functionality that is needed by each of the propagation

@@ -23,18 +23,18 @@
  */
 package syncleus.dann.data.buffer;
 
+import java.io.File;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import syncleus.dann.data.basic.BasicMLDataPair;
 import syncleus.dann.data.basic.BasicMLDataSet;
 import syncleus.dann.learn.ml.MLData;
 import syncleus.dann.learn.ml.MLDataError;
 import syncleus.dann.learn.ml.MLDataPair;
 import syncleus.dann.learn.ml.MLDataSet;
-
-import java.io.File;
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 
 /**
  * This class is not memory based, so very long files can be used, without

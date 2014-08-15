@@ -23,7 +23,6 @@
  */
 package syncleus.dann.math.matrix.hessian;
 
-import org.encog.neural.networks.BasicNetwork;
 import syncleus.dann.learn.ml.MLData;
 import syncleus.dann.learn.ml.MLDataPair;
 import syncleus.dann.learn.ml.MLDataSet;
@@ -31,6 +30,7 @@ import syncleus.dann.math.EncogMath;
 import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.math.matrix.SimpleRealMatrix;
 import syncleus.dann.math.statistics.ErrorCalculation;
+import syncleus.dann.neural.networks.BasicNetwork;
 
 /**
  * Calculate the Hessian matrix using the finite difference method. This is a
@@ -96,7 +96,7 @@ public class HessianFD extends BasicHessian {
         this.dStep = new double[this.weightCount];
 
         for (int i = 0; i < this.weightCount; i++) {
-            this.dStep[i] = this.INITIAL_STEP;
+            this.dStep[i] = HessianFD.INITIAL_STEP;
         }
 
     }
@@ -190,7 +190,7 @@ public class HessianFD extends BasicHessian {
 
         final double[] points = new double[this.dCoeff.length];
 
-        stepSize[row] = Math.max(this.INITIAL_STEP * Math.abs(temp),
+        stepSize[row] = Math.max(HessianFD.INITIAL_STEP * Math.abs(temp),
                 INITIAL_STEP);
 
         points[this.center] = networkOutput;

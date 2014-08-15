@@ -18,17 +18,19 @@
  ******************************************************************************/
 package syncleus.dann.graphicalmodel.bayesian;
 
-import org.junit.Assert;
-import org.junit.Test;
-import syncleus.dann.graph.ImmutableDirectedEdge;
-import syncleus.dann.learn.graphical.GraphicalModelNode;
-import syncleus.dann.learn.graphical.SimpleGraphicalModelNode;
-import syncleus.dann.learn.bayesian.MutableBayesianAdjacencyNetwork;
-
-import javax.xml.bind.annotation.XmlRootElement;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
+
+import javax.xml.bind.annotation.XmlRootElement;
+
+import org.junit.Assert;
+import org.junit.Test;
+
+import syncleus.dann.graph.ImmutableDirectedEdge;
+import syncleus.dann.learn.bayesian.MutableBayesianAdjacencyNetwork;
+import syncleus.dann.learn.graphical.GraphicalModelNode;
+import syncleus.dann.learn.graphical.SimpleGraphicalModelNode;
 
 public class TestSicknessBayesianNetwork {
     @XmlRootElement

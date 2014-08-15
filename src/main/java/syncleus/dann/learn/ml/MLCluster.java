@@ -23,9 +23,6 @@
  */
 package syncleus.dann.learn.ml;
 
-import syncleus.dann.learn.ml.MLData;
-import syncleus.dann.learn.ml.MLDataSet;
-
 import java.util.List;
 
 /**

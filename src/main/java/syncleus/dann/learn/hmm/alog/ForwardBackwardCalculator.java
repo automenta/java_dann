@@ -23,12 +23,12 @@
  */
 package syncleus.dann.learn.hmm.alog;
 
+import java.util.EnumSet;
+import java.util.Iterator;
+
 import syncleus.dann.learn.hmm.HiddenMarkovModel;
 import syncleus.dann.learn.ml.MLDataPair;
 import syncleus.dann.learn.ml.MLDataSet;
-
-import java.util.EnumSet;
-import java.util.Iterator;
 
 /**
  * The forward-backward algorithm is an inference algorithm for hidden Markov

@@ -23,7 +23,6 @@
  */
 package syncleus.dann.learn.ml;
 
-import syncleus.dann.learn.ml.MLData;
 
 /**
  * Defines a Machine Learning Method that supports regression. Regression takes

@@ -21,7 +21,7 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package org.encog.util.obj;
+package syncleus.dann.util;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -54,7 +54,7 @@ public class ChooseObject<T> implements Serializable {
 	 * Finalize the structure and set the probabilities.
 	 */
 	public void finalizeStructure() {
-		double[] d = new double[size()];
+		final double[] d = new double[size()];
 		for(int i=0;i<size();i++) {
 			d[i] = list.get(i).getProbability();
 		}
@@ -67,7 +67,7 @@ public class ChooseObject<T> implements Serializable {
 	 * @param probability The probability to choose this object.
 	 * @param opp The object to add.
 	 */
-	public void add(double probability, T opp) {
+	public void add(final double probability, final T opp) {
 		list.add(new ObjectHolder<T>(opp,probability));
 	}
 	
@@ -83,8 +83,8 @@ public class ChooseObject<T> implements Serializable {
 	 * @param theGenerator
 	 * @return The random choice.
 	 */
-	public T pick(Random theGenerator) {
-		int index = this.chooser.generate(theGenerator);
+	public T pick(final Random theGenerator) {
+		final int index = this.chooser.generate(theGenerator);
 		return this.list.get(index).getObj();
 	}
 	

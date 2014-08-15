@@ -23,9 +23,9 @@
  */
 package syncleus.dann.evolve.sort;
 
-import syncleus.dann.evolve.genome.Genome;
-
 import java.util.Comparator;
+
+import syncleus.dann.evolve.genome.Genome;
 
 /**
  * Defines methods for comparing genomes. Also provides methods to apply bonuses

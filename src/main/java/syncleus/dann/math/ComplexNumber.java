@@ -27,10 +27,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.apache.commons.math3.complex.Complex;
 
-public class ComplexNumber implements TrigonometricAlgebraic<ComplexNumber> {
-    public static final class Field implements
-            syncleus.dann.math.OrderedField<ComplexNumber> {
+//TODO subclass http://commons.apache.org/proper/commons-math/javadocs/api-3.3/org/apache/commons/math3/complex/Complex.html
+
+public class ComplexNumber extends org.apache.commons.math3.complex.Complex implements TrigonometricAlgebraic<ComplexNumber> {
+    
+  
+	public static final class Field implements syncleus.dann.math.OrderedField<ComplexNumber> {
         public static final Field FIELD = new Field();
 
         public static ComplexNumber getImaginaryUnit() {
@@ -98,27 +102,23 @@ public class ComplexNumber implements TrigonometricAlgebraic<ComplexNumber> {
         return complexSum;
     }
 
-    private final double i;
 
-    private final double r;
 
     public ComplexNumber(final double imaginary) {
-        this.r = 0.0;
-        this.i = imaginary;
+    	super(0, imaginary);
     }
 
+    public ComplexNumber(ComplexNumber c) {
+    	this(c.getReal(), c.getImaginary());    	
+    }
+    
     public ComplexNumber(final double real, final double imaginary) {
-        this.r = real;
-        this.i = imaginary;
+    	super(real, imaginary);
     }
 
-    @Override
-    public final ComplexNumber abs() {
-        return new ComplexNumber(this.absScalar(), 0.0);
-    }
 
     public final double absScalar() {
-        return Math.hypot(this.r, this.i);
+        return Math.hypot(this.getReal(), this.getImaginary());
     }
 
     @Override
@@ -128,11 +128,22 @@ public class ComplexNumber implements TrigonometricAlgebraic<ComplexNumber> {
     }
 
     @Override
-    public final ComplexNumber add(final ComplexNumber value) {
-        return new ComplexNumber(this.r + value.r,
-                this.i + value.i);
+    public final ComplexNumber add(final org.apache.commons.math3.complex.Complex value) {
+        return new ComplexNumber(getReal() + value.getReal(),
+                getImaginary() + value.getImaginary());
     }
 
+	@Override
+	public ComplexNumber add(ComplexNumber value) {
+        return new ComplexNumber(getReal() + value.getReal(),
+                getImaginary() + value.getImaginary());
+	}
+
+	@Override
+	public ComplexNumber algebraicAbsolute() {
+        return new ComplexNumber(this.absScalar(), 0.0);
+	}
+    
     public final ComplexNumber add(final double value) {
         return this.add(new ComplexNumber(value, 0.0));
     }
@@ -144,7 +155,7 @@ public class ComplexNumber implements TrigonometricAlgebraic<ComplexNumber> {
      * @return arg(z) where z is this Complex number.
      */
     public double arg() {
-        return Math.atan2(i, r);
+        return Math.atan2(getImaginary(), getReal());
     }
 
     @Override
@@ -168,7 +179,7 @@ public class ComplexNumber implements TrigonometricAlgebraic<ComplexNumber> {
      * @return -z where z is this Complex number.
      */
     public ComplexNumber chs() {
-        return new ComplexNumber(-r, -i);
+        return new ComplexNumber(-getReal(), -getImaginary());
     }
 
     /**
@@ -178,11 +189,11 @@ public class ComplexNumber implements TrigonometricAlgebraic<ComplexNumber> {
      * @return z-bar where z is this Complex number.
      */
     public ComplexNumber conj() {
-        return new ComplexNumber(r, -i);
+        return new ComplexNumber(getReal(), -getImaginary());
     }
 
     public final ComplexNumber conjugate() {
-        return new ComplexNumber(this.r, -this.i);
+        return new ComplexNumber(getReal(), -getImaginary());
     }
 
 
@@ -194,7 +205,7 @@ public class ComplexNumber implements TrigonometricAlgebraic<ComplexNumber> {
      */
     @Override
     public ComplexNumber cos() {
-        return new ComplexNumber(cosh(i) * Math.cos(r), -sinh(i) * Math.sin(r));
+        return new ComplexNumber(cosh(getImaginary()) * Math.cos(getReal()), -sinh(getImaginary()) * Math.sin(getReal()));
     }
 
 
@@ -207,7 +218,7 @@ public class ComplexNumber implements TrigonometricAlgebraic<ComplexNumber> {
      */
     @Override
     public ComplexNumber cosh() {
-        return new ComplexNumber(cosh(r) * Math.cos(i), sinh(r) * Math.sin(i));
+        return new ComplexNumber(cosh(getReal()) * Math.cos(getImaginary()), sinh(getReal()) * Math.sin(getImaginary()));
     }
 
     // Real cosh function (used to compute complex trig functions)
@@ -223,6 +234,8 @@ public class ComplexNumber implements TrigonometricAlgebraic<ComplexNumber> {
      * @return new Complex number z/w where z is this Complex number
      */
     public ComplexNumber div(final ComplexNumber w) {
+    	final double i = getImaginary();
+    	final double r = getReal();
         final double den = Math.pow(w.mod(), 2);
         return new ComplexNumber(
                 (r * w.getReal() + i * w.getImaginary()) / den, (i
@@ -241,13 +254,14 @@ public class ComplexNumber implements TrigonometricAlgebraic<ComplexNumber> {
 
     @Override
     public boolean equals(final Object compareObject) {
-        if (!(compareObject instanceof ComplexNumber))
+        if (!(compareObject instanceof org.apache.commons.math3.complex.Complex))
             return false;
-        final ComplexNumber compareComplex = (ComplexNumber) compareObject;
-        if (compareComplex.r != this.r)
+        
+        final org.apache.commons.math3.complex.Complex compareComplex = (org.apache.commons.math3.complex.Complex) compareObject;
+        if (compareComplex.getReal() != getReal())
             return false;
 
-        return compareComplex.i == this.i;
+        return compareComplex.getImaginary() == getImaginary();
     }
 
     /**
@@ -257,28 +271,24 @@ public class ComplexNumber implements TrigonometricAlgebraic<ComplexNumber> {
      */
     @Override
     public ComplexNumber exp() {
+    	final double r = getReal(), i	= getImaginary();    	
         return new ComplexNumber(Math.exp(r) * Math.cos(i), Math.exp(r)
                 * Math.sin(i));
     }
 
-    @Override
-    public syncleus.dann.math.Field<ComplexNumber> getField() {
-        return Field.FIELD;
-    }
-
     public final double getImaginary() {
-        return this.i;
+        return getImaginary();
     }
 
     public final double getReal() {
-        return this.r;
+        return getReal();
     }
 
     @Override
     public int hashCode() {
-        final int imaginaryHash = Double.valueOf(this.i)
+        final int imaginaryHash = Double.valueOf(getImaginary())
                 .hashCode();
-        final int realHash = Double.valueOf(this.r).hashCode();
+        final int realHash = Double.valueOf(getReal()).hashCode();
         return (imaginaryHash * realHash) + realHash;
     }
 
@@ -288,19 +298,19 @@ public class ComplexNumber implements TrigonometricAlgebraic<ComplexNumber> {
     }
 
     public boolean isInfinite() {
-        return Double.isInfinite(this.r)
-                || Double.isInfinite(this.i);
+        return Double.isInfinite(getReal())
+                || Double.isInfinite(getImaginary());
     }
 
     public boolean isNaN() {
-        return Double.isNaN(this.r)
-                || Double.isNaN(this.i);
+        return Double.isNaN(getReal())
+                || Double.isNaN(getImaginary());
     }
 
     @Override
     public final ComplexNumber log() {
         return new ComplexNumber(Math.log(this.absScalar()), Math.atan2(
-                this.i, this.r));
+                getImaginary(), getReal()));
     }
 
     /**
@@ -322,6 +332,7 @@ public class ComplexNumber implements TrigonometricAlgebraic<ComplexNumber> {
      * @return z-w where z is this Complex number.
      */
     public ComplexNumber minus(final ComplexNumber w) {
+    	final double r = getReal(), i	= getImaginary();    	
         return new ComplexNumber(r - w.getReal(), i - w.getImaginary());
     }
 
@@ -332,6 +343,7 @@ public class ComplexNumber implements TrigonometricAlgebraic<ComplexNumber> {
      * @return |z| where z is this Complex number.
      */
     public double mod() {
+    	final double r = getReal(), i	= getImaginary();    	
         if (r != 0 || i != 0) {
             return Math.sqrt(r * r + i * i);
         } else {
@@ -341,26 +353,27 @@ public class ComplexNumber implements TrigonometricAlgebraic<ComplexNumber> {
 
     @Override
     public final ComplexNumber multiply(final ComplexNumber value) {
-        final double imaginary = this.r * value.i
-                + this.i * value.r;
-        final double real = this.r * value.r
-                - this.i * value.i;
+    	final double r = getReal(), i	= getImaginary();
+        final double imaginary = getReal() * value.getImaginary()
+                + getImaginary() * value.getReal();
+        final double real = getReal() * value.getReal()
+                - getImaginary() * value.getImaginary();
         return new ComplexNumber(real, imaginary);
     }
 
     public final ComplexNumber multiply(final double value) {
-        return new ComplexNumber(value * this.r, value
-                * this.i);
+        return new ComplexNumber(value * getReal(), value
+                * getImaginary());
     }
 
     @Override
     public final ComplexNumber negate() {
-        return new ComplexNumber(-this.r, -this.i);
+        return new ComplexNumber(-getReal(), -getImaginary());
     }
 
     // Value between -pi and pi
     public final double phase() {
-        return Math.atan2(this.i, this.r);
+        return Math.atan2(getImaginary(), getReal());
     }
 
     /**
@@ -371,6 +384,8 @@ public class ComplexNumber implements TrigonometricAlgebraic<ComplexNumber> {
      * @return z+w where z is this Complex number.
      */
     public ComplexNumber plus(final ComplexNumber w) {
+    	final double r = getReal();
+    	final double i	= getImaginary();
         return new ComplexNumber(r + w.getReal(), i + w.getImaginary());
     }
 
@@ -388,9 +403,9 @@ public class ComplexNumber implements TrigonometricAlgebraic<ComplexNumber> {
 
     @Override
     public final ComplexNumber reciprocal() {
-        final double scale = (this.r * this.r)
-                + (this.i * this.i);
-        return new ComplexNumber(this.r / scale, -this.i
+        final double scale = (getReal() * getReal())
+                + (getImaginary() * getImaginary());
+        return new ComplexNumber(getReal() / scale, -getImaginary()
                 / scale);
     }
 
@@ -421,6 +436,8 @@ public class ComplexNumber implements TrigonometricAlgebraic<ComplexNumber> {
      */
     @Override
     public ComplexNumber sin() {
+    	final double r = getReal();
+    	final double i	= getImaginary();    	
         return new ComplexNumber(cosh(i) * Math.sin(r), sinh(i) * Math.cos(r));
     }
 
@@ -433,6 +450,8 @@ public class ComplexNumber implements TrigonometricAlgebraic<ComplexNumber> {
      */
     @Override
     public ComplexNumber sinh() {
+    	final double r = getReal();
+    	final double i	= getImaginary();    	
         return new ComplexNumber(sinh(r) * Math.cos(i), cosh(r) * Math.sin(i));
     }
 
@@ -447,11 +466,11 @@ public class ComplexNumber implements TrigonometricAlgebraic<ComplexNumber> {
         // sqrt(a + i b) = +/- (sqrt(radius + a) + i sqrt(radius - a) sign(b))
         // sqrt(2) / 2,
         // where radius = sqrt(a^2 + b^2).
-        final double radius = Math.sqrt((this.r * this.r)
-                + (this.i * this.i));
+        final double radius = Math.sqrt((getReal() * getReal())
+                + (getImaginary() * getImaginary()));
         final ComplexNumber intermediate = new ComplexNumber(Math.sqrt(radius
-                + this.r), Math.sqrt(radius + this.r)
-                * Math.signum(this.i));
+                + getReal()), Math.sqrt(radius + getReal())
+                * Math.signum(getImaginary()));
         return intermediate.multiply(Math.sqrt(2.0)).divide(2.0);
     }
 
@@ -475,8 +494,10 @@ public class ComplexNumber implements TrigonometricAlgebraic<ComplexNumber> {
 
     @Override
     public final ComplexNumber subtract(final ComplexNumber value) {
-        return new ComplexNumber(this.r - value.r,
-                this.i - value.i);
+    	final double r = getReal();
+    	final double i	= getImaginary();
+        return new ComplexNumber(getReal() - value.getReal(),
+                getImaginary() - value.getImaginary());
     }
 
     public final ComplexNumber subtract(final double value) {
@@ -496,10 +517,10 @@ public class ComplexNumber implements TrigonometricAlgebraic<ComplexNumber> {
 
     @Override
     public final ComplexNumber tanh() {
-        final double denominator = Math.cosh(2.0 * this.r)
-                + Math.cos(2.0 * this.i);
-        return new ComplexNumber(Math.sinh(2.0 * this.r) / denominator,
-                Math.sin(2.0 * this.i) / denominator);
+        final double denominator = Math.cosh(2.0 * getReal())
+                + Math.cos(2.0 * getImaginary());
+        return new ComplexNumber(Math.sinh(2.0 * getReal()) / denominator,
+                Math.sin(2.0 * getImaginary()) / denominator);
     }
 
     /**
@@ -509,19 +530,21 @@ public class ComplexNumber implements TrigonometricAlgebraic<ComplexNumber> {
      * @return z*w where z is this Complex number.
      */
     public ComplexNumber times(final ComplexNumber w) {
+    	final double r = getReal();
+    	final double i	= getImaginary();
         return new ComplexNumber(r * w.getReal() - i * w.getImaginary(), r
                 * w.getImaginary() + i * w.getReal());
     }
 
     @Override
     public String toString() {
-        if (this.i == 0)
-            return this.r + "0";
-        if (this.r == 0)
-            return this.i + "i";
-        if (this.i < 0)
-            return this.r + " - " + this.i + 'i';
-        return this.r + " + " + this.i + 'i';
+        if (getImaginary() == 0)
+            return getReal() + "0";
+        if (getReal() == 0)
+            return getImaginary() + "i";
+        if (getImaginary() < 0)
+            return getReal() + " - " + getImaginary() + 'i';
+        return getReal() + " + " + getImaginary() + 'i';
     }
 
     /**
@@ -530,6 +553,9 @@ public class ComplexNumber implements TrigonometricAlgebraic<ComplexNumber> {
      * @return x+i*y, x-i*y, x, or i*y as appropriate.
      */
     public String toString2() {
+    	final double r = getReal();
+    	final double i	= getImaginary();
+    	
         if (r != 0 && i > 0) {
             return r + " + " + i + 'i';
         }
@@ -546,5 +572,14 @@ public class ComplexNumber implements TrigonometricAlgebraic<ComplexNumber> {
         return r + " + i*" + i;
 
     }
+
+	@Override
+	public syncleus.dann.math.Field<ComplexNumber> field() {
+		return Field.FIELD;
+	}
+
+
+
+
 
 }

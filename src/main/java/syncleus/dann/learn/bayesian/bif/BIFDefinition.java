@@ -23,11 +23,11 @@
  */
 package syncleus.dann.learn.bayesian.bif;
 
-import syncleus.dann.data.file.csv.CSVFormat;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
+
+import syncleus.dann.data.file.csv.CSVFormat;
 
 /**
  * Holds a BIF definition.

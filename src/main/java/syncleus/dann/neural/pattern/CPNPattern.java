@@ -24,7 +24,8 @@
 package org.encog.neural.pattern;
 
 import syncleus.dann.learn.ml.MLMethod;
-import org.encog.neural.cpn.CPN;
+import syncleus.dann.neural.activation.EncogActivationFunction;
+import syncleus.dann.neural.cpn.CPN;
 
 /**
  * Pattern that creates a CPN neural network.

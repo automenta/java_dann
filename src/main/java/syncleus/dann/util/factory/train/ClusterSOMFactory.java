@@ -23,11 +23,11 @@
  */
 package syncleus.dann.util.factory.train;
 
+import syncleus.dann.learn.ml.MLDataSet;
 import syncleus.dann.learn.ml.MLMethod;
 import syncleus.dann.learn.train.MLTrain;
-import org.encog.neural.som.SOM;
-import org.encog.neural.som.training.clustercopy.SOMClusterCopyTraining;
-import syncleus.dann.learn.ml.MLDataSet;
+import syncleus.dann.neural.som.SOM;
+import syncleus.dann.neural.som.training.clustercopy.SOMClusterCopyTraining;
 
 /**
  * Create a trainer that uses the SOM cluster training method.

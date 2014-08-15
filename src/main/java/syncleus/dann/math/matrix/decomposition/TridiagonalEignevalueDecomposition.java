@@ -23,13 +23,13 @@
  */
 package syncleus.dann.math.matrix.decomposition;
 
-import syncleus.dann.math.RealNumber;
-import syncleus.dann.math.matrix.RealMatrix;
-import syncleus.dann.math.matrix.SimpleRealMatrix;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import syncleus.dann.math.RealNumber;
+import syncleus.dann.math.matrix.RealMatrix;
+import syncleus.dann.math.matrix.SimpleRealMatrix;
 
 /**
  * Eigenvalues and eigenvectors of a real matrix.
@@ -258,10 +258,7 @@ public class TridiagonalEignevalueDecomposition implements
             // If m == l, d[l] is an eigenvalue,
             // otherwise, iterate.
             if (m > l) {
-                int iter = 0;
                 do {
-                    iter += 1; // (Could check iteration count here.)
-
                     // Compute implicit shift
                     double g = d[l];
                     double p = (d[l + 1] - g) / (2.0 * e[l]);

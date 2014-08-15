@@ -23,14 +23,14 @@
  */
 package syncleus.dann.learn.hmm.train.kmeans;
 
-import syncleus.dann.learn.ml.MLDataPair;
-import syncleus.dann.learn.ml.MLDataSet;
-import syncleus.dann.classify.kmeans.KMeansUtil;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Hashtable;
 import java.util.List;
+
+import syncleus.dann.classify.kmeans.KMeansUtil;
+import syncleus.dann.learn.ml.MLDataPair;
+import syncleus.dann.learn.ml.MLDataSet;
 
 /**
  * Clusters used for the KMeans HMM training algorithm.

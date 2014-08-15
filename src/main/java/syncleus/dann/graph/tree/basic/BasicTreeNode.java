@@ -23,17 +23,17 @@
  */
 package syncleus.dann.graph.tree.basic;
 
-import syncleus.dann.graph.DirectedEdge;
-import syncleus.dann.graph.Graph;
-import syncleus.dann.graph.tree.TreeNode;
-import syncleus.dann.graph.tree.traverse.tasks.TaskCountNodes;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
+
+import syncleus.dann.graph.DirectedEdge;
+import syncleus.dann.graph.Graph;
+import syncleus.dann.graph.tree.TreeNode;
+import syncleus.dann.graph.tree.traverse.tasks.TaskCountNodes;
 
 public class BasicTreeNode implements TreeNode, Serializable {
     private final List<TreeNode> childNodes = new ArrayList<>();
@@ -61,6 +61,22 @@ public class BasicTreeNode implements TreeNode, Serializable {
 
         return result;
     }
+    
+    
+    @Override public Stream<TreeNode> streamAdjacentNodes(final TreeNode node) {
+    	if (this == node) {
+    		return childNodes.stream();
+    	}
+    	else if (childNodes.contains(node)) {
+    		ArrayList<TreeNode> adjacent = new ArrayList(1);
+    		adjacent.add(this);
+    		return Stream.concat(adjacent.stream(), node.streamAdjacentNodes(node));    		
+    	}
+    	else {
+    		//TODO recurse children
+    		return Stream.empty();
+    	}
+    }    
 
     @Override
     public boolean isLeaf() {
@@ -73,7 +89,7 @@ public class BasicTreeNode implements TreeNode, Serializable {
     }
 
     @Override
-    public boolean isSpanningTree(Graph<TreeNode, DirectedEdge<TreeNode>> subGraph) {
+    public boolean isSpanningTree(final Graph<TreeNode, DirectedEdge<TreeNode>> subGraph) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
@@ -97,54 +113,5 @@ public class BasicTreeNode implements TreeNode, Serializable {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    @Override
-    public List<TreeNode> getAdjacentNodes(TreeNode node) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public List<TreeNode> getTraversableNodes(TreeNode node) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public Graph<TreeNode, DirectedEdge<TreeNode>> cloneAdd(DirectedEdge<TreeNode> newEdge) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public Graph<TreeNode, DirectedEdge<TreeNode>> cloneAdd(TreeNode newNode) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public Graph<TreeNode, DirectedEdge<TreeNode>> cloneAdd(Set<TreeNode> newNodes, Set<DirectedEdge<TreeNode>> newEdges) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public Graph<TreeNode, DirectedEdge<TreeNode>> cloneRemove(DirectedEdge<TreeNode> edgeToRemove) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public Graph<TreeNode, DirectedEdge<TreeNode>> cloneRemove(TreeNode nodeToRemove) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public Graph<TreeNode, DirectedEdge<TreeNode>> cloneRemove(Set<TreeNode> deleteNodes, Set<DirectedEdge<TreeNode>> deleteEdges) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public Graph<TreeNode, DirectedEdge<TreeNode>> clone() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public boolean isContextEnabled() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
+  
 }

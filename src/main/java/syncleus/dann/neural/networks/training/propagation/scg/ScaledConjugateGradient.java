@@ -23,12 +23,12 @@
  */
 package org.encog.neural.networks.training.propagation.scg;
 
-import org.encog.neural.networks.ContainsFlat;
-import org.encog.neural.networks.training.propagation.Propagation;
-import org.encog.neural.networks.training.propagation.TrainingContinuation;
 import syncleus.dann.learn.ml.MLDataSet;
 import syncleus.dann.math.BoundNumbers;
 import syncleus.dann.math.array.EngineArray;
+import syncleus.dann.neural.networks.ContainsFlat;
+import syncleus.dann.neural.networks.training.propagation.Propagation;
+import syncleus.dann.neural.networks.training.propagation.TrainingContinuation;
 
 /**
  * This is a training class that makes use of scaled conjugate gradient methods.

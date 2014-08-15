@@ -23,6 +23,8 @@
  */
 package syncleus.dann.data.temporal;
 
+import syncleus.dann.neural.activation.EncogActivationFunction;
+
 
 /**
  * This class describes one unit of input, or output, to a temporal neural
@@ -86,7 +88,7 @@ public class TemporalDataDescription {
     /**
      * Should an activation function be used?
      */
-    private final ActivationFunction activationFunction;
+    private final EncogActivationFunction activationFunction;
 
     /**
      * Construct a data description item. Set both low and high to zero for
@@ -99,7 +101,7 @@ public class TemporalDataDescription {
      * @param input              Used for input?
      * @param predict            Used for prediction?
      */
-    public TemporalDataDescription(final ActivationFunction activationFunction,
+    public TemporalDataDescription(final EncogActivationFunction  activationFunction,
                                    final double low, final double high, final Type type,
                                    final boolean input, final boolean predict) {
         this.low = low;
@@ -118,7 +120,7 @@ public class TemporalDataDescription {
      * @param input              Used for input?
      * @param predict            Used for prediction?
      */
-    public TemporalDataDescription(final ActivationFunction activationFunction,
+    public TemporalDataDescription(final EncogActivationFunction activationFunction,
                                    final Type type, final boolean input, final boolean predict) {
         this(activationFunction, 0, 0, type, input, predict);
     }
@@ -138,13 +140,13 @@ public class TemporalDataDescription {
     /**
      * @return the activationFunction
      */
-    public ActivationFunction getActivationFunction() {
+    public EncogActivationFunction getActivationFunction() {
         return this.activationFunction;
     }
 
     /**
      * @return the high
-     */
+     */	
     public double getHigh() {
         return this.high;
     }

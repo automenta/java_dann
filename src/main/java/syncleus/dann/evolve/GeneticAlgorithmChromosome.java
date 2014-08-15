@@ -18,16 +18,17 @@
  ******************************************************************************/
 package syncleus.dann.evolve;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import syncleus.dann.evolve.wavelets.Mutations;
-import syncleus.dann.util.UnexpectedDannError;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import syncleus.dann.evolve.wavelets.Mutations;
+import syncleus.dann.util.UnexpectedDannError;
 
 /**
  * A Genetic Algorithm based Chromosome. While technically a Chromatid in

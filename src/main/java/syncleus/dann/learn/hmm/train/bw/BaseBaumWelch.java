@@ -23,19 +23,19 @@
  */
 package syncleus.dann.learn.hmm.train.bw;
 
-import syncleus.dann.learn.ml.MLMethod;
-import syncleus.dann.learn.ml.TrainingImplementationType;
+import java.util.Arrays;
+import java.util.List;
+
 import syncleus.dann.learn.hmm.HiddenMarkovModel;
 import syncleus.dann.learn.hmm.alog.ForwardBackwardCalculator;
 import syncleus.dann.learn.hmm.distributions.StateDistribution;
+import syncleus.dann.learn.ml.MLDataSet;
+import syncleus.dann.learn.ml.MLMethod;
+import syncleus.dann.learn.ml.MLSequenceSet;
+import syncleus.dann.learn.ml.TrainingImplementationType;
 import syncleus.dann.learn.train.MLTrain;
 import syncleus.dann.learn.train.strategy.Strategy;
-import org.encog.neural.networks.training.propagation.TrainingContinuation;
-import syncleus.dann.learn.ml.MLDataSet;
-import syncleus.dann.learn.ml.MLSequenceSet;
-
-import java.util.Arrays;
-import java.util.List;
+import syncleus.dann.neural.networks.training.propagation.TrainingContinuation;
 
 /**
  * This class provides the base implementation for Baum-Welch learning for

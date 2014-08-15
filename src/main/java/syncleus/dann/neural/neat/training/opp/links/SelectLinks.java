@@ -23,12 +23,12 @@
  */
 package org.encog.neural.neat.training.opp.links;
 
-import syncleus.dann.evolve.train.EvolutionaryAlgorithm;
-import org.encog.neural.neat.training.NEATGenome;
-import org.encog.neural.neat.training.NEATLinkGene;
-
 import java.util.List;
 import java.util.Random;
+
+import syncleus.dann.evolve.train.EvolutionaryAlgorithm;
+import syncleus.dann.neural.neat.training.NEATGenome;
+import syncleus.dann.neural.neat.training.NEATLinkGene;
 
 /**
  * This interface defines ways that NEAT links can be chosen for mutation.

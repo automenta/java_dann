@@ -72,8 +72,8 @@ public class CholeskyCroutCholeskyDecomposition<M extends Matrix<M, F>, F extend
             }
             d = matrixToDecompose.getNumber(j, j).subtract(d);
             checkIsSpd = checkIsSpd
-                    && (d.compareTo(d.getField().getZero()) > 0);
-            newMatrix = newMatrix.set(j, j, d.max(d.getField().getZero())
+                    && (d.compareTo(d.field().getZero()) > 0);
+            newMatrix = newMatrix.set(j, j, d.max(d.field().getZero())
                     .sqrt());
             for (int k = j + 1; k < matrixToDecompose.getWidth(); k++)
                 newMatrix = newMatrix.set(k, j, newMatrix.getElementField()

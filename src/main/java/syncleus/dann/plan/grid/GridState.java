@@ -23,8 +23,8 @@
  */
 package syncleus.dann.plan.grid;
 
-import syncleus.dann.plan.basic.BasicState;
 import syncleus.dann.math.Format;
+import syncleus.dann.plan.basic.BasicState;
 
 public class GridState extends BasicState {
 

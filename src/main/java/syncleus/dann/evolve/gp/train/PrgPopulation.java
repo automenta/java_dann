@@ -23,13 +23,13 @@
  */
 package org.encog.ml.prg.train;
 
-import syncleus.dann.learn.ml.MLRegression;
 import syncleus.dann.evolve.genome.Genome;
+import syncleus.dann.evolve.gp.EncogProgram;
+import syncleus.dann.evolve.gp.EncogProgramContext;
 import syncleus.dann.evolve.population.BasicPopulation;
 import syncleus.dann.evolve.species.Species;
-import org.encog.ml.prg.EncogProgram;
-import org.encog.ml.prg.EncogProgramContext;
 import syncleus.dann.learn.ml.MLData;
+import syncleus.dann.learn.ml.MLRegression;
 
 /**
  * A population that contains EncogProgram's. The primary difference between

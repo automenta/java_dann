@@ -23,20 +23,20 @@
  */
 package org.encog.neural.networks.training.pnn;
 
-import syncleus.dann.learn.ml.MLMethod;
-import syncleus.dann.learn.ml.TrainingImplementationType;
 import syncleus.dann.data.basic.BasicMLData;
 import syncleus.dann.data.basic.BasicMLDataPair;
 import syncleus.dann.data.basic.BasicMLDataSet;
-import syncleus.dann.learn.train.BasicTraining;
-import org.encog.neural.networks.training.propagation.TrainingContinuation;
-import org.encog.neural.pnn.BasicPNN;
-import org.encog.neural.pnn.PNNKernelType;
-import org.encog.neural.pnn.PNNOutputMode;
 import syncleus.dann.learn.ml.MLData;
 import syncleus.dann.learn.ml.MLDataPair;
 import syncleus.dann.learn.ml.MLDataSet;
+import syncleus.dann.learn.ml.MLMethod;
+import syncleus.dann.learn.ml.TrainingImplementationType;
+import syncleus.dann.learn.train.BasicTraining;
 import syncleus.dann.math.array.EngineArray;
+import syncleus.dann.neural.networks.training.propagation.TrainingContinuation;
+import syncleus.dann.neural.pnn.BasicPNN;
+import syncleus.dann.neural.pnn.PNNKernelType;
+import syncleus.dann.neural.pnn.PNNOutputMode;
 
 /**
  * Train a PNN.

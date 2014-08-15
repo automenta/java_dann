@@ -29,7 +29,7 @@ package syncleus.dann.data.temporal;
  *
  * @author jheaton
  */
-public class TemporalError extends EncogError {
+public class TemporalError extends RuntimeException {
     /**
      * The serial id for this class.
      */

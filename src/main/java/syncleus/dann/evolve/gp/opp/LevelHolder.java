@@ -23,10 +23,10 @@
  */
 package org.encog.ml.prg.opp;
 
-import org.encog.ml.prg.ProgramNode;
-import org.encog.ml.prg.expvalue.ValueType;
-
 import java.util.List;
+
+import syncleus.dann.evolve.gp.ProgramNode;
+import syncleus.dann.evolve.gp.expvalue.ValueType;
 
 /**
  * The level holder class is passed down as a tree is mutated. The level holder

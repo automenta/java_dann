@@ -18,14 +18,21 @@
  ******************************************************************************/
 package syncleus.dann.graph.cycle;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.Stack;
+import java.util.TreeSet;
+
 import syncleus.dann.graph.Cycle;
 import syncleus.dann.graph.Edge;
 import syncleus.dann.graph.Graph;
 import syncleus.dann.graph.SimpleCycle;
 import syncleus.dann.graph.topological.Topography;
-
-import java.io.Serializable;
-import java.util.*;
 
 public class ExhaustiveDepthFirstSearchCycleFinder<N, E extends Edge<N>>
         extends ColoredDepthFirstSearchDetector implements CycleFinder<N, E> {

@@ -23,11 +23,11 @@
  */
 package syncleus.dann.util.factory.train;
 
+import syncleus.dann.learn.ml.MLDataSet;
 import syncleus.dann.learn.ml.MLMethod;
 import syncleus.dann.learn.train.MLTrain;
-import org.encog.neural.networks.BasicNetwork;
-import org.encog.neural.networks.training.lma.LevenbergMarquardtTraining;
-import syncleus.dann.learn.ml.MLDataSet;
+import syncleus.dann.neural.networks.BasicNetwork;
+import syncleus.dann.neural.networks.training.lma.LevenbergMarquardtTraining;
 
 /**
  * This class is a factory to create the LMA training method.

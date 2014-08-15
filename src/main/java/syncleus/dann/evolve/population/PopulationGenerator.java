@@ -23,9 +23,9 @@
  */
 package syncleus.dann.evolve.population;
 
-import syncleus.dann.evolve.genome.Genome;
-
 import java.util.Random;
+
+import syncleus.dann.evolve.genome.Genome;
 
 /**
  * Generate a random population.

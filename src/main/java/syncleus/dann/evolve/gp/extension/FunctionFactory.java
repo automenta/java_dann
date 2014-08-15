@@ -23,17 +23,17 @@
  */
 package org.encog.ml.prg.extension;
 
-import syncleus.dann.evolve.exception.EACompileError;
-import org.encog.ml.prg.EncogProgram;
-import org.encog.ml.prg.EncogProgramContext;
-import org.encog.ml.prg.ProgramNode;
-import org.encog.ml.prg.expvalue.ValueType;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import syncleus.dann.evolve.exception.EACompileError;
+import syncleus.dann.evolve.gp.EncogProgram;
+import syncleus.dann.evolve.gp.EncogProgramContext;
+import syncleus.dann.evolve.gp.ProgramNode;
+import syncleus.dann.evolve.gp.expvalue.ValueType;
 
 /**
  * A function factory maps the opcodes contained in the EncogOpcodeRegistry into

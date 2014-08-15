@@ -23,19 +23,19 @@
  */
 package syncleus.dann.util.factory.train;
 
+import java.util.Map;
+
 import syncleus.dann.learn.ml.CalculateScore;
-import syncleus.dann.learn.ml.MLMethod;
-import syncleus.dann.util.factory.MLTrainFactory;
-import syncleus.dann.util.factory.parse.ArchitectureParse;
-import syncleus.dann.learn.train.MLTrain;
-import org.encog.neural.networks.BasicNetwork;
-import org.encog.neural.networks.training.TrainingSetScore;
-import org.encog.neural.networks.training.pso.NeuralPSO;
 import syncleus.dann.learn.ml.MLDataSet;
+import syncleus.dann.learn.ml.MLMethod;
+import syncleus.dann.learn.train.MLTrain;
 import syncleus.dann.math.random.NguyenWidrowRandomizer;
 import syncleus.dann.math.random.Randomizer;
-
-import java.util.Map;
+import syncleus.dann.neural.networks.BasicNetwork;
+import syncleus.dann.neural.networks.training.TrainingSetScore;
+import syncleus.dann.neural.networks.training.pso.NeuralPSO;
+import syncleus.dann.util.factory.MLTrainFactory;
+import syncleus.dann.util.factory.parse.ArchitectureParse;
 
 /**
  * A factory for quick propagation training.

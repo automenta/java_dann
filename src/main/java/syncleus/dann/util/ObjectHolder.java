@@ -21,7 +21,7 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package org.encog.util.obj;
+package syncleus.dann.util;
 
 import java.io.Serializable;
 
@@ -43,7 +43,7 @@ public class ObjectHolder<T> implements Serializable {
 	 */
 	private final double probability;
 	
-	public ObjectHolder(T theObj, double probability) {
+	public ObjectHolder(final T theObj, final double probability) {
 		this.obj = theObj;
 		this.probability = probability;
 	}

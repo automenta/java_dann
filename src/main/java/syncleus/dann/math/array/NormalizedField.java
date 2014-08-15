@@ -23,14 +23,14 @@
  */
 package syncleus.dann.math.array;
 
-import syncleus.dann.math.EncogMath;
-import syncleus.dann.math.Equilateral;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import syncleus.dann.math.EncogMath;
+import syncleus.dann.math.Equilateral;
 
 
 /**

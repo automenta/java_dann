@@ -21,10 +21,10 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package org.encog.neural.networks.layers;
+package syncleus.dann.neural.networks.layers;
 
-import org.encog.neural.networks.BasicNetwork;
 import syncleus.dann.neural.activation.EncogActivationFunction;
+import syncleus.dann.neural.networks.BasicNetwork;
 
 /**
  * This interface defines all necessary methods for a neural network layer.
@@ -36,7 +36,7 @@ public interface Layer {
     /**
      * @return The activation function used for this layer.
      */
-    EncogActivationFunction getEncogActivationFunction();
+    EncogActivationFunction getActivationFunction();
 
     /**
      * @return The network that this layer is attached to.

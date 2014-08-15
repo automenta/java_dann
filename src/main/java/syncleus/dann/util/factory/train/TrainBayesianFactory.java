@@ -23,7 +23,8 @@
  */
 package syncleus.dann.util.factory.train;
 
-import syncleus.dann.learn.ml.MLMethod;
+import java.util.Map;
+
 import syncleus.dann.learn.bayesian.BayesianError;
 import syncleus.dann.learn.bayesian.EncogBayesianNetwork;
 import syncleus.dann.learn.bayesian.training.BayesianInit;
@@ -34,12 +35,11 @@ import syncleus.dann.learn.bayesian.training.estimator.SimpleEstimator;
 import syncleus.dann.learn.bayesian.training.search.SearchNone;
 import syncleus.dann.learn.bayesian.training.search.k2.BayesSearch;
 import syncleus.dann.learn.bayesian.training.search.k2.SearchK2;
+import syncleus.dann.learn.ml.MLDataSet;
+import syncleus.dann.learn.ml.MLMethod;
+import syncleus.dann.learn.train.MLTrain;
 import syncleus.dann.util.factory.MLTrainFactory;
 import syncleus.dann.util.factory.parse.ArchitectureParse;
-import syncleus.dann.learn.train.MLTrain;
-import syncleus.dann.learn.ml.MLDataSet;
-
-import java.util.Map;
 
 public class TrainBayesianFactory {
     /**

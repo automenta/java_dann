@@ -23,8 +23,8 @@
  */
 package syncleus.dann.evolve.codec;
 
-import syncleus.dann.learn.ml.MLMethod;
 import syncleus.dann.evolve.genome.Genome;
+import syncleus.dann.learn.ml.MLMethod;
 
 /**
  * This is a simple pass-through CODEC. This CODEC is used when the genome and

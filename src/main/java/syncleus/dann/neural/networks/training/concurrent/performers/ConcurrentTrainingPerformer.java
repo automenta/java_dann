@@ -23,8 +23,8 @@
  */
 package org.encog.neural.networks.training.concurrent.performers;
 
-import org.encog.neural.networks.training.concurrent.ConcurrentTrainingManager;
-import org.encog.neural.networks.training.concurrent.jobs.TrainingJob;
+import syncleus.dann.neural.networks.training.concurrent.ConcurrentTrainingManager;
+import syncleus.dann.neural.networks.training.concurrent.jobs.TrainingJob;
 
 /**
  * Performers actually perform the training. Currently there are performers for

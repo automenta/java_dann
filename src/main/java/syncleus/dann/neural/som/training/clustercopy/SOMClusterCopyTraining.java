@@ -23,15 +23,14 @@
  */
 package org.encog.neural.som.training.clustercopy;
 
-import syncleus.dann.learn.ml.MLMethod;
-import syncleus.dann.learn.ml.TrainingImplementationType;
-import syncleus.dann.learn.train.BasicTraining;
-import org.encog.neural.NeuralNetworkError;
-import org.encog.neural.networks.training.propagation.TrainingContinuation;
-import org.encog.neural.som.SOM;
 import syncleus.dann.learn.ml.MLData;
 import syncleus.dann.learn.ml.MLDataPair;
 import syncleus.dann.learn.ml.MLDataSet;
+import syncleus.dann.learn.ml.MLMethod;
+import syncleus.dann.learn.ml.TrainingImplementationType;
+import syncleus.dann.learn.train.BasicTraining;
+import syncleus.dann.neural.networks.training.propagation.TrainingContinuation;
+import syncleus.dann.neural.som.SOM;
 
 /**
  * SOM cluster copy is a very simple trainer for SOM's. Using this trainer all

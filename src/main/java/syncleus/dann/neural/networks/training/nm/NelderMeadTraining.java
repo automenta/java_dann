@@ -23,15 +23,15 @@
  */
 package org.encog.neural.networks.training.nm;
 
+import syncleus.dann.learn.ml.MLDataSet;
 import syncleus.dann.learn.ml.MLMethod;
 import syncleus.dann.learn.ml.TrainingImplementationType;
 import syncleus.dann.learn.train.BasicTraining;
-import org.encog.neural.networks.BasicNetwork;
-import org.encog.neural.networks.structure.NetworkCODEC;
-import org.encog.neural.networks.training.propagation.TrainingContinuation;
-import syncleus.dann.learn.ml.MLDataSet;
 import syncleus.dann.math.EncogMath;
 import syncleus.dann.math.array.EngineArray;
+import syncleus.dann.neural.networks.BasicNetwork;
+import syncleus.dann.neural.networks.structure.NetworkCODEC;
+import syncleus.dann.neural.networks.training.propagation.TrainingContinuation;
 
 /**
  * The Nelder-Mead method is a commonly used parameter optimization method that
@@ -248,7 +248,7 @@ public class NelderMeadTraining extends BasicTraining {
 			 * Reflection through the centroid.
 			 */
             for (int i = 0; i < n; i++) {
-                this.pstar[i] = this.pbar[i] + this.rcoeff
+                this.pstar[i] = this.pbar[i] + NelderMeadTraining.rcoeff
                         * (this.pbar[i] - this.p[i + this.ihi * n]);
             }
             this.ystar = fn(this.pstar);
@@ -257,7 +257,7 @@ public class NelderMeadTraining extends BasicTraining {
 			 */
             if (this.ystar < this.ylo) {
                 for (int i = 0; i < n; i++) {
-                    this.p2star[i] = this.pbar[i] + this.ecoeff
+                    this.p2star[i] = this.pbar[i] + NelderMeadTraining.ecoeff
                             * (this.pstar[i] - this.pbar[i]);
                 }
                 this.y2star = fn(this.p2star);
@@ -296,7 +296,7 @@ public class NelderMeadTraining extends BasicTraining {
 				 */
                 else if (this.l == 0) {
                     for (int i = 0; i < n; i++) {
-                        this.p2star[i] = this.pbar[i] + this.ccoeff
+                        this.p2star[i] = this.pbar[i] + NelderMeadTraining.ccoeff
                                 * (this.p[i + this.ihi * n] - this.pbar[i]);
                     }
                     this.y2star = fn(this.p2star);
@@ -336,7 +336,7 @@ public class NelderMeadTraining extends BasicTraining {
 				 */
                 else if (this.l == 1) {
                     for (int i = 0; i < n; i++) {
-                        this.p2star[i] = this.pbar[i] + this.ccoeff
+                        this.p2star[i] = this.pbar[i] + NelderMeadTraining.ccoeff
                                 * (this.pstar[i] - this.pbar[i]);
                     }
                     this.y2star = fn(this.p2star);
@@ -396,7 +396,7 @@ public class NelderMeadTraining extends BasicTraining {
         boolean fault = false;
 
         for (int i = 0; i < n; i++) {
-            this.del = this.step[i] * this.eps;
+            this.del = this.step[i] * NelderMeadTraining.eps;
             this.trainedWeights[i] += this.del;
             this.z = fn(this.trainedWeights);
             if (this.z < this.ynewlo) {
@@ -420,7 +420,7 @@ public class NelderMeadTraining extends BasicTraining {
                  * Restart the procedure.
                  */
             System.arraycopy(this.trainedWeights, 0, this.start, 0, n);
-            this.del = this.eps;
+            this.del = NelderMeadTraining.eps;
         }
 
         setError(this.ynewlo);

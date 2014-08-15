@@ -23,12 +23,12 @@
  */
 package syncleus.dann.evolve.species;
 
+import java.util.Collections;
+import java.util.List;
+
 import syncleus.dann.evolve.genome.Genome;
 import syncleus.dann.evolve.sort.SortGenomesForSpecies;
 import syncleus.dann.evolve.train.EvolutionaryAlgorithm;
-
-import java.util.Collections;
-import java.util.List;
 
 /**
  * This speciation strategy simply creates a single species that contains the

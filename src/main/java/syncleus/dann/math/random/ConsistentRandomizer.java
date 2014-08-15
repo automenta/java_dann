@@ -23,8 +23,8 @@
  */
 package syncleus.dann.math.random;
 
-import org.encog.neural.networks.BasicNetwork;
 import syncleus.dann.math.LinearCongruentialGenerator;
+import syncleus.dann.neural.networks.BasicNetwork;
 
 /**
  * A randomizer that takes a seed and will always produce consistent results.

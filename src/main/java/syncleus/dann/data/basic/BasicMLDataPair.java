@@ -23,11 +23,12 @@
  */
 package syncleus.dann.data.basic;
 
+import java.io.Serializable;
+
 import syncleus.dann.learn.ml.MLData;
 import syncleus.dann.learn.ml.MLDataPair;
+import syncleus.dann.math.Format;
 import syncleus.dann.math.cluster.Centroid;
-
-import java.io.Serializable;
 
 /**
  * A basic implementation of the MLDataPair interface. This implementation

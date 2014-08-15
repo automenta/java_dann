@@ -18,10 +18,10 @@
  ******************************************************************************/
 package syncleus.dann.learn.graphical;
 
+import java.util.Set;
+
 import syncleus.dann.graph.BidirectedEdge;
 import syncleus.dann.graph.Graph;
-
-import java.util.Set;
 
 public interface GraphicalModel<N extends GraphicalModelNode, E extends BidirectedEdge<N>>
         extends Graph<N, E> {

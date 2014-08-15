@@ -24,8 +24,9 @@
 package org.encog.neural.pattern;
 
 import syncleus.dann.learn.ml.MLMethod;
-import org.encog.neural.rbf.RBFNetwork;
 import syncleus.dann.math.rbf.RBFEnum;
+import syncleus.dann.neural.activation.EncogActivationFunction;
+import syncleus.dann.neural.rbf.RBFNetwork;
 
 /**
  * A radial basis function (RBF) network uses several radial basis functions to

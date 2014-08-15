@@ -23,9 +23,9 @@
  */
 package syncleus.dann.learn.train.strategy.end;
 
+import syncleus.dann.learn.ml.MLDataSet;
 import syncleus.dann.learn.ml.MLError;
 import syncleus.dann.learn.train.MLTrain;
-import syncleus.dann.learn.ml.MLDataSet;
 
 /**
  * Stop early when validation set no longer improves.

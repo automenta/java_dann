@@ -23,18 +23,18 @@
  */
 package org.encog.ml.prg;
 
-import syncleus.dann.evolve.exception.EARuntimeError;
-import org.encog.ml.prg.expvalue.ExpressionValue;
-import org.encog.ml.prg.expvalue.ValueType;
-import org.encog.ml.prg.extension.FunctionFactory;
-import org.encog.ml.prg.extension.StandardExtensions;
-import syncleus.dann.data.file.csv.CSVFormat;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import syncleus.dann.data.file.csv.CSVFormat;
+import syncleus.dann.evolve.exception.EARuntimeError;
+import syncleus.dann.evolve.gp.expvalue.ExpressionValue;
+import syncleus.dann.evolve.gp.expvalue.ValueType;
+import syncleus.dann.evolve.gp.extension.FunctionFactory;
+import syncleus.dann.evolve.gp.extension.StandardExtensions;
 
 /**
  * Every EncogProgram must belong to a context. When programs are in a

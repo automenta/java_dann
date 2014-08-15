@@ -23,16 +23,15 @@
  */
 package org.encog.neural.networks.training.concurrent;
 
-import org.encog.neural.NeuralNetworkError;
-import org.encog.neural.networks.training.concurrent.jobs.TrainingJob;
-import org.encog.neural.networks.training.concurrent.performers.ConcurrentTrainingPerformer;
-import org.encog.neural.networks.training.concurrent.performers.ConcurrentTrainingPerformerCPU;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
+
+import syncleus.dann.neural.networks.training.concurrent.jobs.TrainingJob;
+import syncleus.dann.neural.networks.training.concurrent.performers.ConcurrentTrainingPerformer;
+import syncleus.dann.neural.networks.training.concurrent.performers.ConcurrentTrainingPerformerCPU;
 
 /**
  * Concurrent training manager. This class allows you to queue up network

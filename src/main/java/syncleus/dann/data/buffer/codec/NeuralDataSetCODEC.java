@@ -23,12 +23,12 @@
  */
 package syncleus.dann.data.buffer.codec;
 
+import java.util.Iterator;
+
 import syncleus.dann.data.basic.BasicMLDataPair;
 import syncleus.dann.learn.ml.MLDataPair;
 import syncleus.dann.learn.ml.MLDataSet;
 import syncleus.dann.math.array.EngineArray;
-
-import java.util.Iterator;
 
 /**
  * A CODEC that works with the NeuralDataSet class.

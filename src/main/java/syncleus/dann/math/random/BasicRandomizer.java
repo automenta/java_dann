@@ -23,12 +23,12 @@
  */
 package syncleus.dann.math.random;
 
+import java.util.Random;
+
 import syncleus.dann.learn.ml.MLEncodable;
 import syncleus.dann.learn.ml.MLMethod;
-import org.encog.neural.networks.BasicNetwork;
 import syncleus.dann.math.matrix.SimpleRealMatrix;
-
-import java.util.Random;
+import syncleus.dann.neural.networks.BasicNetwork;
 
 /**
  * Provides basic functionality that most randomizers will need.

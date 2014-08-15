@@ -24,12 +24,13 @@
 package org.encog.neural.networks.training.propagation;
 
 import syncleus.dann.data.basic.BasicMLDataPair;
-import syncleus.dann.math.error.ErrorFunction;
-import org.encog.neural.flat.FlatNetwork;
 import syncleus.dann.learn.ml.MLDataPair;
 import syncleus.dann.learn.ml.MLDataSet;
 import syncleus.dann.math.array.EngineArray;
+import syncleus.dann.math.error.ErrorFunction;
 import syncleus.dann.math.statistics.ErrorCalculation;
+import syncleus.dann.neural.activation.EncogActivationFunction;
+import syncleus.dann.neural.flat.FlatNetwork;
 
 /**
  * Worker class for the mulithreaded training of flat networks.

@@ -23,9 +23,9 @@
  */
 package syncleus.dann.evolve.sort;
 
-import syncleus.dann.evolve.genome.Genome;
-
 import java.io.Serializable;
+
+import syncleus.dann.evolve.genome.Genome;
 
 /**
  * Use this comparator to maximize the adjusted score.

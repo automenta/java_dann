@@ -23,16 +23,16 @@
  */
 package org.encog.ml.prg.extension;
 
-import syncleus.dann.evolve.exception.EARuntimeError;
-import org.encog.ml.prg.EncogProgramContext;
-import org.encog.ml.prg.ProgramNode;
-import org.encog.ml.prg.expvalue.EvaluateExpr;
-import org.encog.ml.prg.expvalue.ExpressionValue;
-import org.encog.ml.prg.expvalue.ValueType;
-import syncleus.dann.math.random.RangeRandomizer;
-
 import java.util.List;
 import java.util.Random;
+
+import syncleus.dann.evolve.exception.EARuntimeError;
+import syncleus.dann.evolve.gp.EncogProgramContext;
+import syncleus.dann.evolve.gp.ProgramNode;
+import syncleus.dann.evolve.gp.expvalue.EvaluateExpr;
+import syncleus.dann.evolve.gp.expvalue.ExpressionValue;
+import syncleus.dann.evolve.gp.expvalue.ValueType;
+import syncleus.dann.math.random.RangeRandomizer;
 
 /**
  * This class defines the standard opcodes for Encog programs.

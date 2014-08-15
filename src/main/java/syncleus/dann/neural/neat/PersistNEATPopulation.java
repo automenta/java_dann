@@ -23,18 +23,23 @@
  */
 package org.encog.neural.neat;
 
-import syncleus.dann.evolve.species.BasicSpecies;
-import syncleus.dann.evolve.species.Species;
-import org.encog.neural.hyperneat.FactorHyperNEATGenome;
-import org.encog.neural.hyperneat.HyperNEATCODEC;
-import org.encog.neural.hyperneat.HyperNEATGenome;
-import org.encog.neural.neat.training.*;
-import syncleus.dann.data.file.csv.CSVFormat;
-
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.List;
 import java.util.Map;
+
+import syncleus.dann.data.file.csv.CSVFormat;
+import syncleus.dann.evolve.species.BasicSpecies;
+import syncleus.dann.evolve.species.Species;
+import syncleus.dann.neural.activation.EncogActivationFunction;
+import syncleus.dann.neural.hyperneat.FactorHyperNEATGenome;
+import syncleus.dann.neural.hyperneat.HyperNEATCODEC;
+import syncleus.dann.neural.hyperneat.HyperNEATGenome;
+import syncleus.dann.neural.neat.training.NEATGenome;
+import syncleus.dann.neural.neat.training.NEATInnovation;
+import syncleus.dann.neural.neat.training.NEATInnovationList;
+import syncleus.dann.neural.neat.training.NEATLinkGene;
+import syncleus.dann.neural.neat.training.NEATNeuronGene;
 
 /**
  * Persist a NEAT or HyperNEAT network.

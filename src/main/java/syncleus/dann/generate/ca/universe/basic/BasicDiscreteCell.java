@@ -23,12 +23,12 @@
  */
 package syncleus.dann.generate.ca.universe.basic;
 
+import java.io.Serializable;
+
 import syncleus.dann.generate.ca.universe.DiscreteCell;
 import syncleus.dann.generate.ca.universe.UniverseCell;
 import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.math.random.RangeRandomizer;
-
-import java.io.Serializable;
 
 public class BasicDiscreteCell implements DiscreteCell, Serializable {
 

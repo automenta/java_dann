@@ -23,11 +23,10 @@
  */
 package org.encog.neural.som.training.basic;
 
-import org.encog.neural.NeuralNetworkError;
-import org.encog.neural.som.SOM;
 import syncleus.dann.learn.ml.MLData;
 import syncleus.dann.math.BoundMath;
 import syncleus.dann.math.matrix.SimpleRealMatrix;
+import syncleus.dann.neural.som.SOM;
 
 /**
  * The "Best Matching Unit" or BMU is a very important concept in the training

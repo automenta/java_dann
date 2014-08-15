@@ -23,21 +23,21 @@
  */
 package org.encog.neural.freeform.training;
 
-import syncleus.dann.learn.ml.MLMethod;
-import syncleus.dann.learn.ml.TrainingImplementationType;
-import syncleus.dann.learn.train.BasicTraining;
-import org.encog.neural.freeform.FreeformConnection;
-import org.encog.neural.freeform.FreeformNetwork;
-import org.encog.neural.freeform.FreeformNeuron;
-import syncleus.dann.learn.ml.MLData;
-import syncleus.dann.learn.ml.MLDataPair;
-import syncleus.dann.learn.ml.MLDataSet;
-import syncleus.dann.math.statistics.ErrorCalculation;
-import syncleus.dann.neural.activation.ActivationSigmoid;
-
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
+
+import syncleus.dann.learn.ml.MLData;
+import syncleus.dann.learn.ml.MLDataPair;
+import syncleus.dann.learn.ml.MLDataSet;
+import syncleus.dann.learn.ml.MLMethod;
+import syncleus.dann.learn.ml.TrainingImplementationType;
+import syncleus.dann.learn.train.BasicTraining;
+import syncleus.dann.math.statistics.ErrorCalculation;
+import syncleus.dann.neural.activation.ActivationSigmoid;
+import syncleus.dann.neural.freeform.FreeformConnection;
+import syncleus.dann.neural.freeform.FreeformNetwork;
+import syncleus.dann.neural.freeform.FreeformNeuron;
 
 /**
  * Provides basic propagation functions to other trainers.

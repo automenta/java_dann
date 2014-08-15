@@ -23,7 +23,8 @@
  */
 package syncleus.dann.evolve.train;
 
-import syncleus.dann.learn.ml.CalculateScore;
+import java.util.List;
+
 import syncleus.dann.evolve.codec.GeneticCODEC;
 import syncleus.dann.evolve.genome.Genome;
 import syncleus.dann.evolve.opp.EvolutionaryOperator;
@@ -34,8 +35,7 @@ import syncleus.dann.evolve.rules.RuleHolder;
 import syncleus.dann.evolve.score.AdjustScore;
 import syncleus.dann.evolve.sort.GenomeComparator;
 import syncleus.dann.evolve.species.Speciation;
-
-import java.util.List;
+import syncleus.dann.learn.ml.CalculateScore;
 
 /**
  * This interface defines the basic functionality of an Evolutionary Algorithm.

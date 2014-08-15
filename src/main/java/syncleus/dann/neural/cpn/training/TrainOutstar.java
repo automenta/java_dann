@@ -23,17 +23,17 @@
  */
 package org.encog.neural.cpn.training;
 
-import syncleus.dann.learn.ml.MLMethod;
-import syncleus.dann.learn.ml.TrainingImplementationType;
-import syncleus.dann.learn.train.BasicTraining;
-import org.encog.neural.cpn.CPN;
-import org.encog.neural.networks.training.LearningRate;
-import org.encog.neural.networks.training.propagation.TrainingContinuation;
 import syncleus.dann.learn.ml.MLData;
 import syncleus.dann.learn.ml.MLDataPair;
 import syncleus.dann.learn.ml.MLDataSet;
+import syncleus.dann.learn.ml.MLMethod;
+import syncleus.dann.learn.ml.TrainingImplementationType;
+import syncleus.dann.learn.train.BasicTraining;
 import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.math.statistics.ErrorCalculation;
+import syncleus.dann.neural.cpn.CPN;
+import syncleus.dann.neural.networks.training.LearningRate;
+import syncleus.dann.neural.networks.training.propagation.TrainingContinuation;
 
 /**
  * Used for Instar training of a CPN neural network. A CPN network is a hybrid

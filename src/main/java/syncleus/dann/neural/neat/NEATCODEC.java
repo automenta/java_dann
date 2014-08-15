@@ -23,17 +23,21 @@
  */
 package org.encog.neural.neat;
 
-import syncleus.dann.learn.ml.MLMethod;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import syncleus.dann.evolve.GeneticError;
 import syncleus.dann.evolve.codec.GeneticCODEC;
 import syncleus.dann.evolve.genome.Genome;
-import syncleus.dann.evolve.GeneticError;
-import org.encog.neural.NeuralNetworkError;
-import org.encog.neural.neat.training.NEATGenome;
-import org.encog.neural.neat.training.NEATLinkGene;
-import org.encog.neural.neat.training.NEATNeuronGene;
-
-import java.io.Serializable;
-import java.util.*;
+import syncleus.dann.learn.ml.MLMethod;
+import syncleus.dann.neural.activation.EncogActivationFunction;
+import syncleus.dann.neural.neat.training.NEATGenome;
+import syncleus.dann.neural.neat.training.NEATLinkGene;
+import syncleus.dann.neural.neat.training.NEATNeuronGene;
 
 /**
  * This CODEC is used to create phenomes (NEATNetwork) objects using a genome

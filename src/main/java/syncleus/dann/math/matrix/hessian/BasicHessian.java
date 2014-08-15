@@ -23,11 +23,11 @@
  */
 package syncleus.dann.math.matrix.hessian;
 
-import org.encog.neural.flat.FlatNetwork;
-import org.encog.neural.networks.BasicNetwork;
 import syncleus.dann.learn.ml.MLDataSet;
 import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.math.matrix.SimpleRealMatrix;
+import syncleus.dann.neural.flat.FlatNetwork;
+import syncleus.dann.neural.networks.BasicNetwork;
 
 /**
  * Some basic code used to calculate Hessian matrixes.

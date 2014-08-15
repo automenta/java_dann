@@ -23,11 +23,11 @@
  */
 package org.encog.neural.freeform.basic;
 
-import org.encog.neural.freeform.FreeformConnection;
-import org.encog.neural.freeform.FreeformNeuron;
-import org.encog.neural.freeform.factory.FreeformConnectionFactory;
-
 import java.io.Serializable;
+
+import syncleus.dann.neural.freeform.FreeformConnection;
+import syncleus.dann.neural.freeform.FreeformNeuron;
+import syncleus.dann.neural.freeform.factory.FreeformConnectionFactory;
 
 /*
  * A factory that creates basic freeform connection objects.

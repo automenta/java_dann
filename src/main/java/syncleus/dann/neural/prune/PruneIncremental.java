@@ -23,16 +23,16 @@
  */
 package org.encog.neural.prune;
 
-import syncleus.dann.data.buffer.BufferedMLDataSet;
-import syncleus.dann.learn.train.strategy.StopTrainingStrategy;
-import org.encog.neural.networks.BasicNetwork;
-import org.encog.neural.networks.training.propagation.Propagation;
-import org.encog.neural.networks.training.propagation.resilient.ResilientPropagation;
-import org.encog.neural.pattern.NeuralNetworkPattern;
-import syncleus.dann.learn.ml.MLDataSet;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import syncleus.dann.data.buffer.BufferedMLDataSet;
+import syncleus.dann.learn.ml.MLDataSet;
+import syncleus.dann.learn.train.strategy.StopTrainingStrategy;
+import syncleus.dann.neural.networks.BasicNetwork;
+import syncleus.dann.neural.networks.training.propagation.Propagation;
+import syncleus.dann.neural.networks.training.propagation.resilient.ResilientPropagation;
+import syncleus.dann.neural.pattern.NeuralNetworkPattern;
 
 /**
  * This class is used to help determine the optimal configuration for the hidden

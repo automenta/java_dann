@@ -22,13 +22,13 @@
  */
 package syncleus.dann.math.matrix.decomposition;
 
-import syncleus.dann.math.RealNumber;
-import syncleus.dann.math.matrix.RealMatrix;
-import syncleus.dann.math.matrix.SimpleRealMatrix;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import syncleus.dann.math.RealNumber;
+import syncleus.dann.math.matrix.RealMatrix;
+import syncleus.dann.math.matrix.SimpleRealMatrix;
 
 /**
  * Singular Value Decomposition.
@@ -120,7 +120,6 @@ public class StewartSingularValueDecomposition implements java.io.Serializable,
 
         // Main iteration loop for the singular values.
         final int pp = p - 1;
-        int iter = 0;
         final double eps = Math.pow(2.0, -52.0);
         final double tiny = Math.pow(2.0, -966.0);
         while (p > 0) {
@@ -149,7 +148,6 @@ public class StewartSingularValueDecomposition implements java.io.Serializable,
             if (k == p - 2) {
                 k++;
                 convergence(k, pp);
-                iter = 0;
                 p--;
             } else {
                 int ks;
@@ -166,7 +164,6 @@ public class StewartSingularValueDecomposition implements java.io.Serializable,
                 if (ks == k) {
                     k++;
                     oneQrStep(e, p, k);
-                    iter += 1;
                 } else if (ks == p - 1) {
                     k++;
                     deflateNegligibleMatrix(e, p, k);

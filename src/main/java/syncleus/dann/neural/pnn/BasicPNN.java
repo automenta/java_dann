@@ -23,15 +23,14 @@
  */
 package org.encog.neural.pnn;
 
-import syncleus.dann.learn.ml.MLClassification;
-import syncleus.dann.learn.ml.MLError;
-import syncleus.dann.learn.ml.MLRegression;
 import syncleus.dann.data.basic.BasicMLData;
 import syncleus.dann.data.basic.BasicMLDataSet;
-import org.encog.neural.NeuralNetworkError;
+import syncleus.dann.learn.ml.MLClassification;
 import syncleus.dann.learn.ml.MLData;
 import syncleus.dann.learn.ml.MLDataPair;
 import syncleus.dann.learn.ml.MLDataSet;
+import syncleus.dann.learn.ml.MLError;
+import syncleus.dann.learn.ml.MLRegression;
 import syncleus.dann.math.EncogUtility;
 import syncleus.dann.math.array.EngineArray;
 

@@ -23,17 +23,17 @@
  */
 package syncleus.dann.util.factory.method;
 
-import syncleus.dann.learn.ml.MLMethod;
-import syncleus.dann.util.factory.MLMethodFactory;
-import syncleus.dann.util.factory.parse.ArchitectureParse;
-import org.encog.ml.prg.EncogProgramContext;
-import org.encog.ml.prg.extension.StandardExtensions;
-import org.encog.ml.prg.generator.RampedHalfAndHalf;
-import org.encog.ml.prg.train.PrgPopulation;
-
 import java.util.Map;
 import java.util.Random;
 import java.util.StringTokenizer;
+
+import syncleus.dann.evolve.gp.EncogProgramContext;
+import syncleus.dann.evolve.gp.extension.StandardExtensions;
+import syncleus.dann.evolve.gp.generator.RampedHalfAndHalf;
+import syncleus.dann.evolve.gp.train.PrgPopulation;
+import syncleus.dann.learn.ml.MLMethod;
+import syncleus.dann.util.factory.MLMethodFactory;
+import syncleus.dann.util.factory.parse.ArchitectureParse;
 
 public class EPLFactory {
     /**

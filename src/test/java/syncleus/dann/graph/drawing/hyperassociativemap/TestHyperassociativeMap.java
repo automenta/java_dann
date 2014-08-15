@@ -18,14 +18,21 @@
  ******************************************************************************/
 package syncleus.dann.graph.drawing.hyperassociativemap;
 
+import java.util.concurrent.ThreadPoolExecutor;
+
 import org.junit.Assert;
 import org.junit.Test;
+
 import syncleus.dann.graph.AbstractBidirectedAdjacencyGraph;
-import syncleus.dann.neural.*;
+import syncleus.dann.neural.AbstractLocalBrain;
+import syncleus.dann.neural.InputNeuron;
+import syncleus.dann.neural.InvalidConnectionTypeDannException;
+import syncleus.dann.neural.Neuron;
+import syncleus.dann.neural.OutputNeuron;
+import syncleus.dann.neural.SimpleSynapse;
+import syncleus.dann.neural.Synapse;
 import syncleus.dann.neural.backprop.BackpropNeuron;
 import syncleus.dann.neural.backprop.SimpleBackpropNeuron;
-
-import java.util.concurrent.ThreadPoolExecutor;
 
 public class TestHyperassociativeMap {
     private static class TestBrain extends AbstractLocalBrain {

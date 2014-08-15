@@ -36,7 +36,7 @@ public class TemporalPoint implements Comparable<TemporalPoint> {
     /**
      * The sequence number for this point.
      */
-    private int sequence;
+    private long sequence;
 
     /**
      * The data for this point.
@@ -86,7 +86,7 @@ public class TemporalPoint implements Comparable<TemporalPoint> {
     /**
      * @return The sequence for this point.
      */
-    public int getSequence() {
+    public long getSequence() {
         return this.sequence;
     }
 
@@ -110,7 +110,7 @@ public class TemporalPoint implements Comparable<TemporalPoint> {
     /**
      * @param sequence the sequence to set
      */
-    public void setSequence(final int sequence) {
+    public void setSequence(final long sequence) {
         this.sequence = sequence;
     }
 

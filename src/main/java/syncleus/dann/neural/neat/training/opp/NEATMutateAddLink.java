@@ -23,14 +23,14 @@
  */
 package org.encog.neural.neat.training.opp;
 
-import syncleus.dann.evolve.genome.Genome;
-import org.encog.neural.neat.NEATNeuronType;
-import org.encog.neural.neat.NEATPopulation;
-import org.encog.neural.neat.training.NEATGenome;
-import org.encog.neural.neat.training.NEATNeuronGene;
-import syncleus.dann.math.random.RangeRandomizer;
-
 import java.util.Random;
+
+import syncleus.dann.evolve.genome.Genome;
+import syncleus.dann.math.random.RangeRandomizer;
+import syncleus.dann.neural.neat.NEATNeuronType;
+import syncleus.dann.neural.neat.NEATPopulation;
+import syncleus.dann.neural.neat.training.NEATGenome;
+import syncleus.dann.neural.neat.training.NEATNeuronGene;
 
 /**
  * Mutates a NEAT genome by adding a link. To add a link, two random neurons are

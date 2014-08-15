@@ -23,19 +23,23 @@
  */
 package syncleus.dann.util.factory.train;
 
-import syncleus.dann.learn.ml.MLMethod;
-import syncleus.dann.util.factory.MLTrainFactory;
-import syncleus.dann.util.factory.parse.ArchitectureParse;
-import syncleus.dann.learn.train.MLTrain;
-import org.encog.neural.som.SOM;
-import org.encog.neural.som.training.basic.BasicTrainSOM;
-import org.encog.neural.som.training.basic.neighborhood.*;
+import java.util.Map;
+
 import syncleus.dann.data.file.csv.CSVFormat;
 import syncleus.dann.data.language.NumberList;
 import syncleus.dann.learn.ml.MLDataSet;
+import syncleus.dann.learn.ml.MLMethod;
+import syncleus.dann.learn.train.MLTrain;
 import syncleus.dann.math.rbf.RBFEnum;
-
-import java.util.Map;
+import syncleus.dann.neural.som.SOM;
+import syncleus.dann.neural.som.training.basic.BasicTrainSOM;
+import syncleus.dann.neural.som.training.basic.neighborhood.NeighborhoodBubble;
+import syncleus.dann.neural.som.training.basic.neighborhood.NeighborhoodFunction;
+import syncleus.dann.neural.som.training.basic.neighborhood.NeighborhoodRBF;
+import syncleus.dann.neural.som.training.basic.neighborhood.NeighborhoodRBF1D;
+import syncleus.dann.neural.som.training.basic.neighborhood.NeighborhoodSingle;
+import syncleus.dann.util.factory.MLTrainFactory;
+import syncleus.dann.util.factory.parse.ArchitectureParse;
 
 /**
  * Train an SOM network with a neighborhood method.

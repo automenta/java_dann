@@ -23,21 +23,21 @@
  */
 package syncleus.dann.util.factory.train;
 
-import syncleus.dann.learn.ml.CalculateScore;
-import syncleus.dann.learn.ml.MLMethod;
+import syncleus.dann.evolve.gp.PrgCODEC;
+import syncleus.dann.evolve.gp.opp.ConstMutation;
+import syncleus.dann.evolve.gp.opp.SubtreeCrossover;
+import syncleus.dann.evolve.gp.opp.SubtreeMutation;
+import syncleus.dann.evolve.gp.species.PrgSpeciation;
+import syncleus.dann.evolve.gp.train.PrgPopulation;
+import syncleus.dann.evolve.gp.train.rewrite.RewriteAlgebraic;
+import syncleus.dann.evolve.gp.train.rewrite.RewriteConstants;
 import syncleus.dann.evolve.score.adjust.ComplexityAdjustedScore;
 import syncleus.dann.evolve.train.basic.TrainEA;
-import org.encog.ml.prg.PrgCODEC;
-import org.encog.ml.prg.opp.ConstMutation;
-import org.encog.ml.prg.opp.SubtreeCrossover;
-import org.encog.ml.prg.opp.SubtreeMutation;
-import org.encog.ml.prg.species.PrgSpeciation;
-import org.encog.ml.prg.train.PrgPopulation;
-import org.encog.ml.prg.train.rewrite.RewriteAlgebraic;
-import org.encog.ml.prg.train.rewrite.RewriteConstants;
-import syncleus.dann.learn.train.MLTrain;
-import org.encog.neural.networks.training.TrainingSetScore;
+import syncleus.dann.learn.ml.CalculateScore;
 import syncleus.dann.learn.ml.MLDataSet;
+import syncleus.dann.learn.ml.MLMethod;
+import syncleus.dann.learn.train.MLTrain;
+import syncleus.dann.neural.networks.training.TrainingSetScore;
 
 public class EPLGAFactory {
     /**

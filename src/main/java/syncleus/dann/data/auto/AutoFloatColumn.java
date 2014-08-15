@@ -1,6 +1,7 @@
 package syncleus.dann.data.auto;
 
 import syncleus.dann.math.EncogMath;
+import syncleus.dann.math.Format;
 
 
 public class AutoFloatColumn {

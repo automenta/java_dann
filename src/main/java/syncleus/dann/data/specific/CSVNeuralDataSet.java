@@ -23,13 +23,13 @@
  */
 package syncleus.dann.data.specific;
 
+import java.io.File;
+
 import syncleus.dann.data.basic.BasicMLDataSet;
 import syncleus.dann.data.buffer.MemoryDataLoader;
 import syncleus.dann.data.buffer.codec.CSVDataCODEC;
 import syncleus.dann.data.buffer.codec.DataSetCODEC;
 import syncleus.dann.data.file.csv.CSVFormat;
-
-import java.io.File;
 
 /**
  * An implementation of the NeuralDataSet interface designed to provide a CSV

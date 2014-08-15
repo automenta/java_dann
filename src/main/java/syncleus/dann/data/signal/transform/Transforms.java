@@ -18,12 +18,12 @@
  ******************************************************************************/
 package syncleus.dann.data.signal.transform;
 
-import syncleus.dann.data.signal.SignalOutputStream;
-import syncleus.dann.util.UnexpectedDannError;
-
 import java.io.IOException;
 import java.io.PipedInputStream;
 import java.io.PipedOutputStream;
+
+import syncleus.dann.data.signal.SignalOutputStream;
+import syncleus.dann.util.UnexpectedDannError;
 
 /**
  * An utility class that provides the StreamPair class, to convert from a

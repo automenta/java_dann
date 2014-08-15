@@ -23,9 +23,9 @@
  */
 package syncleus.dann.data.market;
 
-import syncleus.dann.data.temporal.TemporalPoint;
-
 import java.util.Date;
+
+import syncleus.dann.data.temporal.TemporalPoint;
 
 /**
  * Hold one market datapoint. This class is based on the TemporalPoint, however

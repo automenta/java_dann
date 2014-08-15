@@ -23,14 +23,14 @@
  */
 package org.encog.neural.rbf.training;
 
+import syncleus.dann.learn.ml.MLDataSet;
 import syncleus.dann.learn.ml.TrainingImplementationType;
 import syncleus.dann.learn.train.BasicTraining;
-import org.encog.neural.networks.training.TrainingError;
-import org.encog.neural.networks.training.propagation.TrainingContinuation;
-import org.encog.neural.rbf.RBFNetwork;
-import syncleus.dann.learn.ml.MLDataSet;
 import syncleus.dann.math.ObjectPair;
 import syncleus.dann.math.rbf.RadialBasisFunction;
+import syncleus.dann.neural.networks.training.TrainingError;
+import syncleus.dann.neural.networks.training.propagation.TrainingContinuation;
+import syncleus.dann.neural.rbf.RBFNetwork;
 
 /**
  * Train a RBF neural network using a SVD.

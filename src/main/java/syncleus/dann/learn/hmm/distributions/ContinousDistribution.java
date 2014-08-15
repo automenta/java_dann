@@ -23,6 +23,9 @@
  */
 package syncleus.dann.learn.hmm.distributions;
 
+import java.util.Arrays;
+import java.util.Random;
+
 import syncleus.dann.data.basic.BasicMLData;
 import syncleus.dann.data.basic.BasicMLDataPair;
 import syncleus.dann.learn.ml.MLDataPair;
@@ -31,9 +34,6 @@ import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.math.matrix.MatrixMath;
 import syncleus.dann.math.matrix.SimpleRealMatrix;
 import syncleus.dann.math.matrix.decomposition.CholeskyDecomposition2;
-
-import java.util.Arrays;
-import java.util.Random;
 
 /**
  * A continuous distribution represents an infinite range of choices between two

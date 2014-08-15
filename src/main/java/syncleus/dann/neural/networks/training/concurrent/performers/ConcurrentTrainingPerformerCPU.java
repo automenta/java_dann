@@ -23,12 +23,11 @@
  */
 package org.encog.neural.networks.training.concurrent.performers;
 
-import syncleus.dann.learn.train.MLTrain;
-import org.encog.neural.NeuralNetworkError;
-import org.encog.neural.networks.training.concurrent.ConcurrentTrainingManager;
-import org.encog.neural.networks.training.concurrent.jobs.TrainingJob;
-
 import java.util.concurrent.atomic.AtomicBoolean;
+
+import syncleus.dann.learn.train.MLTrain;
+import syncleus.dann.neural.networks.training.concurrent.ConcurrentTrainingManager;
+import syncleus.dann.neural.networks.training.concurrent.jobs.TrainingJob;
 
 /**
  * This performer allows jobs to be performed by the CPU.

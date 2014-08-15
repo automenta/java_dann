@@ -24,7 +24,8 @@
 package org.encog.neural.pattern;
 
 import syncleus.dann.learn.ml.MLMethod;
-import org.encog.neural.thermal.BoltzmannMachine;
+import syncleus.dann.neural.activation.EncogActivationFunction;
+import syncleus.dann.neural.thermal.BoltzmannMachine;
 
 /**
  * Pattern to create a Boltzmann machine.

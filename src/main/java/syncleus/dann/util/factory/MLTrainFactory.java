@@ -23,9 +23,9 @@
  */
 package syncleus.dann.util.factory;
 
+import syncleus.dann.learn.ml.MLDataSet;
 import syncleus.dann.learn.ml.MLMethod;
 import syncleus.dann.learn.train.MLTrain;
-import syncleus.dann.learn.ml.MLDataSet;
 
 /**
  * This factory is used to create trainers for machine learning methods.

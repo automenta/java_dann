@@ -23,11 +23,10 @@
  */
 package org.encog.neural.art;
 
-import syncleus.dann.learn.ml.MLClassification;
-import syncleus.dann.learn.ml.MLResettable;
 import syncleus.dann.data.specific.BiPolarNeuralData;
-import org.encog.neural.NeuralNetworkError;
+import syncleus.dann.learn.ml.MLClassification;
 import syncleus.dann.learn.ml.MLData;
+import syncleus.dann.learn.ml.MLResettable;
 import syncleus.dann.math.matrix.SimpleRealMatrix;
 
 /**

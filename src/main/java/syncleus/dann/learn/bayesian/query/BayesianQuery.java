@@ -23,13 +23,13 @@
  */
 package syncleus.dann.learn.bayesian.query;
 
+import java.util.List;
+import java.util.Map;
+
 import syncleus.dann.learn.bayesian.BayesianEvent;
 import syncleus.dann.learn.bayesian.EncogBayesianNetwork;
 import syncleus.dann.learn.bayesian.EventType;
 import syncleus.dann.learn.bayesian.query.sample.EventState;
-
-import java.util.List;
-import java.util.Map;
 
 /**
  * A Bayesian query. This is used to query a Bayesian network and determine a

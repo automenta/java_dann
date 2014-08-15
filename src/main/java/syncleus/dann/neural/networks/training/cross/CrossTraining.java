@@ -23,9 +23,9 @@
  */
 package org.encog.neural.networks.training.cross;
 
+import syncleus.dann.data.folded.FoldedDataSet;
 import syncleus.dann.learn.ml.MLMethod;
 import syncleus.dann.learn.ml.TrainingImplementationType;
-import syncleus.dann.data.folded.FoldedDataSet;
 import syncleus.dann.learn.train.BasicTraining;
 
 /**

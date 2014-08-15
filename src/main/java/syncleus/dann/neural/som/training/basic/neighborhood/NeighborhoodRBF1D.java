@@ -23,8 +23,12 @@
  */
 package org.encog.neural.som.training.basic.neighborhood;
 
-import org.encog.neural.NeuralNetworkError;
-import syncleus.dann.math.rbf.*;
+import syncleus.dann.math.rbf.GaussianFunction;
+import syncleus.dann.math.rbf.InverseMultiquadricFunction;
+import syncleus.dann.math.rbf.MexicanHatFunction;
+import syncleus.dann.math.rbf.MultiquadricFunction;
+import syncleus.dann.math.rbf.RBFEnum;
+import syncleus.dann.math.rbf.RadialBasisFunction;
 
 /**
  * A neighborhood function based on an RBF function.

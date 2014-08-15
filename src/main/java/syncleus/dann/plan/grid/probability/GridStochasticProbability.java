@@ -23,16 +23,16 @@
  */
 package syncleus.dann.plan.grid.probability;
 
+import java.util.Set;
+import java.util.TreeSet;
+
+import syncleus.dann.math.EncogMath;
 import syncleus.dann.plan.Action;
 import syncleus.dann.plan.State;
 import syncleus.dann.plan.SuccessorState;
 import syncleus.dann.plan.WorldError;
 import syncleus.dann.plan.grid.GridState;
 import syncleus.dann.plan.grid.GridWorld;
-import syncleus.dann.math.EncogMath;
-
-import java.util.Set;
-import java.util.TreeSet;
 
 public class GridStochasticProbability extends GridAbstractProbability {
 

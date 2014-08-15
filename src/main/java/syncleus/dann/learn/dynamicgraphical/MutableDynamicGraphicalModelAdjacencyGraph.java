@@ -18,14 +18,14 @@
  ******************************************************************************/
 package syncleus.dann.learn.dynamicgraphical;
 
-import syncleus.dann.graph.BidirectedEdge;
-import syncleus.dann.graph.Graph;
-import syncleus.dann.graph.context.ContextGraphElement;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import syncleus.dann.graph.BidirectedEdge;
+import syncleus.dann.graph.Graph;
+import syncleus.dann.graph.context.ContextGraphElement;
 
 public class MutableDynamicGraphicalModelAdjacencyGraph<N extends DynamicGraphicalModelNode, E extends BidirectedEdge<N>>
         extends AbstractDynamicGraphicalModel<N, E> implements

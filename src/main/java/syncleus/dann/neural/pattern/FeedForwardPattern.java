@@ -21,15 +21,16 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package org.encog.neural.pattern;
-
-import syncleus.dann.learn.ml.MLMethod;
-import org.encog.neural.networks.BasicNetwork;
-import org.encog.neural.networks.layers.BasicLayer;
-import org.encog.neural.networks.layers.Layer;
+package syncleus.dann.neural.pattern;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import syncleus.dann.learn.ml.MLMethod;
+import syncleus.dann.neural.activation.EncogActivationFunction;
+import syncleus.dann.neural.networks.BasicNetwork;
+import syncleus.dann.neural.networks.layers.BasicLayer;
+import syncleus.dann.neural.networks.layers.Layer;
 
 /**
  * Used to create feedforward neural networks. A feedforward network has an
@@ -117,7 +118,7 @@ public class FeedForwardPattern implements NeuralNetworkPattern {
      * @param activation The activation function.
      */
     @Override
-    public void setEncogActivationFunction(final EncogActivationFunction activation) {
+    public void setActivationFunction(final EncogActivationFunction activation) {
         this.activationHidden = activation;
     }
 

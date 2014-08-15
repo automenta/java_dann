@@ -23,12 +23,12 @@
  */
 package org.encog.neural.freeform.training;
 
-import org.encog.neural.freeform.FreeformConnection;
-import org.encog.neural.freeform.FreeformNetwork;
-import org.encog.neural.networks.training.propagation.TrainingContinuation;
-import syncleus.dann.learn.ml.MLDataSet;
-
 import java.io.Serializable;
+
+import syncleus.dann.learn.ml.MLDataSet;
+import syncleus.dann.neural.freeform.FreeformConnection;
+import syncleus.dann.neural.freeform.FreeformNetwork;
+import syncleus.dann.neural.networks.training.propagation.TrainingContinuation;
 
 /**
  * Perform backpropagation for a freeform neural network.

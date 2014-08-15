@@ -23,40 +23,40 @@
  */
 package syncleus.dann.math;
 
-import syncleus.dann.learn.ml.MLClassification;
-import syncleus.dann.learn.ml.MLContext;
-import syncleus.dann.learn.ml.MLMethod;
-import syncleus.dann.learn.ml.MLRegression;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+
 import syncleus.dann.data.basic.BasicMLData;
 import syncleus.dann.data.buffer.BufferedMLDataSet;
 import syncleus.dann.data.buffer.MemoryDataLoader;
 import syncleus.dann.data.buffer.codec.CSVDataCODEC;
 import syncleus.dann.data.buffer.codec.DataSetCODEC;
-import syncleus.dann.data.specific.CSVNeuralDataSet;
-import syncleus.dann.learn.svm.SVM;
-import syncleus.dann.learn.svm.training.SVMTrain;
-import syncleus.dann.learn.train.MLTrain;
-import org.encog.neural.freeform.FreeformNetwork;
-import org.encog.neural.freeform.training.FreeformResilientPropagation;
-import org.encog.neural.networks.BasicNetwork;
-import org.encog.neural.networks.ContainsFlat;
-import org.encog.neural.networks.training.propagation.Propagation;
-import org.encog.neural.networks.training.propagation.resilient.ResilientPropagation;
-import org.encog.neural.pattern.FeedForwardPattern;
 import syncleus.dann.data.file.BasicFile;
 import syncleus.dann.data.file.csv.CSVFormat;
 import syncleus.dann.data.file.csv.ReadCSV;
+import syncleus.dann.data.specific.CSVNeuralDataSet;
+import syncleus.dann.learn.ml.MLClassification;
+import syncleus.dann.learn.ml.MLContext;
 import syncleus.dann.learn.ml.MLData;
 import syncleus.dann.learn.ml.MLDataPair;
 import syncleus.dann.learn.ml.MLDataSet;
+import syncleus.dann.learn.ml.MLMethod;
+import syncleus.dann.learn.ml.MLRegression;
+import syncleus.dann.learn.svm.SVM;
+import syncleus.dann.learn.svm.training.SVMTrain;
+import syncleus.dann.learn.train.MLTrain;
 import syncleus.dann.math.statistics.ErrorCalculation;
 import syncleus.dann.neural.activation.ActivationSigmoid;
 import syncleus.dann.neural.activation.ActivationTANH;
-
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import syncleus.dann.neural.freeform.FreeformNetwork;
+import syncleus.dann.neural.freeform.training.FreeformResilientPropagation;
+import syncleus.dann.neural.networks.BasicNetwork;
+import syncleus.dann.neural.networks.ContainsFlat;
+import syncleus.dann.neural.networks.training.propagation.Propagation;
+import syncleus.dann.neural.networks.training.propagation.resilient.ResilientPropagation;
+import syncleus.dann.neural.pattern.FeedForwardPattern;
 
 /**
  * General utility class for Encog. Provides for some common Encog procedures.

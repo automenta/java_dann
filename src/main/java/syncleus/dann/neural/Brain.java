@@ -18,9 +18,9 @@
  ******************************************************************************/
 package syncleus.dann.neural;
 
-import syncleus.dann.graph.DirectedGraph;
-
 import java.util.Set;
+
+import syncleus.dann.graph.DirectedGraph;
 
 /**
  * Represents a single artificial brain typically belonging to a single

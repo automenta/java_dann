@@ -23,14 +23,14 @@
  */
 package syncleus.dann.data.file;
 
-import syncleus.dann.data.file.csv.CSVFormat;
-import syncleus.dann.math.EncogMath;
-import syncleus.dann.math.array.QuantError;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+
+import syncleus.dann.data.file.csv.CSVFormat;
+import syncleus.dann.math.EncogMath;
+import syncleus.dann.math.array.QuantError;
 
 /**
  * Many of the Encog quant CSV processors are based upon this class. This class
@@ -114,24 +114,11 @@ public class BasicFile /* implements QuantTask*/ {
     private int recordCount;
 
     /**
-     * The last time status was updated.
-     */
-    private int lastUpdate;
-
-    /**
-     * The current record.
-     */
-    private int currentRecord;
-
-    /**
      * Should output headers be produced?
      */
     private boolean produceOutputHeaders;
 
-    /**
-     * True, if the process should stop.
-     */
-    private boolean cancel;
+    
 
     /**
      * The Encog script to use.
@@ -360,8 +347,6 @@ public class BasicFile /* implements QuantTask*/ {
      * Reset the reporting stats. Used internally.
      */
     public void resetStatus() {
-        this.lastUpdate = 0;
-        this.currentRecord = 0;
     }
 
     /**

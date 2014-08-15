@@ -23,9 +23,9 @@
  */
 package syncleus.dann.evolve.genome;
 
-import syncleus.dann.learn.ml.MLMethod;
 import syncleus.dann.evolve.population.Population;
 import syncleus.dann.evolve.species.Species;
+import syncleus.dann.learn.ml.MLMethod;
 
 /**
  * A genome is the basic blueprint for creating an phenome (organism) in Encog.

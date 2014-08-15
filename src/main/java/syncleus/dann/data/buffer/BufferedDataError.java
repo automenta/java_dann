@@ -27,7 +27,7 @@ package syncleus.dann.data.buffer;
 /**
  * An error occurs working with the Encog binary training format.
  */
-public class BufferedDataError extends EncogError {
+public class BufferedDataError extends RuntimeException {
 
     /**
      * The serial version.

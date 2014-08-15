@@ -23,17 +23,23 @@
  */
 package syncleus.dann.math.matrix;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import syncleus.dann.math.EncogMath;
-import syncleus.dann.math.RealNumber;
-import syncleus.dann.math.matrix.decomposition.*;
-import syncleus.dann.math.random.RangeRandomizer;
-import syncleus.dann.util.UnexpectedDannError;
-
 import java.io.Serializable;
 import java.util.Arrays;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import syncleus.dann.math.EncogMath;
+import syncleus.dann.math.RealNumber;
+import syncleus.dann.math.matrix.decomposition.DoolittleLuDecomposition;
+import syncleus.dann.math.matrix.decomposition.HouseholderQrDecomposition;
+import syncleus.dann.math.matrix.decomposition.LuDecomposition2;
+import syncleus.dann.math.matrix.decomposition.QrDecomposition2;
+import syncleus.dann.math.matrix.decomposition.StewartSingularValueDecomposition;
+import syncleus.dann.math.random.RangeRandomizer;
+import syncleus.dann.util.UnexpectedDannError;
+
+//TODO subclass http://commons.apache.org/proper/commons-math/javadocs/api-3.3/org/apache/commons/math3/linear/Array2DRowRealMatrix.html
 /**
  * The Java SimpleRealMatrix Class provides the fundamental operations of
  * numerical linear algebra. Various constructors create Matrices from two
@@ -149,7 +155,7 @@ public class SimpleRealMatrix implements Cloneable, Serializable, RealMatrix {
 
     @Override
     public syncleus.dann.math.OrderedField<RealNumber> getElementField() {
-        return RealNumber.ZERO.getField();
+        return RealNumber.ZERO.field();
     }
 
     @Override
@@ -1438,7 +1444,8 @@ public class SimpleRealMatrix implements Cloneable, Serializable, RealMatrix {
         }
     }
 
-    public boolean isSquare() {
+    @Override
+	public boolean isSquare() {
         return getRows() == getCols();
     }
 }

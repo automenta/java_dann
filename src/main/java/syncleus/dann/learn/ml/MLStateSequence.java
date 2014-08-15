@@ -23,7 +23,6 @@
  */
 package syncleus.dann.learn.ml;
 
-import syncleus.dann.learn.ml.MLDataSet;
 
 /**
  * A state sequence ML method, for example a Hidden Markov Model.

@@ -23,13 +23,13 @@
  */
 package org.encog.neural.networks.training.propagation.quick;
 
-import org.encog.neural.networks.ContainsFlat;
-import org.encog.neural.networks.training.LearningRate;
-import org.encog.neural.networks.training.TrainingError;
-import org.encog.neural.networks.training.propagation.Propagation;
-import org.encog.neural.networks.training.propagation.TrainingContinuation;
 import syncleus.dann.learn.ml.MLDataSet;
 import syncleus.dann.math.array.EngineArray;
+import syncleus.dann.neural.networks.ContainsFlat;
+import syncleus.dann.neural.networks.training.LearningRate;
+import syncleus.dann.neural.networks.training.TrainingError;
+import syncleus.dann.neural.networks.training.propagation.Propagation;
+import syncleus.dann.neural.networks.training.propagation.TrainingContinuation;
 
 /**
  * QPROP is an efficient training method that is based on Newton's Method. QPROP
@@ -249,7 +249,7 @@ public class QuickPropagation extends Propagation implements LearningRate {
 
         final double w = this.network.getFlat().getWeights()[index];
         final double d = this.lastDelta[index];
-        final double s = -this.gradients[index] + this.decay * w;
+        final double s = -this.gradients[index] + QuickPropagation.decay * w;
         final double p = -lastGradient[index];
         double nextStep = 0.0;
 

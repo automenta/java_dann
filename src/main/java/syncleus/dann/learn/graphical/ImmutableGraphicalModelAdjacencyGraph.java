@@ -18,9 +18,15 @@
  ******************************************************************************/
 package syncleus.dann.learn.graphical;
 
-import syncleus.dann.graph.BidirectedEdge;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
-import java.util.*;
+import syncleus.dann.graph.BidirectedEdge;
 
 public class ImmutableGraphicalModelAdjacencyGraph<N extends GraphicalModelNode, E extends BidirectedEdge<N>>
         extends AbstractGraphicalModelAdjacencyGraph<N, E> {

@@ -18,10 +18,10 @@
  ******************************************************************************/
 package syncleus.dann.graph.drawing;
 
+import java.util.Map;
+
 import syncleus.dann.graph.Graph;
 import syncleus.dann.math.Vector;
-
-import java.util.Map;
 
 // TODO use optimizer approach
 

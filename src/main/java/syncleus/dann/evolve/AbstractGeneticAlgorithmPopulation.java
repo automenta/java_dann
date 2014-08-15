@@ -18,14 +18,26 @@
  ******************************************************************************/
 package syncleus.dann.evolve;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
 import syncleus.dann.util.UnexpectedDannError;
 import syncleus.dann.util.UnexpectedInterruptedException;
-
-import java.util.*;
-import java.util.concurrent.*;
-import java.util.stream.Collectors;
 
 /**
  * Represents a population governed by Genetic Algorithm parameters. This class

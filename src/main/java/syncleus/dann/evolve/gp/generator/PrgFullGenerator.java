@@ -23,13 +23,13 @@
  */
 package org.encog.ml.prg.generator;
 
-import org.encog.ml.prg.EncogProgram;
-import org.encog.ml.prg.EncogProgramContext;
-import org.encog.ml.prg.ProgramNode;
-import org.encog.ml.prg.expvalue.ValueType;
-
 import java.util.List;
 import java.util.Random;
+
+import syncleus.dann.evolve.gp.EncogProgram;
+import syncleus.dann.evolve.gp.EncogProgramContext;
+import syncleus.dann.evolve.gp.ProgramNode;
+import syncleus.dann.evolve.gp.expvalue.ValueType;
 
 /**
  * The full generator works by creating program trees that do not stop

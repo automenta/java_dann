@@ -23,7 +23,6 @@
  */
 package syncleus.dann.learn.ml;
 
-import syncleus.dann.learn.ml.MLDataSet;
 
 /**
  * Defines Machine Learning Method that can calculate an error based on a data

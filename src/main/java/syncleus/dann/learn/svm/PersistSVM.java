@@ -23,10 +23,13 @@
  */
 package syncleus.dann.learn.svm;
 
-import syncleus.dann.learn.svm.svm;
-import syncleus.dann.learn.svm.svm_model;
-
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.StringReader;
 import java.util.Map;
 
 /**

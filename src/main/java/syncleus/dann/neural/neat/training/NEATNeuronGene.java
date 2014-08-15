@@ -23,9 +23,10 @@
  */
 package org.encog.neural.neat.training;
 
-import org.encog.neural.neat.NEATNeuronType;
-
 import java.io.Serializable;
+
+import syncleus.dann.neural.activation.EncogActivationFunction;
+import syncleus.dann.neural.neat.NEATNeuronType;
 
 /**
  * Implements a NEAT neuron gene.

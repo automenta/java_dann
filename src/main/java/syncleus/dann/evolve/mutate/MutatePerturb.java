@@ -23,12 +23,12 @@
  */
 package syncleus.dann.evolve.mutate;
 
+import java.util.Random;
+
+import syncleus.dann.evolve.genome.DoubleArrayGenome;
 import syncleus.dann.evolve.genome.Genome;
 import syncleus.dann.evolve.opp.EvolutionaryOperator;
 import syncleus.dann.evolve.train.EvolutionaryAlgorithm;
-import syncleus.dann.evolve.genome.DoubleArrayGenome;
-
-import java.util.Random;
 
 /**
  * A simple mutation based on random numbers.

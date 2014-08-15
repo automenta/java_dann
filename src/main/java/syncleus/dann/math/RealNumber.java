@@ -57,7 +57,7 @@ public class RealNumber extends Number implements
     }
 
     @Override
-    public syncleus.dann.math.OrderedField<RealNumber> getField() {
+    public syncleus.dann.math.OrderedField<RealNumber> field() {
         return Field.FIELD;
     }
 
@@ -122,7 +122,7 @@ public class RealNumber extends Number implements
     }
 
     @Override
-    public RealNumber abs() {
+    public RealNumber algebraicAbsolute() {
         if (this.value < 0.0)
             return new RealNumber(Math.abs(this.value));
         else

@@ -24,9 +24,10 @@
 package org.encog.neural.pattern;
 
 import syncleus.dann.learn.ml.MLMethod;
-import org.encog.neural.pnn.BasicPNN;
-import org.encog.neural.pnn.PNNKernelType;
-import org.encog.neural.pnn.PNNOutputMode;
+import syncleus.dann.neural.activation.EncogActivationFunction;
+import syncleus.dann.neural.pnn.BasicPNN;
+import syncleus.dann.neural.pnn.PNNKernelType;
+import syncleus.dann.neural.pnn.PNNOutputMode;
 
 /**
  * Pattern to create a PNN.

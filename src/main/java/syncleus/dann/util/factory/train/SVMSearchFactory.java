@@ -23,14 +23,14 @@
  */
 package syncleus.dann.util.factory.train;
 
+import java.util.Map;
+
+import syncleus.dann.learn.ml.MLDataSet;
 import syncleus.dann.learn.ml.MLMethod;
-import syncleus.dann.util.factory.parse.ArchitectureParse;
 import syncleus.dann.learn.svm.SVM;
 import syncleus.dann.learn.svm.training.SVMSearchTrain;
 import syncleus.dann.learn.train.MLTrain;
-import syncleus.dann.learn.ml.MLDataSet;
-
-import java.util.Map;
+import syncleus.dann.util.factory.parse.ArchitectureParse;
 
 /**
  * A factory that creates SVM-search trainers.

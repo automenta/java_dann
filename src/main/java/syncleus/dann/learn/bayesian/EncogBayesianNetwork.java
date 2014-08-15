@@ -23,24 +23,29 @@
  */
 package syncleus.dann.learn.bayesian;
 
-import syncleus.dann.learn.ml.BasicML;
-import syncleus.dann.learn.ml.MLClassification;
-import syncleus.dann.learn.ml.MLError;
-import syncleus.dann.learn.ml.MLResettable;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import syncleus.dann.data.file.csv.CSVFormat;
 import syncleus.dann.learn.bayesian.parse.ParseProbability;
 import syncleus.dann.learn.bayesian.parse.ParsedEvent;
 import syncleus.dann.learn.bayesian.parse.ParsedProbability;
 import syncleus.dann.learn.bayesian.query.BayesianQuery;
 import syncleus.dann.learn.bayesian.query.enumerate.EnumerationQuery;
 import syncleus.dann.learn.bayesian.query.sample.EventState;
-import syncleus.dann.data.file.csv.CSVFormat;
+import syncleus.dann.learn.ml.BasicML;
+import syncleus.dann.learn.ml.MLClassification;
 import syncleus.dann.learn.ml.MLData;
 import syncleus.dann.learn.ml.MLDataPair;
 import syncleus.dann.learn.ml.MLDataSet;
+import syncleus.dann.learn.ml.MLError;
+import syncleus.dann.learn.ml.MLResettable;
 import syncleus.dann.math.array.EngineArray;
-
-import java.io.Serializable;
-import java.util.*;
 
 /**
  * The Bayesian Network is a machine learning method that is based on

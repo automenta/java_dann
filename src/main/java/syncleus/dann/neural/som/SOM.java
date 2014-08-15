@@ -25,15 +25,14 @@ package org.encog.neural.som;
 
 import syncleus.dann.learn.ml.BasicML;
 import syncleus.dann.learn.ml.MLClassification;
-import syncleus.dann.learn.ml.MLError;
-import syncleus.dann.learn.ml.MLResettable;
-import org.encog.neural.NeuralNetworkError;
-import org.encog.neural.som.training.basic.BestMatchingUnit;
 import syncleus.dann.learn.ml.MLData;
 import syncleus.dann.learn.ml.MLDataPair;
 import syncleus.dann.learn.ml.MLDataSet;
+import syncleus.dann.learn.ml.MLError;
+import syncleus.dann.learn.ml.MLResettable;
 import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.math.matrix.SimpleRealMatrix;
+import syncleus.dann.neural.som.training.basic.BestMatchingUnit;
 
 /**
  * A self organizing map neural network.

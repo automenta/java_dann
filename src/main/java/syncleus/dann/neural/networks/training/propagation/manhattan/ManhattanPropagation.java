@@ -23,12 +23,12 @@
  */
 package org.encog.neural.networks.training.propagation.manhattan;
 
-import org.encog.neural.networks.ContainsFlat;
-import org.encog.neural.networks.training.LearningRate;
-import org.encog.neural.networks.training.propagation.Propagation;
-import org.encog.neural.networks.training.propagation.TrainingContinuation;
-import org.encog.neural.networks.training.propagation.resilient.RPROPConst;
 import syncleus.dann.learn.ml.MLDataSet;
+import syncleus.dann.neural.networks.ContainsFlat;
+import syncleus.dann.neural.networks.training.LearningRate;
+import syncleus.dann.neural.networks.training.propagation.Propagation;
+import syncleus.dann.neural.networks.training.propagation.TrainingContinuation;
+import syncleus.dann.neural.networks.training.propagation.resilient.RPROPConst;
 
 /**
  * One problem that the backpropagation technique has is that the magnitude of

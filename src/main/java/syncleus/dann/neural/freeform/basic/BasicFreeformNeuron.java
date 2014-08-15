@@ -23,13 +23,13 @@
  */
 package org.encog.neural.freeform.basic;
 
-import org.encog.neural.freeform.FreeformConnection;
-import org.encog.neural.freeform.FreeformNeuron;
-import org.encog.neural.freeform.InputSummation;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
+import syncleus.dann.neural.freeform.FreeformConnection;
+import syncleus.dann.neural.freeform.FreeformNeuron;
+import syncleus.dann.neural.freeform.InputSummation;
 
 /**
  * This class provides a basic implementation of a freeform neuron.

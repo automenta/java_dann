@@ -18,11 +18,11 @@
  ******************************************************************************/
 package syncleus.dann.graph;
 
-import syncleus.dann.graph.context.ContextReporter;
-
 import java.io.Serializable;
 import java.util.List;
 import java.util.stream.Stream;
+
+import syncleus.dann.graph.context.ContextReporter;
 
 public interface Edge<N> extends Serializable, Cloneable, ContextReporter {
     List<N> getNodes();

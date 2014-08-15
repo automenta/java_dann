@@ -27,6 +27,7 @@ import syncleus.dann.learn.ml.MLMethod;
 import syncleus.dann.learn.svm.KernelType;
 import syncleus.dann.learn.svm.SVM;
 import syncleus.dann.learn.svm.SVMType;
+import syncleus.dann.neural.activation.EncogActivationFunction;
 
 /**
  * A pattern to create support vector machines.

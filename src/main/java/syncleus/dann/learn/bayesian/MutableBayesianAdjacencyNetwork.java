@@ -18,15 +18,15 @@
  ******************************************************************************/
 package syncleus.dann.learn.bayesian;
 
-import syncleus.dann.graph.DirectedEdge;
-import syncleus.dann.graph.Graph;
-import syncleus.dann.graph.context.ContextGraphElement;
-import syncleus.dann.learn.graphical.GraphicalModelNode;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import syncleus.dann.graph.DirectedEdge;
+import syncleus.dann.graph.Graph;
+import syncleus.dann.graph.context.ContextGraphElement;
+import syncleus.dann.learn.graphical.GraphicalModelNode;
 
 public class MutableBayesianAdjacencyNetwork<N extends GraphicalModelNode, E extends DirectedEdge<N>>
         extends AbstractBayesianAdjacencyNetwork<N, E> implements

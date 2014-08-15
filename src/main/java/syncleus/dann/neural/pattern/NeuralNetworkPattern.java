@@ -21,7 +21,7 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package org.encog.neural.pattern;
+package syncleus.dann.neural.pattern;
 
 import syncleus.dann.learn.ml.MLMethod;
 import syncleus.dann.neural.activation.EncogActivationFunction;
@@ -61,7 +61,7 @@ public interface NeuralNetworkPattern {
      *
      * @param activation The activation function.
      */
-    void setEncogActivationFunction(EncogActivationFunction activation);
+    void setActivationFunction(EncogActivationFunction activation);
 
     /**
      * Set the number of input neurons.

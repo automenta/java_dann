@@ -23,11 +23,11 @@
  */
 package syncleus.dann.util.factory.train;
 
+import syncleus.dann.learn.ml.MLDataSet;
 import syncleus.dann.learn.ml.MLMethod;
 import syncleus.dann.learn.train.MLTrain;
-import org.encog.neural.networks.training.pnn.TrainBasicPNN;
-import org.encog.neural.pnn.BasicPNN;
-import syncleus.dann.learn.ml.MLDataSet;
+import syncleus.dann.neural.networks.training.pnn.TrainBasicPNN;
+import syncleus.dann.neural.pnn.BasicPNN;
 
 /**
  * A factory used to create PNN trainers.

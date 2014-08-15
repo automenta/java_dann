@@ -23,11 +23,11 @@
  */
 package org.encog.neural.networks.training;
 
+import syncleus.dann.data.buffer.BufferedMLDataSet;
 import syncleus.dann.learn.ml.CalculateScore;
+import syncleus.dann.learn.ml.MLDataSet;
 import syncleus.dann.learn.ml.MLMethod;
 import syncleus.dann.learn.ml.MLRegression;
-import syncleus.dann.data.buffer.BufferedMLDataSet;
-import syncleus.dann.learn.ml.MLDataSet;
 
 /**
  * Calculate a score based on a training set. This class allows simulated

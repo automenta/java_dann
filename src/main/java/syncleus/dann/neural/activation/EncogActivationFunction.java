@@ -53,7 +53,7 @@ public interface EncogActivationFunction extends AbstractActivationFunction, Ser
 
     @Override
     @Deprecated
-    default double activate(double activity) {
+    default double activate(final double activity) {
         return activate(activity);
     }
 

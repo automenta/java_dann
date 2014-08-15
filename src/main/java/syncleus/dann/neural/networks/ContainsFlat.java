@@ -21,10 +21,10 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package org.encog.neural.networks;
+package syncleus.dann.neural.networks;
 
 import syncleus.dann.learn.ml.MLMethod;
-import org.encog.neural.flat.FlatNetwork;
+import syncleus.dann.neural.flat.FlatNetwork;
 
 /**
  * Interface that specifies that a machine learning method contains a flat

@@ -23,14 +23,14 @@
  */
 package syncleus.dann.graph.path;
 
-import syncleus.dann.graph.DirectedGraph;
-import syncleus.dann.graph.Graph;
-import syncleus.dann.graph.WeightedDirectedEdge;
-
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
+
+import syncleus.dann.graph.DirectedGraph;
+import syncleus.dann.graph.Graph;
+import syncleus.dann.graph.WeightedDirectedEdge;
 
 /**
  * Graph with an API optimized for pathfinding/searching
@@ -45,7 +45,8 @@ public class PathGraph implements DirectedGraph<PathNode, WeightedDirectedEdge<P
         nodes.add(rootNode);
     }
 
-    public Set<PathNode> getNodes() {
+    @Override
+	public Set<PathNode> getNodes() {
         return this.nodes;
     }
 
@@ -64,7 +65,7 @@ public class PathGraph implements DirectedGraph<PathNode, WeightedDirectedEdge<P
     }
 
     @Override
-    public Set<WeightedDirectedEdge<PathNode>> getInEdges(PathNode node) {
+    public Set<WeightedDirectedEdge<PathNode>> getInEdges(final PathNode node) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
@@ -72,49 +73,56 @@ public class PathGraph implements DirectedGraph<PathNode, WeightedDirectedEdge<P
     public Stream<PathNode> streamNodes() {
         return nodes.stream();
     }
+	@Override
+	public Stream<PathNode> streamAdjacentNodes(PathNode node) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+    
+    
 
     @Override
     public Stream<WeightedDirectedEdge<PathNode>> streamEdges() {
+        return nodes.stream().flatMap(p -> p.getConnections().stream()); 
+    }
+
+    @Override
+    public List<PathNode> getAdjacentNodes(final PathNode node) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public List<PathNode> getAdjacentNodes(PathNode node) {
+    public List<PathNode> getTraversableNodes(final PathNode node) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public List<PathNode> getTraversableNodes(PathNode node) {
+    public Graph<PathNode, WeightedDirectedEdge<PathNode>> cloneAdd(final WeightedDirectedEdge<PathNode> newEdge) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public Graph<PathNode, WeightedDirectedEdge<PathNode>> cloneAdd(WeightedDirectedEdge<PathNode> newEdge) {
+    public Graph<PathNode, WeightedDirectedEdge<PathNode>> cloneAdd(final PathNode newNode) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public Graph<PathNode, WeightedDirectedEdge<PathNode>> cloneAdd(PathNode newNode) {
+    public Graph<PathNode, WeightedDirectedEdge<PathNode>> cloneAdd(final Set<PathNode> newNodes, final Set<WeightedDirectedEdge<PathNode>> newEdges) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public Graph<PathNode, WeightedDirectedEdge<PathNode>> cloneAdd(Set<PathNode> newNodes, Set<WeightedDirectedEdge<PathNode>> newEdges) {
+    public Graph<PathNode, WeightedDirectedEdge<PathNode>> cloneRemove(final WeightedDirectedEdge<PathNode> edgeToRemove) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public Graph<PathNode, WeightedDirectedEdge<PathNode>> cloneRemove(WeightedDirectedEdge<PathNode> edgeToRemove) {
+    public Graph<PathNode, WeightedDirectedEdge<PathNode>> cloneRemove(final PathNode nodeToRemove) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public Graph<PathNode, WeightedDirectedEdge<PathNode>> cloneRemove(PathNode nodeToRemove) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public Graph<PathNode, WeightedDirectedEdge<PathNode>> cloneRemove(Set<PathNode> deleteNodes, Set<WeightedDirectedEdge<PathNode>> deleteEdges) {
+    public Graph<PathNode, WeightedDirectedEdge<PathNode>> cloneRemove(final Set<PathNode> deleteNodes, final Set<WeightedDirectedEdge<PathNode>> deleteEdges) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
@@ -127,5 +135,6 @@ public class PathGraph implements DirectedGraph<PathNode, WeightedDirectedEdge<P
     public boolean isContextEnabled() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+
 
 }

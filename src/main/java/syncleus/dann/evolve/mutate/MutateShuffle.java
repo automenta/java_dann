@@ -23,12 +23,12 @@
  */
 package syncleus.dann.evolve.mutate;
 
+import java.util.Random;
+
+import syncleus.dann.evolve.genome.ArrayGenome;
 import syncleus.dann.evolve.genome.Genome;
 import syncleus.dann.evolve.opp.EvolutionaryOperator;
 import syncleus.dann.evolve.train.EvolutionaryAlgorithm;
-import syncleus.dann.evolve.genome.ArrayGenome;
-
-import java.util.Random;
 
 /**
  * A simple mutation where genes are shuffled. This mutation will not produce
@@ -80,8 +80,8 @@ public class MutateShuffle implements EvolutionaryOperator {
         child.copy(parent);
 
         final int length = parent.size();
-        int iswap1 = rnd.nextInt((int) length);
-        int iswap2 = rnd.nextInt((int) length);
+        int iswap1 = rnd.nextInt(length);
+        int iswap2 = rnd.nextInt(length);
 
         // can't be equal
         if (iswap1 == iswap2) {

@@ -18,14 +18,14 @@
  ******************************************************************************/
 package syncleus.dann.math.counting;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Test;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
 
 public class TestCounters {
     private static final Logger LOGGER = LogManager

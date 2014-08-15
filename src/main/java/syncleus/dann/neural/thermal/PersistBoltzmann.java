@@ -23,12 +23,12 @@
  */
 package org.encog.neural.thermal;
 
-import syncleus.dann.data.file.csv.CSVFormat;
-import syncleus.dann.data.language.NumberList;
-
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Map;
+
+import syncleus.dann.data.file.csv.CSVFormat;
+import syncleus.dann.data.language.NumberList;
 
 /**
  * Persist the Boltzmann machine.

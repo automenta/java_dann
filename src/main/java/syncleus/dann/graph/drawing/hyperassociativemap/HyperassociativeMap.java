@@ -18,15 +18,6 @@
  ******************************************************************************/
 package syncleus.dann.graph.drawing.hyperassociativemap;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import syncleus.dann.graph.Graph;
-import syncleus.dann.graph.Weighted;
-import syncleus.dann.graph.drawing.GraphDrawer;
-import syncleus.dann.graph.topological.Topography;
-import syncleus.dann.math.MutableVector;
-import syncleus.dann.math.Vector;
-
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -34,6 +25,16 @@ import java.util.Map.Entry;
 import java.util.Random;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import syncleus.dann.graph.Graph;
+import syncleus.dann.graph.Weighted;
+import syncleus.dann.graph.drawing.GraphDrawer;
+import syncleus.dann.graph.topological.Topography;
+import syncleus.dann.math.MutableVector;
+import syncleus.dann.math.Vector;
 
 /**
  * A Hyperassociative Map is a new type of algorithm that organizes an arbitrary
@@ -258,7 +259,7 @@ public class HyperassociativeMap<G extends Graph<N, ?>, N> implements
 
                             neighborEdge.streamNodes().forEach(neighbor -> {
                                 if (!neighbor.equals(nodeToQuery)) {
-                                    neighbors.put(neighbor, currentWeight);
+                                    neighbors.put((N)neighbor, currentWeight);
                                 }
                             });
                         });
@@ -278,7 +279,7 @@ public class HyperassociativeMap<G extends Graph<N, ?>, N> implements
         final Vector location = coordinates.get(nodeToAlign);
         final Map<N, Double> neighbors = getNeighbors(nodeToAlign, neighborStore);
 
-        MutableVector compositeVector = new MutableVector(location.getDimensions());
+        final MutableVector compositeVector = new MutableVector(location.getDimensions());
         // align with neighbours
         for (final Entry<N, Double> neighborEntry : neighbors.entrySet()) {
             final N neighbor = neighborEntry.getKey();

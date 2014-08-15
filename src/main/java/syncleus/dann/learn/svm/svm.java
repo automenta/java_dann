@@ -23,11 +23,16 @@
  */
 package syncleus.dann.learn.svm;
 
-import syncleus.dann.data.file.csv.CSVFormat;
-
-import java.io.*;
+import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Random;
 import java.util.StringTokenizer;
+
+import syncleus.dann.data.file.csv.CSVFormat;
 
 /**
  * This class was taken from the libsvm package. We have made some modifications

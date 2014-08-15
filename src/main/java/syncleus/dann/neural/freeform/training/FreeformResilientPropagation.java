@@ -23,15 +23,14 @@
  */
 package org.encog.neural.freeform.training;
 
-import org.encog.neural.freeform.FreeformConnection;
-import org.encog.neural.freeform.FreeformNetwork;
-import org.encog.neural.freeform.task.ConnectionTask;
-import org.encog.neural.networks.training.propagation.TrainingContinuation;
-import org.encog.neural.networks.training.propagation.resilient.RPROPConst;
+import java.io.Serializable;
+
 import syncleus.dann.learn.ml.MLDataSet;
 import syncleus.dann.math.EncogMath;
-
-import java.io.Serializable;
+import syncleus.dann.neural.freeform.FreeformConnection;
+import syncleus.dann.neural.freeform.FreeformNetwork;
+import syncleus.dann.neural.networks.training.propagation.TrainingContinuation;
+import syncleus.dann.neural.networks.training.propagation.resilient.RPROPConst;
 
 public class FreeformResilientPropagation extends FreeformPropagationTraining
         implements Serializable {
@@ -92,13 +91,8 @@ public class FreeformResilientPropagation extends FreeformPropagationTraining
         super(theNetwork, theTraining);
         this.maxStep = theMaxStep;
         theNetwork.tempTrainingAllocate(1, 4);
-        theNetwork.performConnectionTask(new ConnectionTask() {
-            @Override
-            public void task(final FreeformConnection c) {
-                c.setTempTraining(FreeformResilientPropagation.TEMP_UPDATE,
-                        initialUpdate);
-            }
-        });
+        theNetwork.performConnectionTask(c -> c.setTempTraining(FreeformResilientPropagation.TEMP_UPDATE,
+		        initialUpdate));
     }
 
     /**

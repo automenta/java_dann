@@ -18,11 +18,11 @@
  ******************************************************************************/
 package syncleus.dann.classify.naive;
 
-import syncleus.dann.data.language.parsing.BasicWordParser;
-import syncleus.dann.data.language.parsing.WordParser;
-
 import java.util.Locale;
 import java.util.Set;
+
+import syncleus.dann.data.language.parsing.BasicWordParser;
+import syncleus.dann.data.language.parsing.WordParser;
 
 /**
  * This is an implementation of a SimpleNaiveClassifier for language.

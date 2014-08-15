@@ -23,18 +23,18 @@
  */
 package syncleus.dann.evolve.species;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import syncleus.dann.evolve.GeneticError;
 import syncleus.dann.evolve.genome.Genome;
 import syncleus.dann.evolve.population.Population;
 import syncleus.dann.evolve.sort.SortGenomesForSpecies;
 import syncleus.dann.evolve.sort.SpeciesComparator;
 import syncleus.dann.evolve.train.EvolutionaryAlgorithm;
-import syncleus.dann.evolve.GeneticError;
 import syncleus.dann.math.EncogMath;
-
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 /**
  * Speciate based on threshold. Any genomes with a compatibility score below a

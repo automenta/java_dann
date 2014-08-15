@@ -23,12 +23,12 @@
  */
 package syncleus.dann.learn.ml;
 
-import syncleus.dann.data.file.csv.CSVFormat;
-import syncleus.dann.math.EncogMath;
-
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
+
+import syncleus.dann.data.file.csv.CSVFormat;
+import syncleus.dann.math.EncogMath;
 
 /**
  * A class that provides basic property functionality for the MLProperties

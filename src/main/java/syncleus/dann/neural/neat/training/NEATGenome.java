@@ -23,14 +23,20 @@
  */
 package org.encog.neural.neat.training;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+
 import syncleus.dann.evolve.genome.BasicGenome;
 import syncleus.dann.evolve.genome.Genome;
-import org.encog.neural.neat.NEATNeuronType;
-import org.encog.neural.neat.NEATPopulation;
 import syncleus.dann.math.random.RangeRandomizer;
-
-import java.io.Serializable;
-import java.util.*;
+import syncleus.dann.neural.activation.EncogActivationFunction;
+import syncleus.dann.neural.neat.NEATNeuronType;
+import syncleus.dann.neural.neat.NEATPopulation;
 
 /**
  * Implements a NEAT genome. This is a "blueprint" for creating a neural

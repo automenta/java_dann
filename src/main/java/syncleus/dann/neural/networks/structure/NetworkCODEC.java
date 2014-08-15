@@ -21,14 +21,13 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package org.encog.neural.networks.structure;
+package syncleus.dann.neural.networks.structure;
+
+import java.util.Arrays;
 
 import syncleus.dann.learn.ml.MLEncodable;
 import syncleus.dann.learn.ml.MLMethod;
-import org.encog.neural.NeuralNetworkError;
-import org.encog.neural.networks.BasicNetwork;
-
-import java.util.Arrays;
+import syncleus.dann.neural.networks.BasicNetwork;
 
 /**
  * This class will extract the "long term memory" of a neural network, that is
@@ -58,7 +57,7 @@ public final class NetworkCODEC {
             ((MLEncodable) network).decodeFromArray(array);
             return;
         }
-        throw new NeuralNetworkError(NetworkCODEC.ERROR
+        throw new RuntimeException(NetworkCODEC.ERROR
                 + network.getClass().getName());
     }
 
@@ -101,7 +100,7 @@ public final class NetworkCODEC {
 
         final double test = Math.pow(10.0, precision);
         if (Double.isInfinite(test) || (test > Long.MAX_VALUE)) {
-            throw new NeuralNetworkError("Precision of " + precision
+            throw new RuntimeException("Precision of " + precision
                     + " decimal places is not supported.");
         }
 
@@ -126,7 +125,7 @@ public final class NetworkCODEC {
         if (network instanceof MLEncodable) {
             return ((MLEncodable) network).encodedArrayLength();
         }
-        throw new NeuralNetworkError(NetworkCODEC.ERROR
+        throw new RuntimeException(NetworkCODEC.ERROR
                 + network.getClass().getName());
     }
 
@@ -146,7 +145,7 @@ public final class NetworkCODEC {
             ((MLEncodable) network).encodeToArray(encoded);
             return encoded;
         }
-        throw new NeuralNetworkError(NetworkCODEC.ERROR
+        throw new RuntimeException(NetworkCODEC.ERROR
                 + network.getClass().getName());
 
     }

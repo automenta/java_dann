@@ -23,16 +23,16 @@
  */
 package syncleus.dann.data.buffer.codec;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.PrintStream;
+
 import syncleus.dann.data.buffer.BufferedDataError;
 import syncleus.dann.data.file.csv.CSVFormat;
 import syncleus.dann.data.file.csv.ReadCSV;
 import syncleus.dann.data.language.NumberList;
 import syncleus.dann.math.array.EngineArray;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.PrintStream;
 
 /**
  * A CODEC used to read/write data from/to a CSV data file. There are two

@@ -18,12 +18,12 @@
  ******************************************************************************/
 package syncleus.dann.math.statistics;
 
+import java.util.Random;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Test;
-
-import java.util.Random;
 
 public class TestSimpleMarkovChainEvidence {
     private static enum WeatherState {

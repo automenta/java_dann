@@ -21,7 +21,7 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package org.encog.neural.networks;
+package syncleus.dann.neural.networks;
 
 import syncleus.dann.learn.ml.MLData;
 
