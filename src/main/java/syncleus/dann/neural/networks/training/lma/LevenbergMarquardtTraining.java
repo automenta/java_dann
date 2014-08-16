@@ -23,10 +23,14 @@
  */
 package org.encog.neural.networks.training.lma;
 
+import syncleus.dann.data.DataSample;
+import syncleus.dann.data.Data;
+import syncleus.dann.data.DataSet;
+import syncleus.dann.learn.TrainingImplementationType;
+import syncleus.dann.learn.Learning;
 import syncleus.dann.data.basic.BasicMLData;
 import syncleus.dann.data.basic.BasicMLDataPair;
-import syncleus.dann.learn.ml.*;
-import syncleus.dann.learn.train.BasicTraining;
+import syncleus.dann.learn.BasicTraining;
 import syncleus.dann.math.matrix.decomposition.LuDecomposition2;
 import syncleus.dann.math.matrix.hessian.ComputeHessian;
 import syncleus.dann.math.matrix.hessian.HessianCR;
@@ -89,7 +93,7 @@ public class LevenbergMarquardtTraining extends BasicTraining implements
     /**
      * The training set that we are using to train.
      */
-    private final MLDataSet indexableTraining;
+    private final DataSet indexableTraining;
 
     /**
      * The training set length.
@@ -125,7 +129,7 @@ public class LevenbergMarquardtTraining extends BasicTraining implements
     /**
      * The training elements.
      */
-    private final MLDataPair pair;
+    private final DataSample pair;
 
     /**
      * Is the init complete?
@@ -139,7 +143,7 @@ public class LevenbergMarquardtTraining extends BasicTraining implements
      * @param training The training data to use. Must be indexable.
      */
     public LevenbergMarquardtTraining(final BasicNetwork network,
-                                      final MLDataSet training) {
+                                      final DataSet training) {
         this(network, training, new HessianCR());
     }
 
@@ -150,7 +154,7 @@ public class LevenbergMarquardtTraining extends BasicTraining implements
      * @param training The training data to use. Must be indexable.
      */
     public LevenbergMarquardtTraining(final BasicNetwork network,
-                                      final MLDataSet training, final ComputeHessian h) {
+                                      final DataSet training, final ComputeHessian h) {
         super(TrainingImplementationType.Iterative);
         ValidateNetwork.validateMethodToData(network, training);
 
@@ -188,7 +192,7 @@ public class LevenbergMarquardtTraining extends BasicTraining implements
      * @return The trained network.
      */
     @Override
-    public MLMethod getMethod() {
+    public Learning getMethod() {
         return this.network;
     }
 
@@ -200,7 +204,7 @@ public class LevenbergMarquardtTraining extends BasicTraining implements
 
         for (int i = 0; i < this.trainingLength; i++) {
             this.indexableTraining.getRecord(i, this.pair);
-            final MLData actual = this.network.compute(this.pair.getInput());
+            final Data actual = this.network.compute(this.pair.getInput());
             result.updateError(actual.getData(),
                     this.pair.getIdeal().getData(), pair.getSignificance());
         }

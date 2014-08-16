@@ -119,17 +119,17 @@ public class TestHyperpoint {
     public void testAccessors() {
         Vector testPoint = new Vector(3);
         Assert.assertTrue("dimensions value is incorrect",
-                testPoint.getDimensions() == 3);
+                testPoint.getDimension() == 3);
         final Vector anotherTestPoint = new Vector(testPoint);
         Assert.assertTrue("dimensions value is incorrect",
-                anotherTestPoint.getDimensions() == 3);
+                anotherTestPoint.getDimension() == 3);
         final ArrayList<Double> points = new ArrayList<>();
         points.add(1.0d);
         points.add(2.0d);
         points.add(3.0d);
         testPoint = new Vector(points);
         Assert.assertTrue("dimensions value is incorrect",
-                testPoint.getDimensions() == 3);
+                testPoint.getDimension() == 3);
         Assert.assertTrue("coordinate 1 incorrect",
                 Math.abs(testPoint.get(1) - 1.0d) < 0.000001);
         Assert.assertTrue("coordinate 2 incorrect",

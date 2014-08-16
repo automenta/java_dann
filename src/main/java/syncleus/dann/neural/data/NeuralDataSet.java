@@ -23,12 +23,12 @@
  */
 package org.encog.neural.data;
 
-import syncleus.dann.learn.ml.MLDataSet;
+import syncleus.dann.data.DataSet;
 
 /**
  * This is an alias class for Encog 2.5 compatibility. This class aliases
  * MLDataSet. Newer code should use MLDataSet in place of this class.
  */
-public interface NeuralDataSet extends MLDataSet {
+public interface NeuralDataSet extends DataSet {
 
 }

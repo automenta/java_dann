@@ -23,7 +23,7 @@
  */
 package org.encog.neural.pattern;
 
-import syncleus.dann.learn.ml.MLMethod;
+import syncleus.dann.learn.Learning;
 import syncleus.dann.learn.svm.KernelType;
 import syncleus.dann.learn.svm.SVM;
 import syncleus.dann.learn.svm.SVMType;
@@ -82,7 +82,7 @@ public class SVMPattern implements NeuralNetworkPattern {
      * @return The generated network.
      */
     @Override
-    public MLMethod generate() {
+    public Learning generate() {
         if (this.outputNeurons != 1) {
             throw new PatternError("A SVM may only have one output.");
         }

@@ -23,9 +23,9 @@
  */
 package syncleus.dann.data.basic;
 
-import syncleus.dann.learn.ml.MLData;
-import syncleus.dann.learn.ml.MLDataPair;
-import syncleus.dann.learn.ml.MLDataSet;
+import syncleus.dann.data.Data;
+import syncleus.dann.data.DataSample;
+import syncleus.dann.data.DataSet;
 import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.util.ObjectCloner;
 
@@ -41,7 +41,7 @@ import java.util.List;
  *
  * @author jheaton
  */
-public class BasicMLDataSet implements Serializable, MLDataSet, Cloneable {
+public class BasicMLDataSet implements Serializable, DataSet, Cloneable {
 
     /**
      * An iterator to be used with the BasicMLDataSet. This iterator does not
@@ -49,7 +49,7 @@ public class BasicMLDataSet implements Serializable, MLDataSet, Cloneable {
      *
      * @author jheaton
      */
-    public class BasicMLIterator implements Iterator<MLDataPair> {
+    public class BasicMLIterator implements Iterator<DataSample> {
 
         /**
          * The index that the iterator is currently at.
@@ -68,7 +68,7 @@ public class BasicMLDataSet implements Serializable, MLDataSet, Cloneable {
          * {@inheritDoc}
          */
         @Override
-        public final MLDataPair next() {
+        public final DataSample next() {
             if (!hasNext()) {
                 return null;
             }
@@ -93,7 +93,7 @@ public class BasicMLDataSet implements Serializable, MLDataSet, Cloneable {
     /**
      * The data held by this object.
      */
-    private List<MLDataPair> data = new ArrayList<>();
+    private List<DataSample> data = new ArrayList<>();
 
     /**
      * Default constructor.
@@ -128,7 +128,7 @@ public class BasicMLDataSet implements Serializable, MLDataSet, Cloneable {
      *
      * @param theData The data to use.
      */
-    public BasicMLDataSet(final List<MLDataPair> theData) {
+    public BasicMLDataSet(final List<DataSample> theData) {
         this.data = theData;
     }
 
@@ -137,11 +137,11 @@ public class BasicMLDataSet implements Serializable, MLDataSet, Cloneable {
      *
      * @param set The dataset to copy.
      */
-    public BasicMLDataSet(final MLDataSet set) {
+    public BasicMLDataSet(final DataSet set) {
         final int inputCount = set.getInputSize();
         final int idealCount = set.getIdealSize();
 
-        for (final MLDataPair pair : set) {
+        for (final DataSample pair : set) {
 
             BasicMLData input = null;
             BasicMLData ideal = null;
@@ -164,7 +164,7 @@ public class BasicMLDataSet implements Serializable, MLDataSet, Cloneable {
      * {@inheritDoc}
      */
     @Override
-    public void add(final MLData theData) {
+    public void add(final Data theData) {
         this.data.add(new BasicMLDataPair(theData));
     }
 
@@ -172,9 +172,9 @@ public class BasicMLDataSet implements Serializable, MLDataSet, Cloneable {
      * {@inheritDoc}
      */
     @Override
-    public void add(final MLData inputData, final MLData idealData) {
+    public void add(final Data inputData, final Data idealData) {
 
-        final MLDataPair pair = new BasicMLDataPair(inputData, idealData);
+        final DataSample pair = new BasicMLDataPair(inputData, idealData);
         this.data.add(pair);
     }
 
@@ -182,7 +182,7 @@ public class BasicMLDataSet implements Serializable, MLDataSet, Cloneable {
      * {@inheritDoc}
      */
     @Override
-    public void add(final MLDataPair inputData) {
+    public void add(final DataSample inputData) {
         this.data.add(inputData);
     }
 
@@ -207,7 +207,7 @@ public class BasicMLDataSet implements Serializable, MLDataSet, Cloneable {
      *
      * @return the data
      */
-    public List<MLDataPair> getData() {
+    public List<DataSample> getData() {
         return this.data;
     }
 
@@ -219,7 +219,7 @@ public class BasicMLDataSet implements Serializable, MLDataSet, Cloneable {
         if (this.data.isEmpty()) {
             return 0;
         }
-        final MLDataPair first = this.data.get(0);
+        final DataSample first = this.data.get(0);
         if (first.getIdeal() == null) {
             return 0;
         }
@@ -235,7 +235,7 @@ public class BasicMLDataSet implements Serializable, MLDataSet, Cloneable {
         if (this.data.isEmpty()) {
             return 0;
         }
-        final MLDataPair first = this.data.get(0);
+        final DataSample first = this.data.get(0);
         return first.getInput().size();
     }
 
@@ -243,9 +243,9 @@ public class BasicMLDataSet implements Serializable, MLDataSet, Cloneable {
      * {@inheritDoc}
      */
     @Override
-    public void getRecord(final long index, final MLDataPair pair) {
+    public void getRecord(final long index, final DataSample pair) {
 
-        final MLDataPair source = this.data.get((int) index);
+        final DataSample source = this.data.get((int) index);
         pair.setInputArray(source.getInputArray());
         if (pair.getIdealArray() != null) {
             pair.setIdealArray(source.getIdealArray());
@@ -276,7 +276,7 @@ public class BasicMLDataSet implements Serializable, MLDataSet, Cloneable {
      * {@inheritDoc}
      */
     @Override
-    public Iterator<MLDataPair> iterator() {
+    public Iterator<DataSample> iterator() {
         final BasicMLIterator result = new BasicMLIterator();
         return result;
     }
@@ -285,14 +285,14 @@ public class BasicMLDataSet implements Serializable, MLDataSet, Cloneable {
      * {@inheritDoc}
      */
     @Override
-    public MLDataSet openAdditional() {
+    public DataSet openAdditional() {
         return new BasicMLDataSet(this.data);
     }
 
     /**
      * @param theData the data to set
      */
-    public void setData(final List<MLDataPair> theData) {
+    public void setData(final List<DataSample> theData) {
         this.data = theData;
     }
 
@@ -302,9 +302,9 @@ public class BasicMLDataSet implements Serializable, MLDataSet, Cloneable {
      * @param theSet The data set to convert.
      * @return The list.
      */
-    public static List<MLDataPair> toList(final MLDataSet theSet) {
-        final List<MLDataPair> list = new ArrayList<>();
-        for (final MLDataPair pair : theSet) {
+    public static List<DataSample> toList(final DataSet theSet) {
+        final List<DataSample> list = new ArrayList<>();
+        for (final DataSample pair : theSet) {
             list.add(pair);
         }
         return list;
@@ -322,7 +322,7 @@ public class BasicMLDataSet implements Serializable, MLDataSet, Cloneable {
      * {@inheritDoc}
      */
     @Override
-    public MLDataPair get(final int index) {
+    public DataSample get(final int index) {
         return this.data.get(index);
     }
 

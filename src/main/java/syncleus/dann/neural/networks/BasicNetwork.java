@@ -23,11 +23,20 @@
  */
 package syncleus.dann.neural.networks;
 
+import syncleus.dann.learn.MLContext;
+import syncleus.dann.RegressionLearning;
+import syncleus.dann.learn.AbstractLearning;
+import syncleus.dann.learn.ErrorLearning;
+import syncleus.dann.data.Data;
+import syncleus.dann.data.DataSet;
+import syncleus.dann.learn.MLFactory;
+import syncleus.dann.Classifying;
+import syncleus.dann.learn.MLResettable;
+import syncleus.dann.data.VectorEncodable;
 import org.encog.neural.flat.FlatNetwork;
 import syncleus.dann.data.basic.BasicMLData;
 import syncleus.dann.data.file.csv.CSVFormat;
 import syncleus.dann.data.language.NumberList;
-import syncleus.dann.learn.ml.*;
 import syncleus.dann.math.EncogMath;
 import syncleus.dann.math.EncogUtility;
 import syncleus.dann.math.array.EngineArray;
@@ -56,8 +65,8 @@ import syncleus.dann.util.factory.MLMethodFactory;
  * <p/>
  * Once the neural network has been completely constructed.
  */
-public class BasicNetwork extends BasicML implements ContainsFlat, MLContext,
-        MLRegression, MLEncodable, MLResettable, MLClassification, MLError,
+public class BasicNetwork extends AbstractLearning implements ContainsFlat, MLContext,
+        RegressionLearning, VectorEncodable, MLResettable, Classifying, ErrorLearning,
         MLFactory, Cloneable {
 
     /**
@@ -184,7 +193,7 @@ public class BasicNetwork extends BasicML implements ContainsFlat, MLContext,
      * @return The error percentage.
      */
     @Override
-    public double calculateError(final MLDataSet data) {
+    public double calculateError(final DataSet data) {
         return EncogUtility.calculateRegressionError(this, data);
     }
 
@@ -203,7 +212,7 @@ public class BasicNetwork extends BasicML implements ContainsFlat, MLContext,
      * {@inheritDoc}
      */
     @Override
-    public int classify(final MLData input) {
+    public int classify(final Data input) {
         return winner(input);
     }
 
@@ -238,7 +247,7 @@ public class BasicNetwork extends BasicML implements ContainsFlat, MLContext,
      */
     public void compute(final double[] input, final double[] output) {
         final BasicMLData input2 = new BasicMLData(input);
-        final MLData output2 = this.compute(input2);
+        final Data output2 = this.compute(input2);
         EngineArray.arrayCopy(output2.getData(), output);
     }
 
@@ -249,9 +258,9 @@ public class BasicNetwork extends BasicML implements ContainsFlat, MLContext,
      * @return The output from the neural network.
      */
     @Override
-    public MLData compute(final MLData input) {
+    public Data compute(final Data input) {
         try {
-            final MLData result = new BasicMLData(this.structure.getFlat()
+            final Data result = new BasicMLData(this.structure.getFlat()
                     .getOutputCount());
             this.structure.getFlat().compute(input.getData(), result.getData());
             return result;
@@ -736,8 +745,8 @@ public class BasicNetwork extends BasicML implements ContainsFlat, MLContext,
      * @param input The input patter to present to the neural network.
      * @return The winning neuron.
      */
-    public int winner(final MLData input) {
-        final MLData output = compute(input);
+    public int winner(final Data input) {
+        final Data output = compute(input);
         return EngineArray.maxIndex(output.getData());
     }
 

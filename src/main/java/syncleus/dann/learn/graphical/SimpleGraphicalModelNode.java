@@ -20,8 +20,8 @@ package syncleus.dann.learn.graphical;
 
 import syncleus.dann.graph.BidirectedEdge;
 import syncleus.dann.graph.context.AbstractContextNode;
-import syncleus.dann.learn.EvidenceMap;
-import syncleus.dann.learn.StateEvidence;
+import syncleus.dann.data.state.EvidenceMap;
+import syncleus.dann.data.state.StateEvidence;
 
 import java.util.*;
 

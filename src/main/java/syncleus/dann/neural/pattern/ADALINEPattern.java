@@ -23,7 +23,7 @@
  */
 package org.encog.neural.pattern;
 
-import syncleus.dann.learn.ml.MLMethod;
+import syncleus.dann.learn.Learning;
 import syncleus.dann.math.random.RangeRandomizer;
 import syncleus.dann.neural.activation.ActivationLinear;
 import syncleus.dann.neural.activation.EncogActivationFunction;
@@ -71,7 +71,7 @@ public class ADALINEPattern implements NeuralNetworkPattern {
      * @return The generated network.
      */
     @Override
-    public MLMethod generate() {
+    public Learning generate() {
         final BasicNetwork network = new BasicNetwork();
 
         final Layer inputLayer = new BasicLayer(new ActivationLinear(), true,

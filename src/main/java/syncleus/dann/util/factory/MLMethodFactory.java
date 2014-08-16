@@ -23,8 +23,6 @@
  */
 package syncleus.dann.util.factory;
 
-import syncleus.dann.learn.ml.MLMethod;
-
 /**
  * This factory is used to create machine learning methods.
  */
@@ -79,28 +77,28 @@ public class MLMethodFactory {
 
     public static final String PROPERTY_CYCLES = "cycles";
 
-    /**
-     * Create a new machine learning method.
-     *
-     * @param methodType   The method to create.
-     * @param architecture The architecture string.
-     * @param input        The input count.
-     * @param output       The output count.
-     * @return The newly created machine learning method.
-     */
-    public MLMethod create(final String methodType, final String architecture,
-                           final int input, final int output) {
-        for (final EncogPluginBase plugin : Encog.getInstance().getPlugins()) {
-            if (plugin instanceof EncogPluginService1) {
-                final MLMethod result = ((EncogPluginService1) plugin)
-                        .createMethod(methodType, architecture, input, output);
-                if (result != null) {
-                    return result;
-                }
-            }
-        }
-
-        throw new RuntimeException("Unknown method type: " + methodType);
-    }
+//    /**
+//     * Create a new machine learning method.
+//     *
+//     * @param methodType   The method to create.
+//     * @param architecture The architecture string.
+//     * @param input        The input count.
+//     * @param output       The output count.
+//     * @return The newly created machine learning method.
+//     */
+//    public MLMethod create(final String methodType, final String architecture,
+//                           final int input, final int output) {
+//        for (final EncogPluginBase plugin : Encog.getInstance().getPlugins()) {
+//            if (plugin instanceof EncogPluginService1) {
+//                final MLMethod result = ((EncogPluginService1) plugin)
+//                        .createMethod(methodType, architecture, input, output);
+//                if (result != null) {
+//                    return result;
+//                }
+//            }
+//        }
+//
+//        throw new RuntimeException("Unknown method type: " + methodType);
+//    }
 
 }

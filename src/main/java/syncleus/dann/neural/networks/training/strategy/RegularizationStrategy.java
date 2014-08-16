@@ -23,38 +23,38 @@
  */
 package org.encog.neural.networks.training.strategy;
 
-import syncleus.dann.learn.ml.MLEncodable;
-import syncleus.dann.learn.train.MLTrain;
-import syncleus.dann.learn.train.strategy.Strategy;
+import syncleus.dann.data.VectorEncodable;
+import syncleus.dann.learn.Training;
+import syncleus.dann.learn.strategy.Strategy;
 import syncleus.dann.math.array.EngineArray;
 
 public class RegularizationStrategy implements Strategy {
 
     private final double lambda; // Weight decay
-    private MLTrain train;
+    private Training train;
     private double[] weights;
     private double[] newWeights;
-    private MLEncodable encodable;
+    private VectorEncodable encodable;
 
     public RegularizationStrategy(final double lambda) {
         this.lambda = lambda;
     }
 
     @Override
-    public void init(final MLTrain train) {
+    public void init(final Training train) {
         this.train = train;
-        if (!(train.getMethod() instanceof MLEncodable)) {
+        if (!(train.getMethod() instanceof VectorEncodable)) {
             throw new RuntimeException(
                     "Method must implement MLEncodable to be used with regularization.");
         }
-        this.encodable = ((MLEncodable) train.getMethod());
+        this.encodable = ((VectorEncodable) train.getMethod());
         this.weights = new double[this.encodable.encodedArrayLength()];
         this.newWeights = new double[this.encodable.encodedArrayLength()];
     }
 
     @Override
     public void preIteration() {
-        ((MLEncodable) train.getMethod()).encodeToArray(weights);
+        ((VectorEncodable) train.getMethod()).encodeToArray(weights);
     }
 
     @Override

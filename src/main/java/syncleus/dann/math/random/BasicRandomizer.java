@@ -23,8 +23,8 @@
  */
 package syncleus.dann.math.random;
 
-import syncleus.dann.learn.ml.MLEncodable;
-import syncleus.dann.learn.ml.MLMethod;
+import syncleus.dann.data.VectorEncodable;
+import syncleus.dann.learn.Learning;
 import syncleus.dann.math.matrix.SimpleRealMatrix;
 import syncleus.dann.neural.networks.BasicNetwork;
 
@@ -163,15 +163,15 @@ public abstract class BasicRandomizer implements Randomizer {
      * @param method A network to randomize.
      */
     @Override
-    public void randomize(final MLMethod method) {
+    public void randomize(final Learning method) {
 
         if (method instanceof BasicNetwork) {
             final BasicNetwork network = (BasicNetwork) method;
             for (int i = 0; i < network.getLayerCount() - 1; i++) {
                 randomize(network, i);
             }
-        } else if (method instanceof MLEncodable) {
-            final MLEncodable encode = (MLEncodable) method;
+        } else if (method instanceof VectorEncodable) {
+            final VectorEncodable encode = (VectorEncodable) method;
             final double[] encoded = new double[encode.encodedArrayLength()];
             encode.encodeToArray(encoded);
             randomize(encoded);

@@ -23,11 +23,11 @@
  */
 package syncleus.dann.util.factory.train;
 
-import syncleus.dann.learn.ml.CalculateScore;
-import syncleus.dann.learn.ml.MLDataSet;
-import syncleus.dann.learn.ml.MLEncodable;
-import syncleus.dann.learn.ml.MLMethod;
-import syncleus.dann.learn.train.MLTrain;
+import syncleus.dann.learn.CalculateScore;
+import syncleus.dann.data.DataSet;
+import syncleus.dann.data.VectorEncodable;
+import syncleus.dann.learn.Learning;
+import syncleus.dann.learn.Training;
 import syncleus.dann.neural.networks.BasicNetwork;
 import syncleus.dann.util.factory.MLTrainFactory;
 import syncleus.dann.util.factory.parse.ArchitectureParse;
@@ -46,7 +46,7 @@ public class AnnealFactory {
      * @param argsStr  The arguments to use.
      * @return The newly created trainer.
      */
-    public static MLTrain create(final MLMethod method, final MLDataSet training,
+    public static Training create(final Learning method, final DataSet training,
                                  final String argsStr) {
 
         if (!(method instanceof BasicNetwork)) {
@@ -65,8 +65,8 @@ public class AnnealFactory {
 
         final int cycles = holder.getInt(MLTrainFactory.CYCLES, false, 100);
 
-        final MLTrain train = new NeuralSimulatedAnnealing(
-                (MLEncodable) method, score, startTemp, stopTemp, cycles);
+        final Training train = new NeuralSimulatedAnnealing(
+                (VectorEncodable) method, score, startTemp, stopTemp, cycles);
 
         return train;
     }

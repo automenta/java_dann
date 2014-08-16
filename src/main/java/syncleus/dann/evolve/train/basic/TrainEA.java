@@ -25,12 +25,12 @@ package syncleus.dann.evolve.train.basic;
 
 import syncleus.dann.evolve.exception.EAError;
 import syncleus.dann.evolve.population.Population;
-import syncleus.dann.learn.ml.CalculateScore;
-import syncleus.dann.learn.ml.MLDataSet;
-import syncleus.dann.learn.ml.MLMethod;
-import syncleus.dann.learn.ml.TrainingImplementationType;
-import syncleus.dann.learn.train.MLTrain;
-import syncleus.dann.learn.train.strategy.Strategy;
+import syncleus.dann.learn.CalculateScore;
+import syncleus.dann.data.DataSet;
+import syncleus.dann.learn.Learning;
+import syncleus.dann.learn.TrainingImplementationType;
+import syncleus.dann.learn.Training;
+import syncleus.dann.learn.strategy.Strategy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +38,7 @@ import java.util.List;
 /**
  * Provides a MLTrain compatible class that can be used to train genomes.
  */
-public class TrainEA extends BasicEA implements MLTrain {
+public class TrainEA extends BasicEA implements Training {
 
     /**
      * The serial ID.
@@ -62,7 +62,7 @@ public class TrainEA extends BasicEA implements MLTrain {
      * @param thePopulation The population.
      * @param trainingData  The training data.
      */
-    public TrainEA(final Population thePopulation, final MLDataSet trainingData) {
+    public TrainEA(final Population thePopulation, final DataSet trainingData) {
         super(thePopulation, new TrainingSetScore(trainingData));
     }
 
@@ -153,7 +153,7 @@ public class TrainEA extends BasicEA implements MLTrain {
      * @return A network created for the best genome.
      */
     @Override
-    public MLMethod getMethod() {
+    public Learning getMethod() {
         return this.getPopulation();
     }
 
@@ -163,7 +163,7 @@ public class TrainEA extends BasicEA implements MLTrain {
      * @return null, not used.
      */
     @Override
-    public MLDataSet getTraining() {
+    public DataSet getTraining() {
         return null;
     }
 

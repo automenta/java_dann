@@ -24,7 +24,7 @@
 package org.encog.neural.data.basic;
 
 import syncleus.dann.data.basic.BasicMLDataSet;
-import syncleus.dann.learn.ml.MLDataPair;
+import syncleus.dann.data.DataSample;
 
 import java.util.List;
 
@@ -61,7 +61,7 @@ public class BasicNeuralDataSet extends BasicMLDataSet implements NeuralDataSet 
      *
      * @param theData The other list.
      */
-    public BasicNeuralDataSet(final List<MLDataPair> theData) {
+    public BasicNeuralDataSet(final List<DataSample> theData) {
         super(theData);
     }
 

@@ -26,8 +26,15 @@ package syncleus.dann.math;
 /**
  * A generic single or multivariate function.
  */
-public interface EncogFunction {
-    double fn(double[] x);
+public interface EncogFunction extends syncleus.dann.Function<Double[],Double> {
+    double apply(double[] x);
+    
+    default Double apply(Double[] x) {
+        //TODO impl
+        return null;
+    }
+    
+    
 
     int size();
 }

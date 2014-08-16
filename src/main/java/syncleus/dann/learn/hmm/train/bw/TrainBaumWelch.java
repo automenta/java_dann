@@ -25,9 +25,9 @@ package syncleus.dann.learn.hmm.train.bw;
 
 import syncleus.dann.learn.hmm.HiddenMarkovModel;
 import syncleus.dann.learn.hmm.alog.ForwardBackwardCalculator;
-import syncleus.dann.learn.ml.MLDataPair;
-import syncleus.dann.learn.ml.MLDataSet;
-import syncleus.dann.learn.ml.MLSequenceSet;
+import syncleus.dann.data.DataSample;
+import syncleus.dann.data.DataSet;
+import syncleus.dann.data.DataSetSequence;
 
 import java.util.Arrays;
 import java.util.EnumSet;
@@ -51,7 +51,7 @@ import java.util.Iterator;
  */
 public class TrainBaumWelch extends BaseBaumWelch {
     public TrainBaumWelch(final HiddenMarkovModel hmm,
-                          final MLSequenceSet training) {
+                          final DataSetSequence training) {
         super(hmm, training);
     }
 
@@ -82,7 +82,7 @@ public class TrainBaumWelch extends BaseBaumWelch {
     }
 
     @Override
-    public double[][][] estimateXi(final MLDataSet sequence,
+    public double[][][] estimateXi(final DataSet sequence,
                                    final ForwardBackwardCalculator fbc, final HiddenMarkovModel hmm) {
         if (sequence.size() <= 1) {
             throw new IllegalArgumentException(
@@ -93,11 +93,11 @@ public class TrainBaumWelch extends BaseBaumWelch {
                 .getStateCount()][hmm.getStateCount()];
         final double probability = fbc.probability();
 
-        final Iterator<MLDataPair> seqIterator = sequence.iterator();
+        final Iterator<DataSample> seqIterator = sequence.iterator();
         seqIterator.next();
 
         for (int t = 0; t < (sequence.size() - 1); t++) {
-            final MLDataPair o = seqIterator.next();
+            final DataSample o = seqIterator.next();
 
             for (int i = 0; i < hmm.getStateCount(); i++) {
                 for (int j = 0; j < hmm.getStateCount(); j++) {
@@ -114,7 +114,7 @@ public class TrainBaumWelch extends BaseBaumWelch {
 
     @Override
     public ForwardBackwardCalculator generateForwardBackwardCalculator(
-            final MLDataSet sequence, final HiddenMarkovModel hmm) {
+            final DataSet sequence, final HiddenMarkovModel hmm) {
         return new ForwardBackwardCalculator(sequence, hmm,
                 EnumSet.allOf(ForwardBackwardCalculator.Computation.class));
     }

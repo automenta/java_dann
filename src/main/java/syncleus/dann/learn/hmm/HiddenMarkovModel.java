@@ -29,10 +29,10 @@ import syncleus.dann.learn.hmm.alog.ViterbiCalculator;
 import syncleus.dann.learn.hmm.distributions.ContinousDistribution;
 import syncleus.dann.learn.hmm.distributions.DiscreteDistribution;
 import syncleus.dann.learn.hmm.distributions.StateDistribution;
-import syncleus.dann.learn.ml.BasicML;
-import syncleus.dann.learn.ml.MLDataPair;
-import syncleus.dann.learn.ml.MLDataSet;
-import syncleus.dann.learn.ml.MLStateSequence;
+import syncleus.dann.learn.AbstractLearning;
+import syncleus.dann.data.DataSample;
+import syncleus.dann.data.DataSet;
+import syncleus.dann.StateSequenceLearning;
 
 import java.io.Serializable;
 import java.util.Iterator;
@@ -69,7 +69,7 @@ import java.util.Iterator;
  * "Statistical Inference for Probabilistic Functions of Finite State Markov Chains"
  * The Annals of Mathematical Statistics 37 (6): 1554-1563.
  */
-public class HiddenMarkovModel extends BasicML implements MLStateSequence,
+public class HiddenMarkovModel extends AbstractLearning implements StateSequenceLearning,
         Serializable, Cloneable {
     /**
      * The serial id.
@@ -208,7 +208,7 @@ public class HiddenMarkovModel extends BasicML implements MLStateSequence,
     }
 
     @Override
-    public int[] getStatesForSequence(final MLDataSet seq) {
+    public int[] getStatesForSequence(final DataSet seq) {
         return (new ViterbiCalculator(seq, this)).stateSequence();
     }
 
@@ -224,24 +224,24 @@ public class HiddenMarkovModel extends BasicML implements MLStateSequence,
         return !isContinuous();
     }
 
-    public double lnProbability(final MLDataSet seq) {
+    public double lnProbability(final DataSet seq) {
         return (new ForwardBackwardScaledCalculator(seq, this)).lnProbability();
     }
 
     @Override
-    public double probability(final MLDataSet seq) {
+    public double probability(final DataSet seq) {
         return (new ForwardBackwardCalculator(seq, this)).probability();
     }
 
     @Override
-    public double probability(final MLDataSet seq, final int[] states) {
+    public double probability(final DataSet seq, final int[] states) {
         if ((seq.size() != states.length) || (seq.size() < 1)) {
             throw new IllegalArgumentException();
         }
 
         double probability = getPi(states[0]);
 
-        final Iterator<MLDataPair> oseqIterator = seq.iterator();
+        final Iterator<DataSample> oseqIterator = seq.iterator();
 
         for (int i = 0; i < (states.length - 1); i++) {
             probability *= getStateDistribution(states[i]).probability(

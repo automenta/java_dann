@@ -23,9 +23,9 @@
  */
 package org.encog.neural.rbf.training;
 
-import syncleus.dann.learn.ml.MLDataSet;
-import syncleus.dann.learn.ml.TrainingImplementationType;
-import syncleus.dann.learn.train.BasicTraining;
+import syncleus.dann.data.DataSet;
+import syncleus.dann.learn.TrainingImplementationType;
+import syncleus.dann.learn.BasicTraining;
 import syncleus.dann.math.ObjectPair;
 import syncleus.dann.math.rbf.RadialBasisFunction;
 
@@ -48,7 +48,7 @@ public class SVDTraining extends BasicTraining {
      * @param network  The network to train. Must have a single output neuron.
      * @param training The training data to use. Must be indexable.
      */
-    public SVDTraining(final RBFNetwork network, final MLDataSet training) {
+    public SVDTraining(final RBFNetwork network, final DataSet training) {
         super(TrainingImplementationType.OnePass);
         if (network.getOutputCount() != 1) {
             throw new TrainingError(

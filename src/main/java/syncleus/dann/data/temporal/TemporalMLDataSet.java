@@ -29,8 +29,8 @@ import syncleus.dann.data.basic.BasicMLData;
 import syncleus.dann.data.basic.BasicMLDataPair;
 import syncleus.dann.data.language.time.TimeSpan;
 import syncleus.dann.data.language.time.TimeUnit;
-import syncleus.dann.learn.ml.MLData;
-import syncleus.dann.learn.ml.MLDataPair;
+import syncleus.dann.data.Data;
+import syncleus.dann.data.DataSample;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -156,7 +156,7 @@ public class TemporalMLDataSet extends BasicNeuralDataSet implements
      * @param data Not used.
      */
     @Override
-    public void add(final MLData data) {
+    public void add(final Data data) {
         throw new TemporalError(TemporalMLDataSet.ADD_NOT_SUPPORTED);
     }
 
@@ -168,7 +168,7 @@ public class TemporalMLDataSet extends BasicNeuralDataSet implements
      * @param idealData Not used.
      */
     @Override
-    public void add(final MLData inputData, final MLData idealData) {
+    public void add(final Data inputData, final Data idealData) {
         throw new TemporalError(TemporalMLDataSet.ADD_NOT_SUPPORTED);
     }
 
@@ -180,7 +180,7 @@ public class TemporalMLDataSet extends BasicNeuralDataSet implements
      */
 
     @Override
-    public void add(final MLDataPair inputData) {
+    public void add(final DataSample inputData) {
         throw new TemporalError(TemporalMLDataSet.ADD_NOT_SUPPORTED);
     }
 

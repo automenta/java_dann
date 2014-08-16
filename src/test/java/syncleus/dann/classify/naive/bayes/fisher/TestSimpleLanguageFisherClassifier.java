@@ -18,6 +18,8 @@
  ******************************************************************************/
 package syncleus.dann.classify.naive.bayes.fisher;
 
+import syncleus.dann.learn.naive.bayes.fisher.SimpleLanguageFisherClassifier;
+import syncleus.dann.learn.naive.bayes.fisher.TrainableLanguageFisherClassifier;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -52,12 +54,12 @@ public class TestSimpleLanguageFisherClassifier {
                 classifier.featureClassification("Good") == 2);
 
         Assert.assertTrue("Item had incorrect category!",
-                classifier.classification("Money was here once") == 2);
+                classifier.classify("Money was here once") == 2);
         Assert.assertTrue("Item had incorrect category!", classifier
-                .classification("Money destroys the quick brown fox!") == 1);
+                .classify("Money destroys the quick brown fox!") == 1);
         Assert.assertTrue("Item had incorrect category!",
-                classifier.classification("kills the soul") == 1);
+                classifier.classify("kills the soul") == 1);
         Assert.assertTrue("Item had incorrect category!",
-                classifier.classification("nonsense is the root of good") == 2);
+                classifier.classify("nonsense is the root of good") == 2);
     }
 }

@@ -27,8 +27,8 @@ import syncleus.dann.data.basic.BasicMLData;
 import syncleus.dann.data.basic.BasicMLDataPair;
 import syncleus.dann.data.basic.BasicMLDataSet;
 import syncleus.dann.data.file.csv.CSVFormat;
-import syncleus.dann.learn.ml.MLData;
-import syncleus.dann.learn.ml.MLDataPair;
+import syncleus.dann.data.Data;
+import syncleus.dann.data.DataSample;
 import syncleus.dann.math.array.EngineArray;
 
 import java.io.InputStream;
@@ -175,15 +175,15 @@ public class PersistBasicPNN implements EncogPersistor {
                     final List<String> cols = EncogFileSection
                             .splitColumns(line);
                     int index = 0;
-                    final MLData inputData = new BasicMLData(inputCount);
+                    final Data inputData = new BasicMLData(inputCount);
                     for (int i = 0; i < inputCount; i++) {
                         inputData.setData(i,
                                 CSVFormat.EG_FORMAT.parse(cols.get(index++)));
                     }
-                    final MLData idealData = new BasicMLData(outputCount);
+                    final Data idealData = new BasicMLData(outputCount);
                     idealData.setData(0,
                             CSVFormat.EG_FORMAT.parse(cols.get(index++)));
-                    final MLDataPair pair = new BasicMLDataPair(inputData,
+                    final DataSample pair = new BasicMLDataPair(inputData,
                             idealData);
                     samples.add(pair);
                 }
@@ -228,7 +228,7 @@ public class PersistBasicPNN implements EncogPersistor {
         out.addSubSection("SAMPLES");
 
         if (pnn.getSamples() != null) {
-            for (final MLDataPair pair : pnn.getSamples()) {
+            for (final DataSample pair : pnn.getSamples()) {
                 for (int i = 0; i < pair.getInput().size(); i++) {
                     out.addColumn(pair.getInput().getData(i));
                 }

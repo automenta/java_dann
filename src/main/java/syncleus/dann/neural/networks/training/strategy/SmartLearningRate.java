@@ -23,8 +23,8 @@
  */
 package org.encog.neural.networks.training.strategy;
 
-import syncleus.dann.learn.train.MLTrain;
-import syncleus.dann.learn.train.strategy.Strategy;
+import syncleus.dann.learn.Training;
+import syncleus.dann.learn.strategy.Strategy;
 
 /**
  * Attempt to automatically set the learning rate in a learning method that
@@ -42,7 +42,7 @@ public class SmartLearningRate implements Strategy {
     /**
      * The training algorithm that is using this strategy.
      */
-    private MLTrain train;
+    private Training train;
 
     /**
      * The class that is to have the learning rate set for.
@@ -75,7 +75,7 @@ public class SmartLearningRate implements Strategy {
      * @param train The training algorithm.
      */
     @Override
-    public void init(final MLTrain train) {
+    public void init(final Training train) {
         this.train = train;
         this.ready = false;
         this.setter = (LearningRate) train;

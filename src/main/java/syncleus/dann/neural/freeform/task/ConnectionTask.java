@@ -23,7 +23,8 @@
  */
 package syncleus.dann.neural.freeform.task;
 
-import org.encog.neural.freeform.FreeformConnection;
+import syncleus.dann.neural.freeform.FreeformConnection;
+
 
 /**
  * Implements a task that will be performed for every connection.

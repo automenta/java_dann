@@ -24,13 +24,13 @@
 package syncleus.dann.math.fitting.linear;
 
 import syncleus.dann.data.basic.BasicMLData;
-import syncleus.dann.learn.ml.MLData;
-import syncleus.dann.learn.ml.MLDataSet;
-import syncleus.dann.learn.ml.MLError;
-import syncleus.dann.learn.ml.MLRegression;
+import syncleus.dann.data.Data;
+import syncleus.dann.data.DataSet;
+import syncleus.dann.learn.ErrorLearning;
+import syncleus.dann.RegressionLearning;
 import syncleus.dann.math.EncogUtility;
 
-public class LinearRegression implements MLRegression, MLError {
+public class LinearRegression implements RegressionLearning, ErrorLearning {
 
     private final double[] weights;
     private final int inputCount;
@@ -60,7 +60,7 @@ public class LinearRegression implements MLRegression, MLError {
     }
 
     @Override
-    public MLData compute(final MLData input) {
+    public Data compute(final Data input) {
         if (input.size() != this.inputCount) {
             throw new RuntimeException("Invalid input size, must be " + inputCount);
         }
@@ -76,7 +76,7 @@ public class LinearRegression implements MLRegression, MLError {
     }
 
     @Override
-    public double calculateError(final MLDataSet data) {
+    public double calculateError(final DataSet data) {
         return EncogUtility.calculateRegressionError(this, data);
     }
 }

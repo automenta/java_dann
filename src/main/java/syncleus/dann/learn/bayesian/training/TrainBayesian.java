@@ -30,10 +30,10 @@ import syncleus.dann.learn.bayesian.training.estimator.BayesEstimator;
 import syncleus.dann.learn.bayesian.training.estimator.SimpleEstimator;
 import syncleus.dann.learn.bayesian.training.search.k2.BayesSearch;
 import syncleus.dann.learn.bayesian.training.search.k2.SearchK2;
-import syncleus.dann.learn.ml.MLDataSet;
-import syncleus.dann.learn.ml.MLMethod;
-import syncleus.dann.learn.ml.TrainingImplementationType;
-import syncleus.dann.learn.train.BasicTraining;
+import syncleus.dann.data.DataSet;
+import syncleus.dann.learn.Learning;
+import syncleus.dann.learn.TrainingImplementationType;
+import syncleus.dann.learn.BasicTraining;
 
 /**
  * Train a Bayesian network.
@@ -78,7 +78,7 @@ public class TrainBayesian extends BasicTraining {
     /**
      * The data used for training.
      */
-    private final MLDataSet data;
+    private final DataSet data;
 
     /**
      * The network to train.
@@ -119,7 +119,7 @@ public class TrainBayesian extends BasicTraining {
      * @param theMaximumParents The max number of parents.
      */
     public TrainBayesian(final EncogBayesianNetwork theNetwork,
-                         final MLDataSet theData, final int theMaximumParents) {
+                         final DataSet theData, final int theMaximumParents) {
         this(theNetwork, theData, theMaximumParents,
                 BayesianInit.InitNaiveBayes, new SearchK2(),
                 new SimpleEstimator());
@@ -136,7 +136,7 @@ public class TrainBayesian extends BasicTraining {
      * @param theEstimator      The estimation mehod.
      */
     public TrainBayesian(final EncogBayesianNetwork theNetwork,
-                         final MLDataSet theData, final int theMaximumParents,
+                         final DataSet theData, final int theMaximumParents,
                          final BayesianInit theInit, final BayesSearch theSearch,
                          final BayesEstimator theEstimator) {
         super(TrainingImplementationType.Iterative);
@@ -295,7 +295,7 @@ public class TrainBayesian extends BasicTraining {
      * {@inheritDoc}
      */
     @Override
-    public MLMethod getMethod() {
+    public Learning getMethod() {
         return this.network;
     }
 

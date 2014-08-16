@@ -24,9 +24,9 @@
 package org.encog.ml.prg.train;
 
 import syncleus.dann.data.basic.BasicMLData;
-import syncleus.dann.learn.ml.CalculateScore;
-import syncleus.dann.learn.ml.MLData;
-import syncleus.dann.learn.ml.MLMethod;
+import syncleus.dann.learn.CalculateScore;
+import syncleus.dann.data.Data;
+import syncleus.dann.learn.Learning;
 
 import java.io.Serializable;
 
@@ -50,10 +50,10 @@ public class ZeroEvalScoreFunction implements CalculateScore, Serializable {
      * {@inheritDoc}
      */
     @Override
-    public double calculateScore(final MLMethod genome) {
+    public double calculateScore(final Learning genome) {
         final EncogProgram prg = (EncogProgram) genome;
         final PrgPopulation pop = (PrgPopulation) prg.getPopulation();
-        final MLData inputData = new BasicMLData(pop.getContext()
+        final Data inputData = new BasicMLData(pop.getContext()
                 .getDefinedVariables().size());
         prg.compute(inputData);
         return 0;

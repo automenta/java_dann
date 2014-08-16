@@ -27,7 +27,7 @@ import syncleus.dann.evolve.genome.Genome;
 import syncleus.dann.evolve.genome.GenomeFactory;
 import syncleus.dann.evolve.species.BasicSpecies;
 import syncleus.dann.evolve.species.Species;
-import syncleus.dann.learn.ml.BasicML;
+import syncleus.dann.learn.AbstractLearning;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -39,7 +39,7 @@ import java.util.List;
  * make up the population. If you do not want to use species, then create one
  * species that holds every genome.
  */
-public class BasicPopulation extends BasicML implements Population,
+public class BasicPopulation extends AbstractLearning implements Population,
         Serializable {
 
     /**

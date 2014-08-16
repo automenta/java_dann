@@ -23,7 +23,7 @@
  */
 package syncleus.dann.util.factory.method;
 
-import syncleus.dann.learn.ml.MLMethod;
+import syncleus.dann.learn.Learning;
 import syncleus.dann.util.factory.MLMethodFactory;
 import syncleus.dann.util.factory.parse.ArchitectureParse;
 
@@ -40,7 +40,7 @@ public class EPLFactory {
      * @param output       The output count.
      * @return The feedforward network.
      */
-    public MLMethod create(final String architecture, final int input,
+    public Learning create(final String architecture, final int input,
                            final int output) {
 
         if (input <= 0) {

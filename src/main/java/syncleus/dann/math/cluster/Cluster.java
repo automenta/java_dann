@@ -31,7 +31,7 @@ import java.util.List;
  *
  * @param <T> The type of data to cluster.
  */
-public class Cluster<T extends CentroidFactory<? super T>> {
+public class Cluster<T extends CentroidFactory> {
     /**
      * The contents of the cluster.
      */
@@ -40,7 +40,7 @@ public class Cluster<T extends CentroidFactory<? super T>> {
     /**
      * The centroid of this cluster.
      */
-    private Centroid<? super T> centroid;
+    private Centroid<T> centroid;
 
     /**
      * Create an empty cluster.
@@ -92,7 +92,7 @@ public class Cluster<T extends CentroidFactory<? super T>> {
     /**
      * @return The centroid of this cluster.
      */
-    public Centroid<? super T> centroid() {
+    public Centroid<T> centroid() {
         return centroid;
     }
 }

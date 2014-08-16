@@ -23,12 +23,12 @@
  */
 package syncleus.dann.util.factory.train;
 
-import syncleus.dann.learn.ml.MLDataSet;
-import syncleus.dann.learn.ml.MLInput;
-import syncleus.dann.learn.ml.MLMethod;
+import syncleus.dann.data.DataSet;
+import syncleus.dann.learn.InputLearning;
+import syncleus.dann.learn.Learning;
 import syncleus.dann.learn.svm.SVM;
 import syncleus.dann.learn.svm.training.SVMTrain;
-import syncleus.dann.learn.train.MLTrain;
+import syncleus.dann.learn.Training;
 import syncleus.dann.util.factory.MLTrainFactory;
 import syncleus.dann.util.factory.parse.ArchitectureParse;
 
@@ -47,7 +47,7 @@ public class SVMFactory {
      * @param argsStr  The arguments to use.
      * @return The newly created trainer.
      */
-    public static MLTrain create(final MLMethod method, final MLDataSet training,
+    public static Training create(final Learning method, final DataSet training,
                                  final String argsStr) {
 
         if (!(method instanceof SVM)) {
@@ -56,7 +56,7 @@ public class SVMFactory {
                             + method.getClass().getName());
         }
 
-        final double defaultGamma = 1.0 / ((MLInput) method).getInputCount();
+        final double defaultGamma = 1.0 / ((InputLearning) method).getInputCount();
         final double defaultC = 1.0;
 
         final Map<String, String> args = ArchitectureParse.parseParams(argsStr);

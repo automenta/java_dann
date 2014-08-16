@@ -23,9 +23,14 @@
  */
 package org.encog.neural.pnn;
 
+import syncleus.dann.RegressionLearning;
+import syncleus.dann.learn.ErrorLearning;
+import syncleus.dann.data.DataSample;
+import syncleus.dann.data.DataSet;
+import syncleus.dann.data.Data;
+import syncleus.dann.Classifying;
 import syncleus.dann.data.basic.BasicMLData;
 import syncleus.dann.data.basic.BasicMLDataSet;
-import syncleus.dann.learn.ml.*;
 import syncleus.dann.math.EncogUtility;
 import syncleus.dann.math.array.EngineArray;
 
@@ -50,8 +55,8 @@ import syncleus.dann.math.array.EngineArray;
  * by Timothy Masters, PhD (http://www.timothymasters.info/) John Wiley & Sons
  * Inc (Computers); April 3, 1995, ISBN: 0471105880
  */
-public class BasicPNN extends AbstractPNN implements MLRegression, MLError,
-        MLClassification {
+public class BasicPNN extends AbstractPNN implements RegressionLearning, ErrorLearning,
+        Classifying {
 
     /**
      *
@@ -102,14 +107,14 @@ public class BasicPNN extends AbstractPNN implements MLRegression, MLError,
      * @return The output from the network.
      */
     @Override
-    public MLData compute(final MLData input) {
+    public Data compute(final Data input) {
 
         final double[] out = new double[getOutputCount()];
 
         double psum = 0.0;
 
         int r = -1;
-        for (final MLDataPair pair : this.samples) {
+        for (final DataSample pair : this.samples) {
             r++;
 
             if (r == getExclude()) {
@@ -221,7 +226,7 @@ public class BasicPNN extends AbstractPNN implements MLRegression, MLError,
             this.countPer = new int[getOutputCount()];
             this.priors = new double[getOutputCount()];
 
-            for (final MLDataPair pair : samples) {
+            for (final DataSample pair : samples) {
                 final int i = (int) pair.getIdeal().getData(0);
                 if (i >= this.countPer.length) {
                     throw new RuntimeException(
@@ -250,7 +255,7 @@ public class BasicPNN extends AbstractPNN implements MLRegression, MLError,
      * {@inheritDoc}
      */
     @Override
-    public double calculateError(final MLDataSet data) {
+    public double calculateError(final DataSet data) {
         if (getOutputMode() == PNNOutputMode.Classification) {
             return EncogUtility.calculateClassificationError(this, data);
         } else {
@@ -262,8 +267,8 @@ public class BasicPNN extends AbstractPNN implements MLRegression, MLError,
      * {@inheritDoc}
      */
     @Override
-    public int classify(final MLData input) {
-        final MLData output = compute(input);
+    public int classify(final Data input) {
+        final Data output = compute(input);
         return EngineArray.maxIndex(output.getData());
     }
 }

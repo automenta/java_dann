@@ -23,9 +23,13 @@
  */
 package syncleus.dann.util.factory.train;
 
+import syncleus.dann.learn.MLResettable;
+import syncleus.dann.data.DataSet;
+import syncleus.dann.data.VectorEncodable;
+import syncleus.dann.learn.CalculateScore;
+import syncleus.dann.learn.Learning;
 import syncleus.dann.evolve.MLMethodGeneticAlgorithm;
-import syncleus.dann.learn.ml.*;
-import syncleus.dann.learn.train.MLTrain;
+import syncleus.dann.learn.Training;
 import syncleus.dann.util.factory.MLTrainFactory;
 import syncleus.dann.util.factory.parse.ArchitectureParse;
 
@@ -43,10 +47,10 @@ public class GeneticFactory {
      * @param argsStr  The arguments to use.
      * @return The newly created trainer.
      */
-    public MLTrain create(final MLMethod method, final MLDataSet training,
+    public Training create(final Learning method, final DataSet training,
                           final String argsStr) {
 
-        if (!(method instanceof MLEncodable)) {
+        if (!(method instanceof VectorEncodable)) {
             throw new RuntimeException(
                     "Invalid method type, requires an encodable MLMethod");
         }
@@ -58,8 +62,8 @@ public class GeneticFactory {
         final int populationSize = holder.getInt(
                 MLTrainFactory.PROPERTY_POPULATION_SIZE, false, 5000);
 
-        final MLTrain train = new MLMethodGeneticAlgorithm(() -> {
-            final MLMethod result = ObjectCloner.deepCopy(method);
+        final Training train = new MLMethodGeneticAlgorithm(() -> {
+            final Learning result = ObjectCloner.deepCopy(method);
             ((MLResettable) result).reset();
             return result;
         }, score, populationSize);

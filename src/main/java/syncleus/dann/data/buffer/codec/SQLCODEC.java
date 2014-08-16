@@ -23,7 +23,7 @@
  */
 package syncleus.dann.data.buffer.codec;
 
-import syncleus.dann.learn.ml.MLDataError;
+import syncleus.dann.data.DataException;
 
 import java.sql.*;
 
@@ -89,7 +89,7 @@ public class SQLCODEC implements DataSetCODEC {
             // prepare the statement
             this.statement = this.connection.prepareStatement(theSQL);
         } catch (final SQLException e) {
-            throw new MLDataError(e);
+            throw new DataException(e);
         }
     }
 
@@ -127,7 +127,7 @@ public class SQLCODEC implements DataSetCODEC {
             this.statement = this.connection.prepareStatement(theSQL);
 
         } catch (final ClassNotFoundException | SQLException e) {
-            throw new MLDataError(e);
+            throw new DataException(e);
         }
     }
 
@@ -142,7 +142,7 @@ public class SQLCODEC implements DataSetCODEC {
             }
             this.results.close();
         } catch (final SQLException e) {
-            throw new MLDataError(e);
+            throw new DataException(e);
         }
     }
 
@@ -174,7 +174,7 @@ public class SQLCODEC implements DataSetCODEC {
             // execute the statement
             this.results = this.statement.executeQuery();
         } catch (final SQLException e) {
-            throw new MLDataError(e);
+            throw new DataException(e);
         }
     }
 
@@ -184,7 +184,7 @@ public class SQLCODEC implements DataSetCODEC {
     @Override
     public void prepareWrite(final int recordCount, final int theInputSize,
                              final int theIdealSize) {
-        throw new MLDataError("Write not supported.");
+        throw new DataException("Write not supported.");
     }
 
     /**
@@ -215,7 +215,7 @@ public class SQLCODEC implements DataSetCODEC {
             significance[0] = 1;
             return true;
         } catch (final SQLException e) {
-            throw new MLDataError(e);
+            throw new DataException(e);
         }
     }
 
@@ -225,7 +225,7 @@ public class SQLCODEC implements DataSetCODEC {
     @Override
     public void write(final double[] input, final double[] ideal,
                       final double significance) {
-        throw new MLDataError("Write not supported.");
+        throw new DataException("Write not supported.");
     }
 
     /**

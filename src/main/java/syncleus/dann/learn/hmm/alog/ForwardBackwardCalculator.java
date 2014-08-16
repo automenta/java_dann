@@ -24,8 +24,8 @@
 package syncleus.dann.learn.hmm.alog;
 
 import syncleus.dann.learn.hmm.HiddenMarkovModel;
-import syncleus.dann.learn.ml.MLDataPair;
-import syncleus.dann.learn.ml.MLDataSet;
+import syncleus.dann.data.DataSample;
+import syncleus.dann.data.DataSet;
 
 import java.util.EnumSet;
 import java.util.Iterator;
@@ -67,7 +67,7 @@ public class ForwardBackwardCalculator {
      * @param oseq The sequence to use.
      * @param hmm  THe hidden markov model to use.
      */
-    public ForwardBackwardCalculator(final MLDataSet oseq,
+    public ForwardBackwardCalculator(final DataSet oseq,
                                      final HiddenMarkovModel hmm) {
         this(oseq, hmm, EnumSet.of(Computation.ALPHA));
     }
@@ -79,7 +79,7 @@ public class ForwardBackwardCalculator {
      * @param hmm   The hidden markov model to use.
      * @param flags Flags, alpha or beta.
      */
-    public ForwardBackwardCalculator(final MLDataSet oseq,
+    public ForwardBackwardCalculator(final DataSet oseq,
                                      final HiddenMarkovModel hmm, final EnumSet<Computation> flags) {
         if (oseq.size() < 1) {
             throw new IllegalArgumentException("Empty sequence");
@@ -135,20 +135,20 @@ public class ForwardBackwardCalculator {
      * @param oseq The sequence.
      */
     protected void computeAlpha(final HiddenMarkovModel hmm,
-                                final MLDataSet oseq) {
+                                final DataSet oseq) {
         this.alpha = new double[oseq.size()][hmm.getStateCount()];
 
         for (int i = 0; i < hmm.getStateCount(); i++) {
             computeAlphaInit(hmm, oseq.get(0), i);
         }
 
-        final Iterator<MLDataPair> seqIterator = oseq.iterator();
+        final Iterator<DataSample> seqIterator = oseq.iterator();
         if (seqIterator.hasNext()) {
             seqIterator.next();
         }
 
         for (int t = 1; t < oseq.size(); t++) {
-            final MLDataPair observation = seqIterator.next();
+            final DataSample observation = seqIterator.next();
 
             for (int i = 0; i < hmm.getStateCount(); i++) {
                 computeAlphaStep(hmm, observation, t, i);
@@ -164,7 +164,7 @@ public class ForwardBackwardCalculator {
      * @param i   The state.
      */
     protected void computeAlphaInit(final HiddenMarkovModel hmm,
-                                    final MLDataPair o, final int i) {
+                                    final DataSample o, final int i) {
         this.alpha[0][i] = hmm.getPi(i)
                 * hmm.getStateDistribution(i).probability(o);
     }
@@ -178,7 +178,7 @@ public class ForwardBackwardCalculator {
      * @param j   Thr column.
      */
     protected void computeAlphaStep(final HiddenMarkovModel hmm,
-                                    final MLDataPair o, final int t, final int j) {
+                                    final DataSample o, final int t, final int j) {
         double sum = 0.;
 
         for (int i = 0; i < hmm.getStateCount(); i++) {
@@ -194,7 +194,7 @@ public class ForwardBackwardCalculator {
      * @param hmm  The hidden markov model.
      * @param oseq The sequence.
      */
-    protected void computeBeta(final HiddenMarkovModel hmm, final MLDataSet oseq) {
+    protected void computeBeta(final HiddenMarkovModel hmm, final DataSet oseq) {
         this.beta = new double[oseq.size()][hmm.getStateCount()];
 
         for (int i = 0; i < hmm.getStateCount(); i++) {
@@ -217,7 +217,7 @@ public class ForwardBackwardCalculator {
      * @param i   THe matrix column.
      */
     protected void computeBetaStep(final HiddenMarkovModel hmm,
-                                   final MLDataPair o, final int t, final int i) {
+                                   final DataSample o, final int t, final int i) {
         double sum = 0.;
 
         for (int j = 0; j < hmm.getStateCount(); j++) {
@@ -235,7 +235,7 @@ public class ForwardBackwardCalculator {
      * @param hmm   THe hidden markov model.
      * @param flags The flags.
      */
-    private void computeProbability(final MLDataSet oseq,
+    private void computeProbability(final DataSet oseq,
                                     final HiddenMarkovModel hmm, final EnumSet<Computation> flags) {
         this.probability = 0.;
 

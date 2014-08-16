@@ -24,10 +24,10 @@
 package syncleus.dann.neural.thermal;
 
 import syncleus.dann.data.specific.BiPolarNeuralData;
-import syncleus.dann.learn.ml.BasicML;
-import syncleus.dann.learn.ml.MLAutoAssocation;
-import syncleus.dann.learn.ml.MLMethod;
-import syncleus.dann.learn.ml.MLResettable;
+import syncleus.dann.learn.AbstractLearning;
+import syncleus.dann.AutoAssociating;
+import syncleus.dann.learn.Learning;
+import syncleus.dann.learn.MLResettable;
 import syncleus.dann.math.array.EngineArray;
 
 /**
@@ -35,8 +35,8 @@ import syncleus.dann.math.array.EngineArray;
  *
  * @author jheaton
  */
-public abstract class ThermalNetwork extends BasicML implements MLMethod,
-        MLAutoAssocation, MLResettable {
+public abstract class ThermalNetwork extends AbstractLearning implements Learning,
+        AutoAssociating, MLResettable {
 
     /**
      * Serial id.

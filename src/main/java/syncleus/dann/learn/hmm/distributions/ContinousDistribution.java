@@ -25,8 +25,8 @@ package syncleus.dann.learn.hmm.distributions;
 
 import syncleus.dann.data.basic.BasicMLData;
 import syncleus.dann.data.basic.BasicMLDataPair;
-import syncleus.dann.learn.ml.MLDataPair;
-import syncleus.dann.learn.ml.MLDataSet;
+import syncleus.dann.data.DataSample;
+import syncleus.dann.data.DataSet;
 import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.math.matrix.MatrixMath;
 import syncleus.dann.math.matrix.SimpleRealMatrix;
@@ -133,7 +133,7 @@ public class ContinousDistribution implements StateDistribution {
      * {@inheritDoc}
      */
     @Override
-    public void fit(final MLDataSet co) {
+    public void fit(final DataSet co) {
         final double[] weights = new double[co.size()];
         Arrays.fill(weights, 1. / co.size());
 
@@ -144,7 +144,7 @@ public class ContinousDistribution implements StateDistribution {
      * {@inheritDoc}
      */
     @Override
-    public void fit(final MLDataSet co, final double[] weights) {
+    public void fit(final DataSet co, final double[] weights) {
         if ((co.size() < 1) || (co.size() != weights.length)) {
             throw new IllegalArgumentException();
         }
@@ -154,7 +154,7 @@ public class ContinousDistribution implements StateDistribution {
         for (int r = 0; r < this.dimension; r++) {
             int i = 0;
 
-            for (final MLDataPair o : co) {
+            for (final DataSample o : co) {
                 mean[r] += o.getInput().getData(r) * weights[i++];
             }
         }
@@ -162,7 +162,7 @@ public class ContinousDistribution implements StateDistribution {
         // Compute covariance
         final double[][] covariance = new double[this.dimension][this.dimension];
         int i = 0;
-        for (final MLDataPair o : co) {
+        for (final DataSample o : co) {
             final double[] obs = o.getInput().getData();
             final double[] omm = new double[obs.length];
 
@@ -186,7 +186,7 @@ public class ContinousDistribution implements StateDistribution {
      * {@inheritDoc}
      */
     @Override
-    public MLDataPair generate() {
+    public DataSample generate() {
         final double[] d = new double[this.dimension];
 
         for (int i = 0; i < this.dimension; i++) {
@@ -202,7 +202,7 @@ public class ContinousDistribution implements StateDistribution {
      * {@inheritDoc}
      */
     @Override
-    public double probability(final MLDataPair o) {
+    public double probability(final DataSample o) {
         final double[] v = o.getInputArray();
         final SimpleRealMatrix vmm = SimpleRealMatrix.createColumnMatrix(EngineArray.subtract(v,
                 this.mean));

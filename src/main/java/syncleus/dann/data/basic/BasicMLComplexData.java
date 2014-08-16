@@ -23,8 +23,8 @@
  */
 package syncleus.dann.data.basic;
 
-import syncleus.dann.learn.ml.MLComplexData;
-import syncleus.dann.learn.ml.MLData;
+import syncleus.dann.data.ComplexData;
+import syncleus.dann.data.Data;
 import syncleus.dann.math.ComplexNumber;
 import syncleus.dann.math.cluster.Centroid;
 
@@ -36,7 +36,7 @@ import syncleus.dann.math.cluster.Centroid;
  * does not support complex numbers will only be dealing with the real-number
  * portion of the complex number.
  */
-public class BasicMLComplexData implements MLComplexData {
+public class BasicMLComplexData implements ComplexData {
 
     /**
      * The data held by this object.
@@ -80,11 +80,11 @@ public class BasicMLComplexData implements MLComplexData {
      *
      * @param d The object to be copied.
      */
-    public BasicMLComplexData(final MLData d) {
+    public BasicMLComplexData(final Data d) {
         this(d.size());
 
-        if (d instanceof MLComplexData) {
-            final MLComplexData c = (MLComplexData) d;
+        if (d instanceof ComplexData) {
+            final ComplexData c = (ComplexData) d;
             for (int i = 0; i < d.size(); i++) {
                 this.data[i] = new ComplexNumber(c.getComplexData(i));
             }
@@ -126,7 +126,7 @@ public class BasicMLComplexData implements MLComplexData {
      * {@inheritDoc}
      */
     @Override
-    public MLData clone() {
+    public Data clone() {
         return new BasicMLData(this);
     }
 
@@ -239,7 +239,7 @@ public class BasicMLComplexData implements MLComplexData {
      * @return Nothing.
      */
     @Override
-    public Centroid<MLData> createCentroid() {
+    public Centroid<Data> createCentroid() {
         return null;
     }
 }

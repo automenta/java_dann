@@ -23,8 +23,13 @@
  */
 package syncleus.dann.learn.svm;
 
+import syncleus.dann.RegressionLearning;
+import syncleus.dann.learn.AbstractLearning;
+import syncleus.dann.learn.ErrorLearning;
+import syncleus.dann.data.Data;
+import syncleus.dann.data.DataSet;
+import syncleus.dann.Classifying;
 import syncleus.dann.data.basic.BasicMLData;
-import syncleus.dann.learn.ml.*;
 import syncleus.dann.math.EncogUtility;
 
 /**
@@ -45,7 +50,7 @@ import syncleus.dann.math.EncogUtility;
  * neural network training classes will work. This class must be trained using
  * SVMTrain.
  */
-public class SVM extends BasicML implements MLRegression, MLClassification, MLError {
+public class SVM extends AbstractLearning implements RegressionLearning, Classifying, ErrorLearning {
 
     /**
      * The default degree.
@@ -219,7 +224,7 @@ public class SVM extends BasicML implements MLRegression, MLClassification, MLEr
      * @return The error percentage.
      */
     @Override
-    public double calculateError(final MLDataSet data) {
+    public double calculateError(final DataSet data) {
 
         switch (getSVMType()) {
             case SupportVectorClassification:
@@ -239,7 +244,7 @@ public class SVM extends BasicML implements MLRegression, MLClassification, MLEr
      * {@inheritDoc}
      */
     @Override
-    public int classify(final MLData input) {
+    public int classify(final Data input) {
         if (this.model == null) {
             throw new RuntimeException(
                     "Can't use the SVM yet, it has not been trained, "
@@ -257,7 +262,7 @@ public class SVM extends BasicML implements MLRegression, MLClassification, MLEr
      * @return The results from the SVM.
      */
     @Override
-    public MLData compute(final MLData input) {
+    public Data compute(final Data input) {
 
         if (this.model == null) {
             throw new RuntimeException(
@@ -265,7 +270,7 @@ public class SVM extends BasicML implements MLRegression, MLClassification, MLEr
                             + "and no model exists.");
         }
 
-        final MLData result = new BasicMLData(1);
+        final Data result = new BasicMLData(1);
 
         final svm_node[] formattedInput = makeSparse(input);
 
@@ -351,7 +356,7 @@ public class SVM extends BasicML implements MLRegression, MLClassification, MLEr
      * @param data The data to convert.
      * @return The SVM sparse data.
      */
-    public static svm_node[] makeSparse(final MLData data) {
+    public static svm_node[] makeSparse(final Data data) {
         final svm_node[] result = new svm_node[data.size()];
         for (int i = 0; i < data.size(); i++) {
             result[i] = new svm_node();

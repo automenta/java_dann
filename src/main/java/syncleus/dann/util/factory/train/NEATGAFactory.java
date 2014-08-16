@@ -24,10 +24,10 @@
 package syncleus.dann.util.factory.train;
 
 import syncleus.dann.evolve.train.basic.TrainEA;
-import syncleus.dann.learn.ml.CalculateScore;
-import syncleus.dann.learn.ml.MLDataSet;
-import syncleus.dann.learn.ml.MLMethod;
-import syncleus.dann.learn.train.MLTrain;
+import syncleus.dann.learn.CalculateScore;
+import syncleus.dann.data.DataSet;
+import syncleus.dann.learn.Learning;
+import syncleus.dann.learn.Training;
 
 /**
  * A factory to create genetic algorithm trainers.
@@ -41,7 +41,7 @@ public class NEATGAFactory {
      * @param argsStr  The arguments to use.
      * @return The newly created trainer.
      */
-    public MLTrain create(final MLMethod method, final MLDataSet training,
+    public Training create(final Learning method, final DataSet training,
                           final String argsStr) {
 
         final CalculateScore score = new TrainingSetScore(training);

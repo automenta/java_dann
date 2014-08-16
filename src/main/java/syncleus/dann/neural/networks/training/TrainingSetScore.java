@@ -24,10 +24,10 @@
 package org.encog.neural.networks.training;
 
 import syncleus.dann.data.buffer.BufferedMLDataSet;
-import syncleus.dann.learn.ml.CalculateScore;
-import syncleus.dann.learn.ml.MLDataSet;
-import syncleus.dann.learn.ml.MLMethod;
-import syncleus.dann.learn.ml.MLRegression;
+import syncleus.dann.learn.CalculateScore;
+import syncleus.dann.data.DataSet;
+import syncleus.dann.learn.Learning;
+import syncleus.dann.RegressionLearning;
 
 /**
  * Calculate a score based on a training set. This class allows simulated
@@ -39,14 +39,14 @@ public class TrainingSetScore implements CalculateScore {
     /**
      * The training set.
      */
-    private final MLDataSet training;
+    private final DataSet training;
 
     /**
      * Construct a training set score calculation.
      *
      * @param training The training data to use.
      */
-    public TrainingSetScore(final MLDataSet training) {
+    public TrainingSetScore(final DataSet training) {
         this.training = training;
     }
 
@@ -57,8 +57,8 @@ public class TrainingSetScore implements CalculateScore {
      * @return The score.
      */
     @Override
-    public double calculateScore(final MLMethod method) {
-        return CalculateRegressionError.calculateError((MLRegression) method,
+    public double calculateScore(final Learning method) {
+        return CalculateRegressionError.calculateError((RegressionLearning) method,
                 this.training);
     }
 

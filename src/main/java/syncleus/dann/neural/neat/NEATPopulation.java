@@ -27,10 +27,10 @@ import syncleus.dann.evolve.codec.GeneticCODEC;
 import syncleus.dann.evolve.genome.Genome;
 import syncleus.dann.evolve.population.BasicPopulation;
 import syncleus.dann.evolve.species.BasicSpecies;
-import syncleus.dann.learn.ml.MLData;
-import syncleus.dann.learn.ml.MLDataSet;
-import syncleus.dann.learn.ml.MLError;
-import syncleus.dann.learn.ml.MLRegression;
+import syncleus.dann.data.Data;
+import syncleus.dann.data.DataSet;
+import syncleus.dann.learn.ErrorLearning;
+import syncleus.dann.RegressionLearning;
 import syncleus.dann.math.random.RandomFactory;
 import syncleus.dann.neural.activation.ActivationSteepenedSigmoid;
 import syncleus.dann.neural.activation.EncogActivationFunction;
@@ -55,7 +55,7 @@ import java.util.Random;
  * Automatic feature selection in neuroevolution
  */
 public class NEATPopulation extends BasicPopulation implements Serializable,
-        MLError, MLRegression {
+        ErrorLearning, RegressionLearning {
 
     /**
      * The default survival rate.
@@ -257,7 +257,7 @@ public class NEATPopulation extends BasicPopulation implements Serializable,
      * {@inheritDoc}
      */
     @Override
-    public double calculateError(final MLDataSet data) {
+    public double calculateError(final DataSet data) {
         updateBestNetwork();
         return this.bestNetwork.calculateError(data);
     }
@@ -266,7 +266,7 @@ public class NEATPopulation extends BasicPopulation implements Serializable,
      * {@inheritDoc}
      */
     @Override
-    public MLData compute(final MLData input) {
+    public Data compute(final Data input) {
         updateBestNetwork();
         return this.bestNetwork.compute(input);
     }

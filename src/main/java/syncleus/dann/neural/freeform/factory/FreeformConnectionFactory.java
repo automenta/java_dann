@@ -23,7 +23,7 @@
  */
 package syncleus.dann.neural.freeform.factory;
 
-import org.encog.neural.freeform.FreeformConnection;
+import syncleus.dann.neural.freeform.FreeformConnection;
 import syncleus.dann.neural.freeform.FreeformNeuron;
 
 /**

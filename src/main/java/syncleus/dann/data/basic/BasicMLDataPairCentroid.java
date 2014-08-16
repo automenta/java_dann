@@ -23,14 +23,14 @@
  */
 package syncleus.dann.data.basic;
 
-import syncleus.dann.learn.ml.MLData;
-import syncleus.dann.learn.ml.MLDataPair;
+import syncleus.dann.data.Data;
+import syncleus.dann.data.DataSample;
 import syncleus.dann.math.cluster.Centroid;
 
 /**
  * A centroid for BasicMLDataPair.
  */
-public class BasicMLDataPairCentroid implements Centroid<MLDataPair>, Cloneable {
+public class BasicMLDataPairCentroid<M extends Data> implements Centroid<DataSample<M>>, Cloneable {
     /**
      * The value the centroid is based on.
      */
@@ -49,7 +49,7 @@ public class BasicMLDataPairCentroid implements Centroid<MLDataPair>, Cloneable 
      * {@inheritDoc}
      */
     @Override
-    public void remove(final MLDataPair d) {
+    public void remove(final DataSample d) {
         final double[] a = d.getInputArray();
 
         for (int i = 0; i < value.size(); i++)
@@ -61,8 +61,8 @@ public class BasicMLDataPairCentroid implements Centroid<MLDataPair>, Cloneable 
      * {@inheritDoc}
      */
     @Override
-    public double distance(final MLDataPair d) {
-        final MLData diff = value.minus(d.getInput());
+    public double distance(final DataSample d) {
+        final Data diff = value.minus(d.getInput());
         double sum = 0.;
 
         for (int i = 0; i < diff.size(); i++)
@@ -75,7 +75,7 @@ public class BasicMLDataPairCentroid implements Centroid<MLDataPair>, Cloneable 
      * {@inheritDoc}
      */
     @Override
-    public void add(final MLDataPair d) {
+    public void add(final DataSample d) {
         final double[] a = d.getInputArray();
 
         for (int i = 0; i < value.size(); i++)

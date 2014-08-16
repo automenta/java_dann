@@ -23,8 +23,12 @@
  */
 package org.encog.neural.networks.training.simple;
 
-import syncleus.dann.learn.ml.*;
-import syncleus.dann.learn.train.BasicTraining;
+import syncleus.dann.data.DataSample;
+import syncleus.dann.data.Data;
+import syncleus.dann.data.DataSet;
+import syncleus.dann.learn.TrainingImplementationType;
+import syncleus.dann.learn.Learning;
+import syncleus.dann.learn.BasicTraining;
 import syncleus.dann.math.statistics.ErrorCalculation;
 import syncleus.dann.neural.networks.BasicNetwork;
 
@@ -41,7 +45,7 @@ public class TrainAdaline extends BasicTraining implements LearningRate {
     /**
      * The training data to use.
      */
-    private final MLDataSet training;
+    private final DataSet training;
 
     /**
      * The learning rate.
@@ -55,7 +59,7 @@ public class TrainAdaline extends BasicTraining implements LearningRate {
      * @param training     The training data.
      * @param learningRate The learning rate.
      */
-    public TrainAdaline(final BasicNetwork network, final MLDataSet training,
+    public TrainAdaline(final BasicNetwork network, final DataSet training,
                         final double learningRate) {
         super(TrainingImplementationType.Iterative);
         if (network.getLayerCount() > 2) {
@@ -88,7 +92,7 @@ public class TrainAdaline extends BasicTraining implements LearningRate {
      * {@inheritDoc}
      */
     @Override
-    public MLMethod getMethod() {
+    public Learning getMethod() {
         return this.network;
     }
 
@@ -100,9 +104,9 @@ public class TrainAdaline extends BasicTraining implements LearningRate {
 
         final ErrorCalculation errorCalculation = new ErrorCalculation();
 
-        for (final MLDataPair pair : this.training) {
+        for (final DataSample pair : this.training) {
             // calculate the error
-            final MLData output = this.network.compute(pair.getInput());
+            final Data output = this.network.compute(pair.getInput());
 
             for (int currentAdaline = 0; currentAdaline < output.size(); currentAdaline++) {
                 final double diff = pair.getIdeal().getData(currentAdaline)

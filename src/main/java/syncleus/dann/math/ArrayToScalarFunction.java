@@ -1,8 +1,8 @@
 package syncleus.dann.math;
 
-import syncleus.dann.Transform;
+import syncleus.dann.Function;
 
-public interface ArrayToScalarFunction extends Transform<Double[], Double> {
+public interface ArrayToScalarFunction extends Function<Double[], Double> {
 
     @Override
     default Double apply(final Double[] x) {

@@ -23,7 +23,7 @@
  */
 package syncleus.dann.learn.fitness;
 
-import syncleus.dann.learn.ml.CalculateScore;
+import syncleus.dann.learn.CalculateScore;
 
 import java.io.Serializable;
 

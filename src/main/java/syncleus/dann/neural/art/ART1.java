@@ -24,9 +24,9 @@
 package org.encog.neural.art;
 
 import syncleus.dann.data.specific.BiPolarNeuralData;
-import syncleus.dann.learn.ml.MLClassification;
-import syncleus.dann.learn.ml.MLData;
-import syncleus.dann.learn.ml.MLResettable;
+import syncleus.dann.Classifying;
+import syncleus.dann.data.Data;
+import syncleus.dann.learn.MLResettable;
 import syncleus.dann.math.matrix.SimpleRealMatrix;
 
 /**
@@ -51,7 +51,7 @@ import syncleus.dann.math.matrix.SimpleRealMatrix;
  * neural networks. Unlike most neural networks, ART1 does not have a distinct
  * training and usage stage. The ART1 network will learn as it is used.
  */
-public class ART1 extends ART implements MLResettable, MLClassification {
+public class ART1 extends ART implements MLResettable, Classifying {
 
     /**
      * Serial id.
@@ -189,7 +189,7 @@ public class ART1 extends ART implements MLResettable, MLClassification {
      * @return The class that the data belongs to.
      */
     @Override
-    public int classify(final MLData input) {
+    public int classify(final Data input) {
         final BiPolarNeuralData input2 = new BiPolarNeuralData(this.f1Count);
         final BiPolarNeuralData output = new BiPolarNeuralData(this.f2Count);
 
@@ -257,7 +257,7 @@ public class ART1 extends ART implements MLResettable, MLClassification {
      * @param input The input to the network.
      * @return The output from the network.
      */
-    public MLData compute(final MLData input) {
+    public Data compute(final Data input) {
         if (!(input instanceof BiPolarNeuralData)) {
             throw new RuntimeException(
                     "Input to ART1 logic network must be BiPolarNeuralData.");

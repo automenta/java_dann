@@ -23,8 +23,8 @@
  */
 package syncleus.dann.data.basic;
 
-import syncleus.dann.learn.ml.MLData;
-import syncleus.dann.learn.ml.MLDataPair;
+import syncleus.dann.data.Data;
+import syncleus.dann.data.DataSample;
 import syncleus.dann.math.Format;
 import syncleus.dann.math.cluster.Centroid;
 
@@ -41,7 +41,7 @@ import java.io.Serializable;
  *
  * @author jheaton
  */
-public class BasicMLDataPair implements MLDataPair, Serializable {
+public class BasicMLDataPair implements DataSample, Serializable {
 
     /**
      * The serial ID.
@@ -62,8 +62,8 @@ public class BasicMLDataPair implements MLDataPair, Serializable {
      * @param idealSize The size of the ideal data.
      * @return A new data pair object.
      */
-    public static MLDataPair createPair(final int inputSize, final int idealSize) {
-        MLDataPair result;
+    public static DataSample createPair(final int inputSize, final int idealSize) {
+        DataSample result;
 
         if (idealSize > 0) {
             result = new BasicMLDataPair(new BasicMLData(inputSize),
@@ -79,12 +79,12 @@ public class BasicMLDataPair implements MLDataPair, Serializable {
      * The the expected output from the machine learning method, or null for
      * unsupervised training.
      */
-    private final MLData ideal;
+    private final Data ideal;
 
     /**
      * The training input to the machine learning method.
      */
-    private final MLData input;
+    private final Data input;
 
     /**
      * Construct the object with only input. If this constructor is used, then
@@ -92,7 +92,7 @@ public class BasicMLDataPair implements MLDataPair, Serializable {
      *
      * @param theInput The input to the machine learning method.
      */
-    public BasicMLDataPair(final MLData theInput) {
+    public BasicMLDataPair(final Data theInput) {
         this.input = theInput;
         this.ideal = null;
     }
@@ -104,7 +104,7 @@ public class BasicMLDataPair implements MLDataPair, Serializable {
      * @param theInput The input to the machine learning method.
      * @param theIdeal The expected results from the machine learning method.
      */
-    public BasicMLDataPair(final MLData theInput, final MLData theIdeal) {
+    public BasicMLDataPair(final Data theInput, final Data theIdeal) {
         this.input = theInput;
         this.ideal = theIdeal;
     }
@@ -113,7 +113,7 @@ public class BasicMLDataPair implements MLDataPair, Serializable {
      * {@inheritDoc}
      */
     @Override
-    public MLData getIdeal() {
+    public Data getIdeal() {
         return this.ideal;
     }
 
@@ -132,7 +132,7 @@ public class BasicMLDataPair implements MLDataPair, Serializable {
      * {@inheritDoc}
      */
     @Override
-    public MLData getInput() {
+    public Data getInput() {
         return this.input;
     }
 
@@ -208,7 +208,7 @@ public class BasicMLDataPair implements MLDataPair, Serializable {
      * {@inheritDoc}
      */
     @Override
-    public Centroid<MLDataPair> createCentroid() {
+    public Centroid<DataSample> createCentroid() {
         if (!(this.input instanceof BasicMLData)) {
             throw new RuntimeException("The input data type of "
                     + this.input.getClass().getSimpleName()

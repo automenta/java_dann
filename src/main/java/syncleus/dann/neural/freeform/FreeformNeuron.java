@@ -24,7 +24,6 @@
 package syncleus.dann.neural.freeform;
 
 import java.util.List;
-import org.encog.neural.freeform.FreeformConnection;
 
 
 /**

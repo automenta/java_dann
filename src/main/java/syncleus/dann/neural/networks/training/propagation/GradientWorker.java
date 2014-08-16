@@ -24,8 +24,8 @@
 package org.encog.neural.networks.training.propagation;
 
 import syncleus.dann.data.basic.BasicMLDataPair;
-import syncleus.dann.learn.ml.MLDataPair;
-import syncleus.dann.learn.ml.MLDataSet;
+import syncleus.dann.data.DataSample;
+import syncleus.dann.data.DataSet;
 import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.math.error.ErrorFunction;
 import syncleus.dann.math.statistics.ErrorCalculation;
@@ -99,12 +99,12 @@ public class GradientWorker implements EngineTask {
     /**
      * The pair to use for training.
      */
-    private final MLDataPair pair;
+    private final DataSample pair;
 
     /**
      * The training data.
      */
-    private final MLDataSet training;
+    private final DataSet training;
 
     /**
      * The high end of the training data.
@@ -141,7 +141,7 @@ public class GradientWorker implements EngineTask {
      * @param theHigh     The high index to use in the training data.
      */
     public GradientWorker(final FlatNetwork theNetwork,
-                          final Propagation theOwner, final MLDataSet theTraining,
+                          final Propagation theOwner, final DataSet theTraining,
                           final int theLow, final int theHigh, final double[] flatSpot,
                           final ErrorFunction ef) {
         this.network = theNetwork;
@@ -189,7 +189,7 @@ public class GradientWorker implements EngineTask {
      * @param ideal The ideal values.
      * @param s     The significance.
      */
-    private void process(final MLDataPair pair) {
+    private void process(final DataSample pair) {
         this.network.compute(pair.getInputArray(), this.actual);
 
         this.errorCalculation.updateError(this.actual, pair.getIdealArray(),

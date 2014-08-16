@@ -25,13 +25,13 @@ package syncleus.dann.evolve.genome;
 
 import syncleus.dann.evolve.population.Population;
 import syncleus.dann.evolve.species.Species;
-import syncleus.dann.learn.ml.MLMethod;
+import syncleus.dann.learn.Learning;
 
 /**
  * A genome is the basic blueprint for creating an phenome (organism) in Encog.
  * Some genomes also function as phenomes.
  */
-public interface Genome extends MLMethod {
+public interface Genome extends Learning {
 
     /**
      * Copy from the specified genome into this one.

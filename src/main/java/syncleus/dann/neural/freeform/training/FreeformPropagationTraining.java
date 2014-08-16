@@ -1,3 +1,5 @@
+package syncleus.dann.neural.freeform.training;
+
 /*
  * Encog(tm) Core v3.2 - Java Version
  * http://www.heatonresearch.com/encog/
@@ -21,19 +23,26 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package syncleus.dann.neural.freeform.training;
 
-import syncleus.dann.learn.ml.*;
-import syncleus.dann.learn.train.BasicTraining;
+
+
+
+
+import syncleus.dann.data.DataSample;
+import syncleus.dann.data.Data;
+import syncleus.dann.data.DataSet;
+import syncleus.dann.learn.TrainingImplementationType;
+import syncleus.dann.learn.Learning;
+import syncleus.dann.learn.BasicTraining;
 import syncleus.dann.math.statistics.ErrorCalculation;
 import syncleus.dann.neural.activation.ActivationSigmoid;
 
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
-import org.encog.neural.freeform.FreeformConnection;
-import org.encog.neural.freeform.FreeformNetwork;
-import org.encog.neural.freeform.FreeformNeuron;
+import syncleus.dann.neural.freeform.FreeformConnection;
+import syncleus.dann.neural.freeform.FreeformNetwork;
+import syncleus.dann.neural.freeform.FreeformNeuron;
 
 /**
  * Provides basic propagation functions to other trainers.
@@ -59,7 +68,7 @@ public abstract class FreeformPropagationTraining extends BasicTraining
     /**
      * The training set to use.
      */
-    private final MLDataSet training;
+    private final DataSet training;
 
     /**
      * The number of iterations.
@@ -104,7 +113,7 @@ public abstract class FreeformPropagationTraining extends BasicTraining
      * @param theTraining The training data.
      */
     public FreeformPropagationTraining(final FreeformNetwork theNetwork,
-                                       final MLDataSet theTraining) {
+                                       final DataSet theTraining) {
         super(TrainingImplementationType.Iterative);
         this.network = theNetwork;
         this.training = theTraining;
@@ -218,7 +227,7 @@ public abstract class FreeformPropagationTraining extends BasicTraining
      * {@inheritDoc}
      */
     @Override
-    public MLMethod getMethod() {
+    public Learning getMethod() {
         return this.network;
     }
 
@@ -226,7 +235,7 @@ public abstract class FreeformPropagationTraining extends BasicTraining
      * {@inheritDoc}
      */
     @Override
-    public MLDataSet getTraining() {
+    public DataSet getTraining() {
         return this.training;
     }
 
@@ -273,10 +282,10 @@ public abstract class FreeformPropagationTraining extends BasicTraining
         final ErrorCalculation errorCalc = new ErrorCalculation();
         this.visited.clear();
 
-        for (final MLDataPair pair : this.training) {
-            final MLData input = pair.getInput();
-            final MLData ideal = pair.getIdeal();
-            final MLData actual = this.network.compute(input);
+        for (final DataSample pair : this.training) {
+            final Data input = pair.getInput();
+            final Data ideal = pair.getIdeal();
+            final Data actual = this.network.compute(input);
             final double sig = pair.getSignificance();
 
             errorCalc.updateError(actual.getData(), ideal.getData(), sig);
@@ -306,10 +315,10 @@ public abstract class FreeformPropagationTraining extends BasicTraining
         final ErrorCalculation errorCalc = new ErrorCalculation();
         this.visited.clear();
 
-        for (final MLDataPair pair : this.training) {
-            final MLData input = pair.getInput();
-            final MLData ideal = pair.getIdeal();
-            final MLData actual = this.network.compute(input);
+        for (final DataSample pair : this.training) {
+            final Data input = pair.getInput();
+            final Data ideal = pair.getIdeal();
+            final Data actual = this.network.compute(input);
             final double sig = pair.getSignificance();
 
             errorCalc.updateError(actual.getData(), ideal.getData(), sig);

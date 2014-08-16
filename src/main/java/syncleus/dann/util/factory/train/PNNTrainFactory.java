@@ -23,9 +23,9 @@
  */
 package syncleus.dann.util.factory.train;
 
-import syncleus.dann.learn.ml.MLDataSet;
-import syncleus.dann.learn.ml.MLMethod;
-import syncleus.dann.learn.train.MLTrain;
+import syncleus.dann.data.DataSet;
+import syncleus.dann.learn.Learning;
+import syncleus.dann.learn.Training;
 
 /**
  * A factory used to create PNN trainers.
@@ -40,7 +40,7 @@ public class PNNTrainFactory {
      * @param args     The arguments to use.
      * @return The newly created trainer.
      */
-    public static MLTrain create(final MLMethod method, final MLDataSet training,
+    public static Training create(final Learning method, final DataSet training,
                                  final String args) {
 
         if (!(method instanceof BasicPNN)) {

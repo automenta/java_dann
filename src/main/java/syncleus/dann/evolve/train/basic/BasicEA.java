@@ -40,9 +40,9 @@ import syncleus.dann.evolve.species.SingleSpeciation;
 import syncleus.dann.evolve.species.Speciation;
 import syncleus.dann.evolve.species.Species;
 import syncleus.dann.evolve.train.EvolutionaryAlgorithm;
-import syncleus.dann.learn.ml.CalculateScore;
-import syncleus.dann.learn.ml.MLContext;
-import syncleus.dann.learn.ml.MLMethod;
+import syncleus.dann.learn.CalculateScore;
+import syncleus.dann.learn.MLContext;
+import syncleus.dann.learn.Learning;
 import syncleus.dann.math.random.RandomFactory;
 
 import java.io.Serializable;
@@ -310,7 +310,7 @@ public class BasicEA implements EvolutionaryAlgorithm, /* MultiThreadable,
         this.rules.rewrite(g);
 
         // decode
-        final MLMethod phenotype = getCODEC().decode(g);
+        final Learning phenotype = getCODEC().decode(g);
         double score;
 
         // deal with invalid decode

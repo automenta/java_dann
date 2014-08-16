@@ -23,12 +23,11 @@
  */
 package syncleus.dann.neural.freeform.training;
 
-import syncleus.dann.learn.ml.MLDataSet;
+import syncleus.dann.data.DataSet;
 
 import java.io.Serializable;
-import org.encog.neural.freeform.FreeformConnection;
-import org.encog.neural.freeform.FreeformNetwork;
-import org.encog.neural.freeform.training.FreeformPropagationTraining;
+import syncleus.dann.neural.freeform.FreeformConnection;
+import syncleus.dann.neural.freeform.FreeformNetwork;
 import syncleus.dann.neural.networks.training.propagation.TrainingContinuation;
 
 /**
@@ -66,7 +65,7 @@ public class FreeformBackPropagation extends FreeformPropagationTraining
      * @param theMomentum     The momentum.
      */
     public FreeformBackPropagation(final FreeformNetwork theNetwork,
-                                   final MLDataSet theTraining, final double theLearningRate,
+                                   final DataSet theTraining, final double theLearningRate,
                                    final double theMomentum) {
         super(theNetwork, theTraining);
         theNetwork.tempTrainingAllocate(1, 2);
@@ -90,18 +89,15 @@ public class FreeformBackPropagation extends FreeformPropagationTraining
      * {@inheritDoc}
      */
     @Override
-    public static TrainingContinuation pause() {
+    public TrainingContinuation pause() {
         // TODO Auto-generated method stub
         return null;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void resume(final TrainingContinuation state) {
-        // TODO Auto-generated method stub
 
+    @Override
+    public void resume(TrainingContinuation state) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
 }

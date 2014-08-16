@@ -25,10 +25,10 @@ package syncleus.dann.data.buffer;
 
 import syncleus.dann.data.basic.BasicMLDataPair;
 import syncleus.dann.data.basic.BasicMLDataSet;
-import syncleus.dann.learn.ml.MLData;
-import syncleus.dann.learn.ml.MLDataError;
-import syncleus.dann.learn.ml.MLDataPair;
-import syncleus.dann.learn.ml.MLDataSet;
+import syncleus.dann.data.Data;
+import syncleus.dann.data.DataException;
+import syncleus.dann.data.DataSample;
+import syncleus.dann.data.DataSet;
 
 import java.io.File;
 import java.io.Serializable;
@@ -57,7 +57,7 @@ import java.util.List;
  * format, and can be used with any Encog platform. Encog binary files are
  * stored using "little endian" numbers.
  */
-public class BufferedMLDataSet implements MLDataSet, Serializable {
+public class BufferedMLDataSet implements DataSet, Serializable {
 
     /**
      * The version.
@@ -123,7 +123,7 @@ public class BufferedMLDataSet implements MLDataSet, Serializable {
      * @return An iterator.
      */
     @Override
-    public Iterator<MLDataPair> iterator() {
+    public Iterator<DataSample> iterator() {
         return new BufferedDataSetIterator(this);
     }
 
@@ -147,7 +147,7 @@ public class BufferedMLDataSet implements MLDataSet, Serializable {
      * @param pair  THe data to read.
      */
     @Override
-    public void getRecord(final long index, final MLDataPair pair) {
+    public void getRecord(final long index, final DataSample pair) {
         synchronized (this) {
             this.egb.setLocation((int) index);
             final double[] inputTarget = pair.getInputArray();
@@ -179,9 +179,9 @@ public class BufferedMLDataSet implements MLDataSet, Serializable {
      * @param data1 The data to be added.
      */
     @Override
-    public void add(final MLData data1) {
+    public void add(final Data data1) {
         if (!this.loading) {
-            throw new MLDataError(BufferedMLDataSet.ERROR_ADD);
+            throw new DataException(BufferedMLDataSet.ERROR_ADD);
         }
 
         egb.write(data1.getData());
@@ -195,10 +195,10 @@ public class BufferedMLDataSet implements MLDataSet, Serializable {
      * @param idealData The ideal data.
      */
     @Override
-    public void add(final MLData inputData, final MLData idealData) {
+    public void add(final Data inputData, final Data idealData) {
 
         if (!this.loading) {
-            throw new MLDataError(BufferedMLDataSet.ERROR_ADD);
+            throw new DataException(BufferedMLDataSet.ERROR_ADD);
         }
 
         this.egb.write(inputData.getData());
@@ -212,9 +212,9 @@ public class BufferedMLDataSet implements MLDataSet, Serializable {
      * @param pair The pair to add.
      */
     @Override
-    public void add(final MLDataPair pair) {
+    public void add(final DataSample pair) {
         if (!this.loading) {
-            throw new MLDataError(BufferedMLDataSet.ERROR_ADD);
+            throw new DataException(BufferedMLDataSet.ERROR_ADD);
         }
 
         this.egb.write(pair.getInputArray());
@@ -357,10 +357,10 @@ public class BufferedMLDataSet implements MLDataSet, Serializable {
      *
      * @return A memory dataset.
      */
-    public MLDataSet loadToMemory() {
+    public DataSet loadToMemory() {
         final BasicMLDataSet result = new BasicMLDataSet();
 
-        for (final MLDataPair pair : this) {
+        for (final DataSample pair : this) {
             result.add(pair);
         }
 
@@ -372,9 +372,9 @@ public class BufferedMLDataSet implements MLDataSet, Serializable {
      *
      * @param training The training set to load.
      */
-    public void load(final MLDataSet training) {
+    public void load(final DataSet training) {
         beginLoad(training.getInputSize(), training.getIdealSize());
-        for (final MLDataPair pair : training) {
+        for (final DataSample pair : training) {
             add(pair);
         }
         endLoad();
@@ -386,8 +386,8 @@ public class BufferedMLDataSet implements MLDataSet, Serializable {
     }
 
     @Override
-    public MLDataPair get(final int index) {
-        final MLDataPair result = BasicMLDataPair.createPair(getInputSize(),
+    public DataSample get(final int index) {
+        final DataSample result = BasicMLDataPair.createPair(getInputSize(),
                 getIdealSize());
         this.getRecord(index, result);
         return result;

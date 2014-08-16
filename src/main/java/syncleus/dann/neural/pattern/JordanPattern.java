@@ -23,7 +23,7 @@
  */
 package org.encog.neural.pattern;
 
-import syncleus.dann.learn.ml.MLMethod;
+import syncleus.dann.learn.Learning;
 import syncleus.dann.neural.activation.EncogActivationFunction;
 import syncleus.dann.neural.networks.BasicNetwork;
 import syncleus.dann.neural.networks.layers.BasicLayer;
@@ -103,7 +103,7 @@ public class JordanPattern implements NeuralNetworkPattern {
      * @return A Jordan neural network.
      */
     @Override
-    public MLMethod generate() {
+    public Learning generate() {
 
         BasicLayer hidden, output;
 

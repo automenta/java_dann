@@ -23,7 +23,7 @@
  */
 package syncleus.dann.data.basic;
 
-import syncleus.dann.learn.ml.MLData;
+import syncleus.dann.data.Data;
 import syncleus.dann.math.cluster.Centroid;
 
 import java.io.Serializable;
@@ -34,7 +34,7 @@ import java.io.Serializable;
  *
  * @author jheaton
  */
-public class BasicMLData implements MLData, Serializable, Cloneable {
+public class BasicMLData implements Data, Serializable, Cloneable {
 
     /**
      * The serial id.
@@ -71,7 +71,7 @@ public class BasicMLData implements MLData, Serializable, Cloneable {
      *
      * @param d The object to be copied.
      */
-    public BasicMLData(final MLData d) {
+    public BasicMLData(final Data d) {
         this(d.size());
         System.arraycopy(d.getData(), 0, this.data, 0, d.size());
     }
@@ -98,7 +98,7 @@ public class BasicMLData implements MLData, Serializable, Cloneable {
      * {@inheritDoc}
      */
     @Override
-    public MLData clone() {
+    public Data clone() {
         return new BasicMLData(this);
     }
 
@@ -164,7 +164,7 @@ public class BasicMLData implements MLData, Serializable, Cloneable {
      * {@inheritDoc}
      */
     @Override
-    public Centroid<MLData> createCentroid() {
+    public Centroid<Data> createCentroid() {
         return new BasicMLDataCentroid(this);
     }
 
@@ -174,7 +174,7 @@ public class BasicMLData implements MLData, Serializable, Cloneable {
      * @param o The other data element
      * @return The result.
      */
-    public MLData plus(final MLData o) {
+    public Data plus(final Data o) {
         if (size() != o.size())
             throw new IllegalArgumentException();
 
@@ -191,8 +191,8 @@ public class BasicMLData implements MLData, Serializable, Cloneable {
      * @param d The other data element
      * @return The result.
      */
-    public MLData times(final double d) {
-        final MLData result = new BasicMLData(size());
+    public Data times(final double d) {
+        final Data result = new BasicMLData(size());
 
         for (int i = 0; i < size(); i++)
             result.setData(i, getData(i) * d);
@@ -206,11 +206,11 @@ public class BasicMLData implements MLData, Serializable, Cloneable {
      * @param o The other data element
      * @return The result.
      */
-    public MLData minus(final MLData o) {
+    public Data minus(final Data o) {
         if (size() != o.size())
             throw new IllegalArgumentException();
 
-        final MLData result = new BasicMLData(size());
+        final Data result = new BasicMLData(size());
         for (int i = 0; i < size(); i++)
             result.setData(i, getData(i) - o.getData(i));
 

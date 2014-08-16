@@ -23,6 +23,13 @@
  */
 package syncleus.dann.learn.bayesian;
 
+import syncleus.dann.learn.AbstractLearning;
+import syncleus.dann.learn.ErrorLearning;
+import syncleus.dann.data.DataSample;
+import syncleus.dann.data.DataSet;
+import syncleus.dann.data.Data;
+import syncleus.dann.learn.MLResettable;
+import syncleus.dann.Classifying;
 import syncleus.dann.data.file.csv.CSVFormat;
 import syncleus.dann.learn.bayesian.parse.ParseProbability;
 import syncleus.dann.learn.bayesian.parse.ParsedEvent;
@@ -30,7 +37,6 @@ import syncleus.dann.learn.bayesian.parse.ParsedProbability;
 import syncleus.dann.learn.bayesian.query.BayesianQuery;
 import syncleus.dann.learn.bayesian.query.enumerate.EnumerationQuery;
 import syncleus.dann.learn.bayesian.query.sample.EventState;
-import syncleus.dann.learn.ml.*;
 import syncleus.dann.math.array.EngineArray;
 
 import java.io.Serializable;
@@ -45,8 +51,8 @@ import java.util.*;
  * <p/>
  * http://www.heatonresearch.com/wiki/Bayesian_Network
  */
-public class EncogBayesianNetwork extends BasicML implements MLClassification,
-        MLResettable, Serializable, MLError {
+public class EncogBayesianNetwork extends AbstractLearning implements Classifying,
+        MLResettable, Serializable, ErrorLearning {
 
     /**
      * Default choices for a boolean event.
@@ -522,7 +528,7 @@ public class EncogBayesianNetwork extends BasicML implements MLClassification,
         return 1;
     }
 
-    public double computeProbability(final MLData input) {
+    public double computeProbability(final Data input) {
 
         // copy the input to evidence
         int inputIndex = 0;
@@ -694,7 +700,7 @@ public class EncogBayesianNetwork extends BasicML implements MLClassification,
      * @param input The input.
      * @return An array of class indexes.
      */
-    public int[] determineClasses(final MLData input) {
+    public int[] determineClasses(final Data input) {
         final int[] result = new int[input.size()];
 
         for (int i = 0; i < input.size(); i++) {
@@ -712,7 +718,7 @@ public class EncogBayesianNetwork extends BasicML implements MLClassification,
      * @param input The input to classify.
      */
     @Override
-    public int classify(final MLData input) {
+    public int classify(final Data input) {
 
         if (this.classificationTarget < 0
                 || this.classificationTarget >= this.events.size()) {
@@ -840,7 +846,7 @@ public class EncogBayesianNetwork extends BasicML implements MLClassification,
      * {@inheritDoc}
      */
     @Override
-    public double calculateError(final MLDataSet data) {
+    public double calculateError(final DataSet data) {
 
         if (!this.hasValidClassificationTarget())
             return 1.0;
@@ -852,7 +858,7 @@ public class EncogBayesianNetwork extends BasicML implements MLClassification,
         int badCount = 0;
         int totalCount = 0;
 
-        for (final MLDataPair pair : data) {
+        for (final DataSample pair : data) {
             final int c = this.classify(pair.getInput());
             totalCount++;
             if (c != pair.getInput().getData(this.classificationTarget)) {

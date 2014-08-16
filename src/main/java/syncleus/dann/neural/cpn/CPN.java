@@ -23,8 +23,13 @@
  */
 package org.encog.neural.cpn;
 
+import syncleus.dann.RegressionLearning;
+import syncleus.dann.learn.AbstractLearning;
+import syncleus.dann.learn.ErrorLearning;
+import syncleus.dann.data.Data;
+import syncleus.dann.data.DataSet;
+import syncleus.dann.learn.MLResettable;
 import syncleus.dann.data.basic.BasicMLData;
-import syncleus.dann.learn.ml.*;
 import syncleus.dann.math.EncogMath;
 import syncleus.dann.math.EncogUtility;
 import syncleus.dann.math.matrix.SimpleRealMatrix;
@@ -41,7 +46,7 @@ import syncleus.dann.math.random.ConsistentRandomizer;
  * separately, using instar training and outstar training. The CPN network is
  * good at regression.
  */
-public class CPN extends BasicML implements MLRegression, MLResettable, MLError {
+public class CPN extends AbstractLearning implements RegressionLearning, MLResettable, ErrorLearning {
 
     /**
      * Serial id.
@@ -104,7 +109,7 @@ public class CPN extends BasicML implements MLRegression, MLResettable, MLError 
      * @return The error percentage.
      */
     @Override
-    public double calculateError(final MLDataSet data) {
+    public double calculateError(final DataSet data) {
         return EncogUtility.calculateRegressionError(this, data);
     }
 
@@ -112,8 +117,8 @@ public class CPN extends BasicML implements MLRegression, MLResettable, MLError 
      * {@inheritDoc}
      */
     @Override
-    public MLData compute(final MLData input) {
-        final MLData temp = computeInstar(input);
+    public Data compute(final Data input) {
+        final Data temp = computeInstar(input);
         return computeOutstar(temp);
     }
 
@@ -123,8 +128,8 @@ public class CPN extends BasicML implements MLRegression, MLResettable, MLError 
      * @param input The input.
      * @return The output.
      */
-    public MLData computeInstar(final MLData input) {
-        final MLData result = new BasicMLData(this.instarCount);
+    public Data computeInstar(final Data input) {
+        final Data result = new BasicMLData(this.instarCount);
         int w, i, j;
         double sum, sumWinners, maxOut;
         int winner = 0;
@@ -168,8 +173,8 @@ public class CPN extends BasicML implements MLRegression, MLResettable, MLError 
      * @param input The input.
      * @return The output.
      */
-    public MLData computeOutstar(final MLData input) {
-        final MLData result = new BasicMLData(this.outstarCount);
+    public Data computeOutstar(final Data input) {
+        final Data result = new BasicMLData(this.outstarCount);
 
         double sum = 0;
 

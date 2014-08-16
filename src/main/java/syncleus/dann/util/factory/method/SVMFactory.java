@@ -23,7 +23,7 @@
  */
 package syncleus.dann.util.factory.method;
 
-import syncleus.dann.learn.ml.MLMethod;
+import syncleus.dann.learn.Learning;
 import syncleus.dann.learn.svm.KernelType;
 import syncleus.dann.learn.svm.SVM;
 import syncleus.dann.learn.svm.SVMType;
@@ -50,7 +50,7 @@ public class SVMFactory {
      * @param output       The output count.
      * @return The newly created SVM.
      */
-    public static MLMethod create(final String architecture, final int input,
+    public static Learning create(final String architecture, final int input,
                                   final int output) {
 
         final List<String> layers = ArchitectureParse.parseLayers(architecture);

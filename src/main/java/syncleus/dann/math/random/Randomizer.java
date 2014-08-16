@@ -23,7 +23,7 @@
  */
 package syncleus.dann.math.random;
 
-import syncleus.dann.learn.ml.MLMethod;
+import syncleus.dann.learn.Learning;
 import syncleus.dann.math.matrix.SimpleRealMatrix;
 
 import java.util.Random;
@@ -43,7 +43,7 @@ public interface Randomizer {
      *
      * @param network A network to randomize.
      */
-    void randomize(MLMethod network);
+    void randomize(Learning network);
 
     /**
      * Starting with the specified number, randomize it to the degree specified

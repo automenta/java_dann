@@ -24,7 +24,7 @@
 package org.encog.neural.networks.training.cross;
 
 import syncleus.dann.data.folded.FoldedDataSet;
-import syncleus.dann.learn.train.MLTrain;
+import syncleus.dann.learn.Training;
 import syncleus.dann.neural.networks.BasicNetwork;
 
 /**
@@ -46,7 +46,7 @@ public class CrossValidationKFold extends CrossTraining {
     /**
      * The underlying trainer to use. This trainer does the actual training.
      */
-    private final MLTrain train;
+    private final Training train;
 
     /**
      * The network folds.
@@ -64,7 +64,7 @@ public class CrossValidationKFold extends CrossTraining {
      * @param train The training
      * @param k     The number of folds.
      */
-    public CrossValidationKFold(final MLTrain train, final int k) {
+    public CrossValidationKFold(final Training train, final int k) {
         super(train.getMethod(), (FoldedDataSet) train.getTraining());
         this.train = train;
         getFolded().fold(k);

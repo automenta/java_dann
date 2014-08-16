@@ -24,8 +24,8 @@
 package syncleus.dann.data.buffer.codec;
 
 import syncleus.dann.data.basic.BasicMLDataPair;
-import syncleus.dann.learn.ml.MLDataPair;
-import syncleus.dann.learn.ml.MLDataSet;
+import syncleus.dann.data.DataSample;
+import syncleus.dann.data.DataSet;
 import syncleus.dann.math.array.EngineArray;
 
 import java.util.Iterator;
@@ -48,19 +48,19 @@ public class NeuralDataSetCODEC implements DataSetCODEC {
     /**
      * The dataset.
      */
-    private final MLDataSet dataset;
+    private final DataSet dataset;
 
     /**
      * The iterator used to read through the dataset.
      */
-    private Iterator<MLDataPair> iterator;
+    private Iterator<DataSample> iterator;
 
     /**
      * Construct a CODEC.
      *
      * @param theDataset The dataset to use.
      */
-    public NeuralDataSetCODEC(final MLDataSet theDataset) {
+    public NeuralDataSetCODEC(final DataSet theDataset) {
         this.dataset = theDataset;
         this.inputSize = theDataset.getInputSize();
         this.idealSize = theDataset.getIdealSize();
@@ -91,7 +91,7 @@ public class NeuralDataSetCODEC implements DataSetCODEC {
         if (!iterator.hasNext()) {
             return false;
         } else {
-            final MLDataPair pair = iterator.next();
+            final DataSample pair = iterator.next();
             EngineArray.arrayCopy(pair.getInputArray(), input);
             EngineArray.arrayCopy(pair.getIdealArray(), ideal);
             significance[0] = pair.getSignificance();
@@ -105,7 +105,7 @@ public class NeuralDataSetCODEC implements DataSetCODEC {
     @Override
     public void write(final double[] input, final double[] ideal,
                       final double significance) {
-        final MLDataPair pair = BasicMLDataPair
+        final DataSample pair = BasicMLDataPair
                 .createPair(inputSize, idealSize);
         EngineArray.arrayCopy(input, pair.getIdealArray());
         EngineArray.arrayCopy(ideal, pair.getIdealArray());

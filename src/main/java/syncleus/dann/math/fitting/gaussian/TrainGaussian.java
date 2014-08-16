@@ -24,20 +24,20 @@
 package syncleus.dann.math.fitting.gaussian;
 
 import org.encog.neural.networks.training.propagation.TrainingContinuation;
-import syncleus.dann.learn.ml.MLDataPair;
-import syncleus.dann.learn.ml.MLDataSet;
-import syncleus.dann.learn.ml.MLMethod;
-import syncleus.dann.learn.ml.TrainingImplementationType;
-import syncleus.dann.learn.train.BasicTraining;
+import syncleus.dann.data.DataSample;
+import syncleus.dann.data.DataSet;
+import syncleus.dann.learn.Learning;
+import syncleus.dann.learn.TrainingImplementationType;
+import syncleus.dann.learn.BasicTraining;
 import syncleus.dann.math.array.EngineArray;
 
 public class TrainGaussian extends BasicTraining {
 
     private final GaussianFitting method;
-    private final MLDataSet training;
+    private final DataSet training;
 
     public TrainGaussian(final GaussianFitting theMethod,
-                         final MLDataSet theTraining) {
+                         final DataSet theTraining) {
         super(TrainingImplementationType.OnePass);
         this.method = theMethod;
         this.training = theTraining;
@@ -47,7 +47,7 @@ public class TrainGaussian extends BasicTraining {
      * @return the training
      */
     @Override
-    public MLDataSet getTraining() {
+    public DataSet getTraining() {
         return training;
     }
 
@@ -57,7 +57,7 @@ public class TrainGaussian extends BasicTraining {
         // calculate mu, which is the mean
         final double[] sum = new double[this.method.getInputCount()];
 
-        for (final MLDataPair pair : this.training) {
+        for (final DataSample pair : this.training) {
             for (int i = 0; i < this.training.getInputSize(); i++) {
                 sum[i] += pair.getInput().getData(i);
             }
@@ -74,7 +74,7 @@ public class TrainGaussian extends BasicTraining {
         EngineArray.fill(sigma, 0);
 
         final int inputCount = this.method.getInputCount();
-        for (final MLDataPair pair : this.training) {
+        for (final DataSample pair : this.training) {
             for (int i = 0; i < inputCount; i++) {
                 for (int j = 0; j < inputCount; j++) {
                     sigma[i][j] += (pair.getInput().getData(i) - this.method.getMu().get(0, i))
@@ -108,7 +108,7 @@ public class TrainGaussian extends BasicTraining {
     }
 
     @Override
-    public MLMethod getMethod() {
+    public Learning getMethod() {
         return this.method;
     }
 

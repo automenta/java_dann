@@ -6,13 +6,13 @@
 
 package syncleus.dann.math.wave;
 
-import syncleus.dann.Transform;
+import syncleus.dann.Function;
 import syncleus.dann.math.Vector;
 
 /**
  * @author me
  */
-public class WaveGenerator implements Transform<WaveFunction, Vector> {
+public class WaveGenerator implements Function<WaveFunction, Vector> {
 
     @Override
     public Vector apply(final WaveFunction t) {

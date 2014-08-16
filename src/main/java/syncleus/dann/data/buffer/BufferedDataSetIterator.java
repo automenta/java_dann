@@ -24,15 +24,15 @@
 package syncleus.dann.data.buffer;
 
 import syncleus.dann.data.basic.BasicMLDataPair;
-import syncleus.dann.learn.ml.MLDataError;
-import syncleus.dann.learn.ml.MLDataPair;
+import syncleus.dann.data.DataException;
+import syncleus.dann.data.DataSample;
 
 import java.util.Iterator;
 
 /**
  * An iterator for the BufferedNeuralDataSet.
  */
-public class BufferedDataSetIterator implements Iterator<MLDataPair> {
+public class BufferedDataSetIterator implements Iterator<DataSample> {
 
     /**
      * The dataset being iterated over.
@@ -66,7 +66,7 @@ public class BufferedDataSetIterator implements Iterator<MLDataPair> {
      * {@inheritDoc}
      */
     @Override
-    public MLDataPair next() {
+    public DataSample next() {
         // Make sure that only ONE iterator is using the underlying dataset at a
         // time.
         // This can be improved for better disk-based performance.
@@ -75,7 +75,7 @@ public class BufferedDataSetIterator implements Iterator<MLDataPair> {
                 return null;
             }
 
-            final MLDataPair pair = BasicMLDataPair.createPair(
+            final DataSample pair = BasicMLDataPair.createPair(
                     this.data.getInputSize(), this.data.getIdealSize());
             this.data.getRecord(this.current++, pair);
             return pair;
@@ -87,7 +87,7 @@ public class BufferedDataSetIterator implements Iterator<MLDataPair> {
      */
     @Override
     public void remove() {
-        throw new MLDataError("Remove is not supported.");
+        throw new DataException("Remove is not supported.");
     }
 
 }

@@ -30,10 +30,10 @@ import syncleus.dann.evolve.genome.BasicGenome;
 import syncleus.dann.evolve.genome.Genome;
 import syncleus.dann.graph.tree.traverse.tasks.TaskGetNodeIndex;
 import syncleus.dann.graph.tree.traverse.tasks.TaskReplaceNode;
-import syncleus.dann.learn.ml.MLData;
-import syncleus.dann.learn.ml.MLDataSet;
-import syncleus.dann.learn.ml.MLError;
-import syncleus.dann.learn.ml.MLRegression;
+import syncleus.dann.data.Data;
+import syncleus.dann.data.DataSet;
+import syncleus.dann.learn.ErrorLearning;
+import syncleus.dann.RegressionLearning;
 import syncleus.dann.math.EncogUtility;
 
 import java.util.*;
@@ -53,7 +53,7 @@ import java.util.*;
  * they are stored in a variable holder. Each program usually has its own
  * variable holder, though it is possible to share.
  */
-public class EncogProgram extends BasicGenome implements MLRegression, MLError {
+public class EncogProgram extends BasicGenome implements RegressionLearning, ErrorLearning {
 
     /**
      * The serial id.
@@ -182,7 +182,7 @@ public class EncogProgram extends BasicGenome implements MLRegression, MLError {
      * {@inheritDoc}
      */
     @Override
-    public double calculateError(final MLDataSet data) {
+    public double calculateError(final DataSet data) {
         return EncogUtility.calculateRegressionError(this, data);
     }
 
@@ -222,7 +222,7 @@ public class EncogProgram extends BasicGenome implements MLRegression, MLError {
      * @return A single numer MLData.
      */
     @Override
-    public MLData compute(final MLData input) {
+    public Data compute(final Data input) {
         if (input.size() != getInputCount()) {
             throw new EACompileError("Invalid input count.");
         }
@@ -234,7 +234,7 @@ public class EncogProgram extends BasicGenome implements MLRegression, MLError {
         final ExpressionValue v = this.rootNode.evaluate();
         final VariableMapping resultMapping = getResultType();
 
-        final MLData result = new BasicMLData(1);
+        final Data result = new BasicMLData(1);
         boolean success = false;
 
         switch (resultMapping.getVariableType()) {

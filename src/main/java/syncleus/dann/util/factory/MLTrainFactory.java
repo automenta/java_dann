@@ -23,10 +23,6 @@
  */
 package syncleus.dann.util.factory;
 
-import syncleus.dann.learn.ml.MLDataSet;
-import syncleus.dann.learn.ml.MLMethod;
-import syncleus.dann.learn.train.MLTrain;
-
 /**
  * This factory is used to create trainers for machine learning methods.
  */
@@ -228,27 +224,27 @@ public class MLTrainFactory {
 
     public static final String TYPE_PSO = "pso";
 
-    /**
-     * Create a trainer.
-     *
-     * @param method   The method to train.
-     * @param training The training data.
-     * @param type     Type type of trainer.
-     * @param args     The training args.
-     * @return The new training method.
-     */
-    public MLTrain create(final MLMethod method, final MLDataSet training,
-                          final String type, final String args) {
-
-        for (final EncogPluginBase plugin : Encog.getInstance().getPlugins()) {
-            if (plugin instanceof EncogPluginService1) {
-                final MLTrain result = ((EncogPluginService1) plugin)
-                        .createTraining(method, training, type, args);
-                if (result != null) {
-                    return result;
-                }
-            }
-        }
-        throw new RuntimeException("Unknown training type: " + type);
-    }
+//    /**
+//     * Create a trainer.
+//     *
+//     * @param method   The method to train.
+//     * @param training The training data.
+//     * @param type     Type type of trainer.
+//     * @param args     The training args.
+//     * @return The new training method.
+//     */
+//    public MLTrain create(final MLMethod method, final MLDataSet training,
+//                          final String type, final String args) {
+//
+//        for (final EncogPluginBase plugin : Encog.getInstance().getPlugins()) {
+//            if (plugin instanceof EncogPluginService1) {
+//                final MLTrain result = ((EncogPluginService1) plugin)
+//                        .createTraining(method, training, type, args);
+//                if (result != null) {
+//                    return result;
+//                }
+//            }
+//        }
+//        throw new RuntimeException("Unknown training type: " + type);
+//    }
 }

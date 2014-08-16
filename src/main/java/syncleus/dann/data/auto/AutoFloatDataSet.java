@@ -3,16 +3,16 @@ package syncleus.dann.data.auto;
 import syncleus.dann.data.basic.BasicMLDataPair;
 import syncleus.dann.data.file.csv.CSVFormat;
 import syncleus.dann.data.file.csv.ReadCSV;
-import syncleus.dann.learn.ml.MLData;
-import syncleus.dann.learn.ml.MLDataPair;
-import syncleus.dann.learn.ml.MLDataSet;
+import syncleus.dann.data.Data;
+import syncleus.dann.data.DataSample;
+import syncleus.dann.data.DataSet;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class AutoFloatDataSet implements Serializable, MLDataSet {
+public class AutoFloatDataSet implements Serializable, DataSet {
 
     private final int sourceInputCount;
     private final int sourceIdealCount;
@@ -23,7 +23,7 @@ public class AutoFloatDataSet implements Serializable, MLDataSet {
     private float normalizedMin = -1;
     private boolean normalizationEnabled = false;
 
-    public class AutoFloatIterator implements Iterator<MLDataPair> {
+    public class AutoFloatIterator implements Iterator<DataSample> {
 
         /**
          * The index that the iterator is currently at.
@@ -42,7 +42,7 @@ public class AutoFloatDataSet implements Serializable, MLDataSet {
          * {@inheritDoc}
          */
         @Override
-        public final MLDataPair next() {
+        public final DataSample next() {
             if (!hasNext()) {
                 return null;
             }
@@ -69,7 +69,7 @@ public class AutoFloatDataSet implements Serializable, MLDataSet {
     }
 
     @Override
-    public Iterator<MLDataPair> iterator() {
+    public Iterator<DataSample> iterator() {
         return new AutoFloatIterator();
     }
 
@@ -100,7 +100,7 @@ public class AutoFloatDataSet implements Serializable, MLDataSet {
     }
 
     @Override
-    public void getRecord(final long index, final MLDataPair pair) {
+    public void getRecord(final long index, final DataSample pair) {
 
         int columnID = 0;
 
@@ -139,24 +139,24 @@ public class AutoFloatDataSet implements Serializable, MLDataSet {
     }
 
     @Override
-    public MLDataSet openAdditional() {
+    public DataSet openAdditional() {
         return this;
     }
 
     @Override
-    public void add(final MLData data1) {
+    public void add(final Data data1) {
         throw new RuntimeException("Add's not supported by this dataset.");
 
     }
 
     @Override
-    public void add(final MLData inputData, final MLData idealData) {
+    public void add(final Data inputData, final Data idealData) {
         throw new RuntimeException("Add's not supported by this dataset.");
 
     }
 
     @Override
-    public void add(final MLDataPair inputData) {
+    public void add(final DataSample inputData) {
         throw new RuntimeException("Add's not supported by this dataset.");
 
     }
@@ -172,12 +172,12 @@ public class AutoFloatDataSet implements Serializable, MLDataSet {
     }
 
     @Override
-    public MLDataPair get(final int index) {
+    public DataSample get(final int index) {
         if (index >= size()) {
             return null;
         }
 
-        final MLDataPair result = BasicMLDataPair.createPair(getInputSize(),
+        final DataSample result = BasicMLDataPair.createPair(getInputSize(),
                 this.getIdealSize());
         getRecord(index, result);
         return result;

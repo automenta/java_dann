@@ -26,11 +26,11 @@ package syncleus.dann.generate.ca.universe.basic;
 import syncleus.dann.generate.ca.universe.Universe;
 import syncleus.dann.generate.ca.universe.UniverseCell;
 import syncleus.dann.generate.ca.universe.UniverseCellFactory;
-import syncleus.dann.learn.ml.BasicML;
+import syncleus.dann.learn.AbstractLearning;
 
 import java.io.Serializable;
 
-public class BasicUniverse extends BasicML implements Universe, Serializable, Cloneable {
+public class BasicUniverse extends AbstractLearning implements Universe, Serializable, Cloneable {
     /**
      *
      */

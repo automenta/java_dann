@@ -50,7 +50,7 @@ public abstract class AbstractExponentialDecaySomBrain<IN extends SomInputNeuron
     private double getIntialRadius() {
         double maxCrossSection = 0.0;
         for (int dimensionIndex = 1; dimensionIndex <= this.getUpperBounds()
-                .getDimensions(); dimensionIndex++) {
+                .getDimension(); dimensionIndex++) {
             final double crossSection = this.getUpperBounds().get(
                     dimensionIndex)
                     - this.getLowerBounds().get(dimensionIndex);

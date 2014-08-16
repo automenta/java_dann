@@ -23,11 +23,15 @@
  */
 package org.encog.neural.networks.training.pnn;
 
+import syncleus.dann.data.DataSample;
+import syncleus.dann.data.Data;
+import syncleus.dann.data.DataSet;
+import syncleus.dann.learn.TrainingImplementationType;
+import syncleus.dann.learn.Learning;
 import syncleus.dann.data.basic.BasicMLData;
 import syncleus.dann.data.basic.BasicMLDataPair;
 import syncleus.dann.data.basic.BasicMLDataSet;
-import syncleus.dann.learn.ml.*;
-import syncleus.dann.learn.train.BasicTraining;
+import syncleus.dann.learn.BasicTraining;
 import syncleus.dann.math.array.EngineArray;
 
 /**
@@ -83,7 +87,7 @@ public class TrainBasicPNN extends BasicTraining implements CalculationCriteria 
     /**
      * The training data.
      */
-    private final MLDataSet training;
+    private final DataSet training;
 
     /**
      * The maximum error to allow.
@@ -121,7 +125,7 @@ public class TrainBasicPNN extends BasicTraining implements CalculationCriteria 
      * @param network  The network to train.
      * @param training The training data.
      */
-    public TrainBasicPNN(final BasicPNN network, final MLDataSet training) {
+    public TrainBasicPNN(final BasicPNN network, final DataSet training) {
         super(TrainingImplementationType.OnePass);
         this.network = network;
         this.training = training;
@@ -191,7 +195,7 @@ public class TrainBasicPNN extends BasicTraining implements CalculationCriteria 
      * @param deriv    Should we find the derivative.
      * @return The error.
      */
-    public double calculateError(final MLDataSet training, final boolean deriv) {
+    public double calculateError(final DataSet training, final boolean deriv) {
 
         double err, totErr;
         double diff;
@@ -209,7 +213,7 @@ public class TrainBasicPNN extends BasicTraining implements CalculationCriteria 
 
         this.network.setExclude((int) training.getRecordCount());
 
-        final MLDataPair pair = BasicMLDataPair.createPair(
+        final DataSample pair = BasicMLDataPair.createPair(
                 training.getInputSize(), training.getIdealSize());
 
         final double[] out = new double[this.network.getOutputCount()];
@@ -220,17 +224,17 @@ public class TrainBasicPNN extends BasicTraining implements CalculationCriteria 
 
             err = 0.0;
 
-            final MLData input = pair.getInput();
-            final MLData target = pair.getIdeal();
+            final Data input = pair.getInput();
+            final Data target = pair.getIdeal();
 
             if (this.network.getOutputMode() == PNNOutputMode.Unsupervised) {
                 if (deriv) {
-                    final MLData output = computeDeriv(input, target);
+                    final Data output = computeDeriv(input, target);
                     for (int z = 0; z < this.network.getOutputCount(); z++) {
                         out[z] = output.getData(z);
                     }
                 } else {
-                    final MLData output = this.network.compute(input);
+                    final Data output = this.network.compute(input);
                     for (int z = 0; z < this.network.getOutputCount(); z++) {
                         out[z] = output.getData(z);
                     }
@@ -241,7 +245,7 @@ public class TrainBasicPNN extends BasicTraining implements CalculationCriteria 
                 }
             } else if (this.network.getOutputMode() == PNNOutputMode.Classification) {
                 final int tclass = (int) target.getData(0);
-                MLData output;
+                Data output;
 
                 if (deriv) {
                     output = computeDeriv(input, pair.getIdeal());
@@ -261,12 +265,12 @@ public class TrainBasicPNN extends BasicTraining implements CalculationCriteria 
                 }
             } else if (this.network.getOutputMode() == PNNOutputMode.Regression) {
                 if (deriv) {
-                    final MLData output = this.network.compute(input);
+                    final Data output = this.network.compute(input);
                     for (int z = 0; z < this.network.getOutputCount(); z++) {
                         out[z] = output.getData(z);
                     }
                 } else {
-                    final MLData output = this.network.compute(input);
+                    final Data output = this.network.compute(input);
                     for (int z = 0; z < this.network.getOutputCount(); z++) {
                         out[z] = output.getData(z);
                     }
@@ -321,7 +325,7 @@ public class TrainBasicPNN extends BasicTraining implements CalculationCriteria 
      * @param target The target data.
      * @return The output.
      */
-    public MLData computeDeriv(final MLData input, final MLData target) {
+    public Data computeDeriv(final Data input, final Data target) {
         int pop, ivar;
         int outvar;
         double diff, dist, truedist;
@@ -352,7 +356,7 @@ public class TrainBasicPNN extends BasicTraining implements CalculationCriteria 
             }
         }
 
-        final MLDataPair pair = BasicMLDataPair.createPair(this.network
+        final DataSample pair = BasicMLDataPair.createPair(this.network
                 .getSamples().getInputSize(), this.network.getSamples()
                 .getIdealSize());
 
@@ -529,7 +533,7 @@ public class TrainBasicPNN extends BasicTraining implements CalculationCriteria 
      * {@inheritDoc}
      */
     @Override
-    public MLMethod getMethod() {
+    public Learning getMethod() {
         return this.network;
     }
 

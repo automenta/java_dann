@@ -27,8 +27,8 @@ import syncleus.dann.evolve.exception.EARuntimeError;
 import syncleus.dann.evolve.genome.Genome;
 import syncleus.dann.evolve.score.AdjustScore;
 import syncleus.dann.evolve.train.basic.BasicEA;
-import syncleus.dann.learn.ml.CalculateScore;
-import syncleus.dann.learn.ml.MLMethod;
+import syncleus.dann.learn.CalculateScore;
+import syncleus.dann.learn.Learning;
 
 import java.util.List;
 
@@ -76,7 +76,7 @@ public class ParallelScoreTask implements Runnable {
      */
     @Override
     public void run() {
-        final MLMethod phenotype = this.owner.getCodec().decode(this.genome);
+        final Learning phenotype = this.owner.getCodec().decode(this.genome);
         if (phenotype != null) {
             double score;
             try {

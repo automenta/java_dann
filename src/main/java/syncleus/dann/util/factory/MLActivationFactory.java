@@ -23,8 +23,6 @@
  */
 package syncleus.dann.util.factory;
 
-import syncleus.dann.neural.activation.EncogActivationFunction;
-
 
 public class MLActivationFactory {
 
@@ -41,17 +39,17 @@ public class MLActivationFactory {
     public static final String AF_STEP = "step";
     public static final String AF_TANH = "tanh";
 
-    public EncogActivationFunction create(final String fn) {
-
-        for (final EncogPluginBase plugin : Encog.getInstance().getPlugins()) {
-            if (plugin instanceof EncogPluginService1) {
-                final EncogActivationFunction result = ((EncogPluginService1) plugin)
-                        .createActivationFunction(fn);
-                if (result != null) {
-                    return result;
-                }
-            }
-        }
-        return null;
-    }
+//    public EncogActivationFunction create(final String fn) {
+//
+//        for (final EncogPluginBase plugin : Encog.getInstance().getPlugins()) {
+//            if (plugin instanceof EncogPluginService1) {
+//                final EncogActivationFunction result = ((EncogPluginService1) plugin)
+//                        .createActivationFunction(fn);
+//                if (result != null) {
+//                    return result;
+//                }
+//            }
+//        }
+//        return null;
+//    }
 }

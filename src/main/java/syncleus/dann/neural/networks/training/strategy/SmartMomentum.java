@@ -23,8 +23,8 @@
  */
 package org.encog.neural.networks.training.strategy;
 
-import syncleus.dann.learn.train.MLTrain;
-import syncleus.dann.learn.train.strategy.Strategy;
+import syncleus.dann.learn.Training;
+import syncleus.dann.learn.strategy.Strategy;
 
 /**
  * Attempt to automatically set a momentum in a training algorithm that supports
@@ -62,7 +62,7 @@ public class SmartMomentum implements Strategy {
     /**
      * The training algorithm that is using this strategy.
      */
-    private MLTrain train;
+    private Training train;
 
     /**
      * The setter used to change momentum.
@@ -100,7 +100,7 @@ public class SmartMomentum implements Strategy {
      * @param train The training algorithm.
      */
     @Override
-    public void init(final MLTrain train) {
+    public void init(final Training train) {
         this.train = train;
         this.setter = (Momentum) train;
         this.ready = false;

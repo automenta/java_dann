@@ -25,8 +25,8 @@ package syncleus.dann.math.matrix.hessian;
 
 import org.encog.neural.flat.FlatNetwork;
 import syncleus.dann.data.basic.BasicMLDataPair;
-import syncleus.dann.learn.ml.MLDataPair;
-import syncleus.dann.learn.ml.MLDataSet;
+import syncleus.dann.data.DataSample;
+import syncleus.dann.data.DataSet;
 import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.neural.activation.EncogActivationFunction;
 
@@ -90,7 +90,7 @@ public class ChainRuleWorker implements Runnable {
     /**
      * The training data.
      */
-    private final MLDataSet training;
+    private final DataSet training;
 
     /**
      * The output neuron to calculate for.
@@ -125,7 +125,7 @@ public class ChainRuleWorker implements Runnable {
     /**
      * The pair to use for training.
      */
-    private final MLDataPair pair;
+    private final DataSample pair;
 
     /**
      * The weight count.
@@ -146,7 +146,7 @@ public class ChainRuleWorker implements Runnable {
      * @param theHigh     The high range.
      */
     public ChainRuleWorker(final FlatNetwork theNetwork,
-                           final MLDataSet theTraining, final int theLow, final int theHigh) {
+                           final DataSet theTraining, final int theLow, final int theHigh) {
 
         this.weightCount = theNetwork.getWeights().length;
         this.hessian = new double[this.weightCount][this.weightCount];

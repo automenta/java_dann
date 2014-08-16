@@ -24,20 +24,20 @@
 package syncleus.dann.math.fitting.linear;
 
 import org.encog.neural.networks.training.propagation.TrainingContinuation;
-import syncleus.dann.learn.ml.MLDataPair;
-import syncleus.dann.learn.ml.MLDataSet;
-import syncleus.dann.learn.ml.MLMethod;
-import syncleus.dann.learn.ml.TrainingImplementationType;
-import syncleus.dann.learn.train.BasicTraining;
+import syncleus.dann.data.DataSample;
+import syncleus.dann.data.DataSet;
+import syncleus.dann.learn.Learning;
+import syncleus.dann.learn.TrainingImplementationType;
+import syncleus.dann.learn.BasicTraining;
 import syncleus.dann.math.EncogUtility;
 
 public class TrainLinearRegression extends BasicTraining {
 
     private final LinearRegression method;
-    private final MLDataSet training;
+    private final DataSet training;
 
     public TrainLinearRegression(final LinearRegression theMethod,
-                                 final MLDataSet theTraining) {
+                                 final DataSet theTraining) {
         super(
                 theMethod.getInputCount() == 1 ? TrainingImplementationType.OnePass
                         : TrainingImplementationType.Iterative);
@@ -49,7 +49,7 @@ public class TrainLinearRegression extends BasicTraining {
      * @return the training
      */
     @Override
-    public MLDataSet getTraining() {
+    public DataSet getTraining() {
         return training;
     }
 
@@ -61,7 +61,7 @@ public class TrainLinearRegression extends BasicTraining {
         double sumXY = 0;
         double sumX2 = 0;
 
-        for (final MLDataPair pair : this.training) {
+        for (final DataSample pair : this.training) {
             sumX += pair.getInputArray()[0];
             sumY += pair.getIdealArray()[0];
             sumX2 += Math.pow(pair.getInputArray()[0], 2);
@@ -93,7 +93,7 @@ public class TrainLinearRegression extends BasicTraining {
     }
 
     @Override
-    public MLMethod getMethod() {
+    public Learning getMethod() {
         return this.method;
     }
 

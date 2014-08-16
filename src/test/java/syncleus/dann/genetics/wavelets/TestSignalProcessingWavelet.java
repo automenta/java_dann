@@ -24,7 +24,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import syncleus.dann.evolve.wavelets.SignalProcessingWavelet;
 import syncleus.dann.evolve.wavelets.SignalProcessingWavelet.GlobalSignalConcentration;
-import syncleus.dann.math.Function;
+import syncleus.dann.math.ParameterizedFunction;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -146,7 +146,7 @@ public class TestSignalProcessingWavelet {
         return mutatedProcessor;
     }
 
-    private static double checkXorFitness(final Function xorAttempt,
+    private static double checkXorFitness(final ParameterizedFunction xorAttempt,
                                           final int waveCount) {
         if (waveCount <= 0)
             throw new IllegalArgumentException("waveCount must be >0");

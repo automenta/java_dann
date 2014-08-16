@@ -26,12 +26,12 @@ package syncleus.dann.learn.hmm.train.bw;
 import syncleus.dann.learn.hmm.HiddenMarkovModel;
 import syncleus.dann.learn.hmm.alog.ForwardBackwardCalculator;
 import syncleus.dann.learn.hmm.distributions.StateDistribution;
-import syncleus.dann.learn.ml.MLDataSet;
-import syncleus.dann.learn.ml.MLMethod;
-import syncleus.dann.learn.ml.MLSequenceSet;
-import syncleus.dann.learn.ml.TrainingImplementationType;
-import syncleus.dann.learn.train.MLTrain;
-import syncleus.dann.learn.train.strategy.Strategy;
+import syncleus.dann.data.DataSet;
+import syncleus.dann.learn.Learning;
+import syncleus.dann.data.DataSetSequence;
+import syncleus.dann.learn.TrainingImplementationType;
+import syncleus.dann.learn.Training;
+import syncleus.dann.learn.strategy.Strategy;
 
 import java.util.Arrays;
 import java.util.List;
@@ -53,13 +53,13 @@ import org.encog.neural.networks.training.propagation.TrainingContinuation;
  * Hidden Markov Models and the Baum-Welch Algorithm, IEEE Information Theory
  * Society Newsletter, Dec. 2003.
  */
-public abstract class BaseBaumWelch implements MLTrain {
+public abstract class BaseBaumWelch implements Training {
     private int iterations;
     private HiddenMarkovModel method;
-    private final MLSequenceSet training;
+    private final DataSetSequence training;
 
     public BaseBaumWelch(final HiddenMarkovModel hmm,
-                         final MLSequenceSet training) {
+                         final DataSetSequence training) {
         this.method = hmm;
         this.training = training;
     }
@@ -99,7 +99,7 @@ public abstract class BaseBaumWelch implements MLTrain {
         return gamma;
     }
 
-    public abstract double[][][] estimateXi(MLDataSet sequence,
+    public abstract double[][][] estimateXi(DataSet sequence,
                                             ForwardBackwardCalculator fbc, HiddenMarkovModel hmm);
 
     @Override
@@ -108,7 +108,7 @@ public abstract class BaseBaumWelch implements MLTrain {
     }
 
     public abstract ForwardBackwardCalculator generateForwardBackwardCalculator(
-            MLDataSet sequence, HiddenMarkovModel hmm);
+            DataSet sequence, HiddenMarkovModel hmm);
 
     @Override
     public double getError() {
@@ -126,7 +126,7 @@ public abstract class BaseBaumWelch implements MLTrain {
     }
 
     @Override
-    public MLMethod getMethod() {
+    public Learning getMethod() {
         return this.method;
     }
 
@@ -136,7 +136,7 @@ public abstract class BaseBaumWelch implements MLTrain {
     }
 
     @Override
-    public MLDataSet getTraining() {
+    public DataSet getTraining() {
         return this.training;
     }
 
@@ -166,7 +166,7 @@ public abstract class BaseBaumWelch implements MLTrain {
         }
 
         int g = 0;
-        for (final MLDataSet obsSeq : this.training.getSequences()) {
+        for (final DataSet obsSeq : this.training.getSequences()) {
             final ForwardBackwardCalculator fbc = generateForwardBackwardCalculator(
                     obsSeq, this.method);
 
@@ -221,7 +221,7 @@ public abstract class BaseBaumWelch implements MLTrain {
             int j = 0;
 
             int o = 0;
-            for (final MLDataSet obsSeq : this.training.getSequences()) {
+            for (final DataSet obsSeq : this.training.getSequences()) {
                 for (int t = 0; t < obsSeq.size(); t++, j++) {
                     sum += weights[j] = allGamma[o][t][i];
                 }

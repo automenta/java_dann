@@ -24,15 +24,15 @@
 package syncleus.dann.data.folded;
 
 import syncleus.dann.data.basic.BasicMLDataPair;
-import syncleus.dann.learn.ml.MLDataError;
-import syncleus.dann.learn.ml.MLDataPair;
+import syncleus.dann.data.DataException;
+import syncleus.dann.data.DataSample;
 
 import java.util.Iterator;
 
 /**
  * Used to iterate over a folded data set.
  */
-public class FoldedIterator implements Iterator<MLDataPair> {
+public class FoldedIterator implements Iterator<DataSample> {
 
     /**
      * The owner.
@@ -66,9 +66,9 @@ public class FoldedIterator implements Iterator<MLDataPair> {
      * {@inheritDoc}
      */
     @Override
-    public MLDataPair next() {
+    public DataSample next() {
         if (hasNext()) {
-            final MLDataPair pair = BasicMLDataPair.createPair(
+            final DataSample pair = BasicMLDataPair.createPair(
                     this.owner.getInputSize(), this.owner.getIdealSize());
             this.owner.getRecord(this.currentIndex++, pair);
             return pair;
@@ -82,6 +82,6 @@ public class FoldedIterator implements Iterator<MLDataPair> {
      */
     @Override
     public void remove() {
-        throw new MLDataError("Remove is not supported.");
+        throw new DataException("Remove is not supported.");
     }
 }

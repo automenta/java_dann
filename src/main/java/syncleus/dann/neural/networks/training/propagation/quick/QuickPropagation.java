@@ -23,7 +23,7 @@
  */
 package org.encog.neural.networks.training.propagation.quick;
 
-import syncleus.dann.learn.ml.MLDataSet;
+import syncleus.dann.data.DataSet;
 import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.neural.networks.ContainsFlat;
 
@@ -83,7 +83,7 @@ public class QuickPropagation extends Propagation implements LearningRate {
      * @param network  The network to train.
      * @param training The training data.
      */
-    public QuickPropagation(final ContainsFlat network, final MLDataSet training) {
+    public QuickPropagation(final ContainsFlat network, final DataSet training) {
         this(network, training, 2.0);
     }
 
@@ -97,7 +97,7 @@ public class QuickPropagation extends Propagation implements LearningRate {
      *                        like backprop, except QPROP can take higher learning rates.
      */
     public QuickPropagation(final ContainsFlat network,
-                            final MLDataSet training, final double theLearningRate) {
+                            final DataSet training, final double theLearningRate) {
         super(network, training);
         ValidateNetwork.validateMethodToData(network, training);
 

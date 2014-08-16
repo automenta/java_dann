@@ -23,10 +23,10 @@
  */
 package org.encog.neural.networks.training.concurrent.jobs;
 
-import syncleus.dann.learn.ml.MLDataSet;
-import syncleus.dann.learn.train.MLTrain;
-import syncleus.dann.learn.train.strategy.Strategy;
-import syncleus.dann.learn.train.strategy.end.EndTrainingStrategy;
+import syncleus.dann.data.DataSet;
+import syncleus.dann.learn.Training;
+import syncleus.dann.learn.strategy.Strategy;
+import syncleus.dann.learn.strategy.end.EndTrainingStrategy;
 import syncleus.dann.neural.networks.BasicNetwork;
 
 import java.util.ArrayList;
@@ -45,7 +45,7 @@ public abstract class TrainingJob {
     /**
      * The training data to use.
      */
-    private MLDataSet training;
+    private DataSet training;
 
     /**
      * The strategies to use.
@@ -60,7 +60,7 @@ public abstract class TrainingJob {
     /**
      * The trainer being used.
      */
-    private MLTrain train;
+    private Training train;
 
     /**
      * Holds any errors that occur during training.
@@ -74,7 +74,7 @@ public abstract class TrainingJob {
      * @param training     The training data to use.
      * @param loadToMemory True, if binary data should be loaded to memory.
      */
-    public TrainingJob(final BasicNetwork network, final MLDataSet training,
+    public TrainingJob(final BasicNetwork network, final DataSet training,
                        final boolean loadToMemory) {
         super();
         this.network = network;
@@ -111,14 +111,14 @@ public abstract class TrainingJob {
     /**
      * @return the train
      */
-    public MLTrain getTrain() {
+    public Training getTrain() {
         return this.train;
     }
 
     /**
      * @return the training
      */
-    public MLDataSet getTraining() {
+    public DataSet getTraining() {
         return this.training;
     }
 
@@ -153,14 +153,14 @@ public abstract class TrainingJob {
     /**
      * @param train the train to set
      */
-    public void setTrain(final MLTrain train) {
+    public void setTrain(final Training train) {
         this.train = train;
     }
 
     /**
      * @param training the training to set
      */
-    public void setTraining(final MLDataSet training) {
+    public void setTraining(final DataSet training) {
         this.training = training;
     }
 

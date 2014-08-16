@@ -24,10 +24,10 @@
 package org.encog.neural.neat;
 
 import syncleus.dann.data.basic.BasicMLData;
-import syncleus.dann.learn.ml.MLData;
-import syncleus.dann.learn.ml.MLDataSet;
-import syncleus.dann.learn.ml.MLError;
-import syncleus.dann.learn.ml.MLRegression;
+import syncleus.dann.data.Data;
+import syncleus.dann.data.DataSet;
+import syncleus.dann.learn.ErrorLearning;
+import syncleus.dann.RegressionLearning;
 import syncleus.dann.math.EncogUtility;
 import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.neural.activation.EncogActivationFunction;
@@ -68,7 +68,7 @@ import java.util.List;
  * Computation Conference}, year = {2005}, pages = {1225--1232}, publisher =
  * {ACM Press} }
  */
-public class NEATNetwork implements MLRegression, MLError, Serializable {
+public class NEATNetwork implements RegressionLearning, ErrorLearning, Serializable {
 
     /**
      * The serial ID.
@@ -165,7 +165,7 @@ public class NEATNetwork implements MLRegression, MLError, Serializable {
      * @return The error percentage.
      */
     @Override
-    public double calculateError(final MLDataSet data) {
+    public double calculateError(final DataSet data) {
         return EncogUtility.calculateRegressionError(this, data);
     }
 
@@ -176,8 +176,8 @@ public class NEATNetwork implements MLRegression, MLError, Serializable {
      * @return The output from this synapse.
      */
     @Override
-    public MLData compute(final MLData input) {
-        final MLData result = new BasicMLData(this.outputCount);
+    public Data compute(final Data input) {
+        final Data result = new BasicMLData(this.outputCount);
 
         // clear from previous
         EngineArray.fill(this.preActivation, 0.0);

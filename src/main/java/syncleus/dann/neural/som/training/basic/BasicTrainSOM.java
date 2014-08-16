@@ -23,9 +23,13 @@
  */
 package org.encog.neural.som.training.basic;
 
+import syncleus.dann.data.DataSample;
+import syncleus.dann.data.Data;
+import syncleus.dann.data.DataSet;
+import syncleus.dann.learn.TrainingImplementationType;
+import syncleus.dann.learn.Learning;
 import syncleus.dann.data.basic.BasicMLData;
-import syncleus.dann.learn.ml.*;
-import syncleus.dann.learn.train.BasicTraining;
+import syncleus.dann.learn.BasicTraining;
 import syncleus.dann.math.Format;
 import syncleus.dann.math.matrix.MatrixMath;
 import syncleus.dann.math.matrix.SimpleRealMatrix;
@@ -147,7 +151,7 @@ public class BasicTrainSOM extends BasicTraining implements LearningRate {
      * @param neighborhood The neighborhood function to use.
      */
     public BasicTrainSOM(final SOM network, final double learningRate,
-                         final MLDataSet training, final NeighborhoodFunction neighborhood) {
+                         final DataSet training, final NeighborhoodFunction neighborhood) {
         super(TrainingImplementationType.Iterative);
         this.neighborhood = neighborhood;
         setTraining(training);
@@ -206,7 +210,7 @@ public class BasicTrainSOM extends BasicTraining implements LearningRate {
      * @param input        The input pattern to copy.
      */
     private void copyInputPattern(final SimpleRealMatrix matrix, final int outputNeuron,
-                                  final MLData input) {
+                                  final Data input) {
         for (int inputNeuron = 0; inputNeuron < this.inputNeuronCount; inputNeuron++) {
             matrix.set(outputNeuron, inputNeuron, input.getData(inputNeuron));
         }
@@ -265,12 +269,12 @@ public class BasicTrainSOM extends BasicTraining implements LearningRate {
      * @return True if a winner was forced.
      */
     private boolean forceWinners(final SimpleRealMatrix matrix, final int[] won,
-                                 final MLData leastRepresented) {
+                                 final Data leastRepresented) {
 
         double maxActivation = Double.MIN_VALUE;
         int maxActivationNeuron = -1;
 
-        final MLData output = compute(this.network, leastRepresented);
+        final Data output = compute(this.network, leastRepresented);
 
         // Loop over all of the output neurons. Consider any neurons that were
         // not the BMU (winner) for any pattern. Track which of these
@@ -315,7 +319,7 @@ public class BasicTrainSOM extends BasicTraining implements LearningRate {
      * {@inheritDoc}
      */
     @Override
-    public MLMethod getMethod() {
+    public Learning getMethod() {
         return this.network;
     }
 
@@ -356,14 +360,14 @@ public class BasicTrainSOM extends BasicTraining implements LearningRate {
         this.bmuUtil.reset();
         final int[] won = new int[this.outputNeuronCount];
         double leastRepresentedActivation = Double.MAX_VALUE;
-        MLData leastRepresented = null;
+        Data leastRepresented = null;
 
         // Reset the correction matrix for this synapse and iteration.
         this.correctionMatrix.clear();
 
         // Determine the BMU for each training element.
-        for (final MLDataPair pair : getTraining()) {
-            final MLData input = pair.getInput();
+        for (final DataSample pair : getTraining()) {
+            final Data input = pair.getInput();
 
             final int bmu = this.bmuUtil.calculateBMU(input);
             won[bmu]++;
@@ -374,7 +378,7 @@ public class BasicTrainSOM extends BasicTraining implements LearningRate {
 
                 // Get the "output" from the network for this pattern. This
                 // gets the activation level of the BMU.
-                final MLData output = compute(this.network, pair.getInput());
+                final Data output = compute(this.network, pair.getInput());
 
                 // Track which training entry produces the least BMU. This
                 // pattern is the least represented by the network.
@@ -494,7 +498,7 @@ public class BasicTrainSOM extends BasicTraining implements LearningRate {
      * @param matrix The synapse to train.
      * @param input  The input to train for.
      */
-    private void train(final int bmu, final SimpleRealMatrix matrix, final MLData input) {
+    private void train(final int bmu, final SimpleRealMatrix matrix, final Data input) {
         // adjust the weight for the BMU and its neighborhood
         for (int outputNeuron = 0; outputNeuron < this.outputNeuronCount; outputNeuron++) {
             trainPattern(matrix, input, outputNeuron, bmu);
@@ -509,7 +513,7 @@ public class BasicTrainSOM extends BasicTraining implements LearningRate {
      * @param current The current output neuron being trained.
      * @param bmu     The best matching unit, or winning output neuron.
      */
-    private void trainPattern(final SimpleRealMatrix matrix, final MLData input,
+    private void trainPattern(final SimpleRealMatrix matrix, final Data input,
                               final int current, final int bmu) {
 
         for (int inputNeuron = 0; inputNeuron < this.inputNeuronCount; inputNeuron++) {
@@ -530,9 +534,9 @@ public class BasicTrainSOM extends BasicTraining implements LearningRate {
      *
      * @param pattern The pattern to train.
      */
-    public void trainPattern(final MLData pattern) {
+    public void trainPattern(final Data pattern) {
 
-        final MLData input = pattern;
+        final Data input = pattern;
         final int bmu = this.bmuUtil.calculateBMU(input);
         train(bmu, this.network.getWeights(), input);
         applyCorrection();
@@ -545,9 +549,9 @@ public class BasicTrainSOM extends BasicTraining implements LearningRate {
      * @param input The input pattern.
      * @return The output activation of each output neuron.
      */
-    private static MLData compute(final SOM som, final MLData input) {
+    private static Data compute(final SOM som, final Data input) {
 
-        final MLData result = new BasicMLData(som.getOutputCount());
+        final Data result = new BasicMLData(som.getOutputCount());
 
         for (int i = 0; i < som.getOutputCount(); i++) {
             final SimpleRealMatrix optr = som.getWeights().getRow(i);

@@ -23,14 +23,14 @@
  */
 package syncleus.dann.neural.freeform.training;
 
-import org.encog.neural.freeform.FreeformConnection;
-import org.encog.neural.freeform.FreeformNetwork;
-import org.encog.neural.networks.training.propagation.resilient.RPROPConst;
-import syncleus.dann.learn.ml.MLDataSet;
+import syncleus.dann.data.DataSet;
 import syncleus.dann.math.EncogMath;
 
 import java.io.Serializable;
+import syncleus.dann.neural.freeform.FreeformConnection;
+import syncleus.dann.neural.freeform.FreeformNetwork;
 import syncleus.dann.neural.networks.training.propagation.TrainingContinuation;
+import syncleus.dann.neural.networks.training.propagation.resilient.RPROPConst;
 
 public class FreeformResilientPropagation extends FreeformPropagationTraining
         implements Serializable {
@@ -72,7 +72,7 @@ public class FreeformResilientPropagation extends FreeformPropagationTraining
      * @param theTraining The training set.
      */
     public FreeformResilientPropagation(final FreeformNetwork theNetwork,
-                                        final MLDataSet theTraining) {
+                                        final DataSet theTraining) {
         this(theNetwork, theTraining, RPROPConst.DEFAULT_INITIAL_UPDATE,
                 RPROPConst.DEFAULT_MAX_STEP);
     }
@@ -86,7 +86,7 @@ public class FreeformResilientPropagation extends FreeformPropagationTraining
      * @param theMaxStep    The max step.
      */
     public FreeformResilientPropagation(final FreeformNetwork theNetwork,
-                                        final MLDataSet theTraining, final double initialUpdate,
+                                        final DataSet theTraining, final double initialUpdate,
                                         final double theMaxStep) {
         super(theNetwork, theTraining);
         this.maxStep = theMaxStep;
@@ -169,7 +169,7 @@ public class FreeformResilientPropagation extends FreeformPropagationTraining
      * {@inheritDoc}
      */
     @Override
-    public static TrainingContinuation pause() {
+    public TrainingContinuation pause() {
         // TODO Auto-generated method stub
         return null;
     }

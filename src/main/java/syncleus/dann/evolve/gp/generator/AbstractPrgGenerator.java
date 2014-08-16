@@ -35,7 +35,7 @@ import syncleus.dann.evolve.exception.EACompileError;
 import syncleus.dann.evolve.exception.EARuntimeError;
 import syncleus.dann.evolve.population.Population;
 import syncleus.dann.evolve.species.Species;
-import syncleus.dann.learn.ml.CalculateScore;
+import syncleus.dann.learn.CalculateScore;
 import syncleus.dann.math.random.BasicRandomFactory;
 import syncleus.dann.math.random.RandomFactory;
 

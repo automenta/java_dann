@@ -23,7 +23,11 @@
  */
 package syncleus.dann.data.basic;
 
-import syncleus.dann.learn.ml.*;
+import syncleus.dann.data.DataSample;
+import syncleus.dann.data.Data;
+import syncleus.dann.data.DataSet;
+import syncleus.dann.data.DataException;
+import syncleus.dann.data.DataSetSequence;
 import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.util.ObjectCloner;
 
@@ -36,7 +40,7 @@ import java.util.List;
 /**
  * A basic implementation of the MLSequenceSet.
  */
-public class BasicMLSequenceSet implements Serializable, MLSequenceSet, Cloneable {
+public class BasicMLSequenceSet implements Serializable, DataSetSequence, Cloneable {
 
     /**
      * An iterator to be used with the BasicMLDataSet. This iterator does not
@@ -44,7 +48,7 @@ public class BasicMLSequenceSet implements Serializable, MLSequenceSet, Cloneabl
      *
      * @author jheaton
      */
-    public class BasicMLSeqIterator implements Iterator<MLDataPair> {
+    public class BasicMLSeqIterator implements Iterator<DataSample> {
 
         /**
          * The index that the iterator is currently at.
@@ -66,7 +70,7 @@ public class BasicMLSequenceSet implements Serializable, MLSequenceSet, Cloneabl
                 return false;
             }
 
-            final MLDataSet seq = sequences.get(this.currentSequenceIndex);
+            final DataSet seq = sequences.get(this.currentSequenceIndex);
 
             return this.currentIndex < seq.getRecordCount();
         }
@@ -75,14 +79,14 @@ public class BasicMLSequenceSet implements Serializable, MLSequenceSet, Cloneabl
          * {@inheritDoc}
          */
         @Override
-        public MLDataPair next() {
+        public DataSample next() {
             if (!hasNext()) {
                 return null;
             }
 
-            final MLDataSet target = sequences.get(this.currentSequenceIndex);
+            final DataSet target = sequences.get(this.currentSequenceIndex);
 
-            final MLDataPair result = ((BasicMLDataSet) target).getData().get(
+            final DataSample result = ((BasicMLDataSet) target).getData().get(
                     this.currentIndex);
             this.currentIndex++;
             if (this.currentIndex >= target.getRecordCount()) {
@@ -110,9 +114,9 @@ public class BasicMLSequenceSet implements Serializable, MLSequenceSet, Cloneabl
     /**
      * The data held by this object.
      */
-    private List<MLDataSet> sequences = new ArrayList<>();
+    private List<DataSet> sequences = new ArrayList<>();
 
-    private MLDataSet currentSequence;
+    private DataSet currentSequence;
 
     /**
      * Default constructor.
@@ -144,7 +148,7 @@ public class BasicMLSequenceSet implements Serializable, MLSequenceSet, Cloneabl
      *
      * @param theData The data to use.
      */
-    public BasicMLSequenceSet(final List<MLDataPair> theData) {
+    public BasicMLSequenceSet(final List<DataSample> theData) {
         this.currentSequence = new BasicMLDataSet(theData);
         this.sequences.add(this.currentSequence);
     }
@@ -154,14 +158,14 @@ public class BasicMLSequenceSet implements Serializable, MLSequenceSet, Cloneabl
      *
      * @param set The dataset to copy.
      */
-    public BasicMLSequenceSet(final MLDataSet set) {
+    public BasicMLSequenceSet(final DataSet set) {
         this.currentSequence = new BasicMLDataSet();
         this.sequences.add(this.currentSequence);
 
         final int inputCount = set.getInputSize();
         final int idealCount = set.getIdealSize();
 
-        for (final MLDataPair pair : set) {
+        for (final DataSample pair : set) {
 
             BasicMLData input = null;
             BasicMLData ideal = null;
@@ -184,7 +188,7 @@ public class BasicMLSequenceSet implements Serializable, MLSequenceSet, Cloneabl
      * {@inheritDoc}
      */
     @Override
-    public void add(final MLData theData) {
+    public void add(final Data theData) {
         this.currentSequence.add(theData);
     }
 
@@ -192,9 +196,9 @@ public class BasicMLSequenceSet implements Serializable, MLSequenceSet, Cloneabl
      * {@inheritDoc}
      */
     @Override
-    public void add(final MLData inputData, final MLData idealData) {
+    public void add(final Data inputData, final Data idealData) {
 
-        final MLDataPair pair = new BasicMLDataPair(inputData, idealData);
+        final DataSample pair = new BasicMLDataPair(inputData, idealData);
         this.currentSequence.add(pair);
     }
 
@@ -202,7 +206,7 @@ public class BasicMLSequenceSet implements Serializable, MLSequenceSet, Cloneabl
      * {@inheritDoc}
      */
     @Override
-    public void add(final MLDataPair inputData) {
+    public void add(final DataSample inputData) {
         this.currentSequence.add(inputData);
     }
 
@@ -248,7 +252,7 @@ public class BasicMLSequenceSet implements Serializable, MLSequenceSet, Cloneabl
      * {@inheritDoc}
      */
     @Override
-    public void getRecord(final long index, final MLDataPair pair) {
+    public void getRecord(final long index, final DataSample pair) {
         long recordIndex = index;
         int sequenceIndex = 0;
 
@@ -256,7 +260,7 @@ public class BasicMLSequenceSet implements Serializable, MLSequenceSet, Cloneabl
             recordIndex -= this.sequences.get(sequenceIndex).getRecordCount();
             sequenceIndex++;
             if (sequenceIndex > this.sequences.size()) {
-                throw new MLDataError("Record out of range: " + index);
+                throw new DataException("Record out of range: " + index);
             }
         }
 
@@ -269,7 +273,7 @@ public class BasicMLSequenceSet implements Serializable, MLSequenceSet, Cloneabl
     @Override
     public long getRecordCount() {
         long result = 0;
-        result = this.sequences.stream().map(MLDataSet::getRecordCount).reduce(result, (accumulator, _item) -> accumulator + _item);
+        result = this.sequences.stream().map(DataSet::getRecordCount).reduce(result, (accumulator, _item) -> accumulator + _item);
         return result;
     }
 
@@ -288,7 +292,7 @@ public class BasicMLSequenceSet implements Serializable, MLSequenceSet, Cloneabl
      * {@inheritDoc}
      */
     @Override
-    public Iterator<MLDataPair> iterator() {
+    public Iterator<DataSample> iterator() {
         final BasicMLSeqIterator result = new BasicMLSeqIterator();
         return result;
     }
@@ -297,7 +301,7 @@ public class BasicMLSequenceSet implements Serializable, MLSequenceSet, Cloneabl
      * {@inheritDoc}
      */
     @Override
-    public MLDataSet openAdditional() {
+    public DataSet openAdditional() {
         return new BasicMLSequenceSet(this);
     }
 
@@ -315,12 +319,12 @@ public class BasicMLSequenceSet implements Serializable, MLSequenceSet, Cloneabl
     }
 
     @Override
-    public MLDataSet getSequence(final int i) {
+    public DataSet getSequence(final int i) {
         return this.sequences.get(i);
     }
 
     @Override
-    public Collection<MLDataSet> getSequences() {
+    public Collection<DataSet> getSequences() {
         return this.sequences;
     }
 
@@ -330,16 +334,16 @@ public class BasicMLSequenceSet implements Serializable, MLSequenceSet, Cloneabl
     }
 
     @Override
-    public MLDataPair get(final int index) {
-        final MLDataPair result = BasicMLDataPair.createPair(getInputSize(),
+    public DataSample get(final int index) {
+        final DataSample result = BasicMLDataPair.createPair(getInputSize(),
                 getIdealSize());
         this.getRecord(index, result);
         return result;
     }
 
     @Override
-    public void add(final MLDataSet sequence) {
-        for (final MLDataPair pair : sequence) {
+    public void add(final DataSet sequence) {
+        for (final DataSample pair : sequence) {
             add(pair);
         }
 

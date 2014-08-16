@@ -24,7 +24,7 @@
 package syncleus.dann.evolve.codec;
 
 import syncleus.dann.evolve.genome.Genome;
-import syncleus.dann.learn.ml.MLMethod;
+import syncleus.dann.learn.Learning;
 
 /**
  * This is a simple pass-through CODEC. This CODEC is used when the genome and
@@ -36,7 +36,7 @@ public class GenomeAsPhenomeCODEC implements GeneticCODEC {
      * {@inheritDoc}
      */
     @Override
-    public MLMethod decode(final Genome genome) {
+    public Learning decode(final Genome genome) {
         return genome;
     }
 
@@ -44,7 +44,7 @@ public class GenomeAsPhenomeCODEC implements GeneticCODEC {
      * {@inheritDoc}
      */
     @Override
-    public Genome encode(final MLMethod phenotype) {
+    public Genome encode(final Learning phenotype) {
         return (Genome) phenotype;
     }
 

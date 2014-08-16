@@ -24,7 +24,7 @@
 package syncleus.dann.neural.thermal;
 
 import syncleus.dann.data.specific.BiPolarNeuralData;
-import syncleus.dann.learn.ml.MLData;
+import syncleus.dann.data.Data;
 import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.math.matrix.BiPolarUtil;
 import syncleus.dann.math.matrix.MatrixMath;
@@ -63,7 +63,7 @@ public class HopfieldNetwork extends ThermalNetwork {
      *
      * @param pattern The pattern to train for.
      */
-    public void addPattern(final MLData pattern) {
+    public void addPattern(final Data pattern) {
 
         if (pattern.size() != getNeuronCount()) {
             throw new RuntimeException("Network with " + getNeuronCount()
@@ -100,7 +100,7 @@ public class HopfieldNetwork extends ThermalNetwork {
      * @return The new current state.
      */
     @Override
-    public MLData compute(final MLData input) {
+    public Data compute(final Data input) {
         final BiPolarNeuralData result = new BiPolarNeuralData(input.size());
         EngineArray.arrayCopy(input.getData(), getCurrentState().getData());
         run();

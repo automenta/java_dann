@@ -23,6 +23,11 @@
  */
 package syncleus.dann.evolve;
 
+import syncleus.dann.learn.MethodFactory;
+import syncleus.dann.data.VectorEncodable;
+import syncleus.dann.learn.TrainingImplementationType;
+import syncleus.dann.learn.CalculateScore;
+import syncleus.dann.learn.Learning;
 import org.encog.neural.networks.training.propagation.TrainingContinuation;
 import syncleus.dann.evolve.crossover.Splice;
 import syncleus.dann.evolve.genome.Genome;
@@ -34,8 +39,7 @@ import syncleus.dann.evolve.sort.MaximizeScoreComp;
 import syncleus.dann.evolve.sort.MinimizeScoreComp;
 import syncleus.dann.evolve.species.Species;
 import syncleus.dann.evolve.train.basic.TrainEA;
-import syncleus.dann.learn.ml.*;
-import syncleus.dann.learn.train.BasicTraining;
+import syncleus.dann.learn.BasicTraining;
 
 /**
  * Implements a genetic algorithm that allows an MLMethod that is encodable
@@ -102,7 +106,7 @@ public class MLMethodGeneticAlgorithm extends BasicTraining /*implements MultiTh
         final Species defaultSpecies = population.createSpecies();
 
         for (int i = 0; i < population.getPopulationSize(); i++) {
-            final MLEncodable chromosomeNetwork = (MLEncodable) phenotypeFactory
+            final VectorEncodable chromosomeNetwork = (VectorEncodable) phenotypeFactory
                     .factor();
             final MLMethodGenome genome = new MLMethodGenome(chromosomeNetwork);
             defaultSpecies.add(genome);
@@ -154,7 +158,7 @@ public class MLMethodGeneticAlgorithm extends BasicTraining /*implements MultiTh
      * {@inheritDoc}
      */
     @Override
-    public MLMethod getMethod() {
+    public Learning getMethod() {
         final Genome best = this.genetic.getBestGenome();
         return this.genetic.getCODEC().decode(best);
     }

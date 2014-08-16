@@ -26,9 +26,9 @@ package syncleus.dann.math.array;
 import syncleus.dann.data.basic.BasicMLData;
 import syncleus.dann.data.basic.BasicMLDataPair;
 import syncleus.dann.data.basic.BasicMLDataSet;
-import syncleus.dann.learn.ml.MLData;
-import syncleus.dann.learn.ml.MLDataPair;
-import syncleus.dann.learn.ml.MLDataSet;
+import syncleus.dann.data.Data;
+import syncleus.dann.data.DataSample;
+import syncleus.dann.data.DataSet;
 
 
 /**
@@ -149,15 +149,15 @@ public class TemporalWindowArray {
      * @param data The array to process.
      * @return A neural data set that contains the time-series.
      */
-    public final MLDataSet process(final double[] data) {
-        final MLDataSet result = new BasicMLDataSet();
+    public final DataSet process(final double[] data) {
+        final DataSet result = new BasicMLDataSet();
 
         final int totalWindowSize = this.inputWindow + this.predictWindow;
         final int stopPoint = data.length - totalWindowSize;
 
         for (int i = 0; i < stopPoint; i++) {
-            final MLData inputData = new BasicMLData(this.inputWindow);
-            final MLData idealData = new BasicMLData(this.predictWindow);
+            final Data inputData = new BasicMLData(this.inputWindow);
+            final Data idealData = new BasicMLData(this.predictWindow);
 
             int index = i;
 
@@ -171,7 +171,7 @@ public class TemporalWindowArray {
                 idealData.setData(j, data[index++]);
             }
 
-            final MLDataPair pair = new BasicMLDataPair(inputData, idealData);
+            final DataSample pair = new BasicMLDataPair(inputData, idealData);
             result.add(pair);
         }
 
@@ -199,8 +199,8 @@ public class TemporalWindowArray {
      * @param data The data.
      * @return The data set.
      */
-    public MLDataSet process(final double[][] data) {
-        final MLDataSet result = new BasicMLDataSet();
+    public DataSet process(final double[][] data) {
+        final DataSet result = new BasicMLDataSet();
         for (final double[] doubles : data) {
             result.add(processToPair(doubles));
         }
@@ -213,15 +213,15 @@ public class TemporalWindowArray {
      * @param data The array to process.
      * @return MLDatapair containing data.
      */
-    public MLDataPair processToPair(final double[] data) {
+    public DataSample processToPair(final double[] data) {
 
-        MLDataPair pair = null;
+        DataSample pair = null;
         final int totalWindowSize = inputWindow + predictWindow;
         final int stopPoint = data.length - totalWindowSize;
 
         for (int i = 0; i < stopPoint; i++) {
-            final MLData inputData = new BasicMLData(inputWindow);
-            final MLData idealData = new BasicMLData(predictWindow);
+            final Data inputData = new BasicMLData(inputWindow);
+            final Data idealData = new BasicMLData(predictWindow);
 
             int index = i;
 

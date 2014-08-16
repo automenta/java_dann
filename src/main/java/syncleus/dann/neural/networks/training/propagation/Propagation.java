@@ -26,10 +26,10 @@ package org.encog.neural.networks.training.propagation;
 import org.encog.neural.flat.FlatNetwork;
 import org.encog.neural.networks.training.BatchSize;
 import org.encog.neural.networks.training.Train;
-import syncleus.dann.learn.ml.MLDataSet;
-import syncleus.dann.learn.ml.MLMethod;
-import syncleus.dann.learn.ml.TrainingImplementationType;
-import syncleus.dann.learn.train.BasicTraining;
+import syncleus.dann.data.DataSet;
+import syncleus.dann.learn.Learning;
+import syncleus.dann.learn.TrainingImplementationType;
+import syncleus.dann.learn.BasicTraining;
 import syncleus.dann.math.IntRange;
 import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.math.error.ErrorFunction;
@@ -76,7 +76,7 @@ public abstract class Propagation extends BasicTraining implements Train,
     /**
      * The network in indexable form.
      */
-    private final MLDataSet indexable;
+    private final DataSet indexable;
 
     /**
      * The workers.
@@ -121,7 +121,7 @@ public abstract class Propagation extends BasicTraining implements Train,
      * @param network  The network.
      * @param training The training set.
      */
-    public Propagation(final ContainsFlat network, final MLDataSet training) {
+    public Propagation(final ContainsFlat network, final DataSet training) {
         super(TrainingImplementationType.Iterative);
         this.network = network;
         this.currentFlatNetwork = network.getFlat();
@@ -156,7 +156,7 @@ public abstract class Propagation extends BasicTraining implements Train,
      * {@inheritDoc}
      */
     @Override
-    public MLMethod getMethod() {
+    public Learning getMethod() {
         return this.network;
     }
 

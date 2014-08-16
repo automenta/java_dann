@@ -25,7 +25,7 @@ package org.encog.ml.prg;
 
 import syncleus.dann.evolve.codec.GeneticCODEC;
 import syncleus.dann.evolve.genome.Genome;
-import syncleus.dann.learn.ml.MLMethod;
+import syncleus.dann.learn.Learning;
 
 /**
  * Encode and decode an Encog program between genome and phenotypes. This is a
@@ -37,7 +37,7 @@ public class PrgCODEC implements GeneticCODEC {
      * {@inheritDoc}
      */
     @Override
-    public MLMethod decode(final Genome genome) {
+    public Learning decode(final Genome genome) {
         return genome;
     }
 
@@ -45,7 +45,7 @@ public class PrgCODEC implements GeneticCODEC {
      * {@inheritDoc}
      */
     @Override
-    public Genome encode(final MLMethod phenotype) {
+    public Genome encode(final Learning phenotype) {
         return (Genome) phenotype;
     }
 

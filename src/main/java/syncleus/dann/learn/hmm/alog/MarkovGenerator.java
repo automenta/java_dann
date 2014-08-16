@@ -26,9 +26,9 @@ package syncleus.dann.learn.hmm.alog;
 import syncleus.dann.data.basic.BasicMLDataSet;
 import syncleus.dann.data.basic.BasicMLSequenceSet;
 import syncleus.dann.learn.hmm.HiddenMarkovModel;
-import syncleus.dann.learn.ml.MLDataPair;
-import syncleus.dann.learn.ml.MLDataSet;
-import syncleus.dann.learn.ml.MLSequenceSet;
+import syncleus.dann.data.DataSample;
+import syncleus.dann.data.DataSet;
+import syncleus.dann.data.DataSetSequence;
 
 /**
  * This class is used to generate random sequences based on a Hidden Markov
@@ -44,9 +44,9 @@ public class MarkovGenerator {
         newSequence();
     }
 
-    public MLSequenceSet generateSequences(final int observationCount,
+    public DataSetSequence generateSequences(final int observationCount,
                                            final int observationLength) {
-        final MLSequenceSet result = new BasicMLSequenceSet();
+        final DataSetSequence result = new BasicMLSequenceSet();
 
         for (int i = 0; i < observationCount; i++) {
             result.startNewSequence();
@@ -76,8 +76,8 @@ public class MarkovGenerator {
         this.currentState = this.hmm.getStateCount() - 1;
     }
 
-    public MLDataPair observation() {
-        final MLDataPair o = this.hmm.getStateDistribution(this.currentState)
+    public DataSample observation() {
+        final DataSample o = this.hmm.getStateDistribution(this.currentState)
                 .generate();
         double rand = Math.random();
 
@@ -93,8 +93,8 @@ public class MarkovGenerator {
         return o;
     }
 
-    public MLDataSet observationSequence(int length) {
-        final MLDataSet sequence = new BasicMLDataSet();
+    public DataSet observationSequence(int length) {
+        final DataSet sequence = new BasicMLDataSet();
         while (length-- > 0) {
             sequence.add(observation());
         }

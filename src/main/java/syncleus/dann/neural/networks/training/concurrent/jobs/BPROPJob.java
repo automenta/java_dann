@@ -23,7 +23,7 @@
  */
 package org.encog.neural.networks.training.concurrent.jobs;
 
-import syncleus.dann.learn.ml.MLDataSet;
+import syncleus.dann.data.DataSet;
 import syncleus.dann.neural.networks.BasicNetwork;
 
 /**
@@ -52,7 +52,7 @@ public class BPROPJob extends TrainingJob {
      * @param learningRate THe learning rate to use.
      * @param momentum     The momentum to use.
      */
-    public BPROPJob(final BasicNetwork network, final MLDataSet training,
+    public BPROPJob(final BasicNetwork network, final DataSet training,
                     final boolean loadToMemory, final double learningRate,
                     final double momentum) {
         super(network, training, loadToMemory);

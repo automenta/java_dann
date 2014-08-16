@@ -28,10 +28,10 @@ import syncleus.dann.evolve.gp.opp.SubtreeCrossover;
 import syncleus.dann.evolve.gp.opp.SubtreeMutation;
 import syncleus.dann.evolve.score.adjust.ComplexityAdjustedScore;
 import syncleus.dann.evolve.train.basic.TrainEA;
-import syncleus.dann.learn.ml.CalculateScore;
-import syncleus.dann.learn.ml.MLDataSet;
-import syncleus.dann.learn.ml.MLMethod;
-import syncleus.dann.learn.train.MLTrain;
+import syncleus.dann.learn.CalculateScore;
+import syncleus.dann.data.DataSet;
+import syncleus.dann.learn.Learning;
+import syncleus.dann.learn.Training;
 
 public class EPLGAFactory {
     /**
@@ -42,7 +42,7 @@ public class EPLGAFactory {
      * @param argsStr  The arguments to use.
      * @return The newly created trainer.
      */
-    public static MLTrain create(final MLMethod method, final MLDataSet training,
+    public static Training create(final Learning method, final DataSet training,
                                  final String argsStr) {
 
         final PrgPopulation pop = (PrgPopulation) method;

@@ -24,14 +24,14 @@
 package syncleus.dann.learn.svm.training;
 
 import org.encog.neural.networks.training.propagation.TrainingContinuation;
-import syncleus.dann.learn.ml.MLDataSet;
-import syncleus.dann.learn.ml.MLMethod;
-import syncleus.dann.learn.ml.TrainingImplementationType;
+import syncleus.dann.data.DataSet;
+import syncleus.dann.learn.Learning;
+import syncleus.dann.learn.TrainingImplementationType;
 import syncleus.dann.learn.svm.SVM;
 import syncleus.dann.learn.svm.svm;
 import syncleus.dann.learn.svm.svm_parameter;
 import syncleus.dann.learn.svm.svm_problem;
-import syncleus.dann.learn.train.BasicTraining;
+import syncleus.dann.learn.BasicTraining;
 import syncleus.dann.math.EncogMath;
 import syncleus.dann.math.Format;
 import syncleus.dann.math.statistics.ErrorCalculation;
@@ -77,7 +77,7 @@ public class SVMTrain extends BasicTraining {
      * @param method  The network to train.
      * @param dataSet The training data for this network.
      */
-    public SVMTrain(final SVM method, final MLDataSet dataSet) {
+    public SVMTrain(final SVM method, final DataSet dataSet) {
         super(TrainingImplementationType.OnePass);
         this.network = method;
         setTraining(dataSet);
@@ -154,7 +154,7 @@ public class SVMTrain extends BasicTraining {
      * {@inheritDoc}
      */
     @Override
-    public MLMethod getMethod() {
+    public Learning getMethod() {
         return this.network;
     }
 

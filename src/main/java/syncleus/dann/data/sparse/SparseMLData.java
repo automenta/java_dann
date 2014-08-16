@@ -23,14 +23,14 @@
  */
 package syncleus.dann.data.sparse;
 
-import syncleus.dann.learn.ml.MLData;
-import syncleus.dann.learn.ml.MLDataError;
+import syncleus.dann.data.Data;
+import syncleus.dann.data.DataException;
 import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.math.cluster.Centroid;
 
 import java.io.Serializable;
 
-public class SparseMLData implements MLData, Serializable, Cloneable {
+public class SparseMLData implements Data, Serializable, Cloneable {
 
     private final int[] index;
 
@@ -80,7 +80,7 @@ public class SparseMLData implements MLData, Serializable, Cloneable {
      *
      * @param d The object to be copied.
      */
-    public SparseMLData(final MLData d) {
+    public SparseMLData(final Data d) {
         this(d.size());
 
         if (d instanceof SparseMLData) {
@@ -108,7 +108,7 @@ public class SparseMLData implements MLData, Serializable, Cloneable {
     public void add(final int index, final double value) {
         final int i = findIndex(index);
         if (i == -1) {
-            throw new MLDataError("Can't find sparse index: " + index);
+            throw new DataException("Can't find sparse index: " + index);
         }
         this.data[index] += value;
     }
@@ -127,7 +127,7 @@ public class SparseMLData implements MLData, Serializable, Cloneable {
      * {@inheritDoc}
      */
     @Override
-    public MLData clone() {
+    public Data clone() {
         return new SparseMLData(this);
     }
 
@@ -136,7 +136,7 @@ public class SparseMLData implements MLData, Serializable, Cloneable {
      */
     @Override
     public double[] getData() {
-        throw new MLDataError(
+        throw new DataException(
                 "Can't directly access the data array of a SparseMLData object");
     }
 
@@ -147,7 +147,7 @@ public class SparseMLData implements MLData, Serializable, Cloneable {
     public double getData(final int index) {
         final int i = findIndex(index);
         if (i == -1) {
-            throw new MLDataError("Can't find sparse index: " + index);
+            throw new DataException("Can't find sparse index: " + index);
         }
         return this.data[i];
     }
@@ -157,7 +157,7 @@ public class SparseMLData implements MLData, Serializable, Cloneable {
      */
     @Override
     public void setData(final double[] theData) {
-        throw new MLDataError(
+        throw new DataException(
                 "Can't directly access the data array of a SparseMLData object");
     }
 
@@ -168,7 +168,7 @@ public class SparseMLData implements MLData, Serializable, Cloneable {
     public void setData(final int index, final double d) {
         final int i = findIndex(index);
         if (i == -1) {
-            throw new MLDataError("Can't find sparse index: " + index);
+            throw new DataException("Can't find sparse index: " + index);
         }
         this.data[i] = d;
     }
@@ -210,7 +210,7 @@ public class SparseMLData implements MLData, Serializable, Cloneable {
     }
 
     @Override
-    public Centroid<MLData> createCentroid() {
+    public Centroid<Data> createCentroid() {
         return null;
     }
 

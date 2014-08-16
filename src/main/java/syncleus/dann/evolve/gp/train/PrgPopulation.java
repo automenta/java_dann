@@ -26,8 +26,8 @@ package org.encog.ml.prg.train;
 import syncleus.dann.evolve.genome.Genome;
 import syncleus.dann.evolve.population.BasicPopulation;
 import syncleus.dann.evolve.species.Species;
-import syncleus.dann.learn.ml.MLData;
-import syncleus.dann.learn.ml.MLRegression;
+import syncleus.dann.data.Data;
+import syncleus.dann.RegressionLearning;
 
 /**
  * A population that contains EncogProgram's. The primary difference between
@@ -36,7 +36,7 @@ import syncleus.dann.learn.ml.MLRegression;
  * method. This population type also holds the common context that all of the
  * EncogProgram genomes make use of.
  */
-public class PrgPopulation extends BasicPopulation implements MLRegression {
+public class PrgPopulation extends BasicPopulation implements RegressionLearning {
     /**
      * The serial id.
      */
@@ -66,7 +66,7 @@ public class PrgPopulation extends BasicPopulation implements MLRegression {
      * @param input The input to the
      */
     @Override
-    public MLData compute(final MLData input) {
+    public Data compute(final Data input) {
         final EncogProgram best = (EncogProgram) getBestGenome();
         return best.compute(input);
     }

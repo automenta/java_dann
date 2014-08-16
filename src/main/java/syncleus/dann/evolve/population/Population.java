@@ -26,7 +26,7 @@ package syncleus.dann.evolve.population;
 import syncleus.dann.evolve.genome.Genome;
 import syncleus.dann.evolve.genome.GenomeFactory;
 import syncleus.dann.evolve.species.Species;
-import syncleus.dann.learn.ml.MLMethod;
+import syncleus.dann.learn.Learning;
 
 import java.io.Serializable;
 import java.util.List;
@@ -34,7 +34,7 @@ import java.util.List;
 /**
  * Defines a population of genomes.
  */
-public interface Population extends Serializable, MLMethod {
+public interface Population extends Serializable, Learning {
 
     /**
      * Clear all genomes from this population.

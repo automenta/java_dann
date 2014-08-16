@@ -24,7 +24,7 @@
 package syncleus.dann.util.factory.method;
 
 import syncleus.dann.learn.bayesian.EncogBayesianNetwork;
-import syncleus.dann.learn.ml.MLMethod;
+import syncleus.dann.learn.Learning;
 
 /**
  * Factory to create bayesian networks.
@@ -39,7 +39,7 @@ public class BayesianFactory {
      * @param output       The output neuron count.
      * @return The new bayesian network.
      */
-    public static MLMethod create(final String architecture, final int input,
+    public static Learning create(final String architecture, final int input,
                                   final int output) {
         final EncogBayesianNetwork method = new EncogBayesianNetwork();
         method.setContents(architecture);

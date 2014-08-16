@@ -23,8 +23,14 @@
  */
 package org.encog.neural.rbf;
 
+import syncleus.dann.RegressionLearning;
+import syncleus.dann.learn.AbstractLearning;
+import syncleus.dann.learn.ErrorLearning;
+import syncleus.dann.data.Data;
+import syncleus.dann.data.DataSet;
+import syncleus.dann.learn.MLResettable;
+import syncleus.dann.data.VectorEncodable;
 import syncleus.dann.data.basic.BasicMLData;
-import syncleus.dann.learn.ml.*;
 import syncleus.dann.math.EncogUtility;
 import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.math.random.ConsistentRandomizer;
@@ -35,8 +41,8 @@ import syncleus.dann.neural.networks.ContainsFlat;
 /**
  * RBF neural network.
  */
-public class RBFNetwork extends BasicML implements MLError, MLRegression,
-        ContainsFlat, MLResettable, MLEncodable {
+public class RBFNetwork extends AbstractLearning implements ErrorLearning, RegressionLearning,
+        ContainsFlat, MLResettable, VectorEncodable {
 
     /**
      * Serial id.
@@ -110,7 +116,7 @@ public class RBFNetwork extends BasicML implements MLError, MLRegression,
      * @return The error percentage.
      */
     @Override
-    public double calculateError(final MLDataSet data) {
+    public double calculateError(final DataSet data) {
         return EncogUtility.calculateRegressionError(this, data);
     }
 
@@ -118,8 +124,8 @@ public class RBFNetwork extends BasicML implements MLError, MLRegression,
      * {@inheritDoc}
      */
     @Override
-    public MLData compute(final MLData input) {
-        final MLData output = new BasicMLData(getOutputCount());
+    public Data compute(final Data input) {
+        final Data output = new BasicMLData(getOutputCount());
         this.flat.compute(input.getData(), output.getData());
         return output;
     }

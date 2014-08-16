@@ -27,9 +27,9 @@ import syncleus.dann.data.basic.BasicMLData;
 import syncleus.dann.data.basic.BasicMLDataPair;
 import syncleus.dann.data.basic.BasicMLDataSet;
 import syncleus.dann.data.buffer.codec.DataSetCODEC;
-import syncleus.dann.learn.ml.MLData;
-import syncleus.dann.learn.ml.MLDataPair;
-import syncleus.dann.learn.ml.MLDataSet;
+import syncleus.dann.data.Data;
+import syncleus.dann.data.DataSample;
+import syncleus.dann.data.DataSet;
 
 /**
  * This class is used, together with a CODEC, load training data from some
@@ -67,7 +67,7 @@ public class MemoryDataLoader {
      *
      * @return The binary file to create.
      */
-    public final MLDataSet external2Memory() {
+    public final DataSet external2Memory() {
         this.status.report(0, 0, "Importing to memory");
 
         if (this.result == null) {
@@ -84,7 +84,8 @@ public class MemoryDataLoader {
         int lastUpdate = 0;
 
         while (this.codec.read(input, ideal, significance)) {
-            MLData a = null, b = null;
+            Data a = null;
+            MLData b = null;
 
             a = new BasicMLData(input);
 
@@ -92,7 +93,7 @@ public class MemoryDataLoader {
                 b = new BasicMLData(ideal);
             }
 
-            final MLDataPair pair = new BasicMLDataPair(a, b);
+            final DataSample pair = new BasicMLDataPair(a, b);
             pair.setSignificance(significance[0]);
             this.result.add(pair);
 

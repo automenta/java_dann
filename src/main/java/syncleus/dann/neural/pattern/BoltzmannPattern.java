@@ -23,7 +23,7 @@
  */
 package org.encog.neural.pattern;
 
-import syncleus.dann.learn.ml.MLMethod;
+import syncleus.dann.learn.Learning;
 import syncleus.dann.neural.activation.EncogActivationFunction;
 import syncleus.dann.neural.thermal.BoltzmannMachine;
 
@@ -78,7 +78,7 @@ public class BoltzmannPattern implements NeuralNetworkPattern {
      * @return The generated network.
      */
     @Override
-    public MLMethod generate() {
+    public Learning generate() {
         final BoltzmannMachine boltz = new BoltzmannMachine(this.neuronCount);
         boltz.setTemperature(this.temperature);
         boltz.setRunCycles(this.runCycles);

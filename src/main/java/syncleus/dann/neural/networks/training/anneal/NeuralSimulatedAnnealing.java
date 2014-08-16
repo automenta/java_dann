@@ -23,11 +23,11 @@
  */
 package org.encog.neural.networks.training.anneal;
 
-import syncleus.dann.learn.ml.CalculateScore;
-import syncleus.dann.learn.ml.MLEncodable;
-import syncleus.dann.learn.ml.MLRegression;
-import syncleus.dann.learn.ml.TrainingImplementationType;
-import syncleus.dann.learn.train.BasicTraining;
+import syncleus.dann.learn.CalculateScore;
+import syncleus.dann.data.VectorEncodable;
+import syncleus.dann.RegressionLearning;
+import syncleus.dann.learn.TrainingImplementationType;
+import syncleus.dann.learn.BasicTraining;
 import syncleus.dann.neural.networks.structure.NetworkCODEC;
 
 /**
@@ -57,7 +57,7 @@ public class NeuralSimulatedAnnealing extends BasicTraining {
     /**
      * The neural network that is to be trained.
      */
-    private final MLEncodable network;
+    private final VectorEncodable network;
 
     /**
      * This class actually performs the training.
@@ -78,12 +78,12 @@ public class NeuralSimulatedAnnealing extends BasicTraining {
      * @param stopTemp       The ending temperature.
      * @param cycles         The number of cycles in a training iteration.
      */
-    public NeuralSimulatedAnnealing(final MLEncodable network,
+    public NeuralSimulatedAnnealing(final VectorEncodable network,
                                     final CalculateScore calculateScore, final double startTemp,
                                     final double stopTemp, final int cycles) {
         super(TrainingImplementationType.Iterative);
 
-        if (!(network instanceof MLRegression)) {
+        if (!(network instanceof RegressionLearning)) {
             throw new RuntimeException(
                     "Simulated annealing requires the MLMethod to support MLRegression.");
         }
@@ -133,7 +133,7 @@ public class NeuralSimulatedAnnealing extends BasicTraining {
      * {@inheritDoc}
      */
     @Override
-    public MLEncodable getMethod() {
+    public VectorEncodable getMethod() {
         return this.network;
     }
 

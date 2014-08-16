@@ -24,8 +24,8 @@
 package syncleus.dann.learn.hmm.alog;
 
 import syncleus.dann.learn.hmm.HiddenMarkovModel;
-import syncleus.dann.learn.ml.MLDataPair;
-import syncleus.dann.learn.ml.MLDataSet;
+import syncleus.dann.data.DataSample;
+import syncleus.dann.data.DataSet;
 
 import java.util.Iterator;
 
@@ -46,7 +46,7 @@ public class ViterbiCalculator {
     private final int[] stateSequence;
     private double lnProbability;
 
-    public ViterbiCalculator(final MLDataSet oseq, final HiddenMarkovModel hmm) {
+    public ViterbiCalculator(final DataSet oseq, final HiddenMarkovModel hmm) {
         if (oseq.size() < 1) {
             throw new IllegalArgumentException("Must not have empty sequence");
         }
@@ -62,14 +62,14 @@ public class ViterbiCalculator {
             this.psy[0][i] = 0;
         }
 
-        final Iterator<MLDataPair> oseqIterator = oseq.iterator();
+        final Iterator<DataSample> oseqIterator = oseq.iterator();
         if (oseqIterator.hasNext()) {
             oseqIterator.next();
         }
 
         int t = 1;
         while (oseqIterator.hasNext()) {
-            final MLDataPair observation = oseqIterator.next();
+            final DataSample observation = oseqIterator.next();
 
             for (int i = 0; i < hmm.getStateCount(); i++) {
                 computeStep(hmm, observation, t, i);
@@ -94,7 +94,7 @@ public class ViterbiCalculator {
         }
     }
 
-    private void computeStep(final HiddenMarkovModel hmm, final MLDataPair o,
+    private void computeStep(final HiddenMarkovModel hmm, final DataSample o,
                              final int t, final int j) {
         double minDelta = Double.MAX_VALUE;
         int min_psy = 0;

@@ -24,7 +24,7 @@
 package syncleus.dann.learn.hmm.alog;
 
 import syncleus.dann.learn.hmm.HiddenMarkovModel;
-import syncleus.dann.learn.ml.MLDataSet;
+import syncleus.dann.data.DataSet;
 
 /**
  * This class produces a Kullback-Leibler estimation of the distance between two
@@ -44,7 +44,7 @@ public class KullbackLeiblerDistanceCalculator {
 
         for (int i = 0; i < this.sequenceCount; i++) {
 
-            final MLDataSet oseq = new MarkovGenerator(hmm1)
+            final DataSet oseq = new MarkovGenerator(hmm1)
                     .observationSequence(this.len);
 
             distance += (new ForwardBackwardScaledCalculator(oseq, hmm1)

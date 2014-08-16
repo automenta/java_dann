@@ -26,7 +26,7 @@ package org.encog.neural.networks.training.propagation.resilient;
 import org.encog.neural.networks.training.TrainingError;
 import org.encog.neural.networks.training.propagation.Propagation;
 import org.encog.neural.networks.training.propagation.TrainingContinuation;
-import syncleus.dann.learn.ml.MLDataSet;
+import syncleus.dann.data.DataSet;
 import syncleus.dann.math.EncogMath;
 import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.neural.networks.ContainsFlat;
@@ -115,7 +115,7 @@ public class ResilientPropagation extends Propagation {
      * @param training The training data to use.
      */
     public ResilientPropagation(final ContainsFlat network,
-                                final MLDataSet training) {
+                                final DataSet training) {
         this(network, training, RPROPConst.DEFAULT_INITIAL_UPDATE,
                 RPROPConst.DEFAULT_MAX_STEP);
     }
@@ -133,7 +133,7 @@ public class ResilientPropagation extends Propagation {
      * @param maxStep       The maximum that a delta can reach.
      */
     public ResilientPropagation(final ContainsFlat network,
-                                final MLDataSet training, final double initialUpdate,
+                                final DataSet training, final double initialUpdate,
                                 final double maxStep) {
 
         super(network, training);

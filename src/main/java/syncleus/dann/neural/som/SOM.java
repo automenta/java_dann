@@ -23,7 +23,13 @@
  */
 package syncleus.dann.neural.som;
 
-import syncleus.dann.learn.ml.*;
+import syncleus.dann.learn.AbstractLearning;
+import syncleus.dann.learn.ErrorLearning;
+import syncleus.dann.data.DataSample;
+import syncleus.dann.data.Data;
+import syncleus.dann.data.DataSet;
+import syncleus.dann.learn.MLResettable;
+import syncleus.dann.Classifying;
 import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.math.matrix.SimpleRealMatrix;
 import syncleus.dann.neural.som.training.basic.BestMatchingUnit;
@@ -31,8 +37,8 @@ import syncleus.dann.neural.som.training.basic.BestMatchingUnit;
 /**
  * A self organizing map neural network.
  */
-public class SOM extends BasicML implements MLClassification, MLResettable,
-        MLError {
+public class SOM extends AbstractLearning implements Classifying, MLResettable,
+        ErrorLearning {
 
     /**
      * Serial id.
@@ -71,15 +77,15 @@ public class SOM extends BasicML implements MLClassification, MLResettable,
      * {@inheritDoc}
      */
     @Override
-    public double calculateError(final MLDataSet data) {
+    public double calculateError(final DataSet data) {
 
         final BestMatchingUnit bmu = new BestMatchingUnit(this);
 
         bmu.reset();
 
         // Determine the BMU for each training element.
-        for (final MLDataPair pair : data) {
-            final MLData input = pair.getInput();
+        for (final DataSample pair : data) {
+            final Data input = pair.getInput();
             bmu.calculateBMU(input);
         }
 
@@ -91,7 +97,7 @@ public class SOM extends BasicML implements MLClassification, MLResettable,
      * {@inheritDoc}
      */
     @Override
-    public int classify(final MLData input) {
+    public int classify(final Data input) {
         if (input.size() > getInputCount()) {
             throw new RuntimeException(
                     "Can't classify SOM with input size of " + getInputCount()
@@ -176,7 +182,7 @@ public class SOM extends BasicML implements MLClassification, MLResettable,
      * @param input The input pattern.
      * @return The winning neuron.
      */
-    public int winner(final MLData input) {
+    public int winner(final Data input) {
         return classify(input);
     }
 

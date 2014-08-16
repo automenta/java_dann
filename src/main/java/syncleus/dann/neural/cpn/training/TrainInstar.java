@@ -23,11 +23,11 @@
  */
 package org.encog.neural.cpn.training;
 
-import syncleus.dann.learn.ml.MLData;
-import syncleus.dann.learn.ml.MLDataPair;
-import syncleus.dann.learn.ml.MLDataSet;
-import syncleus.dann.learn.ml.TrainingImplementationType;
-import syncleus.dann.learn.train.BasicTraining;
+import syncleus.dann.data.Data;
+import syncleus.dann.data.DataSample;
+import syncleus.dann.data.DataSet;
+import syncleus.dann.learn.TrainingImplementationType;
+import syncleus.dann.learn.BasicTraining;
 import syncleus.dann.math.BoundMath;
 import syncleus.dann.math.array.EngineArray;
 
@@ -47,7 +47,7 @@ public class TrainInstar extends BasicTraining implements LearningRate {
      * The training data. This is unsupervised training, so only the input
      * portion of the training data will be used.
      */
-    private final MLDataSet training;
+    private final DataSet training;
 
     /**
      * The learning rate.
@@ -70,7 +70,7 @@ public class TrainInstar extends BasicTraining implements LearningRate {
      *                        data. If set to true, then you must have the same number of
      *                        training elements as instar neurons.
      */
-    public TrainInstar(final CPN theNetwork, final MLDataSet theTraining,
+    public TrainInstar(final CPN theNetwork, final DataSet theTraining,
                        final double theLearningRate, final boolean theInitWeights) {
         super(TrainingImplementationType.Iterative);
         this.network = theNetwork;
@@ -116,7 +116,7 @@ public class TrainInstar extends BasicTraining implements LearningRate {
         }
 
         int i = 0;
-        for (final MLDataPair pair : this.training) {
+        for (final DataSample pair : this.training) {
             for (int j = 0; j < this.network.getInputCount(); j++) {
                 this.network.getWeightsInputToInstar().set(j, i,
                         pair.getInput().getData(j));
@@ -138,8 +138,8 @@ public class TrainInstar extends BasicTraining implements LearningRate {
 
         double worstDistance = Double.NEGATIVE_INFINITY;
 
-        for (final MLDataPair pair : this.training) {
-            final MLData out = this.network.computeInstar(pair.getInput());
+        for (final DataSample pair : this.training) {
+            final Data out = this.network.computeInstar(pair.getInput());
 
             // determine winner
             final int winner = EngineArray.indexOfLargest(out.getData());

@@ -26,7 +26,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class AbstractFunction implements Cloneable, Function {
+public abstract class AbstractFunction implements Cloneable, ParameterizedFunction {
     private double[] parameters;
     private final String[] parameterNames;
     private final Map<String, Integer> indexNames;

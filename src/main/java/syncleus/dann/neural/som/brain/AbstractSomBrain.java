@@ -155,10 +155,10 @@ public abstract class AbstractSomBrain<IN extends SomInputNeuron, ON extends Som
 
     private void updateBounds(final Vector position) {
         // make sure we have the proper dimentionality
-        if (position.getDimensions() != this.upperBounds.getDimensions())
+        if (position.getDimension() != this.upperBounds.getDimension())
             throw new IllegalArgumentException("Dimentionality mismatch");
 
-        for (int dimensionIndex = 1; dimensionIndex <= position.getDimensions(); dimensionIndex++) {
+        for (int dimensionIndex = 1; dimensionIndex <= position.getDimension(); dimensionIndex++) {
             if (this.upperBounds.get(dimensionIndex) < position
                     .get(dimensionIndex))
                 this.upperBounds = this.upperBounds.clone(
@@ -180,7 +180,7 @@ public abstract class AbstractSomBrain<IN extends SomInputNeuron, ON extends Som
     @Override
     public void createOutput(final Vector position) {
         // make sure we have the proper dimentionality
-        if (position.getDimensions() != this.upperBounds.getDimensions())
+        if (position.getDimension() != this.upperBounds.getDimension())
             throw new IllegalArgumentException("Dimentionality mismatch");
 
         // increase the upper bounds if needed

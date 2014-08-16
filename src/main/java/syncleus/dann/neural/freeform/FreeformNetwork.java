@@ -23,17 +23,24 @@
  */
 package syncleus.dann.neural.freeform;
 
+import syncleus.dann.learn.MLContext;
+import syncleus.dann.RegressionLearning;
+import syncleus.dann.learn.AbstractLearning;
+import syncleus.dann.learn.ErrorLearning;
+import syncleus.dann.data.Data;
+import syncleus.dann.data.DataSet;
+import syncleus.dann.Classifying;
+import syncleus.dann.learn.MLResettable;
+import syncleus.dann.data.VectorEncodable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import syncleus.dann.learn.ml.*;
 import syncleus.dann.math.EncogUtility;
 import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.neural.activation.EncogActivationFunction;
 import syncleus.dann.neural.networks.BasicNetwork;
 
 import java.util.Set;
-import org.encog.neural.freeform.FreeformConnection;
 
 import syncleus.dann.data.basic.BasicMLData;
 import syncleus.dann.math.EncogMath;
@@ -60,8 +67,8 @@ import syncleus.dann.util.ObjectCloner;
  * Freeform networks allow just about any neuron to be connected to another
  * neuron. You can have neuron layers if you want, but they are not required.
  */
-public class FreeformNetwork extends BasicML implements MLContext, Cloneable,
-        MLRegression, MLEncodable, MLResettable, MLClassification, MLError {
+public class FreeformNetwork extends AbstractLearning implements MLContext, Cloneable,
+        RegressionLearning, VectorEncodable, MLResettable, Classifying, ErrorLearning {
 
     /**
      * The serial ID.
@@ -237,7 +244,7 @@ public class FreeformNetwork extends BasicML implements MLContext, Cloneable,
      * {@inheritDoc}
      */
     @Override
-    public double calculateError(final MLDataSet data) {
+    public double calculateError(final DataSet data) {
         return EncogUtility.calculateRegressionError(this, data);
     }
 
@@ -245,8 +252,8 @@ public class FreeformNetwork extends BasicML implements MLContext, Cloneable,
      * {@inheritDoc}
      */
     @Override
-    public int classify(final MLData input) {
-        final MLData output = compute(input);
+    public int classify(final Data input) {
+        final Data output = compute(input);
         return EngineArray.maxIndex(output.getData());
     }
 
@@ -278,10 +285,10 @@ public class FreeformNetwork extends BasicML implements MLContext, Cloneable,
      * {@inheritDoc}
      */
     @Override
-    public MLData compute(final MLData input) {
+    public Data compute(final Data input) {
 
         // Allocate result
-        final MLData result = new BasicMLData(this.outputLayer.size());
+        final Data result = new BasicMLData(this.outputLayer.size());
 
         // Copy the input
         for (int i = 0; i < input.size(); i++) {

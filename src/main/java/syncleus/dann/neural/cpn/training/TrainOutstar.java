@@ -23,8 +23,12 @@
  */
 package org.encog.neural.cpn.training;
 
-import syncleus.dann.learn.ml.*;
-import syncleus.dann.learn.train.BasicTraining;
+import syncleus.dann.data.DataSample;
+import syncleus.dann.data.Data;
+import syncleus.dann.data.DataSet;
+import syncleus.dann.learn.TrainingImplementationType;
+import syncleus.dann.learn.Learning;
+import syncleus.dann.learn.BasicTraining;
 import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.math.statistics.ErrorCalculation;
 
@@ -49,7 +53,7 @@ public class TrainOutstar extends BasicTraining implements LearningRate {
      * The training data. Supervised training, so both input and ideal must be
      * provided.
      */
-    private final MLDataSet training;
+    private final DataSet training;
 
     /**
      * If the weights have not been initialized, then they must be initialized
@@ -64,7 +68,7 @@ public class TrainOutstar extends BasicTraining implements LearningRate {
      * @param theTraining     The training data, must provide ideal outputs.
      * @param theLearningRate The learning rate.
      */
-    public TrainOutstar(final CPN theNetwork, final MLDataSet theTraining,
+    public TrainOutstar(final CPN theNetwork, final DataSet theTraining,
                         final double theLearningRate) {
         super(TrainingImplementationType.Iterative);
         this.network = theNetwork;
@@ -92,7 +96,7 @@ public class TrainOutstar extends BasicTraining implements LearningRate {
      * {@inheritDoc}
      */
     @Override
-    public MLMethod getMethod() {
+    public Learning getMethod() {
         return this.network;
     }
 
@@ -102,7 +106,7 @@ public class TrainOutstar extends BasicTraining implements LearningRate {
     private void initWeight() {
         for (int i = 0; i < this.network.getOutstarCount(); i++) {
             int j = 0;
-            for (final MLDataPair pair : this.training) {
+            for (final DataSample pair : this.training) {
                 this.network.getWeightsInstarToOutstar().set(j++, i,
                         pair.getIdeal().getData(i));
             }
@@ -122,8 +126,8 @@ public class TrainOutstar extends BasicTraining implements LearningRate {
 
         final ErrorCalculation error = new ErrorCalculation();
 
-        for (final MLDataPair pair : this.training) {
-            final MLData out = this.network.computeInstar(pair.getInput());
+        for (final DataSample pair : this.training) {
+            final Data out = this.network.computeInstar(pair.getInput());
 
             final int j = EngineArray.indexOfLargest(out.getData());
             for (int i = 0; i < this.network.getOutstarCount(); i++) {
@@ -133,7 +137,7 @@ public class TrainOutstar extends BasicTraining implements LearningRate {
                 this.network.getWeightsInstarToOutstar().add(j, i, delta);
             }
 
-            final MLData out2 = this.network.computeOutstar(out);
+            final Data out2 = this.network.computeOutstar(out);
             error.updateError(out2.getData(), pair.getIdeal().getData(),
                     pair.getSignificance());
         }

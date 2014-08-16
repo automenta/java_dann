@@ -25,7 +25,7 @@ package org.encog.neural.data.basic;
 
 import org.encog.neural.data.NeuralData;
 import syncleus.dann.data.basic.BasicMLData;
-import syncleus.dann.learn.ml.MLData;
+import syncleus.dann.data.Data;
 
 /**
  * This is an alias class for Encog 2.5 compatibility. This class aliases
@@ -66,7 +66,7 @@ public class BasicNeuralData extends BasicMLData {
     }
 
     @Override
-    public MLData clone() {
+    public Data clone() {
         return super.clone(); //To change body of generated methods, choose Tools | Templates.
     }
 

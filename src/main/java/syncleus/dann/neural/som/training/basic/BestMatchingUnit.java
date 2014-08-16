@@ -23,7 +23,7 @@
  */
 package syncleus.dann.neural.som.training.basic;
 
-import syncleus.dann.learn.ml.MLData;
+import syncleus.dann.data.Data;
 import syncleus.dann.math.BoundMath;
 import syncleus.dann.math.matrix.SimpleRealMatrix;
 import syncleus.dann.neural.som.SOM;
@@ -69,7 +69,7 @@ public class BestMatchingUnit {
      * @param input The input vector.
      * @return The output neuron number that is the BMU.
      */
-    public int calculateBMU(final MLData input) {
+    public int calculateBMU(final Data input) {
         int result = 0;
 
         if (input.size() > this.som.getInputCount()) {
@@ -111,7 +111,7 @@ public class BestMatchingUnit {
      * @return The Euclidean distance.
      */
     public static double calculateEuclideanDistance(final SimpleRealMatrix matrix,
-                                                    final MLData input, final int outputNeuron) {
+                                                    final Data input, final int outputNeuron) {
         double result = 0;
 
         // Loop over all input data.

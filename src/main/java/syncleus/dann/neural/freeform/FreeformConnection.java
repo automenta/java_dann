@@ -21,10 +21,7 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package org.encog.neural.freeform;
-
-import syncleus.dann.neural.freeform.FreeformNeuron;
-import syncleus.dann.neural.freeform.TempTrainingData;
+package syncleus.dann.neural.freeform;
 
 /**
  * Defines a freeform connection between neurons.

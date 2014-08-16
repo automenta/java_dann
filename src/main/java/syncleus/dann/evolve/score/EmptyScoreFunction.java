@@ -23,8 +23,8 @@
  */
 package syncleus.dann.evolve.score;
 
-import syncleus.dann.learn.ml.CalculateScore;
-import syncleus.dann.learn.ml.MLMethod;
+import syncleus.dann.learn.CalculateScore;
+import syncleus.dann.learn.Learning;
 
 import java.io.Serializable;
 
@@ -42,7 +42,7 @@ public class EmptyScoreFunction implements CalculateScore, Serializable {
      * {@inheritDoc}
      */
     @Override
-    public double calculateScore(final MLMethod phenotype) {
+    public double calculateScore(final Learning phenotype) {
         return 0;
     }
 

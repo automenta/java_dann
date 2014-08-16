@@ -23,8 +23,8 @@
  */
 package syncleus.dann.learn.fitness;
 
-import syncleus.dann.learn.ml.CalculateScore;
-import syncleus.dann.learn.ml.MLMethod;
+import syncleus.dann.learn.CalculateScore;
+import syncleus.dann.learn.Learning;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -73,7 +73,7 @@ public class MultiObjectiveFitness implements CalculateScore, Serializable {
      * {@inheritDoc}
      */
     @Override
-    public double calculateScore(final MLMethod method) {
+    public double calculateScore(final Learning method) {
         double result = 0;
 
         result = this.objectives.stream().map((obj) -> obj.getScore().calculateScore(method) * obj.getWeight()).reduce(result, (accumulator, _item) -> accumulator + _item);

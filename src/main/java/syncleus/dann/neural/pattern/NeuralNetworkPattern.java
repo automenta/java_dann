@@ -23,7 +23,7 @@
  */
 package syncleus.dann.neural.pattern;
 
-import syncleus.dann.learn.ml.MLMethod;
+import syncleus.dann.learn.Learning;
 import syncleus.dann.neural.activation.EncogActivationFunction;
 
 /**
@@ -52,7 +52,7 @@ public interface NeuralNetworkPattern {
      *
      * @return The resulting neural network.
      */
-    MLMethod generate();
+    Learning generate();
 
     /**
      * Set the activation function to be used for all created layers that allow

@@ -23,10 +23,10 @@
  */
 package syncleus.dann.util.factory.train;
 
-import syncleus.dann.learn.ml.CalculateScore;
-import syncleus.dann.learn.ml.MLDataSet;
-import syncleus.dann.learn.ml.MLMethod;
-import syncleus.dann.learn.train.MLTrain;
+import syncleus.dann.learn.CalculateScore;
+import syncleus.dann.data.DataSet;
+import syncleus.dann.learn.Learning;
+import syncleus.dann.learn.Training;
 import syncleus.dann.math.random.NguyenWidrowRandomizer;
 import syncleus.dann.math.random.Randomizer;
 import syncleus.dann.neural.networks.BasicNetwork;
@@ -48,7 +48,7 @@ public class PSOFactory {
      * @param argsStr  The arguments to use.
      * @return The newly created trainer.
      */
-    public static MLTrain create(final MLMethod method, final MLDataSet training,
+    public static Training create(final Learning method, final DataSet training,
                                  final String argsStr) {
 
         final Map<String, String> args = ArchitectureParse.parseParams(argsStr);
@@ -60,7 +60,7 @@ public class PSOFactory {
         final CalculateScore score = new TrainingSetScore(training);
         final Randomizer randomizer = new NguyenWidrowRandomizer();
 
-        final MLTrain train = new NeuralPSO((BasicNetwork) method, randomizer,
+        final Training train = new NeuralPSO((BasicNetwork) method, randomizer,
                 score, particles);
 
         return train;

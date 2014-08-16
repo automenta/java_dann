@@ -23,13 +23,13 @@
  */
 package org.encog.neural.pnn;
 
-import syncleus.dann.learn.ml.BasicML;
-import syncleus.dann.learn.ml.MLData;
+import syncleus.dann.learn.AbstractLearning;
+import syncleus.dann.data.Data;
 
 /**
  * Abstract class to build PNN networks upon.
  */
-public abstract class AbstractPNN extends BasicML {
+public abstract class AbstractPNN extends AbstractLearning {
 
     /**
      * Input neuron count.
@@ -113,7 +113,7 @@ public abstract class AbstractPNN extends BasicML {
      * @param input The input to the network.
      * @return The output from the network.
      */
-    public abstract MLData compute(MLData input);
+    public abstract Data compute(Data input);
 
     /**
      * @return the deriv

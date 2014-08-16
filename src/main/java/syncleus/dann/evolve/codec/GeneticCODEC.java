@@ -24,7 +24,7 @@
 package syncleus.dann.evolve.codec;
 
 import syncleus.dann.evolve.genome.Genome;
-import syncleus.dann.learn.ml.MLMethod;
+import syncleus.dann.learn.Learning;
 
 /**
  * A CODEC defines how to transfer between a genome and phenome. Every CODEC
@@ -40,7 +40,7 @@ public interface GeneticCODEC {
      * @param genome The genome to decode.
      * @return The phenome.
      */
-    MLMethod decode(Genome genome);
+    Learning decode(Genome genome);
 
     /**
      * Attempt to build a genome from a phenome. Note: not all CODEC's support
@@ -49,5 +49,5 @@ public interface GeneticCODEC {
      * @param phenotype The phenotype.
      * @return The genome.
      */
-    Genome encode(MLMethod phenotype);
+    Genome encode(Learning phenotype);
 }

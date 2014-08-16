@@ -23,7 +23,7 @@
  */
 package org.encog.neural.pattern;
 
-import syncleus.dann.learn.ml.MLMethod;
+import syncleus.dann.learn.Learning;
 import syncleus.dann.neural.activation.EncogActivationFunction;
 
 /**
@@ -66,7 +66,7 @@ public class HopfieldPattern implements NeuralNetworkPattern {
      * @return The generated network.
      */
     @Override
-    public MLMethod generate() {
+    public Learning generate() {
         final HopfieldNetwork logic = new HopfieldNetwork(this.neuronCount);
         return logic;
     }

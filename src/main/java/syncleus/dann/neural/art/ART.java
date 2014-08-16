@@ -23,7 +23,7 @@
  */
 package org.encog.neural.art;
 
-import syncleus.dann.learn.ml.BasicML;
+import syncleus.dann.learn.AbstractLearning;
 
 /**
  * Adaptive Resonance Theory (ART) is a form of neural network developed by
@@ -37,7 +37,7 @@ import syncleus.dann.learn.ml.BasicML;
  * neural networks. Unlike most neural networks, ART networks do not have a
  * distinct training and usage stage. The ART network will learn as it is used.
  */
-public class ART extends BasicML {
+public class ART extends AbstractLearning {
     /**
      * Serial id.
      */

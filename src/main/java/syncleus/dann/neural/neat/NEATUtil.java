@@ -26,7 +26,7 @@ package org.encog.neural.neat;
 import syncleus.dann.evolve.opp.CompoundOperator;
 import syncleus.dann.evolve.opp.selection.TruncationSelection;
 import syncleus.dann.evolve.train.basic.TrainEA;
-import syncleus.dann.learn.ml.CalculateScore;
+import syncleus.dann.learn.CalculateScore;
 
 /**
  * NEAT does not make use of a special trainer. Typically the generic TrainEA

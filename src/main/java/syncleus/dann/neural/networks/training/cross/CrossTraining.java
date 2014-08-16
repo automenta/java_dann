@@ -24,9 +24,9 @@
 package org.encog.neural.networks.training.cross;
 
 import syncleus.dann.data.folded.FoldedDataSet;
-import syncleus.dann.learn.ml.MLMethod;
-import syncleus.dann.learn.ml.TrainingImplementationType;
-import syncleus.dann.learn.train.BasicTraining;
+import syncleus.dann.learn.Learning;
+import syncleus.dann.learn.TrainingImplementationType;
+import syncleus.dann.learn.BasicTraining;
 
 /**
  * Base class for cross training trainers. Must use a folded dataset.
@@ -36,7 +36,7 @@ public abstract class CrossTraining extends BasicTraining {
     /**
      * The network to train.
      */
-    private final MLMethod network;
+    private final Learning network;
 
     /**
      * The folded dataset.
@@ -49,7 +49,7 @@ public abstract class CrossTraining extends BasicTraining {
      * @param network  The network.
      * @param training The training data.
      */
-    public CrossTraining(final MLMethod network, final FoldedDataSet training) {
+    public CrossTraining(final Learning network, final FoldedDataSet training) {
         super(TrainingImplementationType.Iterative);
         this.network = network;
         setTraining(training);
@@ -67,7 +67,7 @@ public abstract class CrossTraining extends BasicTraining {
      * {@inheritDoc}
      */
     @Override
-    public MLMethod getMethod() {
+    public Learning getMethod() {
         return this.network;
     }
 

@@ -23,7 +23,7 @@
  */
 package syncleus.dann.neural.pattern;
 
-import syncleus.dann.learn.ml.MLMethod;
+import syncleus.dann.learn.Learning;
 import syncleus.dann.neural.activation.EncogActivationFunction;
 import syncleus.dann.neural.networks.BasicNetwork;
 import syncleus.dann.neural.networks.layers.BasicLayer;
@@ -89,7 +89,7 @@ public class FeedForwardPattern implements NeuralNetworkPattern {
      * @return The feedforward neural network.
      */
     @Override
-    public MLMethod generate() {
+    public Learning generate() {
 
         if (this.activationOutput == null)
             this.activationOutput = this.activationHidden;

@@ -23,12 +23,12 @@
  */
 package org.encog.neural.networks.training;
 
-import syncleus.dann.learn.train.MLTrain;
+import syncleus.dann.learn.Training;
 
 /**
  * This is an alias class for Encog 2.5 compatibility. This class aliases
  * MLTrain. Newer code should use MLTrain in place of this class.
  */
-public interface Train extends MLTrain {
+public interface Train extends Training {
 
 }

@@ -26,8 +26,8 @@ package syncleus.dann.evolve;
 import syncleus.dann.evolve.genome.Genome;
 import syncleus.dann.evolve.genome.GenomeFactory;
 import syncleus.dann.evolve.population.Population;
-import syncleus.dann.learn.ml.MLEncodable;
-import syncleus.dann.learn.ml.MethodFactory;
+import syncleus.dann.data.VectorEncodable;
+import syncleus.dann.learn.MethodFactory;
 
 /**
  * A factory to create MLMethod based genomes.
@@ -62,7 +62,7 @@ public class MLMethodGenomeFactory implements GenomeFactory {
     @Override
     public Genome factor() {
         final Genome result = new MLMethodGenome(
-                (MLEncodable) this.factory.factor());
+                (VectorEncodable) this.factory.factor());
         result.setPopulation(this.population);
         return result;
     }

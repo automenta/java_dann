@@ -23,7 +23,7 @@
  */
 package org.encog.neural.networks.training.concurrent.performers;
 
-import syncleus.dann.learn.train.MLTrain;
+import syncleus.dann.learn.Training;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -109,7 +109,7 @@ public class ConcurrentTrainingPerformerCPU implements
             watch.start();
 
             this.currentJob.createTrainer(this.manager.isSingleThreaded());
-            final MLTrain train = this.currentJob.getTrain();
+            final Training train = this.currentJob.getTrain();
             while (this.currentJob.shouldContinue()) {
                 train.iteration();
             }

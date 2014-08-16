@@ -23,7 +23,7 @@
  */
 package syncleus.dann.math.random;
 
-import syncleus.dann.learn.ml.MLMethod;
+import syncleus.dann.learn.Learning;
 import syncleus.dann.math.matrix.SimpleRealMatrix;
 import syncleus.dann.neural.activation.EncogActivationFunction;
 import syncleus.dann.neural.networks.BasicNetwork;
@@ -38,7 +38,7 @@ public class NguyenWidrowRandomizer extends BasicRandomizer {
     public static String MSG = "This type of randomization is not supported by Nguyen-Widrow";
 
     @Override
-    public void randomize(final MLMethod method) {
+    public void randomize(final Learning method) {
         if (!(method instanceof BasicNetwork)) {
             throw new RuntimeException("Nguyen-Widrow only supports BasicNetwork.");
         }

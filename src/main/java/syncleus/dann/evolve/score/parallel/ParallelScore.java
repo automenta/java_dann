@@ -29,7 +29,7 @@ import syncleus.dann.evolve.genome.Genome;
 import syncleus.dann.evolve.population.Population;
 import syncleus.dann.evolve.score.AdjustScore;
 import syncleus.dann.evolve.species.Species;
-import syncleus.dann.learn.ml.CalculateScore;
+import syncleus.dann.learn.CalculateScore;
 
 import java.util.List;
 import java.util.concurrent.ExecutorService;

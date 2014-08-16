@@ -23,9 +23,9 @@
  */
 package syncleus.dann.math.matrix.hessian;
 
-import syncleus.dann.learn.ml.MLData;
-import syncleus.dann.learn.ml.MLDataPair;
-import syncleus.dann.learn.ml.MLDataSet;
+import syncleus.dann.data.Data;
+import syncleus.dann.data.DataSample;
+import syncleus.dann.data.DataSet;
 import syncleus.dann.math.EncogMath;
 import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.math.matrix.SimpleRealMatrix;
@@ -85,7 +85,7 @@ public class HessianFD extends BasicHessian {
      * {@inheritDoc}
      */
     @Override
-    public void init(final BasicNetwork theNetwork, final MLDataSet theTraining) {
+    public void init(final BasicNetwork theNetwork, final DataSet theTraining) {
 
         super.init(theNetwork, theTraining);
         this.weightCount = theNetwork.getStructure().getFlat().getWeights().length;
@@ -122,9 +122,9 @@ public class HessianFD extends BasicHessian {
         final double[] derivative = new double[weightCount];
 
         // Loop over every training element
-        for (final MLDataPair pair : this.training) {
+        for (final DataSample pair : this.training) {
             EngineArray.fill(derivative, 0);
-            final MLData networkOutput = this.network.compute(pair.getInput());
+            final Data networkOutput = this.network.compute(pair.getInput());
 
             e = pair.getIdeal().getData(outputNeuron)
                     - networkOutput.getData(outputNeuron);
@@ -182,7 +182,7 @@ public class HessianFD extends BasicHessian {
      * @param row           The training row currently being processed.
      * @return The derivative output.
      */
-    private double computeDerivative(final MLData inputData,
+    private double computeDerivative(final Data inputData,
                                      final int outputNeuron, final int weight, final double[] stepSize,
                                      final double networkOutput, final int row) {
 
@@ -203,7 +203,7 @@ public class HessianFD extends BasicHessian {
 
             this.network.getFlat().getWeights()[weight] = newWeight;
 
-            final MLData output = this.network.compute(inputData);
+            final Data output = this.network.compute(inputData);
             points[i] = output.getData(outputNeuron);
         }
 

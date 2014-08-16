@@ -33,7 +33,7 @@ import syncleus.dann.evolve.rules.RuleHolder;
 import syncleus.dann.evolve.score.AdjustScore;
 import syncleus.dann.evolve.sort.GenomeComparator;
 import syncleus.dann.evolve.species.Speciation;
-import syncleus.dann.learn.ml.CalculateScore;
+import syncleus.dann.learn.CalculateScore;
 
 import java.util.List;
 

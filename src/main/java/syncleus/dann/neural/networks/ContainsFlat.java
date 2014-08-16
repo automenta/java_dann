@@ -23,13 +23,13 @@
  */
 package syncleus.dann.neural.networks;
 
-import syncleus.dann.learn.ml.MLMethod;
+import syncleus.dann.learn.Learning;
 
 /**
  * Interface that specifies that a machine learning method contains a flat
  * network.
  */
-public interface ContainsFlat extends MLMethod {
+public interface ContainsFlat extends Learning {
     /**
      * @return The flat network associated with this neural network.
      */

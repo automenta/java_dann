@@ -23,20 +23,24 @@
  */
 package syncleus.dann.learn.hmm.train.kmeans;
 
+import syncleus.dann.data.DataSample;
+import syncleus.dann.data.DataSet;
+import syncleus.dann.learn.TrainingImplementationType;
+import syncleus.dann.learn.Learning;
+import syncleus.dann.data.DataSetSequence;
 import java.util.ArrayList;
 import syncleus.dann.data.basic.BasicMLDataSet;
 import syncleus.dann.learn.hmm.HiddenMarkovModel;
 import syncleus.dann.learn.hmm.alog.ViterbiCalculator;
 import syncleus.dann.learn.hmm.distributions.StateDistribution;
-import syncleus.dann.learn.ml.*;
-import syncleus.dann.learn.train.MLTrain;
-import syncleus.dann.learn.train.strategy.Strategy;
+import syncleus.dann.learn.Training;
+import syncleus.dann.learn.strategy.Strategy;
 
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import org.encog.neural.networks.training.propagation.TrainingContinuation;
-import syncleus.dann.classify.kmeans.KMeansUtil;
+import syncleus.dann.learn.kmeans.KMeansUtil;
 
 /**
  * Train a Hidden Markov Model (HMM) with the KMeans algorithm. Makes use of
@@ -49,18 +53,18 @@ import syncleus.dann.classify.kmeans.KMeansUtil;
  * Faber, Clustering and the Continuous k-Means Algorithm, Los Alamos Science,
  * no. 22, 1994.
  */
-public class KMeansTrainHMM implements MLTrain {
+public class KMeansTrainHMM implements Training {
     private final Clusters clusters;
     private final int states;
-    private final MLSequenceSet sequnces;
+    private final DataSetSequence sequnces;
     private boolean done;
     private final HiddenMarkovModel modelHMM;
     private int iteration;
     private HiddenMarkovModel method;
-    private final MLSequenceSet training;
+    private final DataSetSequence training;
 
     public KMeansTrainHMM(final HiddenMarkovModel method,
-                       final MLSequenceSet sequences) {
+                       final DataSetSequence sequences) {
         this.method = method;
         this.modelHMM = method;
         this.sequnces = sequences;
@@ -100,7 +104,7 @@ public class KMeansTrainHMM implements MLTrain {
     }
 
     @Override
-    public MLMethod getMethod() {
+    public Learning getMethod() {
         return this.method;
     }
 
@@ -110,7 +114,7 @@ public class KMeansTrainHMM implements MLTrain {
     }
 
     @Override
-    public MLDataSet getTraining() {
+    public DataSet getTraining() {
         return this.training;
     }
 
@@ -140,7 +144,7 @@ public class KMeansTrainHMM implements MLTrain {
 
     private void learnOpdf(final HiddenMarkovModel hmm) {
         for (int i = 0; i < hmm.getStateCount(); i++) {
-            final Collection<MLDataPair> clusterObservations = this.clusters
+            final Collection<DataSample> clusterObservations = this.clusters
                     .cluster(i);
 
             if (clusterObservations.size() < 1) {
@@ -148,7 +152,7 @@ public class KMeansTrainHMM implements MLTrain {
                         .createNewDistribution();
                 hmm.setStateDistribution(i, o);
             } else {
-                final MLDataSet temp = new BasicMLDataSet();
+                final DataSet temp = new BasicMLDataSet();
                 clusterObservations.stream().forEach(temp::add);
                 hmm.getStateDistribution(i).fit(temp);
             }
@@ -214,12 +218,12 @@ public class KMeansTrainHMM implements MLTrain {
     private boolean optimizeCluster(final HiddenMarkovModel hmm) {
         boolean modif = false;
 
-        for (final MLDataSet obsSeq : this.sequnces.getSequences()) {
+        for (final DataSet obsSeq : this.sequnces.getSequences()) {
             final ViterbiCalculator vc = new ViterbiCalculator(obsSeq, hmm);
             final int states[] = vc.stateSequence();
 
             for (int i = 0; i < states.length; i++) {
-                final MLDataPair o = obsSeq.get(i);
+                final DataSample o = obsSeq.get(i);
 
                 if (this.clusters.cluster(o) != states[i]) {
                     modif = true;
@@ -254,49 +258,49 @@ public class KMeansTrainHMM implements MLTrain {
     }
     
     static class Clusters {
-        private final HashMap<MLDataPair, Integer> clustersHash;
-        private final ArrayList<Collection<MLDataPair>> clusters;
+        private final HashMap<DataSample, Integer> clustersHash;
+        private final ArrayList<Collection<DataSample>> clusters;
 
-        public Clusters(final int k, final MLDataSet observations) {
+        public Clusters(final int k, final DataSet observations) {
 
             this.clustersHash = new HashMap<>();
             this.clusters = new ArrayList<>();
 
-            final List<MLDataPair> list = new ArrayList<>();
-            for (final MLDataPair pair : observations) {
+            final List<DataSample> list = new ArrayList<>();
+            for (final DataSample pair : observations) {
                 list.add(pair);
             }
-            final KMeansUtil<MLDataPair> kmc = new KMeansUtil<>(k, list);
+            final KMeansUtil<DataSample> kmc = new KMeansUtil<>(k, list);
             kmc.process();
 
             for (int i = 0; i < k; i++) {
-                final Collection<MLDataPair> cluster = kmc.get(i);
+                final Collection<DataSample> cluster = kmc.get(i);
                 this.clusters.add(cluster);
 
-                for (final MLDataPair element : cluster) {
+                for (final DataSample element : cluster) {
                     this.clustersHash.put(element, i);
                 }
             }
         }
 
-        public Collection<MLDataPair> cluster(final int clusterNb) {
+        public Collection<DataSample> cluster(final int clusterNb) {
             return this.clusters.get(clusterNb);
         }
 
-        public int cluster(final MLDataPair o) {
+        public int cluster(final DataSample o) {
             return this.clustersHash.get(o);
         }
 
-        public boolean isInCluster(final MLDataPair o, final int x) {
+        public boolean isInCluster(final DataSample o, final int x) {
             return cluster(o) == x;
         }
 
-        public void put(final MLDataPair o, final int clusterNb) {
+        public void put(final DataSample o, final int clusterNb) {
             this.clustersHash.put(o, clusterNb);
             this.clusters.get(clusterNb).add(o);
         }
 
-        public void remove(final MLDataPair o, final int clusterNb) {
+        public void remove(final DataSample o, final int clusterNb) {
             this.clustersHash.put(o, -1);
             this.clusters.get(clusterNb).remove(o);
         }

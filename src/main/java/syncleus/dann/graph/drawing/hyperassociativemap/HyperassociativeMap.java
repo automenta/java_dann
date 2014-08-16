@@ -278,7 +278,7 @@ public class HyperassociativeMap<G extends Graph<N, ?>, N> implements
         final Vector location = coordinates.get(nodeToAlign);
         final Map<N, Double> neighbors = getNeighbors(nodeToAlign, neighborStore);
 
-        final MutableVector compositeVector = new MutableVector(location.getDimensions());
+        final MutableVector compositeVector = new MutableVector(location.getDimension());
         // align with neighbours
         for (final Entry<N, Double> neighborEntry : neighbors.entrySet()) {
             final N neighbor = neighborEntry.getKey();

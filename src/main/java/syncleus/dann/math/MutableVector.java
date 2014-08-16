@@ -14,11 +14,11 @@ public class MutableVector extends Vector {
     }
 
     public MutableVector(final Vector v) {
-        this(v.coordinates);
+        this(v.data);
     }
 
     public void set(final double coordinate, final int dimension) {
-        this.coordinates[dimension - 1] = coordinate;
+        this.data[dimension - 1] = coordinate;
         distanceCache = null;
     }
 
@@ -30,8 +30,8 @@ public class MutableVector extends Vector {
         final double currentDistance = this.getDistance();
         final double scalar = distance / currentDistance;
 
-        for (int i = 0; i < coordinates.length; i++) {
-            coordinates[i] *= scalar;
+        for (int i = 0; i < data.length; i++) {
+            data[i] *= scalar;
         }
 
         distanceCache = null;
@@ -45,15 +45,15 @@ public class MutableVector extends Vector {
             throw new IllegalArgumentException("absolutePoint can not be null!");
         }
 
-        final double[] absoluteCoords = absolutePoint.coordinates;
+        final double[] absoluteCoords = absolutePoint.data;
 
-        if (absoluteCoords.length != coordinates.length) {
+        if (absoluteCoords.length != data.length) {
             throw new IllegalArgumentException(
                     "absolutePoint must have the same dimensions as this point");
         }
 
-        for (int coordIndex = 0; coordIndex < coordinates.length; coordIndex++) {
-            coordinates[coordIndex] -= absoluteCoords[coordIndex];
+        for (int coordIndex = 0; coordIndex < data.length; coordIndex++) {
+            data[coordIndex] -= absoluteCoords[coordIndex];
         }
 
     }
@@ -62,15 +62,15 @@ public class MutableVector extends Vector {
      * same as Add, but modifies this vector
      */
     public void plus(final Vector pointToAdd) {
-        final double pc[] = pointToAdd.coordinates;
-        for (int coordIndex = 0; coordIndex < coordinates.length; coordIndex++) {
-            coordinates[coordIndex] += pc[coordIndex];
+        final double pc[] = pointToAdd.data;
+        for (int coordIndex = 0; coordIndex < data.length; coordIndex++) {
+            data[coordIndex] += pc[coordIndex];
         }
     }
 
     public void set(final Vector align) {
-        System.arraycopy(align.coordinates, 0, coordinates, 0,
-                coordinates.length);
+        System.arraycopy(align.data, 0, data, 0,
+                data.length);
     }
 
 }

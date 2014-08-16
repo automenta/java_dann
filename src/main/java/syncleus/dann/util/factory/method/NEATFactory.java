@@ -23,7 +23,7 @@
  */
 package syncleus.dann.util.factory.method;
 
-import syncleus.dann.learn.ml.MLMethod;
+import syncleus.dann.learn.Learning;
 import syncleus.dann.util.factory.MLActivationFactory;
 import syncleus.dann.util.factory.MLMethodFactory;
 import syncleus.dann.util.factory.parse.ArchitectureParse;
@@ -48,7 +48,7 @@ public class NEATFactory {
      * @param output       The output count.
      * @return The population.
      */
-    public MLMethod create(final String architecture, final int input,
+    public Learning create(final String architecture, final int input,
                            final int output) {
 
         if (input <= 0) {

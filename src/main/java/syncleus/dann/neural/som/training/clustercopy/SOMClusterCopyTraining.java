@@ -23,8 +23,12 @@
  */
 package org.encog.neural.som.training.clustercopy;
 
-import syncleus.dann.learn.ml.*;
-import syncleus.dann.learn.train.BasicTraining;
+import syncleus.dann.data.DataSample;
+import syncleus.dann.data.Data;
+import syncleus.dann.data.DataSet;
+import syncleus.dann.learn.TrainingImplementationType;
+import syncleus.dann.learn.Learning;
+import syncleus.dann.learn.BasicTraining;
 
 /**
  * SOM cluster copy is a very simple trainer for SOM's. Using this trainer all
@@ -53,7 +57,7 @@ public class SOMClusterCopyTraining extends BasicTraining {
      * @param network  The network to train.
      * @param training The training data.
      */
-    public SOMClusterCopyTraining(final SOM network, final MLDataSet training) {
+    public SOMClusterCopyTraining(final SOM network, final DataSet training) {
         super(TrainingImplementationType.OnePass);
         this.network = network;
         if (this.network.getOutputCount() < training.getRecordCount()) {
@@ -90,7 +94,7 @@ public class SOMClusterCopyTraining extends BasicTraining {
      * @param outputNeuron The output neuron to set.
      * @param input        The input pattern to copy.
      */
-    private void copyInputPattern(final int outputNeuron, final MLData input) {
+    private void copyInputPattern(final int outputNeuron, final Data input) {
         for (int inputNeuron = 0; inputNeuron < this.network.getInputCount(); inputNeuron++) {
             this.network.getWeights().set(outputNeuron, inputNeuron,
                     input.getData(inputNeuron));
@@ -101,7 +105,7 @@ public class SOMClusterCopyTraining extends BasicTraining {
      * {@inheritDoc}
      */
     @Override
-    public final MLMethod getMethod() {
+    public final Learning getMethod() {
         return this.network;
     }
 
@@ -111,7 +115,7 @@ public class SOMClusterCopyTraining extends BasicTraining {
     @Override
     public void iteration() {
         int outputNeuron = 0;
-        for (final MLDataPair pair : getTraining()) {
+        for (final DataSample pair : getTraining()) {
             copyInputPattern(outputNeuron++, pair.getInput());
         }
         this.done = true;

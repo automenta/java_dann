@@ -23,8 +23,8 @@
  */
 package syncleus.dann.neural.networks.structure;
 
-import syncleus.dann.learn.ml.MLEncodable;
-import syncleus.dann.learn.ml.MLMethod;
+import syncleus.dann.data.VectorEncodable;
+import syncleus.dann.learn.Learning;
 import syncleus.dann.neural.networks.BasicNetwork;
 
 import java.util.Arrays;
@@ -52,9 +52,9 @@ public final class NetworkCODEC {
      * @param network The network to encode.
      */
     public static void arrayToNetwork(final double[] array,
-                                      final MLMethod network) {
-        if (network instanceof MLEncodable) {
-            ((MLEncodable) network).decodeFromArray(array);
+                                      final Learning network) {
+        if (network instanceof VectorEncodable) {
+            ((VectorEncodable) network).decodeFromArray(array);
             return;
         }
         throw new RuntimeException(NetworkCODEC.ERROR
@@ -121,9 +121,9 @@ public final class NetworkCODEC {
      * @param network The network.
      * @return The size.
      */
-    public static int networkSize(final MLMethod network) {
-        if (network instanceof MLEncodable) {
-            return ((MLEncodable) network).encodedArrayLength();
+    public static int networkSize(final Learning network) {
+        if (network instanceof VectorEncodable) {
+            return ((VectorEncodable) network).encodedArrayLength();
         }
         throw new RuntimeException(NetworkCODEC.ERROR
                 + network.getClass().getName());
@@ -137,12 +137,12 @@ public final class NetworkCODEC {
      * @param network The network to encode.
      * @return The memory of the neuron.
      */
-    public static double[] networkToArray(final MLMethod network) {
+    public static double[] networkToArray(final Learning network) {
         final int size = NetworkCODEC.networkSize(network);
 
-        if (network instanceof MLEncodable) {
+        if (network instanceof VectorEncodable) {
             final double[] encoded = new double[size];
-            ((MLEncodable) network).encodeToArray(encoded);
+            ((VectorEncodable) network).encodeToArray(encoded);
             return encoded;
         }
         throw new RuntimeException(NetworkCODEC.ERROR

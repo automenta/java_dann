@@ -23,8 +23,8 @@
  */
 package org.encog.neural.bam;
 
-import syncleus.dann.learn.ml.BasicML;
-import syncleus.dann.learn.ml.MLData;
+import syncleus.dann.learn.AbstractLearning;
+import syncleus.dann.data.Data;
 import syncleus.dann.math.matrix.SimpleRealMatrix;
 import syncleus.dann.neural.networks.NeuralDataMapping;
 
@@ -41,7 +41,7 @@ import syncleus.dann.neural.networks.NeuralDataMapping;
  *
  * @author jheaton
  */
-public class BAM extends BasicML {
+public class BAM extends AbstractLearning {
 
     /**
      * Serial id.
@@ -95,7 +95,7 @@ public class BAM extends BasicML {
      * @param inputPattern  The input pattern.
      * @param outputPattern The output pattern(for this input).
      */
-    public void addPattern(final MLData inputPattern, final MLData outputPattern) {
+    public void addPattern(final Data inputPattern, final Data outputPattern) {
 
         int weight;
 
@@ -125,7 +125,7 @@ public class BAM extends BasicML {
      * @param input NOT USED
      * @return NOT USED
      */
-    public static MLData compute(final MLData input) {
+    public static Data compute(final Data input) {
         throw new RuntimeException(
                 "Compute on BasicNetwork cannot be used, rather call"
                         + " the compute(NeuralData) method on the BAMLogic.");
@@ -178,7 +178,7 @@ public class BAM extends BasicML {
      *               input)
      * @return The value from the matrix.
      */
-    private static double getWeight(final SimpleRealMatrix matrix, final MLData input,
+    private static double getWeight(final SimpleRealMatrix matrix, final Data input,
                                     final int x, final int y) {
         if (matrix.getRows() != input.size()) {
             return matrix.getNumber(x, y);
@@ -209,8 +209,8 @@ public class BAM extends BasicML {
      * @param output The output pattern.
      * @return True if the network has become stable.
      */
-    private boolean propagateLayer(final SimpleRealMatrix matrix, final MLData input,
-                                   final MLData output) {
+    private boolean propagateLayer(final SimpleRealMatrix matrix, final Data input,
+                                   final Data output) {
         int i, j;
         int sum, out = 0;
         boolean stable;

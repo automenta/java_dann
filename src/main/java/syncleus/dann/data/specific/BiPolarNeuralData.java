@@ -23,8 +23,8 @@
  */
 package syncleus.dann.data.specific;
 
-import syncleus.dann.learn.ml.MLData;
-import syncleus.dann.learn.ml.MLDataError;
+import syncleus.dann.data.Data;
+import syncleus.dann.data.DataException;
 import syncleus.dann.math.cluster.Centroid;
 import syncleus.dann.math.matrix.BiPolarUtil;
 
@@ -36,7 +36,7 @@ import java.io.Serializable;
  *
  * @author jheaton
  */
-public class BiPolarNeuralData implements MLData, Serializable {
+public class BiPolarNeuralData implements Data, Serializable {
 
     /**
      *
@@ -74,7 +74,7 @@ public class BiPolarNeuralData implements MLData, Serializable {
      */
     @Override
     public void add(final int index, final double value) {
-        throw new MLDataError("Add is not supported for bipolar data.");
+        throw new DataException("Add is not supported for bipolar data.");
     }
 
     /**
@@ -92,7 +92,7 @@ public class BiPolarNeuralData implements MLData, Serializable {
      * @return A cloned copy of this object.
      */
     @Override
-    public MLData clone() {
+    public Data clone() {
         final BiPolarNeuralData result = new BiPolarNeuralData(size());
         for (int i = 0; i < size(); i++) {
             result.setData(i, getData(i));
@@ -201,7 +201,7 @@ public class BiPolarNeuralData implements MLData, Serializable {
      * @return Nothing.
      */
     @Override
-    public Centroid<MLData> createCentroid() {
+    public Centroid<Data> createCentroid() {
         return null;
     }
 }

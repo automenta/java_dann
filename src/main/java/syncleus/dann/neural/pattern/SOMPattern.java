@@ -23,7 +23,7 @@
  */
 package org.encog.neural.pattern;
 
-import syncleus.dann.learn.ml.MLMethod;
+import syncleus.dann.learn.Learning;
 import syncleus.dann.neural.activation.EncogActivationFunction;
 
 /**
@@ -70,7 +70,7 @@ public class SOMPattern implements NeuralNetworkPattern {
      * @return The neural network.
      */
     @Override
-    public MLMethod generate() {
+    public Learning generate() {
         final SOM som = new SOM(this.inputNeurons, this.outputNeurons);
         som.reset();
         return som;

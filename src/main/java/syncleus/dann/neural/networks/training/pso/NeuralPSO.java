@@ -23,11 +23,11 @@
  */
 package org.encog.neural.networks.training.pso;
 
-import syncleus.dann.learn.ml.CalculateScore;
-import syncleus.dann.learn.ml.MLDataSet;
-import syncleus.dann.learn.ml.MLMethod;
-import syncleus.dann.learn.ml.TrainingImplementationType;
-import syncleus.dann.learn.train.BasicTraining;
+import syncleus.dann.learn.CalculateScore;
+import syncleus.dann.data.DataSet;
+import syncleus.dann.learn.Learning;
+import syncleus.dann.learn.TrainingImplementationType;
+import syncleus.dann.learn.BasicTraining;
 import syncleus.dann.math.VectorAlgebra;
 import syncleus.dann.math.random.NguyenWidrowRandomizer;
 import syncleus.dann.math.random.Randomizer;
@@ -147,7 +147,7 @@ public class NeuralPSO extends BasicTraining {
      *                    as this network.
      * @param trainingSet The training set.
      */
-    public NeuralPSO(final BasicNetwork network, final MLDataSet trainingSet) {
+    public NeuralPSO(final BasicNetwork network, final DataSet trainingSet) {
         this(network, new NguyenWidrowRandomizer(), new TrainingSetScore(
                 trainingSet), 20);
     }
@@ -488,7 +488,7 @@ public class NeuralPSO extends BasicTraining {
      *
      *  @return the most fit network in the swarm
      */
-    public MLMethod getMethod() {
+    public Learning getMethod() {
         return m_bestNetwork;
     }
 

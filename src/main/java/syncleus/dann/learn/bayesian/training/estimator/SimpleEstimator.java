@@ -26,15 +26,15 @@ package syncleus.dann.learn.bayesian.training.estimator;
 import syncleus.dann.learn.bayesian.BayesianEvent;
 import syncleus.dann.learn.bayesian.EncogBayesianNetwork;
 import syncleus.dann.learn.bayesian.training.TrainBayesian;
-import syncleus.dann.learn.ml.MLDataPair;
-import syncleus.dann.learn.ml.MLDataSet;
+import syncleus.dann.data.DataSample;
+import syncleus.dann.data.DataSet;
 
 /**
  * A simple probability estimator.
  */
 public class SimpleEstimator implements BayesEstimator {
 
-    private MLDataSet data;
+    private DataSet data;
     private EncogBayesianNetwork network;
     private int index;
 
@@ -43,7 +43,7 @@ public class SimpleEstimator implements BayesEstimator {
      */
     @Override
     public void init(final TrainBayesian theTrainer,
-                     final EncogBayesianNetwork theNetwork, final MLDataSet theData) {
+                     final EncogBayesianNetwork theNetwork, final DataSet theData) {
         this.network = theNetwork;
         this.data = theData;
         this.index = 0;
@@ -64,7 +64,7 @@ public class SimpleEstimator implements BayesEstimator {
         int y = 0;
 
         // calculate overall probability
-        for (final MLDataPair pair : this.data) {
+        for (final DataSample pair : this.data) {
             final int[] d = this.network.determineClasses(pair.getInput());
 
             if (args.length == 0) {

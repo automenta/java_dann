@@ -20,8 +20,8 @@ package syncleus.dann.graphicalmodel;
 
 import org.junit.Assert;
 import org.junit.Test;
-import syncleus.dann.learn.EvidenceMap;
-import syncleus.dann.learn.StateEvidence;
+import syncleus.dann.data.state.EvidenceMap;
+import syncleus.dann.data.state.StateEvidence;
 import syncleus.dann.learn.bayesian.MutableBayesianAdjacencyNetwork;
 import syncleus.dann.learn.graphical.GraphicalModelNode;
 import syncleus.dann.learn.graphical.SimpleGraphicalModelNode;

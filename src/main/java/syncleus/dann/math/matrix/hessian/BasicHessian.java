@@ -24,7 +24,7 @@
 package syncleus.dann.math.matrix.hessian;
 
 import org.encog.neural.flat.FlatNetwork;
-import syncleus.dann.learn.ml.MLDataSet;
+import syncleus.dann.data.DataSet;
 import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.math.matrix.SimpleRealMatrix;
 import syncleus.dann.neural.networks.BasicNetwork;
@@ -37,7 +37,7 @@ public abstract class BasicHessian implements ComputeHessian {
     /**
      * The training data that provides the ideal values.
      */
-    protected MLDataSet training;
+    protected DataSet training;
 
     /**
      * The neural network that we would like to train.
@@ -73,7 +73,7 @@ public abstract class BasicHessian implements ComputeHessian {
      * {@inheritDoc}
      */
     @Override
-    public void init(final BasicNetwork theNetwork, final MLDataSet theTraining) {
+    public void init(final BasicNetwork theNetwork, final DataSet theTraining) {
 
         final int weightCount = theNetwork.getStructure().getFlat()
                 .getWeights().length;

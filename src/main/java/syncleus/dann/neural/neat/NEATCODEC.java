@@ -26,7 +26,7 @@ package org.encog.neural.neat;
 import syncleus.dann.evolve.GeneticError;
 import syncleus.dann.evolve.codec.GeneticCODEC;
 import syncleus.dann.evolve.genome.Genome;
-import syncleus.dann.learn.ml.MLMethod;
+import syncleus.dann.learn.Learning;
 import syncleus.dann.neural.activation.EncogActivationFunction;
 
 import java.io.Serializable;
@@ -63,7 +63,7 @@ public class NEATCODEC implements GeneticCODEC, Serializable {
      * {@inheritDoc}
      */
     @Override
-    public MLMethod decode(final Genome genome) {
+    public Learning decode(final Genome genome) {
         final NEATGenome neatGenome = (NEATGenome) genome;
         final NEATPopulation pop = (NEATPopulation) neatGenome.getPopulation();
         final List<NEATNeuronGene> neuronsChromosome = neatGenome
@@ -119,7 +119,7 @@ public class NEATCODEC implements GeneticCODEC, Serializable {
      * @return Not used.
      */
     @Override
-    public Genome encode(final MLMethod phenotype) {
+    public Genome encode(final Learning phenotype) {
         throw new GeneticError("Encoding of a NEAT network is not supported.");
     }
 

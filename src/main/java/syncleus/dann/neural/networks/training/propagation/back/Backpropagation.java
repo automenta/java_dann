@@ -23,7 +23,7 @@
  */
 package org.encog.neural.networks.training.propagation.back;
 
-import syncleus.dann.learn.ml.MLDataSet;
+import syncleus.dann.data.DataSet;
 import syncleus.dann.neural.networks.ContainsFlat;
 
 /**
@@ -80,7 +80,7 @@ public class Backpropagation extends Propagation implements Momentum,
      * @param network  The network that is to be trained.
      * @param training The training data to be used for backpropagation.
      */
-    public Backpropagation(final ContainsFlat network, final MLDataSet training) {
+    public Backpropagation(final ContainsFlat network, final DataSet training) {
         this(network, training, 0, 0);
         addStrategy(new SmartLearningRate());
         addStrategy(new SmartMomentum());
@@ -95,7 +95,7 @@ public class Backpropagation extends Propagation implements Momentum,
      *                     have on the current iteration.
      */
     public Backpropagation(final ContainsFlat network,
-                           final MLDataSet training, final double theLearnRate,
+                           final DataSet training, final double theLearnRate,
                            final double theMomentum) {
         super(network, training);
         ValidateNetwork.validateMethodToData(network, training);
