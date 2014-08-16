@@ -23,7 +23,7 @@
  */
 package syncleus.dann.util.factory.train;
 
-import syncleus.dann.data.DataSet;
+import syncleus.dann.data.Dataset;
 import syncleus.dann.learn.Learning;
 import syncleus.dann.learn.Training;
 import syncleus.dann.neural.networks.BasicNetwork;
@@ -42,7 +42,7 @@ public class SCGFactory {
      * @param args     The arguments to use.
      * @return The newly created trainer.
      */
-    public static Training create(final Learning method, final DataSet training,
+    public static Training create(final Learning method, final Dataset training,
                                  final String args) {
 
         if (!(method instanceof BasicNetwork)) {

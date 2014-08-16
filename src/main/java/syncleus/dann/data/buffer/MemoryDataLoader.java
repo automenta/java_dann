@@ -23,13 +23,13 @@
  */
 package syncleus.dann.data.buffer;
 
-import syncleus.dann.data.basic.BasicMLData;
-import syncleus.dann.data.basic.BasicMLDataPair;
-import syncleus.dann.data.basic.BasicMLDataSet;
+import syncleus.dann.data.basic.VectorData;
+import syncleus.dann.data.basic.VectorCase;
+import syncleus.dann.data.basic.VectorDataset;
 import syncleus.dann.data.buffer.codec.DataSetCODEC;
 import syncleus.dann.data.Data;
-import syncleus.dann.data.DataSample;
-import syncleus.dann.data.DataSet;
+import syncleus.dann.data.DataCase;
+import syncleus.dann.data.Dataset;
 
 /**
  * This class is used, together with a CODEC, load training data from some
@@ -49,7 +49,7 @@ public class MemoryDataLoader {
     /**
      * The dataset to load into.
      */
-    private BasicMLDataSet result;
+    private VectorDataset result;
 
     /**
      * Construct a loader with the specified CODEC.
@@ -67,11 +67,11 @@ public class MemoryDataLoader {
      *
      * @return The binary file to create.
      */
-    public final DataSet external2Memory() {
+    public final Dataset external2Memory() {
         this.status.report(0, 0, "Importing to memory");
 
         if (this.result == null) {
-            this.result = new BasicMLDataSet();
+            this.result = new VectorDataset();
         }
 
         final double[] input = new double[this.codec.getInputSize()];
@@ -87,13 +87,13 @@ public class MemoryDataLoader {
             Data a = null;
             MLData b = null;
 
-            a = new BasicMLData(input);
+            a = new VectorData(input);
 
             if (this.codec.getIdealSize() > 0) {
-                b = new BasicMLData(ideal);
+                b = new VectorData(ideal);
             }
 
-            final DataSample pair = new BasicMLDataPair(a, b);
+            final DataCase pair = new VectorCase(a, b);
             pair.setSignificance(significance[0]);
             this.result.add(pair);
 
@@ -120,7 +120,7 @@ public class MemoryDataLoader {
     /**
      * @return The resuling dataset.
      */
-    public BasicMLDataSet getResult() {
+    public VectorDataset getResult() {
         return this.result;
     }
 
@@ -136,7 +136,7 @@ public class MemoryDataLoader {
      *
      * @param theResult The resulting dataset.
      */
-    public void setResult(final BasicMLDataSet theResult) {
+    public void setResult(final VectorDataset theResult) {
         this.result = theResult;
     }
 

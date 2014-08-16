@@ -22,10 +22,10 @@ import org.junit.Assert;
 import org.junit.Test;
 import syncleus.dann.graph.BidirectedEdge;
 import syncleus.dann.graph.path.pathfinding.DijkstraPathFinder;
-import syncleus.dann.graph.search.Grid;
-import syncleus.dann.graph.search.GridNode;
+import syncleus.dann.math.geometry.GraphGrid2D;
 
 import java.util.List;
+import syncleus.dann.math.geometry.GraphGrid2D.GridNode;
 
 public class TestDijkstraPathFinder {
     private static final double INF = Double.POSITIVE_INFINITY;
@@ -90,7 +90,7 @@ public class TestDijkstraPathFinder {
 
     @Test
     public void testHardGrid() {
-        final Grid hardGrid = new Grid(HARD_GRID);
+        final GraphGrid2D hardGrid = new GraphGrid2D(HARD_GRID);
         final DijkstraPathFinder<GridNode, BidirectedEdge<GridNode>> pathFinder = new DijkstraPathFinder<>(
                 hardGrid);
 
@@ -108,7 +108,7 @@ public class TestDijkstraPathFinder {
 
     @Test
     public void testInfinityGrid() {
-        final Grid infinityGrid = new Grid(EASY_GRID);
+        final GraphGrid2D infinityGrid = new GraphGrid2D(EASY_GRID);
         final DijkstraPathFinder<GridNode, BidirectedEdge<GridNode>> pathFinder = new DijkstraPathFinder<>(
                 infinityGrid);
 

@@ -23,7 +23,7 @@
  */
 package syncleus.dann.neural.freeform.training;
 
-import syncleus.dann.data.DataSet;
+import syncleus.dann.data.Dataset;
 import syncleus.dann.math.EncogMath;
 
 import java.io.Serializable;
@@ -72,7 +72,7 @@ public class FreeformResilientPropagation extends FreeformPropagationTraining
      * @param theTraining The training set.
      */
     public FreeformResilientPropagation(final FreeformNetwork theNetwork,
-                                        final DataSet theTraining) {
+                                        final Dataset theTraining) {
         this(theNetwork, theTraining, RPROPConst.DEFAULT_INITIAL_UPDATE,
                 RPROPConst.DEFAULT_MAX_STEP);
     }
@@ -86,7 +86,7 @@ public class FreeformResilientPropagation extends FreeformPropagationTraining
      * @param theMaxStep    The max step.
      */
     public FreeformResilientPropagation(final FreeformNetwork theNetwork,
-                                        final DataSet theTraining, final double initialUpdate,
+                                        final Dataset theTraining, final double initialUpdate,
                                         final double theMaxStep) {
         super(theNetwork, theTraining);
         this.maxStep = theMaxStep;

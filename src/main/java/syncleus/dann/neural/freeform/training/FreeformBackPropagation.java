@@ -23,7 +23,7 @@
  */
 package syncleus.dann.neural.freeform.training;
 
-import syncleus.dann.data.DataSet;
+import syncleus.dann.data.Dataset;
 
 import java.io.Serializable;
 import syncleus.dann.neural.freeform.FreeformConnection;
@@ -65,7 +65,7 @@ public class FreeformBackPropagation extends FreeformPropagationTraining
      * @param theMomentum     The momentum.
      */
     public FreeformBackPropagation(final FreeformNetwork theNetwork,
-                                   final DataSet theTraining, final double theLearningRate,
+                                   final Dataset theTraining, final double theLearningRate,
                                    final double theMomentum) {
         super(theNetwork, theTraining);
         theNetwork.tempTrainingAllocate(1, 2);

@@ -23,7 +23,7 @@
  */
 package org.encog.neural.hyperneat;
 
-import syncleus.dann.data.basic.BasicMLData;
+import syncleus.dann.data.basic.VectorData;
 import syncleus.dann.evolve.GeneticError;
 import syncleus.dann.evolve.codec.GeneticCODEC;
 import syncleus.dann.evolve.genome.Genome;
@@ -69,7 +69,7 @@ public class HyperNEATCODEC implements GeneticCODEC {
         }
 
         final double c = this.maxWeight / (1.0 - this.minWeight);
-        final Data input = new BasicMLData(cppn.getInputCount());
+        final Data input = new VectorData(cppn.getInputCount());
 
         substrate.getLinks().stream().forEach((link) -> {
             final SubstrateNode source = link.getSource();

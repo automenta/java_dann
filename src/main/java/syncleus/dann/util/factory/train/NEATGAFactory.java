@@ -25,7 +25,7 @@ package syncleus.dann.util.factory.train;
 
 import syncleus.dann.evolve.train.basic.TrainEA;
 import syncleus.dann.learn.CalculateScore;
-import syncleus.dann.data.DataSet;
+import syncleus.dann.data.Dataset;
 import syncleus.dann.learn.Learning;
 import syncleus.dann.learn.Training;
 
@@ -41,7 +41,7 @@ public class NEATGAFactory {
      * @param argsStr  The arguments to use.
      * @return The newly created trainer.
      */
-    public Training create(final Learning method, final DataSet training,
+    public Training create(final Learning method, final Dataset training,
                           final String argsStr) {
 
         final CalculateScore score = new TrainingSetScore(training);

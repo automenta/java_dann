@@ -28,7 +28,7 @@ import syncleus.dann.RegressionLearning;
 import syncleus.dann.learn.AbstractLearning;
 import syncleus.dann.learn.ErrorLearning;
 import syncleus.dann.data.Data;
-import syncleus.dann.data.DataSet;
+import syncleus.dann.data.Dataset;
 import syncleus.dann.Classifying;
 import syncleus.dann.learn.MLResettable;
 import syncleus.dann.data.VectorEncodable;
@@ -42,7 +42,7 @@ import syncleus.dann.neural.networks.BasicNetwork;
 
 import java.util.Set;
 
-import syncleus.dann.data.basic.BasicMLData;
+import syncleus.dann.data.basic.VectorData;
 import syncleus.dann.math.EncogMath;
 import syncleus.dann.math.random.ConsistentRandomizer;
 import syncleus.dann.neural.activation.ActivationTANH;
@@ -244,7 +244,7 @@ public class FreeformNetwork extends AbstractLearning implements MLContext, Clon
      * {@inheritDoc}
      */
     @Override
-    public double calculateError(final DataSet data) {
+    public double calculateError(final Dataset data) {
         return EncogUtility.calculateRegressionError(this, data);
     }
 
@@ -288,7 +288,7 @@ public class FreeformNetwork extends AbstractLearning implements MLContext, Clon
     public Data compute(final Data input) {
 
         // Allocate result
-        final Data result = new BasicMLData(this.outputLayer.size());
+        final Data result = new VectorData(this.outputLayer.size());
 
         // Copy the input
         for (int i = 0; i < input.size(); i++) {

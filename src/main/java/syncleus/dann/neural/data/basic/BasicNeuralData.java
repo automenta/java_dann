@@ -24,14 +24,14 @@
 package org.encog.neural.data.basic;
 
 import org.encog.neural.data.NeuralData;
-import syncleus.dann.data.basic.BasicMLData;
+import syncleus.dann.data.basic.VectorData;
 import syncleus.dann.data.Data;
 
 /**
  * This is an alias class for Encog 2.5 compatibility. This class aliases
  * BasicMLData. Newer code should use BasicMLData in place of this class.
  */
-public class BasicNeuralData extends BasicMLData {
+public class BasicNeuralData extends VectorData {
 
     /**
      *

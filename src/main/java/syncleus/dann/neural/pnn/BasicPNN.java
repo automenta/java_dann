@@ -25,12 +25,12 @@ package org.encog.neural.pnn;
 
 import syncleus.dann.RegressionLearning;
 import syncleus.dann.learn.ErrorLearning;
-import syncleus.dann.data.DataSample;
-import syncleus.dann.data.DataSet;
+import syncleus.dann.data.DataCase;
+import syncleus.dann.data.Dataset;
 import syncleus.dann.data.Data;
 import syncleus.dann.Classifying;
-import syncleus.dann.data.basic.BasicMLData;
-import syncleus.dann.data.basic.BasicMLDataSet;
+import syncleus.dann.data.basic.VectorData;
+import syncleus.dann.data.basic.VectorDataset;
 import syncleus.dann.math.EncogUtility;
 import syncleus.dann.math.array.EngineArray;
 
@@ -71,7 +71,7 @@ public class BasicPNN extends AbstractPNN implements RegressionLearning, ErrorLe
     /**
      * The training samples that form the memory of this network.
      */
-    private BasicMLDataSet samples;
+    private VectorDataset samples;
 
     /**
      * Used for classification, the number of cases in each class.
@@ -114,7 +114,7 @@ public class BasicPNN extends AbstractPNN implements RegressionLearning, ErrorLe
         double psum = 0.0;
 
         int r = -1;
-        for (final DataSample pair : this.samples) {
+        for (final DataCase pair : this.samples) {
             r++;
 
             if (r == getExclude()) {
@@ -183,7 +183,7 @@ public class BasicPNN extends AbstractPNN implements RegressionLearning, ErrorLe
             }
         }
 
-        return new BasicMLData(out);
+        return new VectorData(out);
     }
 
     /**
@@ -203,7 +203,7 @@ public class BasicPNN extends AbstractPNN implements RegressionLearning, ErrorLe
     /**
      * @return the samples
      */
-    public BasicMLDataSet getSamples() {
+    public VectorDataset getSamples() {
         return this.samples;
     }
 
@@ -217,7 +217,7 @@ public class BasicPNN extends AbstractPNN implements RegressionLearning, ErrorLe
     /**
      * @param samples the samples to set
      */
-    public void setSamples(final BasicMLDataSet samples) {
+    public void setSamples(final VectorDataset samples) {
         this.samples = samples;
 
         // update counts per
@@ -226,7 +226,7 @@ public class BasicPNN extends AbstractPNN implements RegressionLearning, ErrorLe
             this.countPer = new int[getOutputCount()];
             this.priors = new double[getOutputCount()];
 
-            for (final DataSample pair : samples) {
+            for (final DataCase pair : samples) {
                 final int i = (int) pair.getIdeal().getData(0);
                 if (i >= this.countPer.length) {
                     throw new RuntimeException(
@@ -255,7 +255,7 @@ public class BasicPNN extends AbstractPNN implements RegressionLearning, ErrorLe
      * {@inheritDoc}
      */
     @Override
-    public double calculateError(final DataSet data) {
+    public double calculateError(final Dataset data) {
         if (getOutputMode() == PNNOutputMode.Classification) {
             return EncogUtility.calculateClassificationError(this, data);
         } else {

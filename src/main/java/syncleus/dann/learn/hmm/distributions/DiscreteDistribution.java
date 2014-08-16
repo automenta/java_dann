@@ -23,11 +23,11 @@
  */
 package syncleus.dann.learn.hmm.distributions;
 
-import syncleus.dann.data.basic.BasicMLData;
-import syncleus.dann.data.basic.BasicMLDataPair;
+import syncleus.dann.data.basic.VectorData;
+import syncleus.dann.data.basic.VectorCase;
 import syncleus.dann.data.Data;
-import syncleus.dann.data.DataSample;
-import syncleus.dann.data.DataSet;
+import syncleus.dann.data.DataCase;
+import syncleus.dann.data.Dataset;
 
 import java.util.Arrays;
 
@@ -111,7 +111,7 @@ public class DiscreteDistribution implements StateDistribution {
      * @param co THe data to fit to.
      */
     @Override
-    public void fit(final DataSet co) {
+    public void fit(final Dataset co) {
         if (co.size() < 1) {
             throw new IllegalArgumentException("Empty observation set");
         }
@@ -122,7 +122,7 @@ public class DiscreteDistribution implements StateDistribution {
                 this.probabilities[i][j] = 0.0;
             }
 
-            for (final DataSample o : co) {
+            for (final DataCase o : co) {
                 this.probabilities[i][(int) o.getInput().getData(i)]++;
             }
 
@@ -139,7 +139,7 @@ public class DiscreteDistribution implements StateDistribution {
      * @param weights The weights.
      */
     @Override
-    public void fit(final DataSet co, final double[] weights) {
+    public void fit(final Dataset co, final double[] weights) {
         if ((co.size() < 1) || (co.size() != weights.length)) {
             throw new IllegalArgumentException();
         }
@@ -148,7 +148,7 @@ public class DiscreteDistribution implements StateDistribution {
             Arrays.fill(this.probabilities[i], 0.0);
 
             int j = 0;
-            for (final DataSample o : co) {
+            for (final DataCase o : co) {
                 this.probabilities[i][(int) o.getInput().getData(i)] += weights[j++];
             }
         }
@@ -160,8 +160,8 @@ public class DiscreteDistribution implements StateDistribution {
      * @return The next element.
      */
     @Override
-    public DataSample generate() {
-        final Data result = new BasicMLData(this.probabilities.length);
+    public DataCase generate() {
+        final Data result = new VectorData(this.probabilities.length);
 
         for (int i = 0; i < this.probabilities.length; i++) {
             double rand = Math.random();
@@ -175,7 +175,7 @@ public class DiscreteDistribution implements StateDistribution {
             }
         }
 
-        return new BasicMLDataPair(result);
+        return new VectorCase(result);
     }
 
     /**
@@ -184,7 +184,7 @@ public class DiscreteDistribution implements StateDistribution {
      * @param o THe data pair.
      */
     @Override
-    public double probability(final DataSample o) {
+    public double probability(final DataCase o) {
 
         double result = 1;
 

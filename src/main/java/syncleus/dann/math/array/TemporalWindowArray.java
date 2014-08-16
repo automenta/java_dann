@@ -23,12 +23,12 @@
  */
 package syncleus.dann.math.array;
 
-import syncleus.dann.data.basic.BasicMLData;
-import syncleus.dann.data.basic.BasicMLDataPair;
-import syncleus.dann.data.basic.BasicMLDataSet;
+import syncleus.dann.data.basic.VectorData;
+import syncleus.dann.data.basic.VectorCase;
+import syncleus.dann.data.basic.VectorDataset;
 import syncleus.dann.data.Data;
-import syncleus.dann.data.DataSample;
-import syncleus.dann.data.DataSet;
+import syncleus.dann.data.DataCase;
+import syncleus.dann.data.Dataset;
 
 
 /**
@@ -149,15 +149,15 @@ public class TemporalWindowArray {
      * @param data The array to process.
      * @return A neural data set that contains the time-series.
      */
-    public final DataSet process(final double[] data) {
-        final DataSet result = new BasicMLDataSet();
+    public final Dataset process(final double[] data) {
+        final Dataset result = new VectorDataset();
 
         final int totalWindowSize = this.inputWindow + this.predictWindow;
         final int stopPoint = data.length - totalWindowSize;
 
         for (int i = 0; i < stopPoint; i++) {
-            final Data inputData = new BasicMLData(this.inputWindow);
-            final Data idealData = new BasicMLData(this.predictWindow);
+            final Data inputData = new VectorData(this.inputWindow);
+            final Data idealData = new VectorData(this.predictWindow);
 
             int index = i;
 
@@ -171,7 +171,7 @@ public class TemporalWindowArray {
                 idealData.setData(j, data[index++]);
             }
 
-            final DataSample pair = new BasicMLDataPair(inputData, idealData);
+            final DataCase pair = new VectorCase(inputData, idealData);
             result.add(pair);
         }
 
@@ -199,8 +199,8 @@ public class TemporalWindowArray {
      * @param data The data.
      * @return The data set.
      */
-    public DataSet process(final double[][] data) {
-        final DataSet result = new BasicMLDataSet();
+    public Dataset process(final double[][] data) {
+        final Dataset result = new VectorDataset();
         for (final double[] doubles : data) {
             result.add(processToPair(doubles));
         }
@@ -213,15 +213,15 @@ public class TemporalWindowArray {
      * @param data The array to process.
      * @return MLDatapair containing data.
      */
-    public DataSample processToPair(final double[] data) {
+    public DataCase processToPair(final double[] data) {
 
-        DataSample pair = null;
+        DataCase pair = null;
         final int totalWindowSize = inputWindow + predictWindow;
         final int stopPoint = data.length - totalWindowSize;
 
         for (int i = 0; i < stopPoint; i++) {
-            final Data inputData = new BasicMLData(inputWindow);
-            final Data idealData = new BasicMLData(predictWindow);
+            final Data inputData = new VectorData(inputWindow);
+            final Data idealData = new VectorData(predictWindow);
 
             int index = i;
 
@@ -235,7 +235,7 @@ public class TemporalWindowArray {
                 idealData.setData(j, data[index++]);
             }
 
-            pair = new BasicMLDataPair(inputData, idealData);
+            pair = new VectorCase(inputData, idealData);
         }
         return pair;
     }

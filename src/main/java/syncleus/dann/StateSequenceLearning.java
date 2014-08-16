@@ -23,7 +23,7 @@
  */
 package syncleus.dann;
 
-import syncleus.dann.data.DataSet;
+import syncleus.dann.data.Dataset;
 import syncleus.dann.learn.Learning;
 
 
@@ -38,7 +38,7 @@ public interface StateSequenceLearning extends Learning {
      * @param oseq The sequence.
      * @return The states.
      */
-    int[] getStatesForSequence(DataSet oseq);
+    int[] getStatesForSequence(Dataset oseq);
 
     /**
      * Determine the probability of the specified sequence.
@@ -46,7 +46,7 @@ public interface StateSequenceLearning extends Learning {
      * @param oseq The sequence.
      * @return The probability.
      */
-    double probability(DataSet oseq);
+    double probability(Dataset oseq);
 
     /**
      * Determine the probability for the specified sequence and states.
@@ -55,5 +55,5 @@ public interface StateSequenceLearning extends Learning {
      * @param states The states.
      * @return The probability.
      */
-    double probability(DataSet seq, int[] states);
+    double probability(Dataset seq, int[] states);
 }

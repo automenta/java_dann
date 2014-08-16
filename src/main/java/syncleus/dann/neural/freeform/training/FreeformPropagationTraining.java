@@ -28,9 +28,15 @@ package syncleus.dann.neural.freeform.training;
 
 
 
-import syncleus.dann.data.DataSample;
+
+
+
+
+
+
+import syncleus.dann.data.DataCase;
 import syncleus.dann.data.Data;
-import syncleus.dann.data.DataSet;
+import syncleus.dann.data.Dataset;
 import syncleus.dann.learn.TrainingImplementationType;
 import syncleus.dann.learn.Learning;
 import syncleus.dann.learn.BasicTraining;
@@ -68,7 +74,7 @@ public abstract class FreeformPropagationTraining extends BasicTraining
     /**
      * The training set to use.
      */
-    private final DataSet training;
+    private final Dataset training;
 
     /**
      * The number of iterations.
@@ -113,7 +119,7 @@ public abstract class FreeformPropagationTraining extends BasicTraining
      * @param theTraining The training data.
      */
     public FreeformPropagationTraining(final FreeformNetwork theNetwork,
-                                       final DataSet theTraining) {
+                                       final Dataset theTraining) {
         super(TrainingImplementationType.Iterative);
         this.network = theNetwork;
         this.training = theTraining;
@@ -235,7 +241,7 @@ public abstract class FreeformPropagationTraining extends BasicTraining
      * {@inheritDoc}
      */
     @Override
-    public DataSet getTraining() {
+    public Dataset getTraining() {
         return this.training;
     }
 
@@ -282,7 +288,7 @@ public abstract class FreeformPropagationTraining extends BasicTraining
         final ErrorCalculation errorCalc = new ErrorCalculation();
         this.visited.clear();
 
-        for (final DataSample pair : this.training) {
+        for (final DataCase pair : this.training) {
             final Data input = pair.getInput();
             final Data ideal = pair.getIdeal();
             final Data actual = this.network.compute(input);
@@ -315,7 +321,7 @@ public abstract class FreeformPropagationTraining extends BasicTraining
         final ErrorCalculation errorCalc = new ErrorCalculation();
         this.visited.clear();
 
-        for (final DataSample pair : this.training) {
+        for (final DataCase pair : this.training) {
             final Data input = pair.getInput();
             final Data ideal = pair.getIdeal();
             final Data actual = this.network.compute(input);

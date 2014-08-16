@@ -23,13 +23,13 @@
  */
 package syncleus.dann.learn.hmm.train.kmeans;
 
-import syncleus.dann.data.DataSample;
-import syncleus.dann.data.DataSet;
+import syncleus.dann.data.DataCase;
+import syncleus.dann.data.Dataset;
 import syncleus.dann.learn.TrainingImplementationType;
 import syncleus.dann.learn.Learning;
-import syncleus.dann.data.DataSetSequence;
+import syncleus.dann.data.DataSequence;
 import java.util.ArrayList;
-import syncleus.dann.data.basic.BasicMLDataSet;
+import syncleus.dann.data.basic.VectorDataset;
 import syncleus.dann.learn.hmm.HiddenMarkovModel;
 import syncleus.dann.learn.hmm.alog.ViterbiCalculator;
 import syncleus.dann.learn.hmm.distributions.StateDistribution;
@@ -56,15 +56,15 @@ import syncleus.dann.learn.kmeans.KMeansUtil;
 public class KMeansTrainHMM implements Training {
     private final Clusters clusters;
     private final int states;
-    private final DataSetSequence sequnces;
+    private final DataSequence sequnces;
     private boolean done;
     private final HiddenMarkovModel modelHMM;
     private int iteration;
     private HiddenMarkovModel method;
-    private final DataSetSequence training;
+    private final DataSequence training;
 
     public KMeansTrainHMM(final HiddenMarkovModel method,
-                       final DataSetSequence sequences) {
+                       final DataSequence sequences) {
         this.method = method;
         this.modelHMM = method;
         this.sequnces = sequences;
@@ -114,7 +114,7 @@ public class KMeansTrainHMM implements Training {
     }
 
     @Override
-    public DataSet getTraining() {
+    public Dataset getTraining() {
         return this.training;
     }
 
@@ -144,7 +144,7 @@ public class KMeansTrainHMM implements Training {
 
     private void learnOpdf(final HiddenMarkovModel hmm) {
         for (int i = 0; i < hmm.getStateCount(); i++) {
-            final Collection<DataSample> clusterObservations = this.clusters
+            final Collection<DataCase> clusterObservations = this.clusters
                     .cluster(i);
 
             if (clusterObservations.size() < 1) {
@@ -152,7 +152,7 @@ public class KMeansTrainHMM implements Training {
                         .createNewDistribution();
                 hmm.setStateDistribution(i, o);
             } else {
-                final DataSet temp = new BasicMLDataSet();
+                final Dataset temp = new VectorDataset();
                 clusterObservations.stream().forEach(temp::add);
                 hmm.getStateDistribution(i).fit(temp);
             }
@@ -218,12 +218,12 @@ public class KMeansTrainHMM implements Training {
     private boolean optimizeCluster(final HiddenMarkovModel hmm) {
         boolean modif = false;
 
-        for (final DataSet obsSeq : this.sequnces.getSequences()) {
+        for (final Dataset obsSeq : this.sequnces.getSequences()) {
             final ViterbiCalculator vc = new ViterbiCalculator(obsSeq, hmm);
             final int states[] = vc.stateSequence();
 
             for (int i = 0; i < states.length; i++) {
-                final DataSample o = obsSeq.get(i);
+                final DataCase o = obsSeq.get(i);
 
                 if (this.clusters.cluster(o) != states[i]) {
                     modif = true;
@@ -258,49 +258,49 @@ public class KMeansTrainHMM implements Training {
     }
     
     static class Clusters {
-        private final HashMap<DataSample, Integer> clustersHash;
-        private final ArrayList<Collection<DataSample>> clusters;
+        private final HashMap<DataCase, Integer> clustersHash;
+        private final ArrayList<Collection<DataCase>> clusters;
 
-        public Clusters(final int k, final DataSet observations) {
+        public Clusters(final int k, final Dataset observations) {
 
             this.clustersHash = new HashMap<>();
             this.clusters = new ArrayList<>();
 
-            final List<DataSample> list = new ArrayList<>();
-            for (final DataSample pair : observations) {
+            final List<DataCase> list = new ArrayList<>();
+            for (final DataCase pair : observations) {
                 list.add(pair);
             }
-            final KMeansUtil<DataSample> kmc = new KMeansUtil<>(k, list);
+            final KMeansUtil<DataCase> kmc = new KMeansUtil<>(k, list);
             kmc.process();
 
             for (int i = 0; i < k; i++) {
-                final Collection<DataSample> cluster = kmc.get(i);
+                final Collection<DataCase> cluster = kmc.get(i);
                 this.clusters.add(cluster);
 
-                for (final DataSample element : cluster) {
+                for (final DataCase element : cluster) {
                     this.clustersHash.put(element, i);
                 }
             }
         }
 
-        public Collection<DataSample> cluster(final int clusterNb) {
+        public Collection<DataCase> cluster(final int clusterNb) {
             return this.clusters.get(clusterNb);
         }
 
-        public int cluster(final DataSample o) {
+        public int cluster(final DataCase o) {
             return this.clustersHash.get(o);
         }
 
-        public boolean isInCluster(final DataSample o, final int x) {
+        public boolean isInCluster(final DataCase o, final int x) {
             return cluster(o) == x;
         }
 
-        public void put(final DataSample o, final int clusterNb) {
+        public void put(final DataCase o, final int clusterNb) {
             this.clustersHash.put(o, clusterNb);
             this.clusters.get(clusterNb).add(o);
         }
 
-        public void remove(final DataSample o, final int clusterNb) {
+        public void remove(final DataCase o, final int clusterNb) {
             this.clustersHash.put(o, -1);
             this.clusters.get(clusterNb).remove(o);
         }

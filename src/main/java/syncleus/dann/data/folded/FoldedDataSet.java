@@ -23,10 +23,10 @@
  */
 package syncleus.dann.data.folded;
 
-import syncleus.dann.data.basic.BasicMLDataPair;
+import syncleus.dann.data.basic.VectorCase;
 import syncleus.dann.data.Data;
-import syncleus.dann.data.DataSample;
-import syncleus.dann.data.DataSet;
+import syncleus.dann.data.DataCase;
+import syncleus.dann.data.Dataset;
 
 import java.util.Iterator;
 
@@ -38,7 +38,7 @@ import java.util.Iterator;
  * This dataset works off of an underlying dataset. By default there are no
  * folds (fold size 1). Call the fold method to create more folds.
  */
-public class FoldedDataSet implements DataSet {
+public class FoldedDataSet implements Dataset {
 
     /**
      * Error message: adds are not supported.
@@ -48,7 +48,7 @@ public class FoldedDataSet implements DataSet {
     /**
      * The underlying dataset.
      */
-    private final DataSet underlying;
+    private final Dataset underlying;
 
     /**
      * The fold that we are currently on.
@@ -91,7 +91,7 @@ public class FoldedDataSet implements DataSet {
      *
      * @param theUnderlying The underlying folded dataset.
      */
-    public FoldedDataSet(final DataSet theUnderlying) {
+    public FoldedDataSet(final Dataset theUnderlying) {
         this.underlying = theUnderlying;
         fold(1);
     }
@@ -125,7 +125,7 @@ public class FoldedDataSet implements DataSet {
      * @param inputData Not used.
      */
     @Override
-    public void add(final DataSample inputData) {
+    public void add(final DataCase inputData) {
         throw new RuntimeException(FoldedDataSet.ADD_NOT_SUPPORTED);
 
     }
@@ -219,7 +219,7 @@ public class FoldedDataSet implements DataSet {
      * {@inheritDoc}
      */
     @Override
-    public void getRecord(final long index, final DataSample pair) {
+    public void getRecord(final long index, final DataCase pair) {
         this.underlying.getRecord(getCurrentFoldOffset() + index, pair);
     }
 
@@ -234,7 +234,7 @@ public class FoldedDataSet implements DataSet {
     /**
      * @return The underlying dataset.
      */
-    public DataSet getUnderlying() {
+    public Dataset getUnderlying() {
         return this.underlying;
     }
 
@@ -250,7 +250,7 @@ public class FoldedDataSet implements DataSet {
      * {@inheritDoc}
      */
     @Override
-    public Iterator<DataSample> iterator() {
+    public Iterator<DataCase> iterator() {
         return new FoldedIterator(this);
     }
 
@@ -258,7 +258,7 @@ public class FoldedDataSet implements DataSet {
      * {@inheritDoc}
      */
     @Override
-    public DataSet openAdditional() {
+    public Dataset openAdditional() {
         final FoldedDataSet folded = new FoldedDataSet(
                 this.underlying.openAdditional());
         folded.setOwner(this);
@@ -305,8 +305,8 @@ public class FoldedDataSet implements DataSet {
     }
 
     @Override
-    public DataSample get(final int index) {
-        final DataSample result = BasicMLDataPair.createPair(getInputSize(),
+    public DataCase get(final int index) {
+        final DataCase result = VectorCase.createPair(getInputSize(),
                 getIdealSize());
         this.getRecord(index, result);
         return result;

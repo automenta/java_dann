@@ -24,8 +24,8 @@
 package syncleus.dann.math.fitting.linear;
 
 import org.encog.neural.networks.training.propagation.TrainingContinuation;
-import syncleus.dann.data.DataSample;
-import syncleus.dann.data.DataSet;
+import syncleus.dann.data.DataCase;
+import syncleus.dann.data.Dataset;
 import syncleus.dann.learn.Learning;
 import syncleus.dann.learn.TrainingImplementationType;
 import syncleus.dann.learn.BasicTraining;
@@ -34,10 +34,10 @@ import syncleus.dann.math.EncogUtility;
 public class TrainLinearRegression extends BasicTraining {
 
     private final LinearRegression method;
-    private final DataSet training;
+    private final Dataset training;
 
     public TrainLinearRegression(final LinearRegression theMethod,
-                                 final DataSet theTraining) {
+                                 final Dataset theTraining) {
         super(
                 theMethod.getInputCount() == 1 ? TrainingImplementationType.OnePass
                         : TrainingImplementationType.Iterative);
@@ -49,7 +49,7 @@ public class TrainLinearRegression extends BasicTraining {
      * @return the training
      */
     @Override
-    public DataSet getTraining() {
+    public Dataset getTraining() {
         return training;
     }
 
@@ -61,7 +61,7 @@ public class TrainLinearRegression extends BasicTraining {
         double sumXY = 0;
         double sumX2 = 0;
 
-        for (final DataSample pair : this.training) {
+        for (final DataCase pair : this.training) {
             sumX += pair.getInputArray()[0];
             sumY += pair.getIdealArray()[0];
             sumX2 += Math.pow(pair.getInputArray()[0], 2);

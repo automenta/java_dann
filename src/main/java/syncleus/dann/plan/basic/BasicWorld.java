@@ -24,7 +24,7 @@
 package syncleus.dann.plan.basic;
 
 import syncleus.dann.plan.*;
-import syncleus.dann.plan.grid.GridState;
+import syncleus.dann.math.geometry.GridState;
 
 import java.util.ArrayList;
 import java.util.List;

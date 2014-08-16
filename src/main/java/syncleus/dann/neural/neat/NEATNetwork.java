@@ -23,9 +23,9 @@
  */
 package org.encog.neural.neat;
 
-import syncleus.dann.data.basic.BasicMLData;
+import syncleus.dann.data.basic.VectorData;
 import syncleus.dann.data.Data;
-import syncleus.dann.data.DataSet;
+import syncleus.dann.data.Dataset;
 import syncleus.dann.learn.ErrorLearning;
 import syncleus.dann.RegressionLearning;
 import syncleus.dann.math.EncogUtility;
@@ -165,7 +165,7 @@ public class NEATNetwork implements RegressionLearning, ErrorLearning, Serializa
      * @return The error percentage.
      */
     @Override
-    public double calculateError(final DataSet data) {
+    public double calculateError(final Dataset data) {
         return EncogUtility.calculateRegressionError(this, data);
     }
 
@@ -177,7 +177,7 @@ public class NEATNetwork implements RegressionLearning, ErrorLearning, Serializa
      */
     @Override
     public Data compute(final Data input) {
-        final Data result = new BasicMLData(this.outputCount);
+        final Data result = new VectorData(this.outputCount);
 
         // clear from previous
         EngineArray.fill(this.preActivation, 0.0);

@@ -23,7 +23,7 @@
  */
 package syncleus.dann.learn;
 
-import syncleus.dann.data.DataSet;
+import syncleus.dann.data.Dataset;
 import syncleus.dann.learn.Learning;
 import syncleus.dann.learn.TrainingImplementationType;
 import syncleus.dann.learn.strategy.Strategy;
@@ -50,7 +50,7 @@ public interface Training {
     /**
      * @return The training data to use.
      */
-    DataSet getTraining();
+    Dataset getTraining();
 
     /**
      * Perform one iteration of training.

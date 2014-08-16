@@ -23,12 +23,12 @@
  */
 package org.encog.neural.data;
 
-import syncleus.dann.data.DataSample;
+import syncleus.dann.data.DataCase;
 
 /**
  * This is an alias class for Encog 2.5 compatibility. This class aliases
  * MLDataPair. Newer code should use MLDataPair in place of this class.
  */
-public interface NeuralDataPair extends DataSample {
+public interface NeuralDataPair extends DataCase {
 
 }

@@ -1,18 +1,18 @@
 package syncleus.dann.data.auto;
 
-import syncleus.dann.data.basic.BasicMLDataPair;
+import syncleus.dann.data.basic.VectorCase;
 import syncleus.dann.data.file.csv.CSVFormat;
 import syncleus.dann.data.file.csv.ReadCSV;
 import syncleus.dann.data.Data;
-import syncleus.dann.data.DataSample;
-import syncleus.dann.data.DataSet;
+import syncleus.dann.data.DataCase;
+import syncleus.dann.data.Dataset;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class AutoFloatDataSet implements Serializable, DataSet {
+public class AutoFloatDataSet implements Serializable, Dataset {
 
     private final int sourceInputCount;
     private final int sourceIdealCount;
@@ -23,7 +23,7 @@ public class AutoFloatDataSet implements Serializable, DataSet {
     private float normalizedMin = -1;
     private boolean normalizationEnabled = false;
 
-    public class AutoFloatIterator implements Iterator<DataSample> {
+    public class AutoFloatIterator implements Iterator<DataCase> {
 
         /**
          * The index that the iterator is currently at.
@@ -42,7 +42,7 @@ public class AutoFloatDataSet implements Serializable, DataSet {
          * {@inheritDoc}
          */
         @Override
-        public final DataSample next() {
+        public final DataCase next() {
             if (!hasNext()) {
                 return null;
             }
@@ -69,7 +69,7 @@ public class AutoFloatDataSet implements Serializable, DataSet {
     }
 
     @Override
-    public Iterator<DataSample> iterator() {
+    public Iterator<DataCase> iterator() {
         return new AutoFloatIterator();
     }
 
@@ -100,7 +100,7 @@ public class AutoFloatDataSet implements Serializable, DataSet {
     }
 
     @Override
-    public void getRecord(final long index, final DataSample pair) {
+    public void getRecord(final long index, final DataCase pair) {
 
         int columnID = 0;
 
@@ -139,7 +139,7 @@ public class AutoFloatDataSet implements Serializable, DataSet {
     }
 
     @Override
-    public DataSet openAdditional() {
+    public Dataset openAdditional() {
         return this;
     }
 
@@ -156,7 +156,7 @@ public class AutoFloatDataSet implements Serializable, DataSet {
     }
 
     @Override
-    public void add(final DataSample inputData) {
+    public void add(final DataCase inputData) {
         throw new RuntimeException("Add's not supported by this dataset.");
 
     }
@@ -172,12 +172,12 @@ public class AutoFloatDataSet implements Serializable, DataSet {
     }
 
     @Override
-    public DataSample get(final int index) {
+    public DataCase get(final int index) {
         if (index >= size()) {
             return null;
         }
 
-        final DataSample result = BasicMLDataPair.createPair(getInputSize(),
+        final DataCase result = VectorCase.createPair(getInputSize(),
                 this.getIdealSize());
         getRecord(index, result);
         return result;

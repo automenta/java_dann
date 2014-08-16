@@ -26,7 +26,7 @@ package syncleus.dann.evolve.train.basic;
 import syncleus.dann.evolve.exception.EAError;
 import syncleus.dann.evolve.population.Population;
 import syncleus.dann.learn.CalculateScore;
-import syncleus.dann.data.DataSet;
+import syncleus.dann.data.Dataset;
 import syncleus.dann.learn.Learning;
 import syncleus.dann.learn.TrainingImplementationType;
 import syncleus.dann.learn.Training;
@@ -62,7 +62,7 @@ public class TrainEA extends BasicEA implements Training {
      * @param thePopulation The population.
      * @param trainingData  The training data.
      */
-    public TrainEA(final Population thePopulation, final DataSet trainingData) {
+    public TrainEA(final Population thePopulation, final Dataset trainingData) {
         super(thePopulation, new TrainingSetScore(trainingData));
     }
 
@@ -163,7 +163,7 @@ public class TrainEA extends BasicEA implements Training {
      * @return null, not used.
      */
     @Override
-    public DataSet getTraining() {
+    public Dataset getTraining() {
         return null;
     }
 

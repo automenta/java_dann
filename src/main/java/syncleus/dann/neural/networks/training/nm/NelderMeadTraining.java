@@ -23,7 +23,7 @@
  */
 package org.encog.neural.networks.training.nm;
 
-import syncleus.dann.data.DataSet;
+import syncleus.dann.data.Dataset;
 import syncleus.dann.learn.Learning;
 import syncleus.dann.learn.TrainingImplementationType;
 import syncleus.dann.learn.BasicTraining;
@@ -101,7 +101,7 @@ public class NelderMeadTraining extends BasicTraining {
      * @param training The training set to use.
      */
     public NelderMeadTraining(final BasicNetwork network,
-                              final DataSet training) {
+                              final Dataset training) {
         this(network, training, 100);
     }
 
@@ -114,7 +114,7 @@ public class NelderMeadTraining extends BasicTraining {
      *                  of different weights that will be tried.
      */
     public NelderMeadTraining(final BasicNetwork network,
-                              final DataSet training, final double stepValue) {
+                              final Dataset training, final double stepValue) {
         super(TrainingImplementationType.OnePass);
         this.network = network;
         setTraining(training);

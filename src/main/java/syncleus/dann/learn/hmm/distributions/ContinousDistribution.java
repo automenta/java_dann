@@ -23,10 +23,10 @@
  */
 package syncleus.dann.learn.hmm.distributions;
 
-import syncleus.dann.data.basic.BasicMLData;
-import syncleus.dann.data.basic.BasicMLDataPair;
-import syncleus.dann.data.DataSample;
-import syncleus.dann.data.DataSet;
+import syncleus.dann.data.basic.VectorData;
+import syncleus.dann.data.basic.VectorCase;
+import syncleus.dann.data.DataCase;
+import syncleus.dann.data.Dataset;
 import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.math.matrix.MatrixMath;
 import syncleus.dann.math.matrix.SimpleRealMatrix;
@@ -133,7 +133,7 @@ public class ContinousDistribution implements StateDistribution {
      * {@inheritDoc}
      */
     @Override
-    public void fit(final DataSet co) {
+    public void fit(final Dataset co) {
         final double[] weights = new double[co.size()];
         Arrays.fill(weights, 1. / co.size());
 
@@ -144,7 +144,7 @@ public class ContinousDistribution implements StateDistribution {
      * {@inheritDoc}
      */
     @Override
-    public void fit(final DataSet co, final double[] weights) {
+    public void fit(final Dataset co, final double[] weights) {
         if ((co.size() < 1) || (co.size() != weights.length)) {
             throw new IllegalArgumentException();
         }
@@ -154,7 +154,7 @@ public class ContinousDistribution implements StateDistribution {
         for (int r = 0; r < this.dimension; r++) {
             int i = 0;
 
-            for (final DataSample o : co) {
+            for (final DataCase o : co) {
                 mean[r] += o.getInput().getData(r) * weights[i++];
             }
         }
@@ -162,7 +162,7 @@ public class ContinousDistribution implements StateDistribution {
         // Compute covariance
         final double[][] covariance = new double[this.dimension][this.dimension];
         int i = 0;
-        for (final DataSample o : co) {
+        for (final DataCase o : co) {
             final double[] obs = o.getInput().getData();
             final double[] omm = new double[obs.length];
 
@@ -186,7 +186,7 @@ public class ContinousDistribution implements StateDistribution {
      * {@inheritDoc}
      */
     @Override
-    public DataSample generate() {
+    public DataCase generate() {
         final double[] d = new double[this.dimension];
 
         for (int i = 0; i < this.dimension; i++) {
@@ -194,7 +194,7 @@ public class ContinousDistribution implements StateDistribution {
         }
 
         final double[] d2 = MatrixMath.multiply(this.covarianceL, d);
-        return new BasicMLDataPair(new BasicMLData(EngineArray.add(d2,
+        return new VectorCase(new VectorData(EngineArray.add(d2,
                 this.mean)));
     }
 
@@ -202,7 +202,7 @@ public class ContinousDistribution implements StateDistribution {
      * {@inheritDoc}
      */
     @Override
-    public double probability(final DataSample o) {
+    public double probability(final DataCase o) {
         final double[] v = o.getInputArray();
         final SimpleRealMatrix vmm = SimpleRealMatrix.createColumnMatrix(EngineArray.subtract(v,
                 this.mean));

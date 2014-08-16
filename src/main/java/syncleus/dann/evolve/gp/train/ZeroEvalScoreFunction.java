@@ -23,7 +23,7 @@
  */
 package org.encog.ml.prg.train;
 
-import syncleus.dann.data.basic.BasicMLData;
+import syncleus.dann.data.basic.VectorData;
 import syncleus.dann.learn.CalculateScore;
 import syncleus.dann.data.Data;
 import syncleus.dann.learn.Learning;
@@ -53,7 +53,7 @@ public class ZeroEvalScoreFunction implements CalculateScore, Serializable {
     public double calculateScore(final Learning genome) {
         final EncogProgram prg = (EncogProgram) genome;
         final PrgPopulation pop = (PrgPopulation) prg.getPopulation();
-        final Data inputData = new BasicMLData(pop.getContext()
+        final Data inputData = new VectorData(pop.getContext()
                 .getDefinedVariables().size());
         prg.compute(inputData);
         return 0;

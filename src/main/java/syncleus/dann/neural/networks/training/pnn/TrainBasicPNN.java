@@ -23,14 +23,14 @@
  */
 package org.encog.neural.networks.training.pnn;
 
-import syncleus.dann.data.DataSample;
+import syncleus.dann.data.DataCase;
 import syncleus.dann.data.Data;
-import syncleus.dann.data.DataSet;
+import syncleus.dann.data.Dataset;
 import syncleus.dann.learn.TrainingImplementationType;
 import syncleus.dann.learn.Learning;
-import syncleus.dann.data.basic.BasicMLData;
-import syncleus.dann.data.basic.BasicMLDataPair;
-import syncleus.dann.data.basic.BasicMLDataSet;
+import syncleus.dann.data.basic.VectorData;
+import syncleus.dann.data.basic.VectorCase;
+import syncleus.dann.data.basic.VectorDataset;
 import syncleus.dann.learn.BasicTraining;
 import syncleus.dann.math.array.EngineArray;
 
@@ -87,7 +87,7 @@ public class TrainBasicPNN extends BasicTraining implements CalculationCriteria 
     /**
      * The training data.
      */
-    private final DataSet training;
+    private final Dataset training;
 
     /**
      * The maximum error to allow.
@@ -125,7 +125,7 @@ public class TrainBasicPNN extends BasicTraining implements CalculationCriteria 
      * @param network  The network to train.
      * @param training The training data.
      */
-    public TrainBasicPNN(final BasicPNN network, final DataSet training) {
+    public TrainBasicPNN(final BasicPNN network, final Dataset training) {
         super(TrainingImplementationType.OnePass);
         this.network = network;
         this.training = training;
@@ -195,7 +195,7 @@ public class TrainBasicPNN extends BasicTraining implements CalculationCriteria 
      * @param deriv    Should we find the derivative.
      * @return The error.
      */
-    public double calculateError(final DataSet training, final boolean deriv) {
+    public double calculateError(final Dataset training, final boolean deriv) {
 
         double err, totErr;
         double diff;
@@ -213,7 +213,7 @@ public class TrainBasicPNN extends BasicTraining implements CalculationCriteria 
 
         this.network.setExclude((int) training.getRecordCount());
 
-        final DataSample pair = BasicMLDataPair.createPair(
+        final DataCase pair = VectorCase.createPair(
                 training.getInputSize(), training.getIdealSize());
 
         final double[] out = new double[this.network.getOutputCount()];
@@ -356,7 +356,7 @@ public class TrainBasicPNN extends BasicTraining implements CalculationCriteria 
             }
         }
 
-        final DataSample pair = BasicMLDataPair.createPair(this.network
+        final DataCase pair = VectorCase.createPair(this.network
                 .getSamples().getInputSize(), this.network.getSamples()
                 .getIdealSize());
 
@@ -519,7 +519,7 @@ public class TrainBasicPNN extends BasicTraining implements CalculationCriteria 
             }
         }
 
-        return new BasicMLData(out);
+        return new VectorData(out);
     }
 
     /**
@@ -574,7 +574,7 @@ public class TrainBasicPNN extends BasicTraining implements CalculationCriteria 
         preIteration();
 
         if (!this.samplesLoaded) {
-            this.network.setSamples(new BasicMLDataSet(this.training));
+            this.network.setSamples(new VectorDataset(this.training));
             this.samplesLoaded = true;
         }
 

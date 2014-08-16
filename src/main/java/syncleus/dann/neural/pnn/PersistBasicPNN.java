@@ -23,12 +23,12 @@
  */
 package org.encog.neural.pnn;
 
-import syncleus.dann.data.basic.BasicMLData;
-import syncleus.dann.data.basic.BasicMLDataPair;
-import syncleus.dann.data.basic.BasicMLDataSet;
+import syncleus.dann.data.basic.VectorData;
+import syncleus.dann.data.basic.VectorCase;
+import syncleus.dann.data.basic.VectorDataset;
 import syncleus.dann.data.file.csv.CSVFormat;
 import syncleus.dann.data.Data;
-import syncleus.dann.data.DataSample;
+import syncleus.dann.data.DataCase;
 import syncleus.dann.math.array.EngineArray;
 
 import java.io.InputStream;
@@ -140,7 +140,7 @@ public class PersistBasicPNN implements EncogPersistor {
 
         final EncogReadHelper in = new EncogReadHelper(is);
         EncogFileSection section;
-        final BasicMLDataSet samples = new BasicMLDataSet();
+        final VectorDataset samples = new VectorDataset();
         Map<String, String> networkParams = null;
         PNNKernelType kernel = null;
         PNNOutputMode outmodel = null;
@@ -175,15 +175,15 @@ public class PersistBasicPNN implements EncogPersistor {
                     final List<String> cols = EncogFileSection
                             .splitColumns(line);
                     int index = 0;
-                    final Data inputData = new BasicMLData(inputCount);
+                    final Data inputData = new VectorData(inputCount);
                     for (int i = 0; i < inputCount; i++) {
                         inputData.setData(i,
                                 CSVFormat.EG_FORMAT.parse(cols.get(index++)));
                     }
-                    final Data idealData = new BasicMLData(outputCount);
+                    final Data idealData = new VectorData(outputCount);
                     idealData.setData(0,
                             CSVFormat.EG_FORMAT.parse(cols.get(index++)));
-                    final DataSample pair = new BasicMLDataPair(inputData,
+                    final DataCase pair = new VectorCase(inputData,
                             idealData);
                     samples.add(pair);
                 }
@@ -228,7 +228,7 @@ public class PersistBasicPNN implements EncogPersistor {
         out.addSubSection("SAMPLES");
 
         if (pnn.getSamples() != null) {
-            for (final DataSample pair : pnn.getSamples()) {
+            for (final DataCase pair : pnn.getSamples()) {
                 for (int i = 0; i < pair.getInput().size(); i++) {
                     out.addColumn(pair.getInput().getData(i));
                 }

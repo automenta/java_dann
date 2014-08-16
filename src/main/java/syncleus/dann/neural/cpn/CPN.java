@@ -27,9 +27,9 @@ import syncleus.dann.RegressionLearning;
 import syncleus.dann.learn.AbstractLearning;
 import syncleus.dann.learn.ErrorLearning;
 import syncleus.dann.data.Data;
-import syncleus.dann.data.DataSet;
+import syncleus.dann.data.Dataset;
 import syncleus.dann.learn.MLResettable;
-import syncleus.dann.data.basic.BasicMLData;
+import syncleus.dann.data.basic.VectorData;
 import syncleus.dann.math.EncogMath;
 import syncleus.dann.math.EncogUtility;
 import syncleus.dann.math.matrix.SimpleRealMatrix;
@@ -109,7 +109,7 @@ public class CPN extends AbstractLearning implements RegressionLearning, MLReset
      * @return The error percentage.
      */
     @Override
-    public double calculateError(final DataSet data) {
+    public double calculateError(final Dataset data) {
         return EncogUtility.calculateRegressionError(this, data);
     }
 
@@ -129,7 +129,7 @@ public class CPN extends AbstractLearning implements RegressionLearning, MLReset
      * @return The output.
      */
     public Data computeInstar(final Data input) {
-        final Data result = new BasicMLData(this.instarCount);
+        final Data result = new VectorData(this.instarCount);
         int w, i, j;
         double sum, sumWinners, maxOut;
         int winner = 0;
@@ -174,7 +174,7 @@ public class CPN extends AbstractLearning implements RegressionLearning, MLReset
      * @return The output.
      */
     public Data computeOutstar(final Data input) {
-        final Data result = new BasicMLData(this.outstarCount);
+        final Data result = new VectorData(this.outstarCount);
 
         double sum = 0;
 

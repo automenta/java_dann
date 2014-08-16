@@ -23,7 +23,7 @@
  */
 package syncleus.dann.math.fitting.gaussian;
 
-import syncleus.dann.data.basic.BasicMLData;
+import syncleus.dann.data.basic.VectorData;
 import syncleus.dann.data.Data;
 import syncleus.dann.RegressionLearning;
 import syncleus.dann.math.matrix.MatrixMath;
@@ -62,7 +62,7 @@ public class GaussianFitting implements RegressionLearning {
 
     @Override
     public Data compute(final Data input) {
-        final BasicMLData result = new BasicMLData(1);
+        final VectorData result = new VectorData(1);
 
         final SimpleRealMatrix m1 = SimpleRealMatrix.createRowMatrix(input.getData());
         final SimpleRealMatrix m2 = MatrixMath.subtract(m1, this.mu);

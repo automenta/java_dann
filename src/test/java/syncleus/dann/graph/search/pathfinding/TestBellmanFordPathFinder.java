@@ -23,10 +23,10 @@ import org.junit.Test;
 import syncleus.dann.graph.BidirectedEdge;
 import syncleus.dann.graph.DirectedEdge;
 import syncleus.dann.graph.path.pathfinding.BellmanFordPathFinder;
-import syncleus.dann.graph.search.DirectedGrid;
-import syncleus.dann.graph.search.GridNode;
+import syncleus.dann.math.geometry.DirectedGraphGrid2D;
 
 import java.util.List;
+import syncleus.dann.math.geometry.GraphGrid2D.GridNode;
 
 public class TestBellmanFordPathFinder {
     private static final double INF = Double.POSITIVE_INFINITY;
@@ -91,7 +91,7 @@ public class TestBellmanFordPathFinder {
 
     @Test
     public void testHardGrid() {
-        final DirectedGrid hardGrid = new DirectedGrid(HARD_GRID);
+        final DirectedGraphGrid2D hardGrid = new DirectedGraphGrid2D(HARD_GRID);
         final BellmanFordPathFinder<GridNode, DirectedEdge<GridNode>> pathFinder = new BellmanFordPathFinder<>(
                 hardGrid);
 
@@ -109,7 +109,7 @@ public class TestBellmanFordPathFinder {
 
     @Test
     public void testInfinityGrid() {
-        final DirectedGrid infinityGrid = new DirectedGrid(EASY_GRID);
+        final DirectedGraphGrid2D infinityGrid = new DirectedGraphGrid2D(EASY_GRID);
         final BellmanFordPathFinder<GridNode, DirectedEdge<GridNode>> pathFinder = new BellmanFordPathFinder<>(
                 infinityGrid);
 

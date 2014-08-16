@@ -24,8 +24,8 @@
 package syncleus.dann.learn.svm.training;
 
 import syncleus.dann.data.Data;
-import syncleus.dann.data.DataSample;
-import syncleus.dann.data.DataSet;
+import syncleus.dann.data.DataCase;
+import syncleus.dann.data.Dataset;
 import syncleus.dann.learn.svm.svm_node;
 import syncleus.dann.learn.svm.svm_problem;
 
@@ -42,7 +42,7 @@ public final class EncodeSVMProblem {
      *                    only a single output. This value is typically zero.
      * @return The SVM problem.
      */
-    public static svm_problem encode(final DataSet training,
+    public static svm_problem encode(final Dataset training,
                                      final int outputIndex) {
         try {
             final svm_problem result = new svm_problem();
@@ -54,7 +54,7 @@ public final class EncodeSVMProblem {
 
             int elementIndex = 0;
 
-            for (final DataSample pair : training) {
+            for (final DataCase pair : training) {
                 final Data input = pair.getInput();
                 final Data output = pair.getIdeal();
                 result.x[elementIndex] = new svm_node[input.size()];

@@ -23,6 +23,7 @@
  */
 package syncleus.dann.math;
 
+import syncleus.dann.math.geometry.TrigonometricAlgebraic;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

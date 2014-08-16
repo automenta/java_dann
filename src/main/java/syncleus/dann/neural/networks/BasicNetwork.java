@@ -28,13 +28,13 @@ import syncleus.dann.RegressionLearning;
 import syncleus.dann.learn.AbstractLearning;
 import syncleus.dann.learn.ErrorLearning;
 import syncleus.dann.data.Data;
-import syncleus.dann.data.DataSet;
+import syncleus.dann.data.Dataset;
 import syncleus.dann.learn.MLFactory;
 import syncleus.dann.Classifying;
 import syncleus.dann.learn.MLResettable;
 import syncleus.dann.data.VectorEncodable;
 import org.encog.neural.flat.FlatNetwork;
-import syncleus.dann.data.basic.BasicMLData;
+import syncleus.dann.data.basic.VectorData;
 import syncleus.dann.data.file.csv.CSVFormat;
 import syncleus.dann.data.language.NumberList;
 import syncleus.dann.math.EncogMath;
@@ -193,7 +193,7 @@ public class BasicNetwork extends AbstractLearning implements ContainsFlat, MLCo
      * @return The error percentage.
      */
     @Override
-    public double calculateError(final DataSet data) {
+    public double calculateError(final Dataset data) {
         return EncogUtility.calculateRegressionError(this, data);
     }
 
@@ -246,7 +246,7 @@ public class BasicNetwork extends AbstractLearning implements ContainsFlat, MLCo
      * @param output The output.
      */
     public void compute(final double[] input, final double[] output) {
-        final BasicMLData input2 = new BasicMLData(input);
+        final VectorData input2 = new VectorData(input);
         final Data output2 = this.compute(input2);
         EngineArray.arrayCopy(output2.getData(), output);
     }
@@ -260,7 +260,7 @@ public class BasicNetwork extends AbstractLearning implements ContainsFlat, MLCo
     @Override
     public Data compute(final Data input) {
         try {
-            final Data result = new BasicMLData(this.structure.getFlat()
+            final Data result = new VectorData(this.structure.getFlat()
                     .getOutputCount());
             this.structure.getFlat().compute(input.getData(), result.getData());
             return result;

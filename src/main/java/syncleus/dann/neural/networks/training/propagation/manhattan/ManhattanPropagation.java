@@ -23,7 +23,7 @@
  */
 package org.encog.neural.networks.training.propagation.manhattan;
 
-import syncleus.dann.data.DataSet;
+import syncleus.dann.data.Dataset;
 import syncleus.dann.neural.networks.ContainsFlat;
 
 /**
@@ -67,7 +67,7 @@ public class ManhattanPropagation extends Propagation implements LearningRate {
      * @param theLearnRate The learning rate.
      */
     public ManhattanPropagation(final ContainsFlat network,
-                                final DataSet training, final double theLearnRate) {
+                                final Dataset training, final double theLearnRate) {
         super(network, training);
 
         this.learningRate = theLearnRate;

@@ -24,7 +24,7 @@
 package org.encog.neural.prune;
 
 import syncleus.dann.data.buffer.BufferedMLDataSet;
-import syncleus.dann.data.DataSet;
+import syncleus.dann.data.Dataset;
 import syncleus.dann.learn.strategy.StopTrainingStrategy;
 import syncleus.dann.neural.networks.BasicNetwork;
 import syncleus.dann.neural.pattern.NeuralNetworkPattern;
@@ -89,7 +89,7 @@ public class PruneIncremental extends ConcurrentJob {
     /**
      * The training set to use as different neural networks are evaluated.
      */
-    private final DataSet training;
+    private final Dataset training;
 
     /**
      * The pattern for which type of neural network we would like to create.
@@ -169,7 +169,7 @@ public class PruneIncremental extends ConcurrentJob {
      *                      network" from.
      * @param report        Object used to report status to.
      */
-    public PruneIncremental(final DataSet training,
+    public PruneIncremental(final Dataset training,
                             final NeuralNetworkPattern pattern, final int iterations,
                             final int weightTries, final int numTopResults,
                             final StatusReportable report) {
@@ -296,7 +296,7 @@ public class PruneIncremental extends ConcurrentJob {
     /**
      * @return The training set to use.
      */
-    public DataSet getTraining() {
+    public Dataset getTraining() {
         return this.training;
     }
 
@@ -387,7 +387,7 @@ public class PruneIncremental extends ConcurrentJob {
 
         final BasicNetwork network = context.getJobUnit();
         BufferedMLDataSet buffer = null;
-        DataSet useTraining = this.training;
+        Dataset useTraining = this.training;
 
         if (this.training instanceof BufferedMLDataSet) {
             buffer = (BufferedMLDataSet) this.training;

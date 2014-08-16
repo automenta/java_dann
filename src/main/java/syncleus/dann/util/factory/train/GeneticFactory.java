@@ -24,7 +24,7 @@
 package syncleus.dann.util.factory.train;
 
 import syncleus.dann.learn.MLResettable;
-import syncleus.dann.data.DataSet;
+import syncleus.dann.data.Dataset;
 import syncleus.dann.data.VectorEncodable;
 import syncleus.dann.learn.CalculateScore;
 import syncleus.dann.learn.Learning;
@@ -47,7 +47,7 @@ public class GeneticFactory {
      * @param argsStr  The arguments to use.
      * @return The newly created trainer.
      */
-    public Training create(final Learning method, final DataSet training,
+    public Training create(final Learning method, final Dataset training,
                           final String argsStr) {
 
         if (!(method instanceof VectorEncodable)) {

@@ -25,7 +25,7 @@ package org.encog.neural.networks.training;
 
 import syncleus.dann.data.buffer.BufferedMLDataSet;
 import syncleus.dann.learn.CalculateScore;
-import syncleus.dann.data.DataSet;
+import syncleus.dann.data.Dataset;
 import syncleus.dann.learn.Learning;
 import syncleus.dann.RegressionLearning;
 
@@ -39,14 +39,14 @@ public class TrainingSetScore implements CalculateScore {
     /**
      * The training set.
      */
-    private final DataSet training;
+    private final Dataset training;
 
     /**
      * Construct a training set score calculation.
      *
      * @param training The training data to use.
      */
-    public TrainingSetScore(final DataSet training) {
+    public TrainingSetScore(final Dataset training) {
         this.training = training;
     }
 

@@ -30,8 +30,8 @@ import syncleus.dann.learn.hmm.distributions.ContinousDistribution;
 import syncleus.dann.learn.hmm.distributions.DiscreteDistribution;
 import syncleus.dann.learn.hmm.distributions.StateDistribution;
 import syncleus.dann.learn.AbstractLearning;
-import syncleus.dann.data.DataSample;
-import syncleus.dann.data.DataSet;
+import syncleus.dann.data.DataCase;
+import syncleus.dann.data.Dataset;
 import syncleus.dann.StateSequenceLearning;
 
 import java.io.Serializable;
@@ -208,7 +208,7 @@ public class HiddenMarkovModel extends AbstractLearning implements StateSequence
     }
 
     @Override
-    public int[] getStatesForSequence(final DataSet seq) {
+    public int[] getStatesForSequence(final Dataset seq) {
         return (new ViterbiCalculator(seq, this)).stateSequence();
     }
 
@@ -224,24 +224,24 @@ public class HiddenMarkovModel extends AbstractLearning implements StateSequence
         return !isContinuous();
     }
 
-    public double lnProbability(final DataSet seq) {
+    public double lnProbability(final Dataset seq) {
         return (new ForwardBackwardScaledCalculator(seq, this)).lnProbability();
     }
 
     @Override
-    public double probability(final DataSet seq) {
+    public double probability(final Dataset seq) {
         return (new ForwardBackwardCalculator(seq, this)).probability();
     }
 
     @Override
-    public double probability(final DataSet seq, final int[] states) {
+    public double probability(final Dataset seq, final int[] states) {
         if ((seq.size() != states.length) || (seq.size() < 1)) {
             throw new IllegalArgumentException();
         }
 
         double probability = getPi(states[0]);
 
-        final Iterator<DataSample> oseqIterator = seq.iterator();
+        final Iterator<DataCase> oseqIterator = seq.iterator();
 
         for (int i = 0; i < (states.length - 1); i++) {
             probability *= getStateDistribution(states[i]).probability(

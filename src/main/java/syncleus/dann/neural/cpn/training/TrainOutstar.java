@@ -23,9 +23,9 @@
  */
 package org.encog.neural.cpn.training;
 
-import syncleus.dann.data.DataSample;
+import syncleus.dann.data.DataCase;
 import syncleus.dann.data.Data;
-import syncleus.dann.data.DataSet;
+import syncleus.dann.data.Dataset;
 import syncleus.dann.learn.TrainingImplementationType;
 import syncleus.dann.learn.Learning;
 import syncleus.dann.learn.BasicTraining;
@@ -53,7 +53,7 @@ public class TrainOutstar extends BasicTraining implements LearningRate {
      * The training data. Supervised training, so both input and ideal must be
      * provided.
      */
-    private final DataSet training;
+    private final Dataset training;
 
     /**
      * If the weights have not been initialized, then they must be initialized
@@ -68,7 +68,7 @@ public class TrainOutstar extends BasicTraining implements LearningRate {
      * @param theTraining     The training data, must provide ideal outputs.
      * @param theLearningRate The learning rate.
      */
-    public TrainOutstar(final CPN theNetwork, final DataSet theTraining,
+    public TrainOutstar(final CPN theNetwork, final Dataset theTraining,
                         final double theLearningRate) {
         super(TrainingImplementationType.Iterative);
         this.network = theNetwork;
@@ -106,7 +106,7 @@ public class TrainOutstar extends BasicTraining implements LearningRate {
     private void initWeight() {
         for (int i = 0; i < this.network.getOutstarCount(); i++) {
             int j = 0;
-            for (final DataSample pair : this.training) {
+            for (final DataCase pair : this.training) {
                 this.network.getWeightsInstarToOutstar().set(j++, i,
                         pair.getIdeal().getData(i));
             }
@@ -126,7 +126,7 @@ public class TrainOutstar extends BasicTraining implements LearningRate {
 
         final ErrorCalculation error = new ErrorCalculation();
 
-        for (final DataSample pair : this.training) {
+        for (final DataCase pair : this.training) {
             final Data out = this.network.computeInstar(pair.getInput());
 
             final int j = EngineArray.indexOfLargest(out.getData());

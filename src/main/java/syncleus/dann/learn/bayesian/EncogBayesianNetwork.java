@@ -25,8 +25,8 @@ package syncleus.dann.learn.bayesian;
 
 import syncleus.dann.learn.AbstractLearning;
 import syncleus.dann.learn.ErrorLearning;
-import syncleus.dann.data.DataSample;
-import syncleus.dann.data.DataSet;
+import syncleus.dann.data.DataCase;
+import syncleus.dann.data.Dataset;
 import syncleus.dann.data.Data;
 import syncleus.dann.learn.MLResettable;
 import syncleus.dann.Classifying;
@@ -846,7 +846,7 @@ public class EncogBayesianNetwork extends AbstractLearning implements Classifyin
      * {@inheritDoc}
      */
     @Override
-    public double calculateError(final DataSet data) {
+    public double calculateError(final Dataset data) {
 
         if (!this.hasValidClassificationTarget())
             return 1.0;
@@ -858,7 +858,7 @@ public class EncogBayesianNetwork extends AbstractLearning implements Classifyin
         int badCount = 0;
         int totalCount = 0;
 
-        for (final DataSample pair : data) {
+        for (final DataCase pair : data) {
             final int c = this.classify(pair.getInput());
             totalCount++;
             if (c != pair.getInput().getData(this.classificationTarget)) {

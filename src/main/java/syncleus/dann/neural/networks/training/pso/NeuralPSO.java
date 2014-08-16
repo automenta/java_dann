@@ -24,7 +24,7 @@
 package org.encog.neural.networks.training.pso;
 
 import syncleus.dann.learn.CalculateScore;
-import syncleus.dann.data.DataSet;
+import syncleus.dann.data.Dataset;
 import syncleus.dann.learn.Learning;
 import syncleus.dann.learn.TrainingImplementationType;
 import syncleus.dann.learn.BasicTraining;
@@ -147,7 +147,7 @@ public class NeuralPSO extends BasicTraining {
      *                    as this network.
      * @param trainingSet The training set.
      */
-    public NeuralPSO(final BasicNetwork network, final DataSet trainingSet) {
+    public NeuralPSO(final BasicNetwork network, final Dataset trainingSet) {
         this(network, new NguyenWidrowRandomizer(), new TrainingSetScore(
                 trainingSet), 20);
     }

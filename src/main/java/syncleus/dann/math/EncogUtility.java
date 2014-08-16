@@ -26,14 +26,14 @@ package syncleus.dann.math;
 
 import syncleus.dann.learn.MLContext;
 import syncleus.dann.RegressionLearning;
-import syncleus.dann.data.DataSample;
+import syncleus.dann.data.DataCase;
 import syncleus.dann.Classifying;
 import syncleus.dann.data.Data;
-import syncleus.dann.data.DataSet;
+import syncleus.dann.data.Dataset;
 import syncleus.dann.learn.Learning;
 import org.encog.neural.networks.training.propagation.Propagation;
 import org.encog.neural.networks.training.propagation.resilient.ResilientPropagation;
-import syncleus.dann.data.basic.BasicMLData;
+import syncleus.dann.data.basic.VectorData;
 import syncleus.dann.data.buffer.BufferedMLDataSet;
 import syncleus.dann.data.buffer.MemoryDataLoader;
 import syncleus.dann.data.buffer.codec.CSVDataCODEC;
@@ -82,7 +82,7 @@ public final class EncogUtility {
                 inputCount, outputCount, false);
         final BufferedMLDataSet buffer = new BufferedMLDataSet(binFile);
         buffer.beginLoad(inputCount, outputCount);
-        for (final DataSample pair : csv) {
+        for (final DataCase pair : csv) {
             buffer.add(pair);
         }
         buffer.endLoad();
@@ -99,13 +99,13 @@ public final class EncogUtility {
      * @param significance True, if there is a significance column.
      * @return The loaded dataset.
      */
-    public static DataSet loadCSV2Memory(final String filename,
+    public static Dataset loadCSV2Memory(final String filename,
                                            final int input, final int ideal, final boolean headers,
                                            final CSVFormat format, final boolean significance) {
         final DataSetCODEC codec = new CSVDataCODEC(new File(filename), format,
                 headers, input, ideal, significance);
         final MemoryDataLoader load = new MemoryDataLoader(codec);
-        final DataSet dataset = load.external2Memory();
+        final Dataset dataset = load.external2Memory();
         return dataset;
     }
 
@@ -117,8 +117,8 @@ public final class EncogUtility {
      * @param training The training set to evaluate.
      */
     public static void evaluate(final RegressionLearning network,
-                                final DataSet training) {
-        for (final DataSample pair : training) {
+                                final Dataset training) {
+        for (final DataCase pair : training) {
             final Data output = network.compute(pair.getInput());
             System.out.println("Input="
                     + EncogUtility.formatNeuralData(pair.getInput())
@@ -190,7 +190,7 @@ public final class EncogUtility {
      * @param minutes     The number of minutes to train for.
      */
     public static void trainConsole(final BasicNetwork network,
-                                    final DataSet trainingSet, final int minutes) {
+                                    final Dataset trainingSet, final int minutes) {
         final Propagation train = new ResilientPropagation(network, trainingSet);
         train.setThreadCount(0);
         EncogUtility.trainConsole(train, network, trainingSet, minutes);
@@ -206,7 +206,7 @@ public final class EncogUtility {
      * @param minutes     The number of minutes to train for.
      */
     public static void trainConsole(final Training train,
-                                    final BasicNetwork network, final DataSet trainingSet,
+                                    final BasicNetwork network, final Dataset trainingSet,
                                     final int minutes) {
 
         long remaining;
@@ -240,7 +240,7 @@ public final class EncogUtility {
      * @param error   The error level to train to.
      */
     public static void trainToError(final Learning method,
-                                    final DataSet dataSet, final double error) {
+                                    final Dataset dataSet, final double error) {
 
         Training train;
 
@@ -287,9 +287,9 @@ public final class EncogUtility {
 
     }
 
-    public static DataSet loadEGB2Memory(final File filename) {
+    public static Dataset loadEGB2Memory(final File filename) {
         final BufferedMLDataSet buffer = new BufferedMLDataSet(filename);
-        final DataSet result = buffer.loadToMemory();
+        final Dataset result = buffer.loadToMemory();
         buffer.close();
         return result;
     }
@@ -313,7 +313,7 @@ public final class EncogUtility {
         final BufferedMLDataSet buffer = new BufferedMLDataSet(
                 new File(binFile));
         buffer.beginLoad(inputCount, outputCount);
-        for (final DataSample pair : csv) {
+        for (final DataCase pair : csv) {
             buffer.add(pair);
         }
         buffer.endLoad();
@@ -329,8 +329,8 @@ public final class EncogUtility {
         final BufferedMLDataSet buffer = new BufferedMLDataSet(binFile);
         buffer.beginLoad(input.length, ideal.length);
         while (csv.next()) {
-            final BasicMLData inputData = new BasicMLData(input.length);
-            final BasicMLData idealData = new BasicMLData(ideal.length);
+            final VectorData inputData = new VectorData(input.length);
+            final VectorData idealData = new VectorData(ideal.length);
 
             // handle input data
             for (int i = 0; i < input.length; i++) {
@@ -350,13 +350,13 @@ public final class EncogUtility {
     }
 
     public static double calculateRegressionError(final RegressionLearning method,
-                                                  final DataSet data) {
+                                                  final Dataset data) {
 
         final ErrorCalculation errorCalculation = new ErrorCalculation();
         if (method instanceof MLContext)
             ((MLContext) method).clearContext();
 
-        for (final DataSample pair : data) {
+        for (final DataCase pair : data) {
             final Data actual = method.compute(pair.getInput());
             errorCalculation.updateError(actual.getData(), pair.getIdeal()
                     .getData(), pair.getSignificance());
@@ -365,7 +365,7 @@ public final class EncogUtility {
     }
 
     public static void saveCSV(final File targetFile, final CSVFormat format,
-                               final DataSet set) {
+                               final Dataset set) {
 
         FileWriter outFile = null;
         PrintWriter out = null;
@@ -374,7 +374,7 @@ public final class EncogUtility {
             outFile = new FileWriter(targetFile);
             out = new PrintWriter(outFile);
 
-            for (final DataSample data : set) {
+            for (final DataCase data : set) {
                 final StringBuilder line = new StringBuilder();
 
                 for (int i = 0; i < data.getInput().size(); i++) {
@@ -415,11 +415,11 @@ public final class EncogUtility {
      * @return The error.
      */
     public static double calculateClassificationError(
-            final Classifying method, final DataSet data) {
+            final Classifying method, final Dataset data) {
         int total = 0;
         int correct = 0;
 
-        for (final DataSample pair : data) {
+        for (final DataCase pair : data) {
             final int ideal = (int) pair.getIdeal().getData(0);
             final int actual = method.classify(pair.getInput());
             if (actual == ideal)
@@ -435,7 +435,7 @@ public final class EncogUtility {
      * @param f
      * @param data
      */
-    public static void saveEGB(final File f, final DataSet data) {
+    public static void saveEGB(final File f, final Dataset data) {
         final BufferedMLDataSet binary = new BufferedMLDataSet(f);
         binary.load(data);
         data.close();

@@ -23,11 +23,11 @@
  */
 package syncleus.dann.learn.kmeans;
 
-import syncleus.dann.data.basic.BasicMLDataPair;
+import syncleus.dann.data.basic.VectorCase;
 import syncleus.dann.data.DataCluster;
 import syncleus.dann.Clustering;
-import syncleus.dann.data.DataSample;
-import syncleus.dann.data.DataSet;
+import syncleus.dann.data.DataCase;
+import syncleus.dann.data.Dataset;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,10 +63,10 @@ public class KMeansClustering<M> implements Clustering<Data> {
      * @param theK   The number of clusters to use.
      * @param theSet The dataset to cluster.
      */
-    public KMeansClustering(final int theK, final DataSet theSet) {
-        final List<BasicMLDataPair> list = new ArrayList<>();
-        for (final DataSample pair : theSet) {
-            list.add((BasicMLDataPair) pair);
+    public KMeansClustering(final int theK, final Dataset theSet) {
+        final List<VectorCase> list = new ArrayList<>();
+        for (final DataCase pair : theSet) {
+            list.add((VectorCase) pair);
         }
         this.k = theK;
         this.kmeans = new KMeansUtil(this.k, list);

@@ -23,9 +23,9 @@
  */
 package org.encog.neural.flat;
 
-import syncleus.dann.data.basic.BasicMLDataPair;
-import syncleus.dann.data.DataSample;
-import syncleus.dann.data.DataSet;
+import syncleus.dann.data.basic.VectorCase;
+import syncleus.dann.data.DataCase;
+import syncleus.dann.data.Dataset;
 import syncleus.dann.math.EncogMath;
 import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.math.statistics.ErrorCalculation;
@@ -249,11 +249,11 @@ public class FlatNetwork implements Serializable, Cloneable {
      * @param data The training set.
      * @return The error percentage.
      */
-    public double calculateError(final DataSet data) {
+    public double calculateError(final Dataset data) {
         final ErrorCalculation errorCalculation = new ErrorCalculation();
 
         final double[] actual = new double[this.outputCount];
-        final DataSample pair = BasicMLDataPair.createPair(data.getInputSize(),
+        final DataCase pair = VectorCase.createPair(data.getInputSize(),
                 data.getIdealSize());
 
         for (int i = 0; i < data.getRecordCount(); i++) {

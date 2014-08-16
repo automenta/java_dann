@@ -33,7 +33,7 @@ import syncleus.dann.learn.bayesian.training.estimator.SimpleEstimator;
 import syncleus.dann.learn.bayesian.training.search.SearchNone;
 import syncleus.dann.learn.bayesian.training.search.k2.BayesSearch;
 import syncleus.dann.learn.bayesian.training.search.k2.SearchK2;
-import syncleus.dann.data.DataSet;
+import syncleus.dann.data.Dataset;
 import syncleus.dann.learn.Learning;
 import syncleus.dann.learn.Training;
 import syncleus.dann.util.factory.MLTrainFactory;
@@ -50,7 +50,7 @@ public class TrainBayesianFactory {
      * @param argsStr  The arguments to use.
      * @return The newly created trainer.
      */
-    public static Training create(final Learning method, final DataSet training,
+    public static Training create(final Learning method, final Dataset training,
                                  final String argsStr) {
         final Map<String, String> args = ArchitectureParse.parseParams(argsStr);
         final ParamsHolder holder = new ParamsHolder(args);

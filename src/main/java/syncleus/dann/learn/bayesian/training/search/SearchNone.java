@@ -26,7 +26,7 @@ package syncleus.dann.learn.bayesian.training.search;
 import syncleus.dann.learn.bayesian.EncogBayesianNetwork;
 import syncleus.dann.learn.bayesian.training.TrainBayesian;
 import syncleus.dann.learn.bayesian.training.search.k2.BayesSearch;
-import syncleus.dann.data.DataSet;
+import syncleus.dann.data.Dataset;
 
 /**
  * Simple class to perform no search for optimal network structure.
@@ -38,7 +38,7 @@ public class SearchNone implements BayesSearch {
      */
     @Override
     public void init(final TrainBayesian theTrainer,
-                     final EncogBayesianNetwork theNetwork, final DataSet theData) {
+                     final EncogBayesianNetwork theNetwork, final Dataset theData) {
         // TODO Auto-generated method stub
 
     }

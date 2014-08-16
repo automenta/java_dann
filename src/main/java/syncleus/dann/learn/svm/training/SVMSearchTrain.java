@@ -24,7 +24,7 @@
 package syncleus.dann.learn.svm.training;
 
 import org.encog.neural.networks.training.propagation.TrainingContinuation;
-import syncleus.dann.data.DataSet;
+import syncleus.dann.data.Dataset;
 import syncleus.dann.learn.Learning;
 import syncleus.dann.learn.TrainingImplementationType;
 import syncleus.dann.learn.svm.KernelType;
@@ -153,7 +153,7 @@ public class SVMSearchTrain extends BasicTraining {
      * @param method   The method to train.
      * @param training The training data for this network.
      */
-    public SVMSearchTrain(final SVM method, final DataSet training) {
+    public SVMSearchTrain(final SVM method, final Dataset training) {
         super(TrainingImplementationType.Iterative);
         this.network = method;
         setTraining(training);

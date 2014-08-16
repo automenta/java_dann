@@ -28,7 +28,7 @@ import syncleus.dann.evolve.genome.Genome;
 import syncleus.dann.evolve.population.BasicPopulation;
 import syncleus.dann.evolve.species.BasicSpecies;
 import syncleus.dann.data.Data;
-import syncleus.dann.data.DataSet;
+import syncleus.dann.data.Dataset;
 import syncleus.dann.learn.ErrorLearning;
 import syncleus.dann.RegressionLearning;
 import syncleus.dann.math.random.RandomFactory;
@@ -257,7 +257,7 @@ public class NEATPopulation extends BasicPopulation implements Serializable,
      * {@inheritDoc}
      */
     @Override
-    public double calculateError(final DataSet data) {
+    public double calculateError(final Dataset data) {
         updateBestNetwork();
         return this.bestNetwork.calculateError(data);
     }

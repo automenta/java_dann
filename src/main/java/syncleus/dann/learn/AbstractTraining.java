@@ -23,7 +23,7 @@
  */
 package syncleus.dann.learn;
 
-import syncleus.dann.data.DataSet;
+import syncleus.dann.data.Dataset;
 import syncleus.dann.learn.TrainingImplementationType;
 import syncleus.dann.learn.strategy.Strategy;
 import syncleus.dann.learn.strategy.end.EndTrainingStrategy;
@@ -48,7 +48,7 @@ public abstract class AbstractTraining implements Training {
     /**
      * The training data.
      */
-    private DataSet training;
+    private Dataset training;
 
     /**
      * The current error rate.
@@ -122,7 +122,7 @@ public abstract class AbstractTraining implements Training {
      * @return The training data to use.
      */
     @Override
-    public DataSet getTraining() {
+    public Dataset getTraining() {
         return this.training;
     }
 
@@ -189,7 +189,7 @@ public abstract class AbstractTraining implements Training {
      *
      * @param training The training object.
      */
-    public void setTraining(final DataSet training) {
+    public void setTraining(final Dataset training) {
         this.training = training;
     }
 

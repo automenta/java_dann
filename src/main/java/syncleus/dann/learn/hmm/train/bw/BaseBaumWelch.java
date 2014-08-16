@@ -26,9 +26,9 @@ package syncleus.dann.learn.hmm.train.bw;
 import syncleus.dann.learn.hmm.HiddenMarkovModel;
 import syncleus.dann.learn.hmm.alog.ForwardBackwardCalculator;
 import syncleus.dann.learn.hmm.distributions.StateDistribution;
-import syncleus.dann.data.DataSet;
+import syncleus.dann.data.Dataset;
 import syncleus.dann.learn.Learning;
-import syncleus.dann.data.DataSetSequence;
+import syncleus.dann.data.DataSequence;
 import syncleus.dann.learn.TrainingImplementationType;
 import syncleus.dann.learn.Training;
 import syncleus.dann.learn.strategy.Strategy;
@@ -56,10 +56,10 @@ import org.encog.neural.networks.training.propagation.TrainingContinuation;
 public abstract class BaseBaumWelch implements Training {
     private int iterations;
     private HiddenMarkovModel method;
-    private final DataSetSequence training;
+    private final DataSequence training;
 
     public BaseBaumWelch(final HiddenMarkovModel hmm,
-                         final DataSetSequence training) {
+                         final DataSequence training) {
         this.method = hmm;
         this.training = training;
     }
@@ -99,7 +99,7 @@ public abstract class BaseBaumWelch implements Training {
         return gamma;
     }
 
-    public abstract double[][][] estimateXi(DataSet sequence,
+    public abstract double[][][] estimateXi(Dataset sequence,
                                             ForwardBackwardCalculator fbc, HiddenMarkovModel hmm);
 
     @Override
@@ -108,7 +108,7 @@ public abstract class BaseBaumWelch implements Training {
     }
 
     public abstract ForwardBackwardCalculator generateForwardBackwardCalculator(
-            DataSet sequence, HiddenMarkovModel hmm);
+            Dataset sequence, HiddenMarkovModel hmm);
 
     @Override
     public double getError() {
@@ -136,7 +136,7 @@ public abstract class BaseBaumWelch implements Training {
     }
 
     @Override
-    public DataSet getTraining() {
+    public Dataset getTraining() {
         return this.training;
     }
 
@@ -166,7 +166,7 @@ public abstract class BaseBaumWelch implements Training {
         }
 
         int g = 0;
-        for (final DataSet obsSeq : this.training.getSequences()) {
+        for (final Dataset obsSeq : this.training.getSequences()) {
             final ForwardBackwardCalculator fbc = generateForwardBackwardCalculator(
                     obsSeq, this.method);
 
@@ -221,7 +221,7 @@ public abstract class BaseBaumWelch implements Training {
             int j = 0;
 
             int o = 0;
-            for (final DataSet obsSeq : this.training.getSequences()) {
+            for (final Dataset obsSeq : this.training.getSequences()) {
                 for (int t = 0; t < obsSeq.size(); t++, j++) {
                     sum += weights[j] = allGamma[o][t][i];
                 }

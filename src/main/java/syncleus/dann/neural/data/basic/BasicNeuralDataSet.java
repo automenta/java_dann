@@ -23,8 +23,8 @@
  */
 package org.encog.neural.data.basic;
 
-import syncleus.dann.data.basic.BasicMLDataSet;
-import syncleus.dann.data.DataSample;
+import syncleus.dann.data.basic.VectorDataset;
+import syncleus.dann.data.DataCase;
 
 import java.util.List;
 
@@ -32,7 +32,7 @@ import java.util.List;
  * This is an alias class for Encog 2.5 compatibility. This class aliases
  * BasicMLDataSet. Newer code should use BasicMLDataSet in place of this class.
  */
-public class BasicNeuralDataSet extends BasicMLDataSet implements NeuralDataSet {
+public class BasicNeuralDataSet extends VectorDataset implements NeuralDataSet {
 
     /**
      *
@@ -61,7 +61,7 @@ public class BasicNeuralDataSet extends BasicMLDataSet implements NeuralDataSet 
      *
      * @param theData The other list.
      */
-    public BasicNeuralDataSet(final List<DataSample> theData) {
+    public BasicNeuralDataSet(final List<DataCase> theData) {
         super(theData);
     }
 

@@ -23,12 +23,12 @@
  */
 package syncleus.dann.data.buffer;
 
-import syncleus.dann.data.basic.BasicMLDataPair;
-import syncleus.dann.data.basic.BasicMLDataSet;
+import syncleus.dann.data.basic.VectorCase;
+import syncleus.dann.data.basic.VectorDataset;
 import syncleus.dann.data.Data;
 import syncleus.dann.data.DataException;
-import syncleus.dann.data.DataSample;
-import syncleus.dann.data.DataSet;
+import syncleus.dann.data.DataCase;
+import syncleus.dann.data.Dataset;
 
 import java.io.File;
 import java.io.Serializable;
@@ -57,7 +57,7 @@ import java.util.List;
  * format, and can be used with any Encog platform. Encog binary files are
  * stored using "little endian" numbers.
  */
-public class BufferedMLDataSet implements DataSet, Serializable {
+public class BufferedMLDataSet implements Dataset, Serializable {
 
     /**
      * The version.
@@ -123,7 +123,7 @@ public class BufferedMLDataSet implements DataSet, Serializable {
      * @return An iterator.
      */
     @Override
-    public Iterator<DataSample> iterator() {
+    public Iterator<DataCase> iterator() {
         return new BufferedDataSetIterator(this);
     }
 
@@ -147,7 +147,7 @@ public class BufferedMLDataSet implements DataSet, Serializable {
      * @param pair  THe data to read.
      */
     @Override
-    public void getRecord(final long index, final DataSample pair) {
+    public void getRecord(final long index, final DataCase pair) {
         synchronized (this) {
             this.egb.setLocation((int) index);
             final double[] inputTarget = pair.getInputArray();
@@ -212,7 +212,7 @@ public class BufferedMLDataSet implements DataSet, Serializable {
      * @param pair The pair to add.
      */
     @Override
-    public void add(final DataSample pair) {
+    public void add(final DataCase pair) {
         if (!this.loading) {
             throw new DataException(BufferedMLDataSet.ERROR_ADD);
         }
@@ -357,10 +357,10 @@ public class BufferedMLDataSet implements DataSet, Serializable {
      *
      * @return A memory dataset.
      */
-    public DataSet loadToMemory() {
-        final BasicMLDataSet result = new BasicMLDataSet();
+    public Dataset loadToMemory() {
+        final VectorDataset result = new VectorDataset();
 
-        for (final DataSample pair : this) {
+        for (final DataCase pair : this) {
             result.add(pair);
         }
 
@@ -372,9 +372,9 @@ public class BufferedMLDataSet implements DataSet, Serializable {
      *
      * @param training The training set to load.
      */
-    public void load(final DataSet training) {
+    public void load(final Dataset training) {
         beginLoad(training.getInputSize(), training.getIdealSize());
-        for (final DataSample pair : training) {
+        for (final DataCase pair : training) {
             add(pair);
         }
         endLoad();
@@ -386,8 +386,8 @@ public class BufferedMLDataSet implements DataSet, Serializable {
     }
 
     @Override
-    public DataSample get(final int index) {
-        final DataSample result = BasicMLDataPair.createPair(getInputSize(),
+    public DataCase get(final int index) {
+        final DataCase result = VectorCase.createPair(getInputSize(),
                 getIdealSize());
         this.getRecord(index, result);
         return result;

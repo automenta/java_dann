@@ -24,8 +24,8 @@
 package syncleus.dann.learn.hmm.alog;
 
 import syncleus.dann.learn.hmm.HiddenMarkovModel;
-import syncleus.dann.data.DataSample;
-import syncleus.dann.data.DataSet;
+import syncleus.dann.data.DataCase;
+import syncleus.dann.data.Dataset;
 
 import java.util.Arrays;
 import java.util.EnumSet;
@@ -41,12 +41,12 @@ public class ForwardBackwardScaledCalculator extends ForwardBackwardCalculator {
     private final double[] ctFactors;
     private double lnProbability;
 
-    public ForwardBackwardScaledCalculator(final DataSet oseq,
+    public ForwardBackwardScaledCalculator(final Dataset oseq,
                                            final HiddenMarkovModel hmm) {
         this(oseq, hmm, EnumSet.of(Computation.ALPHA));
     }
 
-    public ForwardBackwardScaledCalculator(final DataSet oseq,
+    public ForwardBackwardScaledCalculator(final Dataset oseq,
                                            final HiddenMarkovModel hmm, final EnumSet<Computation> flags) {
         if (oseq.size() < 1) {
             throw new IllegalArgumentException();
@@ -66,7 +66,7 @@ public class ForwardBackwardScaledCalculator extends ForwardBackwardCalculator {
 
     @Override
     protected void computeAlpha(final HiddenMarkovModel hmm,
-                                final DataSet oseq) {
+                                final Dataset oseq) {
         this.alpha = new double[oseq.size()][hmm.getStateCount()];
 
         for (int i = 0; i < hmm.getStateCount(); i++) {
@@ -74,13 +74,13 @@ public class ForwardBackwardScaledCalculator extends ForwardBackwardCalculator {
         }
         scale(this.ctFactors, this.alpha, 0);
 
-        final Iterator<DataSample> seqIterator = oseq.iterator();
+        final Iterator<DataCase> seqIterator = oseq.iterator();
         if (seqIterator.hasNext()) {
             seqIterator.next();
         }
 
         for (int t = 1; t < oseq.size(); t++) {
-            final DataSample observation = seqIterator.next();
+            final DataCase observation = seqIterator.next();
 
             for (int i = 0; i < hmm.getStateCount(); i++) {
                 computeAlphaStep(hmm, observation, t, i);
@@ -90,7 +90,7 @@ public class ForwardBackwardScaledCalculator extends ForwardBackwardCalculator {
     }
 
     @Override
-    protected void computeBeta(final HiddenMarkovModel hmm, final DataSet oseq) {
+    protected void computeBeta(final HiddenMarkovModel hmm, final Dataset oseq) {
         this.beta = new double[oseq.size()][hmm.getStateCount()];
 
         for (int i = 0; i < hmm.getStateCount(); i++) {
@@ -105,7 +105,7 @@ public class ForwardBackwardScaledCalculator extends ForwardBackwardCalculator {
         }
     }
 
-    private void computeProbability(final DataSet oseq,
+    private void computeProbability(final Dataset oseq,
                                     final HiddenMarkovModel hmm, final EnumSet<Computation> flags) {
         this.lnProbability = 0.;
 

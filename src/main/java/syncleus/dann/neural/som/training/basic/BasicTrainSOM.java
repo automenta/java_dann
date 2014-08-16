@@ -23,12 +23,12 @@
  */
 package org.encog.neural.som.training.basic;
 
-import syncleus.dann.data.DataSample;
+import syncleus.dann.data.DataCase;
 import syncleus.dann.data.Data;
-import syncleus.dann.data.DataSet;
+import syncleus.dann.data.Dataset;
 import syncleus.dann.learn.TrainingImplementationType;
 import syncleus.dann.learn.Learning;
-import syncleus.dann.data.basic.BasicMLData;
+import syncleus.dann.data.basic.VectorData;
 import syncleus.dann.learn.BasicTraining;
 import syncleus.dann.math.Format;
 import syncleus.dann.math.matrix.MatrixMath;
@@ -151,7 +151,7 @@ public class BasicTrainSOM extends BasicTraining implements LearningRate {
      * @param neighborhood The neighborhood function to use.
      */
     public BasicTrainSOM(final SOM network, final double learningRate,
-                         final DataSet training, final NeighborhoodFunction neighborhood) {
+                         final Dataset training, final NeighborhoodFunction neighborhood) {
         super(TrainingImplementationType.Iterative);
         this.neighborhood = neighborhood;
         setTraining(training);
@@ -366,7 +366,7 @@ public class BasicTrainSOM extends BasicTraining implements LearningRate {
         this.correctionMatrix.clear();
 
         // Determine the BMU for each training element.
-        for (final DataSample pair : getTraining()) {
+        for (final DataCase pair : getTraining()) {
             final Data input = pair.getInput();
 
             final int bmu = this.bmuUtil.calculateBMU(input);
@@ -551,7 +551,7 @@ public class BasicTrainSOM extends BasicTraining implements LearningRate {
      */
     private static Data compute(final SOM som, final Data input) {
 
-        final Data result = new BasicMLData(som.getOutputCount());
+        final Data result = new VectorData(som.getOutputCount());
 
         for (int i = 0; i < som.getOutputCount(); i++) {
             final SimpleRealMatrix optr = som.getWeights().getRow(i);

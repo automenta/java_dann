@@ -23,10 +23,10 @@ import org.junit.Test;
 import syncleus.dann.graph.BidirectedEdge;
 import syncleus.dann.graph.path.pathfinding.AstarPathFinder;
 import syncleus.dann.graph.path.pathfinding.HeuristicPathCost;
-import syncleus.dann.graph.search.Grid;
-import syncleus.dann.graph.search.GridNode;
+import syncleus.dann.math.geometry.GraphGrid2D;
 
 import java.util.List;
+import syncleus.dann.math.geometry.GraphGrid2D.GridNode;
 
 public class TestAstarPathFinder {
     private static final double INF = Double.POSITIVE_INFINITY;
@@ -110,7 +110,7 @@ public class TestAstarPathFinder {
 
     @Test
     public void testHardGrid() {
-        final Grid hardGrid = new Grid(HARD_GRID);
+        final GraphGrid2D hardGrid = new GraphGrid2D(HARD_GRID);
         final AstarPathFinder<GridNode, BidirectedEdge<GridNode>> pathFinder = new AstarPathFinder<>(
                 hardGrid, new DistanceHeuristic());
 
@@ -128,7 +128,7 @@ public class TestAstarPathFinder {
 
     @Test
     public void testInfinityGrid() {
-        final Grid infinityGrid = new Grid(EASY_GRID);
+        final GraphGrid2D infinityGrid = new GraphGrid2D(EASY_GRID);
         final AstarPathFinder<GridNode, BidirectedEdge<GridNode>> pathFinder = new AstarPathFinder<>(
                 infinityGrid, new DistanceHeuristic());
 

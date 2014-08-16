@@ -25,7 +25,7 @@ package syncleus.dann.learn.bayesian.training.estimator;
 
 import syncleus.dann.learn.bayesian.EncogBayesianNetwork;
 import syncleus.dann.learn.bayesian.training.TrainBayesian;
-import syncleus.dann.data.DataSet;
+import syncleus.dann.data.Dataset;
 
 /**
  * An estimator is used during Bayesian training to determine optimal
@@ -41,7 +41,7 @@ public interface BayesEstimator {
      * @param theData    The data.
      */
     void init(TrainBayesian theTrainer, EncogBayesianNetwork theNetwork,
-              DataSet theData);
+              Dataset theData);
 
     /**
      * Perform an iteration.

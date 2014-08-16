@@ -25,7 +25,7 @@ package syncleus.dann.data;
 
 import java.util.List;
 import syncleus.dann.data.Data;
-import syncleus.dann.data.DataSet;
+import syncleus.dann.data.Dataset;
 
 /**
  * Defines a cluster. Usually used with the MLClustering method to break input
@@ -45,7 +45,7 @@ public interface DataCluster<M extends Data>  {
      *
      * @return A dataset.
      */
-    DataSet createDataSet();
+    Dataset createDataSet();
 
     /**
      * Get the specified data item by index.

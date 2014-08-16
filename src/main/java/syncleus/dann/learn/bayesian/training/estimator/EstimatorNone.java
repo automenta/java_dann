@@ -25,7 +25,7 @@ package syncleus.dann.learn.bayesian.training.estimator;
 
 import syncleus.dann.learn.bayesian.EncogBayesianNetwork;
 import syncleus.dann.learn.bayesian.training.TrainBayesian;
-import syncleus.dann.data.DataSet;
+import syncleus.dann.data.Dataset;
 
 /**
  * A simple estimator that does nothing.
@@ -37,7 +37,7 @@ public class EstimatorNone implements BayesEstimator {
      */
     @Override
     public void init(final TrainBayesian theTrainer,
-                     final EncogBayesianNetwork theNetwork, final DataSet theData) {
+                     final EncogBayesianNetwork theNetwork, final Dataset theData) {
 
     }
 

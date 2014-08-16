@@ -27,9 +27,9 @@ import syncleus.dann.RegressionLearning;
 import syncleus.dann.learn.AbstractLearning;
 import syncleus.dann.learn.ErrorLearning;
 import syncleus.dann.data.Data;
-import syncleus.dann.data.DataSet;
+import syncleus.dann.data.Dataset;
 import syncleus.dann.Classifying;
-import syncleus.dann.data.basic.BasicMLData;
+import syncleus.dann.data.basic.VectorData;
 import syncleus.dann.math.EncogUtility;
 
 /**
@@ -224,7 +224,7 @@ public class SVM extends AbstractLearning implements RegressionLearning, Classif
      * @return The error percentage.
      */
     @Override
-    public double calculateError(final DataSet data) {
+    public double calculateError(final Dataset data) {
 
         switch (getSVMType()) {
             case SupportVectorClassification:
@@ -270,7 +270,7 @@ public class SVM extends AbstractLearning implements RegressionLearning, Classif
                             + "and no model exists.");
         }
 
-        final Data result = new BasicMLData(1);
+        final Data result = new VectorData(1);
 
         final svm_node[] formattedInput = makeSparse(input);
 

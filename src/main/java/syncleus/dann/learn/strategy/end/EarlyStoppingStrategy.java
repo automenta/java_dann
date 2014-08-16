@@ -23,7 +23,7 @@
  */
 package syncleus.dann.learn.strategy.end;
 
-import syncleus.dann.data.DataSet;
+import syncleus.dann.data.Dataset;
 import syncleus.dann.learn.ErrorLearning;
 import syncleus.dann.learn.Training;
 
@@ -43,12 +43,12 @@ public class EarlyStoppingStrategy implements EndTrainingStrategy {
     /**
      * The validation set.
      */
-    private final DataSet validationSet;
+    private final Dataset validationSet;
 
     /**
      * The test set.
      */
-    private final DataSet testSet;
+    private final Dataset testSet;
 
     /**
      * The trainer.
@@ -118,8 +118,8 @@ public class EarlyStoppingStrategy implements EndTrainingStrategy {
      * @param theValidationSet The validation set.
      * @param theTestSet       The test set.
      */
-    public EarlyStoppingStrategy(final DataSet theValidationSet,
-                                 final DataSet theTestSet) {
+    public EarlyStoppingStrategy(final Dataset theValidationSet,
+                                 final Dataset theTestSet) {
         this(theValidationSet, theTestSet, 5, 5, 0.1);
     }
 
@@ -132,8 +132,8 @@ public class EarlyStoppingStrategy implements EndTrainingStrategy {
      * @param theAlpha         Stop once GL is below this value.
      * @param theMinEfficiency The minimum training efficiency to stop.
      */
-    public EarlyStoppingStrategy(final DataSet theValidationSet,
-                                 final DataSet theTestSet, final int theStripLength,
+    public EarlyStoppingStrategy(final Dataset theValidationSet,
+                                 final Dataset theTestSet, final int theStripLength,
                                  final double theAlpha, final double theMinEfficiency) {
         this.validationSet = theValidationSet;
         this.testSet = theTestSet;

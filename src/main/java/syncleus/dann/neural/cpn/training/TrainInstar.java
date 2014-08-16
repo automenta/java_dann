@@ -24,8 +24,8 @@
 package org.encog.neural.cpn.training;
 
 import syncleus.dann.data.Data;
-import syncleus.dann.data.DataSample;
-import syncleus.dann.data.DataSet;
+import syncleus.dann.data.DataCase;
+import syncleus.dann.data.Dataset;
 import syncleus.dann.learn.TrainingImplementationType;
 import syncleus.dann.learn.BasicTraining;
 import syncleus.dann.math.BoundMath;
@@ -47,7 +47,7 @@ public class TrainInstar extends BasicTraining implements LearningRate {
      * The training data. This is unsupervised training, so only the input
      * portion of the training data will be used.
      */
-    private final DataSet training;
+    private final Dataset training;
 
     /**
      * The learning rate.
@@ -70,7 +70,7 @@ public class TrainInstar extends BasicTraining implements LearningRate {
      *                        data. If set to true, then you must have the same number of
      *                        training elements as instar neurons.
      */
-    public TrainInstar(final CPN theNetwork, final DataSet theTraining,
+    public TrainInstar(final CPN theNetwork, final Dataset theTraining,
                        final double theLearningRate, final boolean theInitWeights) {
         super(TrainingImplementationType.Iterative);
         this.network = theNetwork;
@@ -116,7 +116,7 @@ public class TrainInstar extends BasicTraining implements LearningRate {
         }
 
         int i = 0;
-        for (final DataSample pair : this.training) {
+        for (final DataCase pair : this.training) {
             for (int j = 0; j < this.network.getInputCount(); j++) {
                 this.network.getWeightsInputToInstar().set(j, i,
                         pair.getInput().getData(j));
@@ -138,7 +138,7 @@ public class TrainInstar extends BasicTraining implements LearningRate {
 
         double worstDistance = Double.NEGATIVE_INFINITY;
 
-        for (final DataSample pair : this.training) {
+        for (final DataCase pair : this.training) {
             final Data out = this.network.computeInstar(pair.getInput());
 
             // determine winner

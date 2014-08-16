@@ -23,8 +23,8 @@
  */
 package syncleus.dann.learn.hmm.distributions;
 
-import syncleus.dann.data.DataSample;
-import syncleus.dann.data.DataSet;
+import syncleus.dann.data.DataCase;
+import syncleus.dann.data.Dataset;
 
 import java.io.Serializable;
 
@@ -46,7 +46,7 @@ public interface StateDistribution extends Cloneable, Serializable {
      *
      * @param set The data set to fit to.
      */
-    void fit(DataSet set);
+    void fit(Dataset set);
 
     /**
      * Fit this distribution to the specified data set, given the specified
@@ -55,14 +55,14 @@ public interface StateDistribution extends Cloneable, Serializable {
      * @param set     The data set to fit to.
      * @param weights The weights.
      */
-    void fit(DataSet set, double[] weights);
+    void fit(Dataset set, double[] weights);
 
     /**
      * Generate a random data pair, based on the probabilities.
      *
      * @return A random data pair.
      */
-    DataSample generate();
+    DataCase generate();
 
     /**
      * Determine the probability of the specified data pair.
@@ -70,5 +70,5 @@ public interface StateDistribution extends Cloneable, Serializable {
      * @param o The pair to consider.
      * @return The probability.
      */
-    double probability(DataSample o);
+    double probability(DataCase o);
 }

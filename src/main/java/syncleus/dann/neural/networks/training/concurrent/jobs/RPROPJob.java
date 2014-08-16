@@ -23,7 +23,7 @@
  */
 package org.encog.neural.networks.training.concurrent.jobs;
 
-import syncleus.dann.data.DataSet;
+import syncleus.dann.data.Dataset;
 import syncleus.dann.neural.networks.BasicNetwork;
 
 /**
@@ -49,7 +49,7 @@ public class RPROPJob extends TrainingJob {
      * @param training     The training data to use.
      * @param loadToMemory True if binary training data should be loaded to memory.
      */
-    public RPROPJob(final BasicNetwork network, final DataSet training,
+    public RPROPJob(final BasicNetwork network, final Dataset training,
                     final boolean loadToMemory) {
         super(network, training, loadToMemory);
     }

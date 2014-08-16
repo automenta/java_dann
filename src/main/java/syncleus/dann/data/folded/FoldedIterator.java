@@ -23,16 +23,16 @@
  */
 package syncleus.dann.data.folded;
 
-import syncleus.dann.data.basic.BasicMLDataPair;
+import syncleus.dann.data.basic.VectorCase;
 import syncleus.dann.data.DataException;
-import syncleus.dann.data.DataSample;
+import syncleus.dann.data.DataCase;
 
 import java.util.Iterator;
 
 /**
  * Used to iterate over a folded data set.
  */
-public class FoldedIterator implements Iterator<DataSample> {
+public class FoldedIterator implements Iterator<DataCase> {
 
     /**
      * The owner.
@@ -66,9 +66,9 @@ public class FoldedIterator implements Iterator<DataSample> {
      * {@inheritDoc}
      */
     @Override
-    public DataSample next() {
+    public DataCase next() {
         if (hasNext()) {
-            final DataSample pair = BasicMLDataPair.createPair(
+            final DataCase pair = VectorCase.createPair(
                     this.owner.getInputSize(), this.owner.getIdealSize());
             this.owner.getRecord(this.currentIndex++, pair);
             return pair;

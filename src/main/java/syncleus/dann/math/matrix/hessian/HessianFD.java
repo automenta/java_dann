@@ -24,8 +24,8 @@
 package syncleus.dann.math.matrix.hessian;
 
 import syncleus.dann.data.Data;
-import syncleus.dann.data.DataSample;
-import syncleus.dann.data.DataSet;
+import syncleus.dann.data.DataCase;
+import syncleus.dann.data.Dataset;
 import syncleus.dann.math.EncogMath;
 import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.math.matrix.SimpleRealMatrix;
@@ -85,7 +85,7 @@ public class HessianFD extends BasicHessian {
      * {@inheritDoc}
      */
     @Override
-    public void init(final BasicNetwork theNetwork, final DataSet theTraining) {
+    public void init(final BasicNetwork theNetwork, final Dataset theTraining) {
 
         super.init(theNetwork, theTraining);
         this.weightCount = theNetwork.getStructure().getFlat().getWeights().length;
@@ -122,7 +122,7 @@ public class HessianFD extends BasicHessian {
         final double[] derivative = new double[weightCount];
 
         // Loop over every training element
-        for (final DataSample pair : this.training) {
+        for (final DataCase pair : this.training) {
             EngineArray.fill(derivative, 0);
             final Data networkOutput = this.network.compute(pair.getInput());
 

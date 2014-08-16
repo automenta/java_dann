@@ -23,7 +23,7 @@
  */
 package syncleus.dann.data.specific;
 
-import syncleus.dann.data.basic.BasicMLDataSet;
+import syncleus.dann.data.basic.VectorDataset;
 import syncleus.dann.data.buffer.MemoryDataLoader;
 import syncleus.dann.data.buffer.codec.CSVDataCODEC;
 import syncleus.dann.data.buffer.codec.DataSetCODEC;
@@ -40,7 +40,7 @@ import java.io.File;
  * Because this class loads the CSV file to memory, it is quite fast, once the
  * data has been loaded.
  */
-public class CSVNeuralDataSet extends BasicMLDataSet {
+public class CSVNeuralDataSet extends VectorDataset {
 
     /**
      * Serial id.

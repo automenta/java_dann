@@ -23,9 +23,9 @@
  */
 package syncleus.dann.math.fitting.linear;
 
-import syncleus.dann.data.basic.BasicMLData;
+import syncleus.dann.data.basic.VectorData;
 import syncleus.dann.data.Data;
-import syncleus.dann.data.DataSet;
+import syncleus.dann.data.Dataset;
 import syncleus.dann.learn.ErrorLearning;
 import syncleus.dann.RegressionLearning;
 import syncleus.dann.math.EncogUtility;
@@ -72,11 +72,11 @@ public class LinearRegression implements RegressionLearning, ErrorLearning {
             sum[0] += this.weights[i + 1] * Math.pow(input.getData(i), i + 1);
         }
 
-        return new BasicMLData(sum);
+        return new VectorData(sum);
     }
 
     @Override
-    public double calculateError(final DataSet data) {
+    public double calculateError(final Dataset data) {
         return EncogUtility.calculateRegressionError(this, data);
     }
 }

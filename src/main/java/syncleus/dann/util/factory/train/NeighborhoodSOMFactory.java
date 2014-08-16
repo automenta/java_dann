@@ -25,7 +25,7 @@ package syncleus.dann.util.factory.train;
 
 import syncleus.dann.data.file.csv.CSVFormat;
 import syncleus.dann.data.language.NumberList;
-import syncleus.dann.data.DataSet;
+import syncleus.dann.data.Dataset;
 import syncleus.dann.learn.Learning;
 import syncleus.dann.learn.Training;
 import syncleus.dann.math.rbf.RBFEnum;
@@ -47,7 +47,7 @@ public class NeighborhoodSOMFactory {
      * @param argsStr  The arguments to use.
      * @return The newly created trainer.
      */
-    public static Training create(final Learning method, final DataSet training,
+    public static Training create(final Learning method, final Dataset training,
                                  final String argsStr) {
 
         if (!(method instanceof SOM)) {

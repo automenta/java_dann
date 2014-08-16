@@ -23,7 +23,7 @@
  */
 package org.encog.neural.networks.training.propagation.scg;
 
-import syncleus.dann.data.DataSet;
+import syncleus.dann.data.Dataset;
 import syncleus.dann.math.BoundNumbers;
 import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.neural.networks.ContainsFlat;
@@ -122,7 +122,7 @@ public class ScaledConjugateGradient extends Propagation {
      * @param training The training data.
      */
     public ScaledConjugateGradient(final ContainsFlat network,
-                                   final DataSet training) {
+                                   final Dataset training) {
         super(network, training);
 
         this.success = true;

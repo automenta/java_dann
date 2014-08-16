@@ -25,12 +25,12 @@ package syncleus.dann.data.temporal;
 
 import org.encog.neural.data.basic.BasicNeuralData;
 import org.encog.neural.data.basic.BasicNeuralDataSet;
-import syncleus.dann.data.basic.BasicMLData;
-import syncleus.dann.data.basic.BasicMLDataPair;
+import syncleus.dann.data.basic.VectorData;
+import syncleus.dann.data.basic.VectorCase;
 import syncleus.dann.data.language.time.TimeSpan;
 import syncleus.dann.data.language.time.TimeUnit;
 import syncleus.dann.data.Data;
-import syncleus.dann.data.DataSample;
+import syncleus.dann.data.DataCase;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -180,7 +180,7 @@ public class TemporalMLDataSet extends BasicNeuralDataSet implements
      */
 
     @Override
-    public void add(final DataSample inputData) {
+    public void add(final DataCase inputData) {
         throw new TemporalError(TemporalMLDataSet.ADD_NOT_SUPPORTED);
     }
 
@@ -346,10 +346,10 @@ public class TemporalMLDataSet extends BasicNeuralDataSet implements
                 - this.inputWindowSize;
 
         for (int i = start; i < range; i++) {
-            final BasicMLData input = generateInputNeuralData(i);
-            final BasicMLData ideal = generateOutputNeuralData(i
+            final VectorData input = generateInputNeuralData(i);
+            final VectorData ideal = generateOutputNeuralData(i
                     + this.inputWindowSize);
-            final BasicMLDataPair pair = new BasicMLDataPair(input, ideal);
+            final VectorCase pair = new VectorCase(input, ideal);
             super.add(pair);
         }
     }

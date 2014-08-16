@@ -23,9 +23,9 @@
  */
 package org.encog.neural.networks.training.propagation;
 
-import syncleus.dann.data.basic.BasicMLDataPair;
-import syncleus.dann.data.DataSample;
-import syncleus.dann.data.DataSet;
+import syncleus.dann.data.basic.VectorCase;
+import syncleus.dann.data.DataCase;
+import syncleus.dann.data.Dataset;
 import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.math.error.ErrorFunction;
 import syncleus.dann.math.statistics.ErrorCalculation;
@@ -99,12 +99,12 @@ public class GradientWorker implements EngineTask {
     /**
      * The pair to use for training.
      */
-    private final DataSample pair;
+    private final DataCase pair;
 
     /**
      * The training data.
      */
-    private final DataSet training;
+    private final Dataset training;
 
     /**
      * The high end of the training data.
@@ -141,7 +141,7 @@ public class GradientWorker implements EngineTask {
      * @param theHigh     The high index to use in the training data.
      */
     public GradientWorker(final FlatNetwork theNetwork,
-                          final Propagation theOwner, final DataSet theTraining,
+                          final Propagation theOwner, final Dataset theTraining,
                           final int theLow, final int theHigh, final double[] flatSpot,
                           final ErrorFunction ef) {
         this.network = theNetwork;
@@ -164,7 +164,7 @@ public class GradientWorker implements EngineTask {
         this.layerSums = network.getLayerSums();
         this.layerFeedCounts = network.getLayerFeedCounts();
 
-        this.pair = BasicMLDataPair.createPair(network.getInputCount(),
+        this.pair = VectorCase.createPair(network.getInputCount(),
                 network.getOutputCount());
     }
 
@@ -189,7 +189,7 @@ public class GradientWorker implements EngineTask {
      * @param ideal The ideal values.
      * @param s     The significance.
      */
-    private void process(final DataSample pair) {
+    private void process(final DataCase pair) {
         this.network.compute(pair.getInputArray(), this.actual);
 
         this.errorCalculation.updateError(this.actual, pair.getIdealArray(),

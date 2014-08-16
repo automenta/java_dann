@@ -23,10 +23,10 @@ import org.junit.Test;
 import syncleus.dann.graph.BidirectedEdge;
 import syncleus.dann.graph.WeightedDirectedEdge;
 import syncleus.dann.graph.path.pathfinding.JohnsonPathFinder;
-import syncleus.dann.graph.search.GridNode;
-import syncleus.dann.graph.search.WeightedDirectedGrid;
+import syncleus.dann.math.geometry.WeightedDirectedGrid;
 
 import java.util.List;
+import syncleus.dann.math.geometry.GraphGrid2D.GridNode;
 
 public class TestJohnsonPathFinder {
     private static final double INF = Double.MAX_VALUE;

@@ -27,8 +27,8 @@ import syncleus.dann.learn.bayesian.BayesianEvent;
 import syncleus.dann.learn.bayesian.EncogBayesianNetwork;
 import syncleus.dann.learn.bayesian.query.enumerate.EnumerationQuery;
 import syncleus.dann.learn.bayesian.training.TrainBayesian;
-import syncleus.dann.data.DataSample;
-import syncleus.dann.data.DataSet;
+import syncleus.dann.data.DataCase;
+import syncleus.dann.data.Dataset;
 import syncleus.dann.math.EncogMath;
 
 import java.util.ArrayList;
@@ -42,7 +42,7 @@ public class SearchK2 implements BayesSearch {
     /**
      * The data to use.
      */
-    private DataSet data;
+    private Dataset data;
 
     /**
      * The network to optimize.
@@ -74,7 +74,7 @@ public class SearchK2 implements BayesSearch {
      */
     @Override
     public void init(final TrainBayesian theTrainer,
-                     final EncogBayesianNetwork theNetwork, final DataSet theData) {
+                     final EncogBayesianNetwork theNetwork, final Dataset theData) {
         this.network = theNetwork;
         this.data = theData;
         this.train = theTrainer;
@@ -149,7 +149,7 @@ public class SearchK2 implements BayesSearch {
         int result = 0;
         final int eventIndex = network.getEventIndex(event);
 
-        for (final DataSample pair : this.data) {
+        for (final DataCase pair : this.data) {
             final int[] d = this.network.determineClasses(pair.getInput());
 
             if (d[eventIndex] == desiredValue) {
@@ -188,7 +188,7 @@ public class SearchK2 implements BayesSearch {
                           final int[] parentInstance) {
         int result = 0;
 
-        for (final DataSample pair : this.data) {
+        for (final DataCase pair : this.data) {
             final int[] d = this.network.determineClasses(pair.getInput());
 
             boolean reject = false;

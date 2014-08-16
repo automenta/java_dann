@@ -23,7 +23,7 @@
  */
 package org.encog.ml.prg;
 
-import syncleus.dann.data.basic.BasicMLData;
+import syncleus.dann.data.basic.VectorData;
 import syncleus.dann.evolve.exception.EACompileError;
 import syncleus.dann.evolve.exception.EARuntimeError;
 import syncleus.dann.evolve.genome.BasicGenome;
@@ -31,7 +31,7 @@ import syncleus.dann.evolve.genome.Genome;
 import syncleus.dann.graph.tree.traverse.tasks.TaskGetNodeIndex;
 import syncleus.dann.graph.tree.traverse.tasks.TaskReplaceNode;
 import syncleus.dann.data.Data;
-import syncleus.dann.data.DataSet;
+import syncleus.dann.data.Dataset;
 import syncleus.dann.learn.ErrorLearning;
 import syncleus.dann.RegressionLearning;
 import syncleus.dann.math.EncogUtility;
@@ -182,7 +182,7 @@ public class EncogProgram extends BasicGenome implements RegressionLearning, Err
      * {@inheritDoc}
      */
     @Override
-    public double calculateError(final DataSet data) {
+    public double calculateError(final Dataset data) {
         return EncogUtility.calculateRegressionError(this, data);
     }
 
@@ -234,7 +234,7 @@ public class EncogProgram extends BasicGenome implements RegressionLearning, Err
         final ExpressionValue v = this.rootNode.evaluate();
         final VariableMapping resultMapping = getResultType();
 
-        final Data result = new BasicMLData(1);
+        final Data result = new VectorData(1);
         boolean success = false;
 
         switch (resultMapping.getVariableType()) {

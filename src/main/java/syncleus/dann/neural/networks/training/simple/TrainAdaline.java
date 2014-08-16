@@ -23,9 +23,9 @@
  */
 package org.encog.neural.networks.training.simple;
 
-import syncleus.dann.data.DataSample;
+import syncleus.dann.data.DataCase;
 import syncleus.dann.data.Data;
-import syncleus.dann.data.DataSet;
+import syncleus.dann.data.Dataset;
 import syncleus.dann.learn.TrainingImplementationType;
 import syncleus.dann.learn.Learning;
 import syncleus.dann.learn.BasicTraining;
@@ -45,7 +45,7 @@ public class TrainAdaline extends BasicTraining implements LearningRate {
     /**
      * The training data to use.
      */
-    private final DataSet training;
+    private final Dataset training;
 
     /**
      * The learning rate.
@@ -59,7 +59,7 @@ public class TrainAdaline extends BasicTraining implements LearningRate {
      * @param training     The training data.
      * @param learningRate The learning rate.
      */
-    public TrainAdaline(final BasicNetwork network, final DataSet training,
+    public TrainAdaline(final BasicNetwork network, final Dataset training,
                         final double learningRate) {
         super(TrainingImplementationType.Iterative);
         if (network.getLayerCount() > 2) {
@@ -104,7 +104,7 @@ public class TrainAdaline extends BasicTraining implements LearningRate {
 
         final ErrorCalculation errorCalculation = new ErrorCalculation();
 
-        for (final DataSample pair : this.training) {
+        for (final DataCase pair : this.training) {
             // calculate the error
             final Data output = this.network.compute(pair.getInput());
 

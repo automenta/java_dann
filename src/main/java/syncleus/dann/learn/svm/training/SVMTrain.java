@@ -24,7 +24,7 @@
 package syncleus.dann.learn.svm.training;
 
 import org.encog.neural.networks.training.propagation.TrainingContinuation;
-import syncleus.dann.data.DataSet;
+import syncleus.dann.data.Dataset;
 import syncleus.dann.learn.Learning;
 import syncleus.dann.learn.TrainingImplementationType;
 import syncleus.dann.learn.svm.SVM;
@@ -77,7 +77,7 @@ public class SVMTrain extends BasicTraining {
      * @param method  The network to train.
      * @param dataSet The training data for this network.
      */
-    public SVMTrain(final SVM method, final DataSet dataSet) {
+    public SVMTrain(final SVM method, final Dataset dataSet) {
         super(TrainingImplementationType.OnePass);
         this.network = method;
         setTraining(dataSet);

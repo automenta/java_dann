@@ -23,7 +23,7 @@
  */
 package syncleus.dann.learn;
 
-import syncleus.dann.data.DataSet;
+import syncleus.dann.data.Dataset;
 
 
 /**
@@ -37,5 +37,5 @@ public interface ErrorLearning extends Learning {
      * @param data The dataset.
      * @return The error.
      */
-    double calculateError(final DataSet data);
+    double calculateError(final Dataset data);
 }

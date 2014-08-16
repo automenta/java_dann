@@ -21,8 +21,8 @@ package syncleus.dann.graph.search.optimization;
 import org.junit.Assert;
 import org.junit.Test;
 import syncleus.dann.graph.path.search.HillClimbingLocalSearch;
-import syncleus.dann.graph.search.Grid;
-import syncleus.dann.graph.search.GridNode;
+import syncleus.dann.math.geometry.GraphGrid2D;
+import syncleus.dann.math.geometry.GraphGrid2D.GridNode;
 
 public class TestHillClimbingLocalSearch {
     private static final double[][] EASY_GRID = {
@@ -39,8 +39,8 @@ public class TestHillClimbingLocalSearch {
 
     @Test
     public void testEasyHill() {
-        final Grid easyHillGrid = new Grid(EASY_GRID);
-        final HillClimbingLocalSearch<Grid, GridNode> searcher = new HillClimbingLocalSearch<>(
+        final GraphGrid2D easyHillGrid = new GraphGrid2D(EASY_GRID);
+        final HillClimbingLocalSearch<GraphGrid2D, GridNode> searcher = new HillClimbingLocalSearch<>(
                 easyHillGrid);
 
         final GridNode startNode = easyHillGrid.getNode(EASY_GRID_START[0],

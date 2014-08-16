@@ -24,8 +24,8 @@
 package syncleus.dann.math.fitting.gaussian;
 
 import org.encog.neural.networks.training.propagation.TrainingContinuation;
-import syncleus.dann.data.DataSample;
-import syncleus.dann.data.DataSet;
+import syncleus.dann.data.DataCase;
+import syncleus.dann.data.Dataset;
 import syncleus.dann.learn.Learning;
 import syncleus.dann.learn.TrainingImplementationType;
 import syncleus.dann.learn.BasicTraining;
@@ -34,10 +34,10 @@ import syncleus.dann.math.array.EngineArray;
 public class TrainGaussian extends BasicTraining {
 
     private final GaussianFitting method;
-    private final DataSet training;
+    private final Dataset training;
 
     public TrainGaussian(final GaussianFitting theMethod,
-                         final DataSet theTraining) {
+                         final Dataset theTraining) {
         super(TrainingImplementationType.OnePass);
         this.method = theMethod;
         this.training = theTraining;
@@ -47,7 +47,7 @@ public class TrainGaussian extends BasicTraining {
      * @return the training
      */
     @Override
-    public DataSet getTraining() {
+    public Dataset getTraining() {
         return training;
     }
 
@@ -57,7 +57,7 @@ public class TrainGaussian extends BasicTraining {
         // calculate mu, which is the mean
         final double[] sum = new double[this.method.getInputCount()];
 
-        for (final DataSample pair : this.training) {
+        for (final DataCase pair : this.training) {
             for (int i = 0; i < this.training.getInputSize(); i++) {
                 sum[i] += pair.getInput().getData(i);
             }
@@ -74,7 +74,7 @@ public class TrainGaussian extends BasicTraining {
         EngineArray.fill(sigma, 0);
 
         final int inputCount = this.method.getInputCount();
-        for (final DataSample pair : this.training) {
+        for (final DataCase pair : this.training) {
             for (int i = 0; i < inputCount; i++) {
                 for (int j = 0; j < inputCount; j++) {
                     sigma[i][j] += (pair.getInput().getData(i) - this.method.getMu().get(0, i))

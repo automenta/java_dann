@@ -23,15 +23,15 @@
  */
 package syncleus.dann.learn.kmeans;
 
-import syncleus.dann.data.basic.BasicMLDataSet;
+import syncleus.dann.data.basic.VectorDataset;
 import syncleus.dann.data.DataCluster;
 import syncleus.dann.data.Data;
-import syncleus.dann.data.DataSet;
+import syncleus.dann.data.Dataset;
 import syncleus.dann.math.cluster.Centroid;
 
 import java.util.ArrayList;
 import java.util.List;
-import syncleus.dann.data.DataSample;
+import syncleus.dann.data.DataCase;
 import syncleus.dann.math.cluster.Cluster;
 
 /**
@@ -43,7 +43,7 @@ public class BasicCluster<M extends Data> extends org.apache.commons.math3.ml.cl
     /**
      * The centroid.
      */
-    private Centroid<DataSample<M>> centroid;
+    private Centroid<DataCase<M>> centroid;
 
     /**
      * The contents of the cluster.
@@ -56,7 +56,7 @@ public class BasicCluster<M extends Data> extends org.apache.commons.math3.ml.cl
      *
      * @param cluster The other cluster.
      */
-    public BasicCluster(final Cluster<DataSample<M>> cluster) {
+    public BasicCluster(final Cluster<DataCase<M>> cluster) {
         this.centroid = cluster.centroid();
         cluster.getContents().stream().forEach((pair) -> this.data.add(pair.getInput()));
     }
@@ -77,8 +77,8 @@ public class BasicCluster<M extends Data> extends org.apache.commons.math3.ml.cl
      * @return The dataset.
      */
     @Override
-    public final DataSet createDataSet() {
-        final DataSet result = new BasicMLDataSet();
+    public final Dataset createDataSet() {
+        final Dataset result = new VectorDataset();
 
         this.data.stream().forEach(result::add);
 
@@ -121,7 +121,7 @@ public class BasicCluster<M extends Data> extends org.apache.commons.math3.ml.cl
      *
      * @param c The new centroid.
      */
-    public final void setCentroid(final Centroid<DataSample<M>> c) {
+    public final void setCentroid(final Centroid<DataCase<M>> c) {
         this.centroid = c;
     }
 

@@ -26,7 +26,7 @@ package org.encog.neural.networks.training.propagation;
 import org.encog.neural.flat.FlatNetwork;
 import org.encog.neural.networks.training.BatchSize;
 import org.encog.neural.networks.training.Train;
-import syncleus.dann.data.DataSet;
+import syncleus.dann.data.Dataset;
 import syncleus.dann.learn.Learning;
 import syncleus.dann.learn.TrainingImplementationType;
 import syncleus.dann.learn.BasicTraining;
@@ -76,7 +76,7 @@ public abstract class Propagation extends BasicTraining implements Train,
     /**
      * The network in indexable form.
      */
-    private final DataSet indexable;
+    private final Dataset indexable;
 
     /**
      * The workers.
@@ -121,7 +121,7 @@ public abstract class Propagation extends BasicTraining implements Train,
      * @param network  The network.
      * @param training The training set.
      */
-    public Propagation(final ContainsFlat network, final DataSet training) {
+    public Propagation(final ContainsFlat network, final Dataset training) {
         super(TrainingImplementationType.Iterative);
         this.network = network;
         this.currentFlatNetwork = network.getFlat();

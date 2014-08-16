@@ -25,9 +25,9 @@ package syncleus.dann.neural.som;
 
 import syncleus.dann.learn.AbstractLearning;
 import syncleus.dann.learn.ErrorLearning;
-import syncleus.dann.data.DataSample;
+import syncleus.dann.data.DataCase;
 import syncleus.dann.data.Data;
-import syncleus.dann.data.DataSet;
+import syncleus.dann.data.Dataset;
 import syncleus.dann.learn.MLResettable;
 import syncleus.dann.Classifying;
 import syncleus.dann.math.array.EngineArray;
@@ -77,14 +77,14 @@ public class SOM extends AbstractLearning implements Classifying, MLResettable,
      * {@inheritDoc}
      */
     @Override
-    public double calculateError(final DataSet data) {
+    public double calculateError(final Dataset data) {
 
         final BestMatchingUnit bmu = new BestMatchingUnit(this);
 
         bmu.reset();
 
         // Determine the BMU for each training element.
-        for (final DataSample pair : data) {
+        for (final DataCase pair : data) {
             final Data input = pair.getInput();
             bmu.calculateBMU(input);
         }

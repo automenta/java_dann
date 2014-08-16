@@ -25,7 +25,7 @@ package syncleus.dann.learn.bayesian.training.search.k2;
 
 import syncleus.dann.learn.bayesian.EncogBayesianNetwork;
 import syncleus.dann.learn.bayesian.training.TrainBayesian;
-import syncleus.dann.data.DataSet;
+import syncleus.dann.data.Dataset;
 
 /**
  * Search for a good Bayes structure.
@@ -39,7 +39,7 @@ public interface BayesSearch {
      * @param theData    The data to use.
      */
     void init(TrainBayesian theTrainer, EncogBayesianNetwork theNetwork,
-              DataSet theData);
+              Dataset theData);
 
     /**
      * Perform an iteration.

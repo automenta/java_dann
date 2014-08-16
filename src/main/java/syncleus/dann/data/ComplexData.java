@@ -23,8 +23,8 @@
  */
 package syncleus.dann.data;
 
-import syncleus.dann.data.Data;
 import syncleus.dann.math.ComplexNumber;
+import syncleus.dann.math.cluster.Centroid;
 
 /**
  * This class implements a data object that can hold complex numbers. It
@@ -34,33 +34,166 @@ import syncleus.dann.math.ComplexNumber;
  * does not support complex numbers will only be dealing with the real-number
  * portion of the complex number.
  */
-public interface ComplexData extends Data {
+/**
+ * This class implements a data object that can hold complex numbers. It
+ * implements the interface MLData, so it can be used with nearly any Encog
+ * machine learning method. However, not all Encog machine learning methods are
+ * designed to work with complex numbers. A Encog machine learning method that
+ * does not support complex numbers will only be dealing with the real-number
+ * portion of the complex number.
+ */
+public class ComplexData {
 
     /**
-     * Add a complex number to the specified index.
-     *
-     * @param index The index to use.
-     * @param value The complex number value to add.
+     * The data held by this object.
      */
-    void add(final int index, final ComplexNumber value);
+    private ComplexNumber[] data;
+
+    /**
+     * Construct this object with the specified data. Use only real numbers.
+     *
+     * @param d The data to construct this object with.
+     */
+    public ComplexData(final double[] d) {
+        this(d.length);
+        for (int i = 0; i < this.data.length; i++) {
+            this.data[i] = new ComplexNumber(d[i], 0);
+        }
+    }
+
+    /**
+     * Construct this object with the specified data. Use complex numbers.
+     *
+     * @param d The data to construct this object with.
+     */
+    public ComplexData(final ComplexNumber[] d) {
+        this.data = d;
+    }
+    
+    public ComplexData(ComplexData d) {
+        this.data = d.data.clone();
+    }    
+
+    /**
+     * Construct this object with blank data and a specified size.
+     *
+     * @param size The amount of data to store.
+     */
+    public ComplexData(final int size) {
+        this.data = new ComplexNumber[size];
+    }
+
+    /**
+     * Construct a new BasicMLData object from an existing one. This makes a
+     * copy of an array. If MLData is not complex, then only reals will be
+     * created.
+     *
+     * @param d The object to be copied.
+     */
+    public ComplexData(final Data d) {
+        this(d.size());
+
+        if (d instanceof ComplexData) {
+            final ComplexData c = (ComplexData) d;
+            for (int i = 0; i < d.size(); i++) {
+                this.data[i] = new ComplexNumber(c.getComplexData(i));
+            }
+        } else {
+            for (int i = 0; i < d.size(); i++) {
+                this.data[i] = new ComplexNumber(d.getData(i), 0);
+            }
+        }
+
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void add(final int index, final double value) {
+        this.data[index].plus(new ComplexNumber(value, 0));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void add(final int index, final ComplexNumber value) {
+        this.data[index] = this.data[index].plus(value);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void clear() {
+        for (int i = 0; i < this.data.length; i++) {
+            this.data[i] = new ComplexNumber(0, 0);
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public ComplexData clone() {
+        return new ComplexData(this);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public double[] getData() {
+        final double[] d = new double[this.data.length];
+        for (int i = 0; i < d.length; i++) {
+            d[i] = this.data[i].getReal();
+        }
+        return d;
+    }
 
     /**
      * @return The complex numbers.
      */
-    ComplexNumber[] getComplexData();
+    public ComplexNumber[] getComplexData() {
+        return this.data;
+    }
 
     /**
-     * Get the complex data at the specified index.
-     *
-     * @param index The index to get the complex data at.
-     * @return The complex data.
+     * {@inheritDoc}
      */
-    ComplexNumber getComplexData(final int index);
+    public double getData(final int index) {
+        return this.data[index].getReal();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public ComplexNumber getComplexData(final int index) {
+        return this.data[index];
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void setData(final double[] theData) {
+        for (int i = 0; i < theData.length; i++) {
+            this.data[i] = new ComplexNumber(theData[i], 0);
+        }
+    }
 
     /**
      * @param theData Set the complex data array.
      */
-    void setData(final ComplexNumber[] theData);
+    public void setData(final ComplexNumber[] theData) {
+        this.data = theData;
+    }
+
+    /**
+     * Set the data at the specified index. Note, this will only set the real
+     * part of the complex number.
+     *
+     * @param index The index to to set.
+     * @param d     The numeric value to set.
+     */
+    public void setData(final int index, final double d) {
+        this.data[index] = new ComplexNumber(d, 0);
+    }
 
     /**
      * Set a data element to a complex number.
@@ -68,5 +201,41 @@ public interface ComplexData extends Data {
      * @param index The index to set.
      * @param d     The complex number.
      */
-    void setData(final int index, final ComplexNumber d);
+    public void setData(final int index, final ComplexNumber d) {
+        this.data[index] = d;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public int size() {
+        return this.data.length;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder("[");
+        builder.append(this.getClass().getSimpleName());
+        builder.append(':');
+        for (int i = 0; i < this.data.length; i++) {
+            if (i != 0) {
+                builder.append(',');
+            }
+            builder.append(this.data[i].toString());
+        }
+        builder.append(']');
+        return builder.toString();
+    }
+
+    /**
+     * Not supported.
+     *
+     * @return Nothing.
+     */
+    public Centroid<Data> createCentroid() {
+        return null;
+    }
 }

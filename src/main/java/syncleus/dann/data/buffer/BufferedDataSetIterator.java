@@ -23,16 +23,16 @@
  */
 package syncleus.dann.data.buffer;
 
-import syncleus.dann.data.basic.BasicMLDataPair;
+import syncleus.dann.data.basic.VectorCase;
 import syncleus.dann.data.DataException;
-import syncleus.dann.data.DataSample;
+import syncleus.dann.data.DataCase;
 
 import java.util.Iterator;
 
 /**
  * An iterator for the BufferedNeuralDataSet.
  */
-public class BufferedDataSetIterator implements Iterator<DataSample> {
+public class BufferedDataSetIterator implements Iterator<DataCase> {
 
     /**
      * The dataset being iterated over.
@@ -66,7 +66,7 @@ public class BufferedDataSetIterator implements Iterator<DataSample> {
      * {@inheritDoc}
      */
     @Override
-    public DataSample next() {
+    public DataCase next() {
         // Make sure that only ONE iterator is using the underlying dataset at a
         // time.
         // This can be improved for better disk-based performance.
@@ -75,7 +75,7 @@ public class BufferedDataSetIterator implements Iterator<DataSample> {
                 return null;
             }
 
-            final DataSample pair = BasicMLDataPair.createPair(
+            final DataCase pair = VectorCase.createPair(
                     this.data.getInputSize(), this.data.getIdealSize());
             this.data.getRecord(this.current++, pair);
             return pair;

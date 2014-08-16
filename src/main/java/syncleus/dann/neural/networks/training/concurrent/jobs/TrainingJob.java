@@ -23,7 +23,7 @@
  */
 package org.encog.neural.networks.training.concurrent.jobs;
 
-import syncleus.dann.data.DataSet;
+import syncleus.dann.data.Dataset;
 import syncleus.dann.learn.Training;
 import syncleus.dann.learn.strategy.Strategy;
 import syncleus.dann.learn.strategy.end.EndTrainingStrategy;
@@ -45,7 +45,7 @@ public abstract class TrainingJob {
     /**
      * The training data to use.
      */
-    private DataSet training;
+    private Dataset training;
 
     /**
      * The strategies to use.
@@ -74,7 +74,7 @@ public abstract class TrainingJob {
      * @param training     The training data to use.
      * @param loadToMemory True, if binary data should be loaded to memory.
      */
-    public TrainingJob(final BasicNetwork network, final DataSet training,
+    public TrainingJob(final BasicNetwork network, final Dataset training,
                        final boolean loadToMemory) {
         super();
         this.network = network;
@@ -118,7 +118,7 @@ public abstract class TrainingJob {
     /**
      * @return the training
      */
-    public DataSet getTraining() {
+    public Dataset getTraining() {
         return this.training;
     }
 
@@ -160,7 +160,7 @@ public abstract class TrainingJob {
     /**
      * @param training the training to set
      */
-    public void setTraining(final DataSet training) {
+    public void setTraining(final Dataset training) {
         this.training = training;
     }
 
