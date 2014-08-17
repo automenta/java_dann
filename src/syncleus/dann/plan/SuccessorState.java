@@ -26,14 +26,14 @@ package syncleus.dann.plan;
 import syncleus.dann.math.Format;
 
 
-public class SuccessorState implements Comparable<SuccessorState> {
+public class SuccessorState<S extends State> implements Comparable<SuccessorState<S>> {
 
-    private final State state;
+    private final S state;
     private final double probability;
     private final long serialNumber;
     private static long serialCounter;
 
-    public SuccessorState(final State state, final double probability) {
+    public SuccessorState(final S state, final double probability) {
         super();
         if (state == null) {
             throw new ProblemException("Can't create null successor state");
@@ -48,7 +48,7 @@ public class SuccessorState implements Comparable<SuccessorState> {
     /**
      * @return the state
      */
-    public State getState() {
+    public S getState() {
         return state;
     }
 

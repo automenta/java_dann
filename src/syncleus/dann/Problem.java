@@ -9,20 +9,20 @@ import java.util.Set;
  * Abstract definition of a problem in terms of a set of goals (with assigned probabilities)
  * and a historical queue (list) of states that have been reached towards a solution.
  */
-public interface Problem {
+public interface Problem<S extends State> {
 
-    void addGoal(State s);
-    void removeGoal(State s);
+    void addGoal(S s);
+    void removeGoal(S s);
 
-    void addState(State state);
+    void addState(S state);
 
-    Set<State> getGoals();
+    Set<S> getGoals();
 
-    default double getGoalPriority(State s) { return 1.0; }
+    default double getGoalPriority(S s) { return 1.0; }
     
-    Queue<State> getStates();
+    Queue<S> getStates();
 
-    boolean isGoalState(State s);
+    boolean isGoalState(S s);
 
     
 }

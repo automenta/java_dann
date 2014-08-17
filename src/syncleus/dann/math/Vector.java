@@ -261,7 +261,14 @@ public class Vector extends ArrayRealVector implements Serializable {
         double poweredSum = 0.0;
         for (final double coordinate : this.data)
             poweredSum += Math.pow(Math.abs(coordinate), order);
-        return Math.pow(poweredSum, 1.0 / (order));
+        
+        //faster alternatives for common exponents
+        switch (order) {
+            case 0: return 1;
+            case 1: return poweredSum;
+            case 2: return Math.sqrt(poweredSum);
+            default:  return Math.pow(poweredSum, 1.0 / (order));
+        }
     }
 
     @Override

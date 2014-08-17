@@ -21,22 +21,23 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package syncleus.dann.learn.hmm.train.bw;
+package syncleus.dann.learn.markov.training.bw;
 
 import syncleus.dann.data.DataCase;
 import syncleus.dann.data.DataSequence;
 import syncleus.dann.data.Dataset;
-import syncleus.dann.learn.hmm.HiddenMarkovModel;
-import syncleus.dann.learn.hmm.alog.ForwardBackwardCalculator;
+import syncleus.dann.learn.markov.HiddenMarkovModel;
+import syncleus.dann.learn.markov.alog.ForwardBackwardCalculator;
+import syncleus.dann.learn.markov.alog.ForwardBackwardScaledCalculator;
 
-import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.Iterator;
 
 /**
  * Baum Welch Learning allows a HMM to be constructed from a series of sequence
- * observations. This implementation of Baum Welch does not scale and is
- * susceptible to underflows in long sequences of data.
+ * observations. This implementation of Baum Welch scales and is not as
+ * susceptible to underflows in long sequences of data as the regular Baum Welch
+ * algorithm.
  * <p/>
  * Baum Welch requires a starting point. You should create a HMM that has a
  * reasonable guess as to the observation and transition probabilities. If you
@@ -49,36 +50,10 @@ import java.util.Iterator;
  * Hidden Markov Models and the Baum-Welch Algorithm, IEEE Information Theory
  * Society Newsletter, Dec. 2003.
  */
-public class TrainBaumWelch extends BaseBaumWelch {
-    public TrainBaumWelch(final HiddenMarkovModel hmm,
-                          final DataSequence training) {
+public class TrainBaumWelchScaled extends BaseBaumWelch {
+    public TrainBaumWelchScaled(final HiddenMarkovModel hmm,
+                                final DataSequence training) {
         super(hmm, training);
-    }
-
-    @Override
-    protected double[][] estimateGamma(final double[][][] xi,
-                                       final ForwardBackwardCalculator fbc) {
-        final double[][] gamma = new double[xi.length + 1][xi[0].length];
-
-        for (int t = 0; t < (xi.length + 1); t++) {
-            Arrays.fill(gamma[t], 0.);
-        }
-
-        for (int t = 0; t < xi.length; t++) {
-            for (int i = 0; i < xi[0].length; i++) {
-                for (int j = 0; j < xi[0].length; j++) {
-                    gamma[t][i] += xi[t][i][j];
-                }
-            }
-        }
-
-        for (int j = 0; j < xi[0].length; j++) {
-            for (int i = 0; i < xi[0].length; i++) {
-                gamma[xi.length][j] += xi[xi.length - 1][i][j];
-            }
-        }
-
-        return gamma;
     }
 
     @Override
@@ -91,20 +66,19 @@ public class TrainBaumWelch extends BaseBaumWelch {
 
         final double xi[][][] = new double[sequence.size() - 1][hmm
                 .getStateCount()][hmm.getStateCount()];
-        final double probability = fbc.probability();
 
         final Iterator<DataCase> seqIterator = sequence.iterator();
         seqIterator.next();
 
         for (int t = 0; t < (sequence.size() - 1); t++) {
-            final DataCase o = seqIterator.next();
+            final DataCase observation = seqIterator.next();
 
             for (int i = 0; i < hmm.getStateCount(); i++) {
                 for (int j = 0; j < hmm.getStateCount(); j++) {
-                    xi[t][i][j] = (fbc.alphaElement(t, i)
+                    xi[t][i][j] = fbc.alphaElement(t, i)
                             * hmm.getTransitionProbability(i, j)
-                            * hmm.getStateDistribution(j).probability(o) * fbc
-                            .betaElement(t + 1, j)) / probability;
+                            * hmm.getStateDistribution(j).probability(
+                            observation) * fbc.betaElement(t + 1, j);
                 }
             }
         }
@@ -115,10 +89,7 @@ public class TrainBaumWelch extends BaseBaumWelch {
     @Override
     public ForwardBackwardCalculator generateForwardBackwardCalculator(
             final Dataset sequence, final HiddenMarkovModel hmm) {
-        return new ForwardBackwardCalculator(sequence, hmm,
+        return new ForwardBackwardScaledCalculator(sequence, hmm,
                 EnumSet.allOf(ForwardBackwardCalculator.Computation.class));
     }
-
-   
-
 }

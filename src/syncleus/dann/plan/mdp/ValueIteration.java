@@ -27,16 +27,16 @@ import syncleus.dann.plan.ActionProbability;
 import syncleus.dann.plan.DiscreteActionProblem;
 import syncleus.dann.plan.State;
 
-public class ValueIteration<A> extends MarkovDecisionProcess<A> {
+public class ValueIteration<A,S extends State> extends MarkovDecisionProcess<A,S> {
 
     private final double discountFactor;
 
-    public ValueIteration(final DiscreteActionProblem<A> theWorld, final ActionProbability<A> probability, final double theDiscountFactor) {
+    public ValueIteration(final DiscreteActionProblem<A,S> theWorld, final ActionProbability<A> probability, final double theDiscountFactor) {
         super(theWorld, probability);        
         this.discountFactor = theDiscountFactor;
     }
 
-    public void calculateValue(final State state) {
+    public void calculateValue(final S state) {
         double result = Double.NEGATIVE_INFINITY;
         if (!getProblem().isGoalState(state)) {
             for (final A action : getProblem().getActions()) {

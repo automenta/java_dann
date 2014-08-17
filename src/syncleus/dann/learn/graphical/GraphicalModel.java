@@ -22,12 +22,31 @@ import syncleus.dann.graph.BidirectedEdge;
 import syncleus.dann.graph.Graph;
 
 import java.util.Set;
+import org.apache.commons.math3.util.Pair;
+import syncleus.dann.learn.graphical.GraphicalModel.InfluencedGoals;
+import syncleus.dann.math.probablity.ProbabilityFunction;
 
 public interface GraphicalModel<N extends GraphicalModelNode, E extends BidirectedEdge<N>>
-        extends Graph<N, E> {
+        extends Graph<N, E>, ProbabilityFunction<InfluencedGoals<N>> {
+    
+    /** represents a particular set of Goals which may be influenced by a particular set of Influences */
+    public static class InfluencedGoals<M> extends Pair<Set<M>,Set<M>> {
+
+        public InfluencedGoals(Set<M> goals, Set<M> influences) {
+            super(goals, influences);
+        }
+        public Set<M> getGoals() { return getKey(); }
+        public Set<M> getInfluences() { return getValue(); }        
+        
+    }
+    
     void learnStates();
 
     double jointProbability();
 
     double conditionalProbability(Set<N> goals, Set<N> influences);
+    
+    default Double apply(InfluencedGoals ig) {
+        return conditionalProbability(ig.getGoals(), ig.getInfluences());
+    }
 }

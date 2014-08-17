@@ -23,24 +23,25 @@
  */
 package syncleus.dann.plan.grid2d;
 
+import syncleus.dann.math.geometry.Angle;
 import syncleus.dann.plan.*;
 
 import java.util.Set;
 
-public class BasicAgent implements DiscreteActionSolution<BasicAction> {
+public class BasicAgent implements DiscreteActionSolution<Angle,BasicState> {
 
-    private State currentState;
-    private AgentPolicy<BasicAction> policy;
-    private BasicWorld world;
+    private BasicState currentState;
+    private AgentPolicy<Angle,BasicState> policy;
+    private BasicDiscreteActionProblem world;
     private boolean first = true;
 
     @Override
-    public State getCurrentState() {
+    public BasicState getCurrentState() {
         return this.currentState;
     }
 
     @Override
-    public void setCurrentState(final State s) {
+    public void setCurrentState(final BasicState s) {
         this.currentState = s;
     }
 
@@ -58,24 +59,24 @@ public class BasicAgent implements DiscreteActionSolution<BasicAction> {
      * @param world the world to set
      */
     @Override
-    public boolean setProblem(final DiscreteActionProblem<BasicAction> world) {
-        this.world = (BasicWorld)world;
+    public boolean setProblem(final DiscreteActionProblem<Angle,BasicState> world) {
+        this.world = (BasicDiscreteActionProblem)world;
         return true;
     }
 
     @Override
-    public BasicAction nextAction() {
+    public Angle nextAction() {
         if (first) {
             first = false;
             this.currentState.increaseVisited();
         }
 
-        final BasicAction action = this.policy.determineNextAction(this);
-        final Set<SuccessorState> states = world.getProbability()
+        final Angle action = this.policy.determineNextAction(this);
+        final Set<SuccessorState<BasicState>> states = world.getProbability()
                 .determineSuccessorStates(currentState, action);
         final double d = Math.random();
         double sum = 0;
-        for (final SuccessorState state : states) {
+        for (final SuccessorState<BasicState> state : states) {
             sum += state.getProbability();
             if (d < sum) {
                 this.currentState = state.getState();

@@ -16,26 +16,42 @@
  *  Philadelphia, PA 19148                                                     *
  *                                                                             *
  ******************************************************************************/
-package syncleus.dann.math.statistics;
+package syncleus.dann.learn.markov.chain;
 
-public abstract class AbstractMarkovChain<S> implements MarkovChain<S> {
-    @Override
-    public S generateTransition() {
-        return this.generateTransition(true);
-    }
+import syncleus.dann.math.matrix.RealMatrix;
 
-    @Override
-    public S getCurrentState() {
-        return this.getStateHistory().get(0);
-    }
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
-    @Override
-    public double getProbability(final S futureState, final int steps) {
-        return this.getProbability(steps).get(futureState);
-    }
+public interface MarkovChain<S> {
+    int getOrder();
 
-    @Override
-    public double getSteadyStateProbability(final S futureState) {
-        return this.getSteadyStateProbability().get(futureState);
-    }
+    Set<S> getStates();
+
+    void transition(S nextState);
+
+    S generateTransition();
+
+    S generateTransition(boolean step);
+
+    S getCurrentState();
+
+    List<S> getStateHistory();
+
+    void reset();
+
+    Map<S, Double> getProbability(int steps);
+
+    Map<S, Double> getSteadyStateProbability();
+
+    double getProbability(S futureState, int steps);
+
+    double getSteadyStateProbability(S futureState);
+
+    List<S> getTransitionProbabilityColumns();
+
+    List<List<S>> getTransitionProbabilityRows();
+
+    RealMatrix getTransitionProbabilityMatrix();
 }

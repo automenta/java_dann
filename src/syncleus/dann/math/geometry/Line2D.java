@@ -1,6 +1,6 @@
 package syncleus.dann.math.geometry;
 
-import java.io.IOException;
+import java.io.Serializable;
 
 /**
  * 
@@ -13,7 +13,7 @@ import java.io.IOException;
  * @author TR
  *
  */
-public class Line2D implements Savable {
+public class Line2D implements Serializable {
 
     enum PointSide {
 
@@ -102,7 +102,7 @@ public class Line2D implements Savable {
         return normal;
     }
 
-    public void setPoints(float PointAx, float PointAy, float PointBx, float PointBy) {
+    public void setPoints(double PointAx, double PointAy, double PointBx, double PointBy) {
         pointA.x( PointAx);
         pointA.y( PointAy);
         pointB.x( PointBx);
@@ -118,32 +118,29 @@ public class Line2D implements Savable {
         return pointB;
     }
 
-    public float length() {
-        float xdist = pointB.x - pointA.x;
-        float ydist = pointB.y - pointA.y;
+    public double length() {
+        double xdist = pointB.x() - pointA.x();
+        double ydist = pointB.y() - pointA.y();
 
         xdist *= xdist;
         ydist *= ydist;
 
-        return (float) Math.sqrt(xdist + ydist);
+        return (double) Math.sqrt(xdist + ydist);
     }
 
     public Vector2 getDirection() {
-        return pointB.subtract(pointA).normalize();
+        return new Vector2(pointB.subtract(pointA)).normalize();
     }
     
-    public Vector2 normalize() {
-        //..
-    }
 
     private void computeNormal() {
         // Get Normailized direction from A to B
         normal = getDirection();
 
         // Rotate by -90 degrees to get normal of line
-        float oldY = normal.y;
-        normal.y = -normal.x;
-        normal.x = oldY;
+        double oldY = normal.y();
+        normal.y( -normal.x() );
+        normal.x( oldY );
     }
 
     /**
@@ -152,12 +149,12 @@ public class Line2D implements Savable {
     if you were standing on PointA of the line looking towards PointB. Posative distances
     are to the right of the line, negative distances are to the left.
      */
-    public float signedDistance(Vector2 point) {
+    public double signedDistance(Vector2 point) {
         if (normal == null) {
             computeNormal();
         }
 
-        return point.subtract(pointA).dot(normal); //.x*m_Normal.x + TestVector.y*m_Normal.y;//DotProduct(TestVector,m_Normal);
+        return point.subtract(pointA).dotProduct(normal); //.x*m_Normal.x + TestVector.y*m_Normal.y;//DotProduct(TestVector,m_Normal);
     }
 
     /**
@@ -165,9 +162,9 @@ public class Line2D implements Savable {
      * if you were standing on PointA of the line looking towards PointB. The incomming
      * point is then classified as being on the Left, Right or Centered on the line.
      */
-/*    public PointSide getSide(Vector2 point, float epsilon) {
+/*    public PointSide getSide(Vector2 point, double epsilon) {
         PointSide result = PointSide.OnLine;
-        float distance = signedDistance(point);
+        double distance = signedDistance(point);
 
         if (distance > epsilon) {
             result = PointSide.Right;
@@ -179,10 +176,10 @@ public class Line2D implements Savable {
     }
 */
     // this works much more correctly
-    public PointSide getSide(Vector2 c, float epsilon) {
+    public PointSide getSide(Vector2 c, double epsilon) {
         Vector2 a = pointA;
         Vector2 b = pointB;
-        float res = ((b.x - a.x)*(c.y - a.y) - (b.y - a.y)*(c.x - a.x));
+        double res = ((b.x() - a.x())*(c.y() - a.y()) - (b.y() - a.y())*(c.x() - a.x()));
         if (res > 0)
             return PointSide.Left;
         else if (res == 0)
@@ -192,7 +189,7 @@ public class Line2D implements Savable {
     }
     
     public boolean isLeft(Vector2 a, Vector2 b, Vector2 c){
-        return ((b.x - a.x)*(c.y - a.y) - (b.y - a.y)*(c.x - a.x)) > 0;
+        return ((b.x() - a.x())*(c.y() - a.y()) - (b.y() - a.y())*(c.x() - a.x())) > 0;
     }
     
     /**
@@ -203,12 +200,12 @@ public class Line2D implements Savable {
      * @return
      */
     public LineIntersect intersect(Line2D other, Vector2 intersectionPoint) {
-        float denom = (other.pointB.y - other.pointA.y) * (this.pointB.x - this.pointA.x)
-                - (other.pointB.x - other.pointA.x) * (this.pointB.y - this.pointA.y);
-        float u0 = (other.pointB.x - other.pointA.x) * (this.pointA.y - other.pointA.y)
-                - (other.pointB.y - other.pointA.y) * (this.pointA.x - other.pointA.x);
-        float u1 = (other.pointA.x - this.pointA.x) * (this.pointB.y - this.pointA.y)
-                - (other.pointA.y - this.pointA.y) * (this.pointB.x - this.pointA.x);
+        double denom = (other.pointB.y() - other.pointA.y()) * (this.pointB.x() - this.pointA.x())
+                - (other.pointB.x() - other.pointA.x()) * (this.pointB.y() - this.pointA.y());
+        double u0 = (other.pointB.x() - other.pointA.x()) * (this.pointA.y() - other.pointA.y())
+                - (other.pointB.y() - other.pointA.y()) * (this.pointA.x() - other.pointA.x());
+        double u1 = (other.pointA.x() - this.pointA.x()) * (this.pointB.y() - this.pointA.y())
+                - (other.pointA.y() - this.pointA.y()) * (this.pointB.x() - this.pointA.x());
 
         //if parallel
         if (denom == 0.0f) {
@@ -223,12 +220,12 @@ public class Line2D implements Savable {
             u0 = u0 / denom;
             u1 = u1 / denom;
 
-            float x = this.pointA.x + u0 * (this.pointB.x - this.pointA.x);
-            float y = this.pointA.y + u0 * (this.pointB.y - this.pointA.y);
+            double x = this.pointA.x() + u0 * (this.pointB.x() - this.pointA.x());
+            double y = this.pointA.y() + u0 * (this.pointB.y() - this.pointA.y());
 
             if (intersectionPoint != null) {
-                intersectionPoint.x = x; //(m_PointA.x + (FactorAB * Bx_minus_Ax));
-                intersectionPoint.y = y; //(m_PointA.y + (FactorAB * By_minus_Ay));
+                intersectionPoint.x(x); //(m_PointA.x() + (FactorAB * Bx_minus_Ax));
+                intersectionPoint.y(y); //(m_PointA.y() + (FactorAB * By_minus_Ay));
             }
 
             // now determine the type of intersection
@@ -242,83 +239,6 @@ public class Line2D implements Savable {
 
             return LineIntersect.LinesIntersect;
         }
-    }
-
-    /**
-     * Determines if two segments intersect, and if so the point of intersection. The current
-     * member line is considered line AB and the incomming parameter is considered line CD for
-     * the purpose of the utilized equations.
-     *
-     * A = PointA of the member line
-     * B = PointB of the member line
-     * C = PointA of the provided line
-     * D = PointB of the provided line
-     */
-    @Deprecated
-    public LineIntersect intersectionOLD(Line2D Line, Vector2 pIntersectPoint) {
-        float Ay_minus_Cy = pointA.y - Line.getPointA().y;
-        float Dx_minus_Cx = Line.getPointB().x - Line.getPointA().x;
-        float Ax_minus_Cx = pointA.x - Line.getPointA().x;
-        float Dy_minus_Cy = Line.getPointB().y - Line.getPointA().y;
-        float Bx_minus_Ax = pointB.x - pointA.x;
-        float By_minus_Ay = pointB.y - pointA.y;
-
-
-        java.awt.geom.Line2D l1 = new java.awt.geom.Line2D.Float(this.pointA.x, this.pointA.y, this.pointB.x, this.pointB.y);
-        if (l1.intersectsLine(Line.getPointA().x, Line.getPointA().y, Line.getPointB().x, Line.getPointB().y)) //return LINE_CLASSIFICATION.LINES_INTERSECT;
-        {
-            System.out.println("They intersect");
-        } else //return LINE_CLASSIFICATION.COLLINEAR;
-        {
-            System.out.println("They DO NOT intersect");
-        }
-
-        float Numerator = (Ay_minus_Cy * Dx_minus_Cx) - (Ax_minus_Cx * Dy_minus_Cy);
-        float Denominator = (Bx_minus_Ax * Dy_minus_Cy) - (By_minus_Ay * Dx_minus_Cx);
-
-        // if lines do not intersect, return now
-        if (Denominator != 0.0f) {
-            if (Numerator != 0.0f) {
-                System.out.println("App says They DO NOT intersect");
-                return LineIntersect.CoLinear;
-            }
-            System.out.println("App says They DO NOT intersect");
-            return LineIntersect.Parallel;
-        }
-
-        float FactorAB = Numerator / Denominator;
-        float FactorCD = ((Ay_minus_Cy * Bx_minus_Ax) - (Ax_minus_Cx * By_minus_Ay)) / Denominator;
-
-        // posting (hitting a vertex exactly) is not allowed, shift the results
-        // if they are within a minute range of the end vertecies
-//		if (fabs(FactorCD) < 1.0e-6f)
-//		{
-//			FactorCD = 1.0e-6f;
-//		}
-//		if (fabs(FactorCD - 1.0f) < 1.0e-6f)
-//		{
-//			FactorCD = 1.0f - 1.0e-6f;
-//		}
-
-
-        // if an interection point was provided, fill it in now
-        if (pIntersectPoint != null) {
-            pIntersectPoint.x = (pointA.x + (FactorAB * Bx_minus_Ax));
-            pIntersectPoint.y = (pointA.y + (FactorAB * By_minus_Ay));
-        }
-
-        System.out.println("App says They DO intersect");
-        // now determine the type of intersection
-        if ((FactorAB >= 0.0f) && (FactorAB <= 1.0f) && (FactorCD >= 0.0f) && (FactorCD <= 1.0f)) {
-            return LineIntersect.SegmentsIntersect;
-        } else if ((FactorCD >= 0.0f) && (FactorCD <= 1.0f)) {
-            return (LineIntersect.ABisectsB);
-        } else if ((FactorAB >= 0.0f) && (FactorAB <= 1.0f)) {
-            return (LineIntersect.BBisectsA);
-        }
-
-        return LineIntersect.LinesIntersect;
-
     }
 
     
@@ -345,20 +265,7 @@ public class Line2D implements Savable {
     }
 
     public String toString() {
-        return "Line:" + pointA.x + "/" + pointA.y + " -> " + pointB.x + "/" + pointB.y;
+        return "Line:" + pointA.x() + "/" + pointA.y() + " -> " + pointB.x() + "/" + pointB.y();
     }
 
-    public void write(JmeExporter e) throws IOException {
-        OutputCapsule capsule = e.getCapsule(this);
-        capsule.write(pointA, "pointA", null);
-        capsule.write(pointB, "pointB", null);
-        capsule.write(normal, "normal", null);
-    }
-
-    public void read(JmeImporter e) throws IOException {
-        InputCapsule capsule = e.getCapsule(this);
-        pointA = (Vector2) capsule.readSavable("pointA", new Vector2());
-        pointB = (Vector2) capsule.readSavable("pointB", new Vector2());
-        normal = (Vector2) capsule.readSavable("normal", new Vector2());
-    }
 }

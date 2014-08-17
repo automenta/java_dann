@@ -59,18 +59,18 @@ public class CholeskyCroutCholeskyDecomposition<M extends Matrix<M, F>, F extend
         for (int j = 0; j < matrixToDecompose.getWidth(); j++) {
             F d = newMatrix.getElementField().getZero();
             for (int k = 0; k < j; k++) {
-                F s = matrixToDecompose.get(k, j);
+                F s = matrixToDecompose.getElement(k, j);
                 for (int i = 0; i < k; i++)
-                    s = s.subtract(newMatrix.get(i, k).multiply(
-                            newMatrix.get(i, j)));
-                s = s.divide(newMatrix.get(k, k));
+                    s = s.subtract(newMatrix.getElement(i, k).multiply(
+                            newMatrix.getElement(i, j)));
+                s = s.divide(newMatrix.getElement(k, k));
                 newMatrix = newMatrix.setElement(k, j, s);
                 d = d.add(s.multiply(s));
                 checkIsSpd = checkIsSpd
-                        && (matrixToDecompose.get(k, j)
-                        .equals(matrixToDecompose.get(j, k)));
+                        && (matrixToDecompose.getElement(k, j)
+                        .equals(matrixToDecompose.getElement(j, k)));
             }
-            d = matrixToDecompose.get(j, j).subtract(d);
+            d = matrixToDecompose.getElement(j, j).subtract(d);
             checkIsSpd = checkIsSpd
                     && (d.compareTo(d.field().getZero()) > 0);
             newMatrix = newMatrix.setElement(j, j, d.max(d.field().getZero())
@@ -136,11 +136,11 @@ public class CholeskyCroutCholeskyDecomposition<M extends Matrix<M, F>, F extend
                     solutionMatrix = solutionMatrix.setElement(
                             k,
                             j,
-                            solutionMatrix.get(k, j).subtract(
-                                    solutionMatrix.get(i, j).multiply(
-                                            this.matrix.get(k, i))));
+                            solutionMatrix.getElement(k, j).subtract(
+                                    solutionMatrix.getElement(i, j).multiply(
+                                            this.matrix.getElement(k, i))));
                 solutionMatrix = solutionMatrix.setElement(k, j,
-                        solutionMatrix.get(k, j).divide(this.matrix.get(k, k)));
+                        solutionMatrix.getElement(k, j).divide(this.matrix.getElement(k, k)));
             }
 
         // Solve L'*X = Y;
@@ -150,11 +150,11 @@ public class CholeskyCroutCholeskyDecomposition<M extends Matrix<M, F>, F extend
                     solutionMatrix = solutionMatrix.setElement(
                             k,
                             j,
-                            solutionMatrix.get(k, j).subtract(
-                                    solutionMatrix.get(i, j).multiply(
-                                            this.matrix.get(i, k))));
+                            solutionMatrix.getElement(k, j).subtract(
+                                    solutionMatrix.getElement(i, j).multiply(
+                                            this.matrix.getElement(i, k))));
                 solutionMatrix = solutionMatrix.setElement(k, j,
-                        solutionMatrix.get(k, j).divide(this.matrix.get(k, k)));
+                        solutionMatrix.getElement(k, j).divide(this.matrix.getElement(k, k)));
             }
 
         return solutionMatrix;

@@ -27,19 +27,19 @@ import syncleus.dann.plan.ActionProbability;
 import syncleus.dann.plan.DiscreteActionProblem;
 import syncleus.dann.plan.State;
 
-public class MarkovDecisionProcess<A> {
+public class MarkovDecisionProcess<A,S extends State> {
 
-    private final DiscreteActionProblem<A> world;
+    private final DiscreteActionProblem<A,S> world;
     private final State goal;
     protected ActionProbability<A> probability;
 
-    public MarkovDecisionProcess(final DiscreteActionProblem<A> theWorld, ActionProbability<A> probability, State goal) {
+    public MarkovDecisionProcess(final DiscreteActionProblem<A,S> theWorld, ActionProbability<A> probability, State goal) {
         this.world = theWorld;
         this.goal = goal;
         this.probability = probability;
     }
 
-    public MarkovDecisionProcess(final DiscreteActionProblem<A> theWorld, ActionProbability<A> probability) {
+    public MarkovDecisionProcess(final DiscreteActionProblem<A,S> theWorld, ActionProbability<A> probability) {
         this(theWorld, probability, theWorld.getGoals().iterator().next());
         assert(theWorld.getGoals().size() == 1);                
     }
@@ -49,7 +49,7 @@ public class MarkovDecisionProcess<A> {
     /**
      * @return the world
      */
-    public DiscreteActionProblem<A> getProblem() {
+    public DiscreteActionProblem<A,S> getProblem() {
         return world;
     }
 

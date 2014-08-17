@@ -23,8 +23,8 @@
  */
 package syncleus.dann.plan;
 
-public interface AgentPolicy<A> {
-    A determineNextAction(DiscreteActionSolution<A> agent);
+public interface AgentPolicy<A,S extends State> {
+    A determineNextAction(DiscreteActionSolution<A,S> agent);
 
     DiscreteActionProblem getWorld();
 }

@@ -60,14 +60,14 @@ public class CholeskyBanachiewiczCholeskyDecomposition<M extends Matrix<M, F>, F
             for (int k = 0; k < j; k++) {
                 F s = newMatrix.getElementField().getZero();
                 for (int i = 0; i < k; i++)
-                    s = s.add(newMatrix.get(k, i).multiply(newMatrix.get(j, i)));
-                s = (matrix.get(j, k).subtract(s)).divide(newMatrix.get(k, k));
+                    s = s.add(newMatrix.getElement(k, i).multiply(newMatrix.getElement(j, i)));
+                s = (matrix.getElement(j, k).subtract(s)).divide(newMatrix.getElement(k, k));
                 newMatrix = newMatrix.setElement(j, k, s);
                 d = d.add(s.multiply(s));
                 checkIsSpd = checkIsSpd
-                        && (matrix.get(k, j) == matrix.get(j, k));
+                        && (matrix.getElement(k, j) == matrix.getElement(j, k));
             }
-            d = matrix.get(j, j).subtract(d);
+            d = matrix.getElement(j, j).subtract(d);
             checkIsSpd = checkIsSpd
                     && (d.compareTo(newMatrix.getElementField().getZero()) > 0);
             newMatrix = newMatrix.setElement(j, j,
@@ -125,11 +125,11 @@ public class CholeskyBanachiewiczCholeskyDecomposition<M extends Matrix<M, F>, F
                     solvedMatrix = solvedMatrix.setElement(
                             k,
                             j,
-                            solvedMatrix.get(k, j).subtract(
-                                    solvedMatrix.get(i, j).multiply(
-                                            this.matrix.get(k, i))));
-                solvedMatrix = solvedMatrix.setElement(k, j, solvedMatrix.get(k, j)
-                        .divide(this.matrix.get(k, k)));
+                            solvedMatrix.getElement(k, j).subtract(
+                                    solvedMatrix.getElement(i, j).multiply(
+                                            this.matrix.getElement(k, i))));
+                solvedMatrix = solvedMatrix.setElement(k, j, solvedMatrix.getElement(k, j)
+                        .divide(this.matrix.getElement(k, k)));
             }
         // Solve L'*X = Y;
         for (int k = this.matrix.getHeight() - 1; k >= 0; k--)
@@ -138,11 +138,11 @@ public class CholeskyBanachiewiczCholeskyDecomposition<M extends Matrix<M, F>, F
                     solvedMatrix = solvedMatrix.setElement(
                             k,
                             j,
-                            solvedMatrix.get(k, j).subtract(
-                                    solvedMatrix.get(i, j).multiply(
-                                            this.matrix.get(i, k))));
-                solvedMatrix = solvedMatrix.setElement(k, j, solvedMatrix.get(k, j)
-                        .divide(this.matrix.get(k, k)));
+                            solvedMatrix.getElement(k, j).subtract(
+                                    solvedMatrix.getElement(i, j).multiply(
+                                            this.matrix.getElement(i, k))));
+                solvedMatrix = solvedMatrix.setElement(k, j, solvedMatrix.getElement(k, j)
+                        .divide(this.matrix.getElement(k, k)));
             }
         return solvedMatrix;
     }

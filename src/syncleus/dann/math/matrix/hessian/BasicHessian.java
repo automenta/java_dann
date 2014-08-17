@@ -27,6 +27,7 @@ import syncleus.dann.data.Data;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.math.matrix.SimpleRealMatrix;
+import syncleus.dann.neural.flat.FlatNetwork;
 import syncleus.dann.neural.networks.BasicNetwork;
 
 /**

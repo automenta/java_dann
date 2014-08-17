@@ -73,35 +73,35 @@ public class HouseholderQrDecomposition<M extends Matrix<M, F>, F extends Ordere
             // Compute 2-norm of k-th column without under/overflow.
             F nrm = myMatrix.getElementField().getZero();
             for (int i = k; i < myMatrix.getHeight(); i++)
-                nrm = nrm.hypot(myMatrix.get(i, k));
+                nrm = nrm.hypot(myMatrix.getElement(i, k));
 
             if (!nrm.equals(myMatrix.getElementField().getZero())) {
                 // Form k-th Householder vector.
-                if (myMatrix.get(k, k).compareTo(
+                if (myMatrix.getElement(k, k).compareTo(
                         myMatrix.getElementField().getZero()) < 0)
                     nrm = nrm.negate();
                 for (int i = k; i < myMatrix.getHeight(); i++)
-                    myMatrix = myMatrix.setElement(i, k, myMatrix.get(i, k)
+                    myMatrix = myMatrix.setElement(i, k, myMatrix.getElement(i, k)
                             .divide(nrm));
                 myMatrix = myMatrix.setElement(
                         k,
                         k,
-                        myMatrix.get(k, k).add(
+                        myMatrix.getElement(k, k).add(
                                 myMatrix.getElementField().getOne()));
 
                 // Apply transformation to remaining columns.
                 for (int j = k + 1; j < myMatrix.getWidth(); j++) {
                     F sum = myMatrix.getElementField().getZero();
                     for (int i = k; i < myMatrix.getHeight(); i++)
-                        sum = sum.add(myMatrix.get(i, k).multiply(
-                                myMatrix.get(i, j)));
-                    sum = sum.negate().divide(myMatrix.get(k, k));
+                        sum = sum.add(myMatrix.getElement(i, k).multiply(
+                                myMatrix.getElement(i, j)));
+                    sum = sum.negate().divide(myMatrix.getElement(k, k));
                     for (int i = k; i < myMatrix.getHeight(); i++)
                         myMatrix = myMatrix.setElement(
                                 i,
                                 j,
-                                myMatrix.get(i, j).add(
-                                        sum.multiply(myMatrix.get(i, k))));
+                                myMatrix.getElement(i, j).add(
+                                        sum.multiply(myMatrix.getElement(i, k))));
                 }
             }
             myRDiagonal.set(k, nrm.negate());
@@ -150,7 +150,7 @@ public class HouseholderQrDecomposition<M extends Matrix<M, F>, F extends Ordere
             for (int j = 0; j < this.getWidth(); j++)
                 if (i >= j)
                     householderMatrix = householderMatrix.setElement(i, j,
-                            this.matrix.get(i, j));
+                            this.matrix.getElement(i, j));
         return householderMatrix;
     }
 
@@ -165,7 +165,7 @@ public class HouseholderQrDecomposition<M extends Matrix<M, F>, F extends Ordere
         for (int i = 0; i < this.getWidth(); i++)
             for (int j = 0; j < this.getWidth(); j++)
                 if (i < j)
-                    factor = factor.setElement(i, j, this.matrix.get(i, j));
+                    factor = factor.setElement(i, j, this.matrix.getElement(i, j));
                 else if (i == j)
                     factor = factor.setElement(i, j, this.rDiagonal.get(i));
         return factor;
@@ -185,19 +185,19 @@ public class HouseholderQrDecomposition<M extends Matrix<M, F>, F extends Ordere
                         .getZero());
             factor = factor.setElement(k, k, this.matrix.getElementField().getOne());
             for (int j = k; j < this.getWidth(); j++)
-                if (!this.matrix.get(k, k).equals(
+                if (!this.matrix.getElement(k, k).equals(
                         this.matrix.getElementField().getOne())) {
                     F sum = this.matrix.getElementField().getZero();
                     for (int i = k; i < this.getHeight(); i++)
-                        sum = sum.add(this.matrix.get(i, k).multiply(
-                                factor.get(i, j)));
-                    sum = sum.negate().divide(this.matrix.get(k, k));
+                        sum = sum.add(this.matrix.getElement(i, k).multiply(
+                                factor.getElement(i, j)));
+                    sum = sum.negate().divide(this.matrix.getElement(k, k));
                     for (int i = k; i < this.getHeight(); i++)
                         factor = factor.setElement(
                                 i,
                                 j,
-                                factor.get(i, j).add(
-                                        sum.multiply(this.matrix.get(i, k))));
+                                factor.getElement(i, j).add(
+                                        sum.multiply(this.matrix.getElement(i, k))));
                 }
         }
         return factor;
@@ -229,29 +229,29 @@ public class HouseholderQrDecomposition<M extends Matrix<M, F>, F extends Ordere
             for (int j = 0; j < width; j++) {
                 F sum = this.matrix.getElementField().getZero();
                 for (int i = k; i < this.getHeight(); i++)
-                    sum = sum.add(this.matrix.get(i, k).multiply(
-                            solved.get(i, j)));
-                sum = sum.negate().divide(this.matrix.get(k, k));
+                    sum = sum.add(this.matrix.getElement(i, k).multiply(
+                            solved.getElement(i, j)));
+                sum = sum.negate().divide(this.matrix.getElement(k, k));
                 for (int i = k; i < this.getHeight(); i++)
                     solved = solved.setElement(
                             i,
                             j,
-                            solved.get(i, j).add(
-                                    sum.multiply(this.matrix.get(i, k))));
+                            solved.getElement(i, j).add(
+                                    sum.multiply(this.matrix.getElement(i, k))));
             }
         // Solve factor*X = Y;
         for (int k = this.getWidth() - 1; k >= 0; k--) {
             for (int j = 0; j < width; j++)
                 solved = solved.setElement(k, j,
-                        solved.get(k, j).divide(this.rDiagonal.get(k)));
+                        solved.getElement(k, j).divide(this.rDiagonal.get(k)));
             for (int i = 0; i < k; i++)
                 for (int j = 0; j < width; j++)
                     solved = solved.setElement(
                             i,
                             j,
-                            solved.get(i, j).subtract(
-                                    solved.get(k, j).multiply(
-                                            this.matrix.get(i, k))));
+                            solved.getElement(i, j).subtract(
+                                    solved.getElement(k, j).multiply(
+                                            this.matrix.getElement(i, k))));
         }
 
         return solved.getSubmatrix(0, this.getWidth() - 1, 0, width - 1);

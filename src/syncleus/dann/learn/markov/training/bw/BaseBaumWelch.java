@@ -21,19 +21,22 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package syncleus.dann.learn.hmm.train.bw;
+package syncleus.dann.learn.markov.training.bw;
 
 import syncleus.dann.Learning;
 import syncleus.dann.Training;
 import syncleus.dann.data.DataSequence;
 import syncleus.dann.data.Dataset;
-import syncleus.dann.learn.hmm.HiddenMarkovModel;
-import syncleus.dann.learn.hmm.alog.ForwardBackwardCalculator;
-import syncleus.dann.learn.hmm.distributions.StateDistribution;
+import syncleus.dann.learn.markov.HiddenMarkovModel;
+import syncleus.dann.learn.markov.alog.ForwardBackwardCalculator;
+import syncleus.dann.math.probablity.distributions.StateDistribution;
 import syncleus.dann.learn.strategy.Strategy;
 
 import java.util.Arrays;
 import java.util.List;
+import syncleus.dann.data.Data;
+import syncleus.dann.learn.AbstractTraining.TrainingImplementationType;
+import syncleus.dann.neural.networks.training.propagation.TrainingContinuation;
 
 /**
  * This class provides the base implementation for Baum-Welch learning for
@@ -51,13 +54,13 @@ import java.util.List;
  * Hidden Markov Models and the Baum-Welch Algorithm, IEEE Information Theory
  * Society Newsletter, Dec. 2003.
  */
-public abstract class BaseBaumWelch implements Training {
+public abstract class BaseBaumWelch<D extends Data> implements Training {
     private int iterations;
     private HiddenMarkovModel method;
-    private final DataSequence training;
+    private final DataSequence<D> training;
 
     public BaseBaumWelch(final HiddenMarkovModel hmm,
-                         final DataSequence training) {
+                         final DataSequence<D> training) {
         this.method = hmm;
         this.training = training;
     }
@@ -219,7 +222,7 @@ public abstract class BaseBaumWelch implements Training {
             int j = 0;
 
             int o = 0;
-            for (final Dataset obsSeq : this.training.getSequences()) {
+            for (final Dataset<D> obsSeq : this.training.getSequences()) {
                 for (int t = 0; t < obsSeq.size(); t++, j++) {
                     sum += weights[j] = allGamma[o][t][i];
                 }

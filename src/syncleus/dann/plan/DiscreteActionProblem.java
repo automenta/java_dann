@@ -31,7 +31,7 @@ import java.util.List;
  * Abstract definition of a problem; solution instances try to solve it
    @param A action type
  */
-public interface DiscreteActionProblem<A> extends Problem {
+public interface DiscreteActionProblem<A, S extends State> extends Problem<S> {
 
     void addAction(A action);
 

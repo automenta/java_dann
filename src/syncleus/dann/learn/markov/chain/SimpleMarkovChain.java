@@ -16,7 +16,7 @@
  *  Philadelphia, PA 19148                                                     *
  *                                                                             *
  ******************************************************************************/
-package syncleus.dann.math.statistics;
+package syncleus.dann.learn.markov.chain;
 
 import syncleus.dann.math.matrix.RealMatrix;
 import syncleus.dann.math.matrix.SimpleRealMatrix;
@@ -34,6 +34,8 @@ public class SimpleMarkovChain<S> extends AbstractMarkovChain<S> {
     private static final double MAXIMUM_ROW_ERROR = 0.00001;
     private static final Random RANDOM = new Random();
 
+ 
+    
     public SimpleMarkovChain(
             final Map<List<S>, Map<S, Double>> transitionProbabilities,
             final int order, final Set<S> states) {
@@ -228,7 +230,7 @@ public class SimpleMarkovChain<S> extends AbstractMarkovChain<S> {
                     simultaneousValues[rowIndex][columnIndex] = 1.0;
                 else
                     simultaneousValues[rowIndex][columnIndex] = steadyStateMatrix
-                            .get(rowIndex, columnIndex).doubleValue();
+                            .get(rowIndex, columnIndex);
             }
         final RealMatrix simultaneousMatrix = new SimpleRealMatrix(
                 simultaneousValues);
@@ -244,7 +246,7 @@ public class SimpleMarkovChain<S> extends AbstractMarkovChain<S> {
         for (int stateIndex = 0; stateIndex < this.columnMapping.size(); stateIndex++) {
             final S currentState = this.columnMapping.get(stateIndex);
             final double currentProbability = simultaneousSolved.get(
-                    stateIndex, 0).doubleValue();
+                    stateIndex, 0);
             stateProbabilities.put(currentState, currentProbability);
         }
 

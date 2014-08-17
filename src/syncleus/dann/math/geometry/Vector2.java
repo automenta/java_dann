@@ -17,6 +17,10 @@ public class Vector2 extends Vector {
     public Vector2() {
         super(2);
     }
+    
+    public Vector2(Vector v) {
+        super(v);
+    }
 
     public Vector2(double x, double y) {
         super(x, y);
@@ -27,5 +31,9 @@ public class Vector2 extends Vector {
     public double x() { return get(1); }
     public double y() { return get(2); }
     
+    public Vector2 normalize() {
+        double m = getNorm();
+        return new Vector2( x() / m, y() / m );
+    }
     
 }

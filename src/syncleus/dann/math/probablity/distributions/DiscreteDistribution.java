@@ -21,7 +21,7 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package syncleus.dann.learn.hmm.distributions;
+package syncleus.dann.math.probablity.distributions;
 
 import syncleus.dann.data.Data;
 import syncleus.dann.data.DataCase;
@@ -35,7 +35,7 @@ import java.util.Arrays;
  * A discrete distribution is a distribution with a finite set of states that it
  * can be in.
  */
-public class DiscreteDistribution implements StateDistribution {
+public class DiscreteDistribution<D extends Data> implements StateDistribution<D> {
 
     /**
      * The serial id.
@@ -111,7 +111,7 @@ public class DiscreteDistribution implements StateDistribution {
      * @param co THe data to fit to.
      */
     @Override
-    public void fit(final Dataset co) {
+    public void fit(final Dataset<D> co) {
         if (co.size() < 1) {
             throw new IllegalArgumentException("Empty observation set");
         }
@@ -139,7 +139,7 @@ public class DiscreteDistribution implements StateDistribution {
      * @param weights The weights.
      */
     @Override
-    public void fit(final Dataset co, final double[] weights) {
+    public void fit(final Dataset<D> co, final double[] weights) {
         if ((co.size() < 1) || (co.size() != weights.length)) {
             throw new IllegalArgumentException();
         }
@@ -160,8 +160,8 @@ public class DiscreteDistribution implements StateDistribution {
      * @return The next element.
      */
     @Override
-    public DataCase generate() {
-        final Data result = new VectorData(this.probabilities.length);
+    public VectorCase generate() {
+        final VectorData result = new VectorData(this.probabilities.length);
 
         for (int i = 0; i < this.probabilities.length; i++) {
             double rand = Math.random();
@@ -184,7 +184,7 @@ public class DiscreteDistribution implements StateDistribution {
      * @param o THe data pair.
      */
     @Override
-    public double probability(final DataCase o) {
+    public Double probability(final DataCase o) {
 
         double result = 1;
 
@@ -204,5 +204,6 @@ public class DiscreteDistribution implements StateDistribution {
     public double[][] getProbabilities() {
         return this.probabilities;
     }
+
 
 }

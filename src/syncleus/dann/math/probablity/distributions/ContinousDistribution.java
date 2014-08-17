@@ -21,7 +21,7 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package syncleus.dann.learn.hmm.distributions;
+package syncleus.dann.math.probablity.distributions;
 
 import syncleus.dann.data.DataCase;
 import syncleus.dann.data.Dataset;
@@ -35,12 +35,13 @@ import syncleus.dann.math.matrix.decomposition.CholeskyDecomposition2;
 
 import java.util.Arrays;
 import java.util.Random;
+import syncleus.dann.data.Data;
 
 /**
  * A continuous distribution represents an infinite range of choices between two
  * real numbers. A gaussian distribution is used to distribute the probability.
  */
-public class ContinousDistribution implements StateDistribution {
+public class ContinousDistribution<D extends Data> implements StateDistribution<D> {
 
     /**
      * The serial id.
@@ -145,7 +146,7 @@ public class ContinousDistribution implements StateDistribution {
      * {@inheritDoc}
      */
     @Override
-    public void fit(final Dataset co, final double[] weights) {
+    public void fit(final Dataset<D> co, final double[] weights) {
         if ((co.size() < 1) || (co.size() != weights.length)) {
             throw new IllegalArgumentException();
         }
@@ -155,7 +156,7 @@ public class ContinousDistribution implements StateDistribution {
         for (int r = 0; r < this.dimension; r++) {
             int i = 0;
 
-            for (final DataCase o : co) {
+            for (final DataCase<D> o : co) {
                 mean[r] += o.getInput().getData(r) * weights[i++];
             }
         }
@@ -163,7 +164,7 @@ public class ContinousDistribution implements StateDistribution {
         // Compute covariance
         final double[][] covariance = new double[this.dimension][this.dimension];
         int i = 0;
-        for (final DataCase o : co) {
+        for (final DataCase<D> o : co) {
             final double[] obs = o.getInput().getData();
             final double[] omm = new double[obs.length];
 
@@ -187,7 +188,7 @@ public class ContinousDistribution implements StateDistribution {
      * {@inheritDoc}
      */
     @Override
-    public DataCase generate() {
+    public VectorCase generate() {
         final double[] d = new double[this.dimension];
 
         for (int i = 0; i < this.dimension; i++) {
@@ -203,13 +204,13 @@ public class ContinousDistribution implements StateDistribution {
      * {@inheritDoc}
      */
     @Override
-    public double probability(final DataCase o) {
+    public Double probability(final DataCase o) {
         final double[] v = o.getInputArray();
         final SimpleRealMatrix vmm = SimpleRealMatrix.createColumnMatrix(EngineArray.subtract(v,
                 this.mean));
         final SimpleRealMatrix t = MatrixMath.multiply(this.covarianceInv, vmm);
         final double expArg = MatrixMath.multiply(MatrixMath.transpose(vmm), t)
-                .get(0, 0).doubleValue() * -0.5;
+                .get(0, 0) * -0.5;
         return Math.exp(expArg)
                 / (Math.pow(2.0 * Math.PI, this.dimension / 2.0) * Math.pow(
                 this.covarianceDet, 0.5));

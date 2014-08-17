@@ -16,7 +16,7 @@
  *  Philadelphia, PA 19148                                                     *
  *                                                                             *
  ******************************************************************************/
-package syncleus.dann.math.statistics;
+package syncleus.dann.learn.markov.chain;
 
 import java.util.Set;
 

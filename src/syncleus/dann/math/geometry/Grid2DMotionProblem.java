@@ -25,22 +25,30 @@ package syncleus.dann.math.geometry;
 
 import syncleus.dann.math.EncogMath;
 import syncleus.dann.plan.State;
-import syncleus.dann.plan.grid2d.BasicAction;
-import syncleus.dann.plan.grid2d.BasicWorld;
+import syncleus.dann.plan.grid2d.BasicDiscreteActionProblem;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Grid2D extends BasicWorld {
-
-    public static final Action ACTION_NORTH = new BasicAction("NORTH");
-    public static final Action ACTION_SOUTH = new BasicAction("SOUTH");
-    public static final Action ACTION_EAST = new BasicAction("EAST");
-    public static final Action ACTION_WEST = new BasicAction("WEST");
+/** Discrete action problem involving motion in a 2D grid */
+public class Grid2DMotionProblem extends BasicDiscreteActionProblem {    
+    
+    public static final Angle ACTION_EAST = new Angle((int)0) {        
+        @Override public String toString() { return "EAST"; }
+    };
+    public static final Angle ACTION_SOUTH = new Angle((int)90) {        
+        @Override public String toString() { return "SOUTH"; }
+    };
+    public static final Angle ACTION_WEST = new Angle((int)180) {        
+        @Override public String toString() { return "WEST"; }
+    };    
+    public static final Angle ACTION_NORTH = new Angle((int)270) {
+        @Override public String toString() { return "NORTH"; }
+    };    
 
     private final GridState[][] state;
 
-    public Grid2D(final int rows, final int columns) {
+    public Grid2DMotionProblem(final int rows, final int columns) {
         addAction(ACTION_NORTH);
         addAction(ACTION_SOUTH);
         addAction(ACTION_EAST);
@@ -79,41 +87,41 @@ public class Grid2D extends BasicWorld {
         return this.state[row][column];
     }
 
-    public static Action leftOfAction(final Action action) {
-        if (action == Grid2D.ACTION_NORTH) {
-            return Grid2D.ACTION_WEST;
-        } else if (action == Grid2D.ACTION_SOUTH) {
-            return Grid2D.ACTION_EAST;
-        } else if (action == Grid2D.ACTION_EAST) {
-            return Grid2D.ACTION_NORTH;
-        } else if (action == Grid2D.ACTION_WEST) {
-            return Grid2D.ACTION_SOUTH;
+    public static Angle leftOfAction(final Angle action) {
+        if (action == Grid2DMotionProblem.ACTION_NORTH) {
+            return Grid2DMotionProblem.ACTION_WEST;
+        } else if (action == Grid2DMotionProblem.ACTION_SOUTH) {
+            return Grid2DMotionProblem.ACTION_EAST;
+        } else if (action == Grid2DMotionProblem.ACTION_EAST) {
+            return Grid2DMotionProblem.ACTION_NORTH;
+        } else if (action == Grid2DMotionProblem.ACTION_WEST) {
+            return Grid2DMotionProblem.ACTION_SOUTH;
         }
         return null;
     }
 
-    public static Action rightOfAction(final Action action) {
-        if (action == Grid2D.ACTION_NORTH) {
-            return Grid2D.ACTION_EAST;
-        } else if (action == Grid2D.ACTION_SOUTH) {
-            return Grid2D.ACTION_WEST;
-        } else if (action == Grid2D.ACTION_EAST) {
-            return Grid2D.ACTION_SOUTH;
-        } else if (action == Grid2D.ACTION_WEST) {
-            return Grid2D.ACTION_NORTH;
+    public static Angle rightOfAction(final Angle action) {
+        if (action == Grid2DMotionProblem.ACTION_NORTH) {
+            return Grid2DMotionProblem.ACTION_EAST;
+        } else if (action == Grid2DMotionProblem.ACTION_SOUTH) {
+            return Grid2DMotionProblem.ACTION_WEST;
+        } else if (action == Grid2DMotionProblem.ACTION_EAST) {
+            return Grid2DMotionProblem.ACTION_SOUTH;
+        } else if (action == Grid2DMotionProblem.ACTION_WEST) {
+            return Grid2DMotionProblem.ACTION_NORTH;
         }
         return null;
     }
 
-    public static Action reverseOfAction(final Action action) {
-        if (action == Grid2D.ACTION_NORTH) {
-            return Grid2D.ACTION_SOUTH;
-        } else if (action == Grid2D.ACTION_SOUTH) {
-            return Grid2D.ACTION_NORTH;
-        } else if (action == Grid2D.ACTION_EAST) {
-            return Grid2D.ACTION_WEST;
-        } else if (action == Grid2D.ACTION_WEST) {
-            return Grid2D.ACTION_EAST;
+    public static Angle reverseOfAction(final Angle action) {
+        if (action == Grid2DMotionProblem.ACTION_NORTH) {
+            return Grid2DMotionProblem.ACTION_SOUTH;
+        } else if (action == Grid2DMotionProblem.ACTION_SOUTH) {
+            return Grid2DMotionProblem.ACTION_NORTH;
+        } else if (action == Grid2DMotionProblem.ACTION_EAST) {
+            return Grid2DMotionProblem.ACTION_WEST;
+        } else if (action == Grid2DMotionProblem.ACTION_WEST) {
+            return Grid2DMotionProblem.ACTION_EAST;
         }
         return null;
     }
@@ -175,7 +183,7 @@ public class Grid2D extends BasicWorld {
         return minState;
     }
 
-    public static Action determineActionToState(final GridState currentState,
+    public static Angle determineActionToState(final GridState currentState,
                                                 final GridState targetState) {
         final int rowDiff = currentState.getRow() - targetState.getRow();
         final int colDiff = currentState.getColumn() - targetState.getColumn();
@@ -185,14 +193,14 @@ public class Grid2D extends BasicWorld {
 
         if (Math.abs(rowDiff) >= Math.abs(colDiff)) {
             if (rowDiff < 0)
-                return Grid2D.ACTION_SOUTH;
+                return Grid2DMotionProblem.ACTION_SOUTH;
             else
-                return Grid2D.ACTION_NORTH;
+                return Grid2DMotionProblem.ACTION_NORTH;
         } else {
             if (colDiff < 0)
-                return Grid2D.ACTION_EAST;
+                return Grid2DMotionProblem.ACTION_EAST;
             else
-                return Grid2D.ACTION_WEST;
+                return Grid2DMotionProblem.ACTION_WEST;
         }
     }
 
@@ -200,7 +208,7 @@ public class Grid2D extends BasicWorld {
         double min = Double.POSITIVE_INFINITY;
         GridState minState = null;
 
-        for (final State goalState : this.getGoals()) {
+        for (Object goalState : goals) {
             for (final GridState state : states) {
                 final double d = euclideanDistance(state, (GridState) goalState);
                 if (d < min) {

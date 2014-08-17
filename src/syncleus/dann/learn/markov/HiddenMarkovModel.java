@@ -21,18 +21,18 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package syncleus.dann.learn.hmm;
+package syncleus.dann.learn.markov;
 
 import syncleus.dann.StateSequenceLearning;
 import syncleus.dann.data.DataCase;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.learn.AbstractLearning;
-import syncleus.dann.learn.hmm.alog.ForwardBackwardCalculator;
-import syncleus.dann.learn.hmm.alog.ForwardBackwardScaledCalculator;
-import syncleus.dann.learn.hmm.alog.ViterbiCalculator;
-import syncleus.dann.learn.hmm.distributions.ContinousDistribution;
-import syncleus.dann.learn.hmm.distributions.DiscreteDistribution;
-import syncleus.dann.learn.hmm.distributions.StateDistribution;
+import syncleus.dann.learn.markov.alog.ForwardBackwardCalculator;
+import syncleus.dann.learn.markov.alog.ForwardBackwardScaledCalculator;
+import syncleus.dann.learn.markov.alog.ViterbiCalculator;
+import syncleus.dann.math.probablity.distributions.ContinousDistribution;
+import syncleus.dann.math.probablity.distributions.DiscreteDistribution;
+import syncleus.dann.math.probablity.distributions.StateDistribution;
 
 import java.io.Serializable;
 import java.util.Iterator;

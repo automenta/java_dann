@@ -88,7 +88,7 @@ public class DoolittleLuDecomposition<M extends Matrix<M, F>, F extends OrderedA
         for (int j = 0; j < width; j++) {
             // Make a copy of the j-th column to localize references.
             for (int i = 0; i < height; i++)
-                matrixColumn.set(i, myMatrix.get(i, j));
+                matrixColumn.set(i, myMatrix.getElement(i, j));
 
             // Apply previous transformations.
             for (int i = 0; i < height; i++) {
@@ -96,7 +96,7 @@ public class DoolittleLuDecomposition<M extends Matrix<M, F>, F extends OrderedA
                 final int kmax = Math.min(i, j);
                 F sum = matrixToDecompose.getElementField().getZero();
                 for (int k = 0; k < kmax; k++)
-                    sum = sum.add(myMatrix.get(i, k).multiply(
+                    sum = sum.add(myMatrix.getElement(i, k).multiply(
                             matrixColumn.get(k)));
 
                 matrixColumn.set(i, matrixColumn.get(i).subtract(sum));
@@ -111,8 +111,8 @@ public class DoolittleLuDecomposition<M extends Matrix<M, F>, F extends OrderedA
                     pivotIndex = i;
             if (pivotIndex != j) {
                 for (int k = 0; k < width; k++) {
-                    final F tmp = myMatrix.get(pivotIndex, k);
-                    myMatrix = myMatrix.setElement(pivotIndex, k, myMatrix.get(j, k));
+                    final F tmp = myMatrix.getElement(pivotIndex, k);
+                    myMatrix = myMatrix.setElement(pivotIndex, k, myMatrix.getElement(j, k));
                     myMatrix = myMatrix.setElement(j, k, tmp);
                 }
                 final int tmp = this.pivot[pivotIndex];
@@ -123,11 +123,11 @@ public class DoolittleLuDecomposition<M extends Matrix<M, F>, F extends OrderedA
 
             // Compute multipliers.
             if ((j < height)
-                    && (!myMatrix.get(j, j).equals(
+                    && (!myMatrix.getElement(j, j).equals(
                     myMatrix.getElementField().getZero())))
                 for (int i = j + 1; i < height; i++)
                     myMatrix = myMatrix.setElement(i, j,
-                            myMatrix.get(i, j).divide(myMatrix.get(j, j)));
+                            myMatrix.getElement(i, j).divide(myMatrix.getElement(j, j)));
         }
 
         this.pivotSign = myPivotSign;
@@ -155,7 +155,7 @@ public class DoolittleLuDecomposition<M extends Matrix<M, F>, F extends OrderedA
     @Override
     public boolean isNonsingular() {
         for (int j = 0; j < this.getWidth(); j++)
-            if (this.matrix.get(j, j).equals(
+            if (this.matrix.getElement(j, j).equals(
                     this.matrix.getElementField().getZero()))
                 return false;
         return true;
@@ -223,7 +223,7 @@ public class DoolittleLuDecomposition<M extends Matrix<M, F>, F extends OrderedA
         else
             determinant = this.matrix.getElementField().getZero();
         for (int j = 0; j < this.getWidth(); j++)
-            determinant = determinant.multiply(this.matrix.get(j, j));
+            determinant = determinant.multiply(this.matrix.getElement(j, j));
         return determinant;
     }
 
@@ -253,22 +253,22 @@ public class DoolittleLuDecomposition<M extends Matrix<M, F>, F extends OrderedA
                     xMat = xMat.setElement(
                             i,
                             j,
-                            xMat.get(i, j).subtract(
-                                    xMat.get(k, j).multiply(
-                                            this.matrix.get(i, k))));
+                            xMat.getElement(i, j).subtract(
+                                    xMat.getElement(k, j).multiply(
+                                            this.matrix.getElement(i, k))));
         // Solve U*X = Y;
         for (int k = this.getWidth() - 1; k >= 0; k--) {
             for (int j = 0; j < width; j++)
                 xMat = xMat.setElement(k, j,
-                        xMat.get(k, j).divide(this.matrix.get(k, k)));
+                        xMat.getElement(k, j).divide(this.matrix.getElement(k, k)));
             for (int i = 0; i < k; i++)
                 for (int j = 0; j < width; j++)
                     xMat = xMat.setElement(
                             i,
                             j,
-                            xMat.get(i, j).subtract(
-                                    xMat.get(k, j).multiply(
-                                            this.matrix.get(i, k))));
+                            xMat.getElement(i, j).subtract(
+                                    xMat.getElement(k, j).multiply(
+                                            this.matrix.getElement(i, k))));
         }
         return xMat;
     }

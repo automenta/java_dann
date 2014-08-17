@@ -21,10 +21,10 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package syncleus.dann.learn.hmm.alog;
+package syncleus.dann.learn.markov.alog;
 
 import syncleus.dann.data.Dataset;
-import syncleus.dann.learn.hmm.HiddenMarkovModel;
+import syncleus.dann.learn.markov.HiddenMarkovModel;
 
 /**
  * This class produces a Kullback-Leibler estimation of the distance between two

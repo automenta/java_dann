@@ -23,7 +23,7 @@
  */
 package syncleus.dann.plan;
 
-import syncleus.dann.math.geometry.Grid2D;
+import syncleus.dann.math.geometry.Grid2DMotionProblem;
 import syncleus.dann.math.geometry.GridState;
 import syncleus.dann.plan.grid2d.AbstractProbability;
 
@@ -32,7 +32,7 @@ import java.util.TreeSet;
 
 public class DeterministicProbability extends AbstractProbability {
 
-    public DeterministicProbability(final Grid2D theWorld) {
+    public DeterministicProbability(final Grid2DMotionProblem theWorld) {
         super(theWorld);
     }
 
@@ -55,7 +55,7 @@ public class DeterministicProbability extends AbstractProbability {
 
         // are we trying to move nowhere
         if (gridResultState == gridPreviousState) {
-            if (Grid2D.isStateBlocked(desiredState))
+            if (Grid2DMotionProblem.isStateBlocked(desiredState))
                 return 1.0;
             else
                 return 0.0;

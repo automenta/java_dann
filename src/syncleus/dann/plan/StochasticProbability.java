@@ -24,7 +24,7 @@
 package syncleus.dann.plan;
 
 import syncleus.dann.math.EncogMath;
-import syncleus.dann.math.geometry.Grid2D;
+import syncleus.dann.math.geometry.Grid2DMotionProblem;
 import syncleus.dann.math.geometry.GridState;
 import syncleus.dann.plan.grid2d.AbstractProbability;
 
@@ -39,7 +39,7 @@ public class StochasticProbability extends AbstractProbability {
     private double probabilityRight;
     private double probabilityReverse;
 
-    public StochasticProbability(final Grid2D theWorld,
+    public StochasticProbability(final Grid2DMotionProblem theWorld,
                                      final double theProbabilitySuccess,
                                      final double theProbabilitySame, final double theProbabilityLeft,
                                      final double theProbabilityRight, final double theProbabilityReverse) {
@@ -51,7 +51,7 @@ public class StochasticProbability extends AbstractProbability {
         this.probabilityReverse = theProbabilityReverse;
     }
 
-    public StochasticProbability(final Grid2D theWorld) {
+    public StochasticProbability(final Grid2DMotionProblem theWorld) {
         this(theWorld, 0.8, 0.0, 0.1, 0.1, 0.0);
     }
 
@@ -143,7 +143,7 @@ public class StochasticProbability extends AbstractProbability {
 
         // are we trying to move nowhere
         if (gridResultState == gridPreviousState) {
-            if (Grid2D.isStateBlocked(desiredState))
+            if (Grid2DMotionProblem.isStateBlocked(desiredState))
                 return this.probabilitySuccess;
             else
                 return 0.0;
@@ -151,11 +151,11 @@ public class StochasticProbability extends AbstractProbability {
 
         if (resultingAction == desiredAction) {
             return this.probabilitySuccess;
-        } else if (resultingAction == Grid2D.rightOfAction(desiredAction)) {
+        } else if (resultingAction == Grid2DMotionProblem.rightOfAction(desiredAction)) {
             return this.probabilityRight;
-        } else if (resultingAction == Grid2D.leftOfAction(desiredAction)) {
+        } else if (resultingAction == Grid2DMotionProblem.leftOfAction(desiredAction)) {
             return this.probabilityLeft;
-        } else if (resultingAction == Grid2D.reverseOfAction(desiredAction)) {
+        } else if (resultingAction == Grid2DMotionProblem.reverseOfAction(desiredAction)) {
             return this.probabilityReverse;
         } else {
             return 0.0;
@@ -181,7 +181,7 @@ public class StochasticProbability extends AbstractProbability {
             // probability of left
             if (this.probabilityLeft > EncogMath.DEFAULT_EPSILON) {
                 final State newState = determineActionState((GridState) state,
-                        Grid2D.leftOfAction(action));
+                        Grid2DMotionProblem.leftOfAction(action));
                 if (newState != null)
                     result.add(new SuccessorState(newState,
                             this.probabilityLeft));
@@ -190,7 +190,7 @@ public class StochasticProbability extends AbstractProbability {
             // probability of right
             if (this.probabilityRight > EncogMath.DEFAULT_EPSILON) {
                 final State newState = determineActionState((GridState) state,
-                        Grid2D.rightOfAction(action));
+                        Grid2DMotionProblem.rightOfAction(action));
                 if (newState != null)
                     result.add(new SuccessorState(newState,
                             this.probabilityRight));
@@ -199,7 +199,7 @@ public class StochasticProbability extends AbstractProbability {
             // probability of reverse
             if (this.probabilityReverse > EncogMath.DEFAULT_EPSILON) {
                 final State newState = determineActionState((GridState) state,
-                        Grid2D.reverseOfAction(action));
+                        Grid2DMotionProblem.reverseOfAction(action));
                 if (newState != null)
                     result.add(new SuccessorState(newState,
                             this.probabilityReverse));

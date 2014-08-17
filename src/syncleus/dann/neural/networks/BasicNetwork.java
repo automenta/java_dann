@@ -39,6 +39,7 @@ import syncleus.dann.math.random.NguyenWidrowRandomizer;
 import syncleus.dann.math.random.Randomizer;
 import syncleus.dann.math.random.RangeRandomizer;
 import syncleus.dann.neural.activation.EncogActivationFunction;
+import syncleus.dann.neural.flat.FlatNetwork;
 import syncleus.dann.neural.networks.layers.Layer;
 import syncleus.dann.neural.networks.structure.NetworkCODEC;
 import syncleus.dann.neural.networks.structure.NeuralStructure;
@@ -60,8 +61,8 @@ import syncleus.dann.util.factory.MLMethodFactory;
  * <p/>
  * Once the neural network has been completely constructed.
  */
-public class BasicNetwork extends AbstractLearning implements ContainsFlat, MLContext,
-        RegressionLearning, VectorEncodable, MLResettable, Classifying, ErrorLearning,
+public class BasicNetwork<D extends Data> extends AbstractLearning implements ContainsFlat, MLContext,
+        RegressionLearning<D>, VectorEncodable, MLResettable, Classifying<D, Integer>, ErrorLearning<D>,
         MLFactory, Cloneable {
 
     /**
@@ -188,7 +189,7 @@ public class BasicNetwork extends AbstractLearning implements ContainsFlat, MLCo
      * @return The error percentage.
      */
     @Override
-    public double calculateError(final Dataset data) {
+    public double calculateError(final Dataset<D> data) {
         return EncogUtility.calculateRegressionError(this, data);
     }
 
@@ -207,7 +208,7 @@ public class BasicNetwork extends AbstractLearning implements ContainsFlat, MLCo
      * {@inheritDoc}
      */
     @Override
-    public int classify(final Data input) {
+    public Integer classify(final D input) {
         return winner(input);
     }
 

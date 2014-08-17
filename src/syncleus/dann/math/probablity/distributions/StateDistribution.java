@@ -21,12 +21,15 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package syncleus.dann.learn.hmm.distributions;
+package syncleus.dann.math.probablity.distributions;
 
 import syncleus.dann.data.DataCase;
 import syncleus.dann.data.Dataset;
 
 import java.io.Serializable;
+import syncleus.dann.data.Data;
+import syncleus.dann.data.vector.VectorCase;
+import syncleus.dann.math.probablity.ProbabilityFunction;
 
 /**
  * This class represents a "state distribution". This is the means by which the
@@ -34,7 +37,7 @@ import java.io.Serializable;
  * are supported. Use ContinousDistribution to use a Gaussian-based continuous
  * distribution. Use DiscreteDistribution for a item-based distribution.
  */
-public interface StateDistribution extends Cloneable, Serializable {
+public interface StateDistribution<D extends Data> extends Cloneable, Serializable, ProbabilityFunction<DataCase<D>> {
 
     /**
      * @return A clone of this distribution.
@@ -46,7 +49,7 @@ public interface StateDistribution extends Cloneable, Serializable {
      *
      * @param set The data set to fit to.
      */
-    void fit(Dataset set);
+    void fit(Dataset<D> set);
 
     /**
      * Fit this distribution to the specified data set, given the specified
@@ -55,14 +58,14 @@ public interface StateDistribution extends Cloneable, Serializable {
      * @param set     The data set to fit to.
      * @param weights The weights.
      */
-    void fit(Dataset set, double[] weights);
+    void fit(Dataset<D> set, double[] weights);
 
     /**
      * Generate a random data pair, based on the probabilities.
      *
      * @return A random data pair.
      */
-    DataCase generate();
+    VectorCase generate();
 
     /**
      * Determine the probability of the specified data pair.
@@ -70,5 +73,9 @@ public interface StateDistribution extends Cloneable, Serializable {
      * @param o The pair to consider.
      * @return The probability.
      */
-    double probability(DataCase o);
+    @Override
+    Double probability(DataCase<D> o);
+    
+    default Double apply(DataCase<D> o) { return probability(o); }
+    
 }

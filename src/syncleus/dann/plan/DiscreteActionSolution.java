@@ -23,18 +23,18 @@
  */
 package syncleus.dann.plan;
 
-public interface DiscreteActionSolution<A>  {
+public interface DiscreteActionSolution<A,S extends State>  {
     
-    State getCurrentState();
+    S getCurrentState();
     
 
-    void setCurrentState(State s);
+    void setCurrentState(S s);
 
 
-    DiscreteActionProblem<A> getProblem();
+    DiscreteActionProblem<A,S> getProblem();
     
     /** returns false if this solution can not attempt, or does not apply to the problem */
-    boolean setProblem(DiscreteActionProblem<A> p);
+    boolean setProblem(DiscreteActionProblem<A,S> p);
 
     A nextAction();
 }

@@ -30,9 +30,9 @@ public class GridState extends BasicState {
 
     private final int row;
     private final int column;
-    private final Grid2D owner;
+    private final Grid2DMotionProblem owner;
 
-    public GridState(final Grid2D theOwner, final int theRow,
+    public GridState(final Grid2DMotionProblem theOwner, final int theRow,
                      final int theColumn, final boolean blocked) {
         this.owner = theOwner;
         this.row = theRow;
@@ -56,7 +56,7 @@ public class GridState extends BasicState {
     /**
      * @return the owner
      */
-    public Grid2D getOwner() {
+    public Grid2DMotionProblem getOwner() {
         return owner;
     }
 

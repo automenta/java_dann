@@ -31,6 +31,8 @@ import syncleus.dann.neural.networks.layers.Layer;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import syncleus.dann.neural.flat.FlatLayer;
+import syncleus.dann.neural.flat.FlatNetwork;
 
 /**
  * Holds "cached" information about the structure of the neural network. This is

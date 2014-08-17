@@ -21,14 +21,14 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package syncleus.dann.learn.hmm.alog;
+package syncleus.dann.learn.markov.alog;
 
 import syncleus.dann.data.DataCase;
 import syncleus.dann.data.DataSequence;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.data.vector.VectorDataset;
 import syncleus.dann.data.vector.VectorSequence;
-import syncleus.dann.learn.hmm.HiddenMarkovModel;
+import syncleus.dann.learn.markov.HiddenMarkovModel;
 
 /**
  * This class is used to generate random sequences based on a Hidden Markov
@@ -46,7 +46,7 @@ public class MarkovGenerator {
 
     public DataSequence generateSequences(final int observationCount,
                                            final int observationLength) {
-        final DataSequence result = new VectorSequence();
+        final VectorSequence result = new VectorSequence();
 
         for (int i = 0; i < observationCount; i++) {
             result.startNewSequence();

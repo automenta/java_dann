@@ -23,7 +23,6 @@
  */
 package syncleus.dann.plan.grid2d;
 
-import syncleus.dann.math.geometry.GridState;
 import syncleus.dann.plan.ActionProbability;
 import syncleus.dann.plan.DiscreteActionProblem;
 import syncleus.dann.plan.DiscreteActionSolution;
@@ -31,13 +30,13 @@ import syncleus.dann.plan.State;
 
 import java.util.*;
 
-public abstract class BasicWorld<A extends BasicAction> implements DiscreteActionProblem<A> {
+public abstract class BasicDiscreteActionProblem<A, S extends State> implements DiscreteActionProblem<A,S> {
     private final List<A> actions = new ArrayList<>();
-    private final Queue<State> states = new ArrayDeque<>();
+    private final Queue<S> states = new ArrayDeque<>();
     private ActionProbability probability;
     private final List<DiscreteActionSolution> agents = new ArrayList<>();
-    private final Set<State> goals = new HashSet<>();
-
+    protected final Set<S> goals = new HashSet<>();
+ 
     @Override
     public List<A> getActions() {
         return this.actions;
@@ -60,13 +59,13 @@ public abstract class BasicWorld<A extends BasicAction> implements DiscreteActio
         return result;
     }
 
-    public void setPolicyValue(final State state, final A action,
+    public void setPolicyValue(final S state, final A action,
                                final double r) {
         final int index = requireActionIndex(action);
         state.getPolicyValue()[index] = r;
     }
 
-    public double getPolicyValue(final State state, final A action) {
+    public double getPolicyValue(final S state, final A action) {
         final int index = requireActionIndex(action);
         return state.getPolicyValue()[index];
     }
@@ -85,7 +84,7 @@ public abstract class BasicWorld<A extends BasicAction> implements DiscreteActio
         this.probability = probability;
     }
 
-    public static void removeRewardBelow(final List<GridState> states,
+    public void removeRewardBelow(final List<S> states,
                                          final double d) {
         int i = 0;
         while (i < states.size()) {
@@ -101,7 +100,7 @@ public abstract class BasicWorld<A extends BasicAction> implements DiscreteActio
         return this.agents;
     }
 
-    public void addAgent(final DiscreteActionSolution agent) {
+    public void addAgent(final DiscreteActionSolution<A,S> agent) {
         this.agents.add(agent);
         agent.setProblem(this);
     }
@@ -112,37 +111,37 @@ public abstract class BasicWorld<A extends BasicAction> implements DiscreteActio
     }
 
     @Override
-    public void addGoal(final State s) {
+    public void addGoal(final S s) {
         this.goals.add(s);
     }
 
     @Override
-    public void removeGoal(final State s) {
+    public void removeGoal(final S s) {
         this.goals.remove(s);
 
     }
 
     @Override
-    public Set<State> getGoals() {
+    public Set<S> getGoals() {
         return this.goals;
     }
 
     @Override
-    public void addState(final State state) {
+    public void addState(final S state) {
         this.states.add(state);
     }
 
     @Override
-    public Queue<State> getStates() {
+    public Queue<S> getStates() {
         return this.states;
     }
 
     @Override
-    public boolean isGoalState(final State s) {
+    public boolean isGoalState(final S s) {
         return this.getGoals().stream().anyMatch((state) -> (s == state));
     }
 
-    public void runToGoal(final DiscreteActionSolution a) {
+    public void runToGoal(final DiscreteActionSolution<A,S> a) {
         boolean done = false;
         while (!done) {
             tick();
@@ -160,7 +159,7 @@ public abstract class BasicWorld<A extends BasicAction> implements DiscreteActio
         this.states.stream().forEach((state) -> state.setReward(d));
     }
 
-    public void createAbsorbingState(final State s, final double r) {
+    public void createAbsorbingS(final S s, final double r) {
         addGoal(s);
         s.setReward(r);
         s.setAllPolicyValues(r);
