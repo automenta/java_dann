@@ -19,6 +19,7 @@
 package syncleus.dann.math.matrix;
 
 import syncleus.dann.math.RealNumber;
+import syncleus.dann.math.geometry.Vector2i;
 
 public interface RealMatrix extends OrderedMatrix<RealMatrix, RealNumber> /*extends org.apache...RealMatrix*/ {
     @Override
@@ -75,4 +76,97 @@ public interface RealMatrix extends OrderedMatrix<RealMatrix, RealNumber> /*exte
     RealMatrix multiply(double scalar);
 
     RealMatrix divide(double value);
+    
+    void set(final int heightIndex, final int widthIndex, double newValue);
+    
+    int getRows();
+    int getCols();
+    
+    boolean equals(RealMatrix m, int precision);
+    
+    default public Vector2i getDimensionVector() {
+        return new Vector2i(getCols(), getRows()) {
+
+            @Override
+            public String toString() {
+                return "RealMatrix_DimensionVector[r=" + getY() + ", c=" + getX() + ']';
+            }
+            
+        };
+    }
+
+    /**
+     * Read one entire column from the matrix as a sub-matrix.
+     *
+     * @param col The column to read.
+     * @return The column as a sub-matrix.
+     */
+    RealMatrix getColMatrix(final int col);
+
+    /**
+     * Get the specified row as a sub-matrix.
+     *
+     * @param row The row to get.
+     * @return A matrix.
+     */
+    SimpleRealMatrix getRowMatrix(final int row);
+
+    /**
+     * Return true if every value in the matrix is zero.
+     *
+     * @return True if the matrix is all zeros.
+     */
+    boolean isZero();
+
+    /**
+     * Sum all of the values in the matrix.
+     *
+     * @return The sum of the matrix.
+     */
+    double sum();
+
+    /**
+     * Add a value to one cell in the matrix.
+     *
+     * @param row   The row to add to.
+     * @param col   The column to add to.
+     * @param value The value to add to the matrix.
+     */
+    void add(final int row, final int col, final double value);
+
+    //    /**
+    //     * Add the specified matrix to this matrix. This will modify the matrix to
+    //     * hold the result of the addition.
+    //     *
+    //     * @param theMatrix The matrix to add.
+    //     */
+    //    public void addEquals(final RealMatrix theMatrix) {
+    //        final double[][] source = theMatrix.getData();
+    //
+    //        for (int row = 0; row < getRows(); row++) {
+    //            for (int col = 0; col < getCols(); col++) {
+    //                this.matrixElements[row][col] += source[row][col];
+    //            }
+    //        }
+    //    }
+    /**
+     * Set all rows and columns to zero.
+     */
+    void clear();
+
+    /**
+     * Create a matrix from a packed array.
+     *
+     * @param array The packed array.
+     * @param index Where to start in the packed array.
+     * @return The new index after this matrix has been read.
+     */
+    int fromPackedArray(final double[] array, final int index);
+
+    /**
+     * Convert the matrix into a packed array.
+     *
+     * @return The matrix as a packed array.
+     */
+    double[] toPackedArray();
 }

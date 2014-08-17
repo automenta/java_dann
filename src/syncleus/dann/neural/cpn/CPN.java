@@ -139,7 +139,7 @@ public class CPN extends AbstractLearning implements RegressionLearning, MLReset
         for (i = 0; i < this.instarCount; i++) {
             sum = 0;
             for (j = 0; j < this.inputCount; j++) {
-                sum += this.weightsInputToInstar.getNumber(j, i) * input.getData(j);
+                sum += this.weightsInputToInstar.get(j, i) * input.getData(j);
             }
             result.setData(i, sum);
             winners[i] = false;
@@ -182,7 +182,7 @@ public class CPN extends AbstractLearning implements RegressionLearning, MLReset
         for (int i = 0; i < this.outstarCount; i++) {
             sum = 0;
             for (int j = 0; j < this.instarCount; j++) {
-                sum += this.weightsInstarToOutstar.getNumber(j, i) * input.getData(j);
+                sum += this.weightsInstarToOutstar.get(j, i) * input.getData(j);
             }
             result.setData(i, sum);
         }

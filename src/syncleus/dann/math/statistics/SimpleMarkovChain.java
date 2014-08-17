@@ -228,7 +228,7 @@ public class SimpleMarkovChain<S> extends AbstractMarkovChain<S> {
                     simultaneousValues[rowIndex][columnIndex] = 1.0;
                 else
                     simultaneousValues[rowIndex][columnIndex] = steadyStateMatrix
-                            .getNumber(rowIndex, columnIndex).doubleValue();
+                            .get(rowIndex, columnIndex).doubleValue();
             }
         final RealMatrix simultaneousMatrix = new SimpleRealMatrix(
                 simultaneousValues);
@@ -243,7 +243,7 @@ public class SimpleMarkovChain<S> extends AbstractMarkovChain<S> {
         final Map<S, Double> stateProbabilities = new LinkedHashMap<>();
         for (int stateIndex = 0; stateIndex < this.columnMapping.size(); stateIndex++) {
             final S currentState = this.columnMapping.get(stateIndex);
-            final double currentProbability = simultaneousSolved.getNumber(
+            final double currentProbability = simultaneousSolved.get(
                     stateIndex, 0).doubleValue();
             stateProbabilities.put(currentState, currentProbability);
         }

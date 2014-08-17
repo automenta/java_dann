@@ -21,36 +21,38 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package org.encog.matrix;
+package syncleus.dann.math.matrix;
 
 import junit.framework.TestCase;
+import syncleus.dann.math.matrix.MatrixMath;
+import syncleus.dann.math.matrix.RealMatrix;
+import syncleus.dann.math.matrix.SimpleRealMatrix;
 
-import org.encog.mathutil.matrices.Matrix;
-import org.encog.mathutil.matrices.MatrixError;
-import org.encog.mathutil.matrices.MatrixMath;
 
 public class TestMatrix extends TestCase {
 	
 	public void testRowsAndCols() throws Throwable
 	{
-		Matrix matrix = new Matrix(6,3);
+		RealMatrix matrix = new SimpleRealMatrix(6,3);
 		TestCase.assertEquals(matrix.getRows(), 6);
 		TestCase.assertEquals(matrix.getCols(), 3);
 		
-		matrix.set(1,2, 1.5);
+		matrix.set(1, 2, 1.5);
 		TestCase.assertEquals(matrix.get(1,2), 1.5 );
+                
+                
 	}
 	
 	public void testRowAndColRangeUnder() throws Throwable
 	{
-		Matrix matrix = new Matrix(6,3);
+		RealMatrix matrix = new SimpleRealMatrix(6,3);
 		
 		// make sure set registers error on under-bound row
 		try {
 			matrix.set(-1, 0, 1);
 			TestCase.assertTrue(false); // should have thrown an exception
 		}
-		catch(MatrixError e)
+		catch(RuntimeException e)
 		{
 		}
 		
@@ -59,7 +61,7 @@ public class TestMatrix extends TestCase {
 			matrix.set(0, -1, 1);
 			TestCase.assertTrue(false); // should have thrown an exception
 		}
-		catch(MatrixError e)
+		catch(RuntimeException e)
 		{
 		}
 		
@@ -68,7 +70,7 @@ public class TestMatrix extends TestCase {
 			matrix.get(-1, 0 );
 			TestCase.assertTrue(false); // should have thrown an exception
 		}
-		catch(MatrixError e)
+		catch(RuntimeException e)
 		{
 		}
 		
@@ -77,21 +79,21 @@ public class TestMatrix extends TestCase {
 			matrix.get(0, -1 );
 			TestCase.assertTrue(false); // should have thrown an exception
 		}
-		catch(MatrixError e)
+		catch(RuntimeException e)
 		{
 		}
 	}
 	
 	public void testRowAndColRangeOver() throws Throwable
 	{
-		Matrix matrix = new Matrix(6,3);
+		RealMatrix matrix = new SimpleRealMatrix(6,3);
 		
 		// make sure set registers error on under-bound row
 		try {
 			matrix.set(6, 0, 1);
 			TestCase.assertTrue(false); // should have thrown an exception
 		}
-		catch(MatrixError e)
+		catch(RuntimeException e)
 		{
 		}
 		
@@ -100,7 +102,7 @@ public class TestMatrix extends TestCase {
 			matrix.set(0, 3, 1);
 			TestCase.assertTrue(false); // should have thrown an exception
 		}
-		catch(MatrixError e)
+		catch(RuntimeException e)
 		{
 		}
 		
@@ -109,7 +111,7 @@ public class TestMatrix extends TestCase {
 			matrix.get(6, 0 );
 			TestCase.assertTrue(false); // should have thrown an exception
 		}
-		catch(MatrixError e)
+		catch(RuntimeException e)
 		{
 		}
 		
@@ -118,7 +120,7 @@ public class TestMatrix extends TestCase {
 			matrix.get(0, 3 );
 			TestCase.assertTrue(false); // should have thrown an exception
 		}
-		catch(MatrixError e)
+		catch(RuntimeException e)
 		{
 		}
 	}
@@ -130,7 +132,7 @@ public class TestMatrix extends TestCase {
 				{5,6,7,8},
 				{9,10,11,12},
 				{13,14,15,16} };
-		Matrix matrix = new Matrix(m);
+		RealMatrix matrix = new SimpleRealMatrix(m);
 		TestCase.assertEquals(matrix.getRows(), 4);
 		TestCase.assertEquals(matrix.getCols(), 4);
 	}
@@ -145,12 +147,12 @@ public class TestMatrix extends TestCase {
 				{0,2},
 				{3,4} };	
 	
-		Matrix matrix1 = new Matrix(m1);
-		Matrix matrix2 = new Matrix(m1);
+		RealMatrix matrix1 = new SimpleRealMatrix(m1);
+		RealMatrix matrix2 = new SimpleRealMatrix(m1);
 		
 		TestCase.assertTrue(matrix1.equals(matrix2));
 		
-		matrix2 = new Matrix(m2);
+		matrix2 = new SimpleRealMatrix(m2);
 		
 		TestCase.assertFalse(matrix1.equals(matrix2));
 	}
@@ -165,8 +167,8 @@ public class TestMatrix extends TestCase {
 				{1.123,2.123},
 				{3.123,4.123} };
 		
-		Matrix matrix1 = new Matrix(m1);
-		Matrix matrix2 = new Matrix(m2);
+		RealMatrix matrix1 = new SimpleRealMatrix(m1);
+		RealMatrix matrix2 = new SimpleRealMatrix(m2);
 		
 		TestCase.assertTrue(matrix1.equals(matrix2,3));
 		TestCase.assertFalse(matrix1.equals(matrix2,4));
@@ -179,8 +181,8 @@ public class TestMatrix extends TestCase {
 				{1.2,2.1},
 				{3.1,4.1} };
 		
-		Matrix matrix3 = new Matrix(m3);
-		Matrix matrix4 = new Matrix(m4);
+		RealMatrix matrix3 = new SimpleRealMatrix(m3);
+		RealMatrix matrix4 = new SimpleRealMatrix(m4);
 		TestCase.assertTrue(matrix3.equals(matrix4,0));
 		TestCase.assertFalse(matrix3.equals(matrix4,1));
 		
@@ -189,7 +191,7 @@ public class TestMatrix extends TestCase {
 			matrix3.equals(matrix4,-1);
 			TestCase.assertTrue( false);
 		}
-		catch(MatrixError e)
+		catch(RuntimeException e)
 		{
 			
 		}
@@ -199,7 +201,7 @@ public class TestMatrix extends TestCase {
 			matrix3.equals(matrix4,19);
 			TestCase.assertTrue( false);
 		}
-		catch(MatrixError e)
+		catch(RuntimeException e)
 		{
 			
 		}
@@ -224,12 +226,12 @@ public class TestMatrix extends TestCase {
 				{4,2}
 		};
 		
-		Matrix matrixA = new Matrix(a);
-		Matrix matrixB = new Matrix(b);
-		Matrix matrixC = new Matrix(c);
+		RealMatrix matrixA = new SimpleRealMatrix(a);
+		RealMatrix matrixB = new SimpleRealMatrix(b);
+		RealMatrix matrixC = new SimpleRealMatrix(c);
 		
-		Matrix result = matrixA.clone();
-		result = MatrixMath.multiply(matrixA,matrixB); 
+		RealMatrix result = new SimpleRealMatrix(matrixA);
+		result = matrixA.multiply(matrixB); 
 
 		TestCase.assertTrue(result.equals(matrixC));
 		
@@ -250,20 +252,20 @@ public class TestMatrix extends TestCase {
 				{158,184,210}
 		};
 		
-		matrixA = new Matrix(a2);
-		matrixB = new Matrix(b2);
-		matrixC = new Matrix(c2);
+		matrixA = new SimpleRealMatrix(a2);
+		matrixB = new SimpleRealMatrix(b2);
+		matrixC = new SimpleRealMatrix(c2);
 		
-		result = MatrixMath.multiply(matrixA, matrixB);
+		result = matrixA.multiply(matrixB);
 		TestCase.assertTrue(result.equals(matrixC));
 		
-		result = matrixB.clone();
+		result = new SimpleRealMatrix(matrixB);
 		try
 		{
-			MatrixMath.multiply(matrixB,matrixA);
+			matrixB.multiply(matrixA);
 			TestCase.assertTrue(false);
 		}
-		catch(MatrixError e)
+		catch(RuntimeException e)
 		{
 			
 		}	
@@ -281,8 +283,8 @@ public class TestMatrix extends TestCase {
 				{-1.0,1.0},
 		};
 		
-		Matrix matrixBoolean = new Matrix(matrixDataBoolean);
-		Matrix matrixDouble = new Matrix(matrixDataDouble);
+		RealMatrix matrixBoolean = new SimpleRealMatrix(matrixDataBoolean);
+		RealMatrix matrixDouble = new SimpleRealMatrix(matrixDataDouble);
 		
 		TestCase.assertTrue(matrixBoolean.equals(matrixDouble));
 	}
@@ -297,18 +299,18 @@ public class TestMatrix extends TestCase {
 				{3.0,4.0}
 		};
 		
-		Matrix matrix1 = new Matrix(matrixData1);
-		Matrix matrix2 = new Matrix(matrixData2);
+		RealMatrix matrix1 = new SimpleRealMatrix(matrixData1);
+		RealMatrix matrix2 = new SimpleRealMatrix(matrixData2);
 		
-		Matrix matrixRow = matrix1.getRow(1);
+		RealMatrix matrixRow = matrix1.getRowMatrix(1);
 		TestCase.assertTrue(matrixRow.equals(matrix2));
 		
 		try
 		{
-			matrix1.getRow(3);
+			matrix1.getRowMatrix(3);
 			TestCase.assertTrue(false);
 		}
-		catch(MatrixError e)
+		catch(RuntimeException e)
 		{
 			TestCase.assertTrue(true);
 		}
@@ -325,18 +327,18 @@ public class TestMatrix extends TestCase {
 				{4.0}
 		};
 		
-		Matrix matrix1 = new Matrix(matrixData1);
-		Matrix matrix2 = new Matrix(matrixData2);
+		RealMatrix matrix1 = new SimpleRealMatrix(matrixData1);
+		RealMatrix matrix2 = new SimpleRealMatrix(matrixData2);
 		
-		Matrix matrixCol = matrix1.getCol(1);
+		RealMatrix matrixCol = matrix1.getColMatrix(1);
 		TestCase.assertTrue(matrixCol.equals(matrix2));
 		
 		try
 		{
-			matrix1.getCol(3);
+			matrix1.getColMatrix(3);
 			TestCase.assertTrue(false);
 		}
-		catch(MatrixError e)
+		catch(RuntimeException e)
 		{
 			TestCase.assertTrue(true);
 		}
@@ -345,21 +347,21 @@ public class TestMatrix extends TestCase {
 	public void testZero() throws Throwable
 	{
 		double doubleData[][] = { {0,0}, {0,0} };
-		Matrix matrix = new Matrix(doubleData);
+		RealMatrix matrix = new SimpleRealMatrix(doubleData);
 		TestCase.assertTrue(matrix.isZero());
 	}
 	
 	public void testSum() throws Throwable
 	{
 		double doubleData[][] = { {1,2}, {3,4} };
-		Matrix matrix = new Matrix(doubleData);
+		RealMatrix matrix = new SimpleRealMatrix(doubleData);
 		TestCase.assertEquals((int)matrix.sum(), 1+2+3+4);
 	}
 	
 	public void testRowMatrix() throws Throwable
 	{
 		double matrixData[] = {1.0,2.0,3.0,4.0};
-		Matrix matrix = Matrix.createRowMatrix(matrixData);
+		RealMatrix matrix = SimpleRealMatrix.createRowMatrix(matrixData);
 		TestCase.assertEquals(matrix.get(0,0), 1.0);
 		TestCase.assertEquals(matrix.get(0,1), 2.0);
 		TestCase.assertEquals(matrix.get(0,2), 3.0);
@@ -369,7 +371,7 @@ public class TestMatrix extends TestCase {
 	public void testColumnMatrix() throws Throwable
 	{
 		double matrixData[] = {1.0,2.0,3.0,4.0};
-		Matrix matrix = Matrix.createColumnMatrix(matrixData);
+		RealMatrix matrix = SimpleRealMatrix.createColumnMatrix(matrixData);
 		TestCase.assertEquals(matrix.get(0,0), 1.0);
 		TestCase.assertEquals(matrix.get(1,0), 2.0);
 		TestCase.assertEquals(matrix.get(2,0), 3.0);
@@ -379,7 +381,7 @@ public class TestMatrix extends TestCase {
 	public void testAdd() throws Throwable
 	{
 		double matrixData[] = {1.0,2.0,3.0,4.0};
-		Matrix matrix = Matrix.createColumnMatrix(matrixData);
+		RealMatrix matrix = SimpleRealMatrix.createColumnMatrix(matrixData);
 		matrix.add(0, 0, 1);
 		TestCase.assertEquals(matrix.get(0, 0), 2.0);
 	}
@@ -387,7 +389,7 @@ public class TestMatrix extends TestCase {
 	public void testClear() throws Throwable
 	{
 		double matrixData[] = {1.0,2.0,3.0,4.0};
-		Matrix matrix = Matrix.createColumnMatrix(matrixData);
+		RealMatrix matrix = SimpleRealMatrix.createColumnMatrix(matrixData);
 		matrix.clear();
 		TestCase.assertEquals(matrix.get(0, 0), 0.0);
 		TestCase.assertEquals(matrix.get(1, 0), 0.0);
@@ -398,22 +400,22 @@ public class TestMatrix extends TestCase {
 	public void testIsVector() throws Throwable
 	{
 		double matrixData[] = {1.0,2.0,3.0,4.0};
-		Matrix matrixCol = Matrix.createColumnMatrix(matrixData);
-		Matrix matrixRow = Matrix.createRowMatrix(matrixData);
+		RealMatrix matrixCol = SimpleRealMatrix.createColumnMatrix(matrixData);
+		RealMatrix matrixRow = SimpleRealMatrix.createRowMatrix(matrixData);
 		TestCase.assertTrue(matrixCol.isVector());
 		TestCase.assertTrue(matrixRow.isVector());
 		double matrixData2[][] = {{1.0,2.0},{3.0,4.0}};
-		Matrix matrix = new Matrix(matrixData2);
+		RealMatrix matrix = new SimpleRealMatrix(matrixData2);
 		TestCase.assertFalse(matrix.isVector());
 	}
 	
 	public void testIsZero() throws Throwable
 	{
 		double matrixData[] = {1.0,2.0,3.0,4.0};
-		Matrix matrix = Matrix.createColumnMatrix(matrixData);
+		RealMatrix matrix = SimpleRealMatrix.createColumnMatrix(matrixData);
 		TestCase.assertFalse(matrix.isZero());
 		double matrixData2[] = {0.0,0.0,0.0,0.0};
-		Matrix matrix2 = Matrix.createColumnMatrix(matrixData2);
+		RealMatrix matrix2 = SimpleRealMatrix.createColumnMatrix(matrixData2);
 		TestCase.assertTrue(matrix2.isZero());
 
 	}
@@ -421,7 +423,7 @@ public class TestMatrix extends TestCase {
 	public void testPackedArray() throws Throwable
 	{
 		double matrixData[][] = {{1.0,2.0},{3.0,4.0}};
-		Matrix matrix = new Matrix(matrixData);
+		SimpleRealMatrix matrix = new SimpleRealMatrix(matrixData);
 		double matrixData2[] = matrix.toPackedArray();
 		TestCase.assertEquals(4, matrixData2.length);
 		TestCase.assertEquals(1.0,matrix.get(0, 0));
@@ -429,7 +431,7 @@ public class TestMatrix extends TestCase {
 		TestCase.assertEquals(3.0,matrix.get(1, 0));
 		TestCase.assertEquals(4.0,matrix.get(1, 1));
 		
-		Matrix matrix2 = new Matrix(2,2);
+		SimpleRealMatrix matrix2 = new SimpleRealMatrix(2,2);
 		matrix2.fromPackedArray(matrixData2, 0);
 		TestCase.assertTrue(matrix.equals(matrix2));
 	}
@@ -437,7 +439,7 @@ public class TestMatrix extends TestCase {
 	public void testPackedArray2() throws Throwable
 	{
 		double data[] = {1.0,2.0,3.0,4.0};
-		Matrix matrix = new Matrix(1,4);
+		RealMatrix matrix = new SimpleRealMatrix(1,4);
 		matrix.fromPackedArray(data, 0);
 		TestCase.assertEquals(1.0, matrix.get(0, 0));
 		TestCase.assertEquals(2.0, matrix.get(0, 1));
@@ -447,23 +449,23 @@ public class TestMatrix extends TestCase {
 	public void testSize() throws Throwable
 	{
 		double data[][] = {{1.0,2.0},{3.0,4.0}};
-		Matrix matrix = new Matrix(data);
+		SimpleRealMatrix matrix = new SimpleRealMatrix(data);
 		TestCase.assertEquals(4, matrix.size());
 	}
 	
 	public void testVectorLength() throws Throwable
 	{
 		double vectorData[] = {1.0,2.0,3.0,4.0};
-		Matrix vector = Matrix.createRowMatrix(vectorData);
+		SimpleRealMatrix vector = SimpleRealMatrix.createRowMatrix(vectorData);
 		TestCase.assertEquals(5, (int)MatrixMath.vectorLength(vector));
 		
-		Matrix nonVector = new Matrix(2,2);
+		RealMatrix nonVector = new SimpleRealMatrix(2,2);
 		try
 		{
 			MatrixMath.vectorLength(nonVector);
 			TestCase.assertTrue(false);
 		}
-		catch(MatrixError e)
+		catch(RuntimeException e)
 		{
 			
 		}

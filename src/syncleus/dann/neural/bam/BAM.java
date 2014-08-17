@@ -182,9 +182,9 @@ public class BAM extends AbstractLearning {
     private static double getWeight(final SimpleRealMatrix matrix, final Data input,
                                     final int x, final int y) {
         if (matrix.getRows() != input.size()) {
-            return matrix.getNumber(x, y);
+            return matrix.get(x, y);
         } else {
-            return matrix.getNumber(y, x);
+            return matrix.get(y, x);
         }
     }
 

@@ -21,7 +21,7 @@
  * Derived from Public-Domain source as indicated at
  * http://math.nist.gov/javanumerics/jama/ as of 9/13/2009.
  */
-package syncleus.dann.math.linear;
+package syncleus.dann.math.matrix;
 
 import org.junit.Assert;
 import org.junit.Test;

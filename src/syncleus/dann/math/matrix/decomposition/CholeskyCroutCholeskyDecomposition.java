@@ -59,24 +59,24 @@ public class CholeskyCroutCholeskyDecomposition<M extends Matrix<M, F>, F extend
         for (int j = 0; j < matrixToDecompose.getWidth(); j++) {
             F d = newMatrix.getElementField().getZero();
             for (int k = 0; k < j; k++) {
-                F s = matrixToDecompose.getNumber(k, j);
+                F s = matrixToDecompose.get(k, j);
                 for (int i = 0; i < k; i++)
-                    s = s.subtract(newMatrix.getNumber(i, k).multiply(
-                            newMatrix.getNumber(i, j)));
-                s = s.divide(newMatrix.getNumber(k, k));
-                newMatrix = newMatrix.set(k, j, s);
+                    s = s.subtract(newMatrix.get(i, k).multiply(
+                            newMatrix.get(i, j)));
+                s = s.divide(newMatrix.get(k, k));
+                newMatrix = newMatrix.setElement(k, j, s);
                 d = d.add(s.multiply(s));
                 checkIsSpd = checkIsSpd
-                        && (matrixToDecompose.getNumber(k, j)
-                        .equals(matrixToDecompose.getNumber(j, k)));
+                        && (matrixToDecompose.get(k, j)
+                        .equals(matrixToDecompose.get(j, k)));
             }
-            d = matrixToDecompose.getNumber(j, j).subtract(d);
+            d = matrixToDecompose.get(j, j).subtract(d);
             checkIsSpd = checkIsSpd
                     && (d.compareTo(d.field().getZero()) > 0);
-            newMatrix = newMatrix.set(j, j, d.max(d.field().getZero())
+            newMatrix = newMatrix.setElement(j, j, d.max(d.field().getZero())
                     .sqrt());
             for (int k = j + 1; k < matrixToDecompose.getWidth(); k++)
-                newMatrix = newMatrix.set(k, j, newMatrix.getElementField()
+                newMatrix = newMatrix.setElement(k, j, newMatrix.getElementField()
                         .getZero());
         }
         this.isSpd = checkIsSpd;
@@ -133,28 +133,28 @@ public class CholeskyCroutCholeskyDecomposition<M extends Matrix<M, F>, F extend
         for (int k = 0; k < this.matrix.getHeight(); k++)
             for (int j = 0; j < solutionMatrix.getWidth(); j++) {
                 for (int i = 0; i < k; i++)
-                    solutionMatrix = solutionMatrix.set(
+                    solutionMatrix = solutionMatrix.setElement(
                             k,
                             j,
-                            solutionMatrix.getNumber(k, j).subtract(
-                                    solutionMatrix.getNumber(i, j).multiply(
-                                            this.matrix.getNumber(k, i))));
-                solutionMatrix = solutionMatrix.set(k, j,
-                        solutionMatrix.getNumber(k, j).divide(this.matrix.getNumber(k, k)));
+                            solutionMatrix.get(k, j).subtract(
+                                    solutionMatrix.get(i, j).multiply(
+                                            this.matrix.get(k, i))));
+                solutionMatrix = solutionMatrix.setElement(k, j,
+                        solutionMatrix.get(k, j).divide(this.matrix.get(k, k)));
             }
 
         // Solve L'*X = Y;
         for (int k = this.matrix.getHeight() - 1; k >= 0; k--)
             for (int j = 0; j < solutionMatrix.getWidth(); j++) {
                 for (int i = k + 1; i < this.matrix.getHeight(); i++)
-                    solutionMatrix = solutionMatrix.set(
+                    solutionMatrix = solutionMatrix.setElement(
                             k,
                             j,
-                            solutionMatrix.getNumber(k, j).subtract(
-                                    solutionMatrix.getNumber(i, j).multiply(
-                                            this.matrix.getNumber(i, k))));
-                solutionMatrix = solutionMatrix.set(k, j,
-                        solutionMatrix.getNumber(k, j).divide(this.matrix.getNumber(k, k)));
+                            solutionMatrix.get(k, j).subtract(
+                                    solutionMatrix.get(i, j).multiply(
+                                            this.matrix.get(i, k))));
+                solutionMatrix = solutionMatrix.setElement(k, j,
+                        solutionMatrix.get(k, j).divide(this.matrix.get(k, k)));
             }
 
         return solutionMatrix;

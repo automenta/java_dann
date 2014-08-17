@@ -45,7 +45,7 @@ public interface Matrix<M extends Matrix<? extends M, ? extends F>, F extends Fi
      * @param widthIndex  Column index.
      * @return value of the specified element.
      */
-    F getNumber(int heightIndex, int widthIndex);
+    F getElement(int heightIndex, int widthIndex);
 
     /**
      * Set a single element.
@@ -54,7 +54,7 @@ public interface Matrix<M extends Matrix<? extends M, ? extends F>, F extends Fi
      * @param widthIndex  Column index.
      * @param fillValue   value to set
      */
-    M set(final int heightIndex, final int widthIndex, final F fillValue);
+    M setElement(final int heightIndex, final int widthIndex, final F fillValue);
 
     /**
      * Get column dimension.
@@ -280,4 +280,6 @@ public interface Matrix<M extends Matrix<? extends M, ? extends F>, F extends Fi
      * pseudo-inverse otherwise.
      */
     M reciprocal();
+
+    
 }

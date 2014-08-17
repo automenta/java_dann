@@ -209,7 +209,7 @@ public class ContinousDistribution implements StateDistribution {
                 this.mean));
         final SimpleRealMatrix t = MatrixMath.multiply(this.covarianceInv, vmm);
         final double expArg = MatrixMath.multiply(MatrixMath.transpose(vmm), t)
-                .getNumber(0, 0).doubleValue() * -0.5;
+                .get(0, 0).doubleValue() * -0.5;
         return Math.exp(expArg)
                 / (Math.pow(2.0 * Math.PI, this.dimension / 2.0) * Math.pow(
                 this.covarianceDet, 0.5));

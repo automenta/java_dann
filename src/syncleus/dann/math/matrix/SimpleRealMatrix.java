@@ -106,7 +106,21 @@ public class SimpleRealMatrix extends Array2DRowRealMatrix implements Cloneable,
         super(matrixElements);
         this.matrixElements = getData();
     }
+    
+    public SimpleRealMatrix(final boolean[][] boolMatrix) {
+        this(boolMatrix.length, boolMatrix[0].length);
+        for (int j = 0; j < getRows(); j++)
+            for (int i = 0; i < getCols(); i++)
+                matrixElements[j][i] = boolMatrix[j][i] ? 1.0 : -1.0;
+    }
 
+    public SimpleRealMatrix(final RealMatrix m) {
+        this(m.getRows(), m.getCols());
+        for (int j = 0; j < getRows(); j++)
+            for (int i = 0; i < getCols(); i++)
+                this.matrixElements[j][i] = m.get(j,i);        
+    }    
+    
     /**
      * Construct a matrix from a one-dimensional packed array.
      *
@@ -216,13 +230,16 @@ public class SimpleRealMatrix extends Array2DRowRealMatrix implements Cloneable,
         return getColumnDimension();
     }
 
-    @Override
+    
     public double get(final int heightIndex, final int widthIndex) {
         return this.matrixElements[heightIndex][widthIndex];
     }
+    public void set(final int heightIndex, final int widthIndex, double newValue) {
+        this.matrixElements[heightIndex][widthIndex] = newValue;
+    }
 
     @Override
-    public RealNumber getNumber(final int heightIndex, final int widthIndex) {
+    public RealNumber getElement(final int heightIndex, final int widthIndex) {
         return new RealNumber(this.get(heightIndex, widthIndex));
     }
 
@@ -287,7 +304,7 @@ public class SimpleRealMatrix extends Array2DRowRealMatrix implements Cloneable,
     }
 
     @Override
-    public RealMatrix set(final int heightIndex, final int widthIndex,
+    public RealMatrix setElement(final int heightIndex, final int widthIndex,
                           final RealNumber fillValue) {
         final double[][] copy = this.toDoubleArray();
         copy[heightIndex][widthIndex] = fillValue.getValue();
@@ -848,19 +865,9 @@ public class SimpleRealMatrix extends Array2DRowRealMatrix implements Cloneable,
      * @return True if the two matrixes are equal.
      */
     public boolean equals(final SimpleRealMatrix theMatrix, final int precision) {
+       
+        final double actualPrecision = EncogMath.getActualPrecision(precision);        
 
-        if (precision < 0) {
-            throw new RuntimeException("Precision can't be a negative number.");
-        }
-
-        final double test = Math.pow(10.0, precision);
-        if (Double.isInfinite(test) || (test > Long.MAX_VALUE)) {
-            throw new RuntimeException("Precision of " + precision
-                    + " decimal places is not supported.");
-        }
-
-        final int actualPrecision = (int) Math.pow(EncogMath.DEFAULT_PRECISION,
-                precision);
 
         final double[][] data = theMatrix.getData();
 
@@ -874,7 +881,34 @@ public class SimpleRealMatrix extends Array2DRowRealMatrix implements Cloneable,
 
         return true;
     }
+        
 
+    public boolean equals(final RealMatrix theMatrix) {
+        return equals(theMatrix, 0);        
+    }
+    
+    public boolean equals(final RealMatrix theMatrix, final int precision) {
+
+        if ((theMatrix.getCols()!=getCols()) || (theMatrix.getRows()!=getRows())) {
+            //usually a symptom of something wrong:
+            throw new RuntimeException("Comparing matrices of different sizes: " + this.getDimensionVector() + " != " + theMatrix.getDimensionVector());
+            //return false;
+        }
+
+        final double actualPrecision = EncogMath.getActualPrecision(precision);        
+
+        for (int r = 0; r < getRows(); r++) {
+            for (int c = 0; c < getCols(); c++) {
+                //TODO use faster abs() method
+                if ((Math.abs(this.matrixElements[r][c] - theMatrix.get(r,c)) * (1+actualPrecision)) > 1) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+    
     /**
      * Check to see if this matrix equals another, using default precision.
      *
@@ -888,7 +922,7 @@ public class SimpleRealMatrix extends Array2DRowRealMatrix implements Cloneable,
             return false;
         if (other == this)
             return true;
-        if (!(other instanceof RealMatrix))
+        if (!(other instanceof SimpleRealMatrix))
             return false;
         final SimpleRealMatrix otherMyClass = (SimpleRealMatrix) other;
 
@@ -930,7 +964,7 @@ public class SimpleRealMatrix extends Array2DRowRealMatrix implements Cloneable,
      * @param col The column to read.
      * @return The column as a sub-matrix.
      */
-    public RealMatrix getCol(final int col) {
+    public RealMatrix getColMatrix(final int col) {
         if (col > getCols()) {
             throw new RuntimeException("Can't get column #" + col
                     + " because it does not exist.");
@@ -1050,7 +1084,7 @@ public class SimpleRealMatrix extends Array2DRowRealMatrix implements Cloneable,
      * @param row The row to get.
      * @return A matrix.
      */
-    public SimpleRealMatrix getRowAsMatrix(final int row) {
+    public SimpleRealMatrix getRowMatrix(final int row) {
         if (row > getRows()) {
             throw new RuntimeException("Can't get row #" + row
                     + " because it does not exist.");
@@ -1180,18 +1214,6 @@ public class SimpleRealMatrix extends Array2DRowRealMatrix implements Cloneable,
             }
         }
 
-    }
-
-    /**
-     * Set an individual cell in the matrix to the specified value.
-     *
-     * @param row   The row to set.
-     * @param col   The column to set.
-     * @param value The value to be set.
-     */
-    public void set(final int row, final int col, final double value) {
-        validate(row, col);
-        this.matrixElements[row][col] = value;
     }
 
     /**

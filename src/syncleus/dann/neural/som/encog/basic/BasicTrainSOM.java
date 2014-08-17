@@ -578,7 +578,7 @@ public class BasicTrainSOM<D extends Data> extends AbstractTraining<D> implement
         final Data result = new VectorData(som.getOutputCount());
 
         for (int i = 0; i < som.getOutputCount(); i++) {
-            final SimpleRealMatrix optr = som.getWeights().getRowAsMatrix(i);
+            final SimpleRealMatrix optr = som.getWeights().getRowMatrix(i);
             final SimpleRealMatrix inputMatrix = SimpleRealMatrix.createRowMatrix(input.getData());
             result.setData(i, MatrixMath.dotProduct(inputMatrix, optr));
         }

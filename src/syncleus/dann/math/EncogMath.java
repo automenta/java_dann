@@ -144,6 +144,19 @@ public final class EncogMath {
         return result;
     }
 
+    public static double getActualPrecision(final int precision) {
+        if (precision < 0) {
+            throw new RuntimeException("Precision can't be a negative number.");
+        }
+
+        final double test = Math.pow(10.0, precision);
+        if (Double.isInfinite(test) || (test > Long.MAX_VALUE)) {
+            throw new RuntimeException("Precision of " + precision
+                    + " decimal places is not supported.");
+        }
+        return Math.pow(EncogMath.DEFAULT_PRECISION, precision);        
+    }
+
     /**
      * Private constructor.
      */

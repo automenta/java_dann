@@ -27,4 +27,20 @@ public interface OrderedMatrix<M extends OrderedMatrix<? extends M, ? extends F>
     F norm2();
 
     F normInfinite();
+
+    /**
+     * Determine if the matrix is a vector. A vector is has either a single
+     * number of rows or columns.
+     *
+     * @return True if this matrix is a vector.
+     */
+    boolean isVector();
+
+    /**
+     * Get the size of the array. This is the number of elements it would take
+     * to store the matrix as a packed array.
+     *
+     * @return The size of the matrix.
+     */
+    int size();
 }

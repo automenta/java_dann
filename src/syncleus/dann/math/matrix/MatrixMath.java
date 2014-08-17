@@ -366,7 +366,7 @@ public final class MatrixMath {
      * @param input The matrix to calculate the length of.
      * @return Vector length.
      */
-    public static double vectorLength(final SimpleRealMatrix input) {
+    public static double vectorLength(final RealMatrix input) {
 
         if (!input.isVector()) {
             throw new RuntimeException(

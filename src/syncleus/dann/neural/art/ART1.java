@@ -278,7 +278,7 @@ public class ART1 extends ART implements MLResettable, Classifying {
         double sum, activation;
 
         for (int i = 0; i < this.f1Count; i++) {
-            sum = this.weightsF1toF2.getNumber(i, this.winner)
+            sum = this.weightsF1toF2.get(i, this.winner)
                     * (this.outputF2.getBoolean(this.winner) ? 1 : 0);
             activation = ((input.getBoolean(i) ? 1 : 0) + this.d1 * sum - this.b1)
                     / (1 + this.a1
@@ -300,7 +300,7 @@ public class ART1 extends ART implements MLResettable, Classifying {
             if (!this.inhibitF2[i]) {
                 sum = 0;
                 for (j = 0; j < this.f1Count; j++) {
-                    sum += this.weightsF2toF1.getNumber(i, j)
+                    sum += this.weightsF2toF1.get(i, j)
                             * (this.outputF1.getBoolean(j) ? 1 : 0);
                 }
                 if (sum > maxOut) {
