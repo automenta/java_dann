@@ -23,6 +23,8 @@
  */
 package syncleus.dann.learn;
 
+import syncleus.dann.Learning;
+
 /**
  * Defines a MLMethod that can hold context. This allows the context to be
  * cleared. Examples of MLMethod objects that support this are NEAT, Elmann and

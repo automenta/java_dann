@@ -24,7 +24,7 @@
 package org.encog.neural.networks.training.cross;
 
 import syncleus.dann.data.folded.FoldedDataSet;
-import syncleus.dann.learn.Training;
+import syncleus.dann.Training;
 import syncleus.dann.neural.networks.BasicNetwork;
 
 /**

@@ -23,6 +23,8 @@
  */
 package syncleus.dann.data;
 
+import java.util.Iterator;
+
 /**
  * An interface designed to abstract classes that store machine learning data.
  * This interface is designed to provide EngineDataSet objects. These can be
@@ -114,4 +116,8 @@ public interface Dataset<D extends Data> extends Iterable<DataCase<D>> {
     int size();
 
     DataCase get(int index);
+
+    Iterator<DataCase<D>> iterator();
+    
+    
 }

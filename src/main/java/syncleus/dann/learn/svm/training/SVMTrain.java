@@ -23,23 +23,23 @@
  */
 package syncleus.dann.learn.svm.training;
 
-import org.encog.neural.networks.training.propagation.TrainingContinuation;
 import syncleus.dann.data.Dataset;
-import syncleus.dann.learn.Learning;
+import syncleus.dann.Learning;
+import syncleus.dann.learn.AbstractTraining;
 import syncleus.dann.learn.TrainingImplementationType;
 import syncleus.dann.learn.svm.SVM;
 import syncleus.dann.learn.svm.svm;
 import syncleus.dann.learn.svm.svm_parameter;
 import syncleus.dann.learn.svm.svm_problem;
-import syncleus.dann.learn.BasicTraining;
 import syncleus.dann.math.EncogMath;
 import syncleus.dann.math.Format;
 import syncleus.dann.math.statistics.ErrorCalculation;
+import syncleus.dann.neural.networks.training.propagation.TrainingContinuation;
 
 /**
  * Provides training for Support Vector Machine networks.
  */
-public class SVMTrain extends BasicTraining {
+public class SVMTrain extends AbstractTraining {
 
     /**
      * The network that is to be trained.

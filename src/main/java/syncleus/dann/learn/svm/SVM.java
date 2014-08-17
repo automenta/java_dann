@@ -29,7 +29,7 @@ import syncleus.dann.learn.ErrorLearning;
 import syncleus.dann.data.Data;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.Classifying;
-import syncleus.dann.data.basic.VectorData;
+import syncleus.dann.data.vector.VectorData;
 import syncleus.dann.math.EncogUtility;
 
 /**
@@ -50,7 +50,7 @@ import syncleus.dann.math.EncogUtility;
  * neural network training classes will work. This class must be trained using
  * SVMTrain.
  */
-public class SVM extends AbstractLearning implements RegressionLearning, Classifying, ErrorLearning {
+public class SVM<D extends Data> extends AbstractLearning implements RegressionLearning<D>, Classifying<D,Integer>, ErrorLearning<D> {
 
     /**
      * The default degree.
@@ -224,7 +224,7 @@ public class SVM extends AbstractLearning implements RegressionLearning, Classif
      * @return The error percentage.
      */
     @Override
-    public double calculateError(final Dataset data) {
+    public double calculateError(final Dataset<D> data) {
 
         switch (getSVMType()) {
             case SupportVectorClassification:
@@ -244,7 +244,7 @@ public class SVM extends AbstractLearning implements RegressionLearning, Classif
      * {@inheritDoc}
      */
     @Override
-    public int classify(final Data input) {
+    public Integer classify(final Data input) {
         if (this.model == null) {
             throw new RuntimeException(
                     "Can't use the SVM yet, it has not been trained, "

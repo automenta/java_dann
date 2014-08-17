@@ -24,10 +24,10 @@
 package syncleus.dann.util.factory.train;
 
 import syncleus.dann.data.Dataset;
-import syncleus.dann.learn.Learning;
+import syncleus.dann.Learning;
 import syncleus.dann.learn.svm.SVM;
 import syncleus.dann.learn.svm.training.SVMSearchTrain;
-import syncleus.dann.learn.Training;
+import syncleus.dann.Training;
 import syncleus.dann.util.factory.parse.ArchitectureParse;
 
 import java.util.Map;

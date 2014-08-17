@@ -26,7 +26,7 @@ package syncleus.dann.evolve.population;
 import syncleus.dann.evolve.genome.Genome;
 import syncleus.dann.evolve.genome.GenomeFactory;
 import syncleus.dann.evolve.species.Species;
-import syncleus.dann.learn.Learning;
+import syncleus.dann.Learning;
 
 import java.io.Serializable;
 import java.util.List;

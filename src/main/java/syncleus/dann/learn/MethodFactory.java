@@ -23,6 +23,8 @@
  */
 package syncleus.dann.learn;
 
+import syncleus.dann.Learning;
+
 /**
  * Factor MLMethods.
  */

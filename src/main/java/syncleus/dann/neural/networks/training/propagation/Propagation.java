@@ -27,7 +27,7 @@ import org.encog.neural.flat.FlatNetwork;
 import org.encog.neural.networks.training.BatchSize;
 import org.encog.neural.networks.training.Train;
 import syncleus.dann.data.Dataset;
-import syncleus.dann.learn.Learning;
+import syncleus.dann.Learning;
 import syncleus.dann.learn.TrainingImplementationType;
 import syncleus.dann.learn.BasicTraining;
 import syncleus.dann.math.IntRange;

@@ -23,13 +23,14 @@
  */
 package syncleus.dann.learn;
 
+import syncleus.dann.Training;
 import syncleus.dann.data.Dataset;
-import syncleus.dann.learn.TrainingImplementationType;
 import syncleus.dann.learn.strategy.Strategy;
 import syncleus.dann.learn.strategy.end.EndTrainingStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
+import syncleus.dann.data.Data;
 
 /**
  * An abstract class that implements basic training for most training
@@ -38,7 +39,27 @@ import java.util.List;
  *
  * @author jheaton
  */
-public abstract class AbstractTraining implements Training {
+public abstract class AbstractTraining<D extends Data> implements Training {
+
+    public static enum TrainingImplementationType {
+        /**
+         * Iterative - Each iteration attempts to improve the machine learning
+         * method.
+         */
+        Iterative,
+
+        /**
+         * Background - Training continues in the background until it is either
+         * finished or is stopped.
+         */
+        Background,
+
+        /**
+         * Single Pass - Only one iteration is necessary.
+         */
+        OnePass
+    }
+
 
     /**
      * The training strategies to use.
@@ -48,7 +69,7 @@ public abstract class AbstractTraining implements Training {
     /**
      * The training data.
      */
-    private Dataset training;
+    private Dataset<D> training;
 
     /**
      * The current error rate.
@@ -122,7 +143,7 @@ public abstract class AbstractTraining implements Training {
      * @return The training data to use.
      */
     @Override
-    public Dataset getTraining() {
+    public Dataset<D> getTraining() {
         return this.training;
     }
 

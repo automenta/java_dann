@@ -23,7 +23,6 @@
  */
 package syncleus.dann.data.folded;
 
-import syncleus.dann.data.basic.VectorCase;
 import syncleus.dann.data.Data;
 import syncleus.dann.data.DataCase;
 import syncleus.dann.data.Dataset;
@@ -219,8 +218,8 @@ public class FoldedDataSet implements Dataset {
      * {@inheritDoc}
      */
     @Override
-    public void getRecord(final long index, final DataCase pair) {
-        this.underlying.getRecord(getCurrentFoldOffset() + index, pair);
+    public DataCase getRecord(final long index) {        
+        return this.underlying.getRecord(getCurrentFoldOffset() + index);
     }
 
     /**
@@ -306,9 +305,6 @@ public class FoldedDataSet implements Dataset {
 
     @Override
     public DataCase get(final int index) {
-        final DataCase result = VectorCase.createPair(getInputSize(),
-                getIdealSize());
-        this.getRecord(index, result);
-        return result;
+        return getRecord(index);
     }
 }

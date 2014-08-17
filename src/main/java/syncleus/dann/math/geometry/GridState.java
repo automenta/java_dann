@@ -24,7 +24,7 @@
 package syncleus.dann.math.geometry;
 
 import syncleus.dann.math.Format;
-import syncleus.dann.plan.basic.BasicState;
+import syncleus.dann.plan.agent.BasicState;
 
 public class GridState extends BasicState {
 

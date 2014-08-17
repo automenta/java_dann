@@ -23,6 +23,8 @@
  */
 package syncleus.dann.math.cluster;
 
+import syncleus.dann.math.VectorDistance;
+
 /**
  * A centroid.
  */
@@ -47,5 +49,5 @@ public interface Centroid<O> {
      * @param o The element.
      * @return The distance.
      */
-    public double distance(O o);
+    public double distance(O o, VectorDistance distanceFunction);
 }

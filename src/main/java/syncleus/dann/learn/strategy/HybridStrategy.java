@@ -23,7 +23,7 @@
  */
 package syncleus.dann.learn.strategy;
 
-import syncleus.dann.learn.Training;
+import syncleus.dann.Training;
 
 /**
  * A hybrid stragey allows a secondary training algorithm to be used. Once the

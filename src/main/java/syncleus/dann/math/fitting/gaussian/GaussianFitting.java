@@ -23,7 +23,7 @@
  */
 package syncleus.dann.math.fitting.gaussian;
 
-import syncleus.dann.data.basic.VectorData;
+import syncleus.dann.data.vector.VectorData;
 import syncleus.dann.data.Data;
 import syncleus.dann.RegressionLearning;
 import syncleus.dann.math.matrix.MatrixMath;

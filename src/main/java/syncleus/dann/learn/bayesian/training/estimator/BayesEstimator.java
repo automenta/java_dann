@@ -40,8 +40,7 @@ public interface BayesEstimator {
      * @param theNetwork The network.
      * @param theData    The data.
      */
-    void init(TrainBayesian theTrainer, EncogBayesianNetwork theNetwork,
-              Dataset theData);
+    void init(TrainBayesian theTrainer, EncogBayesianNetwork theNetwork, Dataset theData);
 
     /**
      * Perform an iteration.

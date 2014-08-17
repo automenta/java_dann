@@ -27,10 +27,10 @@ import syncleus.dann.data.DataCase;
 import syncleus.dann.data.Data;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.learn.TrainingImplementationType;
-import syncleus.dann.learn.Learning;
-import syncleus.dann.data.basic.VectorData;
-import syncleus.dann.data.basic.VectorCase;
-import syncleus.dann.data.basic.VectorDataset;
+import syncleus.dann.Learning;
+import syncleus.dann.data.vector.VectorData;
+import syncleus.dann.data.vector.VectorCase;
+import syncleus.dann.data.vector.VectorDataset;
 import syncleus.dann.learn.BasicTraining;
 import syncleus.dann.math.array.EngineArray;
 
@@ -213,7 +213,7 @@ public class TrainBasicPNN extends BasicTraining implements CalculationCriteria 
 
         this.network.setExclude((int) training.getRecordCount());
 
-        final DataCase pair = VectorCase.createPair(
+        final DataCase pair = VectorCase.build(
                 training.getInputSize(), training.getIdealSize());
 
         final double[] out = new double[this.network.getOutputCount()];
@@ -356,7 +356,7 @@ public class TrainBasicPNN extends BasicTraining implements CalculationCriteria 
             }
         }
 
-        final DataCase pair = VectorCase.createPair(this.network
+        final DataCase pair = VectorCase.build(this.network
                 .getSamples().getInputSize(), this.network.getSamples()
                 .getIdealSize());
 

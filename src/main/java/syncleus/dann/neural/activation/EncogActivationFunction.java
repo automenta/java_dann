@@ -45,18 +45,13 @@ import java.io.Serializable;
 public interface EncogActivationFunction extends AbstractActivationFunction, Serializable, Cloneable, IterativeDerivative {
 
 
-    double activate(double... activity);
-    /* {
-        activate(activity,0,1);
-		return activity[0];
-	}*/
-
-
-    @Override
-    @Deprecated
-    default double activate(final double activity) {
-        return activate(activity);
+    default double activate(double i) {
+        double[] ii = new double[] { i };
+        activate(ii,0,1);
+        return ii[0];
     }
+
+
 
 
     /**

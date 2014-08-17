@@ -23,7 +23,7 @@
  */
 package syncleus.dann.learn.strategy;
 
-import syncleus.dann.learn.Training;
+import syncleus.dann.Training;
 import syncleus.dann.learn.strategy.end.EndTrainingStrategy;
 
 /**

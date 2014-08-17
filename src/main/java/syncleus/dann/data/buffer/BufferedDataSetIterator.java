@@ -23,7 +23,7 @@
  */
 package syncleus.dann.data.buffer;
 
-import syncleus.dann.data.basic.VectorCase;
+import syncleus.dann.data.vector.VectorCase;
 import syncleus.dann.data.DataException;
 import syncleus.dann.data.DataCase;
 
@@ -75,7 +75,7 @@ public class BufferedDataSetIterator implements Iterator<DataCase> {
                 return null;
             }
 
-            final DataCase pair = VectorCase.createPair(
+            final DataCase pair = VectorCase.build(
                     this.data.getInputSize(), this.data.getIdealSize());
             this.data.getRecord(this.current++, pair);
             return pair;

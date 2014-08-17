@@ -27,7 +27,7 @@ import com.jme3.ai.steering.behaviour.ObstacleAvoid;
 import com.jme3.ai.steering.behaviour.Persuit;
 import com.jme3.ai.steering.behaviour.Seek;
 import com.jme3.ai.steering.behaviour.Separation;
-import com.jme3.ai.steering.utilities.SimpleObstacle;
+import syncleus.dann.plan.navigate.SimpleObstacle;
 
 /**
  *

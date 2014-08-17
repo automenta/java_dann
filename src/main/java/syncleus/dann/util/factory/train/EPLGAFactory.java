@@ -30,8 +30,8 @@ import syncleus.dann.evolve.score.adjust.ComplexityAdjustedScore;
 import syncleus.dann.evolve.train.basic.TrainEA;
 import syncleus.dann.learn.CalculateScore;
 import syncleus.dann.data.Dataset;
-import syncleus.dann.learn.Learning;
-import syncleus.dann.learn.Training;
+import syncleus.dann.Learning;
+import syncleus.dann.Training;
 
 public class EPLGAFactory {
     /**

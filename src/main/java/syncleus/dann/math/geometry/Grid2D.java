@@ -26,8 +26,8 @@ package syncleus.dann.math.geometry;
 import syncleus.dann.math.EncogMath;
 import syncleus.dann.plan.Action;
 import syncleus.dann.plan.State;
-import syncleus.dann.plan.basic.BasicAction;
-import syncleus.dann.plan.basic.BasicWorld;
+import syncleus.dann.plan.agent.BasicAction;
+import syncleus.dann.plan.agent.BasicWorld;
 
 import java.util.ArrayList;
 import java.util.List;

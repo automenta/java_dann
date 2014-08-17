@@ -23,6 +23,8 @@
  */
 package syncleus.dann.learn;
 
+import syncleus.dann.Learning;
+
 /**
  * Defines a MLMethod that produces output. Input is defined as a simple array
  * of double values. Many machine learning methods, such as neural networks and

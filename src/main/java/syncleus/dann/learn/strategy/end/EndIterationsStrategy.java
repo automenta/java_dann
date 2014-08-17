@@ -23,7 +23,7 @@
  */
 package syncleus.dann.learn.strategy.end;
 
-import syncleus.dann.learn.Training;
+import syncleus.dann.Training;
 
 public class EndIterationsStrategy implements EndTrainingStrategy {
 

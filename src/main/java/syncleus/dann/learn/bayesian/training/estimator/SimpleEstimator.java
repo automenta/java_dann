@@ -23,6 +23,7 @@
  */
 package syncleus.dann.learn.bayesian.training.estimator;
 
+import java.util.Iterator;
 import syncleus.dann.learn.bayesian.BayesianEvent;
 import syncleus.dann.learn.bayesian.EncogBayesianNetwork;
 import syncleus.dann.learn.bayesian.training.TrainBayesian;
@@ -64,7 +65,10 @@ public class SimpleEstimator implements BayesEstimator {
         int y = 0;
 
         // calculate overall probability
-        for (final DataCase pair : this.data) {
+        Iterator<DataCase> di = data.iterator();
+        while (di.hasNext()) {
+            DataCase pair = di.next();
+            
             final int[] d = this.network.determineClasses(pair.getInput());
 
             if (args.length == 0) {

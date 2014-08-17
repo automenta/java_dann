@@ -26,7 +26,7 @@ package syncleus.dann.neural.thermal;
 import syncleus.dann.data.specific.BiPolarNeuralData;
 import syncleus.dann.learn.AbstractLearning;
 import syncleus.dann.AutoAssociating;
-import syncleus.dann.learn.Learning;
+import syncleus.dann.Learning;
 import syncleus.dann.learn.MLResettable;
 import syncleus.dann.math.array.EngineArray;
 

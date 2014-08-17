@@ -34,8 +34,8 @@ import syncleus.dann.learn.bayesian.training.search.SearchNone;
 import syncleus.dann.learn.bayesian.training.search.k2.BayesSearch;
 import syncleus.dann.learn.bayesian.training.search.k2.SearchK2;
 import syncleus.dann.data.Dataset;
-import syncleus.dann.learn.Learning;
-import syncleus.dann.learn.Training;
+import syncleus.dann.Learning;
+import syncleus.dann.Training;
 import syncleus.dann.util.factory.MLTrainFactory;
 import syncleus.dann.util.factory.parse.ArchitectureParse;
 

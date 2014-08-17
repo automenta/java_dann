@@ -24,7 +24,7 @@
 package org.encog.neural.networks.training.nm;
 
 import syncleus.dann.data.Dataset;
-import syncleus.dann.learn.Learning;
+import syncleus.dann.Learning;
 import syncleus.dann.learn.TrainingImplementationType;
 import syncleus.dann.learn.BasicTraining;
 import syncleus.dann.math.EncogMath;

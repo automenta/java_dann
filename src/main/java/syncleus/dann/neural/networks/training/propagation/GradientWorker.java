@@ -23,7 +23,7 @@
  */
 package org.encog.neural.networks.training.propagation;
 
-import syncleus.dann.data.basic.VectorCase;
+import syncleus.dann.data.vector.VectorCase;
 import syncleus.dann.data.DataCase;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.math.array.EngineArray;
@@ -164,7 +164,7 @@ public class GradientWorker implements EngineTask {
         this.layerSums = network.getLayerSums();
         this.layerFeedCounts = network.getLayerFeedCounts();
 
-        this.pair = VectorCase.createPair(network.getInputCount(),
+        this.pair = VectorCase.build(network.getInputCount(),
                 network.getOutputCount());
     }
 

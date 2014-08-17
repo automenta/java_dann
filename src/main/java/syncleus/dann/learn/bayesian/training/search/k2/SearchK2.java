@@ -32,6 +32,7 @@ import syncleus.dann.data.Dataset;
 import syncleus.dann.math.EncogMath;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -149,7 +150,9 @@ public class SearchK2 implements BayesSearch {
         int result = 0;
         final int eventIndex = network.getEventIndex(event);
 
-        for (final DataCase pair : this.data) {
+        Iterator<DataCase> di = data.iterator();
+        while (di.hasNext()) {
+            DataCase pair = di.next();
             final int[] d = this.network.determineClasses(pair.getInput());
 
             if (d[eventIndex] == desiredValue) {
@@ -188,7 +191,10 @@ public class SearchK2 implements BayesSearch {
                           final int[] parentInstance) {
         int result = 0;
 
-        for (final DataCase pair : this.data) {
+        Iterator<DataCase> di = data.iterator();
+        while (di.hasNext()) {
+            DataCase pair = di.next();
+            
             final int[] d = this.network.determineClasses(pair.getInput());
 
             boolean reject = false;

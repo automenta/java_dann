@@ -23,19 +23,19 @@
  */
 package syncleus.dann.learn.svm.training;
 
-import org.encog.neural.networks.training.propagation.TrainingContinuation;
 import syncleus.dann.data.Dataset;
-import syncleus.dann.learn.Learning;
+import syncleus.dann.Learning;
+import syncleus.dann.learn.AbstractTraining;
 import syncleus.dann.learn.TrainingImplementationType;
 import syncleus.dann.learn.svm.KernelType;
 import syncleus.dann.learn.svm.SVM;
-import syncleus.dann.learn.BasicTraining;
 import syncleus.dann.math.EncogMath;
+import syncleus.dann.neural.networks.training.propagation.TrainingContinuation;
 
 /**
  * Provides training for Support Vector Machine networks.
  */
-public class SVMSearchTrain extends BasicTraining {
+public class SVMSearchTrain extends AbstractTraining {
 
     /**
      * The default starting number for C.

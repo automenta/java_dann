@@ -23,9 +23,9 @@
  */
 package org.encog.neural.pnn;
 
-import syncleus.dann.data.basic.VectorData;
-import syncleus.dann.data.basic.VectorCase;
-import syncleus.dann.data.basic.VectorDataset;
+import syncleus.dann.data.vector.VectorData;
+import syncleus.dann.data.vector.VectorCase;
+import syncleus.dann.data.vector.VectorDataset;
 import syncleus.dann.data.file.csv.CSVFormat;
 import syncleus.dann.data.Data;
 import syncleus.dann.data.DataCase;

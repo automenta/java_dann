@@ -23,8 +23,8 @@
  */
 package syncleus.dann.learn.hmm.alog;
 
-import syncleus.dann.data.basic.VectorDataset;
-import syncleus.dann.data.basic.VectorSequence;
+import syncleus.dann.data.vector.VectorDataset;
+import syncleus.dann.data.vector.VectorSequence;
 import syncleus.dann.learn.hmm.HiddenMarkovModel;
 import syncleus.dann.data.DataCase;
 import syncleus.dann.data.Dataset;

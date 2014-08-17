@@ -27,7 +27,7 @@ import syncleus.dann.learn.MethodFactory;
 import syncleus.dann.data.VectorEncodable;
 import syncleus.dann.learn.TrainingImplementationType;
 import syncleus.dann.learn.CalculateScore;
-import syncleus.dann.learn.Learning;
+import syncleus.dann.Learning;
 import org.encog.neural.networks.training.propagation.TrainingContinuation;
 import syncleus.dann.evolve.crossover.Splice;
 import syncleus.dann.evolve.genome.Genome;

@@ -23,6 +23,7 @@
  */
 package syncleus.dann.math.matrix.hessian;
 
+import syncleus.dann.data.Data;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.math.matrix.SimpleRealMatrix;
 import syncleus.dann.neural.networks.BasicNetwork;
@@ -37,7 +38,7 @@ import syncleus.dann.neural.networks.BasicNetwork;
  * <p/>
  * http://en.wikipedia.org/wiki/Hessian_matrix
  */
-public interface ComputeHessian {
+public interface ComputeHessian<D extends Data> {
 
     /**
      * Init the class.
@@ -45,7 +46,7 @@ public interface ComputeHessian {
      * @param theNetwork  The neural network to train.
      * @param theTraining The training set to train with.
      */
-    void init(BasicNetwork theNetwork, Dataset theTraining);
+    void init(BasicNetwork theNetwork, Dataset<D> theTraining);
 
     /**
      * Compute the Hessian.

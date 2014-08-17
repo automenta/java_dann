@@ -32,8 +32,7 @@ import java.util.Set;
  * @param <C> The type of categories to use
  * @author Jeffrey Phillips Freeman
  */
-public class SimpleNaiveClassifier<I, F, C> implements
-        TrainableNaiveClassifier<I, F, C> {
+public class SimpleNaiveClassifier<I, F, C> implements TrainableNaiveClassifier<I, F, C> {
     private final ClassificationProbabilities<C> overallCategoryProbability = new ClassificationProbabilities<>();
     private final FeatureClassificationTree<F, C> featureTree = new FeatureClassificationTree<>();
     private final FeatureExtractor<F, I> extractor;
@@ -104,6 +103,19 @@ public class SimpleNaiveClassifier<I, F, C> implements
         });
         return categoryProbabilities;
     }
+
+    @Override
+    public int getInputCount() {
+        return featureTree.size();
+    }
+
+    @Override
+    public int getOutputCount() {
+        return getCategories().size();
+    }
+    
+    
+    
 
     /**
      * Gets the probability that an item is in the given category.

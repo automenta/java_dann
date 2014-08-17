@@ -23,6 +23,8 @@
  */
 package syncleus.dann.learn;
 
+import syncleus.dann.Learning;
+
 /**
  * Defines a Machine Learning Method that can be reset to an untrained starting
  * point. Most weight based machine learning methods, such as neural networks

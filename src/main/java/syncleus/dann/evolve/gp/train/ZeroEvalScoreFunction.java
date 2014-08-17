@@ -23,10 +23,10 @@
  */
 package org.encog.ml.prg.train;
 
-import syncleus.dann.data.basic.VectorData;
+import syncleus.dann.data.vector.VectorData;
 import syncleus.dann.learn.CalculateScore;
 import syncleus.dann.data.Data;
-import syncleus.dann.learn.Learning;
+import syncleus.dann.Learning;
 
 import java.io.Serializable;
 

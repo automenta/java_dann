@@ -23,6 +23,7 @@
  */
 package syncleus.dann.learn;
 
+import syncleus.dann.Learning;
 import syncleus.dann.data.file.csv.CSVFormat;
 import syncleus.dann.math.EncogMath;
 

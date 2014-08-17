@@ -23,7 +23,7 @@
  */
 package syncleus.dann.util.factory.method;
 
-import syncleus.dann.learn.Learning;
+import syncleus.dann.Learning;
 import syncleus.dann.util.factory.MLActivationFactory;
 import syncleus.dann.util.factory.MLMethodFactory;
 import syncleus.dann.util.factory.parse.ArchitectureParse;

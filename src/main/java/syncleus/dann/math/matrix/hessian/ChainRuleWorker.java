@@ -24,7 +24,6 @@
 package syncleus.dann.math.matrix.hessian;
 
 import org.encog.neural.flat.FlatNetwork;
-import syncleus.dann.data.basic.VectorCase;
 import syncleus.dann.data.DataCase;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.math.array.EngineArray;
@@ -122,10 +121,6 @@ public class ChainRuleWorker implements Runnable {
      */
     private final int high;
 
-    /**
-     * The pair to use for training.
-     */
-    private final DataCase pair;
 
     /**
      * The weight count.
@@ -168,8 +163,6 @@ public class ChainRuleWorker implements Runnable {
         this.layerFeedCounts = flat.getLayerFeedCounts();
         this.low = theLow;
         this.high = theHigh;
-        this.pair = VectorCase.createPair(flat.getInputCount(),
-                flat.getOutputCount());
     }
 
     /**
@@ -186,7 +179,7 @@ public class ChainRuleWorker implements Runnable {
 
         // Loop over every training element
         for (int i = this.low; i <= this.high; i++) {
-            this.training.getRecord(i, this.pair);
+            DataCase pair = this.training.getRecord(i);
 
             EngineArray.fill(derivative, 0);
 

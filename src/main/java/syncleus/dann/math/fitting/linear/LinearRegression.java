@@ -23,7 +23,7 @@
  */
 package syncleus.dann.math.fitting.linear;
 
-import syncleus.dann.data.basic.VectorData;
+import syncleus.dann.data.vector.VectorData;
 import syncleus.dann.data.Data;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.learn.ErrorLearning;

@@ -23,7 +23,7 @@
  */
 package syncleus.dann.data.specific;
 
-import syncleus.dann.data.basic.VectorDataset;
+import syncleus.dann.data.vector.VectorDataset;
 import syncleus.dann.data.buffer.MemoryDataLoader;
 import syncleus.dann.data.buffer.codec.CSVDataCODEC;
 import syncleus.dann.data.buffer.codec.DataSetCODEC;

@@ -34,6 +34,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
 import java.util.*;
+import syncleus.dann.data.http.FormUtility;
 
 /**
  * This class loads financial data from Yahoo. One caution on Yahoo data.

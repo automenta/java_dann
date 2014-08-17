@@ -25,7 +25,7 @@ package syncleus.dann.learn.strategy.end;
 
 import syncleus.dann.data.Dataset;
 import syncleus.dann.learn.ErrorLearning;
-import syncleus.dann.learn.Training;
+import syncleus.dann.Training;
 
 /**
  * Stop early when validation set no longer improves.

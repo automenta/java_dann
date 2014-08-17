@@ -23,7 +23,7 @@
  */
 package syncleus.dann.neural.networks;
 
-import syncleus.dann.learn.Learning;
+import syncleus.dann.Learning;
 
 /**
  * Interface that specifies that a machine learning method contains a flat

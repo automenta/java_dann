@@ -24,7 +24,7 @@
 package syncleus.dann.learn.strategy;
 
 import syncleus.dann.learn.MLResettable;
-import syncleus.dann.learn.Training;
+import syncleus.dann.Training;
 
 /**
  * The reset strategy will reset the weights if the neural network fails to

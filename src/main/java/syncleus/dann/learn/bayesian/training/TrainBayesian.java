@@ -23,7 +23,6 @@
  */
 package syncleus.dann.learn.bayesian.training;
 
-import org.encog.neural.networks.training.propagation.TrainingContinuation;
 import syncleus.dann.learn.bayesian.BayesianEvent;
 import syncleus.dann.learn.bayesian.EncogBayesianNetwork;
 import syncleus.dann.learn.bayesian.training.estimator.BayesEstimator;
@@ -31,14 +30,35 @@ import syncleus.dann.learn.bayesian.training.estimator.SimpleEstimator;
 import syncleus.dann.learn.bayesian.training.search.k2.BayesSearch;
 import syncleus.dann.learn.bayesian.training.search.k2.SearchK2;
 import syncleus.dann.data.Dataset;
-import syncleus.dann.learn.Learning;
+import syncleus.dann.Learning;
+import syncleus.dann.learn.AbstractTraining;
 import syncleus.dann.learn.TrainingImplementationType;
-import syncleus.dann.learn.BasicTraining;
+import syncleus.dann.neural.networks.training.propagation.TrainingContinuation;
 
 /**
  * Train a Bayesian network.
  */
-public class TrainBayesian extends BasicTraining {
+public class TrainBayesian extends AbstractTraining {
+
+    /**
+    * The method by which a Bayesian network should be initialized.
+    */
+   public enum BayesianInit {
+       /**
+        * No init, do not change anything.
+        */
+       InitNoChange,
+
+       /**
+        * Start with no connections.
+        */
+       InitEmpty,
+
+       /**
+        * Init as Naive Bayes.
+        */
+       InitNaiveBayes
+   }
 
     /**
      * What phase of training are we in?

@@ -24,7 +24,7 @@
 package org.encog.neural.networks.training.concurrent.jobs;
 
 import syncleus.dann.data.Dataset;
-import syncleus.dann.learn.Training;
+import syncleus.dann.Training;
 import syncleus.dann.learn.strategy.Strategy;
 import syncleus.dann.learn.strategy.end.EndTrainingStrategy;
 import syncleus.dann.neural.networks.BasicNetwork;

@@ -23,21 +23,20 @@
  */
 package syncleus.dann.math.fitting.gaussian;
 
-import org.encog.neural.networks.training.propagation.TrainingContinuation;
 import syncleus.dann.data.DataCase;
 import syncleus.dann.data.Dataset;
-import syncleus.dann.learn.Learning;
-import syncleus.dann.learn.TrainingImplementationType;
-import syncleus.dann.learn.BasicTraining;
+import syncleus.dann.Learning;
+import syncleus.dann.data.Data;
+import syncleus.dann.learn.AbstractTraining;
 import syncleus.dann.math.array.EngineArray;
+import syncleus.dann.neural.networks.training.propagation.TrainingContinuation;
 
-public class TrainGaussian extends BasicTraining {
+public class TrainGaussian<D extends Data> extends AbstractTraining {
 
     private final GaussianFitting method;
-    private final Dataset training;
+    private final Dataset<D> training;
 
-    public TrainGaussian(final GaussianFitting theMethod,
-                         final Dataset theTraining) {
+    public TrainGaussian(final GaussianFitting theMethod, final Dataset<D> theTraining) {
         super(TrainingImplementationType.OnePass);
         this.method = theMethod;
         this.training = theTraining;

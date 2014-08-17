@@ -1,6 +1,6 @@
 package syncleus.dann.data.auto;
 
-import syncleus.dann.data.basic.VectorCase;
+import syncleus.dann.data.vector.VectorCase;
 import syncleus.dann.data.file.csv.CSVFormat;
 import syncleus.dann.data.file.csv.ReadCSV;
 import syncleus.dann.data.Data;
@@ -11,6 +11,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import syncleus.dann.data.vector.VectorData;
 
 public class AutoFloatDataSet implements Serializable, Dataset {
 
@@ -100,8 +101,11 @@ public class AutoFloatDataSet implements Serializable, Dataset {
     }
 
     @Override
-    public void getRecord(final long index, final DataCase pair) {
+    public DataCase getRecord(final long index) {
 
+        VectorCase pair = new VectorCase(
+                new VectorData(getInputSize()), new VectorData(getIdealSize()));
+        
         int columnID = 0;
 
         // copy the input
@@ -136,6 +140,7 @@ public class AutoFloatDataSet implements Serializable, Dataset {
             }
         }
 
+        return pair;
     }
 
     @Override
@@ -177,10 +182,7 @@ public class AutoFloatDataSet implements Serializable, Dataset {
             return null;
         }
 
-        final DataCase result = VectorCase.createPair(getInputSize(),
-                this.getIdealSize());
-        getRecord(index, result);
-        return result;
+        return getRecord(index);
     }
 
     public void addColumn(final float[] data) {

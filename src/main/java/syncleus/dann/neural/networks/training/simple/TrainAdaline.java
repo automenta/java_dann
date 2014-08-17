@@ -27,7 +27,7 @@ import syncleus.dann.data.DataCase;
 import syncleus.dann.data.Data;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.learn.TrainingImplementationType;
-import syncleus.dann.learn.Learning;
+import syncleus.dann.Learning;
 import syncleus.dann.learn.BasicTraining;
 import syncleus.dann.math.statistics.ErrorCalculation;
 import syncleus.dann.neural.networks.BasicNetwork;

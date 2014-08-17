@@ -23,8 +23,8 @@
  */
 package syncleus.dann.data.buffer;
 
-import syncleus.dann.data.basic.VectorCase;
-import syncleus.dann.data.basic.VectorDataset;
+import syncleus.dann.data.vector.VectorCase;
+import syncleus.dann.data.vector.VectorDataset;
 import syncleus.dann.data.Data;
 import syncleus.dann.data.DataException;
 import syncleus.dann.data.DataCase;
@@ -387,7 +387,7 @@ public class BufferedMLDataSet implements Dataset, Serializable {
 
     @Override
     public DataCase get(final int index) {
-        final DataCase result = VectorCase.createPair(getInputSize(),
+        final DataCase result = VectorCase.build(getInputSize(),
                 getIdealSize());
         this.getRecord(index, result);
         return result;

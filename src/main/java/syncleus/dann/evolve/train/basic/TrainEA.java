@@ -27,9 +27,9 @@ import syncleus.dann.evolve.exception.EAError;
 import syncleus.dann.evolve.population.Population;
 import syncleus.dann.learn.CalculateScore;
 import syncleus.dann.data.Dataset;
-import syncleus.dann.learn.Learning;
+import syncleus.dann.Learning;
 import syncleus.dann.learn.TrainingImplementationType;
-import syncleus.dann.learn.Training;
+import syncleus.dann.Training;
 import syncleus.dann.learn.strategy.Strategy;
 
 import java.util.ArrayList;

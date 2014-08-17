@@ -24,7 +24,7 @@
 package syncleus.dann.evolve.score;
 
 import syncleus.dann.learn.CalculateScore;
-import syncleus.dann.learn.Learning;
+import syncleus.dann.Learning;
 
 import java.io.Serializable;
 

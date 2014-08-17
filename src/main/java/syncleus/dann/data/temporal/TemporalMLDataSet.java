@@ -23,13 +23,10 @@
  */
 package syncleus.dann.data.temporal;
 
-import org.encog.neural.data.basic.BasicNeuralData;
-import org.encog.neural.data.basic.BasicNeuralDataSet;
-import syncleus.dann.data.basic.VectorData;
-import syncleus.dann.data.basic.VectorCase;
+import syncleus.dann.data.vector.VectorData;
+import syncleus.dann.data.vector.VectorCase;
 import syncleus.dann.data.language.time.TimeSpan;
 import syncleus.dann.data.language.time.TimeUnit;
-import syncleus.dann.data.Data;
 import syncleus.dann.data.DataCase;
 
 import java.io.Serializable;
@@ -37,6 +34,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import syncleus.dann.data.vector.VectorDataset;
 
 /**
  * This class implements a temporal neural data set. A temporal neural dataset
@@ -63,8 +61,7 @@ import java.util.List;
  *
  * @author jheaton
  */
-public class TemporalMLDataSet extends BasicNeuralDataSet implements
-        Serializable {
+public class TemporalMLDataSet extends VectorDataset implements Serializable {
 
     /**
      * The serial id.
@@ -156,7 +153,7 @@ public class TemporalMLDataSet extends BasicNeuralDataSet implements
      * @param data Not used.
      */
     @Override
-    public void add(final Data data) {
+    public void add(final VectorData data) {
         throw new TemporalError(TemporalMLDataSet.ADD_NOT_SUPPORTED);
     }
 
@@ -168,7 +165,7 @@ public class TemporalMLDataSet extends BasicNeuralDataSet implements
      * @param idealData Not used.
      */
     @Override
-    public void add(final Data inputData, final Data idealData) {
+    public void add(final VectorData inputData, final VectorData idealData) {
         throw new TemporalError(TemporalMLDataSet.ADD_NOT_SUPPORTED);
     }
 
@@ -360,9 +357,8 @@ public class TemporalMLDataSet extends BasicNeuralDataSet implements
      * @param index The index to generate neural data for.
      * @return The input neural data generated.
      */
-    public BasicNeuralData generateInputNeuralData(final int index) {
-        final BasicNeuralData result = new BasicNeuralData(
-                this.inputNeuronCount);
+    public VectorData generateInputNeuralData(final int index) {
+        final VectorData result = new VectorData(this.inputNeuronCount);
         int resultIndex = 0;
 
         for (int i = 0; i < this.inputWindowSize; i++) {
@@ -381,7 +377,7 @@ public class TemporalMLDataSet extends BasicNeuralDataSet implements
      * @param index The index to generate for.
      * @return The neural data generated.
      */
-    public BasicNeuralData generateOutputNeuralData(final int index) {
+    public VectorData generateOutputNeuralData(final int index) {
         if (index + this.predictWindowSize > this.points.size()) {
 
             final String str = "Can't generate prediction temporal data "
@@ -390,8 +386,7 @@ public class TemporalMLDataSet extends BasicNeuralDataSet implements
             throw new TemporalError(str);
         }
 
-        final BasicNeuralData result = new BasicNeuralData(
-                this.outputNeuronCount);
+        final VectorData result = new VectorData(this.outputNeuronCount);
         int resultIndex = 0;
 
         for (int i = 0; i < this.predictWindowSize; i++) {

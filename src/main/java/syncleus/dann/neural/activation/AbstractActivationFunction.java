@@ -1,6 +1,8 @@
 package syncleus.dann.neural.activation;
 
-public interface AbstractActivationFunction {
+import syncleus.dann.Function;
+
+public interface AbstractActivationFunction extends Function<Double,Double> {
 
     /**
      * The activation function.
@@ -11,7 +13,11 @@ public interface AbstractActivationFunction {
      * required.
      * @since 1.0
      */
-    public abstract double activate(double activity);
+    double activate(double activity);
+    
+    default Double apply(Double i) {
+        return activate(i);
+    }
 
     /**
      * Implements the activation function. The array is modified according to
@@ -22,6 +28,6 @@ public interface AbstractActivationFunction {
      * @param start The starting index.
      * @param size  The number of values to calculate.
      */
-    public abstract void activate(double[] d, int start, int size);
+    void activate(double[] d, int start, int size);
 
 }

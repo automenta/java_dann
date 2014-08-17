@@ -23,7 +23,7 @@
  */
 package syncleus.dann.data.buffer.codec;
 
-import syncleus.dann.data.basic.VectorCase;
+import syncleus.dann.data.vector.VectorCase;
 import syncleus.dann.data.DataCase;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.math.array.EngineArray;
@@ -106,7 +106,7 @@ public class NeuralDataSetCODEC implements DataSetCODEC {
     public void write(final double[] input, final double[] ideal,
                       final double significance) {
         final DataCase pair = VectorCase
-                .createPair(inputSize, idealSize);
+                .build(inputSize, idealSize);
         EngineArray.arrayCopy(input, pair.getIdealArray());
         EngineArray.arrayCopy(ideal, pair.getIdealArray());
         pair.setSignificance(significance);

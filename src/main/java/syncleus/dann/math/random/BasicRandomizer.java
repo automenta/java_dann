@@ -24,7 +24,7 @@
 package syncleus.dann.math.random;
 
 import syncleus.dann.data.VectorEncodable;
-import syncleus.dann.learn.Learning;
+import syncleus.dann.Learning;
 import syncleus.dann.math.matrix.SimpleRealMatrix;
 import syncleus.dann.neural.networks.BasicNetwork;
 

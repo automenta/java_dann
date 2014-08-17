@@ -26,21 +26,23 @@ package syncleus.dann.learn.hmm.train.kmeans;
 import syncleus.dann.data.DataCase;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.learn.TrainingImplementationType;
-import syncleus.dann.learn.Learning;
+import syncleus.dann.Learning;
 import syncleus.dann.data.DataSequence;
 import java.util.ArrayList;
-import syncleus.dann.data.basic.VectorDataset;
+import syncleus.dann.data.vector.VectorDataset;
 import syncleus.dann.learn.hmm.HiddenMarkovModel;
 import syncleus.dann.learn.hmm.alog.ViterbiCalculator;
 import syncleus.dann.learn.hmm.distributions.StateDistribution;
-import syncleus.dann.learn.Training;
+import syncleus.dann.Training;
 import syncleus.dann.learn.strategy.Strategy;
 
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
-import org.encog.neural.networks.training.propagation.TrainingContinuation;
+import syncleus.dann.data.Data;
 import syncleus.dann.learn.kmeans.KMeansUtil;
+import syncleus.dann.math.VectorDistance;
+import syncleus.dann.neural.networks.training.propagation.TrainingContinuation;
 
 /**
  * Train a Hidden Markov Model (HMM) with the KMeans algorithm. Makes use of
@@ -53,24 +55,27 @@ import syncleus.dann.learn.kmeans.KMeansUtil;
  * Faber, Clustering and the Continuous k-Means Algorithm, Los Alamos Science,
  * no. 22, 1994.
  */
-public class KMeansTrainHMM implements Training {
+public class KMeansTrainHMM<D extends Data> implements Training {
     private final Clusters clusters;
     private final int states;
-    private final DataSequence sequnces;
+    private final DataSequence<D> sequnces;
     private boolean done;
     private final HiddenMarkovModel modelHMM;
     private int iteration;
     private HiddenMarkovModel method;
     private final DataSequence training;
 
-    public KMeansTrainHMM(final HiddenMarkovModel method,
-                       final DataSequence sequences) {
+    public KMeansTrainHMM(final HiddenMarkovModel method, final DataSequence sequences) {
+        this(method, sequences, new VectorDistance.EuclideanVectorDistance());
+    }
+            
+    public KMeansTrainHMM(final HiddenMarkovModel method, final DataSequence sequences, VectorDistance distanceFunc) {
         this.method = method;
         this.modelHMM = method;
         this.sequnces = sequences;
         this.states = method.getStateCount();
         this.training = sequences;
-        this.clusters = new Clusters(this.states, sequences);
+        this.clusters = new Clusters(this.states, sequences, distanceFunc);
         this.done = false;
     }
 
@@ -257,24 +262,24 @@ public class KMeansTrainHMM implements Training {
         throw new UnsupportedOperationException("Not supported yet.");
     }
     
-    static class Clusters {
-        private final HashMap<DataCase, Integer> clustersHash;
-        private final ArrayList<Collection<DataCase>> clusters;
+    static class Clusters<D extends Data> {
+        private final HashMap<DataCase<D>, Integer> clustersHash;
+        private final ArrayList<Collection<DataCase<D>>> clusters;
 
-        public Clusters(final int k, final Dataset observations) {
+        public Clusters(final int k, final Dataset<D> observations, VectorDistance distanceFunc) {
 
             this.clustersHash = new HashMap<>();
             this.clusters = new ArrayList<>();
 
-            final List<DataCase> list = new ArrayList<>();
-            for (final DataCase pair : observations) {
+            final List<DataCase<D>> list = new ArrayList<>();
+            for (final DataCase<D> pair : observations) {
                 list.add(pair);
             }
-            final KMeansUtil<DataCase> kmc = new KMeansUtil<>(k, list);
+            final KMeansUtil<DataCase<D>> kmc = new KMeansUtil<>(k, list, distanceFunc);
             kmc.process();
 
             for (int i = 0; i < k; i++) {
-                final Collection<DataCase> cluster = kmc.get(i);
+                final Collection<DataCase<D>> cluster = kmc.get(i);
                 this.clusters.add(cluster);
 
                 for (final DataCase element : cluster) {
@@ -283,24 +288,24 @@ public class KMeansTrainHMM implements Training {
             }
         }
 
-        public Collection<DataCase> cluster(final int clusterNb) {
+        public Collection<DataCase<D>> cluster(final int clusterNb) {
             return this.clusters.get(clusterNb);
         }
 
-        public int cluster(final DataCase o) {
+        public int cluster(final DataCase<D> o) {
             return this.clustersHash.get(o);
         }
 
-        public boolean isInCluster(final DataCase o, final int x) {
+        public boolean isInCluster(final DataCase<D> o, final int x) {
             return cluster(o) == x;
         }
 
-        public void put(final DataCase o, final int clusterNb) {
+        public void put(final DataCase<D> o, final int clusterNb) {
             this.clustersHash.put(o, clusterNb);
             this.clusters.get(clusterNb).add(o);
         }
 
-        public void remove(final DataCase o, final int clusterNb) {
+        public void remove(final DataCase<D> o, final int clusterNb) {
             this.clustersHash.put(o, -1);
             this.clusters.get(clusterNb).remove(o);
         }

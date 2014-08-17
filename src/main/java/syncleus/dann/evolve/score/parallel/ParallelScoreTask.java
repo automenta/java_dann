@@ -28,7 +28,7 @@ import syncleus.dann.evolve.genome.Genome;
 import syncleus.dann.evolve.score.AdjustScore;
 import syncleus.dann.evolve.train.basic.BasicEA;
 import syncleus.dann.learn.CalculateScore;
-import syncleus.dann.learn.Learning;
+import syncleus.dann.Learning;
 
 import java.util.List;
 

@@ -23,7 +23,7 @@
  */
 package org.encog.neural.networks.training.concurrent.performers;
 
-import syncleus.dann.learn.Training;
+import syncleus.dann.Training;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 

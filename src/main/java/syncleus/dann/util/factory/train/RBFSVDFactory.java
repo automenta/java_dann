@@ -24,8 +24,8 @@
 package syncleus.dann.util.factory.train;
 
 import syncleus.dann.data.Dataset;
-import syncleus.dann.learn.Learning;
-import syncleus.dann.learn.Training;
+import syncleus.dann.Learning;
+import syncleus.dann.Training;
 
 /**
  * This factory is used to create a SVD trainer for an RBF network.

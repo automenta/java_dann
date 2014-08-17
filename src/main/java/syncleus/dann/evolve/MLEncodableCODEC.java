@@ -26,7 +26,7 @@ package syncleus.dann.evolve;
 import syncleus.dann.evolve.codec.GeneticCODEC;
 import syncleus.dann.evolve.genome.Genome;
 import syncleus.dann.data.VectorEncodable;
-import syncleus.dann.learn.Learning;
+import syncleus.dann.Learning;
 
 import java.io.Serializable;
 

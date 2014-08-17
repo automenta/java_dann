@@ -42,7 +42,7 @@ public final class EncodeSVMProblem {
      *                    only a single output. This value is typically zero.
      * @return The SVM problem.
      */
-    public static svm_problem encode(final Dataset training,
+    public static <D extends Data> svm_problem encode(final Dataset<D> training,
                                      final int outputIndex) {
         try {
             final svm_problem result = new svm_problem();
@@ -54,7 +54,7 @@ public final class EncodeSVMProblem {
 
             int elementIndex = 0;
 
-            for (final DataCase pair : training) {
+            for (final DataCase<D> pair : training) {
                 final Data input = pair.getInput();
                 final Data output = pair.getIdeal();
                 result.x[elementIndex] = new svm_node[input.size()];

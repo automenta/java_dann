@@ -26,8 +26,8 @@ package syncleus.dann.util.factory.train;
 import syncleus.dann.evolve.train.basic.TrainEA;
 import syncleus.dann.learn.CalculateScore;
 import syncleus.dann.data.Dataset;
-import syncleus.dann.learn.Learning;
-import syncleus.dann.learn.Training;
+import syncleus.dann.Learning;
+import syncleus.dann.Training;
 
 /**
  * A factory to create genetic algorithm trainers.

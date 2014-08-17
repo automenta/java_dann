@@ -23,7 +23,7 @@
  */
 package org.encog.neural.networks.training;
 
-import syncleus.dann.learn.Training;
+import syncleus.dann.Training;
 
 /**
  * This is an alias class for Encog 2.5 compatibility. This class aliases

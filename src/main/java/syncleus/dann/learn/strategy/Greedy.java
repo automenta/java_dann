@@ -24,7 +24,7 @@
 package syncleus.dann.learn.strategy;
 
 import syncleus.dann.data.VectorEncodable;
-import syncleus.dann.learn.Training;
+import syncleus.dann.Training;
 
 /**
  * A simple greedy strategy. If the last iteration did not improve training,

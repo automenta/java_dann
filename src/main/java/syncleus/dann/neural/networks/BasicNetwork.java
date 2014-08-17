@@ -34,7 +34,7 @@ import syncleus.dann.Classifying;
 import syncleus.dann.learn.MLResettable;
 import syncleus.dann.data.VectorEncodable;
 import org.encog.neural.flat.FlatNetwork;
-import syncleus.dann.data.basic.VectorData;
+import syncleus.dann.data.vector.VectorData;
 import syncleus.dann.data.file.csv.CSVFormat;
 import syncleus.dann.data.language.NumberList;
 import syncleus.dann.math.EncogMath;

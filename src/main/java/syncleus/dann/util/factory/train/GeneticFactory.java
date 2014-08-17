@@ -27,9 +27,9 @@ import syncleus.dann.learn.MLResettable;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.data.VectorEncodable;
 import syncleus.dann.learn.CalculateScore;
-import syncleus.dann.learn.Learning;
+import syncleus.dann.Learning;
 import syncleus.dann.evolve.MLMethodGeneticAlgorithm;
-import syncleus.dann.learn.Training;
+import syncleus.dann.Training;
 import syncleus.dann.util.factory.MLTrainFactory;
 import syncleus.dann.util.factory.parse.ArchitectureParse;
 

@@ -27,10 +27,10 @@ import syncleus.dann.learn.hmm.HiddenMarkovModel;
 import syncleus.dann.learn.hmm.alog.ForwardBackwardCalculator;
 import syncleus.dann.learn.hmm.distributions.StateDistribution;
 import syncleus.dann.data.Dataset;
-import syncleus.dann.learn.Learning;
+import syncleus.dann.Learning;
 import syncleus.dann.data.DataSequence;
 import syncleus.dann.learn.TrainingImplementationType;
-import syncleus.dann.learn.Training;
+import syncleus.dann.Training;
 import syncleus.dann.learn.strategy.Strategy;
 
 import java.util.Arrays;

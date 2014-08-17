@@ -24,7 +24,6 @@
 package syncleus.dann;
 
 import syncleus.dann.data.Dataset;
-import syncleus.dann.learn.Learning;
 
 
 /**

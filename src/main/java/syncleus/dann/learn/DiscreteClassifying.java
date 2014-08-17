@@ -37,7 +37,7 @@ public interface DiscreteClassifying<I, O> extends Classifying<I, O> {
      * @return The classification of the item.
      */
     O classify(I item);
-
+    
 
     /**
      * Gets the possible categories for a given item, and the probability that

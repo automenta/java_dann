@@ -23,9 +23,9 @@
  */
 package syncleus.dann.data.buffer;
 
-import syncleus.dann.data.basic.VectorData;
-import syncleus.dann.data.basic.VectorCase;
-import syncleus.dann.data.basic.VectorDataset;
+import syncleus.dann.data.vector.VectorData;
+import syncleus.dann.data.vector.VectorCase;
+import syncleus.dann.data.vector.VectorDataset;
 import syncleus.dann.data.buffer.codec.DataSetCODEC;
 import syncleus.dann.data.Data;
 import syncleus.dann.data.DataCase;

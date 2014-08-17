@@ -23,7 +23,7 @@
  */
 package org.encog.neural.neat;
 
-import syncleus.dann.data.basic.VectorData;
+import syncleus.dann.data.vector.VectorData;
 import syncleus.dann.data.Data;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.learn.ErrorLearning;

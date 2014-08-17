@@ -23,7 +23,7 @@
  */
 package syncleus.dann.util.factory.method;
 
-import syncleus.dann.learn.Learning;
+import syncleus.dann.Learning;
 import syncleus.dann.neural.activation.ActivationLinear;
 import syncleus.dann.neural.networks.BasicNetwork;
 import syncleus.dann.neural.networks.layers.BasicLayer;

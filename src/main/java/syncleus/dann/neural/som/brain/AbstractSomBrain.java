@@ -18,6 +18,7 @@
  ******************************************************************************/
 package syncleus.dann.neural.som.brain;
 
+import syncleus.dann.neural.som.SOMBrain;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import syncleus.dann.graph.AbstractBidirectedAdjacencyGraph;
@@ -48,7 +49,7 @@ import java.util.concurrent.Future;
  */
 public abstract class AbstractSomBrain<IN extends SomInputNeuron, ON extends SomOutputNeuron, N extends SomNeuron, S extends Synapse<N>>
         extends AbstractLocalBrain<IN, ON, N, S> implements
-        SomBrain<IN, ON, N, S> {
+        SOMBrain<IN, ON, N, S> {
     private int iterationsTrained;
     private Vector upperBounds;
     private Vector lowerBounds;

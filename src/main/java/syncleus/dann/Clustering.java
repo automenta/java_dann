@@ -25,7 +25,6 @@ package syncleus.dann;
 
 import syncleus.dann.data.DataCluster;
 import syncleus.dann.data.Data;
-import syncleus.dann.learn.Learning;
 
 /**
  * A machine learning method that is used to break data into clusters. The

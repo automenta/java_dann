@@ -30,7 +30,7 @@ import syncleus.dann.data.Data;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.learn.MLResettable;
 import syncleus.dann.data.VectorEncodable;
-import syncleus.dann.data.basic.VectorData;
+import syncleus.dann.data.vector.VectorData;
 import syncleus.dann.math.EncogUtility;
 import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.math.random.ConsistentRandomizer;

@@ -23,12 +23,12 @@
  */
 package org.encog.neural.hyperneat;
 
-import syncleus.dann.data.basic.VectorData;
+import syncleus.dann.data.vector.VectorData;
 import syncleus.dann.evolve.GeneticError;
 import syncleus.dann.evolve.codec.GeneticCODEC;
 import syncleus.dann.evolve.genome.Genome;
 import syncleus.dann.data.Data;
-import syncleus.dann.learn.Learning;
+import syncleus.dann.Learning;
 import syncleus.dann.neural.activation.ActivationSteepenedSigmoid;
 import syncleus.dann.neural.activation.EncogActivationFunction;
 

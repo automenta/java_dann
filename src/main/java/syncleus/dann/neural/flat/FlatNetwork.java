@@ -23,7 +23,7 @@
  */
 package org.encog.neural.flat;
 
-import syncleus.dann.data.basic.VectorCase;
+import syncleus.dann.data.vector.VectorCase;
 import syncleus.dann.data.DataCase;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.math.EncogMath;
@@ -253,7 +253,7 @@ public class FlatNetwork implements Serializable, Cloneable {
         final ErrorCalculation errorCalculation = new ErrorCalculation();
 
         final double[] actual = new double[this.outputCount];
-        final DataCase pair = VectorCase.createPair(data.getInputSize(),
+        final DataCase pair = VectorCase.build(data.getInputSize(),
                 data.getIdealSize());
 
         for (int i = 0; i < data.getRecordCount(); i++) {

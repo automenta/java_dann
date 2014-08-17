@@ -24,7 +24,7 @@
 package syncleus.dann.evolve.codec;
 
 import syncleus.dann.evolve.genome.Genome;
-import syncleus.dann.learn.Learning;
+import syncleus.dann.Learning;
 
 /**
  * A CODEC defines how to transfer between a genome and phenome. Every CODEC

@@ -23,6 +23,7 @@
  */
 package syncleus.dann.learn;
 
+import syncleus.dann.Learning;
 import java.util.Map;
 
 /**

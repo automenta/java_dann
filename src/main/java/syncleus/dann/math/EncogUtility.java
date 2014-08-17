@@ -30,10 +30,10 @@ import syncleus.dann.data.DataCase;
 import syncleus.dann.Classifying;
 import syncleus.dann.data.Data;
 import syncleus.dann.data.Dataset;
-import syncleus.dann.learn.Learning;
+import syncleus.dann.Learning;
 import org.encog.neural.networks.training.propagation.Propagation;
 import org.encog.neural.networks.training.propagation.resilient.ResilientPropagation;
-import syncleus.dann.data.basic.VectorData;
+import syncleus.dann.data.vector.VectorData;
 import syncleus.dann.data.buffer.BufferedMLDataSet;
 import syncleus.dann.data.buffer.MemoryDataLoader;
 import syncleus.dann.data.buffer.codec.CSVDataCODEC;
@@ -44,7 +44,7 @@ import syncleus.dann.data.file.csv.ReadCSV;
 import syncleus.dann.data.specific.CSVNeuralDataSet;
 import syncleus.dann.learn.svm.SVM;
 import syncleus.dann.learn.svm.training.SVMTrain;
-import syncleus.dann.learn.Training;
+import syncleus.dann.Training;
 import syncleus.dann.math.statistics.ErrorCalculation;
 import syncleus.dann.neural.activation.ActivationSigmoid;
 import syncleus.dann.neural.activation.ActivationTANH;
@@ -111,14 +111,14 @@ public final class EncogUtility {
 
     /**
      * Evaluate the network and display (to the console) the output for every
-     * value in the training set. Displays ideal and actual.
+     * value in the training set. Displays ideal and actual.cd 
      *
      * @param network  The network to evaluate.
      * @param training The training set to evaluate.
      */
-    public static void evaluate(final RegressionLearning network,
-                                final Dataset training) {
-        for (final DataCase pair : training) {
+    public static <D extends Data> void evaluate(final RegressionLearning<D> network,
+                                final Dataset<D> training) {
+        for (final DataCase<D> pair : training) {
             final Data output = network.compute(pair.getInput());
             System.out.println("Input="
                     + EncogUtility.formatNeuralData(pair.getInput())
@@ -239,8 +239,8 @@ public final class EncogUtility {
      * @param dataSet The training set to use.
      * @param error   The error level to train to.
      */
-    public static void trainToError(final Learning method,
-                                    final Dataset dataSet, final double error) {
+    public static <D extends Data> void trainToError(final Learning method,
+                                    final Dataset<D> dataSet, final double error) {
 
         Training train;
 
@@ -248,8 +248,7 @@ public final class EncogUtility {
             train = new SVMTrain((SVM) method, dataSet);
         }
         if (method instanceof FreeformNetwork) {
-            train = new FreeformResilientPropagation((FreeformNetwork) method,
-                    dataSet);
+            train = new FreeformResilientPropagation((FreeformNetwork) method, dataSet);
         } else {
             train = new ResilientPropagation((ContainsFlat) method, dataSet);
         }
@@ -349,8 +348,8 @@ public final class EncogUtility {
         buffer.endLoad();
     }
 
-    public static double calculateRegressionError(final RegressionLearning method,
-                                                  final Dataset data) {
+    public static <D extends Data> double calculateRegressionError(final RegressionLearning method,
+                                                  final Dataset<D> data) {
 
         final ErrorCalculation errorCalculation = new ErrorCalculation();
         if (method instanceof MLContext)
@@ -364,8 +363,8 @@ public final class EncogUtility {
         return errorCalculation.calculate();
     }
 
-    public static void saveCSV(final File targetFile, final CSVFormat format,
-                               final Dataset set) {
+    public static <D extends Data> void saveCSV(final File targetFile, final CSVFormat format,
+                               final Dataset<D> set) {
 
         FileWriter outFile = null;
         PrintWriter out = null;
@@ -414,12 +413,12 @@ public final class EncogUtility {
      * @param data   The data to check.
      * @return The error.
      */
-    public static double calculateClassificationError(
-            final Classifying method, final Dataset data) {
+    public static <D extends Data> double calculateClassificationError(
+            final Classifying<D,Integer> method, final Dataset<D> data) {
         int total = 0;
         int correct = 0;
 
-        for (final DataCase pair : data) {
+        for (final DataCase<D> pair : data) {
             final int ideal = (int) pair.getIdeal().getData(0);
             final int actual = method.classify(pair.getInput());
             if (actual == ideal)

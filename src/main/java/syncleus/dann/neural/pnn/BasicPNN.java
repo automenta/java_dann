@@ -29,8 +29,8 @@ import syncleus.dann.data.DataCase;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.data.Data;
 import syncleus.dann.Classifying;
-import syncleus.dann.data.basic.VectorData;
-import syncleus.dann.data.basic.VectorDataset;
+import syncleus.dann.data.vector.VectorData;
+import syncleus.dann.data.vector.VectorDataset;
 import syncleus.dann.math.EncogUtility;
 import syncleus.dann.math.array.EngineArray;
 

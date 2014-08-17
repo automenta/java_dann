@@ -23,8 +23,8 @@
  */
 package syncleus.dann.learn.hmm.distributions;
 
-import syncleus.dann.data.basic.VectorData;
-import syncleus.dann.data.basic.VectorCase;
+import syncleus.dann.data.vector.VectorData;
+import syncleus.dann.data.vector.VectorCase;
 import syncleus.dann.data.Data;
 import syncleus.dann.data.DataCase;
 import syncleus.dann.data.Dataset;

@@ -23,10 +23,9 @@
  */
 package syncleus.dann.math.array;
 
-import syncleus.dann.data.basic.VectorData;
-import syncleus.dann.data.basic.VectorCase;
-import syncleus.dann.data.basic.VectorDataset;
-import syncleus.dann.data.Data;
+import syncleus.dann.data.vector.VectorData;
+import syncleus.dann.data.vector.VectorCase;
+import syncleus.dann.data.vector.VectorDataset;
 import syncleus.dann.data.DataCase;
 import syncleus.dann.data.Dataset;
 
@@ -156,8 +155,8 @@ public class TemporalWindowArray {
         final int stopPoint = data.length - totalWindowSize;
 
         for (int i = 0; i < stopPoint; i++) {
-            final Data inputData = new VectorData(this.inputWindow);
-            final Data idealData = new VectorData(this.predictWindow);
+            final VectorData inputData = new VectorData(this.inputWindow);
+            final VectorData idealData = new VectorData(this.predictWindow);
 
             int index = i;
 
@@ -171,7 +170,7 @@ public class TemporalWindowArray {
                 idealData.setData(j, data[index++]);
             }
 
-            final DataCase pair = new VectorCase(inputData, idealData);
+            final VectorCase pair = new VectorCase(inputData, idealData);
             result.add(pair);
         }
 
@@ -220,8 +219,8 @@ public class TemporalWindowArray {
         final int stopPoint = data.length - totalWindowSize;
 
         for (int i = 0; i < stopPoint; i++) {
-            final Data inputData = new VectorData(inputWindow);
-            final Data idealData = new VectorData(predictWindow);
+            final VectorData inputData = new VectorData(inputWindow);
+            final VectorData idealData = new VectorData(predictWindow);
 
             int index = i;
 

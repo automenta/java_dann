@@ -42,7 +42,7 @@ import syncleus.dann.neural.networks.BasicNetwork;
 
 import java.util.Set;
 
-import syncleus.dann.data.basic.VectorData;
+import syncleus.dann.data.vector.VectorData;
 import syncleus.dann.math.EncogMath;
 import syncleus.dann.math.random.ConsistentRandomizer;
 import syncleus.dann.neural.activation.ActivationTANH;
@@ -67,8 +67,8 @@ import syncleus.dann.util.ObjectCloner;
  * Freeform networks allow just about any neuron to be connected to another
  * neuron. You can have neuron layers if you want, but they are not required.
  */
-public class FreeformNetwork extends AbstractLearning implements MLContext, Cloneable,
-        RegressionLearning, VectorEncodable, MLResettable, Classifying, ErrorLearning {
+public class FreeformNetwork<D extends Data> extends AbstractLearning implements MLContext, Cloneable, RegressionLearning<D>, VectorEncodable, MLResettable, Classifying<D,Integer>, ErrorLearning<D>
+{
 
     /**
      * The serial ID.
@@ -252,7 +252,7 @@ public class FreeformNetwork extends AbstractLearning implements MLContext, Clon
      * {@inheritDoc}
      */
     @Override
-    public int classify(final Data input) {
+    public Integer classify(final D input) {
         final Data output = compute(input);
         return EngineArray.maxIndex(output.getData());
     }
@@ -285,7 +285,7 @@ public class FreeformNetwork extends AbstractLearning implements MLContext, Clon
      * {@inheritDoc}
      */
     @Override
-    public Data compute(final Data input) {
+    public Data compute(final D input) {
 
         // Allocate result
         final Data result = new VectorData(this.outputLayer.size());

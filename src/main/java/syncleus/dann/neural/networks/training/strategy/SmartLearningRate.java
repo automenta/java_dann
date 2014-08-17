@@ -23,7 +23,7 @@
  */
 package org.encog.neural.networks.training.strategy;
 
-import syncleus.dann.learn.Training;
+import syncleus.dann.Training;
 import syncleus.dann.learn.strategy.Strategy;
 
 /**

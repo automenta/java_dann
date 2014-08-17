@@ -1,5 +1,7 @@
 package com.jme3.ai.navmesh;
 
+import syncleus.dann.math.geometry.Line2D;
+import syncleus.dann.math.geometry.Plane;
 import java.io.IOException;
 import java.util.ArrayList;
 

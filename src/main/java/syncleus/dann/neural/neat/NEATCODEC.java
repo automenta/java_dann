@@ -26,7 +26,7 @@ package org.encog.neural.neat;
 import syncleus.dann.evolve.GeneticError;
 import syncleus.dann.evolve.codec.GeneticCODEC;
 import syncleus.dann.evolve.genome.Genome;
-import syncleus.dann.learn.Learning;
+import syncleus.dann.Learning;
 import syncleus.dann.neural.activation.EncogActivationFunction;
 
 import java.io.Serializable;

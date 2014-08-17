@@ -23,7 +23,7 @@
  */
 package syncleus.dann.learn.strategy;
 
-import syncleus.dann.learn.Training;
+import syncleus.dann.Training;
 
 /**
  * Training strategies can be added to training algorithms. Training strategies

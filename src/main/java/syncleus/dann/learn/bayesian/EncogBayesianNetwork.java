@@ -51,8 +51,8 @@ import java.util.*;
  * <p/>
  * http://www.heatonresearch.com/wiki/Bayesian_Network
  */
-public class EncogBayesianNetwork extends AbstractLearning implements Classifying,
-        MLResettable, Serializable, ErrorLearning {
+public class EncogBayesianNetwork extends AbstractLearning implements Classifying<Data,Integer>,
+        MLResettable, Serializable, ErrorLearning<Data> {
 
     /**
      * Default choices for a boolean event.
@@ -718,7 +718,7 @@ public class EncogBayesianNetwork extends AbstractLearning implements Classifyin
      * @param input The input to classify.
      */
     @Override
-    public int classify(final Data input) {
+    public Integer classify(final Data input) {
 
         if (this.classificationTarget < 0
                 || this.classificationTarget >= this.events.size()) {
@@ -846,7 +846,7 @@ public class EncogBayesianNetwork extends AbstractLearning implements Classifyin
      * {@inheritDoc}
      */
     @Override
-    public double calculateError(final Dataset data) {
+    public double calculateError(final Dataset<Data> data) {
 
         if (!this.hasValidClassificationTarget())
             return 1.0;
@@ -858,7 +858,7 @@ public class EncogBayesianNetwork extends AbstractLearning implements Classifyin
         int badCount = 0;
         int totalCount = 0;
 
-        for (final DataCase pair : data) {
+        for (final DataCase<Data> pair : data) {
             final int c = this.classify(pair.getInput());
             totalCount++;
             if (c != pair.getInput().getData(this.classificationTarget)) {

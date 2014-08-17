@@ -37,15 +37,15 @@ package syncleus.dann.neural.freeform.training;
 import syncleus.dann.data.DataCase;
 import syncleus.dann.data.Data;
 import syncleus.dann.data.Dataset;
-import syncleus.dann.learn.TrainingImplementationType;
-import syncleus.dann.learn.Learning;
-import syncleus.dann.learn.BasicTraining;
+import syncleus.dann.Learning;
 import syncleus.dann.math.statistics.ErrorCalculation;
 import syncleus.dann.neural.activation.ActivationSigmoid;
 
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
+import syncleus.dann.learn.AbstractTraining;
+import syncleus.dann.learn.AbstractTraining.TrainingImplementationType;
 import syncleus.dann.neural.freeform.FreeformConnection;
 import syncleus.dann.neural.freeform.FreeformNetwork;
 import syncleus.dann.neural.freeform.FreeformNeuron;
@@ -53,7 +53,7 @@ import syncleus.dann.neural.freeform.FreeformNeuron;
 /**
  * Provides basic propagation functions to other trainers.
  */
-public abstract class FreeformPropagationTraining extends BasicTraining
+public abstract class FreeformPropagationTraining<D extends Data> extends AbstractTraining
         implements Serializable {
 
     /**
@@ -74,7 +74,7 @@ public abstract class FreeformPropagationTraining extends BasicTraining
     /**
      * The training set to use.
      */
-    private final Dataset training;
+    private final Dataset<D> training;
 
     /**
      * The number of iterations.
@@ -119,7 +119,7 @@ public abstract class FreeformPropagationTraining extends BasicTraining
      * @param theTraining The training data.
      */
     public FreeformPropagationTraining(final FreeformNetwork theNetwork,
-                                       final Dataset theTraining) {
+                                       final Dataset<D> theTraining) {
         super(TrainingImplementationType.Iterative);
         this.network = theNetwork;
         this.training = theTraining;

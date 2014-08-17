@@ -29,6 +29,7 @@ import syncleus.dann.math.cluster.Cluster;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import syncleus.dann.math.VectorDistance;
 
 /**
  * Generic KMeans clustering object.
@@ -46,6 +47,7 @@ public class KMeansUtil<K extends CentroidFactory<? super K>> {
      * The number of clusters.
      */
     private final int k;
+    private VectorDistance distanceFunc;
 
     /**
      * Construct the clusters. Call process to perform the cluster.
@@ -53,9 +55,11 @@ public class KMeansUtil<K extends CentroidFactory<? super K>> {
      * @param theK        The number of clusters.
      * @param theElements The elements to cluster.
      */
-    public KMeansUtil(final int theK, final List<? extends K> theElements) {
+    public KMeansUtil(final int theK, final List<? extends K> theElements, VectorDistance distance) {
         this.k = theK;
         clusters = new ArrayList<>(theK);
+        this.distanceFunc = distance;
+        
         initRandomClusters(theElements);
     }
 
@@ -80,7 +84,7 @@ public class KMeansUtil<K extends CentroidFactory<? super K>> {
             for (int i = 0; i < clusterIndex; i++) {
                 final Cluster<K> cluster = clusters.get(i);
 
-                if (cluster.centroid().distance(element) == 0) {
+                if (cluster.centroid().distance(element, distanceFunc) == 0) {
                     cluster.add(element);
                     added = true;
                     break;
@@ -135,7 +139,7 @@ public class KMeansUtil<K extends CentroidFactory<? super K>> {
                     final K thisElement = thisElements.get(j);
 
                     // don't make a cluster empty
-                    if (thisCluster.centroid().distance(thisElement) > 0) {
+                    if (thisCluster.centroid().distance(thisElement, distanceFunc) > 0) {
                         final Cluster<K> nearestCluster = nearestCluster(thisElement);
 
                         // move to nearer cluster
@@ -162,7 +166,7 @@ public class KMeansUtil<K extends CentroidFactory<? super K>> {
 
         for (int i = 0; i < clusters.size(); i++) {
             final double thisDistance = clusters.get(i).centroid()
-                    .distance(element);
+                    .distance(element, this.distanceFunc);
 
             if (distance > thisDistance) {
                 distance = thisDistance;

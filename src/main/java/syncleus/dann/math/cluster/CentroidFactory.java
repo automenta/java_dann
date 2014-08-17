@@ -32,5 +32,5 @@ public interface CentroidFactory<O> {
     /**
      * @return The centroid.
      */
-    public Centroid<O> createCentroid();
+    public Centroid<? extends O> createCentroid();
 }

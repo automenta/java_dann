@@ -27,13 +27,13 @@ import syncleus.dann.data.Dataset;
 import syncleus.dann.math.EncogMath;
 
 import java.io.Serializable;
+import syncleus.dann.data.Data;
 import syncleus.dann.neural.freeform.FreeformConnection;
 import syncleus.dann.neural.freeform.FreeformNetwork;
 import syncleus.dann.neural.networks.training.propagation.TrainingContinuation;
 import syncleus.dann.neural.networks.training.propagation.resilient.RPROPConst;
 
-public class FreeformResilientPropagation extends FreeformPropagationTraining
-        implements Serializable {
+public class FreeformResilientPropagation extends FreeformPropagationTraining<Data> implements Serializable {
 
     /**
      * The serial ID.
@@ -165,22 +165,32 @@ public class FreeformResilientPropagation extends FreeformPropagationTraining
                 weightChange);
     }
 
-    /**
-     * {@inheritDoc}
-     */
+//    /**
+//     * {@inheritDoc}
+//     */
+//    @Override
+//    public TrainingContinuation pause() {
+//        // TODO Auto-generated method stub
+//        return null;
+//    }
+//
+//    /**
+//     * {@inheritDoc}
+//     */
+//    @Override
+//    public void resume(final TrainingContinuation state) {
+//        // TODO Auto-generated method stub
+//
+//    }
+
     @Override
     public TrainingContinuation pause() {
-        // TODO Auto-generated method stub
-        return null;
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public void resume(final TrainingContinuation state) {
-        // TODO Auto-generated method stub
-
+    public void resume(TrainingContinuation state) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
 }

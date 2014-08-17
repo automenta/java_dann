@@ -23,21 +23,21 @@
  */
 package syncleus.dann.math.fitting.linear;
 
-import org.encog.neural.networks.training.propagation.TrainingContinuation;
 import syncleus.dann.data.DataCase;
 import syncleus.dann.data.Dataset;
-import syncleus.dann.learn.Learning;
-import syncleus.dann.learn.TrainingImplementationType;
-import syncleus.dann.learn.BasicTraining;
+import syncleus.dann.Learning;
+import syncleus.dann.data.Data;
+import syncleus.dann.learn.AbstractTraining;
 import syncleus.dann.math.EncogUtility;
+import syncleus.dann.neural.networks.training.propagation.TrainingContinuation;
 
-public class TrainLinearRegression extends BasicTraining {
+public class TrainLinearRegression<D extends Data> extends AbstractTraining {
 
     private final LinearRegression method;
-    private final Dataset training;
+    private final Dataset<D> training;
 
     public TrainLinearRegression(final LinearRegression theMethod,
-                                 final Dataset theTraining) {
+                                 final Dataset<D> theTraining) {
         super(
                 theMethod.getInputCount() == 1 ? TrainingImplementationType.OnePass
                         : TrainingImplementationType.Iterative);

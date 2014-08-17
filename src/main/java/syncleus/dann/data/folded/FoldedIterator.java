@@ -23,7 +23,6 @@
  */
 package syncleus.dann.data.folded;
 
-import syncleus.dann.data.basic.VectorCase;
 import syncleus.dann.data.DataException;
 import syncleus.dann.data.DataCase;
 
@@ -68,10 +67,7 @@ public class FoldedIterator implements Iterator<DataCase> {
     @Override
     public DataCase next() {
         if (hasNext()) {
-            final DataCase pair = VectorCase.createPair(
-                    this.owner.getInputSize(), this.owner.getIdealSize());
-            this.owner.getRecord(this.currentIndex++, pair);
-            return pair;
+            return owner.getRecord(this.currentIndex++);
         } else {
             return null;
         }

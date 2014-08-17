@@ -23,17 +23,17 @@
  */
 package syncleus.dann.learn.fitness;
 
-import syncleus.dann.learn.CalculateScore;
-import syncleus.dann.learn.Learning;
+import syncleus.dann.Learning;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import syncleus.dann.learn.LearningScoring;
 
 /**
  * A multi-objective fitness function.
  */
-public class MultiObjectiveFitness implements CalculateScore, Serializable {
+public class MultiObjectiveFitness implements LearningScoring, Serializable {
 
     /**
      * The serial id.
@@ -57,7 +57,7 @@ public class MultiObjectiveFitness implements CalculateScore, Serializable {
      * @param fitnessFunction The fitness function.
      */
     public void addObjective(final double weight,
-                             final CalculateScore fitnessFunction) {
+                             final LearningScoring fitnessFunction) {
         if (this.objectives.isEmpty()) {
             this.min = fitnessFunction.shouldMinimize();
         } else {
@@ -73,10 +73,10 @@ public class MultiObjectiveFitness implements CalculateScore, Serializable {
      * {@inheritDoc}
      */
     @Override
-    public double calculateScore(final Learning method) {
+    public Double apply(final Learning method) {
         double result = 0;
 
-        result = this.objectives.stream().map((obj) -> obj.getScore().calculateScore(method) * obj.getWeight()).reduce(result, (accumulator, _item) -> accumulator + _item);
+        result = this.objectives.stream().map((obj) -> obj.getScore().apply(method) * obj.getWeight()).reduce(result, (accumulator, _item) -> accumulator + _item);
 
         return result;
     }

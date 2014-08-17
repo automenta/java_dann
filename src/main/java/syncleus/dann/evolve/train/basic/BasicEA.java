@@ -42,7 +42,7 @@ import syncleus.dann.evolve.species.Species;
 import syncleus.dann.evolve.train.EvolutionaryAlgorithm;
 import syncleus.dann.learn.CalculateScore;
 import syncleus.dann.learn.MLContext;
-import syncleus.dann.learn.Learning;
+import syncleus.dann.Learning;
 import syncleus.dann.math.random.RandomFactory;
 
 import java.io.Serializable;

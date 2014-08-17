@@ -23,7 +23,7 @@
  */
 package org.encog.neural.pattern;
 
-import syncleus.dann.learn.Learning;
+import syncleus.dann.Learning;
 import syncleus.dann.neural.activation.EncogActivationFunction;
 import syncleus.dann.neural.networks.BasicNetwork;
 import syncleus.dann.neural.networks.layers.BasicLayer;

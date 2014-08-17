@@ -23,7 +23,7 @@
  */
 package syncleus.dann.learn.kmeans;
 
-import syncleus.dann.data.basic.VectorCase;
+import syncleus.dann.data.vector.VectorCluster;
 import syncleus.dann.data.DataCluster;
 import syncleus.dann.Clustering;
 import syncleus.dann.data.DataCase;
@@ -32,6 +32,7 @@ import syncleus.dann.data.Dataset;
 import java.util.ArrayList;
 import java.util.List;
 import syncleus.dann.data.Data;
+import syncleus.dann.math.VectorDistance;
 
 /**
  * This class performs a basic K-Means clustering. This class can be used on
@@ -40,12 +41,12 @@ import syncleus.dann.data.Data;
  * <p/>
  * http://en.wikipedia.org/wiki/Kmeans
  */
-public class KMeansClustering<M> implements Clustering<Data> {
+public class KMeansClustering<D extends Data> implements Clustering<D> {
 
     /**
      * The kmeans utility.
      */
-    private final KMeansUtil<Data> kmeans;
+    private final KMeansUtil<D> kmeans;
 
     /**
      * The clusters
@@ -63,13 +64,13 @@ public class KMeansClustering<M> implements Clustering<Data> {
      * @param theK   The number of clusters to use.
      * @param theSet The dataset to cluster.
      */
-    public KMeansClustering(final int theK, final Dataset theSet) {
-        final List<VectorCase> list = new ArrayList<>();
-        for (final DataCase pair : theSet) {
-            list.add((VectorCase) pair);
+    public KMeansClustering(final int theK, final Dataset<D> theSet, VectorDistance distance) {
+        final List<DataCase<D>> list = new ArrayList<>();
+        for (final DataCase<D> pair : theSet) {
+            list.add(pair);
         }
         this.k = theK;
-        this.kmeans = new KMeansUtil(this.k, list);
+        this.kmeans = new KMeansUtil(this.k, list, distance);
     }
 
     /**
@@ -80,7 +81,7 @@ public class KMeansClustering<M> implements Clustering<Data> {
         this.kmeans.process();
         this.clusters = new DataCluster[this.k];
         for (int i = 0; i < this.k; i++) {
-            this.clusters[i] = new BasicCluster(this.kmeans.getCluster(i));
+            this.clusters[i] = new VectorCluster(this.kmeans.getCluster(i));
         }
 
     }

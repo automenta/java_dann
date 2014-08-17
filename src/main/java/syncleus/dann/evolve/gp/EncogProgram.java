@@ -23,7 +23,7 @@
  */
 package org.encog.ml.prg;
 
-import syncleus.dann.data.basic.VectorData;
+import syncleus.dann.data.vector.VectorData;
 import syncleus.dann.evolve.exception.EACompileError;
 import syncleus.dann.evolve.exception.EARuntimeError;
 import syncleus.dann.evolve.genome.BasicGenome;

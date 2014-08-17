@@ -1,11 +1,13 @@
 package com.jme3.ai.navmesh;
 
-import com.jme3.ai.navmesh.Path.Waypoint;
+import syncleus.dann.math.geometry.Line2D;
+import syncleus.dann.math.geometry.Path;
+import syncleus.dann.math.geometry.Path.Waypoint;
 import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
 import com.jme3.ai.navmesh.Cell.ClassifyResult;
 import com.jme3.ai.navmesh.Cell.PathResult;
-import com.jme3.ai.navmesh.Line2D.LineIntersect;
+import syncleus.dann.math.geometry.Line2D.LineIntersect;
 import java.util.ArrayList;
 import java.util.List;
 

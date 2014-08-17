@@ -43,7 +43,7 @@ import syncleus.dann.neural.networks.BasicNetwork;
  * <p/>
  * http://en.wikipedia.org/wiki/Finite_difference_method
  */
-public class HessianFD extends BasicHessian {
+public class HessianFD<D extends Data> extends BasicHessian<D> {
 
     /**
      * The initial step size for dStep.
@@ -85,7 +85,7 @@ public class HessianFD extends BasicHessian {
      * {@inheritDoc}
      */
     @Override
-    public void init(final BasicNetwork theNetwork, final Dataset theTraining) {
+    public void init(final BasicNetwork theNetwork, final Dataset<D> theTraining) {
 
         super.init(theNetwork, theTraining);
         this.weightCount = theNetwork.getStructure().getFlat().getWeights().length;
@@ -272,3 +272,4 @@ public class HessianFD extends BasicHessian {
     }
 
 }
+

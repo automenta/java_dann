@@ -34,7 +34,7 @@ import syncleus.dann.learn.InputOutputLearning;
  * in multiple classes, one option is to create additional classes that
  * represent the compound classes.
  */
-public interface Classifying<I,O> extends InputOutputLearning {
+public interface Classifying<I,O> extends InputOutputLearning, Function<I,O> {
 
     /**
      * Classify the input into a group.
@@ -44,5 +44,8 @@ public interface Classifying<I,O> extends InputOutputLearning {
      */
     O classify(I input);
     
+    default O apply(I input) {
+        return classify(input);
+    }
 
 }
