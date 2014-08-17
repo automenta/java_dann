@@ -31,7 +31,7 @@ public interface Data extends Clusterable, VectorEncodable, CentroidFactory<Data
     /**
      * @return How many elements are stored in this object.
      */    
-    public default int size() { return getData().length; }    
+    default int size() { return getData().length; }    
 
     
     /**

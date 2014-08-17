@@ -76,6 +76,16 @@ public class HyperassociativeMap<G extends Graph<N, ?>, N> implements
     private double totalMovement = DEFAULT_TOTAL_MOVEMENT;
     private double acceptableDistanceFactor = DEFAULT_ACCEPTABLE_DISTANCE_FACTOR;
 
+    public void setMaxSpeed(double d) {
+        if (learningRate > d)
+            setLearningRate(d);
+    }
+
+    public void setLearningRate(double learningRate) {
+        this.learningRate = learningRate;
+    }
+    
+
     private class Align implements Callable<Vector> {
         private final N node;
 
@@ -410,8 +420,8 @@ public class HyperassociativeMap<G extends Graph<N, ?>, N> implements
                 acceptableDistanceFactor *= LEARNING_RATE_INCREASE_FACTOR;
             }
             learningRate *= LEARNING_RATE_PROCESSING_ADJUSTMENT;
-            LOGGER.debug("learning rate: " + learningRate
-                    + ", acceptableDistanceFactor: " + acceptableDistanceFactor);
+            /*LOGGER.debug("learning rate: " + learningRate
+                    + ", acceptableDistanceFactor: " + acceptableDistanceFactor);*/
         }
         return pointSum;
     }
