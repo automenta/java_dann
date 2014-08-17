@@ -21,7 +21,7 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package syncleus.dann.plan.agent;
+package syncleus.dann.plan.grid2d;
 
 import syncleus.dann.math.Format;
 import syncleus.dann.math.array.EngineArray;
@@ -103,5 +103,11 @@ public class BasicState implements State {
     public void increaseVisited() {
         this.visited++;
     }
+
+    @Override
+    public double[] getData() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
 
 }

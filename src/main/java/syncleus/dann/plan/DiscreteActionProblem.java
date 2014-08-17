@@ -21,33 +21,22 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package syncleus.dann.plan.agent;
+package syncleus.dann.plan;
 
-import syncleus.dann.plan.Action;
+import java.util.List;
+import syncleus.dann.Problem;
 
-public class BasicAction implements Action {
-    private final String label;
+/*
+ * Abstract definition of a problem; solution instances try to solve it
+   @param A action type
+ */
+public interface DiscreteActionProblem<A> extends Problem {
 
-    public BasicAction(final String label) {
-        super();
-        this.label = label;
-    }
+    void addAction(A action);
 
-    /**
-     * @return the label
-     */
-    @Override
-    public String getLabel() {
-        return label;
-    }
+    /** this list should not contain duplicates; it is a List and not a Set in order to provide an indexed numbering for each action */
+    List<A> getActions();
 
-    @Override
-    public String toString() {
-        final StringBuilder result = new StringBuilder();
-        result.append("[BasicAction: label=");
-        result.append(this.label);
-        result.append(']');
-        return result.toString();
-    }
+
 
 }

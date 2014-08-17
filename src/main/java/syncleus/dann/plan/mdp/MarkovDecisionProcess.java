@@ -24,22 +24,32 @@
 package syncleus.dann.plan.mdp;
 
 import syncleus.dann.plan.State;
-import syncleus.dann.plan.World;
+import syncleus.dann.plan.DiscreteActionProblem;
+import syncleus.dann.plan.ActionProbability;
 
-public class MarkovDecisionProcess {
+public class MarkovDecisionProcess<A> {
 
-    private final World world;
+    private final DiscreteActionProblem<A> world;
     private final State goal;
+    protected ActionProbability<A> probability;
 
-    public MarkovDecisionProcess(final World theWorld) {
+    public MarkovDecisionProcess(final DiscreteActionProblem<A> theWorld, ActionProbability<A> probability, State goal) {
         this.world = theWorld;
-        this.goal = theWorld.getGoals().get(0);
+        this.goal = goal;
+        this.probability = probability;
     }
+
+    public MarkovDecisionProcess(final DiscreteActionProblem<A> theWorld, ActionProbability<A> probability) {
+        this(theWorld, probability, theWorld.getGoals().iterator().next());
+        assert(theWorld.getGoals().size() == 1);                
+    }
+    
+    
 
     /**
      * @return the world
      */
-    public World getWorld() {
+    public DiscreteActionProblem<A> getProblem() {
         return world;
     }
 

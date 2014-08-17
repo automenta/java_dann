@@ -21,18 +21,21 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package org.encog.neural.networks.training.pso;
+package syncleus.dann.neural.networks.training.pso;
 
+import org.encog.neural.networks.training.pso.NeuralPSOWorker;
 import syncleus.dann.learn.CalculateScore;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.Learning;
-import syncleus.dann.learn.TrainingImplementationType;
-import syncleus.dann.learn.BasicTraining;
+import syncleus.dann.learn.AbstractTraining;
+import syncleus.dann.learn.AbstractTraining.TrainingImplementationType;
 import syncleus.dann.math.VectorAlgebra;
 import syncleus.dann.math.random.NguyenWidrowRandomizer;
 import syncleus.dann.math.random.Randomizer;
 import syncleus.dann.neural.networks.BasicNetwork;
 import syncleus.dann.neural.networks.structure.NetworkCODEC;
+import syncleus.dann.neural.networks.training.TrainingSetScore;
+import syncleus.dann.neural.networks.training.propagation.TrainingContinuation;
 
 /**
  * Iteratively trains a population of neural networks by applying particle swarm
@@ -46,7 +49,7 @@ import syncleus.dann.neural.networks.structure.NetworkCODEC;
  *
  * @author Geoffroy Noel
  */
-public class NeuralPSO extends BasicTraining {
+public class NeuralPSO extends AbstractTraining {
 
     protected boolean m_multiThreaded = true;
     protected VectorAlgebra m_va;

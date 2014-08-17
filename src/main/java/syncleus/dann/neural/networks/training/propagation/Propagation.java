@@ -21,15 +21,16 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package org.encog.neural.networks.training.propagation;
+package syncleus.dann.neural.networks.training.propagation;
 
 import org.encog.neural.flat.FlatNetwork;
 import org.encog.neural.networks.training.BatchSize;
 import org.encog.neural.networks.training.Train;
+import org.encog.neural.networks.training.propagation.GradientWorker;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.Learning;
-import syncleus.dann.learn.TrainingImplementationType;
-import syncleus.dann.learn.BasicTraining;
+import syncleus.dann.learn.AbstractTraining;
+import syncleus.dann.learn.AbstractTraining.TrainingImplementationType;
 import syncleus.dann.math.IntRange;
 import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.math.error.ErrorFunction;
@@ -45,8 +46,8 @@ import syncleus.dann.neural.networks.ContainsFlat;
  *
  * @author jheaton
  */
-public abstract class Propagation extends BasicTraining implements Train,
-        MultiThreadable, BatchSize {
+public abstract class Propagation extends AbstractTraining implements Train,
+        BatchSize {
 
     /**
      * The current flat network we are using for training, or null for none.
@@ -366,13 +367,13 @@ public abstract class Propagation extends BasicTraining implements Train,
 
         // fix flat spot, if needed
         this.flatSpot = new double[this.currentFlatNetwork
-                .getEncogActivationFunctions().length];
+                .getActivationFunctions().length];
 
         if (this.shouldFixFlatSpot) {
             for (int i = 0; i < this.currentFlatNetwork
-                    .getEncogActivationFunctions().length; i++) {
+                    .getActivationFunctions().length; i++) {
                 final EncogActivationFunction af = this.currentFlatNetwork
-                        .getEncogActivationFunctions()[i];
+                        .getActivationFunctions()[i];
 
                 if (af instanceof ActivationSigmoid) {
                     this.flatSpot[i] = 0.1;

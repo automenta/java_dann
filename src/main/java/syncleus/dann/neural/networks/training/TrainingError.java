@@ -21,13 +21,13 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package org.encog.neural.networks.training;
+package syncleus.dann.neural.networks.training;
 
 
 /**
  * Thrown when a training error occurs.
  */
-public class TrainingError extends NeuralNetworkError {
+public class TrainingError extends RuntimeException {
 
     /**
      * The serial id.

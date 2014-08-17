@@ -31,8 +31,6 @@ import syncleus.dann.Classifying;
 import syncleus.dann.data.Data;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.Learning;
-import org.encog.neural.networks.training.propagation.Propagation;
-import org.encog.neural.networks.training.propagation.resilient.ResilientPropagation;
 import syncleus.dann.data.vector.VectorData;
 import syncleus.dann.data.buffer.BufferedMLDataSet;
 import syncleus.dann.data.buffer.MemoryDataLoader;
@@ -58,6 +56,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import syncleus.dann.neural.freeform.FreeformNetwork;
 import syncleus.dann.neural.freeform.training.FreeformResilientPropagation;
+import syncleus.dann.neural.networks.training.propagation.Propagation;
+import syncleus.dann.neural.networks.training.propagation.resilient.ResilientPropagation;
 
 /**
  * General utility class for Encog. Provides for some common Encog procedures.

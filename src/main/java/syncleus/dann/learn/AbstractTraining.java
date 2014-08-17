@@ -69,7 +69,7 @@ public abstract class AbstractTraining<D extends Data> implements Training {
     /**
      * The training data.
      */
-    private Dataset<D> training;
+    protected Dataset<D> training;
 
     /**
      * The current error rate.

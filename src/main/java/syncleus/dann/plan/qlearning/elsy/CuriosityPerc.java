@@ -1,20 +1,18 @@
-package syncleus.dann.plan.qlearning.curiosity;
-
-import syncleus.dann.plan.qlearning.Perception;
+package syncleus.dann.plan.qlearning.elsy;
 
 /**
  * Perception feeding Curiosity neural network. Provides information for the
  * ErrorBackpropagationNN that tries to predict player's perception output in
  * the next step.
  */
-public class CuriosityPerc extends Perception {
+public class CuriosityPerc extends QPerception {
     private static final long serialVersionUID = 1L;
 
-    private final Perception perception;
+    private final QPerception perception;
 
     private final CuriousBrain brain;
 
-    public CuriosityPerc(final Perception perception, final CuriousBrain brain) {
+    public CuriosityPerc(final QPerception perception, final CuriousBrain brain) {
         this.perception = perception;
         this.brain = brain;
     }

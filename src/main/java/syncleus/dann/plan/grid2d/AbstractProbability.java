@@ -21,23 +21,22 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package syncleus.dann.math.geometry.probability;
+package syncleus.dann.plan.grid2d;
 
-import syncleus.dann.plan.Action;
+import syncleus.dann.plan.DiscreteActionProblem;
+import syncleus.dann.plan.State;
 import syncleus.dann.plan.ActionProbability;
-import syncleus.dann.math.geometry.GridState;
-import syncleus.dann.math.geometry.Grid2D;
 
-public abstract class Grid2DAbstractProbability implements ActionProbability {
 
-    private final Grid2D world;
+public abstract class AbstractProbability<A> implements ActionProbability<A> {
 
-    public Grid2DAbstractProbability(final Grid2D theWorld) {
+    private final DiscreteActionProblem<A> world;
+
+    public AbstractProbability(final DiscreteActionProblem<A> theWorld) {
         this.world = theWorld;
     }
 
-    public static Action determineResultingAction(final GridState s1,
-                                                  final GridState s2) {
+    public A determineResultingAction(final State s1, final State s2) {
 
         if ((s1.getRow() - 1) == s2.getRow()
                 && s1.getColumn() == s2.getColumn()) {
@@ -56,10 +55,10 @@ public abstract class Grid2DAbstractProbability implements ActionProbability {
         return null;
     }
 
-    public GridState determineActionState(final GridState currentState,
+    public A determineActionState(final GridState currentState,
                                           final Action action) {
 
-        GridState result = null;
+        A result = null;
 
         if (action == Grid2D.ACTION_NORTH) {
             result = this.world.getState(currentState.getRow() - 1,
@@ -82,11 +81,6 @@ public abstract class Grid2DAbstractProbability implements ActionProbability {
         return result;
     }
 
-    /**
-     * @return the world
-     */
-    public Grid2D getWorld() {
-        return world;
-    }
+ 
 
 }

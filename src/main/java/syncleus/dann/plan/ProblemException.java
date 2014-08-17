@@ -24,7 +24,7 @@
 package syncleus.dann.plan;
 
 
-public class WorldError extends RuntimeException {
+public class ProblemException extends RuntimeException {
 
     /**
      * World errors.
@@ -36,7 +36,7 @@ public class WorldError extends RuntimeException {
      *
      * @param msg The exception message.
      */
-    public WorldError(final String msg) {
+    public ProblemException(final String msg) {
         super(msg);
         //EncogLogging.log(//EncogLogging.LEVEL_ERROR, msg);
     }
@@ -46,7 +46,7 @@ public class WorldError extends RuntimeException {
      *
      * @param t The other exception.
      */
-    public WorldError(final Throwable t) {
+    public ProblemException(final Throwable t) {
         super(t);
         //EncogLogging.log(//EncogLogging.LEVEL_ERROR, t);
     }
@@ -57,7 +57,7 @@ public class WorldError extends RuntimeException {
      * @param msg A message.
      * @param t   The other exception.
      */
-    public WorldError(final String msg, final Throwable t) {
+    public ProblemException(final String msg, final Throwable t) {
         super(msg, t);
         //EncogLogging.log(//EncogLogging.LEVEL_ERROR, msg);
         //EncogLogging.log(//EncogLogging.LEVEL_ERROR, t);

@@ -1,4 +1,4 @@
-package syncleus.dann.plan.qlearning;
+package syncleus.dann.plan.qlearning.elsy;
 
 import syncleus.dann.math.Randoms;
 import syncleus.dann.math.Sigmoids;
@@ -21,7 +21,7 @@ public class ErrorBackpropagationNN implements Serializable {
     /**
      * An instance of class extending Perception
      */
-    private final Perception perception;
+    private final QPerception perception;
     /**
      * Array of actions that can be taken
      */
@@ -70,7 +70,7 @@ public class ErrorBackpropagationNN implements Serializable {
      * @param gamma           Q-learning Discount factor
      * @param maxWeight       maximum initial weight of neuron connection
      */
-    public ErrorBackpropagationNN(final Perception perception,
+    public ErrorBackpropagationNN(final QPerception perception,
                                   final double[] desiredOutput, final int[] hiddenNeuronsNo, final double alpha,
                                   final double maxWeight) {
         this.unipolar = perception.isUnipolar();
@@ -98,7 +98,7 @@ public class ErrorBackpropagationNN implements Serializable {
      * @param actionsArray    - array of actions that can be taken
      * @param hiddenNeuronsNo - numbers of neurons in hidden layers
      */
-    public ErrorBackpropagationNN(final Perception perception,
+    public ErrorBackpropagationNN(final QPerception perception,
                                   final double[] desiredOutput, final int[] hiddenNeuronsNo) {
         this(perception, desiredOutput, hiddenNeuronsNo, ALPHA_DEFAULT,
                 MAX_WEIGHT_DEFAULT);
@@ -110,7 +110,7 @@ public class ErrorBackpropagationNN implements Serializable {
      * @param perception   - an instance of class implementing Perception
      * @param actionsArray - array of actions that can be taken
      */
-    public ErrorBackpropagationNN(final Perception perception, final double[] desiredOutput) {
+    public ErrorBackpropagationNN(final QPerception perception, final double[] desiredOutput) {
         this(perception, desiredOutput, new int[]{} // no hidden layers
         );
     }
@@ -420,7 +420,7 @@ public class ErrorBackpropagationNN implements Serializable {
         in.close();
     }
 
-    public Perception getPerception() {
+    public QPerception getPerception() {
         return perception;
     }
 

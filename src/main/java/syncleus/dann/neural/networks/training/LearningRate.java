@@ -21,7 +21,7 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package org.encog.neural.networks.training;
+package syncleus.dann.neural.networks.training;
 
 /**
  * Specifies that a training algorithm has the concept of a learning rate. This

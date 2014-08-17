@@ -21,31 +21,29 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package org.encog.neural.networks.training.simple;
+package syncleus.dann.neural.networks.training.simple;
 
 import syncleus.dann.data.DataCase;
 import syncleus.dann.data.Data;
 import syncleus.dann.data.Dataset;
-import syncleus.dann.learn.TrainingImplementationType;
 import syncleus.dann.Learning;
-import syncleus.dann.learn.BasicTraining;
+import syncleus.dann.learn.AbstractTraining;
+import syncleus.dann.learn.AbstractTraining.TrainingImplementationType;
 import syncleus.dann.math.statistics.ErrorCalculation;
 import syncleus.dann.neural.networks.BasicNetwork;
+import syncleus.dann.neural.networks.training.LearningRate;
+import syncleus.dann.neural.networks.training.propagation.TrainingContinuation;
 
 /**
  * Train an ADALINE neural network.
  */
-public class TrainAdaline extends BasicTraining implements LearningRate {
+public class TrainAdaline<D extends Data> extends AbstractTraining<D> implements LearningRate {
 
     /**
      * The network to train.
      */
     private final BasicNetwork network;
 
-    /**
-     * The training data to use.
-     */
-    private final Dataset training;
 
     /**
      * The learning rate.
@@ -59,7 +57,7 @@ public class TrainAdaline extends BasicTraining implements LearningRate {
      * @param training     The training data.
      * @param learningRate The learning rate.
      */
-    public TrainAdaline(final BasicNetwork network, final Dataset training,
+    public TrainAdaline(final BasicNetwork network, final Dataset<D> training,
                         final double learningRate) {
         super(TrainingImplementationType.Iterative);
         if (network.getLayerCount() > 2) {

@@ -23,6 +23,7 @@
  */
 package syncleus.dann.neural.networks;
 
+import org.encog.neural.flat.FlatNetwork;
 import syncleus.dann.Learning;
 
 /**

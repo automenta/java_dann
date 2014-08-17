@@ -21,20 +21,21 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package syncleus.dann.math.geometry.probability;
+package syncleus.dann.plan;
 
+import syncleus.dann.plan.grid2d.AbstractProbability;
 import syncleus.dann.math.EncogMath;
 import syncleus.dann.plan.Action;
 import syncleus.dann.plan.State;
 import syncleus.dann.plan.SuccessorState;
-import syncleus.dann.plan.WorldError;
+import syncleus.dann.plan.ProblemException;
 import syncleus.dann.math.geometry.GridState;
 import syncleus.dann.math.geometry.Grid2D;
 
 import java.util.Set;
 import java.util.TreeSet;
 
-public class Grid2DStochasticProbability extends Grid2DAbstractProbability {
+public class StochasticProbability extends AbstractProbability {
 
     private double probabilitySuccess;
     private double probabilitySame;
@@ -42,7 +43,7 @@ public class Grid2DStochasticProbability extends Grid2DAbstractProbability {
     private double probabilityRight;
     private double probabilityReverse;
 
-    public Grid2DStochasticProbability(final Grid2D theWorld,
+    public StochasticProbability(final Grid2D theWorld,
                                      final double theProbabilitySuccess,
                                      final double theProbabilitySame, final double theProbabilityLeft,
                                      final double theProbabilityRight, final double theProbabilityReverse) {
@@ -54,7 +55,7 @@ public class Grid2DStochasticProbability extends Grid2DAbstractProbability {
         this.probabilityReverse = theProbabilityReverse;
     }
 
-    public Grid2DStochasticProbability(final Grid2D theWorld) {
+    public StochasticProbability(final Grid2D theWorld) {
         this(theWorld, 0.8, 0.0, 0.1, 0.1, 0.0);
     }
 
@@ -133,7 +134,7 @@ public class Grid2DStochasticProbability extends Grid2DAbstractProbability {
                             final Action desiredAction) {
         if (!(resultState instanceof GridState)
                 || !(previousState instanceof GridState)) {
-            throw new WorldError("Must be instance of GridState");
+            throProblemExceptiondError("Must be instance of GridState");
         }
 
         final GridState gridResultState = (GridState) resultState;

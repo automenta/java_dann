@@ -21,21 +21,21 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package syncleus.dann.math.geometry.probability;
+package syncleus.dann.plan;
 
+import syncleus.dann.plan.grid2d.AbstractProbability;
 import syncleus.dann.plan.Action;
 import syncleus.dann.plan.State;
 import syncleus.dann.plan.SuccessorState;
-import syncleus.dann.plan.WorldError;
 import syncleus.dann.math.geometry.GridState;
 import syncleus.dann.math.geometry.Grid2D;
 
 import java.util.Set;
 import java.util.TreeSet;
 
-public class Grid2DDeterministicProbability extends Grid2DAbstractProbability {
+public class DeterministicProbability extends AbstractProbability {
 
-    public Grid2DDeterministicProbability(final Grid2D theWorld) {
+    public DeterministicProbability(final Grid2D theWorld) {
         super(theWorld);
     }
 
@@ -45,7 +45,7 @@ public class Grid2DDeterministicProbability extends Grid2DAbstractProbability {
 
         if (!(resultState instanceof GridState)
                 || !(previousState instanceof GridState)) {
-            throw new WorldError("Must be instance of GridState");
+            throw new RuntimeException("Must be instance of GridState");
         }
 
         final GridState gridResultState = (GridState) resultState;

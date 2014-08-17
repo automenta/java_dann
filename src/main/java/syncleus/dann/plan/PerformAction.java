@@ -23,10 +23,10 @@
  */
 package syncleus.dann.plan;
 
-public interface PerformAction {
-    void perform(World w, State s, Action a);
+public interface PerformAction<A> {
+    void perform(DiscreteActionProblem w, State s, A a);
 
-    double determineCost(World w, State s, Action a);
+    double determineCost(DiscreteActionProblem w, State s, A a);
 
-    boolean isPossible(World w, State s, Action a);
+    boolean isPossible(DiscreteActionProblem w, State s, A a);
 }

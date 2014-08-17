@@ -1,8 +1,6 @@
-package syncleus.dann.plan.qlearning.curiosity;
+package syncleus.dann.plan.qlearning.elsy;
 
-import syncleus.dann.plan.qlearning.Perception;
-
-public abstract class CuriousPlayerPerception extends Perception {
+public abstract class CuriousPlayerPerception extends QPerception {
     private static double rMin = 0.02;
     private static double rMax = 0.325;
     private static double rSlope = 650;
@@ -12,7 +10,7 @@ public abstract class CuriousPlayerPerception extends Perception {
     private static double offset = 0;
     private Curiosity curiosity;
     private double novelty;
-    private Perception foreseePerc = this;
+    private QPerception foreseePerc = this;
 
     @Override
     public double getReward() {
@@ -64,11 +62,11 @@ public abstract class CuriousPlayerPerception extends Perception {
         return foreseePerc.getOutput();
     }
 
-    public Perception getForeseePerc() {
+    public QPerception getForeseePerc() {
         return foreseePerc;
     }
 
-    public void setForeseePerc(final Perception foreseePerc) {
+    public void setForeseePerc(final QPerception foreseePerc) {
         this.foreseePerc = foreseePerc;
         // this.foreseePerc.setInputPerception(this);
     }

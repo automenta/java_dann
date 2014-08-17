@@ -21,36 +21,41 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package syncleus.dann.plan.agent;
+package syncleus.dann.plan.grid2d;
 
+import syncleus.dann.plan.ActionProbability;
+import java.util.ArrayDeque;
 import syncleus.dann.plan.*;
 import syncleus.dann.math.geometry.GridState;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Queue;
+import java.util.Set;
 
-public abstract class BasicWorld implements World {
-    private final List<State> states = new ArrayList<>();
-    private final List<Action> actions = new ArrayList<>();
+public abstract class BasicWorld<A extends BasicAction> implements DiscreteActionProblem<A> {
+    private final List<A> actions = new ArrayList<>();
+    private final Queue<State> states = new ArrayDeque<>();
     private ActionProbability probability;
-    private final List<WorldAgent> agents = new ArrayList<>();
-    private final List<State> goals = new ArrayList<>();
+    private final List<DiscreteActionSolution> agents = new ArrayList<>();
+    private final Set<State> goals = new HashSet<>();
 
     @Override
-    public List<Action> getActions() {
+    public List<A> getActions() {
         return this.actions;
     }
 
     @Override
-    public void addAction(final Action action) {
+    public void addAction(final A action) {
         this.actions.add(action);
     }
 
-    private int getActionIndex(final Action a) {
+    private int getActionIndex(final A a) {
         return actions.indexOf(a);
     }
 
-    private int requireActionIndex(final Action a) {
+    private int requireActionIndex(final A a) {
         final int result = getActionIndex(a);
         if (result == -1) {
             throw new RuntimeException("No such action: " + a);
@@ -58,16 +63,13 @@ public abstract class BasicWorld implements World {
         return result;
     }
 
-    @Override
-    public void setPolicyValue(final State state, final Action action,
+    public void setPolicyValue(final State state, final A action,
                                final double r) {
         final int index = requireActionIndex(action);
         state.getPolicyValue()[index] = r;
-
     }
 
-    @Override
-    public double getPolicyValue(final State state, final Action action) {
+    public double getPolicyValue(final State state, final A action) {
         final int index = requireActionIndex(action);
         return state.getPolicyValue()[index];
     }
@@ -75,7 +77,6 @@ public abstract class BasicWorld implements World {
     /**
      * @return the probability
      */
-    @Override
     public ActionProbability getProbability() {
         return probability;
     }
@@ -83,7 +84,6 @@ public abstract class BasicWorld implements World {
     /**
      * @param probability the probability to set
      */
-    @Override
     public void setProbability(final ActionProbability probability) {
         this.probability = probability;
     }
@@ -100,21 +100,18 @@ public abstract class BasicWorld implements World {
         }
     }
 
-    @Override
-    public List<WorldAgent> getAgents() {
+    public List<DiscreteActionSolution> getAgents() {
         return this.agents;
     }
 
-    @Override
-    public void addAgent(final WorldAgent agent) {
+    public void addAgent(final DiscreteActionSolution agent) {
         this.agents.add(agent);
-        agent.setWorld(this);
+        agent.setProblem(this);
     }
 
-    @Override
-    public void removeAgent(final WorldAgent agent) {
+    public void removeAgent(final DiscreteActionSolution agent) {
         this.agents.remove(agent);
-        agent.setWorld(null);
+        agent.setProblem(null);
     }
 
     @Override
@@ -129,7 +126,7 @@ public abstract class BasicWorld implements World {
     }
 
     @Override
-    public List<State> getGoals() {
+    public Set<State> getGoals() {
         return this.goals;
     }
 
@@ -139,7 +136,7 @@ public abstract class BasicWorld implements World {
     }
 
     @Override
-    public List<State> getStates() {
+    public Queue<State> getStates() {
         return this.states;
     }
 
@@ -148,8 +145,7 @@ public abstract class BasicWorld implements World {
         return this.getGoals().stream().anyMatch((state) -> (s == state));
     }
 
-    @Override
-    public void runToGoal(final WorldAgent a) {
+    public void runToGoal(final DiscreteActionSolution a) {
         boolean done = false;
         while (!done) {
             tick();
@@ -159,12 +155,10 @@ public abstract class BasicWorld implements World {
         }
     }
 
-    @Override
     public void tick() {
-        getAgents().stream().forEach(WorldAgent::tick);
+        getAgents().stream().forEach(DiscreteActionSolution::nextAction);
     }
 
-    @Override
     public void setAllRewards(final double d) {
         this.states.stream().forEach((state) -> state.setReward(d));
     }

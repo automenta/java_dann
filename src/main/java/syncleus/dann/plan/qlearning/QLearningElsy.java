@@ -1,41 +1,35 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package syncleus.dann.plan.qlearning;
 
 import java.util.Arrays;
+import syncleus.dann.plan.DiscreteActionProblem;
+import syncleus.dann.plan.DiscreteActionSolution;
+import syncleus.dann.plan.State;
+import syncleus.dann.plan.qlearning.elsy.QPerception;
+import syncleus.dann.plan.qlearning.elsy.QBrain;
 
-/**
- * @author me
- */
-public class QLearner {
+/** Adapted from: http://elsy.gdan.pl/index.php , package pl.gdan.elsy */
+public class QLearningElsy<A> implements DiscreteActionSolution<A> {
 
-    private Action[] qaction;
-    private final QBrain brain;
+    
+    private QBrain brain;
     double nextReward;
     double[] sensor;
     double[] action;
+    private State state;
+    private DiscreteActionProblem<A> problem;
 
-    public QLearner(final int sensors, final Action[] actions) {
 
-        this.qaction = actions;
+    @Override
+    public boolean setProblem(DiscreteActionProblem<A> p) {
 
-        for (int i = 0; i < actions.length; i++) {
-            final int I = i;
-            qaction[i] = new Action() {
-                @Override
-                public int execute() {
-                    return I;
-                }
-            };
-        }
+
+        this.problem = p;
+        int numActions = p.getActions().size();
+        int sensors = p.getStates().peek().getData().length;
 
         sensor = new double[sensors];
 
-        brain = new QBrain(new Perception() {
+        brain = new QBrain(new QPerception() {
 
             @Override
             public boolean isUnipolar() {
@@ -52,7 +46,7 @@ public class QLearner {
                 for (int i = 0; i < sensor.length; i++)
                     setNextValue(sensor[i]);
             }
-        }, qaction);
+        }, numActions);
 
 		/*
          * brain = new Brain(new DAPerception(sensor, 4) {
@@ -65,8 +59,11 @@ public class QLearner {
 		 */
 
         brain.reset();
+        
+        return true;
     }
 
+    
     double minReward = Double.MAX_VALUE;
     double maxReward = Double.MIN_VALUE;
 
@@ -97,6 +94,27 @@ public class QLearner {
 
     public double[] getAction() {
         return action;
+    }
+
+    @Override
+    public State getCurrentState() {
+        return this.state;
+    }
+
+    @Override
+    public void setCurrentState(State s) {
+        this.state = s;
+    }
+
+    @Override
+    public DiscreteActionProblem<A> getProblem() {
+        return problem;
+    }
+
+    @Override
+    public A nextAction() {
+        double reward = state.getReward();
+        return problem.getActions().get(step(reward));
     }
 
 }

@@ -21,7 +21,7 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package org.encog.neural.networks.training.propagation.resilient;
+package syncleus.dann.neural.networks.training.propagation.resilient;
 
 /**
  * Allows the type of RPROP to be defined. RPROPp is the classic RPROP.

@@ -23,6 +23,18 @@
  */
 package syncleus.dann.plan;
 
-public interface Action {
-    String getLabel();
+public interface DiscreteActionSolution<A>  {
+    
+    State getCurrentState();
+    
+
+    void setCurrentState(State s);
+
+
+    DiscreteActionProblem<A> getProblem();
+    
+    /** returns false if this solution can not attempt, or does not apply to the problem */
+    boolean setProblem(DiscreteActionProblem<A> p);
+
+    A nextAction();
 }

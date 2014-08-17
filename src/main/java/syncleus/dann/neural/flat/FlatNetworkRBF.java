@@ -21,7 +21,7 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package org.encog.neural.flat;
+package syncleus.dann.neural.flat;
 
 import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.math.rbf.RadialBasisFunction;

@@ -24,9 +24,11 @@
 package syncleus.dann.plan;
 
 import java.util.Set;
+import syncleus.dann.plan.State;
+import syncleus.dann.plan.SuccessorState;
 
-public interface ActionProbability {
-    double calculate(State targetState, State currentState, Action action);
+public interface ActionProbability<A> {
+    double calculate(State targetState, State currentState, A action);
 
-    Set<SuccessorState> determineSuccessorStates(State state, Action action);
+    Set<SuccessorState> determineSuccessorStates(State state, A action);
 }

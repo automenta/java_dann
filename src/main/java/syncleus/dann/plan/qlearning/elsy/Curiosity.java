@@ -1,7 +1,5 @@
-package syncleus.dann.plan.qlearning.curiosity;
+package syncleus.dann.plan.qlearning.elsy;
 
-import syncleus.dann.plan.qlearning.ErrorBackpropagationNN;
-import syncleus.dann.plan.qlearning.Perception;
 
 import java.io.Serializable;
 
@@ -16,7 +14,7 @@ public class Curiosity implements Serializable {
 
     private final CuriousBrain brain;
 
-    private final Perception curiosityPerc;
+    private final QPerception curiosityPerc;
 
     private double avgError;
 

@@ -21,17 +21,18 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package syncleus.dann.plan.agent;
+package syncleus.dann.plan.grid2d;
 
+import syncleus.dann.plan.AgentPolicy;
 import syncleus.dann.plan.*;
 
 import java.util.Set;
 
-public class BasicAgent implements WorldAgent {
+public class BasicAgent implements DiscreteActionSolution<BasicAction> {
 
     private State currentState;
-    private AgentPolicy policy;
-    private World world;
+    private AgentPolicy<BasicAction> policy;
+    private BasicWorld world;
     private boolean first = true;
 
     @Override
@@ -44,21 +45,13 @@ public class BasicAgent implements WorldAgent {
         this.currentState = s;
     }
 
-    @Override
-    public AgentPolicy getPolicy() {
-        return this.policy;
-    }
 
-    @Override
-    public void setAgentPolicy(final AgentPolicy p) {
-        this.policy = p;
-    }
 
     /**
      * @return the world
      */
     @Override
-    public World getWorld() {
+    public DiscreteActionProblem getProblem() {
         return world;
     }
 
@@ -66,18 +59,18 @@ public class BasicAgent implements WorldAgent {
      * @param world the world to set
      */
     @Override
-    public void setWorld(final World world) {
-        this.world = world;
+    public boolean setProblem(final DiscreteActionProblem<BasicAction> world) {
+        this.world = (BasicWorld)world;
+        return true;
     }
 
-    @Override
-    public void tick() {
+    public BasicAction nextAction() {
         if (first) {
             first = false;
             this.currentState.increaseVisited();
         }
 
-        final Action action = this.policy.determineNextAction(this);
+        final BasicAction action = this.policy.determineNextAction(this);
         final Set<SuccessorState> states = world.getProbability()
                 .determineSuccessorStates(currentState, action);
         final double d = Math.random();
@@ -90,9 +83,10 @@ public class BasicAgent implements WorldAgent {
                     System.out.println("danger");
                 }
                 state.getState().increaseVisited();
-                return;
+                
             }
         }
+        return action;
     }
 
     @Override

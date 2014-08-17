@@ -1,4 +1,4 @@
-package syncleus.dann.plan.qlearning;
+package syncleus.dann.plan.qlearning.elsy;
 
 import syncleus.dann.math.Randoms;
 import syncleus.dann.math.Sigmoids;
@@ -23,7 +23,7 @@ public class QBrain implements Serializable {
     /**
      * An instance of class extending Perception
      */
-    private final Perception perception;
+    private final QPerception perception;
     private final double[] input;
     private final double[] Q;
     private final double layerInput[][];
@@ -109,7 +109,7 @@ public class QBrain implements Serializable {
      * @param gamma           Q-learning Discount factor
      * @param maxWeight       maximum initial weight of neuron connection
      */
-    public QBrain(final Perception perception, final Action[] actionsArray,
+    public QBrain(final QPerception perception, final int numActions,
                   final int[] hiddenNeuronsNo, final double alpha, final double lambda, final double gamma,
                   final boolean useBoltzmann, final double temperature, final double randActions,
                   final double maxWeight) {
@@ -127,7 +127,7 @@ public class QBrain implements Serializable {
         neuronsNo = new int[hiddenNeuronsNo.length + 1];
         System.arraycopy(hiddenNeuronsNo, 0, neuronsNo, 0,
                 hiddenNeuronsNo.length);
-        neuronsNo[neuronsNo.length - 1] = actionsArray.length;
+        neuronsNo[neuronsNo.length - 1] = numActions;
         activation = createActivationTable(neuronsNo);
         layerInput = createLayerInputs(neuronsNo);
         w = createWeightTable(neuronsNo);
@@ -144,9 +144,9 @@ public class QBrain implements Serializable {
      * @param actionsArray    - array of actions that can be taken
      * @param hiddenNeuronsNo - numbers of neurons in hidden layers
      */
-    public QBrain(final Perception perception, final Action[] actionsArray,
+    public QBrain(final QPerception perception, final int numActions,
                   final int[] hiddenNeuronsNo) {
-        this(perception, actionsArray, hiddenNeuronsNo, ALPHA_DEFAULT,
+        this(perception, numActions, hiddenNeuronsNo, ALPHA_DEFAULT,
                 LAMBDA_DEFAULT, GAMMA_DEFAULT, USE_BOLTZMANN_DEFAULT,
                 TEMPERATURE_DEFAULT, RAND_ACTIONS_DEFAULT, MAX_WEIGHT_DEFAULT);
     }
@@ -157,8 +157,8 @@ public class QBrain implements Serializable {
      * @param perception   - an instance of class implementing Perception
      * @param actionsArray - array of actions that can be taken
      */
-    public QBrain(final Perception perception, final Action[] actionsArray) {
-        this(perception, actionsArray, new int[]{} // no hidden layers
+    public QBrain(final QPerception perception, final int numActions) {
+        this(perception, numActions, new int[]{} // no hidden layers
         );
     }
 
@@ -592,7 +592,7 @@ public class QBrain implements Serializable {
         in.close();
     }
 
-    public Perception getPerception() {
+    public QPerception getPerception() {
         return perception;
     }
 }

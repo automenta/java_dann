@@ -21,14 +21,31 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package org.encog.neural.networks.training;
+package syncleus.dann.plan.grid2d;
 
-import syncleus.dann.Training;
+public class BasicAction  {
+    private final String label;
 
-/**
- * This is an alias class for Encog 2.5 compatibility. This class aliases
- * MLTrain. Newer code should use MLTrain in place of this class.
- */
-public interface Train extends Training {
+    public BasicAction(final String label) {
+        super();
+        this.label = label;
+    }
+
+    /**
+     * @return the label
+     */
+    
+    public String getLabel() {
+        return label;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder result = new StringBuilder();
+        result.append("[BasicAction: label=");
+        result.append(this.label);
+        result.append(']');
+        return result.toString();
+    }
 
 }

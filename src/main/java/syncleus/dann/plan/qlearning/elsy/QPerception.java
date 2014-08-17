@@ -1,4 +1,4 @@
-package syncleus.dann.plan.qlearning;
+package syncleus.dann.plan.qlearning.elsy;
 
 import syncleus.dann.math.Randoms;
 import syncleus.dann.math.Sigmoids;
@@ -11,7 +11,7 @@ import java.io.Serializable;
  *
  * @author Elser
  */
-public abstract class Perception implements Serializable {
+public abstract class QPerception implements Serializable {
     boolean rawInput = false;
     private static final double NEURON_ON = 0.85;
     private static final long serialVersionUID = 1;

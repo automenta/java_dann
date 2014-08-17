@@ -21,20 +21,21 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package org.encog.neural.networks.training;
+package syncleus.dann.neural.networks.training;
 
 import syncleus.dann.data.buffer.BufferedMLDataSet;
-import syncleus.dann.learn.CalculateScore;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.Learning;
 import syncleus.dann.RegressionLearning;
+import syncleus.dann.learn.LearningScoring;
+import syncleus.dann.math.EncogUtility;
 
 /**
  * Calculate a score based on a training set. This class allows simulated
  * annealing or genetic algorithms just as you would any other training set
  * based training method. The method must support regression (MLRegression).
  */
-public class TrainingSetScore implements CalculateScore {
+public class TrainingSetScore implements LearningScoring {
 
     /**
      * The training set.
@@ -57,9 +58,8 @@ public class TrainingSetScore implements CalculateScore {
      * @return The score.
      */
     @Override
-    public double calculateScore(final Learning method) {
-        return CalculateRegressionError.calculateError((RegressionLearning) method,
-                this.training);
+    public Double apply(final Learning method) {
+        return EncogUtility.calculateRegressionError((RegressionLearning) method, this.training);
     }
 
     /**

@@ -23,28 +23,25 @@
  */
 package syncleus.dann.plan.mdp;
 
-import syncleus.dann.plan.Action;
+import syncleus.dann.plan.DiscreteActionProblem;
 import syncleus.dann.plan.State;
-import syncleus.dann.plan.World;
+import syncleus.dann.plan.ActionProbability;
 
-public class ValueIteration extends MarkovDecisionProcess {
+public class ValueIteration<A> extends MarkovDecisionProcess<A> {
 
     private final double discountFactor;
 
-    public ValueIteration(final World theWorld, final double theDiscountFactor) {
-        super(theWorld);
+    public ValueIteration(final DiscreteActionProblem<A> theWorld, final ActionProbability<A> probability, final double theDiscountFactor) {
+        super(theWorld, probability);        
         this.discountFactor = theDiscountFactor;
     }
 
     public void calculateValue(final State state) {
         double result = Double.NEGATIVE_INFINITY;
-        if (!getWorld().isGoalState(state)) {
-            for (final Action action : getWorld().getActions()) {
+        if (!getProblem().isGoalState(state)) {
+            for (final A action : getProblem().getActions()) {
                 double sum = 0;
-                sum = this.getWorld()
-                        .getProbability()
-                        .determineSuccessorStates(state, action).stream().map((statePrime) -> statePrime.getProbability()
-                                * statePrime.getState().getPolicyValue()[0]).reduce(sum, (accumulator, _item) -> accumulator + _item);
+                sum = probability.determineSuccessorStates(state, action).stream().map((statePrime) -> statePrime.getProbability() * statePrime.getState().getPolicyValue()[0]).reduce(sum, (accumulator, _item) -> accumulator + _item);
                 sum *= this.discountFactor;
 
                 result = Math.max(result, sum);
@@ -57,7 +54,7 @@ public class ValueIteration extends MarkovDecisionProcess {
     }
 
     public void iteration() {
-        getWorld().getStates().stream().forEach(this::calculateValue);
+        getProblem().getStates().stream().forEach(this::calculateValue);
     }
 
 }

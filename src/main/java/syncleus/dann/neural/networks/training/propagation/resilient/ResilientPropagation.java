@@ -21,15 +21,15 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package org.encog.neural.networks.training.propagation.resilient;
+package syncleus.dann.neural.networks.training.propagation.resilient;
 
 import org.encog.neural.networks.training.TrainingError;
-import org.encog.neural.networks.training.propagation.Propagation;
-import org.encog.neural.networks.training.propagation.TrainingContinuation;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.math.EncogMath;
 import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.neural.networks.ContainsFlat;
+import syncleus.dann.neural.networks.training.propagation.Propagation;
+import syncleus.dann.neural.networks.training.propagation.TrainingContinuation;
 
 /**
  * One problem with the backpropagation algorithm is that the magnitude of the
