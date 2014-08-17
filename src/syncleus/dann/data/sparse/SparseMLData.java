@@ -23,14 +23,14 @@
  */
 package syncleus.dann.data.sparse;
 
-import syncleus.dann.data.Data;
+import syncleus.dann.data.MutableData;
 import syncleus.dann.data.DataException;
 import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.math.cluster.Centroid;
 
 import java.io.Serializable;
 
-public class SparseMLData implements Data, Serializable, Cloneable {
+public class SparseMLData implements MutableData, Serializable, Cloneable {
 
     private final int[] index;
 
@@ -80,7 +80,7 @@ public class SparseMLData implements Data, Serializable, Cloneable {
      *
      * @param d The object to be copied.
      */
-    public SparseMLData(final Data d) {
+    public SparseMLData(final MutableData d) {
         this(d.size());
 
         if (d instanceof SparseMLData) {
@@ -127,7 +127,7 @@ public class SparseMLData implements Data, Serializable, Cloneable {
      * {@inheritDoc}
      */
     @Override
-    public Data clone() {
+    public MutableData clone() {
         return new SparseMLData(this);
     }
 
@@ -210,7 +210,7 @@ public class SparseMLData implements Data, Serializable, Cloneable {
     }
 
     @Override
-    public Centroid<Data> createCentroid() {
+    public Centroid<MutableData> createCentroid() {
         return null;
     }
 

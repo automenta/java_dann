@@ -35,13 +35,13 @@ import syncleus.dann.math.matrix.decomposition.CholeskyDecomposition2;
 
 import java.util.Arrays;
 import java.util.Random;
-import syncleus.dann.data.Data;
+import syncleus.dann.data.MutableData;
 
 /**
  * A continuous distribution represents an infinite range of choices between two
  * real numbers. A gaussian distribution is used to distribute the probability.
  */
-public class ContinousDistribution<D extends Data> implements StateDistribution<D> {
+public class ContinousDistribution<D extends MutableData> implements StateDistribution<D> {
 
     /**
      * The serial id.

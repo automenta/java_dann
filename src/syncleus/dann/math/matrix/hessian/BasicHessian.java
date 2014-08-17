@@ -23,7 +23,7 @@
  */
 package syncleus.dann.math.matrix.hessian;
 
-import syncleus.dann.data.Data;
+import syncleus.dann.data.MutableData;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.math.matrix.SimpleRealMatrix;
@@ -33,7 +33,7 @@ import syncleus.dann.neural.networks.BasicNetwork;
 /**
  * Some basic code used to calculate Hessian matrixes.
  */
-public abstract class BasicHessian<D extends Data> implements ComputeHessian<D> {
+public abstract class BasicHessian<D extends MutableData> implements ComputeHessian<D> {
 
     /**
      * The training data that provides the ideal values.

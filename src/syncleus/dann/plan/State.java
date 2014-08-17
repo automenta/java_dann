@@ -23,9 +23,9 @@
  */
 package syncleus.dann.plan;
 
-import syncleus.dann.data.ImplicitData;
+import syncleus.dann.data.Data;
 
-public interface State extends ImplicitData {
+public interface State extends Data {
     
     void setProperty(String key, Object value);
 

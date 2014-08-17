@@ -24,7 +24,7 @@
 package syncleus.dann.neural.networks.training.pnn;
 
 import syncleus.dann.Learning;
-import syncleus.dann.data.Data;
+import syncleus.dann.data.MutableData;
 import syncleus.dann.data.DataCase;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.data.vector.VectorCase;
@@ -222,17 +222,17 @@ public class TrainBasicPNN extends BasicTraining implements CalculationCriteria 
 
             err = 0.0;
 
-            final Data input = pair.getInput();
-            final Data target = pair.getIdeal();
+            final MutableData input = pair.getInput();
+            final MutableData target = pair.getIdeal();
 
             if (this.network.getOutputMode() == PNNOutputMode.Unsupervised) {
                 if (deriv) {
-                    final Data output = computeDeriv(input, target);
+                    final MutableData output = computeDeriv(input, target);
                     for (int z = 0; z < this.network.getOutputCount(); z++) {
                         out[z] = output.getData(z);
                     }
                 } else {
-                    final Data output = this.network.compute(input);
+                    final MutableData output = this.network.compute(input);
                     for (int z = 0; z < this.network.getOutputCount(); z++) {
                         out[z] = output.getData(z);
                     }
@@ -243,7 +243,7 @@ public class TrainBasicPNN extends BasicTraining implements CalculationCriteria 
                 }
             } else if (this.network.getOutputMode() == PNNOutputMode.Classification) {
                 final int tclass = (int) target.getData(0);
-                Data output;
+                MutableData output;
 
                 if (deriv) {
                     output = computeDeriv(input, pair.getIdeal());
@@ -263,12 +263,12 @@ public class TrainBasicPNN extends BasicTraining implements CalculationCriteria 
                 }
             } else if (this.network.getOutputMode() == PNNOutputMode.Regression) {
                 if (deriv) {
-                    final Data output = this.network.compute(input);
+                    final MutableData output = this.network.compute(input);
                     for (int z = 0; z < this.network.getOutputCount(); z++) {
                         out[z] = output.getData(z);
                     }
                 } else {
-                    final Data output = this.network.compute(input);
+                    final MutableData output = this.network.compute(input);
                     for (int z = 0; z < this.network.getOutputCount(); z++) {
                         out[z] = output.getData(z);
                     }
@@ -323,7 +323,7 @@ public class TrainBasicPNN extends BasicTraining implements CalculationCriteria 
      * @param target The target data.
      * @return The output.
      */
-    public Data computeDeriv(final Data input, final Data target) {
+    public MutableData computeDeriv(final MutableData input, final MutableData target) {
         int pop, ivar;
         int outvar;
         double diff, dist, truedist;

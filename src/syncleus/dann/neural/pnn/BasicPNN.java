@@ -25,7 +25,7 @@ package syncleus.dann.neural.pnn;
 
 import syncleus.dann.Classifying;
 import syncleus.dann.RegressionLearning;
-import syncleus.dann.data.Data;
+import syncleus.dann.data.MutableData;
 import syncleus.dann.data.DataCase;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.data.vector.VectorData;
@@ -107,7 +107,7 @@ public class BasicPNN extends AbstractPNN implements RegressionLearning, ErrorLe
      * @return The output from the network.
      */
     @Override
-    public Data compute(final Data input) {
+    public MutableData compute(final MutableData input) {
 
         final double[] out = new double[getOutputCount()];
 
@@ -267,8 +267,8 @@ public class BasicPNN extends AbstractPNN implements RegressionLearning, ErrorLe
      * {@inheritDoc}
      */
     @Override
-    public int classify(final Data input) {
-        final Data output = compute(input);
+    public int classify(final MutableData input) {
+        final MutableData output = compute(input);
         return EngineArray.maxIndex(output.getData());
     }
 }

@@ -23,7 +23,7 @@
  */
 package syncleus.dann.data.vector;
 
-import syncleus.dann.data.Data;
+import syncleus.dann.data.MutableData;
 import syncleus.dann.math.cluster.Centroid;
 
 import java.io.Serializable;
@@ -34,7 +34,7 @@ import java.io.Serializable;
  *
  * @author jheaton
  */
-public class VectorData implements Data, Serializable, Cloneable {
+public class VectorData implements MutableData, Serializable, Cloneable {
 
     /**
      * The serial id.
@@ -71,7 +71,7 @@ public class VectorData implements Data, Serializable, Cloneable {
      *
      * @param d The object to be copied.
      */
-    public VectorData(final Data d) {
+    public VectorData(final MutableData d) {
         this(d.size());
         System.arraycopy(d.getData(), 0, this.data, 0, d.size());
     }
@@ -98,7 +98,7 @@ public class VectorData implements Data, Serializable, Cloneable {
      * {@inheritDoc}
      */
     @Override
-    public Data clone() {
+    public MutableData clone() {
         return new VectorData(this);
     }
 
@@ -177,7 +177,7 @@ public class VectorData implements Data, Serializable, Cloneable {
      * @param o The other data element
      * @return The result.
      */
-    public Data plus(final Data o) {
+    public MutableData plus(final MutableData o) {
         if (size() != o.size())
             throw new IllegalArgumentException();
 
@@ -194,8 +194,8 @@ public class VectorData implements Data, Serializable, Cloneable {
      * @param d The other data element
      * @return The result.
      */
-    public Data times(final double d) {
-        final Data result = new VectorData(size());
+    public MutableData times(final double d) {
+        final MutableData result = new VectorData(size());
 
         for (int i = 0; i < size(); i++)
             result.setData(i, getData(i) * d);
@@ -209,11 +209,11 @@ public class VectorData implements Data, Serializable, Cloneable {
      * @param o The other data element
      * @return The result.
      */
-    public Data minus(final Data o) {
+    public MutableData minus(final MutableData o) {
         if (size() != o.size())
             throw new IllegalArgumentException();
 
-        final Data result = new VectorData(size());
+        final MutableData result = new VectorData(size());
         for (int i = 0; i < size(); i++)
             result.setData(i, getData(i) - o.getData(i));
 

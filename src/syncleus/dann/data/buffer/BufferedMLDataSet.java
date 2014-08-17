@@ -23,7 +23,7 @@
  */
 package syncleus.dann.data.buffer;
 
-import syncleus.dann.data.Data;
+import syncleus.dann.data.MutableData;
 import syncleus.dann.data.DataCase;
 import syncleus.dann.data.DataException;
 import syncleus.dann.data.Dataset;
@@ -179,7 +179,7 @@ public class BufferedMLDataSet implements Dataset, Serializable {
      * @param data1 The data to be added.
      */
     @Override
-    public void add(final Data data1) {
+    public void add(final MutableData data1) {
         if (!this.loading) {
             throw new DataException(BufferedMLDataSet.ERROR_ADD);
         }
@@ -195,7 +195,7 @@ public class BufferedMLDataSet implements Dataset, Serializable {
      * @param idealData The ideal data.
      */
     @Override
-    public void add(final Data inputData, final Data idealData) {
+    public void add(final MutableData inputData, final MutableData idealData) {
 
         if (!this.loading) {
             throw new DataException(BufferedMLDataSet.ERROR_ADD);

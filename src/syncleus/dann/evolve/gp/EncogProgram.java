@@ -24,7 +24,7 @@
 package syncleus.dann.evolve.gp;
 
 import syncleus.dann.RegressionLearning;
-import syncleus.dann.data.Data;
+import syncleus.dann.data.MutableData;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.data.vector.VectorData;
 import syncleus.dann.evolve.exception.EACompileError;
@@ -222,7 +222,7 @@ public class EncogProgram extends BasicGenome implements RegressionLearning, Err
      * @return A single numer MLData.
      */
     @Override
-    public Data compute(final Data input) {
+    public MutableData compute(final MutableData input) {
         if (input.size() != getInputCount()) {
             throw new EACompileError("Invalid input count.");
         }
@@ -234,7 +234,7 @@ public class EncogProgram extends BasicGenome implements RegressionLearning, Err
         final ExpressionValue v = this.rootNode.evaluate();
         final VariableMapping resultMapping = getResultType();
 
-        final Data result = new VectorData(1);
+        final MutableData result = new VectorData(1);
         boolean success = false;
 
         switch (resultMapping.getVariableType()) {

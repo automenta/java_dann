@@ -23,7 +23,7 @@
  */
 package syncleus.dann.neural.cpn.training;
 
-import syncleus.dann.data.Data;
+import syncleus.dann.data.MutableData;
 import syncleus.dann.data.DataCase;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.math.BoundMath;
@@ -137,7 +137,7 @@ public class TrainInstar extends BasicTraining implements LearningRate {
         double worstDistance = Double.NEGATIVE_INFINITY;
 
         for (final DataCase pair : this.training) {
-            final Data out = this.network.computeInstar(pair.getInput());
+            final MutableData out = this.network.computeInstar(pair.getInput());
 
             // determine winner
             final int winner = EngineArray.indexOfLargest(out.getData());

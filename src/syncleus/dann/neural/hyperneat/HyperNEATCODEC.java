@@ -24,7 +24,7 @@
 package syncleus.dann.neural.hyperneat;
 
 import syncleus.dann.Learning;
-import syncleus.dann.data.Data;
+import syncleus.dann.data.MutableData;
 import syncleus.dann.data.vector.VectorData;
 import syncleus.dann.evolve.GeneticError;
 import syncleus.dann.evolve.codec.GeneticCODEC;
@@ -69,7 +69,7 @@ public class HyperNEATCODEC implements GeneticCODEC {
         }
 
         final double c = this.maxWeight / (1.0 - this.minWeight);
-        final Data input = new VectorData(cppn.getInputCount());
+        final MutableData input = new VectorData(cppn.getInputCount());
 
         substrate.getLinks().stream().forEach((link) -> {
             final SubstrateNode source = link.getSource();
@@ -81,7 +81,7 @@ public class HyperNEATCODEC implements GeneticCODEC {
             for (final double d : target.getLocation()) {
                 input.setData(index++, d);
             }
-            final Data output = cppn.compute(input);
+            final MutableData output = cppn.compute(input);
             double weight = output.getData(0);
             if (Math.abs(weight) > this.minWeight) {
                 weight = (Math.abs(weight) - this.minWeight) * c
@@ -101,7 +101,7 @@ public class HyperNEATCODEC implements GeneticCODEC {
             }
             return target;
         }).forEach((target) -> {
-            final Data output = cppn.compute(input);
+            final MutableData output = cppn.compute(input);
             double biasWeight = output.getData(1);
             if (Math.abs(biasWeight) > this.minWeight) {
                 biasWeight = (Math.abs(biasWeight) - this.minWeight) * c

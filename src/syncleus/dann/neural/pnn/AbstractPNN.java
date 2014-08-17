@@ -23,7 +23,7 @@
  */
 package syncleus.dann.neural.pnn;
 
-import syncleus.dann.data.Data;
+import syncleus.dann.data.MutableData;
 import syncleus.dann.learn.AbstractLearning;
 
 /**
@@ -113,7 +113,7 @@ public abstract class AbstractPNN extends AbstractLearning {
      * @param input The input to the network.
      * @return The output from the network.
      */
-    public abstract Data compute(Data input);
+    public abstract MutableData compute(MutableData input);
 
     /**
      * @return the deriv

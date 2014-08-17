@@ -24,7 +24,7 @@
 package syncleus.dann.neural.cpn.training;
 
 import syncleus.dann.Learning;
-import syncleus.dann.data.Data;
+import syncleus.dann.data.MutableData;
 import syncleus.dann.data.DataCase;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.math.array.EngineArray;
@@ -125,7 +125,7 @@ public class TrainOutstar extends BasicTraining implements LearningRate {
         final ErrorCalculation error = new ErrorCalculation();
 
         for (final DataCase pair : this.training) {
-            final Data out = this.network.computeInstar(pair.getInput());
+            final MutableData out = this.network.computeInstar(pair.getInput());
 
             final int j = EngineArray.indexOfLargest(out.getData());
             for (int i = 0; i < this.network.getOutstarCount(); i++) {
@@ -135,7 +135,7 @@ public class TrainOutstar extends BasicTraining implements LearningRate {
                 this.network.getWeightsInstarToOutstar().add(j, i, delta);
             }
 
-            final Data out2 = this.network.computeOutstar(out);
+            final MutableData out2 = this.network.computeOutstar(out);
             error.updateError(out2.getData(), pair.getIdeal().getData(),
                     pair.getSignificance());
         }

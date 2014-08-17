@@ -24,7 +24,7 @@
 package syncleus.dann.neural.som;
 
 import syncleus.dann.Classifying;
-import syncleus.dann.data.Data;
+import syncleus.dann.data.MutableData;
 import syncleus.dann.data.DataCase;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.learn.AbstractLearning;
@@ -37,7 +37,7 @@ import syncleus.dann.neural.som.encog.basic.BestMatchingUnit;
 /**
  * A self organizing map neural network.
  */
-public class SOMEncog<D extends Data> extends AbstractLearning implements Classifying<D,Integer>, MLResettable,  ErrorLearning<D> {
+public class SOMEncog<D extends MutableData> extends AbstractLearning implements Classifying<D,Integer>, MLResettable,  ErrorLearning<D> {
 
     /**
      * Serial id.
@@ -84,7 +84,7 @@ public class SOMEncog<D extends Data> extends AbstractLearning implements Classi
 
         // Determine the BMU for each training element.
         for (final DataCase pair : data) {
-            final Data input = pair.getInput();
+            final MutableData input = pair.getInput();
             bmu.calculateBMU(input);
         }
 

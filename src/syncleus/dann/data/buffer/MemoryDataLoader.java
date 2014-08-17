@@ -23,7 +23,7 @@
  */
 package syncleus.dann.data.buffer;
 
-import syncleus.dann.data.Data;
+import syncleus.dann.data.MutableData;
 import syncleus.dann.data.DataCase;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.data.buffer.codec.DataSetCODEC;
@@ -84,7 +84,7 @@ public class MemoryDataLoader {
         int lastUpdate = 0;
 
         while (this.codec.read(input, ideal, significance)) {
-            Data a = null;
+            MutableData a = null;
             MLData b = null;
 
             a = new VectorData(input);

@@ -23,7 +23,7 @@
  */
 package syncleus.dann.neural.pnn;
 
-import syncleus.dann.data.Data;
+import syncleus.dann.data.MutableData;
 import syncleus.dann.data.DataCase;
 import syncleus.dann.data.file.csv.CSVFormat;
 import syncleus.dann.data.vector.VectorCase;
@@ -175,12 +175,12 @@ public class PersistBasicPNN implements EncogPersistor {
                     final List<String> cols = EncogFileSection
                             .splitColumns(line);
                     int index = 0;
-                    final Data inputData = new VectorData(inputCount);
+                    final MutableData inputData = new VectorData(inputCount);
                     for (int i = 0; i < inputCount; i++) {
                         inputData.setData(i,
                                 CSVFormat.EG_FORMAT.parse(cols.get(index++)));
                     }
-                    final Data idealData = new VectorData(outputCount);
+                    final MutableData idealData = new VectorData(outputCount);
                     idealData.setData(0,
                             CSVFormat.EG_FORMAT.parse(cols.get(index++)));
                     final DataCase pair = new VectorCase(inputData,

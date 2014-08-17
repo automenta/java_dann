@@ -23,7 +23,7 @@
  */
 package syncleus.dann.neural.bam;
 
-import syncleus.dann.data.Data;
+import syncleus.dann.data.MutableData;
 import syncleus.dann.learn.AbstractLearning;
 import syncleus.dann.math.matrix.RealMatrix;
 import syncleus.dann.math.matrix.SimpleRealMatrix;
@@ -96,7 +96,7 @@ public class BAM extends AbstractLearning {
      * @param inputPattern  The input pattern.
      * @param outputPattern The output pattern(for this input).
      */
-    public void addPattern(final Data inputPattern, final Data outputPattern) {
+    public void addPattern(final MutableData inputPattern, final MutableData outputPattern) {
 
         int weight;
 
@@ -126,7 +126,7 @@ public class BAM extends AbstractLearning {
      * @param input NOT USED
      * @return NOT USED
      */
-    public static Data compute(final Data input) {
+    public static MutableData compute(final MutableData input) {
         throw new RuntimeException(
                 "Compute on BasicNetwork cannot be used, rather call"
                         + " the compute(NeuralData) method on the BAMLogic.");
@@ -179,7 +179,7 @@ public class BAM extends AbstractLearning {
      *               input)
      * @return The value from the matrix.
      */
-    private static double getWeight(final SimpleRealMatrix matrix, final Data input,
+    private static double getWeight(final SimpleRealMatrix matrix, final MutableData input,
                                     final int x, final int y) {
         if (matrix.getRows() != input.size()) {
             return matrix.get(x, y);
@@ -210,8 +210,8 @@ public class BAM extends AbstractLearning {
      * @param output The output pattern.
      * @return True if the network has become stable.
      */
-    private boolean propagateLayer(final SimpleRealMatrix matrix, final Data input,
-                                   final Data output) {
+    private boolean propagateLayer(final SimpleRealMatrix matrix, final MutableData input,
+                                   final MutableData output) {
         int i, j;
         int sum, out = 0;
         boolean stable;

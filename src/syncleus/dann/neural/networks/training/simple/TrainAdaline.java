@@ -24,7 +24,7 @@
 package syncleus.dann.neural.networks.training.simple;
 
 import syncleus.dann.Learning;
-import syncleus.dann.data.Data;
+import syncleus.dann.data.MutableData;
 import syncleus.dann.data.DataCase;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.learn.AbstractTraining;
@@ -36,7 +36,7 @@ import syncleus.dann.neural.networks.training.propagation.TrainingContinuation;
 /**
  * Train an ADALINE neural network.
  */
-public class TrainAdaline<D extends Data> extends AbstractTraining<D> implements LearningRate {
+public class TrainAdaline<D extends MutableData> extends AbstractTraining<D> implements LearningRate {
 
     /**
      * The network to train.
@@ -103,7 +103,7 @@ public class TrainAdaline<D extends Data> extends AbstractTraining<D> implements
 
         for (final DataCase pair : this.training) {
             // calculate the error
-            final Data output = this.network.compute(pair.getInput());
+            final MutableData output = this.network.compute(pair.getInput());
 
             for (int currentAdaline = 0; currentAdaline < output.size(); currentAdaline++) {
                 final double diff = pair.getIdeal().getData(currentAdaline)

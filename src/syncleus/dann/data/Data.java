@@ -1,78 +1,64 @@
-/*
- * Encog(tm) Core v3.2 - Java Version
- * http://www.heatonresearch.com/encog/
- * https://github.com/encog/encog-java-core
-
- * Copyright 2008-2013 Heaton Research, Inc.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- * For more information on Heaton Research copyrights, licenses
- * and trademarks visit:
- * http://www.heatonresearch.com/copyright
- */
 package syncleus.dann.data;
 
+import org.apache.commons.math3.ml.clustering.Clusterable;
+import syncleus.dann.math.cluster.Centroid;
 import syncleus.dann.math.cluster.CentroidFactory;
 
 /**
  * Defines an array of real number data. This is an array of double values that could be
  * used either for input data, actual output data or ideal output data.
- * <p/>
- * TODO rename MutableData
- *
- * @author jheaton
+ * 
+ * Although this interface is not MutableData, implementations are free to change the 
+ * provided data on its own. 
+ * 
+ * This interface is simpler than MutableData, not providing mutating methods.
+ * 
+ * Editable implementations with explicit modifying methods inherit from MutableData.
+ * 
+ * @author SeH
  */
-public interface Data extends Cloneable, CentroidFactory<Data>, ImplicitData {
+public interface Data extends Clusterable, VectorEncodable, CentroidFactory<Data>  {
 
     /**
-     * Add a value to the specified index.
-     *
-     * @param index The index to add to.
-     * @param value The value to add.
+     * @return All of the elements as an array.
      */
-    void add(int index, double value);
-
-    /**
-     * Clear any data to zero.
-     */
-    void clear();
-
-    /**
-     * Clone this object.
-     *
-     * @return A cloned version of this object.
-     */
-    Data clone();
-
-    
+    double[] getData();
+ 
+    /** for compatibility with apache commons math */
+    @Override default double[] getPoint() { return getData(); }
     
 
     /**
-     * Set all of the data as an array of doubles.
-     *
-     * @param data An array of doubles.
-     */
-    void setData(double[] data);
+     * @return How many elements are stored in this object.
+     */    
+    public default int size() { return getData().length; }    
 
+    
     /**
-     * Set the specified element.
+     * Get the element specified index value.
      *
-     * @param index The index to set.
-     * @param d     The data for the specified element.
+     * @param index The index to read.
+     * @return The value at the specified inedx.
      */
-    void setData(int index, double d);
+    default double getData(int index) {
+        return getData()[index];
+    }
+    
+    
+    
+    //VectorEncodable defaults
+    default void encodeToArray(double[] encoded) {
+        System.arraycopy(getData(), 0, encoded, 0, size());
+    }
+    default void decodeFromArray(double[] encoded) {
+        System.arraycopy(encoded, 0, getData(), 0, size());
+    }
+    default int encodedArrayLength() { return size(); }
 
+    @Override
+    default Centroid<? extends Data> createCentroid() {
+        throw new UnsupportedOperationException("Coming soon");
+    }
 
-
+    
 }

@@ -23,7 +23,6 @@
  */
 package syncleus.dann.data.vector;
 
-import syncleus.dann.data.Data;
 import syncleus.dann.data.DataCase;
 import syncleus.dann.data.DataCluster;
 import syncleus.dann.data.Dataset;
@@ -32,6 +31,7 @@ import syncleus.dann.math.cluster.Cluster;
 
 import java.util.ArrayList;
 import java.util.List;
+import syncleus.dann.data.Data;
 
 /**
  * Holds a cluster of MLData items that have been clustered by the
@@ -88,7 +88,7 @@ public class VectorCluster<M extends Data> extends org.apache.commons.math3.ml.c
      * {@inheritDoc}
      */
     @Override
-    public final Data get(final int pos) {
+    public final M get(final int pos) {
         return this.data.get(pos);
     }
 
@@ -111,7 +111,7 @@ public class VectorCluster<M extends Data> extends org.apache.commons.math3.ml.c
      * {@inheritDoc}
      */
     @Override
-    public final void remove(final Data pair) {
+    public final void remove(final M pair) {
         this.data.remove(pair);
     }
 

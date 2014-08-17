@@ -24,7 +24,7 @@
 package syncleus.dann.neural.networks.training.lma;
 
 import syncleus.dann.Learning;
-import syncleus.dann.data.Data;
+import syncleus.dann.data.MutableData;
 import syncleus.dann.data.DataCase;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.data.vector.VectorCase;
@@ -202,7 +202,7 @@ public class LevenbergMarquardtTraining extends BasicTraining implements
 
         for (int i = 0; i < this.trainingLength; i++) {
             this.indexableTraining.getRecord(i, this.pair);
-            final Data actual = this.network.compute(this.pair.getInput());
+            final MutableData actual = this.network.compute(this.pair.getInput());
             result.updateError(actual.getData(),
                     this.pair.getIdeal().getData(), pair.getSignificance());
         }

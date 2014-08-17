@@ -25,7 +25,7 @@ package syncleus.dann.neural.freeform;
 
 import syncleus.dann.Classifying;
 import syncleus.dann.RegressionLearning;
-import syncleus.dann.data.Data;
+import syncleus.dann.data.MutableData;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.data.VectorEncodable;
 import syncleus.dann.data.vector.VectorData;
@@ -66,7 +66,7 @@ import java.util.Set;
  * Freeform networks allow just about any neuron to be connected to another
  * neuron. You can have neuron layers if you want, but they are not required.
  */
-public class FreeformNetwork<D extends Data> extends AbstractLearning implements MLContext, Cloneable, RegressionLearning<D>, VectorEncodable, MLResettable, Classifying<D,Integer>, ErrorLearning<D>
+public class FreeformNetwork<D extends MutableData> extends AbstractLearning implements MLContext, Cloneable, RegressionLearning<D>, VectorEncodable, MLResettable, Classifying<D,Integer>, ErrorLearning<D>
 {
 
     /**
@@ -252,7 +252,7 @@ public class FreeformNetwork<D extends Data> extends AbstractLearning implements
      */
     @Override
     public Integer classify(final D input) {
-        final Data output = compute(input);
+        final MutableData output = compute(input);
         return EngineArray.maxIndex(output.getData());
     }
 
@@ -284,10 +284,10 @@ public class FreeformNetwork<D extends Data> extends AbstractLearning implements
      * {@inheritDoc}
      */
     @Override
-    public Data compute(final D input) {
+    public MutableData compute(final D input) {
 
         // Allocate result
-        final Data result = new VectorData(this.outputLayer.size());
+        final MutableData result = new VectorData(this.outputLayer.size());
 
         // Copy the input
         for (int i = 0; i < input.size(); i++) {

@@ -32,7 +32,7 @@ import syncleus.dann.learn.InputOutputLearning;
  * an input and produces numeric output. Function approximation uses regression.
  * Contrast this to classification, which uses the input to assign a class.
  */
-public interface RegressionLearning<D extends Data> extends InputOutputLearning {
+public interface RegressionLearning<D extends Data> extends InputOutputLearning/*, Function<D, Data>*/ {
 
     /**
      * Compute regression.
@@ -41,4 +41,6 @@ public interface RegressionLearning<D extends Data> extends InputOutputLearning 
      * @return The output data.
      */
     Data compute(D input);
+    
+    //default Data apply(D input) { return compute(input); }
 }

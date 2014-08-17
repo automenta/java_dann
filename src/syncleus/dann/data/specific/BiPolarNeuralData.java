@@ -23,7 +23,7 @@
  */
 package syncleus.dann.data.specific;
 
-import syncleus.dann.data.Data;
+import syncleus.dann.data.MutableData;
 import syncleus.dann.data.DataException;
 import syncleus.dann.math.cluster.Centroid;
 import syncleus.dann.math.matrix.BiPolarUtil;
@@ -36,7 +36,7 @@ import java.io.Serializable;
  *
  * @author jheaton
  */
-public class BiPolarNeuralData implements Data, Serializable {
+public class BiPolarNeuralData implements MutableData, Serializable {
 
     /**
      *
@@ -92,7 +92,7 @@ public class BiPolarNeuralData implements Data, Serializable {
      * @return A cloned copy of this object.
      */
     @Override
-    public Data clone() {
+    public MutableData clone() {
         final BiPolarNeuralData result = new BiPolarNeuralData(size());
         for (int i = 0; i < size(); i++) {
             result.setData(i, getData(i));
@@ -201,7 +201,7 @@ public class BiPolarNeuralData implements Data, Serializable {
      * @return Nothing.
      */
     @Override
-    public Centroid<Data> createCentroid() {
+    public Centroid<MutableData> createCentroid() {
         return null;
     }
 }

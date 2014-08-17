@@ -23,7 +23,6 @@
  */
 package syncleus.dann.data.vector;
 
-import syncleus.dann.data.Data;
 import syncleus.dann.math.VectorDistance;
 import syncleus.dann.math.cluster.Centroid;
 
@@ -46,8 +45,8 @@ public class VectorCentroid implements Centroid<VectorData>, Cloneable {
      *
      * @param o The object to base the centroid on.
      */
-    public VectorCentroid(final Data o) {
-        this.value = (VectorData) o.clone();
+    public VectorCentroid(final VectorData o) {
+        this.value = o;
         this.size = 1;
     }
 

@@ -24,7 +24,7 @@
 package syncleus.dann.evolve.gp.train;
 
 import syncleus.dann.Learning;
-import syncleus.dann.data.Data;
+import syncleus.dann.data.MutableData;
 import syncleus.dann.data.vector.VectorData;
 
 import java.io.Serializable;
@@ -52,7 +52,7 @@ public class ZeroEvalScoreFunction implements CalculateScore, Serializable {
     public double calculateScore(final Learning genome) {
         final EncogProgram prg = (EncogProgram) genome;
         final PrgPopulation pop = (PrgPopulation) prg.getPopulation();
-        final Data inputData = new VectorData(pop.getContext()
+        final MutableData inputData = new VectorData(pop.getContext()
                 .getDefinedVariables().size());
         prg.compute(inputData);
         return 0;

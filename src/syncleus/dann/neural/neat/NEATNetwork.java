@@ -24,7 +24,7 @@
 package syncleus.dann.neural.neat;
 
 import syncleus.dann.RegressionLearning;
-import syncleus.dann.data.Data;
+import syncleus.dann.data.MutableData;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.data.vector.VectorData;
 import syncleus.dann.learn.ErrorLearning;
@@ -176,8 +176,8 @@ public class NEATNetwork implements RegressionLearning, ErrorLearning, Serializa
      * @return The output from this synapse.
      */
     @Override
-    public Data compute(final Data input) {
-        final Data result = new VectorData(this.outputCount);
+    public MutableData compute(final MutableData input) {
+        final MutableData result = new VectorData(this.outputCount);
 
         // clear from previous
         EngineArray.fill(this.preActivation, 0.0);

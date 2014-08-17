@@ -24,7 +24,7 @@
 package syncleus.dann.neural.neat;
 
 import syncleus.dann.RegressionLearning;
-import syncleus.dann.data.Data;
+import syncleus.dann.data.MutableData;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.evolve.codec.GeneticCODEC;
 import syncleus.dann.evolve.genome.Genome;
@@ -266,7 +266,7 @@ public class NEATPopulation extends BasicPopulation implements Serializable,
      * {@inheritDoc}
      */
     @Override
-    public Data compute(final Data input) {
+    public MutableData compute(final MutableData input) {
         updateBestNetwork();
         return this.bestNetwork.compute(input);
     }

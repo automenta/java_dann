@@ -28,7 +28,6 @@ import syncleus.dann.Classifying;
 import syncleus.dann.Learning;
 import syncleus.dann.RegressionLearning;
 import syncleus.dann.Training;
-import syncleus.dann.data.Data;
 import syncleus.dann.data.DataCase;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.data.buffer.BufferedMLDataSet;
@@ -58,6 +57,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import syncleus.dann.data.Data;
 
 /**
  * General utility class for Encog. Provides for some common Encog procedures.
@@ -348,8 +348,7 @@ public final class EncogUtility {
         buffer.endLoad();
     }
 
-    public static <D extends Data> double calculateRegressionError(final RegressionLearning method,
-                                                  final Dataset<D> data) {
+    public static <D extends Data> double calculateRegressionError(final RegressionLearning method, final Dataset<D> data) {
 
         final ErrorCalculation errorCalculation = new ErrorCalculation();
         if (method instanceof MLContext)

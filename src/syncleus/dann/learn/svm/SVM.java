@@ -244,7 +244,7 @@ public class SVM<D extends Data> extends AbstractLearning implements RegressionL
      * {@inheritDoc}
      */
     @Override
-    public Integer classify(final Data input) {
+    public Integer classify(final D input) {
         if (this.model == null) {
             throw new RuntimeException(
                     "Can't use the SVM yet, it has not been trained, "
@@ -262,7 +262,7 @@ public class SVM<D extends Data> extends AbstractLearning implements RegressionL
      * @return The results from the SVM.
      */
     @Override
-    public Data compute(final Data input) {
+    public VectorData compute(final D input) {
 
         if (this.model == null) {
             throw new RuntimeException(
@@ -270,7 +270,7 @@ public class SVM<D extends Data> extends AbstractLearning implements RegressionL
                             + "and no model exists.");
         }
 
-        final Data result = new VectorData(1);
+        final VectorData result = new VectorData(1);
 
         final svm_node[] formattedInput = makeSparse(input);
 
@@ -356,7 +356,7 @@ public class SVM<D extends Data> extends AbstractLearning implements RegressionL
      * @param data The data to convert.
      * @return The SVM sparse data.
      */
-    public static svm_node[] makeSparse(final Data data) {
+    public svm_node[] makeSparse(final D data) {
         final svm_node[] result = new svm_node[data.size()];
         for (int i = 0; i < data.size(); i++) {
             result[i] = new svm_node();

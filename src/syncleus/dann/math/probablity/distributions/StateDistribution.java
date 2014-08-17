@@ -27,7 +27,7 @@ import syncleus.dann.data.DataCase;
 import syncleus.dann.data.Dataset;
 
 import java.io.Serializable;
-import syncleus.dann.data.Data;
+import syncleus.dann.data.MutableData;
 import syncleus.dann.data.vector.VectorCase;
 import syncleus.dann.math.probablity.ProbabilityFunction;
 
@@ -37,7 +37,7 @@ import syncleus.dann.math.probablity.ProbabilityFunction;
  * are supported. Use ContinousDistribution to use a Gaussian-based continuous
  * distribution. Use DiscreteDistribution for a item-based distribution.
  */
-public interface StateDistribution<D extends Data> extends Cloneable, Serializable, ProbabilityFunction<DataCase<D>> {
+public interface StateDistribution<D extends MutableData> extends Cloneable, Serializable, ProbabilityFunction<DataCase<D>> {
 
     /**
      * @return A clone of this distribution.

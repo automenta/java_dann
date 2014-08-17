@@ -32,7 +32,7 @@ import syncleus.dann.data.Dataset;
  * Defines Machine Learning Method that can calculate an error based on a data
  * set.
  */
-public interface ErrorLearning<D extends Data> extends Learning {
+public interface ErrorLearning<D extends Data> extends Learning /*, Function<Dataset<D>, Double>*/ {
     /**
      * Calculate the error of the ML method, given a dataset.
      *
@@ -40,4 +40,6 @@ public interface ErrorLearning<D extends Data> extends Learning {
      * @return The error.
      */
     double calculateError(final Dataset<D> data);
+    
+    //default Double apply(Dataset<D> input) { return calculateError(input); }
 }

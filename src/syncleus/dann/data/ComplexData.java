@@ -42,7 +42,8 @@ import syncleus.dann.math.cluster.Centroid;
  * does not support complex numbers will only be dealing with the real-number
  * portion of the complex number.
  */
-public class ComplexData {
+//TODO provide a constructor switch option for creating the vector from either REAL, COMPLEX, or BOTH (double length of input values)
+public class ComplexData implements Data {
 
     /**
      * The data held by this object.
@@ -236,7 +237,7 @@ public class ComplexData {
      *
      * @return Nothing.
      */
-    public Centroid<Data> createCentroid() {
+    public Centroid<MutableData> createCentroid() {
         return null;
     }
 }

@@ -2,14 +2,14 @@ package syncleus.dann.learn.autoencoder;
 
 
 import syncleus.dann.AutoAssociating;
-import syncleus.dann.data.Data;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.learn.ErrorLearning;
 
 import java.util.Arrays;
 import java.util.Random;
+import syncleus.dann.data.Data;
 
-public class DenoisingAutoencoder implements AutoAssociating, ErrorLearning {
+public class DenoisingAutoencoder<D extends Data> implements AutoAssociating<D>, ErrorLearning<D> {
 
     public int n_visible;
     public int n_hidden;
@@ -255,7 +255,7 @@ public class DenoisingAutoencoder implements AutoAssociating, ErrorLearning {
     }*/
 
     @Override
-    public Data compute(Data input) {
+    public Data compute(D input) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 

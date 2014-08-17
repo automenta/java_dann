@@ -24,7 +24,7 @@
 package syncleus.dann.neural.som.encog.clustercopy;
 
 import syncleus.dann.Learning;
-import syncleus.dann.data.Data;
+import syncleus.dann.data.MutableData;
 import syncleus.dann.data.DataCase;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.learn.AbstractTraining;
@@ -40,7 +40,7 @@ import syncleus.dann.neural.som.SOMEncog;
  * elements to the number of output neurons. Eventually I hope to expand this by
  * using KMeans clustering.
  */
-public class SOMClusterCopyTraining<D extends Data> extends AbstractTraining<D> {
+public class SOMClusterCopyTraining<D extends MutableData> extends AbstractTraining<D> {
 
     /**
      * The SOM to train.
@@ -95,7 +95,7 @@ public class SOMClusterCopyTraining<D extends Data> extends AbstractTraining<D> 
      * @param outputNeuron The output neuron to set.
      * @param input        The input pattern to copy.
      */
-    private void copyInputPattern(final int outputNeuron, final Data input) {
+    private void copyInputPattern(final int outputNeuron, final MutableData input) {
         for (int inputNeuron = 0; inputNeuron < this.network.getInputCount(); inputNeuron++) {
             this.network.getWeights().set(outputNeuron, inputNeuron,
                     input.getData(inputNeuron));

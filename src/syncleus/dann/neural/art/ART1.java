@@ -24,7 +24,7 @@
 package syncleus.dann.neural.art;
 
 import syncleus.dann.Classifying;
-import syncleus.dann.data.Data;
+import syncleus.dann.data.MutableData;
 import syncleus.dann.data.specific.BiPolarNeuralData;
 import syncleus.dann.learn.MLResettable;
 import syncleus.dann.math.matrix.RealMatrix;
@@ -190,7 +190,7 @@ public class ART1 extends ART implements MLResettable, Classifying {
      * @return The class that the data belongs to.
      */
     @Override
-    public int classify(final Data input) {
+    public int classify(final MutableData input) {
         final BiPolarNeuralData input2 = new BiPolarNeuralData(this.f1Count);
         final BiPolarNeuralData output = new BiPolarNeuralData(this.f2Count);
 
@@ -258,7 +258,7 @@ public class ART1 extends ART implements MLResettable, Classifying {
      * @param input The input to the network.
      * @return The output from the network.
      */
-    public Data compute(final Data input) {
+    public MutableData compute(final MutableData input) {
         if (!(input instanceof BiPolarNeuralData)) {
             throw new RuntimeException(
                     "Input to ART1 logic network must be BiPolarNeuralData.");

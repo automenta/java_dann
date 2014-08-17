@@ -23,7 +23,7 @@
  */
 package syncleus.dann.data.folded;
 
-import syncleus.dann.data.Data;
+import syncleus.dann.data.MutableData;
 import syncleus.dann.data.DataCase;
 import syncleus.dann.data.Dataset;
 
@@ -101,7 +101,7 @@ public class FoldedDataSet implements Dataset {
      * @param data1 Not used.
      */
     @Override
-    public void add(final Data data1) {
+    public void add(final MutableData data1) {
         throw new RuntimeException(FoldedDataSet.ADD_NOT_SUPPORTED);
 
     }
@@ -113,7 +113,7 @@ public class FoldedDataSet implements Dataset {
      * @param idealData Not used.
      */
     @Override
-    public void add(final Data inputData, final Data idealData) {
+    public void add(final MutableData inputData, final MutableData idealData) {
         throw new RuntimeException(FoldedDataSet.ADD_NOT_SUPPORTED);
 
     }

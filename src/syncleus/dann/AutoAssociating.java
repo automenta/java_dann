@@ -23,6 +23,8 @@
  */
 package syncleus.dann;
 
+import syncleus.dann.data.Data;
+
 /**
  * Defines a MLMethod that can handle autoassocation. Autoassociation is a
  * simple form of pattern recognition where the MLMethod echos back the exact
@@ -34,6 +36,6 @@ package syncleus.dann;
  * optional recognition form used by GR/PNN's. This is a form of unsupervised
  * training.
  */
-public interface AutoAssociating extends RegressionLearning {
+public interface AutoAssociating<D extends Data> extends RegressionLearning<D> {
 
 }

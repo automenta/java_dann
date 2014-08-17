@@ -24,7 +24,6 @@
 package syncleus.dann.learn.kmeans;
 
 import syncleus.dann.Clustering;
-import syncleus.dann.data.Data;
 import syncleus.dann.data.DataCase;
 import syncleus.dann.data.DataCluster;
 import syncleus.dann.data.Dataset;
@@ -33,6 +32,7 @@ import syncleus.dann.math.VectorDistance;
 
 import java.util.ArrayList;
 import java.util.List;
+import syncleus.dann.data.Data;
 
 /**
  * This class performs a basic K-Means clustering. This class can be used on

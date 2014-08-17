@@ -24,7 +24,7 @@
 package syncleus.dann.learn.bayesian;
 
 import syncleus.dann.Classifying;
-import syncleus.dann.data.Data;
+import syncleus.dann.data.MutableData;
 import syncleus.dann.data.DataCase;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.data.file.csv.CSVFormat;
@@ -41,6 +41,7 @@ import syncleus.dann.math.array.EngineArray;
 
 import java.io.Serializable;
 import java.util.*;
+import syncleus.dann.data.Data;
 
 /**
  * The Bayesian Network is a machine learning method that is based on
@@ -51,8 +52,8 @@ import java.util.*;
  * <p/>
  * http://www.heatonresearch.com/wiki/Bayesian_Network
  */
-public class EncogBayesianNetwork extends AbstractLearning implements Classifying<Data,Integer>,
-        MLResettable, Serializable, ErrorLearning<Data> {
+public class EncogBayesianNetwork<D extends Data> extends AbstractLearning implements Classifying<D,Integer>,
+        MLResettable, Serializable, ErrorLearning<D> {
 
     /**
      * Default choices for a boolean event.
@@ -528,7 +529,7 @@ public class EncogBayesianNetwork extends AbstractLearning implements Classifyin
         return 1;
     }
 
-    public double computeProbability(final Data input) {
+    public double computeProbability(final MutableData input) {
 
         // copy the input to evidence
         int inputIndex = 0;
@@ -700,7 +701,7 @@ public class EncogBayesianNetwork extends AbstractLearning implements Classifyin
      * @param input The input.
      * @return An array of class indexes.
      */
-    public int[] determineClasses(final Data input) {
+    public int[] determineClasses(final D input) {
         final int[] result = new int[input.size()];
 
         for (int i = 0; i < input.size(); i++) {
@@ -718,7 +719,7 @@ public class EncogBayesianNetwork extends AbstractLearning implements Classifyin
      * @param input The input to classify.
      */
     @Override
-    public Integer classify(final Data input) {
+    public Integer classify(final D input) {
 
         if (this.classificationTarget < 0
                 || this.classificationTarget >= this.events.size()) {
@@ -846,7 +847,7 @@ public class EncogBayesianNetwork extends AbstractLearning implements Classifyin
      * {@inheritDoc}
      */
     @Override
-    public double calculateError(final Dataset<Data> data) {
+    public double calculateError(final Dataset<D> data) {
 
         if (!this.hasValidClassificationTarget())
             return 1.0;
@@ -858,7 +859,7 @@ public class EncogBayesianNetwork extends AbstractLearning implements Classifyin
         int badCount = 0;
         int totalCount = 0;
 
-        for (final DataCase<Data> pair : data) {
+        for (final DataCase<D> pair : data) {
             final int c = this.classify(pair.getInput());
             totalCount++;
             if (c != pair.getInput().getData(this.classificationTarget)) {

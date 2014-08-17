@@ -24,7 +24,7 @@
 package syncleus.dann.evolve.gp.train;
 
 import syncleus.dann.RegressionLearning;
-import syncleus.dann.data.Data;
+import syncleus.dann.data.MutableData;
 import syncleus.dann.evolve.genome.Genome;
 import syncleus.dann.evolve.population.BasicPopulation;
 import syncleus.dann.evolve.species.Species;
@@ -66,7 +66,7 @@ public class PrgPopulation extends BasicPopulation implements RegressionLearning
      * @param input The input to the
      */
     @Override
-    public Data compute(final Data input) {
+    public MutableData compute(final MutableData input) {
         final EncogProgram best = (EncogProgram) getBestGenome();
         return best.compute(input);
     }

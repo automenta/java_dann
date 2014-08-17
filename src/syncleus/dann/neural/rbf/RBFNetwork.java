@@ -24,7 +24,7 @@
 package syncleus.dann.neural.rbf;
 
 import syncleus.dann.RegressionLearning;
-import syncleus.dann.data.Data;
+import syncleus.dann.data.MutableData;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.data.VectorEncodable;
 import syncleus.dann.data.vector.VectorData;
@@ -124,8 +124,8 @@ public class RBFNetwork extends AbstractLearning implements ErrorLearning, Regre
      * {@inheritDoc}
      */
     @Override
-    public Data compute(final Data input) {
-        final Data output = new VectorData(getOutputCount());
+    public MutableData compute(final MutableData input) {
+        final MutableData output = new VectorData(getOutputCount());
         this.flat.compute(input.getData(), output.getData());
         return output;
     }

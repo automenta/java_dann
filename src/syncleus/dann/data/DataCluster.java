@@ -43,7 +43,7 @@ public interface DataCluster<M extends Data>  {
      *
      * @return A dataset.
      */
-    Dataset createDataSet();
+    Dataset<M> createDataSet();
 
     /**
      * Get the specified data item by index.
@@ -51,7 +51,7 @@ public interface DataCluster<M extends Data>  {
      * @param pos The index of the data item to get.
      * @return The data item.
      */
-    Data get(final int pos);
+    M get(final int pos);
 
     /**
      * @return The data in this cluster.

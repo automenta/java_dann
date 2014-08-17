@@ -25,7 +25,7 @@ package syncleus.dann.neural.networks;
 
 import syncleus.dann.Classifying;
 import syncleus.dann.RegressionLearning;
-import syncleus.dann.data.Data;
+import syncleus.dann.data.MutableData;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.data.VectorEncodable;
 import syncleus.dann.data.file.csv.CSVFormat;
@@ -61,7 +61,7 @@ import syncleus.dann.util.factory.MLMethodFactory;
  * <p/>
  * Once the neural network has been completely constructed.
  */
-public class BasicNetwork<D extends Data> extends AbstractLearning implements ContainsFlat, MLContext,
+public class BasicNetwork<D extends MutableData> extends AbstractLearning implements ContainsFlat, MLContext,
         RegressionLearning<D>, VectorEncodable, MLResettable, Classifying<D, Integer>, ErrorLearning<D>,
         MLFactory, Cloneable {
 
@@ -243,7 +243,7 @@ public class BasicNetwork<D extends Data> extends AbstractLearning implements Co
      */
     public void compute(final double[] input, final double[] output) {
         final VectorData input2 = new VectorData(input);
-        final Data output2 = this.compute(input2);
+        final MutableData output2 = this.compute(input2);
         EngineArray.arrayCopy(output2.getData(), output);
     }
 
@@ -254,9 +254,9 @@ public class BasicNetwork<D extends Data> extends AbstractLearning implements Co
      * @return The output from the neural network.
      */
     @Override
-    public Data compute(final Data input) {
+    public MutableData compute(final MutableData input) {
         try {
-            final Data result = new VectorData(this.structure.getFlat()
+            final MutableData result = new VectorData(this.structure.getFlat()
                     .getOutputCount());
             this.structure.getFlat().compute(input.getData(), result.getData());
             return result;
@@ -741,8 +741,8 @@ public class BasicNetwork<D extends Data> extends AbstractLearning implements Co
      * @param input The input patter to present to the neural network.
      * @return The winning neuron.
      */
-    public int winner(final Data input) {
-        final Data output = compute(input);
+    public int winner(final MutableData input) {
+        final MutableData output = compute(input);
         return EngineArray.maxIndex(output.getData());
     }
 

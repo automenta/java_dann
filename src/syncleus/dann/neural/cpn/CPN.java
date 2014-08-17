@@ -24,7 +24,7 @@
 package syncleus.dann.neural.cpn;
 
 import syncleus.dann.RegressionLearning;
-import syncleus.dann.data.Data;
+import syncleus.dann.data.MutableData;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.data.vector.VectorData;
 import syncleus.dann.learn.AbstractLearning;
@@ -118,8 +118,8 @@ public class CPN extends AbstractLearning implements RegressionLearning, MLReset
      * {@inheritDoc}
      */
     @Override
-    public Data compute(final Data input) {
-        final Data temp = computeInstar(input);
+    public MutableData compute(final MutableData input) {
+        final MutableData temp = computeInstar(input);
         return computeOutstar(temp);
     }
 
@@ -129,8 +129,8 @@ public class CPN extends AbstractLearning implements RegressionLearning, MLReset
      * @param input The input.
      * @return The output.
      */
-    public Data computeInstar(final Data input) {
-        final Data result = new VectorData(this.instarCount);
+    public MutableData computeInstar(final MutableData input) {
+        final MutableData result = new VectorData(this.instarCount);
         int w, i, j;
         double sum, sumWinners, maxOut;
         int winner = 0;
@@ -174,8 +174,8 @@ public class CPN extends AbstractLearning implements RegressionLearning, MLReset
      * @param input The input.
      * @return The output.
      */
-    public Data computeOutstar(final Data input) {
-        final Data result = new VectorData(this.outstarCount);
+    public MutableData computeOutstar(final MutableData input) {
+        final MutableData result = new VectorData(this.outstarCount);
 
         double sum = 0;
 

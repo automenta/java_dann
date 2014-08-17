@@ -1,6 +1,6 @@
 package syncleus.dann.data.auto;
 
-import syncleus.dann.data.Data;
+import syncleus.dann.data.MutableData;
 import syncleus.dann.data.DataCase;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.data.file.csv.CSVFormat;
@@ -149,13 +149,13 @@ public class AutoFloatDataSet implements Serializable, Dataset {
     }
 
     @Override
-    public void add(final Data data1) {
+    public void add(final MutableData data1) {
         throw new RuntimeException("Add's not supported by this dataset.");
 
     }
 
     @Override
-    public void add(final Data inputData, final Data idealData) {
+    public void add(final MutableData inputData, final MutableData idealData) {
         throw new RuntimeException("Add's not supported by this dataset.");
 
     }

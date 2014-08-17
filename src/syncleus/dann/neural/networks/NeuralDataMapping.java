@@ -23,7 +23,7 @@
  */
 package syncleus.dann.neural.networks;
 
-import syncleus.dann.data.Data;
+import syncleus.dann.data.MutableData;
 
 /**
  * Used to map one neural data object to another. Useful for a BAM network.
@@ -50,12 +50,12 @@ public class NeuralDataMapping {
     /**
      * The source data.
      */
-    private Data from;
+    private MutableData from;
 
     /**
      * The target data.
      */
-    private Data to;
+    private MutableData to;
 
     /**
      * Construct the neural data mapping class, with null values.
@@ -71,7 +71,7 @@ public class NeuralDataMapping {
      * @param from The source data.
      * @param to   The target data.
      */
-    public NeuralDataMapping(final Data from, final Data to) {
+    public NeuralDataMapping(final MutableData from, final MutableData to) {
         this.from = from;
         this.to = to;
     }
@@ -79,14 +79,14 @@ public class NeuralDataMapping {
     /**
      * @return The "from" data.
      */
-    public Data getFrom() {
+    public MutableData getFrom() {
         return this.from;
     }
 
     /**
      * @return The "to" data.
      */
-    public Data getTo() {
+    public MutableData getTo() {
         return this.to;
     }
 
@@ -95,7 +95,7 @@ public class NeuralDataMapping {
      *
      * @param from The from data.
      */
-    public void setFrom(final Data from) {
+    public void setFrom(final MutableData from) {
         this.from = from;
     }
 
@@ -104,7 +104,7 @@ public class NeuralDataMapping {
      *
      * @param to The target data.
      */
-    public void setTo(final Data to) {
+    public void setTo(final MutableData to) {
         this.to = to;
     }
 }

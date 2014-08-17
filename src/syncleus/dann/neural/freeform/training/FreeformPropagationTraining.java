@@ -26,7 +26,7 @@ package syncleus.dann.neural.freeform.training;
 
 
 import syncleus.dann.Learning;
-import syncleus.dann.data.Data;
+import syncleus.dann.data.MutableData;
 import syncleus.dann.data.DataCase;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.learn.AbstractTraining;
@@ -43,7 +43,7 @@ import java.util.Set;
 /**
  * Provides basic propagation functions to other trainers.
  */
-public abstract class FreeformPropagationTraining<D extends Data> extends AbstractTraining
+public abstract class FreeformPropagationTraining<D extends MutableData> extends AbstractTraining
         implements Serializable {
 
     /**
@@ -279,9 +279,9 @@ public abstract class FreeformPropagationTraining<D extends Data> extends Abstra
         this.visited.clear();
 
         for (final DataCase pair : this.training) {
-            final Data input = pair.getInput();
-            final Data ideal = pair.getIdeal();
-            final Data actual = this.network.compute(input);
+            final MutableData input = pair.getInput();
+            final MutableData ideal = pair.getIdeal();
+            final MutableData actual = this.network.compute(input);
             final double sig = pair.getSignificance();
 
             errorCalc.updateError(actual.getData(), ideal.getData(), sig);
@@ -312,9 +312,9 @@ public abstract class FreeformPropagationTraining<D extends Data> extends Abstra
         this.visited.clear();
 
         for (final DataCase pair : this.training) {
-            final Data input = pair.getInput();
-            final Data ideal = pair.getIdeal();
-            final Data actual = this.network.compute(input);
+            final MutableData input = pair.getInput();
+            final MutableData ideal = pair.getIdeal();
+            final MutableData actual = this.network.compute(input);
             final double sig = pair.getSignificance();
 
             errorCalc.updateError(actual.getData(), ideal.getData(), sig);
