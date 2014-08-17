@@ -27,7 +27,7 @@ import syncleus.dann.Learning;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.math.EncogMath;
 import syncleus.dann.math.array.EngineArray;
-import syncleus.dann.neural.networks.BasicNetwork;
+import syncleus.dann.neural.networks.VectorNeuralNetwork;
 import syncleus.dann.neural.networks.structure.NetworkCODEC;
 
 /**
@@ -52,7 +52,7 @@ public class NelderMeadTraining extends BasicTraining {
     /**
      * The network to be trained.
      */
-    private final BasicNetwork network;
+    private final VectorNeuralNetwork network;
 
     /**
      * The best error rate.
@@ -98,7 +98,7 @@ public class NelderMeadTraining extends BasicTraining {
      * @param network  The network to train.
      * @param training The training set to use.
      */
-    public NelderMeadTraining(final BasicNetwork network,
+    public NelderMeadTraining(final VectorNeuralNetwork network,
                               final Dataset training) {
         this(network, training, 100);
     }
@@ -111,7 +111,7 @@ public class NelderMeadTraining extends BasicTraining {
      * @param stepValue The step value. This value defines, to some degree the range
      *                  of different weights that will be tried.
      */
-    public NelderMeadTraining(final BasicNetwork network,
+    public NelderMeadTraining(final VectorNeuralNetwork network,
                               final Dataset training, final double stepValue) {
         super(TrainingImplementationType.OnePass);
         this.network = network;

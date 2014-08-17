@@ -25,6 +25,7 @@ package syncleus.dann.neural.som.encog.basic;
 
 import syncleus.dann.Function;
 import syncleus.dann.Learning;
+import syncleus.dann.data.Data;
 import syncleus.dann.data.MutableData;
 import syncleus.dann.data.DataCase;
 import syncleus.dann.data.Dataset;
@@ -34,6 +35,7 @@ import syncleus.dann.math.Format;
 import syncleus.dann.math.matrix.MatrixMath;
 import syncleus.dann.math.matrix.RealMatrix;
 import syncleus.dann.math.matrix.SimpleRealMatrix;
+import syncleus.dann.neural.networks.training.LearningRate;
 import syncleus.dann.neural.networks.training.propagation.TrainingContinuation;
 import syncleus.dann.neural.som.SOMEncog;
 import syncleus.dann.neural.som.encog.basic.BasicTrainSOM.SOMInput;
@@ -68,7 +70,7 @@ import syncleus.dann.neural.som.encog.basic.neighborhood.NeighborhoodFunction;
  *
  * @author jheaton
  */
-public class BasicTrainSOM<D extends MutableData> extends AbstractTraining<D> implements LearningRate, Function<SOMInput<D>,MutableData> {
+public class BasicTrainSOM<D extends Data> extends AbstractTraining<D> implements LearningRate, Function<SOMInput<D>,VectorData> {
 
     /**
      * The neighborhood function to use to determine to what degree a neuron
@@ -215,7 +217,7 @@ public class BasicTrainSOM<D extends MutableData> extends AbstractTraining<D> im
      * @param input        The input pattern to copy.
      */
     private void copyInputPattern(final SimpleRealMatrix matrix, final int outputNeuron,
-                                  final MutableData input) {
+                                  final Data input) {
         for (int inputNeuron = 0; inputNeuron < this.inputNeuronCount; inputNeuron++) {
             matrix.set(outputNeuron, inputNeuron, input.getData(inputNeuron));
         }
@@ -504,7 +506,7 @@ public class BasicTrainSOM<D extends MutableData> extends AbstractTraining<D> im
      * @param matrix The synapse to train.
      * @param input  The input to train for.
      */
-    private void train(final int bmu, final RealMatrix matrix, final MutableData input) {
+    private void train(final int bmu, final RealMatrix matrix, final Data input) {
         // adjust the weight for the BMU and its neighborhood
         for (int outputNeuron = 0; outputNeuron < this.outputNeuronCount; outputNeuron++) {
             trainPattern(matrix, input, outputNeuron, bmu);
@@ -519,7 +521,7 @@ public class BasicTrainSOM<D extends MutableData> extends AbstractTraining<D> im
      * @param current The current output neuron being trained.
      * @param bmu     The best matching unit, or winning output neuron.
      */
-    private void trainPattern(final RealMatrix matrix, final MutableData input,
+    private void trainPattern(final RealMatrix matrix, final Data input,
                               final int current, final int bmu) {
 
         for (int inputNeuron = 0; inputNeuron < this.inputNeuronCount; inputNeuron++) {
@@ -540,9 +542,9 @@ public class BasicTrainSOM<D extends MutableData> extends AbstractTraining<D> im
      *
      * @param pattern The pattern to train.
      */
-    public void trainPattern(final MutableData pattern) {
+    public void trainPattern(final Data pattern) {
 
-        final MutableData input = pattern;
+        final Data input = pattern;
         final int bmu = this.bmuUtil.calculateBMU(input);
         train(bmu, this.network.getWeights(), input);
         applyCorrection();
@@ -550,7 +552,7 @@ public class BasicTrainSOM<D extends MutableData> extends AbstractTraining<D> im
 
     
     /** A tuple of a SOM and a possible input to the SOM */
-    public static class SOMInput<D extends MutableData> {
+    public static class SOMInput<D extends Data> {
         public final SOMEncog<D> som;
         public final D input;
 
@@ -562,7 +564,7 @@ public class BasicTrainSOM<D extends MutableData> extends AbstractTraining<D> im
     }
     
     @Override
-    public MutableData apply(SOMInput<D> s) {
+    public VectorData apply(SOMInput<D> s) {
         return compute(s.som, s.input);
     }
     
@@ -573,9 +575,9 @@ public class BasicTrainSOM<D extends MutableData> extends AbstractTraining<D> im
      * @param input The input pattern.
      * @return The output activation of each output neuron.
      */
-    private MutableData compute(final SOMEncog som, final D input) {
+    private VectorData compute(final SOMEncog som, final D input) {
 
-        final MutableData result = new VectorData(som.getOutputCount());
+        final VectorData result = new VectorData(som.getOutputCount());
 
         for (int i = 0; i < som.getOutputCount(); i++) {
             final SimpleRealMatrix optr = som.getWeights().getRowMatrix(i);

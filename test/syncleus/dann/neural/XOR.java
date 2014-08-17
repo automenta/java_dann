@@ -21,22 +21,22 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package org.encog.neural.networks;
+package syncleus.dann.neural;
 
 import junit.framework.TestCase;
+import syncleus.dann.RegressionLearning;
+import syncleus.dann.data.Data;
+import syncleus.dann.data.DataCase;
+import syncleus.dann.data.vector.VectorCase;
+import syncleus.dann.data.vector.VectorData;
+import syncleus.dann.data.vector.VectorDataset;
 
-import org.encog.mathutil.randomize.RangeRandomizer;
-import org.encog.ml.MLRegression;
-import org.encog.ml.data.MLData;
-import org.encog.ml.data.MLDataPair;
-import org.encog.ml.data.MLDataSet;
-import org.encog.ml.data.basic.BasicMLData;
-import org.encog.ml.data.basic.BasicMLDataPair;
-import org.encog.ml.data.basic.BasicMLDataSet;
-import org.encog.neural.freeform.FreeformNetwork;
-import org.encog.neural.networks.layers.BasicLayer;
-import org.encog.neural.networks.structure.NetworkCODEC;
-import org.encog.util.simple.EncogUtility;
+import syncleus.dann.math.EncogUtility;
+import syncleus.dann.math.random.RangeRandomizer;
+import syncleus.dann.neural.freeform.FreeformNetwork;
+import syncleus.dann.neural.networks.VectorNeuralNetwork;
+import syncleus.dann.neural.networks.layers.BasicLayer;
+import syncleus.dann.neural.networks.structure.NetworkCODEC;
 
 
 
@@ -49,11 +49,11 @@ public class XOR {
 		
 		public static double XOR_IDEAL2[][] = { { 1.0, 0.0 }, { 0.0,1.0 }, { 1.0,0.0 }, { 0.0,1.0 } };
 		
-		public static boolean verifyXOR(MLRegression network,double tolerance) 
+		public static boolean verifyXOR(RegressionLearning network,double tolerance) 
 		{
 			for(int trainingSet=0;trainingSet<XOR.XOR_IDEAL.length;trainingSet++)
 			{
-				MLData actual = network.compute(new BasicMLData(XOR.XOR_INPUT[trainingSet]));
+				Data actual = network.compute(new VectorData(XOR.XOR_INPUT[trainingSet]));
 				
 				for(int i=0;i<XOR.XOR_IDEAL[0].length;i++)
 				{
@@ -67,15 +67,15 @@ public class XOR {
 			return true;
 		}
 		
-		public static MLDataSet createXORDataSet()
+		public static VectorDataset createXORDataSet()
 		{
-			return new BasicMLDataSet(XOR.XOR_INPUT,XOR.XOR_IDEAL);
+			return new VectorDataset(XOR.XOR_INPUT,XOR.XOR_IDEAL);
 		}
 		
-		public static void testXORDataSet(MLDataSet set)
+		public static void testXORDataSet(VectorDataset set)
 		{
 			int row = 0;
-			for(MLDataPair item: set)
+			for(DataCase<VectorData> item: set)
 			{
 				for(int i=0;i<XOR.XOR_INPUT[0].length;i++)
 				{
@@ -93,25 +93,25 @@ public class XOR {
 			}
 		}
 		
-		public static BasicNetwork createTrainedXOR()
+		public static VectorNeuralNetwork createTrainedXOR()
 		{
 			double[] TRAINED_XOR_WEIGHTS = { 25.427193285452972,-26.92000502099534,20.76598054603445,-12.921266548020219,-0.9223427050161919,-1.0588373209475093,-3.80109620509867,3.1764938777876837,80.98981535707951,-75.5552829139118,37.089976176012634,74.85166823997326,75.20561368661059,-37.18307123471437,-21.044949631177417,43.81815044327334,9.648991753485689 };
-			BasicNetwork network = EncogUtility.simpleFeedForward(2, 4, 0, 1, false);
+			VectorNeuralNetwork network = EncogUtility.simpleFeedForward(2, 4, 0, 1, false);
 			NetworkCODEC.arrayToNetwork(TRAINED_XOR_WEIGHTS, network);
 			return network;
 		}
 		
-		public static BasicNetwork createUnTrainedXOR()
+		public static VectorNeuralNetwork createUnTrainedXOR()
 		{
 			double[] TRAINED_XOR_WEIGHTS = { -0.427193285452972,0.92000502099534,-0.76598054603445,-0.921266548020219,-0.9223427050161919,-0.0588373209475093,-0.80109620509867,3.1764938777876837,0.98981535707951,-0.5552829139118,0.089976176012634,0.85166823997326,0.20561368661059,0.18307123471437,0.044949631177417,0.81815044327334,0.648991753485689 };
-			BasicNetwork network = EncogUtility.simpleFeedForward(2, 4, 0, 1, false);
+			VectorNeuralNetwork network = EncogUtility.simpleFeedForward(2, 4, 0, 1, false);
 			NetworkCODEC.arrayToNetwork(TRAINED_XOR_WEIGHTS, network);
 			return network;
 		}
 		
-		public static BasicNetwork createThreeLayerNet()
+		public static VectorNeuralNetwork createThreeLayerNet()
 		{
-			BasicNetwork network = new BasicNetwork();
+			VectorNeuralNetwork network = new VectorNeuralNetwork();
 			network.addLayer(new BasicLayer(2));
 			network.addLayer(new BasicLayer(3));
 			network.addLayer(new BasicLayer(1));
@@ -120,13 +120,13 @@ public class XOR {
 			return network;
 		}
 
-		public static MLDataSet createNoisyXORDataSet(int count) {
-			MLDataSet result = new BasicMLDataSet();
+		public static VectorDataset createNoisyXORDataSet(int count) {
+			VectorDataset result = new VectorDataset();
 			for(int i=0;i<count;i++) {
 				for(int j=0;j<4;j++) {
-					MLData inputData = new BasicMLData(XOR_INPUT[j]);
-					MLData idealData = new BasicMLData(XOR_IDEAL[j]);
-					MLDataPair pair = new BasicMLDataPair(inputData,idealData);
+					VectorData inputData = new VectorData(XOR_INPUT[j]);
+					VectorData idealData = new VectorData(XOR_IDEAL[j]);
+					VectorCase pair = new VectorCase(inputData,idealData);
 					inputData.setData(0, inputData.getData(0)+RangeRandomizer.randomize(-0.1, 0.1));
 					inputData.setData(1, inputData.getData(1)+RangeRandomizer.randomize(-0.1, 0.1));
 					result.add(pair);
@@ -136,7 +136,7 @@ public class XOR {
 		}
 
 		public static FreeformNetwork createTrainedFreeformXOR() {
-			BasicNetwork network = createTrainedXOR();
+			VectorNeuralNetwork network = createTrainedXOR();
 			return new FreeformNetwork(network);
 		}
 }

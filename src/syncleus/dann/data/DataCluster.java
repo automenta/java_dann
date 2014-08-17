@@ -24,26 +24,27 @@
 package syncleus.dann.data;
 
 import java.util.List;
+import syncleus.dann.math.cluster.Centroid;
 
 /**
  * Defines a cluster. Usually used with the MLClustering method to break input
  * into clusters.
  */
-public interface DataCluster<M extends Data>  {
+public interface DataCluster<D extends Data>  {
 
     /**
      * Add data to this cluster.
      *
      * @param pair The data to add.
      */
-    void addPoint(final M pair);
+    void addPoint(final D pair);
 
     /**
      * Create a machine learning dataset from the data.
      *
      * @return A dataset.
      */
-    Dataset<M> createDataSet();
+    Dataset<D> createDataSet();
 
     /**
      * Get the specified data item by index.
@@ -51,22 +52,26 @@ public interface DataCluster<M extends Data>  {
      * @param pos The index of the data item to get.
      * @return The data item.
      */
-    M get(final int pos);
+    D get(final int pos);
 
     /**
      * @return The data in this cluster.
      */
-    List<M> getPoints();
+    List<D> getPoints();
 
     /**
      * Remove the specified item.
      *
      * @param data The item to remove.
      */
-    void remove(final M data);
+    void removePoint(final D data);
+    
+    void removePoint(final int pointIndex);
 
     /**
      * @return The number of items.
      */
     int size();
+    
+    Centroid<D> getCentroid();
 }

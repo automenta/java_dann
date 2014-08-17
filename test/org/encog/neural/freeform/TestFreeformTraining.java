@@ -34,7 +34,7 @@ import org.encog.ml.genetic.MLMethodGeneticAlgorithm;
 import org.encog.ml.train.MLTrain;
 import org.encog.neural.freeform.training.FreeformBackPropagation;
 import org.encog.neural.freeform.training.FreeformResilientPropagation;
-import org.encog.neural.networks.NetworkUtil;
+import syncleus.dann.neural.NetworkUtil;
 import org.encog.neural.networks.XOR;
 import org.encog.neural.networks.training.TrainingSetScore;
 import org.encog.neural.networks.training.anneal.NeuralSimulatedAnnealing;

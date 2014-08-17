@@ -23,17 +23,17 @@
  */
 package syncleus.dann.math.matrix.hessian;
 
-import syncleus.dann.data.MutableData;
+import syncleus.dann.data.Data;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.math.matrix.SimpleRealMatrix;
 import syncleus.dann.neural.flat.FlatNetwork;
-import syncleus.dann.neural.networks.BasicNetwork;
+import syncleus.dann.neural.networks.VectorNeuralNetwork;
 
 /**
  * Some basic code used to calculate Hessian matrixes.
  */
-public abstract class BasicHessian<D extends MutableData> implements ComputeHessian<D> {
+public abstract class BasicHessian<D extends Data> implements ComputeHessian<D> {
 
     /**
      * The training data that provides the ideal values.
@@ -43,7 +43,7 @@ public abstract class BasicHessian<D extends MutableData> implements ComputeHess
     /**
      * The neural network that we would like to train.
      */
-    protected BasicNetwork network;
+    protected VectorNeuralNetwork network;
 
     /**
      * The sum of square error.
@@ -74,7 +74,7 @@ public abstract class BasicHessian<D extends MutableData> implements ComputeHess
      * {@inheritDoc}
      */
     @Override
-    public void init(final BasicNetwork theNetwork, final Dataset<D> theTraining) {
+    public void init(final VectorNeuralNetwork theNetwork, final Dataset<D> theTraining) {
 
         final int weightCount = theNetwork.getStructure().getFlat()
                 .getWeights().length;

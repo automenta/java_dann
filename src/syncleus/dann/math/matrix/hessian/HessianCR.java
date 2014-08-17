@@ -26,7 +26,7 @@ package syncleus.dann.math.matrix.hessian;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.math.matrix.SimpleRealMatrix;
-import syncleus.dann.neural.networks.BasicNetwork;
+import syncleus.dann.neural.networks.VectorNeuralNetwork;
 
 /**
  * Calculate the Hessian matrix using the chain rule method.
@@ -42,7 +42,7 @@ public class HessianCR extends BasicHessian {
      * {@inheritDoc}
      */
     @Override
-    public void init(final BasicNetwork theNetwork, final Dataset theTraining) {
+    public void init(final VectorNeuralNetwork theNetwork, final Dataset theTraining) {
 
         super.init(theNetwork, theTraining);
         final int weightCount = theNetwork.getStructure().getFlat()

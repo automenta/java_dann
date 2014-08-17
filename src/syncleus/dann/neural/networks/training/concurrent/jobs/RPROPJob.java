@@ -24,7 +24,7 @@
 package syncleus.dann.neural.networks.training.concurrent.jobs;
 
 import syncleus.dann.data.Dataset;
-import syncleus.dann.neural.networks.BasicNetwork;
+import syncleus.dann.neural.networks.VectorNeuralNetwork;
 
 /**
  * A training definition for RPROP training.
@@ -49,7 +49,7 @@ public class RPROPJob extends TrainingJob {
      * @param training     The training data to use.
      * @param loadToMemory True if binary training data should be loaded to memory.
      */
-    public RPROPJob(final BasicNetwork network, final Dataset training,
+    public RPROPJob(final VectorNeuralNetwork network, final Dataset training,
                     final boolean loadToMemory) {
         super(network, training, loadToMemory);
     }

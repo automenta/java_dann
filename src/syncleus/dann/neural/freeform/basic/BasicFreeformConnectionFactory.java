@@ -27,6 +27,7 @@ import syncleus.dann.neural.freeform.FreeformNeuron;
 import syncleus.dann.neural.freeform.factory.FreeformConnectionFactory;
 
 import java.io.Serializable;
+import syncleus.dann.neural.freeform.FreeformConnection;
 
 /*
  * A factory that creates basic freeform connection objects.

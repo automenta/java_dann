@@ -27,7 +27,7 @@ import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.math.random.Distort;
 import syncleus.dann.math.random.Randomizer;
 import syncleus.dann.math.random.RangeRandomizer;
-import syncleus.dann.neural.networks.BasicNetwork;
+import syncleus.dann.neural.networks.VectorNeuralNetwork;
 
 /**
  * Prune a neural network selectively. This class allows you to either add or
@@ -44,14 +44,14 @@ public class PruneSelective {
     /**
      * The network to prune.
      */
-    private final BasicNetwork network;
+    private final VectorNeuralNetwork network;
 
     /**
      * Construct an object prune the neural network.
      *
      * @param network The network to prune.
      */
-    public PruneSelective(final BasicNetwork network) {
+    public PruneSelective(final VectorNeuralNetwork network) {
         this.network = network;
     }
 
@@ -185,7 +185,7 @@ public class PruneSelective {
     /**
      * @return The network that is being processed.
      */
-    public BasicNetwork getNetwork() {
+    public VectorNeuralNetwork getNetwork() {
         return this.network;
     }
 

@@ -26,7 +26,7 @@ package syncleus.dann.util.factory.train;
 import syncleus.dann.Learning;
 import syncleus.dann.Training;
 import syncleus.dann.data.Dataset;
-import syncleus.dann.neural.networks.BasicNetwork;
+import syncleus.dann.neural.networks.VectorNeuralNetwork;
 import syncleus.dann.neural.networks.ContainsFlat;
 
 /**
@@ -45,7 +45,7 @@ public class SCGFactory {
     public static Training create(final Learning method, final Dataset training,
                                  final String args) {
 
-        if (!(method instanceof BasicNetwork)) {
+        if (!(method instanceof VectorNeuralNetwork)) {
             throw new RuntimeException(
                     "SCG training cannot be used on a method of type: "
                             + method.getClass().getName());

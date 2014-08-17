@@ -25,6 +25,13 @@ package syncleus.dann.neural.networks.training.propagation.back;
 
 import syncleus.dann.data.Dataset;
 import syncleus.dann.neural.networks.ContainsFlat;
+import syncleus.dann.neural.networks.training.LearningRate;
+import syncleus.dann.neural.networks.training.Momentum;
+import syncleus.dann.neural.networks.training.TrainingError;
+import syncleus.dann.neural.networks.training.propagation.Propagation;
+import syncleus.dann.neural.networks.training.propagation.TrainingContinuation;
+import syncleus.dann.neural.networks.training.strategy.SmartLearningRate;
+import syncleus.dann.neural.networks.training.strategy.SmartMomentum;
 
 /**
  * This class implements a backpropagation training algorithm for feed forward
@@ -98,7 +105,7 @@ public class Backpropagation extends Propagation implements Momentum,
                            final Dataset training, final double theLearnRate,
                            final double theMomentum) {
         super(network, training);
-        ValidateNetwork.validateMethodToData(network, training);
+        Propagation.validateMethodToData(network, training);
         this.momentum = theMomentum;
         this.learningRate = theLearnRate;
         this.lastDelta = new double[network.getFlat().getWeights().length];
@@ -109,7 +116,7 @@ public class Backpropagation extends Propagation implements Momentum,
      * {@inheritDoc}
      */
     @Override
-    public static boolean canContinue() {
+    public boolean canContinue() {
         return false;
     }
 

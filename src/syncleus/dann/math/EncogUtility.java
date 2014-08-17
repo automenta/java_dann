@@ -47,7 +47,7 @@ import syncleus.dann.neural.activation.ActivationSigmoid;
 import syncleus.dann.neural.activation.ActivationTANH;
 import syncleus.dann.neural.freeform.FreeformNetwork;
 import syncleus.dann.neural.freeform.training.FreeformResilientPropagation;
-import syncleus.dann.neural.networks.BasicNetwork;
+import syncleus.dann.neural.networks.VectorNeuralNetwork;
 import syncleus.dann.neural.networks.ContainsFlat;
 import syncleus.dann.neural.networks.training.propagation.Propagation;
 import syncleus.dann.neural.networks.training.propagation.resilient.ResilientPropagation;
@@ -157,7 +157,7 @@ public final class EncogUtility {
      *                use the sigmoid activation function.
      * @return The neural network.
      */
-    public static BasicNetwork simpleFeedForward(final int input,
+    public static VectorNeuralNetwork simpleFeedForward(final int input,
                                                  final int hidden1, final int hidden2, final int output,
                                                  final boolean tanh) {
         final FeedForwardPattern pattern = new FeedForwardPattern();
@@ -176,7 +176,7 @@ public final class EncogUtility {
             pattern.addHiddenLayer(hidden2);
         }
 
-        final BasicNetwork network = (BasicNetwork) pattern.generate();
+        final VectorNeuralNetwork network = (VectorNeuralNetwork) pattern.generate();
         network.reset();
         return network;
     }
@@ -189,7 +189,7 @@ public final class EncogUtility {
      * @param trainingSet The training set.
      * @param minutes     The number of minutes to train for.
      */
-    public static void trainConsole(final BasicNetwork network,
+    public static void trainConsole(final VectorNeuralNetwork network,
                                     final Dataset trainingSet, final int minutes) {
         final Propagation train = new ResilientPropagation(network, trainingSet);
         train.setThreadCount(0);
@@ -206,7 +206,7 @@ public final class EncogUtility {
      * @param minutes     The number of minutes to train for.
      */
     public static void trainConsole(final Training train,
-                                    final BasicNetwork network, final Dataset trainingSet,
+                                    final VectorNeuralNetwork network, final Dataset trainingSet,
                                     final int minutes) {
 
         long remaining;

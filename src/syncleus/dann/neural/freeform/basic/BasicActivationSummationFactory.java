@@ -44,7 +44,7 @@ public class BasicActivationSummationFactory implements InputSummationFactory,
      * {@inheritDoc}
      */
     @Override
-    public static InputSummation factor(final EncogActivationFunction theEncogActivationFunction) {
+    public InputSummation factor(final EncogActivationFunction theEncogActivationFunction) {
         return new BasicActivationSummation(theEncogActivationFunction);
     }
 

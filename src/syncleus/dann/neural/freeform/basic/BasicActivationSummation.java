@@ -29,6 +29,7 @@ import syncleus.dann.neural.freeform.InputSummation;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import syncleus.dann.neural.freeform.FreeformConnection;
 
 /**
  * Provides a basic implementation of an input summation. The inputs are summed

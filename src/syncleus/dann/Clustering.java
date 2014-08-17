@@ -33,7 +33,7 @@ import syncleus.dann.data.DataCluster;
  * additional data must be clustered later, the entire group must be
  * reclustered.
  */
-public interface Clustering<M extends Data> extends Learning {
+public interface Clustering<D extends Data> extends Learning {
 
     /**
      * Perform the training iteration.
@@ -50,7 +50,7 @@ public interface Clustering<M extends Data> extends Learning {
     /**
      * @return The clusters.
      */
-    DataCluster<M>[] getClusters();
+    DataCluster<D>[] getClusters();
 
     /**
      * @return The number of clusters.

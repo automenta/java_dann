@@ -21,15 +21,17 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package org.encog.ml.bayesian;
+package syncleus.dann.learn;
 
 import junit.framework.Assert;
 import junit.framework.TestCase;
+import syncleus.dann.learn.bayesian.BayesianEvent;
+import syncleus.dann.learn.bayesian.EncogBayesianNetwork;
 
 public class TestBayesNet extends TestCase {
 	
 	public void testCount() {
-		BayesianNetwork network = new BayesianNetwork();
+		EncogBayesianNetwork network = new EncogBayesianNetwork();
 		BayesianEvent a = network.createEvent("a");
 		BayesianEvent b = network.createEvent("b");
 		BayesianEvent c = network.createEvent("c");
@@ -44,7 +46,7 @@ public class TestBayesNet extends TestCase {
 	}
 	
 	public void testIndependant() {
-		BayesianNetwork network = new BayesianNetwork();
+		EncogBayesianNetwork network = new EncogBayesianNetwork();
 		BayesianEvent a = network.createEvent("a");
 		BayesianEvent b = network.createEvent("b");
 		BayesianEvent c = network.createEvent("c");
@@ -63,7 +65,7 @@ public class TestBayesNet extends TestCase {
 	}
 	
 	public void testIndependant2() {
-		BayesianNetwork network = new BayesianNetwork();
+		EncogBayesianNetwork network = new EncogBayesianNetwork();
 		BayesianEvent a = network.createEvent("a");
 		BayesianEvent b = network.createEvent("b");
 		BayesianEvent c = network.createEvent("c");

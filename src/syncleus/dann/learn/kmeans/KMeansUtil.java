@@ -23,31 +23,31 @@
  */
 package syncleus.dann.learn.kmeans;
 
-import syncleus.dann.math.VectorDistance;
-import syncleus.dann.math.cluster.CentroidFactory;
-import syncleus.dann.math.cluster.Cluster;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import syncleus.dann.data.DataCluster;
+import syncleus.dann.data.vector.VectorCluster;
+import syncleus.dann.data.vector.VectorData;
+import syncleus.dann.math.VectorDistance;
 
 /**
  * Generic KMeans clustering object.
  *
  * @param <K> The type to cluster.
  */
-public class KMeansUtil<K extends CentroidFactory<? super K>> {
+public class KMeansUtil {
 
     /**
      * The clusters.
      */
-    private final ArrayList<Cluster<K>> clusters;
+    private final ArrayList<VectorCluster> clusters;
 
     /**
      * The number of clusters.
      */
     private final int k;
-    private VectorDistance distanceFunc;
+    private final VectorDistance distanceFunc;
 
     /**
      * Construct the clusters. Call process to perform the cluster.
@@ -55,7 +55,7 @@ public class KMeansUtil<K extends CentroidFactory<? super K>> {
      * @param theK        The number of clusters.
      * @param theElements The elements to cluster.
      */
-    public KMeansUtil(final int theK, final List<? extends K> theElements, VectorDistance distance) {
+    public KMeansUtil(final int theK, final List<VectorData> theElements, VectorDistance distance) {
         this.k = theK;
         clusters = new ArrayList<>(theK);
         this.distanceFunc = distance;
@@ -63,36 +63,41 @@ public class KMeansUtil<K extends CentroidFactory<? super K>> {
         initRandomClusters(theElements);
     }
 
+    
     /**
      * Create random clusters.
      *
      * @param elements The elements to cluster.
      */
-    private void initRandomClusters(final List<? extends K> elements) {
+    private void initRandomClusters(final List<VectorData> elements) {
 
         int clusterIndex = 0;
         int elementIndex = 0;
+        int vectorSize = 1; //discovered through iterating:
 
         // first simply fill out the clusters, until we run out of clusters
         while ((elementIndex < elements.size()) && (clusterIndex < k)
                 && (elements.size() - elementIndex > k - clusterIndex)) {
-            final K element = elements.get(elementIndex);
+            final VectorData element = elements.get(elementIndex);
 
             boolean added = false;
 
             // if this element is identical to another, add it to this cluster
             for (int i = 0; i < clusterIndex; i++) {
-                final Cluster<K> cluster = clusters.get(i);
+                final DataCluster<VectorData> cluster = clusters.get(i);
 
-                if (cluster.centroid().distance(element, distanceFunc) == 0) {
-                    cluster.add(element);
+                if (cluster.getCentroid().distance(element, distanceFunc) == 0) {
+                    cluster.addPoint(element);
+                    vectorSize = element.size();
                     added = true;
                     break;
                 }
             }
 
             if (!added) {
-                clusters.add(new Cluster<>(elements.get(elementIndex)));
+                VectorData nextElement = elements.get(elementIndex);
+                clusters.add(new VectorCluster(nextElement));
+                vectorSize = element.size();
                 clusterIndex++;
             }
             elementIndex++;
@@ -100,7 +105,8 @@ public class KMeansUtil<K extends CentroidFactory<? super K>> {
 
         // create
         while (clusterIndex < k && elementIndex < elements.size()) {
-            clusters.add(new Cluster<>(elements.get(elementIndex)));
+            clusters.add(new VectorCluster(elements.get(elementIndex)));
+            vectorSize = elements.size();
             elementIndex++;
             clusterIndex++;
         }
@@ -108,15 +114,15 @@ public class KMeansUtil<K extends CentroidFactory<? super K>> {
         // handle case where there were not enough clusters created,
         // create empty ones.
         while (clusterIndex < k) {
-            clusters.add(new Cluster<>());
+            clusters.add(new VectorCluster(vectorSize));
             clusterIndex++;
         }
 
         // otherwise, handle case where there were still unassigned elements
         // add them to the nearest clusters.
         while (elementIndex < elements.size()) {
-            final K element = elements.get(elementIndex);
-            nearestCluster(element).add(element);
+            final VectorData element = elements.get(elementIndex);
+            nearestCluster(element).addPoint(element);
             elementIndex++;
         }
 
@@ -132,20 +138,20 @@ public class KMeansUtil<K extends CentroidFactory<? super K>> {
             done = true;
 
             for (int i = 0; i < k; i++) {
-                final Cluster<K> thisCluster = clusters.get(i);
-                final List<K> thisElements = thisCluster.getContents();
+                final VectorCluster thisCluster = clusters.get(i);
+                final List<VectorData> thisElements = thisCluster.getPoints();
 
                 for (int j = 0; j < thisElements.size(); j++) {
-                    final K thisElement = thisElements.get(j);
+                    final VectorData thisElement = thisElements.get(j);
 
                     // don't make a cluster empty
-                    if (thisCluster.centroid().distance(thisElement, distanceFunc) > 0) {
-                        final Cluster<K> nearestCluster = nearestCluster(thisElement);
+                    if (thisCluster.getCentroid().distance(thisElement, distanceFunc) > 0) {
+                        final VectorCluster nearestCluster = nearestCluster(thisElement);
 
                         // move to nearer cluster
                         if (thisCluster != nearestCluster) {
-                            nearestCluster.add(thisElement);
-                            thisCluster.remove(j);
+                            nearestCluster.addPoint(thisElement);
+                            thisCluster.removePoint(j);
                             done = false;
                         }
                     }
@@ -160,12 +166,12 @@ public class KMeansUtil<K extends CentroidFactory<? super K>> {
      * @param element The element.
      * @return The nearest cluster.
      */
-    private Cluster<K> nearestCluster(final K element) {
+    private VectorCluster nearestCluster(final VectorData element) {
         double distance = Double.MAX_VALUE;
-        Cluster<K> result = null;
+        VectorCluster result = null;
 
         for (int i = 0; i < clusters.size(); i++) {
-            final double thisDistance = clusters.get(i).centroid()
+            final double thisDistance = clusters.get(i).getCentroid()
                     .distance(element, this.distanceFunc);
 
             if (distance > thisDistance) {
@@ -183,8 +189,8 @@ public class KMeansUtil<K extends CentroidFactory<? super K>> {
      * @param index The index to get.
      * @return The cluster.
      */
-    public Collection<K> get(final int index) {
-        return clusters.get(index).getContents();
+    public Collection<VectorData> get(final int index) {
+        return clusters.get(index).getPoints();
     }
 
     /**
@@ -200,7 +206,7 @@ public class KMeansUtil<K extends CentroidFactory<? super K>> {
      * @param i The index to get.
      * @return The cluster.
      */
-    public Cluster<K> getCluster(final int i) {
+    public VectorCluster getCluster(final int i) {
         return this.clusters.get(i);
     }
 }

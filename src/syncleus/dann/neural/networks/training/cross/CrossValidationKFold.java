@@ -25,7 +25,7 @@ package syncleus.dann.neural.networks.training.cross;
 
 import syncleus.dann.Training;
 import syncleus.dann.data.folded.FoldedDataSet;
-import syncleus.dann.neural.networks.BasicNetwork;
+import syncleus.dann.neural.networks.VectorNeuralNetwork;
 
 /**
  * Train using K-Fold cross validation. Each iteration will train a number of
@@ -69,7 +69,7 @@ public class CrossValidationKFold extends CrossTraining {
         this.train = train;
         getFolded().fold(k);
 
-        this.flatNetwork = ((BasicNetwork) train.getMethod()).getStructure()
+        this.flatNetwork = ((VectorNeuralNetwork) train.getMethod()).getStructure()
                 .getFlat();
 
         this.networks = new NetworkFold[k];

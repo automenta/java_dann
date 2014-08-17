@@ -28,7 +28,7 @@ import junit.framework.TestCase;
 import org.encog.ml.data.MLDataSet;
 import org.encog.ml.data.basic.BasicMLDataSet;
 import org.encog.neural.networks.BasicNetwork;
-import org.encog.neural.networks.NetworkUtil;
+import syncleus.dann.neural.NetworkUtil;
 import org.encog.neural.networks.XOR;
 import org.encog.neural.networks.structure.NetworkCODEC;
 import org.encog.neural.networks.training.propagation.TrainingContinuation;

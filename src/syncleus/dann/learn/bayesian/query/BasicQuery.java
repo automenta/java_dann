@@ -24,7 +24,7 @@
 package syncleus.dann.learn.bayesian.query;
 
 import syncleus.dann.learn.bayesian.BayesianError;
-import syncleus.dann.learn.bayesian.BayesianEvent;
+
 import syncleus.dann.learn.bayesian.EncogBayesianNetwork;
 import syncleus.dann.learn.bayesian.EventType;
 import syncleus.dann.learn.bayesian.query.sample.EventState;
@@ -34,6 +34,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import syncleus.dann.learn.bayesian.BayesianEvent;
+import static syncleus.dann.learn.bayesian.EventType.Evidence;
+import static syncleus.dann.learn.bayesian.EventType.Outcome;
 
 /**
  * Provides basic functionality for a Bayesian query. This class is abstract,
@@ -119,6 +122,7 @@ public abstract class BasicQuery implements BayesianQuery, Serializable {
         this.evidenceEvents.clear();
         this.outcomeEvents.clear();
 
+        
         for (final BayesianEvent event : this.network.getEvents()) {
             switch (getEventType(event)) {
                 case Evidence:

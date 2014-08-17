@@ -26,7 +26,7 @@ package syncleus.dann.math.random;
 import syncleus.dann.Learning;
 import syncleus.dann.math.matrix.SimpleRealMatrix;
 import syncleus.dann.neural.activation.EncogActivationFunction;
-import syncleus.dann.neural.networks.BasicNetwork;
+import syncleus.dann.neural.networks.VectorNeuralNetwork;
 
 /**
  * Implementation of <i>Nguyen-Widrow</i> weight initialization. This is the
@@ -39,11 +39,11 @@ public class NguyenWidrowRandomizer extends BasicRandomizer {
 
     @Override
     public void randomize(final Learning method) {
-        if (!(method instanceof BasicNetwork)) {
+        if (!(method instanceof VectorNeuralNetwork)) {
             throw new RuntimeException("Nguyen-Widrow only supports BasicNetwork.");
         }
 
-        final BasicNetwork network = (BasicNetwork) method;
+        final VectorNeuralNetwork network = (VectorNeuralNetwork) method;
 
         for (int fromLayer = 0; fromLayer < network.getLayerCount() - 1; fromLayer++) {
             randomizeSynapse(network, fromLayer);
@@ -57,7 +57,7 @@ public class NguyenWidrowRandomizer extends BasicRandomizer {
         return d[0];
     }
 
-    private void randomizeSynapse(final BasicNetwork network,
+    private void randomizeSynapse(final VectorNeuralNetwork network,
                                   final int fromLayer) {
         final int toLayer = fromLayer + 1;
         final int toCount = network.getLayerNeuronCount(toLayer);

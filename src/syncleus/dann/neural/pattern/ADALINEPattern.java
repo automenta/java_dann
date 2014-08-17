@@ -27,7 +27,7 @@ import syncleus.dann.Learning;
 import syncleus.dann.math.random.RangeRandomizer;
 import syncleus.dann.neural.activation.ActivationLinear;
 import syncleus.dann.neural.activation.EncogActivationFunction;
-import syncleus.dann.neural.networks.BasicNetwork;
+import syncleus.dann.neural.networks.VectorNeuralNetwork;
 import syncleus.dann.neural.networks.layers.BasicLayer;
 import syncleus.dann.neural.networks.layers.Layer;
 
@@ -72,7 +72,7 @@ public class ADALINEPattern implements NeuralNetworkPattern {
      */
     @Override
     public Learning generate() {
-        final BasicNetwork network = new BasicNetwork();
+        final VectorNeuralNetwork network = new VectorNeuralNetwork();
 
         final Layer inputLayer = new BasicLayer(new ActivationLinear(), true,
                 this.inputNeurons);

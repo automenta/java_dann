@@ -26,7 +26,7 @@ package syncleus.dann.util.factory.train;
 import syncleus.dann.Learning;
 import syncleus.dann.Training;
 import syncleus.dann.data.Dataset;
-import syncleus.dann.neural.networks.BasicNetwork;
+import syncleus.dann.neural.networks.VectorNeuralNetwork;
 
 public class NelderMeadFactory {
     /**
@@ -39,6 +39,6 @@ public class NelderMeadFactory {
      */
     public static Training create(final Learning method, final Dataset training,
                                  final String argsStr) {
-        return new NelderMeadTraining((BasicNetwork) method, training);
+        return new NelderMeadTraining((VectorNeuralNetwork) method, training);
     }
 }

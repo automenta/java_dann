@@ -23,18 +23,23 @@
  */
 package syncleus.dann.neural.networks.training.propagation;
 
-import org.encog.neural.networks.training.BatchSize;
-import org.encog.neural.networks.training.propagation.GradientWorker;
+
+import java.util.Arrays;
 import syncleus.dann.Learning;
+import syncleus.dann.Training;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.learn.AbstractTraining;
-import syncleus.dann.math.IntRange;
+import syncleus.dann.learn.InputLearning;
+import syncleus.dann.learn.OutputLearning;
 import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.math.error.ErrorFunction;
 import syncleus.dann.math.error.LinearErrorFunction;
 import syncleus.dann.neural.activation.ActivationSigmoid;
 import syncleus.dann.neural.activation.EncogActivationFunction;
+import syncleus.dann.neural.flat.FlatNetwork;
 import syncleus.dann.neural.networks.ContainsFlat;
+import syncleus.dann.neural.networks.training.BatchSize;
+import syncleus.dann.neural.pnn.BasicPNN;
 
 /**
  * Implements basic functionality that is needed by each of the propagation
@@ -43,7 +48,7 @@ import syncleus.dann.neural.networks.ContainsFlat;
  *
  * @author jheaton
  */
-public abstract class Propagation extends AbstractTraining implements Train,
+public abstract class Propagation extends AbstractTraining implements Training,
         BatchSize {
 
     /**
@@ -185,42 +190,42 @@ public abstract class Propagation extends AbstractTraining implements Train,
         }
     }
 
-    private void processBatches() {
-        if (this.workers == null) {
-            init();
-        }
-
-        if (this.currentFlatNetwork.getHasContext()) {
-            this.workers[0].getNetwork().clearContext();
-        }
-
-        this.workers[0].getErrorCalculation().reset();
-
-        int lastLearn = 0;
-
-        for (int i = 0; i < this.getTraining().size(); i++) {
-            this.workers[0].run(i);
-
-            lastLearn++;
-
-            if (lastLearn++ >= this.batchSize) {
-                if (this.currentFlatNetwork.isLimited()) {
-                    learnLimited();
-                } else {
-                    learn();
-                    lastLearn = 0;
-                }
-            }
-        }
-
-        // handle any remaining learning
-        if (lastLearn > 0) {
-            learn();
-        }
-
-        this.setError(this.workers[0].getErrorCalculation().calculate());
-
-    }
+//    private void processBatches() {
+//        if (this.workers == null) {
+//            init();
+//        }
+//
+//        if (this.currentFlatNetwork.getHasContext()) {
+//            this.workers[0].getNetwork().clearContext();
+//        }
+//
+//        this.workers[0].getErrorCalculation().reset();
+//
+//        int lastLearn = 0;
+//
+//        for (int i = 0; i < this.getTraining().size(); i++) {
+//            this.workers[0].run(i);
+//
+//            lastLearn++;
+//
+//            if (lastLearn++ >= this.batchSize) {
+//                if (this.currentFlatNetwork.isLimited()) {
+//                    learnLimited();
+//                } else {
+//                    learn();
+//                    lastLearn = 0;
+//                }
+//            }
+//        }
+//
+//        // handle any remaining learning
+//        if (lastLearn > 0) {
+//            learn();
+//        }
+//
+//        this.setError(this.workers[0].getErrorCalculation().calculate());
+//
+//    }
 
     /**
      * Perform the specified number of training iterations. This can be more
@@ -239,11 +244,11 @@ public abstract class Propagation extends AbstractTraining implements Train,
 
                 rollIteration();
 
-                if (this.batchSize == 0) {
+                //if (this.batchSize == 0) {
                     processPureBatch();
-                } else {
+                /*} else {
                     processBatches();
-                }
+                }*/
 
                 for (final GradientWorker worker : this.workers) {
                     EngineArray.arrayCopy(this.currentFlatNetwork.getWeights(),
@@ -251,12 +256,12 @@ public abstract class Propagation extends AbstractTraining implements Train,
                             this.currentFlatNetwork.getWeights().length);
                 }
 
-                if (this.currentFlatNetwork.getHasContext()) {
-                    copyContexts();
-                }
+//                if (this.currentFlatNetwork.getHasContext()) {
+//                    copyContexts();
+//                }
 
                 if (this.reportedException != null) {
-                    throw (new RuntimeException(this.reportedException));
+                    throw (new RuntimeException(this.reportedException + " " + Arrays.toString(reportedException.getStackTrace())));
                 }
 
                 postIteration();
@@ -266,28 +271,95 @@ public abstract class Propagation extends AbstractTraining implements Train,
 
             }
         } catch (final ArrayIndexOutOfBoundsException ex) {
-            EncogValidate.validateNetworkForTraining(this.network,
-                    getTraining());
+            validateNetworkForTraining(this.network, getTraining());
             throw new RuntimeException(ex);
         }
     }
+    
 
-    /**
-     * Set the number of threads. Specify zero to tell Encog to automatically
-     * determine the best number of threads for the processor. If OpenCL is used
-     * as the target device, then this value is not used.
-     *
-     * @param numThreads The number of threads.
-     */
-    @Override
-    public void setThreadCount(final int numThreads) {
-        this.numThreads = numThreads;
-    }
+	public static void validateMethodToData(Learning method, Dataset training) {
+		
+		if( !(method instanceof InputLearning) || !(method instanceof OutputLearning) ) {
+			throw new RuntimeException("This machine learning method is not compatible with the provided data.");
+		}
+		
+		int trainingInputCount = training.getInputSize();
+		int trainingOutputCount = training.getIdealSize();
+		int methodInputCount = 0;
+		int methodOutputCount = 0;
+		
+		if( method instanceof InputLearning ) {
+			methodInputCount = ((InputLearning)method).getInputCount();
+		}
+		
+		if( method instanceof OutputLearning ) {
+			methodOutputCount = ((OutputLearning)method).getOutputCount();
+		}
+		
+		if( methodInputCount != trainingInputCount ) {
+			throw new RuntimeException("The machine learning method has an input length of " + methodInputCount + ", but the training data has " + trainingInputCount  + ". They must be the same.");
+		}
+		
+		if (!(method instanceof BasicPNN)) {
+			if (trainingOutputCount > 0
+					&& methodOutputCount != trainingOutputCount) {
+				throw new RuntimeException(
+						"The machine learning method has an output length of "
+								+ methodOutputCount
+								+ ", but the training data has "
+								+ trainingOutputCount
+								+ ". They must be the same.");
+			}
+		}
+		
+	}
+        
+	/**
+	 * Validate a network for training.
+	 * 
+	 * @param network
+	 *            The network to validate.
+	 * @param training
+	 *            The training set to validate.
+	 */
+	public static void validateNetworkForTraining(final ContainsFlat network,
+			final Dataset training) {
 
-    @Override
-    public int getThreadCount() {
-        return this.numThreads;
-    }
+		int inputCount = network.getFlat().getInputCount();
+		int outputCount = network.getFlat().getOutputCount();		
+
+		if (inputCount != training.getInputSize()) {
+			throw new RuntimeException("The input layer size of "
+					+ inputCount
+					+ " must match the training input size of "
+					+ training.getInputSize() + ".");
+		}
+
+		if ((training.getIdealSize() > 0)
+				&& (outputCount != training.getIdealSize())) {
+			throw new RuntimeException("The output layer size of "
+					+ outputCount
+					+ " must match the training input size of "
+					+ training.getIdealSize() + ".");
+		}
+	}    
+
+//    /**
+//     * Set the number of threads. Specify zero to tell Encog to automatically
+//     * determine the best number of threads for the processor. If OpenCL is used
+//     * as the target device, then this value is not used.
+//     *
+//     * @param numThreads The number of threads.
+//     */
+//    @Override
+//    public void setThreadCount(final int numThreads) {
+//        this.numThreads = numThreads;
+//    }
+//
+//    @Override
+//    public int getThreadCount() {
+//        return this.numThreads;
+//    }
 
     /**
      * Default is true. Call this with false to disable flat spot fix.
@@ -314,48 +386,48 @@ public abstract class Propagation extends AbstractTraining implements Train,
             init();
         }
 
-        if (this.currentFlatNetwork.getHasContext()) {
-            this.workers[0].getNetwork().clearContext();
-        }
+//        if (this.currentFlatNetwork.getHasContext()) {
+//            this.workers[0].getNetwork().clearContext();
+//        }
 
         this.totalError = 0;
 
-        if (this.workers.length > 1) {
-
-            final TaskGroup group = EngineConcurrency.getInstance()
-                    .createTaskGroup();
-
-            for (final GradientWorker worker : this.workers) {
-                EngineConcurrency.getInstance().processTask(worker, group);
-            }
-
-            group.waitForComplete();
-        } else {
+//        if (this.workers.length > 1) {
+//
+//            final TaskGroup group = EngineConcurrency.getInstance()
+//                    .createTaskGroup();
+//
+//            for (final GradientWorker worker : this.workers) {
+//                EngineConcurrency.getInstance().processTask(worker, group);
+//            }
+//
+//            group.waitForComplete();
+//        } else {
             this.workers[0].run();
-        }
+//        }
 
         this.setError(this.totalError / this.workers.length);
 
     }
 
-    /**
-     * Copy the contexts to keep them consistent with multithreaded training.
-     */
-    private void copyContexts() {
-
-        // copy the contexts(layer outputO from each group to the next group
-        for (int i = 0; i < (this.workers.length - 1); i++) {
-            final double[] src = this.workers[i].getNetwork().getLayerOutput();
-            final double[] dst = this.workers[i + 1].getNetwork()
-                    .getLayerOutput();
-            EngineArray.arrayCopy(src, dst);
-        }
-
-        // copy the contexts from the final group to the real network
-        EngineArray.arrayCopy(this.workers[this.workers.length - 1]
-                .getNetwork().getLayerOutput(), this.currentFlatNetwork
-                .getLayerOutput());
-    }
+//    /**
+//     * Copy the contexts to keep them consistent with multithreaded training.
+//     */
+//    private void copyContexts() {
+//
+//        // copy the contexts(layer outputO from each group to the next group
+//        for (int i = 0; i < (this.workers.length - 1); i++) {
+//            final double[] src = this.workers[i].getNetwork().getLayerOutput();
+//            final double[] dst = this.workers[i + 1].getNetwork()
+//                    .getLayerOutput();
+//            EngineArray.arrayCopy(src, dst);
+//        }
+//
+//        // copy the contexts from the final group to the real network
+//        EngineArray.arrayCopy(this.workers[this.workers.length - 1]
+//                .getNetwork().getLayerOutput(), this.currentFlatNetwork
+//                .getLayerOutput());
+//    }
 
     /**
      * Init the process.
@@ -395,21 +467,22 @@ public abstract class Propagation extends AbstractTraining implements Train,
             this.numThreads = 1;
         }
 
-        final DetermineWorkload determine = new DetermineWorkload(
-                this.numThreads, (int) this.indexable.getRecordCount());
+        /*final DetermineWorkload determine = new DetermineWorkload(
+                this.numThreads, (int) this.indexable.getRecordCount());*/
 
-        final int actualThreadCount = determine.getThreadCount();
+        final int actualThreadCount = 1; //determine.getThreadCount();
 
         this.workers = new GradientWorker[actualThreadCount];
 
         int index = 0;
 
-        for (final IntRange r : determine.calculateWorkers()) {
+        //for (final IntRange r : determine.calculateWorkers()) {
             this.workers[index++] = new GradientWorker(
                     this.currentFlatNetwork.clone(), this,
-                    this.indexable.openAdditional(), r.getLow(), r.getHigh(),
+                    //this.indexable.openAdditional(), r.getLow(), r.getHigh(),
+                    this.indexable.openAdditional(), 0, (int)this.indexable.getRecordCount()-1,
                     this.flatSpot, this.ef);
-        }
+        //}
 
         initOthers();
     }

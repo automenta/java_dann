@@ -31,7 +31,7 @@ import java.util.List;
  *
  * @param <T> The type of data to cluster.
  */
-public class Cluster<T extends CentroidFactory> {
+@Deprecated class Cluster<T extends CentroidFactory> {
     /**
      * The contents of the cluster.
      */

@@ -26,7 +26,7 @@ package syncleus.dann.neural.prune;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.data.buffer.BufferedMLDataSet;
 import syncleus.dann.learn.strategy.StopTrainingStrategy;
-import syncleus.dann.neural.networks.BasicNetwork;
+import syncleus.dann.neural.networks.VectorNeuralNetwork;
 import syncleus.dann.neural.pattern.NeuralNetworkPattern;
 
 import java.util.ArrayList;
@@ -58,7 +58,7 @@ public class PruneIncremental extends ConcurrentJob {
      * @param network The network to format.
      * @return A human readable string.
      */
-    public static String networkToString(final BasicNetwork network) {
+    public static String networkToString(final VectorNeuralNetwork network) {
         if (network != null) {
             final StringBuilder result = new StringBuilder();
             int num = 1;
@@ -109,7 +109,7 @@ public class PruneIncremental extends ConcurrentJob {
     /**
      * An array of the top networks.
      */
-    private final BasicNetwork[] topNetworks;
+    private final VectorNeuralNetwork[] topNetworks;
 
     /**
      * An array of the top errors.
@@ -119,7 +119,7 @@ public class PruneIncremental extends ConcurrentJob {
     /**
      * The best network found so far.
      */
-    private BasicNetwork bestNetwork;
+    private VectorNeuralNetwork bestNetwork;
 
     /**
      * Keeps track of how many neurons in each hidden layer as training the
@@ -183,7 +183,7 @@ public class PruneIncremental extends ConcurrentJob {
         this.pattern = pattern;
         this.iterations = iterations;
         this.weightTries = weightTries;
-        this.topNetworks = new BasicNetwork[numTopResults];
+        this.topNetworks = new VectorNeuralNetwork[numTopResults];
         this.topErrors = new double[numTopResults];
     }
 
@@ -204,7 +204,7 @@ public class PruneIncremental extends ConcurrentJob {
      *
      * @return The network based on current hidden layer counts.
      */
-    private BasicNetwork generateNetwork() {
+    private VectorNeuralNetwork generateNetwork() {
         this.pattern.clear();
 
         for (final int element : this.hiddenCounts) {
@@ -213,13 +213,13 @@ public class PruneIncremental extends ConcurrentJob {
             }
         }
 
-        return (BasicNetwork) this.pattern.generate();
+        return (VectorNeuralNetwork) this.pattern.generate();
     }
 
     /**
      * @return The network being processed.
      */
-    public BasicNetwork getBestNetwork() {
+    public VectorNeuralNetwork getBestNetwork() {
         return this.bestNetwork;
     }
 
@@ -289,7 +289,7 @@ public class PruneIncremental extends ConcurrentJob {
     /**
      * @return the topNetworks
      */
-    public BasicNetwork[] getTopNetworks() {
+    public VectorNeuralNetwork[] getTopNetworks() {
         return this.topNetworks;
     }
 
@@ -385,7 +385,7 @@ public class PruneIncremental extends ConcurrentJob {
     @Override
     public void performJobUnit(final JobUnitContext context) {
 
-        final BasicNetwork network = context.getJobUnit();
+        final VectorNeuralNetwork network = context.getJobUnit();
         BufferedMLDataSet buffer = null;
         Dataset useTraining = this.training;
 
@@ -509,7 +509,7 @@ public class PruneIncremental extends ConcurrentJob {
             return null;
         }
 
-        final BasicNetwork network = generateNetwork();
+        final VectorNeuralNetwork network = generateNetwork();
 
         if (!increaseHiddenCounts()) {
             this.done = true;
@@ -524,7 +524,7 @@ public class PruneIncremental extends ConcurrentJob {
      * @param network The network to consider.
      * @param error   The error for this network.
      */
-    private synchronized void updateBest(final BasicNetwork network,
+    private synchronized void updateBest(final VectorNeuralNetwork network,
                                          final double error) {
         this.high = Math.max(this.high, error);
         this.low = Math.min(this.low, error);
@@ -555,9 +555,9 @@ public class PruneIncremental extends ConcurrentJob {
         // now select the best network, which is the most simple of the
         // top networks.
 
-        BasicNetwork choice = null;
+        VectorNeuralNetwork choice = null;
 
-        for (final BasicNetwork n : this.topNetworks) {
+        for (final VectorNeuralNetwork n : this.topNetworks) {
             if (n == null) {
                 continue;
             }

@@ -34,6 +34,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import syncleus.dann.math.cluster.Centroid;
 
 /**
  * A basic implementation of the MLSequenceSet.
@@ -349,4 +350,10 @@ public class VectorSequence implements Serializable, DataSequence<VectorData>, C
 
     }
 
+    @Override
+    public Centroid<? extends VectorData> createCentroid() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    
 }

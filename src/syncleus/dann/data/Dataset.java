@@ -24,6 +24,7 @@
 package syncleus.dann.data;
 
 import java.util.Iterator;
+import syncleus.dann.math.cluster.CentroidFactory;
 
 /**
  * An interface designed to abstract classes that store machine learning data.
@@ -41,7 +42,7 @@ import java.util.Iterator;
  *
  * @author jheaton
  */
-public interface Dataset<D extends Data> extends Iterable<DataCase<D>> {
+public interface Dataset<D extends Data> extends Iterable<DataCase<D>>, CentroidFactory<D> {
 
     /**
      * @return The size of the ideal data.
@@ -77,7 +78,7 @@ public interface Dataset<D extends Data> extends Iterable<DataCase<D>> {
      *
      * @return The new instance.
      */
-    Dataset openAdditional();
+    Dataset<D> openAdditional();
 
     /**
      * Add a object to the dataset. This is used with unsupervised training, as
@@ -115,7 +116,7 @@ public interface Dataset<D extends Data> extends Iterable<DataCase<D>> {
 
     int size();
 
-    DataCase get(int index);
+    DataCase<D> get(int index);
 
     @Override
     Iterator<DataCase<D>> iterator();

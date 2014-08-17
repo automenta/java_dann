@@ -29,7 +29,7 @@ import syncleus.dann.data.DataCase;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.learn.AbstractTraining;
 import syncleus.dann.math.statistics.ErrorCalculation;
-import syncleus.dann.neural.networks.BasicNetwork;
+import syncleus.dann.neural.networks.VectorNeuralNetwork;
 import syncleus.dann.neural.networks.training.LearningRate;
 import syncleus.dann.neural.networks.training.propagation.TrainingContinuation;
 
@@ -41,7 +41,7 @@ public class TrainAdaline<D extends MutableData> extends AbstractTraining<D> imp
     /**
      * The network to train.
      */
-    private final BasicNetwork network;
+    private final VectorNeuralNetwork network;
 
 
     /**
@@ -56,7 +56,7 @@ public class TrainAdaline<D extends MutableData> extends AbstractTraining<D> imp
      * @param training     The training data.
      * @param learningRate The learning rate.
      */
-    public TrainAdaline(final BasicNetwork network, final Dataset<D> training,
+    public TrainAdaline(final VectorNeuralNetwork network, final Dataset<D> training,
                         final double learningRate) {
         super(TrainingImplementationType.Iterative);
         if (network.getLayerCount() > 2) {

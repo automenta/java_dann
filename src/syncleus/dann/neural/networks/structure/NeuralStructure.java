@@ -24,7 +24,7 @@
 package syncleus.dann.neural.networks.structure;
 
 import syncleus.dann.neural.activation.ActivationLinear;
-import syncleus.dann.neural.networks.BasicNetwork;
+import syncleus.dann.neural.networks.VectorNeuralNetwork;
 import syncleus.dann.neural.networks.layers.BasicLayer;
 import syncleus.dann.neural.networks.layers.Layer;
 
@@ -57,7 +57,7 @@ public class NeuralStructure implements Serializable {
     /**
      * The neural network this class belongs to.
      */
-    private final BasicNetwork network;
+    private final VectorNeuralNetwork network;
 
     /**
      * The limit, below which a connection is treated as zero.
@@ -79,7 +79,7 @@ public class NeuralStructure implements Serializable {
      *
      * @param network The network to construct a structure for.
      */
-    public NeuralStructure(final BasicNetwork network) {
+    public NeuralStructure(final VectorNeuralNetwork network) {
         this.network = network;
     }
 
@@ -117,7 +117,7 @@ public class NeuralStructure implements Serializable {
     public void finalizeLimit() {
         // see if there is a connection limit imposed
         final String limit = this.network
-                .getPropertyString(BasicNetwork.TAG_LIMIT);
+                .getPropertyString(VectorNeuralNetwork.TAG_LIMIT);
         if (limit != null) {
             try {
                 this.connectionLimited = true;
@@ -125,7 +125,7 @@ public class NeuralStructure implements Serializable {
                 enforceLimit();
             } catch (final NumberFormatException e) {
                 throw new RuntimeException("Invalid property("
-                        + BasicNetwork.TAG_LIMIT + "):" + limit);
+                        + VectorNeuralNetwork.TAG_LIMIT + "):" + limit);
             }
         } else {
             this.connectionLimited = false;
@@ -188,7 +188,7 @@ public class NeuralStructure implements Serializable {
     /**
      * @return The network this structure belongs to.
      */
-    public final BasicNetwork getNetwork() {
+    public final VectorNeuralNetwork getNetwork() {
         return this.network;
     }
 
@@ -222,9 +222,9 @@ public class NeuralStructure implements Serializable {
      * Update any properties from the property map.
      */
     public final void updateProperties() {
-        if (this.network.getProperties().containsKey(BasicNetwork.TAG_LIMIT)) {
+        if (this.network.getProperties().containsKey(VectorNeuralNetwork.TAG_LIMIT)) {
             this.connectionLimit = this.network
-                    .getPropertyDouble(BasicNetwork.TAG_LIMIT);
+                    .getPropertyDouble(VectorNeuralNetwork.TAG_LIMIT);
             this.connectionLimited = true;
         } else {
             this.connectionLimited = false;

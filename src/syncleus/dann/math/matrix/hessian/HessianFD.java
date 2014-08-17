@@ -23,14 +23,15 @@
  */
 package syncleus.dann.math.matrix.hessian;
 
-import syncleus.dann.data.MutableData;
+import syncleus.dann.data.Data;
 import syncleus.dann.data.DataCase;
 import syncleus.dann.data.Dataset;
+import syncleus.dann.data.vector.VectorData;
 import syncleus.dann.math.EncogMath;
 import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.math.matrix.SimpleRealMatrix;
 import syncleus.dann.math.statistics.ErrorCalculation;
-import syncleus.dann.neural.networks.BasicNetwork;
+import syncleus.dann.neural.networks.VectorNeuralNetwork;
 
 /**
  * Calculate the Hessian matrix using the finite difference method. This is a
@@ -43,7 +44,7 @@ import syncleus.dann.neural.networks.BasicNetwork;
  * <p/>
  * http://en.wikipedia.org/wiki/Finite_difference_method
  */
-public class HessianFD<D extends MutableData> extends BasicHessian<D> {
+public class HessianFD<D extends Data> extends BasicHessian<D> {
 
     /**
      * The initial step size for dStep.
@@ -85,7 +86,7 @@ public class HessianFD<D extends MutableData> extends BasicHessian<D> {
      * {@inheritDoc}
      */
     @Override
-    public void init(final BasicNetwork theNetwork, final Dataset<D> theTraining) {
+    public void init(final VectorNeuralNetwork theNetwork, final Dataset<D> theTraining) {
 
         super.init(theNetwork, theTraining);
         this.weightCount = theNetwork.getStructure().getFlat().getWeights().length;
@@ -122,9 +123,9 @@ public class HessianFD<D extends MutableData> extends BasicHessian<D> {
         final double[] derivative = new double[weightCount];
 
         // Loop over every training element
-        for (final DataCase pair : this.training) {
+        for (final DataCase<D> pair : this.training) {
             EngineArray.fill(derivative, 0);
-            final MutableData networkOutput = this.network.compute(pair.getInput());
+            final VectorData networkOutput = this.network.compute(pair.getInput());
 
             e = pair.getIdeal().getData(outputNeuron)
                     - networkOutput.getData(outputNeuron);
@@ -182,7 +183,7 @@ public class HessianFD<D extends MutableData> extends BasicHessian<D> {
      * @param row           The training row currently being processed.
      * @return The derivative output.
      */
-    private double computeDerivative(final MutableData inputData,
+    private double computeDerivative(final D inputData,
                                      final int outputNeuron, final int weight, final double[] stepSize,
                                      final double networkOutput, final int row) {
 
@@ -203,7 +204,7 @@ public class HessianFD<D extends MutableData> extends BasicHessian<D> {
 
             this.network.getFlat().getWeights()[weight] = newWeight;
 
-            final MutableData output = this.network.compute(inputData);
+            final Data output = this.network.compute(inputData);
             points[i] = output.getData(outputNeuron);
         }
 

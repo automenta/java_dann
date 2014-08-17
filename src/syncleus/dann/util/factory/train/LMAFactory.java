@@ -26,7 +26,7 @@ package syncleus.dann.util.factory.train;
 import syncleus.dann.Learning;
 import syncleus.dann.Training;
 import syncleus.dann.data.Dataset;
-import syncleus.dann.neural.networks.BasicNetwork;
+import syncleus.dann.neural.networks.VectorNeuralNetwork;
 
 /**
  * This class is a factory to create the LMA training method.
@@ -44,14 +44,14 @@ public class LMAFactory {
     public static Training create(final Learning method, final Dataset training,
                                  final String argsStr) {
 
-        if (!(method instanceof BasicNetwork)) {
+        if (!(method instanceof VectorNeuralNetwork)) {
             throw new RuntimeException(
                     "LMA training cannot be used on a method of type: "
                             + method.getClass().getName());
         }
 
         final LevenbergMarquardtTraining result = new LevenbergMarquardtTraining(
-                (BasicNetwork) method, training);
+                (VectorNeuralNetwork) method, training);
         return result;
     }
 }

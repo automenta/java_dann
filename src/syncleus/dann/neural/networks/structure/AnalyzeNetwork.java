@@ -26,7 +26,7 @@ package syncleus.dann.neural.networks.structure;
 import syncleus.dann.math.Format;
 import syncleus.dann.math.NumericRange;
 import syncleus.dann.math.array.EngineArray;
-import syncleus.dann.neural.networks.BasicNetwork;
+import syncleus.dann.neural.networks.VectorNeuralNetwork;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -81,7 +81,7 @@ public class AnalyzeNetwork {
      *
      * @param network The network to analyze.
      */
-    public AnalyzeNetwork(final BasicNetwork network) {
+    public AnalyzeNetwork(final VectorNeuralNetwork network) {
         int assignDisabled = 0;
         int assignedTotal = 0;
         final List<Double> biasList = new ArrayList<>();

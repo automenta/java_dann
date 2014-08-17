@@ -25,7 +25,7 @@ package syncleus.dann.neural.pattern;
 
 import syncleus.dann.Learning;
 import syncleus.dann.neural.activation.EncogActivationFunction;
-import syncleus.dann.neural.networks.BasicNetwork;
+import syncleus.dann.neural.networks.VectorNeuralNetwork;
 import syncleus.dann.neural.networks.layers.BasicLayer;
 
 /**
@@ -105,7 +105,7 @@ public class ElmanPattern implements NeuralNetworkPattern {
     public Learning generate() {
         BasicLayer hidden, input;
 
-        final BasicNetwork network = new BasicNetwork();
+        final VectorNeuralNetwork network = new VectorNeuralNetwork();
         network.addLayer(input = new BasicLayer(this.activation, true,
                 this.inputNeurons));
         network.addLayer(hidden = new BasicLayer(this.activation, true,

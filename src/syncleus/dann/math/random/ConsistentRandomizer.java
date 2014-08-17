@@ -24,7 +24,7 @@
 package syncleus.dann.math.random;
 
 import syncleus.dann.math.LinearCongruentialGenerator;
-import syncleus.dann.neural.networks.BasicNetwork;
+import syncleus.dann.neural.networks.VectorNeuralNetwork;
 
 /**
  * A randomizer that takes a seed and will always produce consistent results.
@@ -92,7 +92,7 @@ public class ConsistentRandomizer extends BasicRandomizer {
      *
      * @param network The network to randomize.
      */
-    public void randomize(final BasicNetwork network) {
+    public void randomize(final VectorNeuralNetwork network) {
         this.rand.setSeed(this.seed);
         super.randomize(network);
     }

@@ -26,6 +26,8 @@ package syncleus.dann.neural.freeform.basic;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import syncleus.dann.neural.freeform.FreeformLayer;
+import syncleus.dann.neural.freeform.FreeformNeuron;
 
 /**
  * Implements a basic freeform layer.

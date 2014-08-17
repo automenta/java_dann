@@ -21,32 +21,37 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package org.encog.neural.freeform;
+package syncleus.dann.neural;
 
 import junit.framework.Assert;
 import junit.framework.TestCase;
+import syncleus.dann.Training;
+import syncleus.dann.data.vector.VectorDataset;
 
-import org.encog.engine.network.activation.ActivationSigmoid;
-import org.encog.ml.data.MLDataSet;
-import org.encog.ml.data.basic.BasicMLDataSet;
-import org.encog.ml.train.MLTrain;
-import org.encog.neural.freeform.training.FreeformResilientPropagation;
-import org.encog.neural.networks.BasicNetwork;
-import org.encog.neural.networks.NetworkUtil;
-import org.encog.neural.networks.XOR;
-import org.encog.neural.networks.layers.BasicLayer;
+
+import syncleus.dann.neural.activation.ActivationSigmoid;
+import syncleus.dann.neural.freeform.FreeformNetwork;
+import syncleus.dann.neural.freeform.training.FreeformResilientPropagation;
+import syncleus.dann.neural.networks.VectorNeuralNetwork;
+import syncleus.dann.neural.networks.layers.BasicLayer;
 
 public class TestFreeform extends TestCase {
 	
+        public static VectorNeuralNetwork newFreeformNetwork() {
+            // create a neural network, without using a factory
+            VectorNeuralNetwork basicNetwork = new VectorNeuralNetwork();
+            basicNetwork.addLayer(new BasicLayer(null, true, 2));
+            basicNetwork.addLayer(new BasicLayer(new ActivationSigmoid(), true, 3));
+            basicNetwork.addLayer(new BasicLayer(new ActivationSigmoid(), false, 1));
+            basicNetwork.getStructure().finalizeStructure();
+            basicNetwork.reset();
+            
+            return basicNetwork;
+
+        }
+    
 	public void testCreation() {
-		// create a neural network, without using a factory
-		BasicNetwork basicNetwork = new BasicNetwork();
-		basicNetwork.addLayer(new BasicLayer(null, true, 2));
-		basicNetwork.addLayer(new BasicLayer(new ActivationSigmoid(), true, 3));
-		basicNetwork
-				.addLayer(new BasicLayer(new ActivationSigmoid(), false, 1));
-		basicNetwork.getStructure().finalizeStructure();
-		basicNetwork.reset();
+                VectorNeuralNetwork basicNetwork = newFreeformNetwork();
 
 		FreeformNetwork freeformNetwork = new FreeformNetwork(basicNetwork);
 		Assert.assertEquals(basicNetwork.getInputCount(),
@@ -60,9 +65,9 @@ public class TestFreeform extends TestCase {
 	public void testEncode() {
 		
 		// train (and test) a network
-		MLDataSet trainingData = new BasicMLDataSet(XOR.XOR_INPUT,XOR.XOR_IDEAL);		
+		VectorDataset trainingData = new VectorDataset(XOR.XOR_INPUT,XOR.XOR_IDEAL);		
 		FreeformNetwork trainedNetwork = NetworkUtil.createXORFreeformNetworkUntrained();
-		MLTrain bprop = new FreeformResilientPropagation(trainedNetwork, trainingData);
+		Training bprop = new FreeformResilientPropagation(trainedNetwork, trainingData);
 		NetworkUtil.testTraining(trainingData,bprop,0.01);
 		
 		trainedNetwork = (FreeformNetwork) bprop.getMethod();

@@ -27,7 +27,7 @@ import syncleus.dann.Training;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.learn.strategy.Strategy;
 import syncleus.dann.learn.strategy.end.EndTrainingStrategy;
-import syncleus.dann.neural.networks.BasicNetwork;
+import syncleus.dann.neural.networks.VectorNeuralNetwork;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +40,7 @@ public abstract class TrainingJob {
     /**
      * The network to train.
      */
-    private BasicNetwork network;
+    private VectorNeuralNetwork network;
 
     /**
      * The training data to use.
@@ -74,7 +74,7 @@ public abstract class TrainingJob {
      * @param training     The training data to use.
      * @param loadToMemory True, if binary data should be loaded to memory.
      */
-    public TrainingJob(final BasicNetwork network, final Dataset training,
+    public TrainingJob(final VectorNeuralNetwork network, final Dataset training,
                        final boolean loadToMemory) {
         super();
         this.network = network;
@@ -97,7 +97,7 @@ public abstract class TrainingJob {
     /**
      * @return the network
      */
-    public BasicNetwork getNetwork() {
+    public VectorNeuralNetwork getNetwork() {
         return this.network;
     }
 
@@ -146,7 +146,7 @@ public abstract class TrainingJob {
     /**
      * @param network the network to set
      */
-    public void setNetwork(final BasicNetwork network) {
+    public void setNetwork(final VectorNeuralNetwork network) {
         this.network = network;
     }
 

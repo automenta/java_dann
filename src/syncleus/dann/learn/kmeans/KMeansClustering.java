@@ -25,14 +25,14 @@ package syncleus.dann.learn.kmeans;
 
 import syncleus.dann.Clustering;
 import syncleus.dann.data.DataCase;
-import syncleus.dann.data.DataCluster;
 import syncleus.dann.data.Dataset;
-import syncleus.dann.data.vector.VectorCluster;
 import syncleus.dann.math.VectorDistance;
 
 import java.util.ArrayList;
 import java.util.List;
-import syncleus.dann.data.Data;
+import syncleus.dann.data.DataCluster;
+import syncleus.dann.data.vector.VectorCluster;
+import syncleus.dann.data.vector.VectorData;
 
 /**
  * This class performs a basic K-Means clustering. This class can be used on
@@ -41,12 +41,12 @@ import syncleus.dann.data.Data;
  * <p/>
  * http://en.wikipedia.org/wiki/Kmeans
  */
-public class KMeansClustering<D extends Data> implements Clustering<D> {
+public class KMeansClustering<D extends VectorData> implements Clustering<D> {
 
     /**
      * The kmeans utility.
      */
-    private final KMeansUtil<D> kmeans;
+    private final KMeansUtil kmeans;
 
     /**
      * The clusters
@@ -65,9 +65,9 @@ public class KMeansClustering<D extends Data> implements Clustering<D> {
      * @param theSet The dataset to cluster.
      */
     public KMeansClustering(final int theK, final Dataset<D> theSet, VectorDistance distance) {
-        final List<DataCase<D>> list = new ArrayList<>();
+        final List<VectorData> list = new ArrayList<>();
         for (final DataCase<D> pair : theSet) {
-            list.add(pair);
+            list.add(pair.getInput());
         }
         this.k = theK;
         this.kmeans = new KMeansUtil(this.k, list, distance);
@@ -81,7 +81,8 @@ public class KMeansClustering<D extends Data> implements Clustering<D> {
         this.kmeans.process();
         this.clusters = new DataCluster[this.k];
         for (int i = 0; i < this.k; i++) {
-            this.clusters[i] = new VectorCluster(this.kmeans.getCluster(i));
+            VectorCluster c = this.kmeans.getCluster(i);
+            this.clusters[i] = c;
         }
 
     }

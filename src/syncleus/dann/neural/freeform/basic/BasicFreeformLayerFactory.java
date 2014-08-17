@@ -43,7 +43,7 @@ public class BasicFreeformLayerFactory implements FreeformLayerFactory,
      * {@inheritDoc}
      */
     @Override
-    public static FreeformLayer factor() {
+    public FreeformLayer factor() {
         return new BasicFreeformLayer();
     }
 

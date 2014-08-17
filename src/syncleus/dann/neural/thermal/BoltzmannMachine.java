@@ -23,7 +23,7 @@
  */
 package syncleus.dann.neural.thermal;
 
-import syncleus.dann.data.MutableData;
+import syncleus.dann.data.Data;
 import syncleus.dann.data.specific.BiPolarNeuralData;
 import syncleus.dann.math.BoundMath;
 import syncleus.dann.math.array.EngineArray;
@@ -109,7 +109,7 @@ public class BoltzmannMachine extends ThermalNetwork {
      * @return The new current state.
      */
     @Override
-    public MutableData compute(final MutableData input) {
+    public BiPolarNeuralData compute(final Data input) {
         final BiPolarNeuralData result = new BiPolarNeuralData(input.size());
         EngineArray.arrayCopy(input.getData(), getCurrentState().getData());
         run();

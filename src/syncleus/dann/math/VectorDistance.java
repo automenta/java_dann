@@ -7,13 +7,13 @@
 package syncleus.dann.math;
 
 import org.apache.commons.math3.ml.distance.*;
-import syncleus.dann.data.MutableData;
+import syncleus.dann.data.Data;
 
 /**
  *
  * @author me
  */
-public interface VectorDistance extends DistanceFunction<MutableData>, org.apache.commons.math3.ml.distance.DistanceMeasure {
+public interface VectorDistance extends DistanceFunction<Data>, org.apache.commons.math3.ml.distance.DistanceMeasure {
     
     /** @see http://commons.apache.org/proper/commons-math/javadocs/api-3.3/org/apache/commons/math3/ml/distance/DistanceMeasure.html */
     static abstract class ApacheVectorDistance implements VectorDistance {
@@ -29,7 +29,7 @@ public interface VectorDistance extends DistanceFunction<MutableData>, org.apach
         }
         
         @Override
-        public double distance(MutableData a, MutableData b) {
+        public double distance(Data a, Data b) {
             return compute(a.getData(), b.getData());
         }        
         

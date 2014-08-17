@@ -25,7 +25,7 @@ package syncleus.dann.neural.pattern;
 
 import syncleus.dann.Learning;
 import syncleus.dann.neural.activation.EncogActivationFunction;
-import syncleus.dann.neural.networks.BasicNetwork;
+import syncleus.dann.neural.networks.VectorNeuralNetwork;
 import syncleus.dann.neural.networks.layers.BasicLayer;
 import syncleus.dann.neural.networks.layers.Layer;
 
@@ -96,7 +96,7 @@ public class FeedForwardPattern implements NeuralNetworkPattern {
 
         final Layer input = new BasicLayer(null, true, this.inputNeurons);
 
-        final BasicNetwork result = new BasicNetwork();
+        final VectorNeuralNetwork result = new VectorNeuralNetwork();
         result.addLayer(input);
 
         this.hidden.stream().map((count) -> new BasicLayer(this.activationHidden, true,

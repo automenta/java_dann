@@ -26,7 +26,7 @@ package syncleus.dann.math.random;
 import syncleus.dann.Learning;
 import syncleus.dann.data.VectorEncodable;
 import syncleus.dann.math.matrix.SimpleRealMatrix;
-import syncleus.dann.neural.networks.BasicNetwork;
+import syncleus.dann.neural.networks.VectorNeuralNetwork;
 
 import java.util.Random;
 
@@ -84,7 +84,7 @@ public abstract class BasicRandomizer implements Randomizer {
      * @param network   The network to randomize
      * @param fromLayer The from level to randomize.
      */
-    public void randomize(final BasicNetwork network, final int fromLayer) {
+    public void randomize(final VectorNeuralNetwork network, final int fromLayer) {
         final int fromCount = network.getLayerTotalNeuronCount(fromLayer);
         final int toCount = network.getLayerNeuronCount(fromLayer + 1);
 
@@ -165,8 +165,8 @@ public abstract class BasicRandomizer implements Randomizer {
     @Override
     public void randomize(final Learning method) {
 
-        if (method instanceof BasicNetwork) {
-            final BasicNetwork network = (BasicNetwork) method;
+        if (method instanceof VectorNeuralNetwork) {
+            final VectorNeuralNetwork network = (VectorNeuralNetwork) method;
             for (int i = 0; i < network.getLayerCount() - 1; i++) {
                 randomize(network, i);
             }

@@ -35,8 +35,7 @@ import syncleus.dann.math.array.EngineArray;
  *
  * @author jheaton
  */
-public abstract class ThermalNetwork extends AbstractLearning implements Learning,
-        AutoAssociating, MLResettable {
+public abstract class ThermalNetwork extends AbstractLearning implements Learning, AutoAssociating, MLResettable {
 
     /**
      * Serial id.

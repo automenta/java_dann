@@ -24,14 +24,14 @@
 package syncleus.dann.math.fitting.gaussian;
 
 import syncleus.dann.Learning;
-import syncleus.dann.data.MutableData;
+import syncleus.dann.data.Data;
 import syncleus.dann.data.DataCase;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.learn.AbstractTraining;
 import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.neural.networks.training.propagation.TrainingContinuation;
 
-public class TrainGaussian<D extends MutableData> extends AbstractTraining {
+public class TrainGaussian<D extends Data> extends AbstractTraining<D> {
 
     private final GaussianFitting method;
     private final Dataset<D> training;
@@ -46,7 +46,7 @@ public class TrainGaussian<D extends MutableData> extends AbstractTraining {
      * @return the training
      */
     @Override
-    public Dataset getTraining() {
+    public Dataset<D> getTraining() {
         return training;
     }
 

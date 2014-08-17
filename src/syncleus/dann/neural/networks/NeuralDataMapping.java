@@ -28,7 +28,7 @@ import syncleus.dann.data.MutableData;
 /**
  * Used to map one neural data object to another. Useful for a BAM network.
  */
-public class NeuralDataMapping {
+public class NeuralDataMapping<D extends MutableData> {
 
     /**
      * Copy from one object to the other.
@@ -36,8 +36,8 @@ public class NeuralDataMapping {
      * @param source The source object.
      * @param target The target object.
      */
-    public static void copy(final NeuralDataMapping source,
-                            final NeuralDataMapping target) {
+    public static <D extends MutableData> void copy(final NeuralDataMapping<D> source,
+                            final NeuralDataMapping<D> target) {
         for (int i = 0; i < source.getFrom().size(); i++) {
             target.getFrom().setData(i, source.getFrom().getData(i));
         }
@@ -50,12 +50,12 @@ public class NeuralDataMapping {
     /**
      * The source data.
      */
-    private MutableData from;
+    private D from;
 
     /**
      * The target data.
      */
-    private MutableData to;
+    private D to;
 
     /**
      * Construct the neural data mapping class, with null values.
@@ -71,7 +71,7 @@ public class NeuralDataMapping {
      * @param from The source data.
      * @param to   The target data.
      */
-    public NeuralDataMapping(final MutableData from, final MutableData to) {
+    public NeuralDataMapping(final D from, final D to) {
         this.from = from;
         this.to = to;
     }
@@ -79,14 +79,14 @@ public class NeuralDataMapping {
     /**
      * @return The "from" data.
      */
-    public MutableData getFrom() {
+    public D getFrom() {
         return this.from;
     }
 
     /**
      * @return The "to" data.
      */
-    public MutableData getTo() {
+    public D getTo() {
         return this.to;
     }
 
@@ -95,7 +95,7 @@ public class NeuralDataMapping {
      *
      * @param from The from data.
      */
-    public void setFrom(final MutableData from) {
+    public void setFrom(final D from) {
         this.from = from;
     }
 
@@ -104,7 +104,7 @@ public class NeuralDataMapping {
      *
      * @param to The target data.
      */
-    public void setTo(final MutableData to) {
+    public void setTo(final D to) {
         this.to = to;
     }
 }

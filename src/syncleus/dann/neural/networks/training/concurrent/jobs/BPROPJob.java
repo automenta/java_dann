@@ -24,7 +24,7 @@
 package syncleus.dann.neural.networks.training.concurrent.jobs;
 
 import syncleus.dann.data.Dataset;
-import syncleus.dann.neural.networks.BasicNetwork;
+import syncleus.dann.neural.networks.VectorNeuralNetwork;
 
 /**
  * A training definition for BPROP training.
@@ -52,7 +52,7 @@ public class BPROPJob extends TrainingJob {
      * @param learningRate THe learning rate to use.
      * @param momentum     The momentum to use.
      */
-    public BPROPJob(final BasicNetwork network, final Dataset training,
+    public BPROPJob(final VectorNeuralNetwork network, final Dataset training,
                     final boolean loadToMemory, final double learningRate,
                     final double momentum) {
         super(network, training, loadToMemory);

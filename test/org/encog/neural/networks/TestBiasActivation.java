@@ -23,6 +23,7 @@
  */
 package org.encog.neural.networks;
 
+import syncleus.dann.neural.NetworkUtil;
 import junit.framework.Assert;
 import junit.framework.TestCase;
 

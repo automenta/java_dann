@@ -30,7 +30,7 @@ import syncleus.dann.learn.AbstractTraining;
 import syncleus.dann.math.VectorAlgebra;
 import syncleus.dann.math.random.NguyenWidrowRandomizer;
 import syncleus.dann.math.random.Randomizer;
-import syncleus.dann.neural.networks.BasicNetwork;
+import syncleus.dann.neural.networks.VectorNeuralNetwork;
 import syncleus.dann.neural.networks.structure.NetworkCODEC;
 import syncleus.dann.neural.networks.training.TrainingSetScore;
 import syncleus.dann.neural.networks.training.propagation.TrainingContinuation;
@@ -55,7 +55,7 @@ public class NeuralPSO extends AbstractTraining {
     protected Randomizer m_randomizer;
 
     // Swarm state and memories.
-    protected BasicNetwork[] m_networks;
+    protected VectorNeuralNetwork[] m_networks;
     protected double[][] m_velocities;
     protected double[][] m_bestVectors;
     protected double[] m_bestErrors;
@@ -64,7 +64,7 @@ public class NeuralPSO extends AbstractTraining {
     // Although this is redundant with m_bestVectors[m_bestVectorIndex],
     // m_bestVectors[m_bestVectorIndex] is not thread safe.
     private final double[] m_bestVector;
-    BasicNetwork m_bestNetwork = null;
+    VectorNeuralNetwork m_bestNetwork = null;
 
     // Typical range is 20 - 40 for many problems.
     // More difficult problems may need much higher value.
@@ -118,7 +118,7 @@ public class NeuralPSO extends AbstractTraining {
      * @param calculateScore any type of Encog network scoring/fitness object.
      * @param populationSize the swarm size.
      */
-    public NeuralPSO(final BasicNetwork network, final Randomizer randomizer,
+    public NeuralPSO(final VectorNeuralNetwork network, final Randomizer randomizer,
                      final CalculateScore calculateScore, final int populationSize) {
         super(TrainingImplementationType.Iterative);
         // initialisation of the member variables
@@ -127,7 +127,7 @@ public class NeuralPSO extends AbstractTraining {
         m_calculateScore = calculateScore;
         m_bestNetwork = network;
 
-        m_networks = new BasicNetwork[m_populationSize];
+        m_networks = new VectorNeuralNetwork[m_populationSize];
         m_velocities = null;
         m_bestVectors = new double[m_populationSize][];
         m_bestErrors = new double[m_populationSize];
@@ -148,7 +148,7 @@ public class NeuralPSO extends AbstractTraining {
      *                    as this network.
      * @param trainingSet The training set.
      */
-    public NeuralPSO(final BasicNetwork network, final Dataset trainingSet) {
+    public NeuralPSO(final VectorNeuralNetwork network, final Dataset trainingSet) {
         this(network, new NguyenWidrowRandomizer(), new TrainingSetScore(
                 trainingSet), 20);
     }
@@ -215,7 +215,7 @@ public class NeuralPSO extends AbstractTraining {
             // Except the first particle which has the same values
             // as the network passed to the algorithm.
             if (m_networks[i] == null) {
-                m_networks[i] = (BasicNetwork) m_bestNetwork.clone();
+                m_networks[i] = (VectorNeuralNetwork) m_bestNetwork.clone();
                 if (i > 0)
                     m_randomizer.randomize(m_networks[i]);
             }
@@ -499,7 +499,7 @@ public class NeuralPSO extends AbstractTraining {
      *
      * @param initialPopulation
      */
-    public void setInitialPopulation(final BasicNetwork[] initialPopulation) {
+    public void setInitialPopulation(final VectorNeuralNetwork[] initialPopulation) {
         m_networks = initialPopulation;
     }
 

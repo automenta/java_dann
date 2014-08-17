@@ -25,7 +25,7 @@ package syncleus.dann.util.factory.method;
 
 import syncleus.dann.Learning;
 import syncleus.dann.neural.activation.ActivationLinear;
-import syncleus.dann.neural.networks.BasicNetwork;
+import syncleus.dann.neural.networks.VectorNeuralNetwork;
 import syncleus.dann.neural.networks.layers.BasicLayer;
 import syncleus.dann.util.factory.MLActivationFactory;
 import syncleus.dann.util.factory.parse.ArchitectureLayer;
@@ -69,7 +69,7 @@ public class FeedforwardFactory {
                     "Must have at least one output for feedforward.");
         }
 
-        final BasicNetwork result = new BasicNetwork();
+        final VectorNeuralNetwork result = new VectorNeuralNetwork();
         final List<String> layers = ArchitectureParse.parseLayers(architecture);
         ActivationFunction af = new ActivationLinear();
 

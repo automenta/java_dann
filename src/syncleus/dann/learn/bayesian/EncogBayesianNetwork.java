@@ -52,8 +52,8 @@ import syncleus.dann.data.Data;
  * <p/>
  * http://www.heatonresearch.com/wiki/Bayesian_Network
  */
-public class EncogBayesianNetwork<D extends Data> extends AbstractLearning implements Classifying<D,Integer>,
-        MLResettable, Serializable, ErrorLearning<D> {
+public class EncogBayesianNetwork extends AbstractLearning implements Classifying<Data,Integer>,
+        MLResettable, Serializable, ErrorLearning<Data> {
 
     /**
      * Default choices for a boolean event.
@@ -701,7 +701,7 @@ public class EncogBayesianNetwork<D extends Data> extends AbstractLearning imple
      * @param input The input.
      * @return An array of class indexes.
      */
-    public int[] determineClasses(final D input) {
+    public int[] determineClasses(final Data input) {
         final int[] result = new int[input.size()];
 
         for (int i = 0; i < input.size(); i++) {
@@ -719,7 +719,7 @@ public class EncogBayesianNetwork<D extends Data> extends AbstractLearning imple
      * @param input The input to classify.
      */
     @Override
-    public Integer classify(final D input) {
+    public Integer classify(final Data input) {
 
         if (this.classificationTarget < 0
                 || this.classificationTarget >= this.events.size()) {
@@ -847,7 +847,7 @@ public class EncogBayesianNetwork<D extends Data> extends AbstractLearning imple
      * {@inheritDoc}
      */
     @Override
-    public double calculateError(final Dataset<D> data) {
+    public double calculateError(final Dataset<Data> data) {
 
         if (!this.hasValidClassificationTarget())
             return 1.0;
@@ -859,7 +859,7 @@ public class EncogBayesianNetwork<D extends Data> extends AbstractLearning imple
         int badCount = 0;
         int totalCount = 0;
 
-        for (final DataCase<D> pair : data) {
+        for (final DataCase<Data> pair : data) {
             final int c = this.classify(pair.getInput());
             totalCount++;
             if (c != pair.getInput().getData(this.classificationTarget)) {

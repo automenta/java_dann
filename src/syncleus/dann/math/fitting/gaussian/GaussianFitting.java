@@ -24,13 +24,13 @@
 package syncleus.dann.math.fitting.gaussian;
 
 import syncleus.dann.RegressionLearning;
-import syncleus.dann.data.MutableData;
+import syncleus.dann.data.Data;
 import syncleus.dann.data.vector.VectorData;
 import syncleus.dann.math.matrix.MatrixMath;
 import syncleus.dann.math.matrix.RealMatrix;
 import syncleus.dann.math.matrix.SimpleRealMatrix;
 
-public class GaussianFitting implements RegressionLearning {
+public class GaussianFitting<D extends Data> implements RegressionLearning<D> {
 
     private final double[] weights;
     private final int inputCount;
@@ -62,7 +62,7 @@ public class GaussianFitting implements RegressionLearning {
     }
 
     @Override
-    public MutableData compute(final MutableData input) {
+    public VectorData compute(final D input) {
         final VectorData result = new VectorData(1);
 
         final SimpleRealMatrix m1 = SimpleRealMatrix.createRowMatrix(input.getData());

@@ -320,4 +320,21 @@ public class VectorDataset implements Serializable, Dataset<VectorData>, Cloneab
         return this.data.get(index);
     }
 
+    @Override
+    public VectorCentroid createCentroid() {
+        //TODO do we want to create a centroid for Output?
+        VectorCentroid vc = new VectorCentroid(getInputSize());
+        for (DataCase<VectorData> c : this) {
+            vc.add(c.getInput());
+        }
+        return vc;
+    }
+
+    @Override
+    public String toString() {
+        return data.toString();
+    }
+
+    
+    
 }

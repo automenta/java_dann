@@ -45,7 +45,7 @@ public class BasicFreeformNeuronFactory implements FreeformNeuronFactory,
      * {@inheritDoc}
      */
     @Override
-    public static FreeformNeuron factorContext(final FreeformNeuron neuron) {
+    public FreeformNeuron factorContext(final FreeformNeuron neuron) {
         final FreeformNeuron result = new FreeformContextNeuron(neuron);
         return result;
     }
@@ -54,7 +54,7 @@ public class BasicFreeformNeuronFactory implements FreeformNeuronFactory,
      * {@inheritDoc}
      */
     @Override
-    public static FreeformNeuron factorRegular(final InputSummation object) {
+    public FreeformNeuron factorRegular(final InputSummation object) {
         return new BasicFreeformNeuron(object);
     }
 }

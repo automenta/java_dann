@@ -24,7 +24,7 @@
 package syncleus.dann.math.random;
 
 import syncleus.dann.math.matrix.SimpleRealMatrix;
-import syncleus.dann.neural.networks.BasicNetwork;
+import syncleus.dann.neural.networks.VectorNeuralNetwork;
 
 /**
  * A randomizer that attempts to create starting weight values that are
@@ -194,7 +194,7 @@ public class FanInRandomizer extends BasicRandomizer {
      * @param fromLayer The from level to randomize.
      */
     @Override
-    public void randomize(final BasicNetwork network, final int fromLayer) {
+    public void randomize(final VectorNeuralNetwork network, final int fromLayer) {
         final int fromCount = network.getLayerTotalNeuronCount(fromLayer);
         final int toCount = network.getLayerNeuronCount(fromLayer + 1);
 

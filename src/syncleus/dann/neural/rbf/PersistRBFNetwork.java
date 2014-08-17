@@ -26,7 +26,7 @@ package syncleus.dann.neural.rbf;
 import syncleus.dann.data.file.csv.CSVFormat;
 import syncleus.dann.math.rbf.RadialBasisFunction;
 import syncleus.dann.neural.activation.EncogActivationFunction;
-import syncleus.dann.neural.networks.BasicNetwork;
+import syncleus.dann.neural.networks.VectorNeuralNetwork;
 
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -76,38 +76,38 @@ public class PersistRBFNetwork implements EncogPersistor {
                 final Map<String, String> params = section.parseParams();
 
                 flat.setBeginTraining(EncogFileSection.parseInt(params,
-                        BasicNetwork.TAG_BEGIN_TRAINING));
+                        VectorNeuralNetwork.TAG_BEGIN_TRAINING));
                 flat.setConnectionLimit(EncogFileSection.parseDouble(params,
-                        BasicNetwork.TAG_CONNECTION_LIMIT));
+                        VectorNeuralNetwork.TAG_CONNECTION_LIMIT));
                 flat.setContextTargetOffset(EncogFileSection.parseIntArray(
-                        params, BasicNetwork.TAG_CONTEXT_TARGET_OFFSET));
+                        params, VectorNeuralNetwork.TAG_CONTEXT_TARGET_OFFSET));
                 flat.setContextTargetSize(EncogFileSection.parseIntArray(
-                        params, BasicNetwork.TAG_CONTEXT_TARGET_SIZE));
+                        params, VectorNeuralNetwork.TAG_CONTEXT_TARGET_SIZE));
                 flat.setEndTraining(EncogFileSection.parseInt(params,
-                        BasicNetwork.TAG_END_TRAINING));
+                        VectorNeuralNetwork.TAG_END_TRAINING));
                 flat.setHasContext(EncogFileSection.parseBoolean(params,
-                        BasicNetwork.TAG_HAS_CONTEXT));
+                        VectorNeuralNetwork.TAG_HAS_CONTEXT));
                 flat.setInputCount(EncogFileSection.parseInt(params,
                         PersistConst.INPUT_COUNT));
                 flat.setLayerCounts(EncogFileSection.parseIntArray(params,
-                        BasicNetwork.TAG_LAYER_COUNTS));
+                        VectorNeuralNetwork.TAG_LAYER_COUNTS));
                 flat.setLayerFeedCounts(EncogFileSection.parseIntArray(params,
-                        BasicNetwork.TAG_LAYER_FEED_COUNTS));
+                        VectorNeuralNetwork.TAG_LAYER_FEED_COUNTS));
                 flat.setLayerContextCount(EncogFileSection.parseIntArray(
-                        params, BasicNetwork.TAG_LAYER_CONTEXT_COUNT));
+                        params, VectorNeuralNetwork.TAG_LAYER_CONTEXT_COUNT));
                 flat.setLayerIndex(EncogFileSection.parseIntArray(params,
-                        BasicNetwork.TAG_LAYER_INDEX));
+                        VectorNeuralNetwork.TAG_LAYER_INDEX));
                 flat.setLayerOutput(section.parseDoubleArray(params,
                         PersistConst.OUTPUT));
                 flat.setLayerSums(new double[flat.getLayerOutput().length]);
                 flat.setOutputCount(EncogFileSection.parseInt(params,
                         PersistConst.OUTPUT_COUNT));
                 flat.setWeightIndex(EncogFileSection.parseIntArray(params,
-                        BasicNetwork.TAG_WEIGHT_INDEX));
+                        VectorNeuralNetwork.TAG_WEIGHT_INDEX));
                 flat.setWeights(section.parseDoubleArray(params,
                         PersistConst.WEIGHTS));
                 flat.setBiasActivation(section.parseDoubleArray(params,
-                        BasicNetwork.TAG_BIAS_ACTIVATION));
+                        VectorNeuralNetwork.TAG_BIAS_ACTIVATION));
             } else if (section.getSectionName().equals("RBF-NETWORK")
                     && section.getSubSectionName().equals("ACTIVATION")) {
                 int index = 0;
@@ -187,28 +187,28 @@ public class PersistRBFNetwork implements EncogPersistor {
         out.addSubSection("PARAMS");
         out.addProperties(net.getProperties());
         out.addSubSection("NETWORK");
-        out.writeProperty(BasicNetwork.TAG_BEGIN_TRAINING,
+        out.writeProperty(VectorNeuralNetwork.TAG_BEGIN_TRAINING,
                 flat.getBeginTraining());
-        out.writeProperty(BasicNetwork.TAG_CONNECTION_LIMIT,
+        out.writeProperty(VectorNeuralNetwork.TAG_CONNECTION_LIMIT,
                 flat.getConnectionLimit());
-        out.writeProperty(BasicNetwork.TAG_CONTEXT_TARGET_OFFSET,
+        out.writeProperty(VectorNeuralNetwork.TAG_CONTEXT_TARGET_OFFSET,
                 flat.getContextTargetOffset());
-        out.writeProperty(BasicNetwork.TAG_CONTEXT_TARGET_SIZE,
+        out.writeProperty(VectorNeuralNetwork.TAG_CONTEXT_TARGET_SIZE,
                 flat.getContextTargetSize());
-        out.writeProperty(BasicNetwork.TAG_END_TRAINING, flat.getEndTraining());
-        out.writeProperty(BasicNetwork.TAG_HAS_CONTEXT, flat.getHasContext());
+        out.writeProperty(VectorNeuralNetwork.TAG_END_TRAINING, flat.getEndTraining());
+        out.writeProperty(VectorNeuralNetwork.TAG_HAS_CONTEXT, flat.getHasContext());
         out.writeProperty(PersistConst.INPUT_COUNT, flat.getInputCount());
-        out.writeProperty(BasicNetwork.TAG_LAYER_COUNTS, flat.getLayerCounts());
-        out.writeProperty(BasicNetwork.TAG_LAYER_FEED_COUNTS,
+        out.writeProperty(VectorNeuralNetwork.TAG_LAYER_COUNTS, flat.getLayerCounts());
+        out.writeProperty(VectorNeuralNetwork.TAG_LAYER_FEED_COUNTS,
                 flat.getLayerFeedCounts());
-        out.writeProperty(BasicNetwork.TAG_LAYER_CONTEXT_COUNT,
+        out.writeProperty(VectorNeuralNetwork.TAG_LAYER_CONTEXT_COUNT,
                 flat.getLayerContextCount());
-        out.writeProperty(BasicNetwork.TAG_LAYER_INDEX, flat.getLayerIndex());
+        out.writeProperty(VectorNeuralNetwork.TAG_LAYER_INDEX, flat.getLayerIndex());
         out.writeProperty(PersistConst.OUTPUT, flat.getLayerOutput());
         out.writeProperty(PersistConst.OUTPUT_COUNT, flat.getOutputCount());
-        out.writeProperty(BasicNetwork.TAG_WEIGHT_INDEX, flat.getWeightIndex());
+        out.writeProperty(VectorNeuralNetwork.TAG_WEIGHT_INDEX, flat.getWeightIndex());
         out.writeProperty(PersistConst.WEIGHTS, flat.getWeights());
-        out.writeProperty(BasicNetwork.TAG_BIAS_ACTIVATION,
+        out.writeProperty(VectorNeuralNetwork.TAG_BIAS_ACTIVATION,
                 flat.getBiasActivation());
         out.addSubSection("ACTIVATION");
         for (final EncogActivationFunction af : flat.getEncogActivationFunctions()) {

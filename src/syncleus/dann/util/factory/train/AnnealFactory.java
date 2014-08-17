@@ -27,7 +27,7 @@ import syncleus.dann.Learning;
 import syncleus.dann.Training;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.data.VectorEncodable;
-import syncleus.dann.neural.networks.BasicNetwork;
+import syncleus.dann.neural.networks.VectorNeuralNetwork;
 import syncleus.dann.util.factory.MLTrainFactory;
 import syncleus.dann.util.factory.parse.ArchitectureParse;
 
@@ -48,7 +48,7 @@ public class AnnealFactory {
     public static Training create(final Learning method, final Dataset training,
                                  final String argsStr) {
 
-        if (!(method instanceof BasicNetwork)) {
+        if (!(method instanceof VectorNeuralNetwork)) {
             throw new TrainingError(
                     "Invalid method type, requires BasicNetwork");
         }

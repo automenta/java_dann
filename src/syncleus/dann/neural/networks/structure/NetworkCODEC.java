@@ -25,7 +25,7 @@ package syncleus.dann.neural.networks.structure;
 
 import syncleus.dann.Learning;
 import syncleus.dann.data.VectorEncodable;
-import syncleus.dann.neural.networks.BasicNetwork;
+import syncleus.dann.neural.networks.VectorNeuralNetwork;
 
 import java.util.Arrays;
 
@@ -69,8 +69,8 @@ public final class NetworkCODEC {
      * @param network2 The second network.
      * @return True if the two networks are equal.
      */
-    public static boolean equals(final BasicNetwork network1,
-                                 final BasicNetwork network2) {
+    public static boolean equals(final VectorNeuralNetwork network1,
+                                 final VectorNeuralNetwork network2) {
         final double[] array1 = NetworkCODEC.networkToArray(network1);
         final double[] array2 = NetworkCODEC.networkToArray(network2);
 
@@ -89,8 +89,8 @@ public final class NetworkCODEC {
      * @param precision How many decimal places to check.
      * @return True if the two networks are equal.
      */
-    public static boolean equals(final BasicNetwork network1,
-                                 final BasicNetwork network2, final int precision) {
+    public static boolean equals(final VectorNeuralNetwork network1,
+                                 final VectorNeuralNetwork network2, final int precision) {
         final double[] array1 = NetworkCODEC.networkToArray(network1);
         final double[] array2 = NetworkCODEC.networkToArray(network2);
 

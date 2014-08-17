@@ -24,7 +24,7 @@
 package syncleus.dann.neural.networks.layers;
 
 import syncleus.dann.neural.activation.EncogActivationFunction;
-import syncleus.dann.neural.networks.BasicNetwork;
+import syncleus.dann.neural.networks.VectorNeuralNetwork;
 
 /**
  * This interface defines all necessary methods for a neural network layer.
@@ -41,7 +41,7 @@ public interface Layer {
     /**
      * @return The network that this layer is attached to.
      */
-    BasicNetwork getNetwork();
+    VectorNeuralNetwork getNetwork();
 
     /**
      * @return The neuron count.
@@ -58,7 +58,7 @@ public interface Layer {
      *
      * @param network The network.
      */
-    void setNetwork(BasicNetwork network);
+    void setNetwork(VectorNeuralNetwork network);
 
     /**
      * Most layer types will default this value to one. However, it is possible

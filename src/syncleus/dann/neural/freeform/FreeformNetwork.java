@@ -49,7 +49,7 @@ import syncleus.dann.neural.freeform.factory.FreeformNeuronFactory;
 import syncleus.dann.neural.freeform.factory.InputSummationFactory;
 import syncleus.dann.neural.freeform.task.ConnectionTask;
 import syncleus.dann.neural.freeform.task.NeuronTask;
-import syncleus.dann.neural.networks.BasicNetwork;
+import syncleus.dann.neural.networks.VectorNeuralNetwork;
 import syncleus.dann.util.ObjectCloner;
 
 import java.util.ArrayList;
@@ -177,7 +177,7 @@ public class FreeformNetwork<D extends MutableData> extends AbstractLearning imp
      *
      * @param network The basic network to use.
      */
-    public FreeformNetwork(final BasicNetwork network) {
+    public FreeformNetwork(final VectorNeuralNetwork network) {
 
         if (network.getLayerCount() < 2) {
             throw new FreeformNetworkError(
@@ -276,7 +276,7 @@ public class FreeformNetwork<D extends MutableData> extends AbstractLearning imp
      */
     @Override
     public Object clone() {
-        final BasicNetwork result = (BasicNetwork)ObjectCloner.deepCopy(this);
+        final VectorNeuralNetwork result = (VectorNeuralNetwork)ObjectCloner.deepCopy(this);
         return result;
     }
 
@@ -388,7 +388,7 @@ public class FreeformNetwork<D extends MutableData> extends AbstractLearning imp
      * @param targetIdx    The target index.
      * @param isRecurrent  True, if this is recurrent.
      */
-    private void connectLayersFromBasic(final BasicNetwork network,
+    private void connectLayersFromBasic(final VectorNeuralNetwork network,
                                         final int fromLayerIdx, final FreeformLayer source,
                                         final int sourceIdx, final FreeformLayer target,
                                         final int targetIdx, final boolean isRecurrent) {

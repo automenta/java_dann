@@ -27,6 +27,7 @@ import syncleus.dann.data.MutableData;
 import syncleus.dann.math.cluster.Centroid;
 
 import java.io.Serializable;
+import syncleus.dann.data.Data;
 
 /**
  * Basic implementation of the MLData interface that stores the data in an
@@ -54,6 +55,10 @@ public class VectorData implements MutableData, Serializable, Cloneable {
     public VectorData(final double[] d) {
         this(d.length);
         System.arraycopy(d, 0, this.data, 0, d.length);
+    }
+    
+    public VectorData(final Data d) {
+        this(d.getData());
     }
 
     /**
@@ -98,7 +103,7 @@ public class VectorData implements MutableData, Serializable, Cloneable {
      * {@inheritDoc}
      */
     @Override
-    public MutableData clone() {
+    public VectorData clone() {
         return new VectorData(this);
     }
 
@@ -219,4 +224,6 @@ public class VectorData implements MutableData, Serializable, Cloneable {
 
         return result;
     }
+    
+    
 }

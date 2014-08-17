@@ -28,7 +28,7 @@ import syncleus.dann.Training;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.math.random.NguyenWidrowRandomizer;
 import syncleus.dann.math.random.Randomizer;
-import syncleus.dann.neural.networks.BasicNetwork;
+import syncleus.dann.neural.networks.VectorNeuralNetwork;
 import syncleus.dann.util.factory.MLTrainFactory;
 import syncleus.dann.util.factory.parse.ArchitectureParse;
 
@@ -59,7 +59,7 @@ public class PSOFactory {
         final CalculateScore score = new TrainingSetScore(training);
         final Randomizer randomizer = new NguyenWidrowRandomizer();
 
-        final Training train = new NeuralPSO((BasicNetwork) method, randomizer,
+        final Training train = new NeuralPSO((VectorNeuralNetwork) method, randomizer,
                 score, particles);
 
         return train;

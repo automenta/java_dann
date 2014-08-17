@@ -25,7 +25,7 @@ package syncleus.dann.neural.networks;
 
 import syncleus.dann.Classifying;
 import syncleus.dann.RegressionLearning;
-import syncleus.dann.data.MutableData;
+import syncleus.dann.data.Data;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.data.VectorEncodable;
 import syncleus.dann.data.file.csv.CSVFormat;
@@ -47,9 +47,10 @@ import syncleus.dann.util.ObjectCloner;
 import syncleus.dann.util.factory.MLMethodFactory;
 
 /**
- * This class implements a neural network. This class works in conjunction the
- * Layer classes. Layers are added to the BasicNetwork to specify the structure
- * of the neural network.
+ * This class implements a neural network which operates primarily on vectors of data, 
+ * and consists of layers which generally have a structure natural for vector processing.
+ * 
+ * This class works in conjunction the Layer classes. Layers are added to the BasicNetwork to specify the structure of the neural network.
  * <p/>
  * The first layer added is the input layer, the final layer added is the output
  * layer. Any layers added between these two layers are the hidden layers.
@@ -61,9 +62,7 @@ import syncleus.dann.util.factory.MLMethodFactory;
  * <p/>
  * Once the neural network has been completely constructed.
  */
-public class BasicNetwork<D extends MutableData> extends AbstractLearning implements ContainsFlat, MLContext,
-        RegressionLearning<D>, VectorEncodable, MLResettable, Classifying<D, Integer>, ErrorLearning<D>,
-        MLFactory, Cloneable {
+public class VectorNeuralNetwork<D extends Data> extends AbstractLearning implements ContainsFlat, MLContext, RegressionLearning<D>, VectorEncodable, MLResettable, Classifying<D, Integer>, ErrorLearning<D>, MLFactory, Cloneable {
 
     /**
      * Tag used for the connection limit.
@@ -149,7 +148,7 @@ public class BasicNetwork<D extends MutableData> extends AbstractLearning implem
     /**
      * Construct an empty neural network.
      */
-    public BasicNetwork() {
+    public VectorNeuralNetwork() {
         this.structure = new NeuralStructure(this);
     }
 
@@ -231,7 +230,7 @@ public class BasicNetwork<D extends MutableData> extends AbstractLearning implem
      */
     @Override
     public Object clone() {
-        final BasicNetwork result = (BasicNetwork) ObjectCloner.deepCopy(this);
+        final VectorNeuralNetwork result = (VectorNeuralNetwork) ObjectCloner.deepCopy(this);
         return result;
     }
 
@@ -242,11 +241,9 @@ public class BasicNetwork<D extends MutableData> extends AbstractLearning implem
      * @param output The output.
      */
     public void compute(final double[] input, final double[] output) {
-        final VectorData input2 = new VectorData(input);
-        final MutableData output2 = this.compute(input2);
-        EngineArray.arrayCopy(output2.getData(), output);
+        this.structure.getFlat().compute(input, output);
     }
-
+    
     /**
      * Compute the output for a given input to the neural network.
      *
@@ -254,11 +251,11 @@ public class BasicNetwork<D extends MutableData> extends AbstractLearning implem
      * @return The output from the neural network.
      */
     @Override
-    public MutableData compute(final MutableData input) {
+    public VectorData compute(final D input) {
         try {
-            final MutableData result = new VectorData(this.structure.getFlat()
+            final VectorData result = new VectorData(this.structure.getFlat()
                     .getOutputCount());
-            this.structure.getFlat().compute(input.getData(), result.getData());
+            compute(input.getData(), result.getData());            
             return result;
         } catch (final ArrayIndexOutOfBoundsException ex) {
             throw new RuntimeException(
@@ -318,8 +315,8 @@ public class BasicNetwork<D extends MutableData> extends AbstractLearning implem
             }
         } else {
             if (!this.structure.isConnectionLimited()) {
-                this.setProperty(BasicNetwork.TAG_LIMIT,
-                        BasicNetwork.DEFAULT_CONNECTION_LIMIT);
+                this.setProperty(VectorNeuralNetwork.TAG_LIMIT,
+                        VectorNeuralNetwork.DEFAULT_CONNECTION_LIMIT);
                 this.structure.updateProperties();
 
             }
@@ -365,9 +362,9 @@ public class BasicNetwork<D extends MutableData> extends AbstractLearning implem
             return false;
         if (other == this)
             return true;
-        if (!(other instanceof BasicNetwork))
+        if (!(other instanceof VectorNeuralNetwork))
             return false;
-        final BasicNetwork otherMyClass = (BasicNetwork) other;
+        final VectorNeuralNetwork otherMyClass = (VectorNeuralNetwork) other;
 
         return equals(otherMyClass, EncogMath.DEFAULT_PRECISION);
     }
@@ -381,7 +378,7 @@ public class BasicNetwork<D extends MutableData> extends AbstractLearning implem
      * @param precision The number of decimal places to compare to.
      * @return True if the two neural networks are equal.
      */
-    public boolean equals(final BasicNetwork other, final int precision) {
+    public boolean equals(final VectorNeuralNetwork other, final int precision) {
         return NetworkCODEC.equals(this, other, precision);
     }
 
@@ -741,8 +738,8 @@ public class BasicNetwork<D extends MutableData> extends AbstractLearning implem
      * @param input The input patter to present to the neural network.
      * @return The winning neuron.
      */
-    public int winner(final MutableData input) {
-        final MutableData output = compute(input);
+    public int winner(final D input) {
+        final VectorData output = compute(input);
         return EngineArray.maxIndex(output.getData());
     }
 

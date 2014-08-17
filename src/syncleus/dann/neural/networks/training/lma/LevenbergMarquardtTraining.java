@@ -29,12 +29,16 @@ import syncleus.dann.data.DataCase;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.data.vector.VectorCase;
 import syncleus.dann.data.vector.VectorData;
+import syncleus.dann.learn.AbstractTraining;
+import syncleus.dann.learn.AbstractTraining.TrainingImplementationType;
 import syncleus.dann.math.matrix.decomposition.LuDecomposition2;
 import syncleus.dann.math.matrix.hessian.ComputeHessian;
 import syncleus.dann.math.matrix.hessian.HessianCR;
 import syncleus.dann.math.statistics.ErrorCalculation;
-import syncleus.dann.neural.networks.BasicNetwork;
+import syncleus.dann.neural.networks.VectorNeuralNetwork;
 import syncleus.dann.neural.networks.structure.NetworkCODEC;
+import syncleus.dann.neural.networks.training.TrainingError;
+import syncleus.dann.neural.networks.training.propagation.TrainingContinuation;
 
 /**
  * Trains a neural network using a Levenberg Marquardt algorithm (LMA). This
@@ -65,7 +69,7 @@ import syncleus.dann.neural.networks.structure.NetworkCODEC;
  * http://www-alg.ist.hokudai.ac.jp/~jan/alpha.pdf -
  * http://www.inference.phy.cam.ac.uk/mackay/Bayes_FAQ.html
  */
-public class LevenbergMarquardtTraining extends BasicTraining implements
+public class LevenbergMarquardtTraining extends AbstractTraining implements
         MultiThreadable {
 
     /**
@@ -86,7 +90,7 @@ public class LevenbergMarquardtTraining extends BasicTraining implements
     /**
      * The network that is to be trained.
      */
-    private final BasicNetwork network;
+    private final VectorNeuralNetwork network;
 
     /**
      * The training set that we are using to train.
@@ -140,7 +144,7 @@ public class LevenbergMarquardtTraining extends BasicTraining implements
      * @param network  The network to train. Must have a single output neuron.
      * @param training The training data to use. Must be indexable.
      */
-    public LevenbergMarquardtTraining(final BasicNetwork network,
+    public LevenbergMarquardtTraining(final VectorNeuralNetwork network,
                                       final Dataset training) {
         this(network, training, new HessianCR());
     }
@@ -151,7 +155,7 @@ public class LevenbergMarquardtTraining extends BasicTraining implements
      * @param network  The network to train. Must have a single output neuron.
      * @param training The training data to use. Must be indexable.
      */
-    public LevenbergMarquardtTraining(final BasicNetwork network,
+    public LevenbergMarquardtTraining(final VectorNeuralNetwork network,
                                       final Dataset training, final ComputeHessian h) {
         super(TrainingImplementationType.Iterative);
         ValidateNetwork.validateMethodToData(network, training);

@@ -39,6 +39,7 @@ import syncleus.dann.neural.freeform.FreeformNeuron;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
+import syncleus.dann.data.Data;
 
 /**
  * Provides basic propagation functions to other trainers.
@@ -278,10 +279,10 @@ public abstract class FreeformPropagationTraining<D extends MutableData> extends
         final ErrorCalculation errorCalc = new ErrorCalculation();
         this.visited.clear();
 
-        for (final DataCase pair : this.training) {
-            final MutableData input = pair.getInput();
-            final MutableData ideal = pair.getIdeal();
-            final MutableData actual = this.network.compute(input);
+        for ( DataCase<D> pair : this.training) {
+            final D input = pair.getInput();
+            final D ideal = pair.getIdeal();
+            final Data actual = this.network.compute(input);
             final double sig = pair.getSignificance();
 
             errorCalc.updateError(actual.getData(), ideal.getData(), sig);
@@ -311,9 +312,9 @@ public abstract class FreeformPropagationTraining<D extends MutableData> extends
         final ErrorCalculation errorCalc = new ErrorCalculation();
         this.visited.clear();
 
-        for (final DataCase pair : this.training) {
-            final MutableData input = pair.getInput();
-            final MutableData ideal = pair.getIdeal();
+        for (final DataCase<D> pair : this.training) {
+            final D input = pair.getInput();
+            final D ideal = pair.getIdeal();
             final MutableData actual = this.network.compute(input);
             final double sig = pair.getSignificance();
 

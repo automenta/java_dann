@@ -205,7 +205,7 @@ public class ResilientPropagation extends Propagation {
     @Override
     public void resume(final TrainingContinuation state) {
         if (!isValidResume(state)) {
-            throw new TrainingError("Invalid training resume data length");
+            throw new RuntimeException("Invalid training resume data length");
         }
         final double[] lastGradient = (double[]) state
                 .get(ResilientPropagation.LAST_GRADIENTS);
@@ -268,7 +268,7 @@ public class ResilientPropagation extends Propagation {
                 weightChange = updateiWeightMinus(gradients, lastGradient, index);
                 break;
             default:
-                throw new TrainingError("Unknown RPROP type: " + this.rpropType);
+                throw new RuntimeException("Unknown RPROP type: " + this.rpropType);
         }
 
         this.lastWeightChange[index] = weightChange;

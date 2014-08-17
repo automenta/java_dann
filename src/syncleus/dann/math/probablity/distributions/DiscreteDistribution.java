@@ -23,19 +23,19 @@
  */
 package syncleus.dann.math.probablity.distributions;
 
-import syncleus.dann.data.MutableData;
 import syncleus.dann.data.DataCase;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.data.vector.VectorCase;
 import syncleus.dann.data.vector.VectorData;
 
 import java.util.Arrays;
+import syncleus.dann.data.Data;
 
 /**
  * A discrete distribution is a distribution with a finite set of states that it
  * can be in.
  */
-public class DiscreteDistribution<D extends MutableData> implements StateDistribution<D> {
+public class DiscreteDistribution<D extends Data> implements StateDistribution<D> {
 
     /**
      * The serial id.

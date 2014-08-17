@@ -25,7 +25,7 @@ package syncleus.dann.neural.networks.layers;
 
 import syncleus.dann.neural.activation.ActivationTANH;
 import syncleus.dann.neural.activation.EncogActivationFunction;
-import syncleus.dann.neural.networks.BasicNetwork;
+import syncleus.dann.neural.networks.VectorNeuralNetwork;
 
 import java.io.Serializable;
 import syncleus.dann.neural.flat.FlatLayer;
@@ -77,7 +77,7 @@ public class BasicLayer extends FlatLayer implements Layer, Serializable {
     /**
      * The network that this layer belongs to.
      */
-    private BasicNetwork network;
+    private VectorNeuralNetwork network;
 
     /**
      * Construct this layer with a non-default activation function, also
@@ -106,7 +106,7 @@ public class BasicLayer extends FlatLayer implements Layer, Serializable {
      * @return The network that owns this layer.
      */
     @Override
-    public BasicNetwork getNetwork() {
+    public VectorNeuralNetwork getNetwork() {
         return this.network;
     }
 
@@ -116,7 +116,7 @@ public class BasicLayer extends FlatLayer implements Layer, Serializable {
      * @param network The network for this layer.
      */
     @Override
-    public void setNetwork(final BasicNetwork network) {
+    public void setNetwork(final VectorNeuralNetwork network) {
         this.network = network;
     }
 

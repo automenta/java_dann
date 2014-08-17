@@ -32,7 +32,7 @@ import syncleus.dann.neural.activation.ActivationLinear;
 import syncleus.dann.neural.activation.ActivationSigmoid;
 import syncleus.dann.neural.activation.ActivationTANH;
 import syncleus.dann.neural.activation.EncogActivationFunction;
-import syncleus.dann.neural.networks.BasicNetwork;
+import syncleus.dann.neural.networks.VectorNeuralNetwork;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -736,7 +736,7 @@ public class FlatNetwork implements Serializable, Cloneable {
     public void setConnectionLimit(final double connectionLimit) {
         this.connectionLimit = connectionLimit;
         if (Math.abs(this.connectionLimit
-                - BasicNetwork.DEFAULT_CONNECTION_LIMIT) < EncogMath.DEFAULT_EPSILON) {
+                - VectorNeuralNetwork.DEFAULT_CONNECTION_LIMIT) < EncogMath.DEFAULT_EPSILON) {
             this.isLimited = true;
         }
     }

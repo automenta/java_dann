@@ -33,7 +33,7 @@ import org.encog.ml.data.basic.BasicMLDataSet;
 import org.encog.ml.genetic.MLMethodGeneticAlgorithm;
 import org.encog.ml.train.MLTrain;
 import org.encog.neural.networks.BasicNetwork;
-import org.encog.neural.networks.NetworkUtil;
+import syncleus.dann.neural.NetworkUtil;
 import org.encog.neural.networks.XOR;
 import org.encog.neural.networks.training.anneal.NeuralSimulatedAnnealing;
 import org.encog.neural.networks.training.lma.LevenbergMarquardtTraining;

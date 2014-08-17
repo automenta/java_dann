@@ -23,31 +23,27 @@
  */
 package syncleus.dann.data.vector;
 
-import syncleus.dann.data.DataCase;
-import syncleus.dann.data.DataCluster;
-import syncleus.dann.data.Dataset;
-import syncleus.dann.math.cluster.Centroid;
-import syncleus.dann.math.cluster.Cluster;
-
 import java.util.ArrayList;
+import syncleus.dann.data.DataCluster;
+import syncleus.dann.math.cluster.Centroid;
+
 import java.util.List;
-import syncleus.dann.data.Data;
 
 /**
  * Holds a cluster of MLData items that have been clustered by the
  * KMeansClustering class.
  */
-public class VectorCluster<M extends Data> extends org.apache.commons.math3.ml.clustering.Cluster<M> implements DataCluster<M> {
+public class VectorCluster extends org.apache.commons.math3.ml.clustering.Cluster<VectorData> implements DataCluster<VectorData> {
 
     /**
      * The centroid.
      */
-    private Centroid<DataCase<M>> centroid;
+    public VectorCentroid centroid;
 
     /**
      * The contents of the cluster.
      */
-    private final List<M> data = new ArrayList<>();
+    public final List<VectorData> data;
     
 
     /**
@@ -55,19 +51,40 @@ public class VectorCluster<M extends Data> extends org.apache.commons.math3.ml.c
      *
      * @param cluster The other cluster.
      */
-    public VectorCluster(final Cluster<DataCase<M>> cluster) {
-        this.centroid = cluster.centroid();
-        cluster.getContents().stream().forEach((pair) -> this.data.add(pair.getInput()));
+    public VectorCluster(final VectorCluster cluster) {
+        this.centroid = cluster.centroid.clone();
+        this.data = new ArrayList(cluster.data.size());
+        for (VectorData v : cluster.data) {
+            data.add(v.clone());
+        }
     }
+
+    public VectorCluster(final VectorDataset s) {
+        this.centroid = s.createCentroid();
+        data = new ArrayList(1);
+        s.getData().stream().forEach((pair) -> addPoint(pair.getInput()));
+    }
+    
+    public VectorCluster(final VectorData v) {
+        this.centroid = new VectorCentroid(v);
+        data = new ArrayList(1);
+        addPoint(v);
+    }    
+    
+    public VectorCluster(int dimensions) {
+        this.centroid = new VectorCentroid(dimensions);
+        data = new ArrayList();
+    }        
 
     /**
      * Add to the cluster.
      *
-     * @param pair The pair to add.
+     * @param point The pair to add.
      */
     @Override
-    public final void addPoint(final M pair) {
-        this.data.add(pair);
+    public final void addPoint(final VectorData point) {
+        this.data.add(point);
+        centroid.add(point);
     }
 
     /**
@@ -76,8 +93,8 @@ public class VectorCluster<M extends Data> extends org.apache.commons.math3.ml.c
      * @return The dataset.
      */
     @Override
-    public final Dataset createDataSet() {
-        final Dataset result = new VectorDataset();
+    public final VectorDataset createDataSet() {
+        final VectorDataset result = new VectorDataset();
 
         this.data.stream().forEach(result::add);
 
@@ -88,14 +105,15 @@ public class VectorCluster<M extends Data> extends org.apache.commons.math3.ml.c
      * {@inheritDoc}
      */
     @Override
-    public final M get(final int pos) {
+    public final VectorData get(final int pos) {
         return this.data.get(pos);
     }
 
     /**
      * @return The centroid.
      */
-    public final Centroid<?> getCentroid() {
+    @Override
+    public final Centroid<VectorData> getCentroid() {
         return this.centroid;
     }
 
@@ -103,7 +121,7 @@ public class VectorCluster<M extends Data> extends org.apache.commons.math3.ml.c
      * {@inheritDoc}
      */
     @Override
-    public final List<M> getPoints() {
+    public final List<VectorData> getPoints() {
         return this.data;
     }
 
@@ -111,8 +129,16 @@ public class VectorCluster<M extends Data> extends org.apache.commons.math3.ml.c
      * {@inheritDoc}
      */
     @Override
-    public final void remove(final M pair) {
-        this.data.remove(pair);
+    public final void removePoint(final VectorData point) {
+        this.data.remove(point);
+        centroid.remove(point);
+    }
+    
+    @Override
+    public final void removePoint(int point) {
+        VectorData removed = this.data.remove(point);
+        if (removed!=null)
+            centroid.remove(removed);
     }
 
     /**
@@ -120,7 +146,7 @@ public class VectorCluster<M extends Data> extends org.apache.commons.math3.ml.c
      *
      * @param c The new centroid.
      */
-    public final void setCentroid(final Centroid<DataCase<M>> c) {
+    public final void setCentroid(final VectorCentroid c) {
         this.centroid = c;
     }
 
@@ -132,4 +158,10 @@ public class VectorCluster<M extends Data> extends org.apache.commons.math3.ml.c
         return this.data.size();
     }
 
+    @Override
+    public String toString() {
+        return "[centroid=" + centroid.toString() + ", points={" + data.toString() + "}]";
+    }
+
+    
 }

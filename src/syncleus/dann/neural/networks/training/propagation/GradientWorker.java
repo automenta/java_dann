@@ -30,11 +30,12 @@ import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.math.error.ErrorFunction;
 import syncleus.dann.math.statistics.ErrorCalculation;
 import syncleus.dann.neural.activation.EncogActivationFunction;
+import syncleus.dann.neural.flat.FlatNetwork;
 
 /**
  * Worker class for the mulithreaded training of flat networks.
  */
-public class GradientWorker implements EngineTask {
+public class GradientWorker implements Runnable {
 
     /**
      * The network to train.
@@ -99,7 +100,7 @@ public class GradientWorker implements EngineTask {
     /**
      * The pair to use for training.
      */
-    private final DataCase pair;
+    private DataCase pair;
 
     /**
      * The training data.
@@ -164,8 +165,7 @@ public class GradientWorker implements EngineTask {
         this.layerSums = network.getLayerSums();
         this.layerFeedCounts = network.getLayerFeedCounts();
 
-        this.pair = VectorCase.build(network.getInputCount(),
-                network.getOutputCount());
+        this.pair = new VectorCase(network.getInputCount(), network.getOutputCount());
     }
 
     /**
@@ -199,8 +199,8 @@ public class GradientWorker implements EngineTask {
 
         for (int i = 0; i < this.actual.length; i++) {
 
-            this.layerDelta[i] = ((this.network.getEncogActivationFunctions()[0]
-                    .derivativeFunction(this.layerSums[i], this.layerOutput[i]) + this.flatSpot[0]))
+            this.layerDelta[i] = ((this.network.getActivationFunctions()[0]
+                    .derivative(this.layerSums[i], this.layerOutput[i]) + this.flatSpot[0]))
                     * (this.layerDelta[i] * pair.getSignificance());
         }
 
@@ -223,7 +223,7 @@ public class GradientWorker implements EngineTask {
 
         final int index = this.weightIndex[currentLevel];
         final EncogActivationFunction activation = this.network
-                .getEncogActivationFunctions()[currentLevel];
+                .getActivationFunctions()[currentLevel];
         final double currentFlatSpot = this.flatSpot[currentLevel + 1];
 
         // handle weights
@@ -246,7 +246,7 @@ public class GradientWorker implements EngineTask {
             }
 
             layerDelta[yi] = sum
-                    * (activation.derivativeFunction(layerSums[yi],
+                    * (activation.derivative(layerSums[yi],
                     layerOutput[yi]) + currentFlatSpot);
 
             yi++;
@@ -261,7 +261,7 @@ public class GradientWorker implements EngineTask {
         try {
             this.errorCalculation.reset();
             for (int i = this.low; i <= this.high; i++) {
-                this.training.getRecord(i, this.pair);
+                this.pair = this.training.getRecord(i);
                 process(pair);
             }
             final double error = this.errorCalculation.calculate();
@@ -273,7 +273,7 @@ public class GradientWorker implements EngineTask {
     }
 
     public final void run(final int index) {
-        this.training.getRecord(index, this.pair);
+        this.pair = this.training.getRecord(index);
         process(pair);
         this.owner.report(this.gradients, 0, null);
         EngineArray.fill(this.gradients, 0);

@@ -21,22 +21,31 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package org.encog.neural.networks;
+package syncleus.dann.neural;
 
+import junit.framework.Assert;
 import junit.framework.TestCase;
+import syncleus.dann.data.vector.VectorDataset;
 
-import org.encog.ml.data.MLDataSet;
-import org.encog.ml.data.basic.BasicMLDataSet;
-import org.encog.neural.networks.training.propagation.resilient.ResilientPropagation;
-import org.junit.Assert;
+
+import syncleus.dann.neural.networks.VectorNeuralNetwork;
+import syncleus.dann.neural.networks.training.propagation.resilient.ResilientPropagation;
 
 public class TestLimited extends TestCase {
 	
 	public void testLimited()
 	{
-		MLDataSet trainingData = new BasicMLDataSet(XOR.XOR_INPUT,XOR.XOR_IDEAL);
-		BasicNetwork network = NetworkUtil.createXORNetworkUntrained();		
+            try {
+		VectorDataset trainingData = new VectorDataset(XOR.XOR_INPUT,XOR.XOR_IDEAL);
+		VectorNeuralNetwork network = NetworkUtil.createXORNetworkUntrained();		
 		
+                /*
+                System.out.println("Training Data: " + trainingData);
+                System.out.println("Network: " + network);
+                System.out.println("Network: " + network.getStructure());
+                System.out.println("Network: " + network.getFlat());
+                */
+                
 		ResilientPropagation rprop = new ResilientPropagation(network,trainingData);
 		rprop.iteration();
 		rprop.iteration();
@@ -55,5 +64,10 @@ public class TestLimited extends TestCase {
 		Assert.assertEquals(0.0, network.getStructure().getFlat().getWeights()[0], 0.01);
 		Assert.assertEquals(0.0, network.getStructure().getFlat().getWeights()[1], 0.01);		
 		rprop.finishTraining();
+            }
+            catch (Throwable t) {
+                System.out.println(t);
+                Assert.assertTrue(false);
+            }
 	}
 }
