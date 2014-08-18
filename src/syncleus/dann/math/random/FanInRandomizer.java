@@ -24,7 +24,7 @@
 package syncleus.dann.math.random;
 
 import syncleus.dann.math.matrix.SimpleRealMatrix;
-import syncleus.dann.neural.networks.VectorNeuralNetwork;
+import syncleus.dann.neural.VectorNeuralNetwork;
 
 /**
  * A randomizer that attempts to create starting weight values that are

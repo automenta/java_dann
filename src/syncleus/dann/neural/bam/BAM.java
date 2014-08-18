@@ -27,7 +27,7 @@ import syncleus.dann.data.MutableData;
 import syncleus.dann.learn.AbstractLearning;
 import syncleus.dann.math.matrix.RealMatrix;
 import syncleus.dann.math.matrix.SimpleRealMatrix;
-import syncleus.dann.neural.networks.NeuralDataMapping;
+import syncleus.dann.neural.util.NeuralDataMapping;
 
 /**
  * Bidirectional associative memory (BAM) is a type of neural network developed

@@ -27,8 +27,8 @@ import syncleus.dann.Learning;
 import syncleus.dann.Training;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.learn.InputLearning;
-import syncleus.dann.learn.svm.SVM;
-import syncleus.dann.learn.svm.training.SVMTrain;
+import syncleus.dann.neural.svm.SVM;
+import syncleus.dann.neural.svm.train.SVMTrain;
 import syncleus.dann.util.factory.MLTrainFactory;
 import syncleus.dann.util.factory.parse.ArchitectureParse;
 

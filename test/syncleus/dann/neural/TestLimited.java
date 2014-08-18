@@ -28,8 +28,7 @@ import junit.framework.TestCase;
 import syncleus.dann.data.vector.VectorDataset;
 
 
-import syncleus.dann.neural.networks.VectorNeuralNetwork;
-import syncleus.dann.neural.networks.training.propagation.resilient.ResilientPropagation;
+import syncleus.dann.neural.train.propagation.resilient.ResilientPropagation;
 
 public class TestLimited extends TestCase {
 	

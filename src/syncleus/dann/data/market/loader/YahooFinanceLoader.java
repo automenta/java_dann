@@ -25,7 +25,7 @@ package syncleus.dann.data.market.loader;
 
 import syncleus.dann.data.file.csv.CSVFormat;
 import syncleus.dann.data.file.csv.ReadCSV;
-import syncleus.dann.data.http.FormUtility;
+import syncleus.dann.data.file.FormUtility;
 import syncleus.dann.data.market.MarketDataType;
 import syncleus.dann.data.market.TickerSymbol;
 

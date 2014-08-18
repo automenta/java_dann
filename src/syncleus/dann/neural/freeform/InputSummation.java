@@ -23,7 +23,7 @@
  */
 package syncleus.dann.neural.freeform;
 
-import syncleus.dann.neural.activation.EncogActivationFunction;
+import syncleus.dann.neural.util.activation.EncogActivationFunction;
 
 import java.util.List;
 

@@ -28,7 +28,7 @@ import syncleus.dann.data.Dataset;
 import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.math.matrix.SimpleRealMatrix;
 import syncleus.dann.neural.flat.FlatNetwork;
-import syncleus.dann.neural.networks.VectorNeuralNetwork;
+import syncleus.dann.neural.VectorNeuralNetwork;
 
 /**
  * Some basic code used to calculate Hessian matrixes.

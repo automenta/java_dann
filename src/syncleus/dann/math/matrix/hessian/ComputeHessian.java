@@ -26,7 +26,7 @@ package syncleus.dann.math.matrix.hessian;
 import syncleus.dann.data.Data;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.math.matrix.SimpleRealMatrix;
-import syncleus.dann.neural.networks.VectorNeuralNetwork;
+import syncleus.dann.neural.VectorNeuralNetwork;
 
 /**
  * Compute (estimate) the Hessian matrix. The Hessian matrix is a matrix of the

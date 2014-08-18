@@ -26,7 +26,7 @@ package syncleus.dann.util.factory.train;
 import syncleus.dann.Learning;
 import syncleus.dann.Training;
 import syncleus.dann.data.Dataset;
-import syncleus.dann.neural.networks.VectorNeuralNetwork;
+import syncleus.dann.neural.VectorNeuralNetwork;
 
 /**
  * This class is a factory to create the LMA training method.

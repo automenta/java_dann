@@ -1,0 +1,104 @@
+/*
+ * Encog(tm) Core v3.2 - Java Version
+ * http://www.heatonresearch.com/encog/
+ * https://github.com/encog/encog-java-core
+
+ * Copyright 2008-2013 Heaton Research, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * For more information on Heaton Research copyrights, licenses
+ * and trademarks visit:
+ * http://www.heatonresearch.com/copyright
+ */
+package syncleus.dann.neural.train.concurrent.jobs;
+
+import syncleus.dann.data.Dataset;
+import syncleus.dann.neural.VectorNeuralNetwork;
+
+/**
+ * A training definition for RPROP training.
+ */
+public class RPROPJob extends TrainingJob {
+
+    /**
+     * The initial update value.
+     */
+    private double initialUpdate = RPROPConst.DEFAULT_INITIAL_UPDATE;
+
+    /**
+     * The maximum step value.
+     */
+    private double maxStep = RPROPConst.DEFAULT_MAX_STEP;
+
+    /**
+     * Construct an RPROP job. For more information on RPROP see the
+     * ResilientPropagation class.
+     *
+     * @param network      The network to train.
+     * @param training     The training data to use.
+     * @param loadToMemory True if binary training data should be loaded to memory.
+     */
+    public RPROPJob(final VectorNeuralNetwork network, final Dataset training,
+                    final boolean loadToMemory) {
+        super(network, training, loadToMemory);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void createTrainer(final boolean singleThreaded) {
+        final Propagation train = new ResilientPropagation(getNetwork(),
+                getTraining(), getInitialUpdate(), getMaxStep());
+
+        if (singleThreaded) {
+            train.setThreadCount(1);
+        } else {
+            train.setThreadCount(0);
+        }
+
+        getStrategies().stream().forEach(train::addStrategy);
+
+        setTrain(train);
+    }
+
+    /**
+     * @return the initialUpdate
+     */
+    public double getInitialUpdate() {
+        return this.initialUpdate;
+    }
+
+    /**
+     * @return the maxStep
+     */
+    public double getMaxStep() {
+        return this.maxStep;
+    }
+
+    /**
+     * @param initialUpdate the initialUpdate to set
+     */
+    public void setInitialUpdate(final double initialUpdate) {
+        this.initialUpdate = initialUpdate;
+    }
+
+    /**
+     * @param maxStep the maxStep to set
+     */
+    public void setMaxStep(final double maxStep) {
+        this.maxStep = maxStep;
+    }
+
+}

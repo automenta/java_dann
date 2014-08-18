@@ -26,7 +26,7 @@ package syncleus.dann.math.matrix.hessian;
 import syncleus.dann.data.DataCase;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.math.array.EngineArray;
-import syncleus.dann.neural.activation.EncogActivationFunction;
+import syncleus.dann.neural.util.activation.EncogActivationFunction;
 import syncleus.dann.neural.flat.FlatNetwork;
 
 /**

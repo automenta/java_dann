@@ -23,7 +23,7 @@
  */
 package syncleus.dann.data.temporal;
 
-import syncleus.dann.neural.activation.EncogActivationFunction;
+import syncleus.dann.neural.util.activation.EncogActivationFunction;
 
 
 /**

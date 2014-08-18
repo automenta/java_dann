@@ -32,8 +32,8 @@ import syncleus.dann.evolve.population.BasicPopulation;
 import syncleus.dann.evolve.species.BasicSpecies;
 import syncleus.dann.learn.ErrorLearning;
 import syncleus.dann.math.random.RandomFactory;
-import syncleus.dann.neural.activation.ActivationSteepenedSigmoid;
-import syncleus.dann.neural.activation.EncogActivationFunction;
+import syncleus.dann.neural.util.activation.ActivationSteepenedSigmoid;
+import syncleus.dann.neural.util.activation.EncogActivationFunction;
 import syncleus.dann.util.ChooseObject;
 
 import java.io.Serializable;

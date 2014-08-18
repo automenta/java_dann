@@ -24,7 +24,7 @@
 package syncleus.dann.math.random;
 
 import syncleus.dann.math.LinearCongruentialGenerator;
-import syncleus.dann.neural.networks.VectorNeuralNetwork;
+import syncleus.dann.neural.VectorNeuralNetwork;
 
 /**
  * A randomizer that takes a seed and will always produce consistent results.

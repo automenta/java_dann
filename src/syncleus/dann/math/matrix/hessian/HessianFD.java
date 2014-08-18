@@ -31,7 +31,7 @@ import syncleus.dann.math.EncogMath;
 import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.math.matrix.SimpleRealMatrix;
 import syncleus.dann.math.statistics.ErrorCalculation;
-import syncleus.dann.neural.networks.VectorNeuralNetwork;
+import syncleus.dann.neural.VectorNeuralNetwork;
 
 /**
  * Calculate the Hessian matrix using the finite difference method. This is a

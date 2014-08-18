@@ -24,7 +24,7 @@
 package syncleus.dann.neural.flat;
 
 import syncleus.dann.math.EncogMath;
-import syncleus.dann.neural.activation.EncogActivationFunction;
+import syncleus.dann.neural.util.activation.EncogActivationFunction;
 
 /**
  * Used to configure a flat layer. Flat layers are not kept by a Flat Network,

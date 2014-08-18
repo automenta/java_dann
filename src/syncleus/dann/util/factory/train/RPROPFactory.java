@@ -26,7 +26,7 @@ package syncleus.dann.util.factory.train;
 import syncleus.dann.Learning;
 import syncleus.dann.Training;
 import syncleus.dann.data.Dataset;
-import syncleus.dann.neural.networks.ContainsFlat;
+import syncleus.dann.neural.util.ContainsFlat;
 import syncleus.dann.util.factory.MLTrainFactory;
 import syncleus.dann.util.factory.parse.ArchitectureParse;
 

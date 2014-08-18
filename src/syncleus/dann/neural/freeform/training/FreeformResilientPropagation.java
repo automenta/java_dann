@@ -28,8 +28,8 @@ import syncleus.dann.data.Dataset;
 import syncleus.dann.math.EncogMath;
 import syncleus.dann.neural.freeform.FreeformConnection;
 import syncleus.dann.neural.freeform.FreeformNetwork;
-import syncleus.dann.neural.networks.training.propagation.TrainingContinuation;
-import syncleus.dann.neural.networks.training.propagation.resilient.RPROPConst;
+import syncleus.dann.neural.train.propagation.TrainingContinuation;
+import syncleus.dann.neural.train.propagation.resilient.RPROPConst;
 
 import java.io.Serializable;
 

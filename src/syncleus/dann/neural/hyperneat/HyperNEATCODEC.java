@@ -29,8 +29,8 @@ import syncleus.dann.data.vector.VectorData;
 import syncleus.dann.evolve.GeneticError;
 import syncleus.dann.evolve.codec.GeneticCODEC;
 import syncleus.dann.evolve.genome.Genome;
-import syncleus.dann.neural.activation.ActivationSteepenedSigmoid;
-import syncleus.dann.neural.activation.EncogActivationFunction;
+import syncleus.dann.neural.util.activation.ActivationSteepenedSigmoid;
+import syncleus.dann.neural.util.activation.EncogActivationFunction;
 
 import java.util.ArrayList;
 import java.util.Collections;

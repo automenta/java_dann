@@ -10,7 +10,7 @@ import static junit.framework.Assert.assertEquals;
 import org.junit.Test;
 import syncleus.dann.neural.TestFreeform;
 import syncleus.dann.neural.VectorNeuralGraph;
-import syncleus.dann.neural.networks.VectorNeuralNetwork;
+import syncleus.dann.neural.VectorNeuralNetwork;
 
 /**
  *

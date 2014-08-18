@@ -26,7 +26,7 @@ package syncleus.dann.math.matrix.hessian;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.math.matrix.SimpleRealMatrix;
-import syncleus.dann.neural.networks.VectorNeuralNetwork;
+import syncleus.dann.neural.VectorNeuralNetwork;
 
 /**
  * Calculate the Hessian matrix using the chain rule method.

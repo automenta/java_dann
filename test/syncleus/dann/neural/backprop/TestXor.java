@@ -18,13 +18,14 @@
  ******************************************************************************/
 package syncleus.dann.neural.backprop;
 
+import syncleus.dann.neural.feedforward.graph.SimpleOutputBackpropNeuron;
 import org.junit.Assert;
 import org.junit.Test;
-import syncleus.dann.neural.InputNeuron;
-import syncleus.dann.neural.OutputNeuron;
-import syncleus.dann.neural.activation.DannActivationFunction;
-import syncleus.dann.neural.activation.SineActivationFunction;
-import syncleus.dann.neural.backprop.brain.FullyConnectedFeedforwardBrain;
+import syncleus.dann.neural.util.InputNeuron;
+import syncleus.dann.neural.util.OutputNeuron;
+import syncleus.dann.neural.util.activation.DannActivationFunction;
+import syncleus.dann.neural.util.activation.SineActivationFunction;
+import syncleus.dann.neural.feedforward.FullyConnectedFeedforwardBrain;
 import syncleus.dann.util.DannException;
 
 import java.util.ArrayList;

@@ -35,7 +35,7 @@ import syncleus.dann.math.probablity.distributions.StateDistribution;
 import syncleus.dann.learn.kmeans.KMeansUtil;
 import syncleus.dann.learn.strategy.Strategy;
 import syncleus.dann.math.VectorDistance;
-import syncleus.dann.neural.networks.training.propagation.TrainingContinuation;
+import syncleus.dann.neural.train.propagation.TrainingContinuation;
 
 import java.util.ArrayList;
 import java.util.Collection;

@@ -18,6 +18,7 @@
  ******************************************************************************/
 package syncleus.dann.neural;
 
+import syncleus.dann.neural.util.structure.SynapseNotConnectedDannException;
 import org.junit.Test;
 
 public class TestSynapseNotConnectedException {

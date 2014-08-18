@@ -30,7 +30,7 @@ import syncleus.dann.data.vector.VectorData;
 import syncleus.dann.learn.ErrorLearning;
 import syncleus.dann.math.EncogUtility;
 import syncleus.dann.math.array.EngineArray;
-import syncleus.dann.neural.activation.EncogActivationFunction;
+import syncleus.dann.neural.util.activation.EncogActivationFunction;
 
 import java.io.Serializable;
 import java.util.List;

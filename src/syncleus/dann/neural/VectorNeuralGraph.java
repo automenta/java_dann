@@ -12,7 +12,6 @@ import syncleus.dann.graph.AbstractDirectedEdge;
 import syncleus.dann.graph.MutableDirectedAdjacencyGraph;
 import syncleus.dann.neural.VectorNeuralGraph.VectorNeuralEdge;
 import syncleus.dann.neural.VectorNeuralGraph.VectorNeuralNode;
-import syncleus.dann.neural.networks.VectorNeuralNetwork;
 
 /**
  * Wraps a VectorNeuralNetwork as a Graph for analysis, display, and other purposes

@@ -29,11 +29,10 @@ import syncleus.dann.Training;
 import syncleus.dann.data.vector.VectorDataset;
 
 
-import syncleus.dann.neural.activation.ActivationSigmoid;
+import syncleus.dann.neural.util.activation.ActivationSigmoid;
 import syncleus.dann.neural.freeform.FreeformNetwork;
 import syncleus.dann.neural.freeform.training.FreeformResilientPropagation;
-import syncleus.dann.neural.networks.VectorNeuralNetwork;
-import syncleus.dann.neural.networks.layers.BasicLayer;
+import syncleus.dann.neural.util.layer.BasicLayer;
 
 public class TestFreeform extends TestCase {
 	

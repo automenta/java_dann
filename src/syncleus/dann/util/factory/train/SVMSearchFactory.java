@@ -26,8 +26,8 @@ package syncleus.dann.util.factory.train;
 import syncleus.dann.Learning;
 import syncleus.dann.Training;
 import syncleus.dann.data.Dataset;
-import syncleus.dann.learn.svm.SVM;
-import syncleus.dann.learn.svm.training.SVMSearchTrain;
+import syncleus.dann.neural.svm.SVM;
+import syncleus.dann.neural.svm.train.SVMSearchTrain;
 import syncleus.dann.util.factory.parse.ArchitectureParse;
 
 import java.util.Map;

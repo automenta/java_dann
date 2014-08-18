@@ -25,7 +25,7 @@ package syncleus.dann.neural.neat.training.opp;
 
 import syncleus.dann.evolve.genome.Genome;
 import syncleus.dann.math.random.RangeRandomizer;
-import syncleus.dann.neural.activation.EncogActivationFunction;
+import syncleus.dann.neural.util.activation.EncogActivationFunction;
 
 import java.util.Random;
 

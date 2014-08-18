@@ -18,10 +18,10 @@
  ******************************************************************************/
 package syncleus.dann.neural.som.brain;
 
-import syncleus.dann.neural.AbstractNeuron;
+import syncleus.dann.neural.util.AbstractNeuron;
 import syncleus.dann.neural.Brain;
-import syncleus.dann.neural.activation.AbstractActivationFunction;
-import syncleus.dann.neural.activation.SqrtActivationFunction;
+import syncleus.dann.neural.util.activation.AbstractActivationFunction;
+import syncleus.dann.neural.util.activation.SqrtActivationFunction;
 
 /**
  * A SOM neuron will calculate its euclidean distance to the input vector as its

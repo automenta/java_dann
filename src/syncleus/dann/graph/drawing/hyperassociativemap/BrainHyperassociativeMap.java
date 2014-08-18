@@ -18,6 +18,8 @@
  ******************************************************************************/
 package syncleus.dann.graph.drawing.hyperassociativemap;
 
+import syncleus.dann.neural.util.InputNeuron;
+import syncleus.dann.neural.util.OutputNeuron;
 import syncleus.dann.neural.*;
 
 import java.util.Map;

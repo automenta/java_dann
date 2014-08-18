@@ -24,7 +24,7 @@
 package syncleus.dann.data.market;
 
 import syncleus.dann.data.temporal.TemporalDataDescription;
-import syncleus.dann.neural.activation.EncogActivationFunction;
+import syncleus.dann.neural.util.activation.EncogActivationFunction;
 
 /**
  * This class is used to describe the type of financial data that is needed.

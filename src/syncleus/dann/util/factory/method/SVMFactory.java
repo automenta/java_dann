@@ -24,9 +24,9 @@
 package syncleus.dann.util.factory.method;
 
 import syncleus.dann.Learning;
-import syncleus.dann.learn.svm.KernelType;
-import syncleus.dann.learn.svm.SVM;
-import syncleus.dann.learn.svm.SVMType;
+import syncleus.dann.neural.svm.KernelType;
+import syncleus.dann.neural.svm.SVM;
+import syncleus.dann.neural.svm.SVMType;
 import syncleus.dann.util.factory.parse.ArchitectureLayer;
 import syncleus.dann.util.factory.parse.ArchitectureParse;
 

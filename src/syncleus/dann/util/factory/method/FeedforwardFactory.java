@@ -24,9 +24,9 @@
 package syncleus.dann.util.factory.method;
 
 import syncleus.dann.Learning;
-import syncleus.dann.neural.activation.ActivationLinear;
-import syncleus.dann.neural.networks.VectorNeuralNetwork;
-import syncleus.dann.neural.networks.layers.BasicLayer;
+import syncleus.dann.neural.util.activation.ActivationLinear;
+import syncleus.dann.neural.VectorNeuralNetwork;
+import syncleus.dann.neural.util.layer.BasicLayer;
 import syncleus.dann.util.factory.MLActivationFactory;
 import syncleus.dann.util.factory.parse.ArchitectureLayer;
 import syncleus.dann.util.factory.parse.ArchitectureParse;

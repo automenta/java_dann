@@ -30,11 +30,10 @@ import syncleus.dann.learn.ErrorLearning;
 
 import syncleus.dann.math.random.ConsistentRandomizer;
 import syncleus.dann.math.random.NguyenWidrowRandomizer;
-import syncleus.dann.neural.activation.ActivationSigmoid;
+import syncleus.dann.neural.util.activation.ActivationSigmoid;
 import syncleus.dann.neural.freeform.FreeformLayer;
 import syncleus.dann.neural.freeform.FreeformNetwork;
-import syncleus.dann.neural.networks.VectorNeuralNetwork;
-import syncleus.dann.neural.networks.layers.BasicLayer;
+import syncleus.dann.neural.util.layer.BasicLayer;
 
 public class NetworkUtil {
 

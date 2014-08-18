@@ -34,9 +34,8 @@ import syncleus.dann.data.vector.VectorDataset;
 import syncleus.dann.math.EncogUtility;
 import syncleus.dann.math.random.RangeRandomizer;
 import syncleus.dann.neural.freeform.FreeformNetwork;
-import syncleus.dann.neural.networks.VectorNeuralNetwork;
-import syncleus.dann.neural.networks.layers.BasicLayer;
-import syncleus.dann.neural.networks.structure.NetworkCODEC;
+import syncleus.dann.neural.util.layer.BasicLayer;
+import syncleus.dann.neural.util.structure.NetworkCODEC;
 
 
 

@@ -25,8 +25,8 @@ package syncleus.dann.math.random;
 
 import syncleus.dann.Learning;
 import syncleus.dann.math.matrix.SimpleRealMatrix;
-import syncleus.dann.neural.activation.EncogActivationFunction;
-import syncleus.dann.neural.networks.VectorNeuralNetwork;
+import syncleus.dann.neural.util.activation.EncogActivationFunction;
+import syncleus.dann.neural.VectorNeuralNetwork;
 
 /**
  * Implementation of <i>Nguyen-Widrow</i> weight initialization. This is the

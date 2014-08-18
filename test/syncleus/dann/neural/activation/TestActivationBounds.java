@@ -18,6 +18,11 @@
  ******************************************************************************/
 package syncleus.dann.neural.activation;
 
+import syncleus.dann.neural.util.activation.HyperbolicSecantActivationFunction;
+import syncleus.dann.neural.util.activation.SineActivationFunction;
+import syncleus.dann.neural.util.activation.DannActivationFunction;
+import syncleus.dann.neural.util.activation.GausianActivationFunction;
+import syncleus.dann.neural.util.activation.HyperbolicTangentActivationFunction;
 import org.junit.Assert;
 import org.junit.Test;
 

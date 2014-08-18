@@ -18,9 +18,11 @@
  ******************************************************************************/
 package syncleus.dann.neural;
 
+import syncleus.dann.neural.util.AbstractLocalBrain;
+import syncleus.dann.neural.util.NeuronGroup;
 import org.junit.Assert;
 import org.junit.Test;
-import syncleus.dann.neural.backprop.SimpleBackpropNeuron;
+import syncleus.dann.neural.feedforward.graph.SimpleBackpropNeuron;
 
 import java.util.stream.Collectors;
 

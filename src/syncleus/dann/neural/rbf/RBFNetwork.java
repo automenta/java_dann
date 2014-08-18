@@ -36,7 +36,7 @@ import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.math.random.ConsistentRandomizer;
 import syncleus.dann.math.random.RangeRandomizer;
 import syncleus.dann.math.rbf.*;
-import syncleus.dann.neural.networks.ContainsFlat;
+import syncleus.dann.neural.util.ContainsFlat;
 
 /**
  * RBF neural network.

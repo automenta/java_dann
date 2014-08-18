@@ -31,7 +31,7 @@ import syncleus.dann.data.DataCase;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.learn.AbstractTraining;
 import syncleus.dann.math.statistics.ErrorCalculation;
-import syncleus.dann.neural.activation.ActivationSigmoid;
+import syncleus.dann.neural.util.activation.ActivationSigmoid;
 import syncleus.dann.neural.freeform.FreeformConnection;
 import syncleus.dann.neural.freeform.FreeformNetwork;
 import syncleus.dann.neural.freeform.FreeformNeuron;

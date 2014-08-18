@@ -23,7 +23,11 @@
  */
 package syncleus.dann.neural.hyperneat;
 
-import syncleus.dann.neural.activation.*;
+import syncleus.dann.neural.util.activation.ActivationBipolarSteepenedSigmoid;
+import syncleus.dann.neural.util.activation.ActivationGaussian;
+import syncleus.dann.neural.util.activation.ActivationSIN;
+import syncleus.dann.neural.util.activation.ActivationClippedLinear;
+import syncleus.dann.neural.util.activation.EncogActivationFunction;
 import syncleus.dann.util.ChooseObject;
 
 import java.util.List;

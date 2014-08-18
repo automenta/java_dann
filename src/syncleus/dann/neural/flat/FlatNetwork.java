@@ -28,11 +28,11 @@ import syncleus.dann.data.Dataset;
 import syncleus.dann.math.EncogMath;
 import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.math.statistics.ErrorCalculation;
-import syncleus.dann.neural.activation.ActivationLinear;
-import syncleus.dann.neural.activation.ActivationSigmoid;
-import syncleus.dann.neural.activation.ActivationTANH;
-import syncleus.dann.neural.activation.EncogActivationFunction;
-import syncleus.dann.neural.networks.VectorNeuralNetwork;
+import syncleus.dann.neural.util.activation.ActivationLinear;
+import syncleus.dann.neural.util.activation.ActivationSigmoid;
+import syncleus.dann.neural.util.activation.ActivationTANH;
+import syncleus.dann.neural.util.activation.EncogActivationFunction;
+import syncleus.dann.neural.VectorNeuralNetwork;
 
 import java.io.Serializable;
 import java.util.ArrayList;

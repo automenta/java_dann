@@ -25,7 +25,7 @@ package syncleus.dann.neural.flat;
 
 import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.math.rbf.RadialBasisFunction;
-import syncleus.dann.neural.activation.ActivationLinear;
+import syncleus.dann.neural.util.activation.ActivationLinear;
 
 import java.io.Serializable;
 import java.util.Arrays;

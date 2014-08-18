@@ -19,11 +19,11 @@
 package syncleus.dann.graph.drawing.hyperassociativemap;
 
 import syncleus.dann.neural.Synapse;
-import syncleus.dann.neural.backprop.BackpropNeuron;
-import syncleus.dann.neural.backprop.BackpropStaticNeuron;
-import syncleus.dann.neural.backprop.InputBackpropNeuron;
-import syncleus.dann.neural.backprop.OutputBackpropNeuron;
-import syncleus.dann.neural.backprop.brain.FeedforwardBackpropBrain;
+import syncleus.dann.neural.feedforward.graph.BackpropNeuron;
+import syncleus.dann.neural.feedforward.graph.BackpropStaticNeuron;
+import syncleus.dann.neural.feedforward.graph.InputBackpropNeuron;
+import syncleus.dann.neural.feedforward.graph.OutputBackpropNeuron;
+import syncleus.dann.neural.feedforward.graph.FeedforwardBackpropBrain;
 
 import java.util.HashMap;
 import java.util.Map;
