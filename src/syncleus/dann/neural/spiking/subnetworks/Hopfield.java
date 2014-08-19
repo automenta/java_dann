@@ -231,6 +231,7 @@ public class Hopfield extends Subnetwork implements Trainable {
                 }
             }
         }
+        
 
         getSynapseGroup().initializeSynapseVisibility();
 

@@ -173,21 +173,16 @@ public class SpikingNeuralNetwork {
         // Notify network listeners
         this.fireNetworkChanged();
 
-        // Clear input nodes
-        clearInputs();
-    }
-
-    /**
-     * Update all neuron groups and other groups.
-     */
-    public void updateAllGroups() {
-        // Update group lists
         if (getGroupList() != null) {
             for (Group group : getGroupList()) {
                 group.update();
             }
         }
+        
+        // Clear input nodes
+        clearInputs();
     }
+
 
     /**
      * Update the priority list used for priority based update.
