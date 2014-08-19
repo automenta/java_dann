@@ -21,13 +21,12 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package org.encog.util.concurrency;
+package syncleus.dann.util.concurrency;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-import org.encog.EncogError;
 
 /**
  * This class abstracts thread pools, and potentially grids and other types of

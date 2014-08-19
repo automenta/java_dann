@@ -20,7 +20,7 @@ import org.neuroph.nnet.comp.layer.InputMapsLayer;
 import org.neuroph.nnet.comp.Kernel;
 import org.neuroph.nnet.comp.layer.Layer2D;
 import org.neuroph.nnet.comp.layer.PoolingLayer;
-import syncleus.dann.neural.train.neuroph.ConvolutionalBackpropagation;
+import syncleus.dann.neural.feedforward.backpropagation.ConvolutionalBackpropagation;
 import org.neuroph.core.Layer;
 import org.neuroph.core.Neuron;
 import org.neuroph.core.data.DataSet;
@@ -29,7 +29,7 @@ import org.neuroph.core.events.LearningEvent;
 import org.neuroph.core.events.LearningEventListener;
 import syncleus.dann.neural.util.input.WeightedSum;
 import org.neuroph.nnet.comp.neuron.BiasNeuron;
-import syncleus.dann.neural.train.neuroph.BackPropagation;
+import syncleus.dann.neural.feedforward.backpropagation.BackPropagationNeuroph;
 import org.neuroph.util.ConnectionFactory;
 import org.neuroph.util.NeuronProperties;
 import org.neuroph.util.TransferFunctionType;
@@ -73,7 +73,7 @@ public class OCRExample {
         static class LearningListener implements LearningEventListener {
 
             public void handleLearningEvent(LearningEvent event) {
-                BackPropagation bp = (BackPropagation)event.getSource();
+                BackPropagationNeuroph bp = (BackPropagationNeuroph)event.getSource();
                 System.out.println("Current iteration: "+bp.getCurrentIteration());
                 System.out.println("Error: "+bp.getTotalNetworkError());
             }

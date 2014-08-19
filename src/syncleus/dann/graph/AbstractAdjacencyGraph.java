@@ -214,12 +214,12 @@ public abstract class AbstractAdjacencyGraph<N, E extends Edge<N>> implements
 
     @Override
     public Stream<E> streamEdges() {
-        return edges.stream();
+        return getEdges().stream();
     }
 
     @Override
     public Stream<N> streamNodes() {
-        return adjacentNodes.keySet().stream();
+        return getNodes().stream();
     }
 
     @Override

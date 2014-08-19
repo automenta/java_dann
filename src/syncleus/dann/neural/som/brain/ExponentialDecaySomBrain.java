@@ -22,6 +22,7 @@ import syncleus.dann.graph.AbstractBidirectedAdjacencyGraph;
 import syncleus.dann.neural.Synapse;
 
 import java.util.concurrent.ExecutorService;
+import syncleus.dann.data.Data;
 
 /**
  * A SomBrain which uses exponential decay over time for the neighborhood
@@ -51,5 +52,13 @@ public final class ExponentialDecaySomBrain<IN extends SomInputNeuron, ON extend
     @Override
     public AbstractBidirectedAdjacencyGraph<N, S> clone() {
         return super.clone(); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void compute(Data d) {
+        if (d.size()!=getInputCount())
+            throw new RuntimeException(d + " has invalid data dimensions for " + this);
+        for (int i = 0; i < d.size(); i++) {
+            setInput(i, d.getData(i));
+        }
     }
 }

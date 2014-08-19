@@ -47,7 +47,7 @@ public abstract class AbstractInputNeuron extends AbstractNeuron implements
     }
 
     @Override
-    protected double getOutput() {
+    public double getOutput() {
         return this.input;
     }
 

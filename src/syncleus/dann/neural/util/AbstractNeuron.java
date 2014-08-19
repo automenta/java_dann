@@ -50,5 +50,12 @@ public abstract class AbstractNeuron implements Neuron {
     }
 
     // TODO consider making this public and moving it to the neuron interface
-    protected abstract double getOutput();
+    public abstract double getOutput();
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName();
+    }
+    
+    
 }

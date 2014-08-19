@@ -18,11 +18,12 @@
  ******************************************************************************/
 package syncleus.dann.math;
 
+import java.io.Serializable;
 import org.apache.commons.math3.linear.ArrayRealVector;
 
-import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
+import syncleus.dann.data.DoubleArray;
 
 /**
  * Representation of a point in n-dimensions. Works with both Cartesian
@@ -32,7 +33,7 @@ import java.util.List;
  * @author Jeffrey Phillips Freeman
  * @since 1.0
  */
-public class Vector extends ArrayRealVector implements Serializable {
+public class Vector extends ArrayRealVector implements DoubleArray, Serializable {
     private static final long serialVersionUID = -1488734312355605257L;
     private static final String DIMENSIONS_BELOW_ONE = "dimensions can not be less than or equal to zero";
 
@@ -70,6 +71,12 @@ public class Vector extends ArrayRealVector implements Serializable {
             d[i++] = x;
         return d;
     }
+
+    public double[] getData() {
+        return data;
+    }
+    
+    
     
     /**
      * Creates a hyper-point with the specified coordinates. The number of

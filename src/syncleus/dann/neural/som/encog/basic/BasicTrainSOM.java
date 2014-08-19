@@ -23,11 +23,13 @@
  */
 package syncleus.dann.neural.som.encog.basic;
 
+import syncleus.dann.Clustering;
 import syncleus.dann.Function;
 import syncleus.dann.Learning;
 import syncleus.dann.data.Data;
 import syncleus.dann.data.MutableData;
 import syncleus.dann.data.DataCase;
+import syncleus.dann.data.DataCluster;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.data.vector.VectorData;
 import syncleus.dann.learn.AbstractTraining;
@@ -36,7 +38,7 @@ import syncleus.dann.math.matrix.MatrixMath;
 import syncleus.dann.math.matrix.RealMatrix;
 import syncleus.dann.math.matrix.SimpleRealMatrix;
 import syncleus.dann.neural.util.LearningRate;
-import syncleus.dann.neural.train.propagation.TrainingContinuation;
+import syncleus.dann.neural.flat.propagation.TrainingContinuation;
 import syncleus.dann.neural.som.SOMEncog;
 import syncleus.dann.neural.som.encog.basic.BasicTrainSOM.SOMInput;
 import syncleus.dann.neural.som.encog.basic.neighborhood.NeighborhoodFunction;
@@ -70,7 +72,7 @@ import syncleus.dann.neural.som.encog.basic.neighborhood.NeighborhoodFunction;
  *
  * @author jheaton
  */
-public class BasicTrainSOM<D extends Data> extends AbstractTraining<D> implements LearningRate, Function<SOMInput<D>,VectorData> {
+public class BasicTrainSOM<D extends Data> extends AbstractTraining<D> implements LearningRate, Function<SOMInput<D>,VectorData>, Clustering<D> {
 
     /**
      * The neighborhood function to use to determine to what degree a neuron
@@ -548,6 +550,16 @@ public class BasicTrainSOM<D extends Data> extends AbstractTraining<D> implement
         final int bmu = this.bmuUtil.calculateBMU(input);
         train(bmu, this.network.getWeights(), input);
         applyCorrection();
+    }
+
+    @Override
+    public DataCluster<D>[] getClusters() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public int numClusters() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     

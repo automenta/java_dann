@@ -22,10 +22,11 @@ import syncleus.dann.graph.AbstractDirectedEdge;
 
 import java.util.List;
 import java.util.Random;
+import syncleus.dann.graph.WeightedEdge;
 import syncleus.dann.neural.Synapse;
 
 public abstract class AbstractSynapse<N> extends AbstractDirectedEdge<N>
-        implements Synapse<N> {
+        implements Synapse<N>, WeightedEdge<N> {
     private static final long serialVersionUID = -7939448149356677295L;
     /**
      * The current weight of the synapse.
@@ -157,4 +158,11 @@ public abstract class AbstractSynapse<N> extends AbstractDirectedEdge<N>
     public AbstractSynapse<N> clone() {
         return (AbstractSynapse<N>) super.clone();
     }
+
+    @Override
+    public String toString() {
+        return '(' + super.toString() + ", w=" + getWeight() + ")";
+    }
+    
+    
 }

@@ -60,7 +60,7 @@ public class PNNPattern implements NeuralNetworkPattern {
      * @param count The number of hidden neurons.
      */
     @Override
-    public static void addHiddenLayer(final int count) {
+    public void addHiddenLayer(final int count) {
         throw new PatternError("A PNN network does not have hidden layers.");
     }
 
@@ -118,7 +118,7 @@ public class PNNPattern implements NeuralNetworkPattern {
      * @param activation The activation function to use.
      */
     @Override
-    public static void setEncogActivationFunction(final EncogActivationFunction activation) {
+    public void setActivationFunction(final EncogActivationFunction activation) {
         throw new PatternError(
                 "A SOM network can't define an activation function.");
 

@@ -32,7 +32,7 @@ import syncleus.dann.learn.bayesian.training.estimator.BayesEstimator;
 import syncleus.dann.learn.bayesian.training.estimator.SimpleEstimator;
 import syncleus.dann.learn.bayesian.training.search.k2.BayesSearch;
 import syncleus.dann.learn.bayesian.training.search.k2.SearchK2;
-import syncleus.dann.neural.train.propagation.TrainingContinuation;
+import syncleus.dann.neural.flat.propagation.TrainingContinuation;
 
 /**
  * Train a Bayesian network.

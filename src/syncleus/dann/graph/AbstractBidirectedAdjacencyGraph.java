@@ -80,6 +80,11 @@ public abstract class AbstractBidirectedAdjacencyGraph<N, E extends BidirectedEd
     }
 
     @Override
+    public Set<N> getNodes() {
+        return Collections.unmodifiableSet(getInternalAdjacencyNodes().keySet());
+    }
+    
+    @Override
     public AbstractBidirectedAdjacencyGraph<N, E> cloneAdd(final E newEdge) {
         return (AbstractBidirectedAdjacencyGraph<N, E>) super.cloneAdd(newEdge);
     }

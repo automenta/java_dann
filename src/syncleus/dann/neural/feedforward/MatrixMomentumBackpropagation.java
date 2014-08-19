@@ -18,7 +18,7 @@ package syncleus.dann.neural.feedforward;
 
 import org.neuroph.core.NeuralNetwork;
 import org.neuroph.core.transfer.TransferFunction;
-import syncleus.dann.neural.train.neuroph.MomentumBackpropagation;
+import syncleus.dann.neural.feedforward.backpropagation.MomentumBackpropagation;
 
 /**
  * Momentum Backpropagation for matrix based MLP

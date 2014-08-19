@@ -37,7 +37,7 @@ public abstract class AbstractBackpropStaticNeuron extends
     }
 
     @Override
-    protected double getOutput() {
+    public double getOutput() {
         return this.output;
     }
 

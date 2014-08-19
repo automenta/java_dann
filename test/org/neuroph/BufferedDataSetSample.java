@@ -6,7 +6,7 @@ import org.neuroph.core.data.BufferedDataSet;
 import org.neuroph.core.events.LearningEvent;
 import org.neuroph.core.events.LearningEventListener;
 import org.neuroph.nnet.MultiLayerPerceptron;
-import syncleus.dann.neural.train.neuroph.BackPropagation;
+import syncleus.dann.neural.feedforward.backpropagation.BackPropagationNeuroph;
 
 /**
  *
@@ -35,7 +35,7 @@ public class BufferedDataSetSample implements LearningEventListener {
     }
 
     public void handleLearningEvent(LearningEvent event) {
-        BackPropagation bp = (BackPropagation)event.getSource();
+        BackPropagationNeuroph bp = (BackPropagationNeuroph)event.getSource();
         System.out.println(bp.getCurrentIteration() + ". iteration : "+ bp.getTotalNetworkError());
     }
     

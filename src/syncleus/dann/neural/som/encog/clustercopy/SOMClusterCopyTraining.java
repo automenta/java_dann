@@ -28,7 +28,7 @@ import syncleus.dann.data.Data;
 import syncleus.dann.data.DataCase;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.learn.AbstractTraining;
-import syncleus.dann.neural.train.propagation.TrainingContinuation;
+import syncleus.dann.neural.flat.propagation.TrainingContinuation;
 import syncleus.dann.neural.som.SOMEncog;
 
 /**

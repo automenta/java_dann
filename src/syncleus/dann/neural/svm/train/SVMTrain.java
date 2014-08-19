@@ -33,7 +33,7 @@ import syncleus.dann.neural.svm.svm_problem;
 import syncleus.dann.math.EncogMath;
 import syncleus.dann.math.Format;
 import syncleus.dann.math.statistics.ErrorCalculation;
-import syncleus.dann.neural.train.propagation.TrainingContinuation;
+import syncleus.dann.neural.flat.propagation.TrainingContinuation;
 
 /**
  * Provides training for Support Vector Machine networks.

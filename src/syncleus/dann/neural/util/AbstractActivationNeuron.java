@@ -123,7 +123,7 @@ public abstract class AbstractActivationNeuron extends AbstractNeuron {
      * @since 1.0
      */
     @Override
-    protected double getOutput() {
+    public double getOutput() {
         return this.output;
     }
 

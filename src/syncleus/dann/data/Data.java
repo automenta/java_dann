@@ -17,12 +17,8 @@ import syncleus.dann.math.cluster.CentroidFactory;
  * 
  * @author SeH
  */
-public interface Data extends Clusterable, VectorEncodable, CentroidFactory<Data>  {
+public interface Data extends DoubleArray, Clusterable, VectorEncodable, CentroidFactory<Data>  {
 
-    /**
-     * @return All of the elements as an array.
-     */
-    double[] getData();
  
     /** for compatibility with apache commons math */
     @Override default double[] getPoint() { return getData(); }

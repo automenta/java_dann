@@ -24,6 +24,7 @@ import syncleus.dann.util.UnexpectedDannError;
 
 import java.util.*;
 import java.util.concurrent.ExecutorService;
+import syncleus.dann.data.DoubleArray;
 import syncleus.dann.neural.Brain;
 import syncleus.dann.neural.Neuron;
 import syncleus.dann.neural.Synapse;
@@ -356,4 +357,20 @@ public abstract class AbstractLocalBrain<IN extends InputNeuron, ON extends Outp
     protected ExecutorService getThreadExecutor() {
         return this.threadExecutor;
     }
+    
+    public void setCurrentInput(final double[] i) {        
+        if (i.length!=getInputNeurons().size()) {
+            throw new RuntimeException("wrong input dimension for " + this);
+        }
+        
+        int j = 0;
+        for (InputNeuron n : getInputNeurons()) {
+            n.setInput(i[j++]);
+        }
+    }    
+    public void setCurrentInput(DoubleArray d) {
+        setCurrentInput(d.getData());
+    }
+
+
 }

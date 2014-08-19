@@ -1,23 +1,30 @@
 package syncleus.dann.data.random;
 
+import java.util.Random;
 import syncleus.dann.data.AbstractLERPMomentumData;
 
 public class UniformRandomData extends AbstractLERPMomentumData {
-    private double scale;
-    private double bias;
-
-    public UniformRandomData(int dimension, double scale, double bias) {
+    private double min;
+    private double max;
+    private Random random;
+    
+    public UniformRandomData(Random random, int dimension, double min, double max) {
         super(dimension);
         
-        this.scale = scale;
-        this.bias = bias;
-        
-        update(1.0);
+        this.random = random;
+        this.min = min;
+        this.max = max;
+                
+        update(true, 0.0);
     }
-
-    public void update(double momentum) {
-        for (int i = 0; i < targetData.length; i++)
-            targetData[i] = Math.random() * scale + bias;
+    
+    public void update(boolean randomize, double momentum) {
+        
+        if (randomize) {
+            double d = max-min;
+            for (int i = 0; i < targetData.length; i++)
+                targetData[i] = random.nextDouble() * d  + min;
+        }
         
         super.update(momentum);
     }

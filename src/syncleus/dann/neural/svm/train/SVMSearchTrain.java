@@ -29,7 +29,7 @@ import syncleus.dann.learn.AbstractTraining;
 import syncleus.dann.neural.svm.KernelType;
 import syncleus.dann.neural.svm.SVM;
 import syncleus.dann.math.EncogMath;
-import syncleus.dann.neural.train.propagation.TrainingContinuation;
+import syncleus.dann.neural.flat.propagation.TrainingContinuation;
 
 /**
  * Provides training for Support Vector Machine networks.

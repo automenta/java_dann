@@ -23,8 +23,8 @@ import org.neuroph.core.data.DataSetRow;
 import org.neuroph.core.events.LearningEvent;
 import org.neuroph.core.events.LearningEventListener;
 import org.neuroph.nnet.MultiLayerPerceptron;
-import syncleus.dann.neural.train.neuroph.BackPropagation;
-import syncleus.dann.neural.train.neuroph.MomentumBackpropagation;
+import syncleus.dann.neural.feedforward.backpropagation.BackPropagationNeuroph;
+import syncleus.dann.neural.feedforward.backpropagation.MomentumBackpropagation;
 
 /**
  *
@@ -134,7 +134,7 @@ public class PredictingTheReligionSample implements LearningEventListener {
     }
 
     public void handleLearningEvent(LearningEvent event) {
-        BackPropagation bp = (BackPropagation) event.getSource();
+        BackPropagationNeuroph bp = (BackPropagationNeuroph) event.getSource();
         System.out.println(bp.getCurrentIteration() + ". iteration | Total network error: " + bp.getTotalNetworkError());
     }
 }

@@ -31,7 +31,7 @@ import syncleus.dann.learn.AbstractTraining;
 import syncleus.dann.math.statistics.ErrorCalculation;
 import syncleus.dann.neural.VectorNeuralNetwork;
 import syncleus.dann.neural.util.LearningRate;
-import syncleus.dann.neural.train.propagation.TrainingContinuation;
+import syncleus.dann.neural.flat.propagation.TrainingContinuation;
 
 /**
  * Train an ADALINE neural network.

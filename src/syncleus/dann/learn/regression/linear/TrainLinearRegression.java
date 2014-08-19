@@ -29,7 +29,7 @@ import syncleus.dann.data.DataCase;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.learn.AbstractTraining;
 import syncleus.dann.math.EncogUtility;
-import syncleus.dann.neural.train.propagation.TrainingContinuation;
+import syncleus.dann.neural.flat.propagation.TrainingContinuation;
 
 public class TrainLinearRegression<D extends Data> extends AbstractTraining<D> {
 

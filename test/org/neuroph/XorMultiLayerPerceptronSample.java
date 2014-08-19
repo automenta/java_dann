@@ -25,8 +25,8 @@ import org.neuroph.core.data.DataSetRow;
 import org.neuroph.core.events.LearningEventType;
 import org.neuroph.core.learning.LearningRule;
 import org.neuroph.nnet.MultiLayerPerceptron;
-import syncleus.dann.neural.train.neuroph.BackPropagation;
-import syncleus.dann.neural.train.neuroph.MomentumBackpropagation;
+import syncleus.dann.neural.feedforward.backpropagation.BackPropagationNeuroph;
+import syncleus.dann.neural.feedforward.backpropagation.MomentumBackpropagation;
 import org.neuroph.util.TransferFunctionType;
 
 /**
@@ -100,7 +100,7 @@ public class XorMultiLayerPerceptronSample implements LearningEventListener {
     
     @Override
     public void handleLearningEvent(LearningEvent event) {
-        BackPropagation bp = (BackPropagation)event.getSource();
+        BackPropagationNeuroph bp = (BackPropagationNeuroph)event.getSource();
         if (event.getEventType() != LearningEventType.LEARNING_STOPPED)
             System.out.println(bp.getCurrentIteration() + ". iteration : "+ bp.getTotalNetworkError());
     }    

@@ -45,7 +45,10 @@ public interface Clustering<D extends Data> extends Learning {
      *
      * @param count The number of training iterations.
      */
-    void iteration(final int count);
+    default void iteration(final int count) {
+        for (int i = 0; i < count; i++)
+            iteration();
+    }
 
     /**
      * @return The clusters.

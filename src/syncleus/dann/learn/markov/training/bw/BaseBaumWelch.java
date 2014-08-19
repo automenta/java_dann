@@ -36,7 +36,7 @@ import java.util.Arrays;
 import java.util.List;
 import syncleus.dann.data.Data;
 import syncleus.dann.learn.AbstractTraining.TrainingImplementationType;
-import syncleus.dann.neural.train.propagation.TrainingContinuation;
+import syncleus.dann.neural.flat.propagation.TrainingContinuation;
 
 /**
  * This class provides the base implementation for Baum-Welch learning for

@@ -7,8 +7,8 @@ import org.neuroph.core.data.DataSetRow;
 import org.neuroph.core.events.LearningEvent;
 import org.neuroph.core.events.LearningEventListener;
 import org.neuroph.nnet.RBFNetwork;
-import syncleus.dann.neural.train.neuroph.LMS;
-import syncleus.dann.neural.train.neuroph.RBFLearning;
+import syncleus.dann.neural.misc.LMS;
+import syncleus.dann.neural.misc.RBFLearning;
 
 /**
  * TODO: use k-nearest neighbour to tweak sigma

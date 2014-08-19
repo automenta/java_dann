@@ -24,6 +24,12 @@ import syncleus.dann.neural.util.activation.DannActivationFunction;
 
 import java.util.concurrent.ExecutorService;
 import syncleus.dann.neural.feedforward.graph.AbstractFullyConnectedFeedforwardBrain;
+import syncleus.dann.neural.feedforward.graph.BackpropNeuron;
+import syncleus.dann.neural.feedforward.graph.InputBackpropNeuron;
+import syncleus.dann.neural.feedforward.graph.OutputBackpropNeuron;
+import syncleus.dann.neural.feedforward.graph.SimpleBackpropNeuron;
+import syncleus.dann.neural.feedforward.graph.SimpleInputBackpropNeuron;
+import syncleus.dann.neural.feedforward.graph.SimpleOutputBackpropNeuron;
 
 public final class FullyConnectedFeedforwardBrain<IN extends InputBackpropNeuron, ON extends OutputBackpropNeuron, N extends BackpropNeuron, S extends Synapse<N>>
         extends AbstractFullyConnectedFeedforwardBrain<IN, ON, N, S> {
@@ -86,4 +92,5 @@ public final class FullyConnectedFeedforwardBrain<IN extends InputBackpropNeuron
     public AbstractBidirectedAdjacencyGraph<N, S> clone() {
         return super.clone(); //To change body of generated methods, choose Tools | Templates.
     }
+
 }

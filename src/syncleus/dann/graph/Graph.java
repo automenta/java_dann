@@ -111,12 +111,14 @@ public interface Graph<N, E extends Edge<N>> extends ImplicitGraph<N, E>, Serial
      * @return An unmodifiable set of all edges that can be traversed from node.
      * @since 2.0
      */
-    default Set<E> getTraversableEdges(final N node) {
+    Set<E> getTraversableEdges(final N node);
+    /*default Set<E> getTraversableEdges(final N node) {
         return streamTraversableEdges(node).collect(Collectors.toSet());
-    }
+    }*/
 
-    default public Stream<E> streamTraversableEdges(final N node) {
-        return streamEdges().filter(E -> E.isTraversable(node));
+    default Stream<E> streamTraversableEdges(final N node) {
+        return getTraversableEdges(node).stream();
+        //return getEdges().stream().filter(E -> E.isTraversable(node));
     }
 
     /**

@@ -49,8 +49,8 @@ import syncleus.dann.neural.freeform.FreeformNetwork;
 import syncleus.dann.neural.freeform.training.FreeformResilientPropagation;
 import syncleus.dann.neural.VectorNeuralNetwork;
 import syncleus.dann.neural.util.ContainsFlat;
-import syncleus.dann.neural.train.propagation.Propagation;
-import syncleus.dann.neural.train.propagation.resilient.ResilientPropagation;
+import syncleus.dann.neural.flat.propagation.Propagation;
+import syncleus.dann.neural.flat.propagation.resilient.ResilientPropagation;
 import syncleus.dann.neural.feedforward.FeedForwardPattern;
 
 import java.io.File;

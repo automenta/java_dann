@@ -26,7 +26,7 @@ package syncleus.dann.neural.freeform.training;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.neural.freeform.FreeformConnection;
 import syncleus.dann.neural.freeform.FreeformNetwork;
-import syncleus.dann.neural.train.propagation.TrainingContinuation;
+import syncleus.dann.neural.flat.propagation.TrainingContinuation;
 
 import java.io.Serializable;
 

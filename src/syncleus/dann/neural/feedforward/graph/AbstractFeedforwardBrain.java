@@ -28,6 +28,7 @@ import syncleus.dann.neural.Synapse;
 
 import java.util.*;
 import java.util.concurrent.ExecutorService;
+import syncleus.dann.data.DoubleArray;
 
 public abstract class AbstractFeedforwardBrain<IN extends InputBackpropNeuron, ON extends OutputBackpropNeuron, N extends BackpropNeuron, S extends Synapse<N>>
         extends AbstractLocalBrain<IN, ON, N, S> implements
@@ -132,7 +133,9 @@ public abstract class AbstractFeedforwardBrain<IN extends InputBackpropNeuron, O
         // step backwards through all the layers, except the first.
         for (int layerIndex = (this.neuronLayers.size() - 1); layerIndex >= 0; layerIndex--) {
             final NeuronGroup<N> layer = this.neuronLayers.get(layerIndex);
-            layer.getChildrenNeuronsRecursivly().parallel()
+            
+            
+            layer.getChildrenNeuronsRecursivly()/*.parallel()*/
                     .forEach(BackpropNeuron::backPropagate);
 
             //
@@ -188,5 +191,29 @@ public abstract class AbstractFeedforwardBrain<IN extends InputBackpropNeuron, O
     @Override
     public AbstractBidirectedAdjacencyGraph<N, S> clone() {
         return super.clone(); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /** Sets the desired output values of the output neurons */
+    public void setDesiredOutput(double[] d) {
+        if (d.length!=getOutputNeurons().size()) {
+            throw new RuntimeException("wrong output dimension for " + this);
+        }
+        int j = 0;
+        for (ON o : getOutputNeurons()) {
+            o.setDesired(d[j++]);
+        }
+    }
+    
+    /** Sets the desired output values of the output neurons */
+    public void setDesiredOutput(DoubleArray d) {
+        setDesiredOutput(d.getData());
+    }
+
+    /** Calculate one training iteration (forward then backward propagation) for an input and output */
+    public void train(DoubleArray input, DoubleArray output) {
+        setCurrentInput(input);
+        propagate();                
+        setDesiredOutput(output);
+        backPropagate();        
     }
 }

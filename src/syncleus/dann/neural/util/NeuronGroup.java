@@ -133,6 +133,7 @@ public class NeuronGroup<N extends Neuron> implements java.io.Serializable {
     public Stream<N> getChildrenNeuronsRecursivly() {
         return Stream.concat(childrenNeurons.stream(), childrenNeuronGroups
                 .stream().flatMap(NeuronGroup::getChildrenNeuronsRecursivly));
+        
         // returnList.addAll(this.childrenNeurons);
         // for(final NeuronGroup<? extends N> currentChild :
         // this.childrenNeuronGroups)
