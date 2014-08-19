@@ -23,7 +23,7 @@
  */
 package syncleus.dann.math.geometry;
 
-import syncleus.dann.problem.Grid2DMotionProblem;
+import syncleus.dann.solve.Grid2DMotionProblem;
 import syncleus.dann.math.Format;
 import syncleus.dann.plan.grid2d.BasicState;
 

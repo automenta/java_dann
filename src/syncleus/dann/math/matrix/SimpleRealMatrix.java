@@ -1419,4 +1419,21 @@ public class SimpleRealMatrix extends Array2DRowRealMatrix implements Cloneable,
     public boolean isSquare() {
         return getRows() == getCols();
     }
+    
+    /** shifts all rows to the next index, leaving the 0th row untouched*/
+    public void shiftRowUp() {
+        for (int i = getRows()-1; i > 0; i--) {
+            for (int j = 0; j < getCols(); j++) {
+                set(i, j, get(i-1, j));
+            }
+        }
+    }
+    /** shifts all cols to the next index, leaving the 0th row untouched*/
+    public void shiftColUp() {
+        for (int i = getCols()-1; i > 0; i--) {
+            for (int j = 0; j < getRows(); j++) {               
+                set(j, i, get(j, i-1));                
+            }
+        }
+    }    
 }

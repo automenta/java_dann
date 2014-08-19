@@ -29,4 +29,8 @@ public class UniformRandomData extends AbstractLERPMomentumData {
         super.update(momentum);
     }
     
+    public void update(double randomizeProbability, double momentum) {
+        update(Math.random() < randomizeProbability ? true : false, momentum);
+    }
+    
 }

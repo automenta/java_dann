@@ -25,7 +25,7 @@ import java.util.List;
 import syncleus.dann.neural.spiking.connections.AllToAll;
 import syncleus.dann.neural.spiking.SpikingNeuralNetwork;
 import syncleus.dann.neural.spiking.SpikingNeuron;
-import syncleus.dann.neural.spiking.NeuronUpdateRule;
+import syncleus.dann.neural.spiking.SpikingNeuronUpdateRule;
 import syncleus.dann.neural.spiking.groups.NeuronGroup;
 import syncleus.dann.neural.spiking.groups.Subnetwork;
 import syncleus.dann.neural.spiking.groups.SynapseGroup;
@@ -95,8 +95,7 @@ public final class SimpleRecurrentNetwork extends Subnetwork implements
     public SimpleRecurrentNetwork(final SpikingNeuralNetwork network, int numInputNodes,
         int numHiddenNodes, int numOutputNodes) {
         this(network, numInputNodes, numHiddenNodes, numOutputNodes,
-            new SigmoidalRule(), new SigmoidalRule(), new Point2D.Double(0,
-                0));
+            new SigmoidalRule(), new SigmoidalRule());
     }
 
     /**
@@ -119,13 +118,12 @@ public final class SimpleRecurrentNetwork extends Subnetwork implements
      */
     public SimpleRecurrentNetwork(final SpikingNeuralNetwork network, int numInputNodes,
         int numHiddenNodes, int numOutputNodes,
-        NeuronUpdateRule hiddenNeuronType,
-        NeuronUpdateRule outputNeuronType, Point2D initialPosition) {
+        SpikingNeuronUpdateRule hiddenNeuronType,
+        SpikingNeuronUpdateRule outputNeuronType) {
         super(network);
 
         this.initialPosition = initialPosition;
 
-        setLabel("SRN");
 
         // Initialize layers and set node types. TODO: Can this be done at group
         // level?
@@ -140,7 +138,6 @@ public final class SimpleRecurrentNetwork extends Subnetwork implements
 
         // Input Layer
         inputLayer = new NeuronGroup(getParentNetwork(), inputLayerNeurons);
-        inputLayer.setLabel("Input layer");
         inputLayer.setClamped(true);
         inputLayer.setIncrement(1);
         addNeuronGroup(inputLayer);
@@ -148,7 +145,6 @@ public final class SimpleRecurrentNetwork extends Subnetwork implements
 
         // Hidden Layer
         hiddenLayer = new NeuronGroup(getParentNetwork(), hiddenLayerNeurons);
-        hiddenLayer.setLabel("Hidden layer");
         addNeuronGroup(hiddenLayer);
         hiddenLayer.setLowerBound(-1);
         hiddenLayer.setUpperBound(1);
@@ -159,7 +155,6 @@ public final class SimpleRecurrentNetwork extends Subnetwork implements
         // Context Layer
         // Initial context layer values set to 0.5 (as in Elman 1991). TODO
         contextLayer = new NeuronGroup(getParentNetwork(), contextLayerNeurons);
-        contextLayer.setLabel("Context nodes");
         addNeuronGroup(contextLayer);
         contextLayer.setLayoutBasedOnSize();
         NetworkLayoutManager.offsetNeuronGroup(inputLayer, contextLayer,
@@ -168,7 +163,6 @@ public final class SimpleRecurrentNetwork extends Subnetwork implements
         // Output layer
         outputLayer = new NeuronGroup(getParentNetwork(), outputLayerNeurons);
         addNeuronGroup(outputLayer);
-        outputLayer.setLabel("Output layer");
         outputLayer.setLayoutBasedOnSize();
         NetworkLayoutManager.offsetNeuronGroup(hiddenLayer, outputLayer,
             Direction.NORTH, betweenLayerInterval);
@@ -201,7 +195,7 @@ public final class SimpleRecurrentNetwork extends Subnetwork implements
      * @param nodes
      *            the desired number of nodes
      */
-    private void initializeLayer(List<SpikingNeuron> layer, NeuronUpdateRule nodeType,
+    private void initializeLayer(List<SpikingNeuron> layer, SpikingNeuronUpdateRule nodeType,
         int nodes) {
 
         for (int i = 0; i < nodes; i++) {

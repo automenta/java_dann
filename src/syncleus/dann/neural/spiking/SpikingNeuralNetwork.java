@@ -27,6 +27,7 @@ import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+import syncleus.dann.data.Data;
 
 import syncleus.dann.neural.spiking.connections.ConnectNeurons;
 import syncleus.dann.neural.spiking.groups.Group;
@@ -43,6 +44,7 @@ import syncleus.dann.neural.spiking.neuron_update_rules.interfaces.BiasedUpdateR
 
 import syncleus.dann.neural.Neuron;
 import syncleus.dann.neural.Synapse;
+import syncleus.dann.neural.spiking.groups.SpikingInputs;
 
 /**
  * <b>Network</b> provides core neural network functionality and is the the main
@@ -78,6 +80,35 @@ public class SpikingNeuralNetwork {
 
     /** Time step. */
     private double timeStep = DEFAULT_TIME_STEP;
+    private List<SpikingNeuron> inputNeuronCache = null;
+
+    public Collection<? extends SpikingNeuron> getInputNeurons() {
+        if (inputNeuronCache == null) {
+            List<SpikingNeuron> x = new ArrayList();
+            for ( Group g: getGroupList() ) {
+                if (g instanceof SpikingInputs) {
+                    SpikingInputs s = (SpikingInputs)g;
+                    x.addAll(s.getInputNeurons());
+                }
+            }
+            inputNeuronCache = x;
+        }
+        return inputNeuronCache;
+    }
+
+    public void setInput(Data rd) {
+        Collection<? extends SpikingNeuron> inputNeurons = getInputNeurons();
+        if (inputNeurons.size()!=rd.size()) {
+            throw new RuntimeException(rd + " has wrong input data dimensions for " + this);
+        }
+        
+        int i = 0;
+        for (SpikingNeuron s : inputNeurons) {
+            s.forceSetActivation(rd.getData(i++));
+        }
+    }
+
+
 
     /**
      * Two types of time used in simulations.
@@ -1005,6 +1036,7 @@ public class SpikingNeuralNetwork {
         for (NeuronListener listener : neuronListeners) {
             listener.neuronRemoved(new NetworkEvent<SpikingNeuron>(this, deleted));
         }
+        inputNeuronCache = null;
     }
 
     /**
@@ -1038,6 +1070,8 @@ public class SpikingNeuralNetwork {
         for (NeuronListener listener : neuronListeners) {
             listener.neuronAdded(new NetworkEvent<SpikingNeuron>(this, added));
         }
+
+        inputNeuronCache = null;
     }
 
     /**

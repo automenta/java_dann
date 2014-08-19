@@ -1,5 +1,7 @@
 package syncleus.dann.data;
 
+import java.util.Arrays;
+
 /**
  * LERP Updates the vector with a momentum parameter
  */
@@ -23,5 +25,12 @@ public class AbstractLERPMomentumData implements Data {
     public double[] getData() {
         return currentData;
     }
+
+    @Override
+    public String toString() {
+        return Arrays.toString(currentData);
+    }
+    
+    
     
 }

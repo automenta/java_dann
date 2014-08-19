@@ -24,7 +24,7 @@
 package syncleus.dann.plan;
 
 import syncleus.dann.math.EncogMath;
-import syncleus.dann.problem.Grid2DMotionProblem;
+import syncleus.dann.solve.Grid2DMotionProblem;
 import syncleus.dann.math.geometry.GridState;
 import syncleus.dann.plan.grid2d.AbstractProbability;
 

@@ -35,7 +35,7 @@ import syncleus.dann.neural.spiking.trainers.TrainingSet;
 /**
  * <b>Hopfield</b> is a basic implementation of a discrete Hopfield network.
  */
-public class Hopfield extends Subnetwork implements Trainable {
+public class Hopfield extends Subnetwork implements Trainable  {
 
     public enum HopfieldUpdate {
         RAND {

@@ -104,7 +104,6 @@ public class SOMGroup extends NeuronGroup {
         for (int i = 0; i < numNeurons; i++) {
             addNeuron(new SpikingNeuron(getParentNetwork(), new LinearRule()));
         }
-        setLabel("SOM");
     }
 
     @Override

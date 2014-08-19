@@ -16,6 +16,7 @@ package syncleus.dann.neural.spiking.trainers;
 import java.util.List;
 
 import syncleus.dann.neural.spiking.SpikingNeuron;
+import syncleus.dann.neural.spiking.groups.SpikingInputs;
 
 /**
  * Interface that must be implemented by any object that can be trained by a
@@ -25,7 +26,7 @@ import syncleus.dann.neural.spiking.SpikingNeuron;
  * @author Zach Tosi
  *
  */
-public interface Trainable {
+public interface Trainable extends SpikingInputs  {
 
     /**
      * Returns the list of input neurons.

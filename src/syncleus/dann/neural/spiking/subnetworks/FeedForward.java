@@ -22,6 +22,7 @@ import syncleus.dann.neural.spiking.SpikingNeuralNetwork;
 import syncleus.dann.neural.spiking.SpikingNeuron;
 import syncleus.dann.neural.spiking.SpikingSynapse;
 import syncleus.dann.neural.spiking.groups.NeuronGroup;
+import syncleus.dann.neural.spiking.groups.SpikingInputs;
 import syncleus.dann.neural.spiking.groups.Subnetwork;
 import syncleus.dann.neural.spiking.groups.SynapseGroup;
 import syncleus.dann.neural.spiking.neuron_update_rules.LinearRule;
@@ -36,7 +37,7 @@ import syncleus.dann.neural.spiking.util.NetworkLayoutManager.Direction;
  *
  * @author Jeff Yoshimi
  */
-public class FeedForward extends Subnetwork {
+public class FeedForward extends Subnetwork implements SpikingInputs {
 
     /** Space to put between layers. */
     private int betweenLayerInterval = 150;
@@ -197,6 +198,7 @@ public class FeedForward extends Subnetwork {
      *
      * @return the input layer neurons as a list.
      */
+    @Override
     public List<SpikingNeuron> getInputNeurons() {
         return getInputLayer().getNeuronList();
     }
