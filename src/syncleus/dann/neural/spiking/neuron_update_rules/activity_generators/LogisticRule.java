@@ -20,7 +20,7 @@ package syncleus.dann.neural.spiking.neuron_update_rules.activity_generators;
 
 import syncleus.dann.neural.spiking.SpikingNeuralNetwork.TimeType;
 import syncleus.dann.neural.spiking.SpikingNeuron;
-import syncleus.dann.neural.spiking.NeuronUpdateRule;
+import syncleus.dann.neural.spiking.SpikingNeuronUpdateRule;
 import syncleus.dann.neural.spiking.neuron_update_rules.interfaces.ActivityGenerator;
 import syncleus.dann.neural.spiking.neuron_update_rules.interfaces.BoundedUpdateRule;
 import syncleus.dann.neural.spiking.neuron_update_rules.interfaces.ClippableUpdateRule;
@@ -31,7 +31,7 @@ import syncleus.dann.neural.spiking.neuron_update_rules.interfaces.ClippableUpda
  *
  * TODO: This should be an input generator
  */
-public class LogisticRule extends NeuronUpdateRule implements
+public class LogisticRule extends SpikingNeuronUpdateRule implements
         BoundedUpdateRule, ClippableUpdateRule, ActivityGenerator {
 
     public static final double DEFAULT_FLOOR = 0.0;

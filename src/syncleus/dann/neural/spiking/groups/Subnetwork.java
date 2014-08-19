@@ -364,7 +364,7 @@ public abstract class Subnetwork extends Group {
     @Override
     public String toString() {
         String ret = new String();
-        ret += ("Subnetwork Group [" + toString() + "] Subnetwork with "
+        ret += ("Subnetwork Group [" + getClass().getSimpleName() + "] Subnetwork with "
                 + neuronGroupList.size() + " neuron group(s) and ");
         ret += (synapseGroupList.size() + " synapse group(s)");
         if ((getNeuronGroupCount() + getSynapseGroupCount()) > 0) {

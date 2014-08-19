@@ -20,7 +20,7 @@ package syncleus.dann.neural.spiking.neuron_update_rules;
 
 import syncleus.dann.neural.spiking.SpikingNeuralNetwork.TimeType;
 import syncleus.dann.neural.spiking.SpikingNeuron;
-import syncleus.dann.neural.spiking.NeuronUpdateRule;
+import syncleus.dann.neural.spiking.SpikingNeuronUpdateRule;
 
 /**
  * <b>RunningAverageNeuron</b> keeps a running average of current and past
@@ -29,7 +29,7 @@ import syncleus.dann.neural.spiking.NeuronUpdateRule;
  * TODO: Currently explodes. Fix and improve. See
  * http://en.wikipedia.org/wiki/Moving_average
  */
-public class RunningAverageRule extends NeuronUpdateRule {
+public class RunningAverageRule extends SpikingNeuronUpdateRule {
 
     /** Rate constant variable. */
     private double rateConstant = .5;

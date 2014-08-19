@@ -20,7 +20,7 @@ package syncleus.dann.neural.spiking.neuron_update_rules;
 
 import syncleus.dann.neural.spiking.SpikingNeuralNetwork.TimeType;
 import syncleus.dann.neural.spiking.SpikingNeuron;
-import syncleus.dann.neural.spiking.NeuronUpdateRule;
+import syncleus.dann.neural.spiking.SpikingNeuronUpdateRule;
 import syncleus.dann.neural.spiking.neuron_update_rules.interfaces.BoundedUpdateRule;
 import syncleus.dann.neural.spiking.neuron_update_rules.interfaces.NoisyUpdateRule;
 import syncleus.dann.neural.spiking.util.Randomizer;
@@ -30,7 +30,7 @@ import syncleus.dann.neural.spiking.util.Randomizer;
  * model spike rates of real neurons. It is used extensively in Hugh Wilson's
  * Spikes, Decisions, and Action.
  */
-public class NakaRushtonRule extends NeuronUpdateRule implements
+public class NakaRushtonRule extends SpikingNeuronUpdateRule implements
     BoundedUpdateRule, NoisyUpdateRule {
 
     /** The default activation ceiling. */

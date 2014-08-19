@@ -93,7 +93,7 @@ public final class CascadingNetworkBuilder {
      */
     public void buildNetwork() {
 
-        SpikingNeuron firstNeuron = new SpikingNeuron(network, DEFAULT_NEURON_TYPE);
+        SpikingNeuron firstNeuron = new SpikingNeuron(network, new LinearRule());
         List<SpikingNeuron> currentLayer = new ArrayList<SpikingNeuron>();
         firstNeuron.setPosition(initialPosition);
         currentLayer.add(firstNeuron);

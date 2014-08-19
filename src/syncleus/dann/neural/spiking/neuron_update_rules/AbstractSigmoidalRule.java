@@ -18,7 +18,8 @@
  */
 package syncleus.dann.neural.spiking.neuron_update_rules;
 
-import syncleus.dann.neural.spiking.NeuronUpdateRule;
+
+import syncleus.dann.neural.spiking.SpikingNeuronUpdateRule;
 import syncleus.dann.neural.spiking.util.Randomizer;
 import syncleus.dann.neural.spiking.neuron_update_rules.interfaces.BiasedUpdateRule;
 import syncleus.dann.neural.spiking.neuron_update_rules.interfaces.BoundedUpdateRule;
@@ -37,7 +38,7 @@ import syncleus.dann.neural.spiking.util.SquashingFunction;
  * @author Zach Tosi
  *
  */
-public abstract class AbstractSigmoidalRule extends NeuronUpdateRule implements
+public abstract class AbstractSigmoidalRule extends SpikingNeuronUpdateRule implements
     BiasedUpdateRule, DifferentiableUpdateRule, InvertibleUpdateRule,
     BoundedUpdateRule, NoisyUpdateRule {
 

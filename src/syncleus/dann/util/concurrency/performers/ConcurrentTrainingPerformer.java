@@ -21,36 +21,37 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package syncleus.dann.util.concurrent.performers;
-
+package syncleus.dann.util.concurrency.performers;
 
 /**
- * A task to be performed.
- *
- * @author jheaton
+ * Performers actually perform the training. Currently there are performers for
+ * OpenCL and CPU.
  */
-public class PerformerTask implements EngineTask {
+public interface ConcurrentTrainingPerformer extends Runnable {
 
     /**
-     * The owner.
+     * @return True, if this performer is ready to train a job.
      */
-    private final ConcurrentTrainingPerformer owner;
+    boolean ready();
 
     /**
-     * Construct the object.
+     * Perform the specified job.
      *
-     * @param owner The owner.
+     * @param job The job to perform.
      */
-    public PerformerTask(final ConcurrentTrainingPerformer owner) {
-        this.owner = owner;
-    }
+    void perform(TrainingJob job);
 
     /**
-     * Run the task.
+     * Set the manager.
+     *
+     * @param manager The manager.
      */
-    @Override
-    public final void run() {
-        this.owner.run();
-    }
+    void setManager(ConcurrentTrainingManager manager);
 
+    /**
+     * Get the manager.
+     *
+     * @return The manager
+     */
+    ConcurrentTrainingManager getManager();
 }

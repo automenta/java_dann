@@ -21,37 +21,44 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package syncleus.dann.util.concurrent.jobs;
+package syncleus.dann.util.concurrency.job;
 
 import syncleus.dann.data.Dataset;
 import syncleus.dann.neural.VectorNeuralNetwork;
 
 /**
- * A training definition for RPROP training.
+ * A training definition for BPROP training.
  */
-public class RPROPJob extends TrainingJob {
+public class BPROPJob extends TrainingJob {
 
     /**
-     * The initial update value.
+     * The learning rate to use.
      */
-    private double initialUpdate = RPROPConst.DEFAULT_INITIAL_UPDATE;
+    private double learningRate;
 
     /**
-     * The maximum step value.
+     * The momentum to use.
      */
-    private double maxStep = RPROPConst.DEFAULT_MAX_STEP;
+    private double momentum;
 
     /**
-     * Construct an RPROP job. For more information on RPROP see the
-     * ResilientPropagation class.
+     * Construct a job definition for RPROP. For more information on backprop,
+     * see the Backpropagation class. Use OpenCLratio of 1.0 and process one
+     * iteration per cycle.
      *
-     * @param network      The network to train.
+     * @param network      The network to use.
      * @param training     The training data to use.
-     * @param loadToMemory True if binary training data should be loaded to memory.
+     * @param loadToMemory Should binary data be loaded to memory?
+     * @param learningRate THe learning rate to use.
+     * @param momentum     The momentum to use.
      */
-    public RPROPJob(final VectorNeuralNetwork network, final Dataset training,
-                    final boolean loadToMemory) {
+    public BPROPJob(final VectorNeuralNetwork network, final Dataset training,
+                    final boolean loadToMemory, final double learningRate,
+                    final double momentum) {
         super(network, training, loadToMemory);
+        this.learningRate = learningRate;
+        this.momentum = momentum;
+
     }
 
     /**
@@ -59,8 +66,8 @@ public class RPROPJob extends TrainingJob {
      */
     @Override
     public void createTrainer(final boolean singleThreaded) {
-        final Propagation train = new ResilientPropagation(getNetwork(),
-                getTraining(), getInitialUpdate(), getMaxStep());
+        final Propagation train = new Backpropagation(getNetwork(),
+                getTraining(), getLearningRate(), getMomentum());
 
         if (singleThreaded) {
             train.setThreadCount(1);
@@ -74,31 +81,31 @@ public class RPROPJob extends TrainingJob {
     }
 
     /**
-     * @return the initialUpdate
+     * @return the learningRate
      */
-    public double getInitialUpdate() {
-        return this.initialUpdate;
+    public double getLearningRate() {
+        return this.learningRate;
     }
 
     /**
-     * @return the maxStep
+     * @return the momentum
      */
-    public double getMaxStep() {
-        return this.maxStep;
+    public double getMomentum() {
+        return this.momentum;
     }
 
     /**
-     * @param initialUpdate the initialUpdate to set
+     * @param learningRate the learningRate to set
      */
-    public void setInitialUpdate(final double initialUpdate) {
-        this.initialUpdate = initialUpdate;
+    public void setLearningRate(final double learningRate) {
+        this.learningRate = learningRate;
     }
 
     /**
-     * @param maxStep the maxStep to set
+     * @param momentum the momentum to set
      */
-    public void setMaxStep(final double maxStep) {
-        this.maxStep = maxStep;
+    public void setMomentum(final double momentum) {
+        this.momentum = momentum;
     }
 
 }

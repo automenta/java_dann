@@ -20,7 +20,7 @@ package syncleus.dann.neural.spiking.neuron_update_rules;
 
 import syncleus.dann.neural.spiking.SpikingNeuralNetwork.TimeType;
 import syncleus.dann.neural.spiking.SpikingNeuron;
-import syncleus.dann.neural.spiking.NeuronUpdateRule;
+import syncleus.dann.neural.spiking.SpikingNeuronUpdateRule;
 import syncleus.dann.neural.spiking.neuron_update_rules.interfaces.BoundedUpdateRule;
 import syncleus.dann.neural.spiking.neuron_update_rules.interfaces.ClippableUpdateRule;
 import syncleus.dann.neural.spiking.neuron_update_rules.interfaces.NoisyUpdateRule;
@@ -29,7 +29,7 @@ import syncleus.dann.neural.spiking.util.Randomizer;
 /**
  * <b>DecayNeuron</b> implements various forms of standard decay.
  */
-public class DecayRule extends NeuronUpdateRule implements BoundedUpdateRule,
+public class DecayRule extends SpikingNeuronUpdateRule implements BoundedUpdateRule,
     ClippableUpdateRule, NoisyUpdateRule {
 
     /** The Default upper bound. */

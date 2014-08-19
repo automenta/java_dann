@@ -20,7 +20,7 @@ package syncleus.dann.neural.spiking.neuron_update_rules;
 
 import syncleus.dann.neural.spiking.SpikingNeuralNetwork.TimeType;
 import syncleus.dann.neural.spiking.SpikingNeuron;
-import syncleus.dann.neural.spiking.NeuronUpdateRule;
+import syncleus.dann.neural.spiking.SpikingNeuronUpdateRule;
 import syncleus.dann.neural.spiking.SpikingSynapse;
 import syncleus.dann.neural.spiking.util.Randomizer;
 
@@ -28,7 +28,7 @@ import syncleus.dann.neural.spiking.util.Randomizer;
  * <b>AdditiveNeuron</b> See Haykin (2002), section 14.5. Used with continuous
  * Hopfield networks.
  */
-public class AdditiveRule extends NeuronUpdateRule {
+public class AdditiveRule extends SpikingNeuronUpdateRule {
 
     //TODO: May need clipping and bounds.
 

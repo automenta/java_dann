@@ -23,7 +23,7 @@ import java.util.Random;
 
 import syncleus.dann.neural.spiking.SpikingNeuralNetwork.TimeType;
 import syncleus.dann.neural.spiking.SpikingNeuron;
-import syncleus.dann.neural.spiking.NeuronUpdateRule;
+import syncleus.dann.neural.spiking.SpikingNeuronUpdateRule;
 import syncleus.dann.neural.spiking.SpikingSynapse;
 import syncleus.dann.neural.spiking.SynapseUpdateRule;
 import syncleus.dann.neural.spiking.listeners.NetworkEvent;
@@ -35,7 +35,7 @@ import syncleus.dann.neural.spiking.neuron_update_rules.interfaces.BiasedUpdateR
  * Cognitive Neuroscience, chapter 2. All page references below are are to this
  * book.
  */
-public class PointNeuronRule extends NeuronUpdateRule implements
+public class PointNeuronRule extends SpikingNeuronUpdateRule implements
         SynapseListener, BiasedUpdateRule {
 
     /** Excitatory inputs for connected Synapses. */

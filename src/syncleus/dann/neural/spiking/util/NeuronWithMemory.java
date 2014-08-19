@@ -20,6 +20,7 @@ package syncleus.dann.neural.spiking.util;
 
 import syncleus.dann.neural.spiking.SpikingNeuralNetwork;
 import syncleus.dann.neural.spiking.SpikingNeuron;
+import syncleus.dann.neural.spiking.SpikingNeuronUpdateRule;
 
 /**
  * A neuron that stores a memory of its last activation.
@@ -34,7 +35,7 @@ public class NeuronWithMemory extends SpikingNeuron {
     /**
      * {@inheritDoc}
      */
-    public NeuronWithMemory(SpikingNeuralNetwork parent, String updateRule) {
+    public NeuronWithMemory(SpikingNeuralNetwork parent, SpikingNeuronUpdateRule updateRule) {
         super(parent, updateRule);
     }
 

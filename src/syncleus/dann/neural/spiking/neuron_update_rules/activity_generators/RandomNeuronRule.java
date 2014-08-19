@@ -20,7 +20,7 @@ package syncleus.dann.neural.spiking.neuron_update_rules.activity_generators;
 
 import syncleus.dann.neural.spiking.SpikingNeuralNetwork.TimeType;
 import syncleus.dann.neural.spiking.SpikingNeuron;
-import syncleus.dann.neural.spiking.NeuronUpdateRule;
+import syncleus.dann.neural.spiking.SpikingNeuronUpdateRule;
 import syncleus.dann.neural.spiking.neuron_update_rules.interfaces.ActivityGenerator;
 import syncleus.dann.neural.spiking.neuron_update_rules.interfaces.BoundedUpdateRule;
 import syncleus.dann.neural.spiking.util.Randomizer;
@@ -30,7 +30,7 @@ import syncleus.dann.neural.spiking.util.Randomizer;
  *
  * TODO: This should be an input generator
  */
-public class RandomNeuronRule extends NeuronUpdateRule implements
+public class RandomNeuronRule extends SpikingNeuronUpdateRule implements
         BoundedUpdateRule, ActivityGenerator {
 
     /** Noise source. */

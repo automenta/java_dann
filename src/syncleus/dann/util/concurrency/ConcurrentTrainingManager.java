@@ -21,7 +21,7 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package syncleus.dann.util.concurrent;
+package syncleus.dann.util.concurrency;
 
 import java.util.ArrayList;
 import java.util.List;

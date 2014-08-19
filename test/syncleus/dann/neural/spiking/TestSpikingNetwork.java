@@ -22,9 +22,14 @@ public class TestSpikingNetwork {
     
         SpikingNeuralNetwork net = new SpikingNeuralNetwork();
         Hopfield h = new Hopfield(net, 16);
+        
         FeedForward h2 = new FeedForward(net, new int[] { 4, 2, 1}, new Point2D.Double());
+        
         System.out.println(net.getFlatNeuronList());
         System.out.println(net.getFlatSynapseList());
+        
+        System.out.println(h);
+        System.out.println(h2);
         
     }
     

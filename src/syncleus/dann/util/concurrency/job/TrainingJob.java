@@ -21,7 +21,7 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package syncleus.dann.util.concurrent.jobs;
+package syncleus.dann.util.concurrency.job;
 
 import syncleus.dann.Training;
 import syncleus.dann.data.Dataset;

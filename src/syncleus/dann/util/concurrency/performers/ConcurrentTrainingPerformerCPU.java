@@ -21,7 +21,7 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package syncleus.dann.util.concurrent.performers;
+package syncleus.dann.util.concurrency.performers;
 
 import syncleus.dann.Training;
 

@@ -449,7 +449,7 @@ public class SynapseGroup extends Group {
     @Override
     public String toString() {
         String ret = new String();
-        ret += ("Synapse Group [" + toString() + "]. Contains " + this.size()
+        ret += ("Synapse Group [" + getClass().getSimpleName() + "]. Contains " + this.size()
             + " synapse(s)." + " Connects "+
             getSourceNeuronGroup().toString() +  "\n");
 

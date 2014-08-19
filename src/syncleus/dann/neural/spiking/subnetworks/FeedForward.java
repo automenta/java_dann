@@ -77,16 +77,16 @@ public class FeedForward extends Subnetwork {
      */
     public FeedForward(final SpikingNeuralNetwork network, int[] nodesPerLayer,
         Point2D initialPosition) {
+        
         super(network);
-        try {
-            LinearRule rule = new LinearRule();
-        }
-        catch (Throwable t) { t.printStackTrace(); }
-//        SpikingNeuron neuron = new SpikingNeuron(network, rule);
-//        rule.setIncrement(1); // For easier testing
-//        rule.setLowerBound(0);
-//        buildNetwork(network, nodesPerLayer, initialPosition, neuron);
+        
+        LinearRule rule = new LinearRule();
+        SpikingNeuron neuron = new SpikingNeuron(network, rule);
+        rule.setIncrement(1); // For easier testing
+        rule.setLowerBound(0);
+        buildNetwork(network, nodesPerLayer, initialPosition, neuron);
     }
+    
 
     /**
      * Create the network using the parameters.

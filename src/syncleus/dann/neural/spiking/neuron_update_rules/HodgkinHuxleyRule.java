@@ -292,4 +292,9 @@ public class HodgkinHuxleyRule extends SpikingNeuronUpdateRule {
         return "Hodgkin-Huxley";
     }
 
+
+    public SpikingNeuronUpdateRule deepCopy() {
+        // TODO
+        return null;
+    }    
 }

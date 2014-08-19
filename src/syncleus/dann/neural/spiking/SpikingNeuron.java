@@ -135,19 +135,19 @@ public class SpikingNeuron {
         setUpdateRule(DEFAULT_UPDATE_RULE);
     }
 
-    /**
-     * Construct a specific type of neuron from a string description.
-     *
-     * @param parent
-     *            The parent network. Be careful not to set this to root network
-     *            if the root network is not the parent.
-     * @param updateRule
-     *            the update method
-     */
-    public SpikingNeuron(final SpikingNeuralNetwork parent, final String updateRule) {
-        this.parent = parent;
-        setUpdateRule(updateRule);
-    }
+//    /**
+//     * Construct a specific type of neuron from a string description.
+//     *
+//     * @param parent
+//     *            The parent network. Be careful not to set this to root network
+//     *            if the root network is not the parent.
+//     * @param updateRule
+//     *            the update method
+//     */
+//    public SpikingNeuron(final SpikingNeuralNetwork parent, final String updateRule) {
+//        this.parent = parent;
+//        setUpdateRule(updateRule);
+//    }
 
     /**
      * Construct a specific type of neuron.

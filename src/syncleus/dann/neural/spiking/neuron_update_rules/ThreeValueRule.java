@@ -22,14 +22,14 @@ import java.util.Random;
 
 import syncleus.dann.neural.spiking.SpikingNeuralNetwork.TimeType;
 import syncleus.dann.neural.spiking.SpikingNeuron;
-import syncleus.dann.neural.spiking.NeuronUpdateRule;
+import syncleus.dann.neural.spiking.SpikingNeuronUpdateRule;
 
 /**
  * <b>ThreeValuedNeuron</b> is a natural extension of a binary neuron, which
  * takes one of three values depending on the inputs to the neuron in relation
  * to two thresholds.
  */
-public class ThreeValueRule extends NeuronUpdateRule {
+public class ThreeValueRule extends SpikingNeuronUpdateRule {
 
     /** Bias field. */
     private double bias = 0;
