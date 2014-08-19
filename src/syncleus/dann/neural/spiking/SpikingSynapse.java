@@ -27,14 +27,13 @@ import syncleus.dann.neural.spiking.groups.SynapseGroup;
 import syncleus.dann.neural.spiking.synapse_update_rules.StaticSynapseRule;
 import syncleus.dann.neural.spiking.synapse_update_rules.spikeresponders.JumpAndDecay;
 import syncleus.dann.neural.spiking.synapse_update_rules.spikeresponders.SpikeResponder;
-import org.simbrain.util.Utils;
 
 /**
  * <b>Synapse</b> objects represent "connections" between neurons, which learn
  * (grow or weaken) based on various factors, including the activation level of
  * connected neurons.
  */
-public class Synapse {
+public class SpikingSynapse {
 
     private static final SynapseUpdateRule DEFAULT_LEARNING_RULE =
         new StaticSynapseRule();
@@ -63,8 +62,6 @@ public class Synapse {
     /** Only used of source neuron is a spiking neuron. */
     private SpikeResponder spikeResponder = DEFAULT_SPIKE_RESPONDER;
 
-    /** Synapse id. */
-    private String id = "";
 
     /** The maximum number of digits to display in the tool tip. */
     private static final int MAX_DIGITS = 2;
@@ -115,7 +112,7 @@ public class Synapse {
      * @param target
      *            target neuron
      */
-    public Synapse(SpikingNeuron source, SpikingNeuron target) {
+    public SpikingSynapse(SpikingNeuron source, SpikingNeuron target) {
         setSourceAndTarget(source, target);
         initSpikeResponder();
         if (source != null) {
@@ -133,7 +130,7 @@ public class Synapse {
      * @param initialStrength
      *            initial strength for synapse
      */
-    public Synapse(SpikingNeuron source, SpikingNeuron target, double initialStrength) {
+    public SpikingSynapse(SpikingNeuron source, SpikingNeuron target, double initialStrength) {
         this(source, target);
         this.setStrength(initialStrength);
     }
@@ -150,7 +147,7 @@ public class Synapse {
      * @param learningRule
      *            update rule for this synapse
      */
-    public Synapse(SpikingNeuron source, SpikingNeuron target,
+    public SpikingSynapse(SpikingNeuron source, SpikingNeuron target,
         SynapseUpdateRule learningRule) {
         setSourceAndTarget(source, target);
         initSpikeResponder();
@@ -174,8 +171,8 @@ public class Synapse {
      * @param templateSynapse
      *            synapse with parameters to copy
      */
-    public Synapse(SpikingNeuron source, SpikingNeuron target,
-        SynapseUpdateRule learningRule, Synapse templateSynapse) {
+    public SpikingSynapse(SpikingNeuron source, SpikingNeuron target,
+        SynapseUpdateRule learningRule, SpikingSynapse templateSynapse) {
         this(templateSynapse); // invoke the copy constructor
         setSourceAndTarget(source, target);
         initSpikeResponder();
@@ -198,7 +195,7 @@ public class Synapse {
      * @param parent
      *            parent network for this synapse.
      */
-    public Synapse(SpikingNeuron source, SpikingNeuron target,
+    public SpikingSynapse(SpikingNeuron source, SpikingNeuron target,
         SynapseUpdateRule learningRule, SpikingNeuralNetwork parent) {
         setSourceAndTarget(source, target);
         setLearningRule(learningRule);
@@ -212,7 +209,7 @@ public class Synapse {
      * @param s
      *            Synapse to used as a template for constructing a new synapse.
      */
-    private Synapse(final Synapse s) {
+    private SpikingSynapse(final SpikingSynapse s) {
         setLearningRule(s.getLearningRule().deepCopy());
         forceSetStrength(s.getStrength());
         setUpperBound(s.getUpperBound());
@@ -230,12 +227,12 @@ public class Synapse {
      * @param s
      * @return
      */
-    public static Synapse copyTemplateSynapse(Synapse s) {
+    public static SpikingSynapse copyTemplateSynapse(SpikingSynapse s) {
         if (s.getSource() != null || s.getTarget() != null) {
             throw new IllegalArgumentException("Synapse is not template"
                 + " synapse.");
         }
-        return new Synapse(s);
+        return new SpikingSynapse(s);
     }
 
     /**
@@ -477,29 +474,29 @@ public class Synapse {
      */
     public void randomizeSymmetric() {
         randomize();
-        Synapse symmetric = getSymmetricSynapse();
+        SpikingSynapse symmetric = getSymmetricSynapse();
         if (symmetric != null) {
             symmetric.setStrength(strength);
         }
         getNetwork().fireSynapseChanged(this);
     }
 
-    /**
-     * Returns string for tool tip or short description.
-     *
-     * @return tool tip text
-     */
-    public String getToolTipText() {
-        return "(" + id + ") Strength: "
-            + Utils.round(this.getStrength(), MAX_DIGITS);
-    }
+//    /**
+//     * Returns string for tool tip or short description.
+//     *
+//     * @return tool tip text
+//     */
+//    public String getToolTipText() {
+//        return "(" + id + ") Strength: "
+//            + Utils.round(this.getStrength(), MAX_DIGITS);
+//    }
 
     /**
      * Returns symmetric synapse if there is one, null otherwise.
      *
      * @return the symmetric synapse, if any.
      */
-    public Synapse getSymmetricSynapse() {
+    public SpikingSynapse getSymmetricSynapse() {
         return getTarget().getFanOut().get(getSource());
     }
 
@@ -546,20 +543,20 @@ public class Synapse {
         return val;
     }
 
-    /**
-     * @return Returns the id.
-     */
-    public String getId() {
-        return id;
-    }
+//    /**
+//     * @return Returns the id.
+//     */
+//    public String getId() {
+//        return id;
+//    }
 
-    /**
-     * @param id
-     *            The id to set.
-     */
-    public void setId(final String id) {
-        this.id = id;
-    }
+//    /**
+//     * @param id
+//     *            The id to set.
+//     */
+//    public void setId(final String id) {
+//        this.id = id;
+//    }
 
     /**
      * @return Returns the spikeResponder.
@@ -629,10 +626,10 @@ public class Synapse {
     @Override
     public String toString() {
         String ret = new String();
-        ret += ("Synapse [" + getId() + "]: " + getStrength());
+        ret += ("Synapse " + getStrength());
         ret += ("  Connects neuron " + (getSource() == null ? "[null]"
-            : getSource().getId()) + " to neuron "
-            + (getTarget() == null ? "[null]" : getTarget().getId())
+            : getSource()) + " to neuron "
+            + (getTarget() == null ? "[null]" : getTarget())
             + "\n");
         return ret;
     }
@@ -744,8 +741,8 @@ public class Synapse {
      * @return the template synapse.
      * @see instantiateTemplateSynapse
      */
-    public static Synapse getTemplateSynapse() {
-        return new Synapse(null, null, new StaticSynapseRule(), (SpikingNeuralNetwork) null);
+    public static SpikingSynapse getTemplateSynapse() {
+        return new SpikingSynapse(null, null, new StaticSynapseRule(), (SpikingNeuralNetwork) null);
     }
 
     /**
@@ -756,8 +753,8 @@ public class Synapse {
      * @return the template synapse
      * @see instantiateTemplateSynapse
      */
-    public static Synapse getTemplateSynapse(SynapseUpdateRule rule) {
-        Synapse synapse = getTemplateSynapse();
+    public static SpikingSynapse getTemplateSynapse(SynapseUpdateRule rule) {
+        SpikingSynapse synapse = getTemplateSynapse();
         synapse.setLearningRule(rule);
         return synapse;
     }
@@ -770,8 +767,8 @@ public class Synapse {
      * @return the template synapse
      * @see instantiateTemplateSynapse
      */
-    public static Synapse getTemplateSynapse(String rule) {
-        Synapse synapse = getTemplateSynapse();
+    public static SpikingSynapse getTemplateSynapse(String rule) {
+        SpikingSynapse synapse = getTemplateSynapse();
         synapse.setLearningRule(rule);
         return synapse;
     }
@@ -788,11 +785,11 @@ public class Synapse {
      *         of synapses
      */
     public static List<SynapseUpdateRule> getRuleList(
-        Collection<Synapse> synapseCollection) {
+        Collection<SpikingSynapse> synapseCollection) {
         ArrayList<SynapseUpdateRule> ruleList =
             new ArrayList<SynapseUpdateRule>(
                 synapseCollection.size());
-        for (Synapse s : synapseCollection) {
+        for (SpikingSynapse s : synapseCollection) {
             ruleList.add(s.getLearningRule());
 
         }
@@ -813,12 +810,12 @@ public class Synapse {
      * @return a new synapse with these references and the base synapse's
      *         properties
      */
-    public Synapse instantiateTemplateSynapse(SpikingNeuron source, SpikingNeuron target,
+    public SpikingSynapse instantiateTemplateSynapse(SpikingNeuron source, SpikingNeuron target,
         SpikingNeuralNetwork parent) {
         this.source = source;
         this.target = target;
         this.parentNetwork = parent;
-        return new Synapse(this);
+        return new SpikingSynapse(this);
     }
 
     /**

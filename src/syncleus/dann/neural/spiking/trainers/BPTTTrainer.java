@@ -22,7 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import syncleus.dann.neural.spiking.SpikingNeuron;
-import syncleus.dann.neural.spiking.Synapse;
+import syncleus.dann.neural.spiking.SpikingSynapse;
 import syncleus.dann.neural.spiking.neuron_update_rules.interfaces.BiasedUpdateRule;
 import syncleus.dann.neural.spiking.neuron_update_rules.interfaces.DifferentiableUpdateRule;
 import syncleus.dann.neural.spiking.subnetworks.BPTTNetwork;
@@ -57,7 +57,7 @@ public class BPTTTrainer extends IterableTrainer {
     private HashMap<SpikingNeuron, Double> errorMap;
 
     /** For storing weight deltas. */
-    private HashMap<Synapse, Double> weightDeltaMap;
+    private HashMap<SpikingSynapse, Double> weightDeltaMap;
 
     /** For storing bias deltas. */
     private HashMap<SpikingNeuron, Double> biasDeltaMap;
@@ -72,7 +72,7 @@ public class BPTTTrainer extends IterableTrainer {
         super(bptt);
         this.bptt = bptt;
         errorMap = new HashMap<SpikingNeuron, Double>();
-        weightDeltaMap = new HashMap<Synapse, Double>();
+        weightDeltaMap = new HashMap<SpikingSynapse, Double>();
         biasDeltaMap = new HashMap<SpikingNeuron, Double>();
         setIteration(0);
         mse = 0;
@@ -115,7 +115,7 @@ public class BPTTTrainer extends IterableTrainer {
             // Update weights
             if (lastPatternInSet()) {
                 // System.out.println("Last in set:" + iteration);
-                for (Synapse synapse : weightDeltaMap.keySet()) {
+                for (SpikingSynapse synapse : weightDeltaMap.keySet()) {
                     // System.out.println(synapse.getId() + ":"
                     // + Utils.round(synapse.getStrength(), 2) + " + "
                     // + Utils.round(weightDeltaMap.get(synapse), 2));
@@ -180,7 +180,7 @@ public class BPTTTrainer extends IterableTrainer {
         for (SpikingNeuron neuron : bptt.getHiddenLayer().getNeuronList()) {
             // Compute sum of fan-out errors on this neuron
             double sumFanOutErrors = 0;
-            for (Synapse synapse : neuron.getFanOut().values()) {
+            for (SpikingSynapse synapse : neuron.getFanOut().values()) {
                 SpikingNeuron nextLayerNeuron = synapse.getTarget();
                 sumFanOutErrors += (errorMap.get(nextLayerNeuron) * synapse
                         .getStrength());
@@ -212,7 +212,7 @@ public class BPTTTrainer extends IterableTrainer {
         }
 
         // Compute and store weight deltas for the fan-in to this neuron
-        for (Synapse synapse : neuron.getFanIn()) {
+        for (SpikingSynapse synapse : neuron.getFanIn()) {
             double lastWeightDelta = 0;
             if (weightDeltaMap.get(synapse) != null) {
                 lastWeightDelta = weightDeltaMap.get(synapse);

@@ -48,7 +48,7 @@ public class Vector extends ArrayRealVector implements DoubleArray, Serializable
      * @since 1.0
      */
     public Vector(final int dimensions) {
-        super(dimensions);
+        super((int)dimensions);
         this.data = getDataRef();
     }
 
@@ -460,45 +460,45 @@ public class Vector extends ArrayRealVector implements DoubleArray, Serializable
         }
     }
 
-    /**
-     * Generates a hash code based on the coordinate values.
-     *
-     * @return the hash-code representing this object.
-     * @since 2.0
-     */
-    @Override
-    public int hashCode() {
-        final double[] currentCoords = this.data.clone();
-        int hashcode = 0;
-        for (final double coordinate : currentCoords)
-            hashcode += hashcode ^ Double.valueOf(coordinate).hashCode();
-        return hashcode;
-    }
-
-    /**
-     * checks if another point is equals to this one.
-     *
-     * @return true if equals, false if not.
-     * @since 2.0
-     */
-    @Override
-    public boolean equals(final Object compareWithObject) {
-        if (!(compareWithObject instanceof Vector))
-            return false;
-
-        final Vector compareWith = (Vector) compareWithObject;
-
-        final double[] otherCoords = compareWith.data;
-
-        if (data.length != otherCoords.length)
-            return false;
-
-        for (int dimension = 0; dimension <= data.length; dimension++)
-            if (data[dimension] != otherCoords[dimension])
-                return false;
-
-        return true;
-    }
+//    /**
+//     * Generates a hash code based on the coordinate values.
+//     *
+//     * @return the hash-code representing this object.
+//     * @since 2.0
+//     */
+//    @Override
+//    public int hashCode() {
+//        final double[] currentCoords = this.data.clone();
+//        int hashcode = 0;
+//        for (final double coordinate : currentCoords)
+//            hashcode += hashcode ^ Double.valueOf(coordinate).hashCode();
+//        return hashcode;
+//    }
+//
+//    /**
+//     * checks if another point is equals to this one.
+//     *
+//     * @return true if equals, false if not.
+//     * @since 2.0
+//     */
+//    @Override
+//    public boolean equals(final Object compareWithObject) {
+//        if (!(compareWithObject instanceof Vector))
+//            return false;
+//
+//        final Vector compareWith = (Vector) compareWithObject;
+//
+//        final double[] otherCoords = compareWith.data;
+//
+//        if (data.length != otherCoords.length)
+//            return false;
+//
+//        for (int dimension = 0; dimension <= data.length; dimension++)
+//            if (data[dimension] != otherCoords[dimension])
+//                return false;
+//
+//        return true;
+//    }
 
 
 }

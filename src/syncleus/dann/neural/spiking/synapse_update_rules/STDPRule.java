@@ -19,7 +19,7 @@
 package syncleus.dann.neural.spiking.synapse_update_rules;
 
 import syncleus.dann.neural.spiking.SpikingNeuronUpdateRule;
-import syncleus.dann.neural.spiking.Synapse;
+import syncleus.dann.neural.spiking.SpikingSynapse;
 import syncleus.dann.neural.spiking.SynapseUpdateRule;
 
 /**
@@ -69,7 +69,7 @@ public class STDPRule extends SynapseUpdateRule {
     private double learningRate = LEARNING_RATE_DEFAULT;
 
     @Override
-    public void init(Synapse synapse) {
+    public void init(SpikingSynapse synapse) {
     }
 
     @Override
@@ -89,7 +89,7 @@ public class STDPRule extends SynapseUpdateRule {
     }
 
     @Override
-    public void update(Synapse synapse) {
+    public void update(SpikingSynapse synapse) {
 
         double delta_t, delta_w;
 

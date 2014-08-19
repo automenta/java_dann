@@ -24,7 +24,7 @@ import java.util.List;
 
 import syncleus.dann.neural.spiking.SpikingNeuralNetwork;
 import syncleus.dann.neural.spiking.SpikingNeuron;
-import syncleus.dann.neural.spiking.Synapse;
+import syncleus.dann.neural.spiking.SpikingSynapse;
 import syncleus.dann.neural.spiking.groups.NeuronGroup;
 import syncleus.dann.neural.spiking.groups.Subnetwork;
 import syncleus.dann.neural.spiking.neuron_update_rules.BinaryRule;
@@ -203,7 +203,6 @@ public class Hopfield extends Subnetwork implements Trainable {
      */
     public Hopfield(final SpikingNeuralNetwork root, final int numNeurons) {
         super(root);
-        setLabel("Hopfield network");
         NeuronGroup hopfieldGroup = new NeuronGroup(root);
         this.addNeuronGroup(hopfieldGroup);
         this.connectNeuronGroups(hopfieldGroup, hopfieldGroup);
@@ -225,7 +224,7 @@ public class Hopfield extends Subnetwork implements Trainable {
         for (SpikingNeuron source : this.getNeuronGroup().getNeuronList()) {
             for (SpikingNeuron target : this.getNeuronGroup().getNeuronList()) {
                 if (source != target) {
-                    Synapse newSynapse = new Synapse(source, target,
+                    SpikingSynapse newSynapse = new SpikingSynapse(source, target,
                             new StaticSynapseRule());
                     newSynapse.setStrength(0);
                     getSynapseGroup().addSynapseUnsafe(newSynapse);
@@ -252,13 +251,13 @@ public class Hopfield extends Subnetwork implements Trainable {
     public void randomize() {
         for (int i = 0; i < getNeuronGroup().getNeuronList().size(); i++) {
             for (int j = 0; j < i; j++) {
-                Synapse w = SpikingNeuralNetwork.getSynapse(getNeuronGroup().getNeuronList()
+                SpikingSynapse w = SpikingNeuralNetwork.getSynapse(getNeuronGroup().getNeuronList()
                         .get(i), getNeuronGroup().getNeuronList().get(j));
                 if (w != null) {
                     w.randomize();
                     w.setStrength(Math.round(w.getStrength()));
                 }
-                Synapse w2 = SpikingNeuralNetwork.getSynapse(getNeuronGroup()
+                SpikingSynapse w2 = SpikingNeuralNetwork.getSynapse(getNeuronGroup()
                         .getNeuronList().get(j), getNeuronGroup()
                         .getNeuronList().get(i));
                 if (w2 != null) {
@@ -311,7 +310,7 @@ public class Hopfield extends Subnetwork implements Trainable {
      * main training algorithm, which directly makes use of the input data.
      */
     public void trainOnCurrentPattern() {
-        for (Synapse w : this.getSynapseGroup().getAllSynapses()) {
+        for (SpikingSynapse w : this.getSynapseGroup().getAllSynapses()) {
             SpikingNeuron src = w.getSource();
             SpikingNeuron tar = w.getTarget();
             getSynapseGroup().setSynapseStrength(w,

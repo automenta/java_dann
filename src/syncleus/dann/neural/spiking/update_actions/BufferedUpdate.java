@@ -44,15 +44,15 @@ public class BufferedUpdate implements NetworkUpdateAction {
         network.bufferedUpdateAllNeurons();
         network.updateAllSynapses();
     }
-
-    @Override
-    public String getDescription() {
-        return "Loose neurons (buffered) and synapses";
-    }
-
-    @Override
-    public String getLongDescription() {
-        return "Buffered update of loose items";
-    }
+//
+//    @Override
+//    public String getDescription() {
+//        return "Loose neurons (buffered) and synapses";
+//    }
+//
+//    @Override
+//    public String getLongDescription() {
+//        return "Buffered update of loose items";
+//    }
 
 }

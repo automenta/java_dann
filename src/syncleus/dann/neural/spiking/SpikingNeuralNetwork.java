@@ -28,7 +28,6 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.apache.log4j.Logger;
 import syncleus.dann.neural.spiking.connections.ConnectNeurons;
 import syncleus.dann.neural.spiking.groups.Group;
 import syncleus.dann.neural.spiking.groups.NeuronGroup;
@@ -41,14 +40,9 @@ import syncleus.dann.neural.spiking.listeners.NeuronListener;
 import syncleus.dann.neural.spiking.listeners.SynapseListener;
 import syncleus.dann.neural.spiking.listeners.TextListener;
 import syncleus.dann.neural.spiking.neuron_update_rules.interfaces.BiasedUpdateRule;
-import syncleus.dann.neural.spiking.subnetworks.CompetitiveGroup;
-import syncleus.dann.neural.spiking.update_actions.CustomUpdate;
-import org.simbrain.util.SimbrainPreferences;
-import org.simbrain.util.SimbrainPreferences.PropertyNotFoundException;
-import org.simbrain.util.SimpleId;
 
-import com.thoughtworks.xstream.XStream;
-import com.thoughtworks.xstream.io.xml.DomDriver;
+import syncleus.dann.neural.Neuron;
+import syncleus.dann.neural.Synapse;
 
 /**
  * <b>Network</b> provides core neural network functionality and is the the main
@@ -58,14 +52,12 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
  */
 public class SpikingNeuralNetwork {
 
-    /** Logger. */
-    private Logger logger = Logger.getLogger(SpikingNeuralNetwork.class);
 
     /** Array list of neurons. */
     private final List<SpikingNeuron> neuronList = new ArrayList<SpikingNeuron>();
 
     /** Array list of synapses. */
-    private final Set<Synapse> synapseList = new LinkedHashSet<Synapse>();
+    private final Set<SpikingSynapse> synapseList = new LinkedHashSet<SpikingSynapse>();
 
     /** Since groups span all levels of the hierarchy they are stored here. */
     private final List<Group> groupList = new ArrayList<Group>();
@@ -74,8 +66,6 @@ public class SpikingNeuralNetwork {
     private List<NetworkTextObject> textList =
         new ArrayList<NetworkTextObject>();
 
-    /** The update manager for this network. */
-    private NetworkUpdateManager updateManager;
 
     /** The initial time-step for the network. */
     private static final double DEFAULT_TIME_STEP = .1;
@@ -138,14 +128,14 @@ public class SpikingNeuralNetwork {
     /** Comparator used for sorting the priority sorted neuron list. */
     private PriorityComparator priorityComparator = new PriorityComparator();
 
-    /** Neuron Id generator. */
-    private SimpleId neuronIdGenerator = new SimpleId("Neuron", 1);
-
-    /** Synapse Id generator. */
-    private SimpleId synapseIdGenerator = new SimpleId("Synapse", 1);
-
-    /** Group Id generator. */
-    private SimpleId groupIdGenerator = new SimpleId("Group", 1);
+//    /** Neuron Id generator. */
+//    private SimpleId neuronIdGenerator = new SimpleId("Neuron", 1);
+//
+//    /** Synapse Id generator. */
+//    private SimpleId synapseIdGenerator = new SimpleId("Synapse", 1);
+//
+//    /** Group Id generator. */
+//    private SimpleId groupIdGenerator = new SimpleId("Group", 1);
 
     /**
      * If a subnetwork or synapse group has more than this many synapses, then
@@ -153,21 +143,20 @@ public class SpikingNeuralNetwork {
      */
     private static int synapseVisibilityThreshold = 200;
 
-    /** Static initializer */
-    {
-        try {
-            synapseVisibilityThreshold = SimbrainPreferences
-                .getInt("networkSynapseVisibilityThreshold");
-        } catch (PropertyNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
+//    /** Static initializer */
+//    {
+//        try {
+//            synapseVisibilityThreshold = SimbrainPreferences
+//                .getInt("networkSynapseVisibilityThreshold");
+//        } catch (PropertyNotFoundException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     /**
      * Used to create an instance of network (Default constructor).
      */
     public SpikingNeuralNetwork() {
-        updateManager = new NetworkUpdateManager(this);
         prioritySortedNeuronList = new ArrayList<SpikingNeuron>();
     }
 
@@ -180,10 +169,6 @@ public class SpikingNeuralNetwork {
         // Update Time
         updateTime();
 
-        // Perform update
-        for (NetworkUpdateAction action : updateManager.getActionList()) {
-            action.invoke();
-        }
 
         // Notify network listeners
         this.fireNetworkChanged();
@@ -282,7 +267,7 @@ public class SpikingNeuralNetwork {
      *
      * @return List of synapses in network.
      */
-    public Collection<Synapse> getSynapseList() {
+    public Collection<SpikingSynapse> getSynapseList() {
         return Collections.unmodifiableCollection(synapseList);
     }
 
@@ -327,74 +312,7 @@ public class SpikingNeuralNetwork {
         return neuronList.get(index);
     }
 
-    /**
-     * Find a neuron with a given string id.
-     *
-     * @param id
-     *            id to search for.
-     * @return neuron with that id, null otherwise
-     */
-    public SpikingNeuron getNeuron(final String id) {
-        for (SpikingNeuron n : getFlatNeuronList()) {
-            if (n.getId().equalsIgnoreCase(id)) {
-                return n;
-            }
-        }
-        return null;
-    }
 
-    /**
-     * Find a group with a given string id.
-     *
-     * @param id
-     *            id to search for.
-     * @return group with that id, null otherwise
-     */
-    public Group getGroup(final String id) {
-        for (Group group : getFlatGroupList()) {
-            if (group.getId().equalsIgnoreCase(id)) {
-                return group;
-            }
-        }
-        return null;
-    }
-
-    /**
-     * Find groups with a given label, or null if none found.
-     *
-     * @param label
-     *            label to search for.
-     * @return list of groups with that label found, null otherwise
-     */
-    public List<Group> getGroupsByLabel(final String label) {
-        List<Group> returnList = new ArrayList<Group>();
-        for (Group group : getGroupList()) {
-            if (group.getLabel().equalsIgnoreCase(label)) {
-                returnList.add(group);
-            }
-        }
-        if (returnList.isEmpty()) {
-            return null;
-        } else {
-            return returnList;
-        }
-    }
-
-    /**
-     * Find group with a given label, or null if none found.
-     *
-     * @param label
-     *            label to search for.
-     * @return list of groups with that label found, null otherwise
-     */
-    public Group getGroupByLabel(final String label) {
-        List<Group> returnList = getGroupsByLabel(label);
-        if (returnList == null) {
-            return null;
-        } else {
-            return returnList.get(0);
-        }
-    }
 
     /**
      * Returns the group list.
@@ -448,21 +366,21 @@ public class SpikingNeuralNetwork {
 
     }
 
-    /**
-     * Find a synapse with a given string id.
-     *
-     * @param id
-     *            id to search for.
-     * @return synapse with that id, null otherwise
-     */
-    public Synapse getSynapse(final String id) {
-        for (Synapse s : getFlatSynapseList()) {
-            if (s.getId().equalsIgnoreCase(id)) {
-                return s;
-            }
-        }
-        return null;
-    }
+//    /**
+//     * Find a synapse with a given string id.
+//     *
+//     * @param id
+//     *            id to search for.
+//     * @return synapse with that id, null otherwise
+//     */
+//    public SpikingSynapse getSynapse(final String id) {
+//        for (SpikingSynapse s : getFlatSynapseList()) {
+//            if (s.getId().equalsIgnoreCase(id)) {
+//                return s;
+//            }
+//        }
+//        return null;
+//    }
 
     /**
      * Adds a new neuron.
@@ -472,7 +390,7 @@ public class SpikingNeuralNetwork {
      */
     public void addNeuron(final SpikingNeuron neuron) {
         neuronList.add(neuron);
-        neuron.setId(getNeuronIdGenerator().getId());
+        //neuron.setId(getNeuronIdGenerator().getId());
         updatePriorityList();
         fireNeuronAdded(neuron);
     }
@@ -484,10 +402,10 @@ public class SpikingNeuralNetwork {
      * @param synapse
      *            the weight object to add
      */
-    public void addSynapse(final Synapse synapse) {
+    public void addSynapse(final SpikingSynapse synapse) {
         synapse.initSpikeResponder();
         synapseList.add(synapse);
-        synapse.setId(getSynapseIdGenerator().getId());
+        //synapse.setId(getSynapseIdGenerator().getId());
         fireSynapseAdded(synapse);
     }
 
@@ -498,7 +416,7 @@ public class SpikingNeuralNetwork {
 
         // No Buffering necessary because the values of weights don't depend on
         // one another
-        for (Synapse s : synapseList) {
+        for (SpikingSynapse s : synapseList) {
             s.update();
         }
     }
@@ -540,7 +458,7 @@ public class SpikingNeuralNetwork {
      * @param toDelete
      *            the weight to delete
      */
-    public void removeSynapse(final Synapse toDelete) {
+    public void removeSynapse(final SpikingSynapse toDelete) {
 
         // Remove references to this synapse from parent neurons
         if (toDelete.getSource() != null) {
@@ -650,7 +568,7 @@ public class SpikingNeuralNetwork {
      *            value to set
      */
     public void setWeights(final double value) {
-        for (Synapse synapse : this.getFlatSynapseList()) {
+        for (SpikingSynapse synapse : this.getFlatSynapseList()) {
             synapse.setStrength(value);
         }
     }
@@ -676,7 +594,7 @@ public class SpikingNeuralNetwork {
      * Sets all weight values to zero, effectively eliminating them.
      */
     public void setWeightsToZero() {
-        for (Synapse s : synapseList) {
+        for (SpikingSynapse s : synapseList) {
             s.setStrength(0);
         }
     }
@@ -694,7 +612,7 @@ public class SpikingNeuralNetwork {
      * Randomizes all weights.
      */
     public void randomizeWeights() {
-        for (Synapse s : synapseList) {
+        for (SpikingSynapse s : synapseList) {
             s.randomize();
         }
     }
@@ -736,7 +654,7 @@ public class SpikingNeuralNetwork {
      *
      * @return synapse from source to target
      */
-    public static Synapse getSynapse(final SpikingNeuron src, final SpikingNeuron tar) {
+    public static SpikingSynapse getSynapse(final SpikingNeuron src, final SpikingNeuron tar) {
         return src.getFanOut().get(tar);
     }
 
@@ -750,7 +668,7 @@ public class SpikingNeuralNetwork {
      * @return Weight at the points defined
      */
     // TODO: Either fix this or make its assumptions explicit
-    public Synapse getWeight(final int i, final int j) {
+    public SpikingSynapse getWeight(final int i, final int j) {
         return getNeuron(i).getFanOut().get(getNeuron(j));
     }
 
@@ -765,11 +683,11 @@ public class SpikingNeuralNetwork {
      */
     public void addGroup(final Group group) {
         // Generate group id
-        String id = getGroupIdGenerator().getId();
-        group.setId(id);
-        if (group.getLabel() == null) {
-            group.setLabel(id.replaceAll("_", " "));
-        }
+//        String id = getGroupIdGenerator().getId();
+//        group.setId(id);
+//        if (group.getLabel() == null) {
+//            group.setLabel(id.replaceAll("_", " "));
+//        }
         if (group.isTopLevelGroup()) {
             groupList.add(group);
         }
@@ -839,8 +757,8 @@ public class SpikingNeuralNetwork {
      *
      * @return the flat list
      */
-    public List<Synapse> getFlatSynapseList() {
-        List<Synapse> ret = new ArrayList<Synapse>();
+    public List<SpikingSynapse> getFlatSynapseList() {
+        List<SpikingSynapse> ret = new ArrayList<SpikingSynapse>();
         ret.addAll(synapseList);
         for (int i = 0; i < groupList.size(); i++) {
             if (groupList.get(i) instanceof SynapseGroup) {
@@ -929,31 +847,6 @@ public class SpikingNeuralNetwork {
         return ret;
     }
 
-    /**
-     * Returns a properly initialized xstream object.
-     *
-     * @return the XStream object
-     */
-    public static XStream getXStream() {
-        XStream xstream = new XStream(new DomDriver("UTF-8"));
-        xstream.omitField(SpikingNeuralNetwork.class, "groupListeners");
-        xstream.omitField(SpikingNeuralNetwork.class, "neuronListeners");
-        xstream.omitField(SpikingNeuralNetwork.class, "networkListeners");
-        xstream.omitField(SpikingNeuralNetwork.class, "synapseListeners");
-        xstream.omitField(SpikingNeuralNetwork.class, "textListeners");
-        xstream.omitField(SpikingNeuralNetwork.class, "updateCompleted");
-        xstream.omitField(SpikingNeuralNetwork.class, "logger");
-        xstream.omitField(SpikingNeuralNetwork.class, "synapseVisibilityThreshold");
-
-        xstream.omitField(NetworkUpdateManager.class, "listeners");
-        xstream.omitField(CustomUpdate.class, "interpreter");
-        xstream.omitField(CustomUpdate.class, "theAction");
-
-        xstream.omitField(SpikingNeuron.class, "fanOut");
-        xstream.omitField(SpikingNeuron.class, "fanIn");
-
-        return xstream;
-    }
 
     /**
      * Standard method call made to objects after they are deserialized. See:
@@ -972,8 +865,6 @@ public class SpikingNeuralNetwork {
         textListeners = new ArrayList<TextListener>();
         groupListeners = new ArrayList<GroupListener>();
 
-        // Initialize update manager
-        updateManager.postUnmarshallingInit();
 
         // Initialize neurons
         for (SpikingNeuron neuron : this.getFlatNeuronList()) {
@@ -988,19 +879,17 @@ public class SpikingNeuralNetwork {
         // Check for and remove corrupt synapses.
         // This should not happen but as of 1/24/11 I have not
         // determined why it happens, so the check is needed.
-        for (Synapse synapse : this.getFlatSynapseList()) {
+        for (SpikingSynapse synapse : this.getFlatSynapseList()) {
             if (synapse.getTarget().getFanIn() != null) {
                 synapse.getTarget().addAfferent(synapse);
             } else {
-                System.out.println("Warning:" + synapse.getId()
-                    + " has null fanIn");
+                System.out.println("Warning:" + synapse + " has null fanIn");
                 removeSynapse(synapse);
             }
             if (synapse.getSource().getFanOut() != null) {
                 synapse.getSource().addEfferent(synapse);
             } else {
-                System.out.println("Warning:" + synapse.getId()
-                    + " has null fanOut");
+                System.out.println("Warning:" + synapse + " has null fanOut");
                 removeSynapse(synapse);
             }
         }
@@ -1164,11 +1053,10 @@ public class SpikingNeuralNetwork {
      * @param changed
      *            the new update rule
      */
-    public void fireNeuronTypeChanged(final NeuronUpdateRule old,
-        final NeuronUpdateRule changed) {
+    public void fireNeuronTypeChanged(final SpikingNeuronUpdateRule old,
+        final SpikingNeuronUpdateRule changed) {
         for (NeuronListener listener : neuronListeners) {
-            listener.neuronTypeChanged(new NetworkEvent<NeuronUpdateRule>(this,
-                old, changed));
+            listener.neuronTypeChanged(new NetworkEvent<SpikingNeuronUpdateRule>(this, old, changed));
         }
     }
 
@@ -1202,9 +1090,9 @@ public class SpikingNeuralNetwork {
      * @param added
      *            synapse which was added
      */
-    public void fireSynapseAdded(final Synapse added) {
+    public void fireSynapseAdded(final SpikingSynapse added) {
         for (SynapseListener listener : synapseListeners) {
-            listener.synapseAdded(new NetworkEvent<Synapse>(this, added));
+            listener.synapseAdded(new NetworkEvent<SpikingSynapse>(this, added));
         }
     }
 
@@ -1214,9 +1102,9 @@ public class SpikingNeuralNetwork {
      * @param deleted
      *            synapse which was deleted
      */
-    public void fireSynapseRemoved(final Synapse deleted) {
+    public void fireSynapseRemoved(final SpikingSynapse deleted) {
         for (SynapseListener listener : synapseListeners) {
-            listener.synapseRemoved(new NetworkEvent<Synapse>(this, deleted));
+            listener.synapseRemoved(new NetworkEvent<SpikingSynapse>(this, deleted));
         }
     }
 
@@ -1226,9 +1114,9 @@ public class SpikingNeuralNetwork {
      * @param changed
      *            new, changed synapse
      */
-    public void fireSynapseChanged(final Synapse changed) {
+    public void fireSynapseChanged(final SpikingSynapse changed) {
         for (SynapseListener listener : synapseListeners) {
-            listener.synapseChanged(new NetworkEvent<Synapse>(this, changed));
+            listener.synapseChanged(new NetworkEvent<SpikingSynapse>(this, changed));
         }
     }
 
@@ -1392,9 +1280,9 @@ public class SpikingNeuralNetwork {
         }
 
         if (this.getSynapseList().size() > 0) {
-            Iterator<Synapse> synapseIterator = synapseList.iterator();
+            Iterator<SpikingSynapse> synapseIterator = synapseList.iterator();
             for (int i = 0; i < getSynapseList().size(); i++) {
-                Synapse tempRef = synapseIterator.next();
+                SpikingSynapse tempRef = synapseIterator.next();
                 ret += tempRef;
             }
         }
@@ -1411,23 +1299,6 @@ public class SpikingNeuralNetwork {
         return ret;
     }
 
-    /**
-     * Return the generator for neuron ids.
-     *
-     * @return the generator
-     */
-    public SimpleId getNeuronIdGenerator() {
-        return neuronIdGenerator;
-    }
-
-    /**
-     * Return the generator for synapse ids.
-     *
-     * @return the generator.
-     */
-    public SimpleId getSynapseIdGenerator() {
-        return synapseIdGenerator;
-    }
 
     /**
      * Register a network listener.
@@ -1510,51 +1381,6 @@ public class SpikingNeuralNetwork {
     }
 
     /**
-     * Search for a neuron by label. If there are more than one with the same
-     * label only the first one found is returned.
-     *
-     * @param inputString
-     *            label of neuron to search for
-     * @return list of matched neurons, or null if none are found
-     */
-    public List<SpikingNeuron> getNeuronsByLabel(String inputString) {
-        ArrayList<SpikingNeuron> foundNeurons = new ArrayList<SpikingNeuron>();
-        for (SpikingNeuron neuron : this.getFlatNeuronList()) {
-            if (neuron.getLabel().equalsIgnoreCase(inputString)) {
-                foundNeurons.add(neuron);
-            }
-        }
-        if (foundNeurons.size() == 0) {
-            return null;
-        } else {
-            return foundNeurons;
-        }
-    }
-
-    /**
-     * Returns the first neuron in the array returned by getNeuronsByLabel.
-     *
-     * @param inputString
-     *            label of neuron to search for
-     * @return matched Neuron, if any
-     */
-    public SpikingNeuron getNeuronByLabel(String inputString) {
-        List<SpikingNeuron> foundNeurons = getNeuronsByLabel(inputString);
-        if (foundNeurons == null) {
-            return null;
-        } else {
-            return foundNeurons.get(0);
-        }
-    }
-
-    /**
-     * @return the groupIdGenerator
-     */
-    public SimpleId getGroupIdGenerator() {
-        return groupIdGenerator;
-    }
-
-    /**
      * Add a network text object.
      *
      * @param text
@@ -1587,24 +1413,6 @@ public class SpikingNeuralNetwork {
     }
 
     /**
-     * Add an update action to the network' action list (the sequence of actions
-     * invoked on each iteration of the network).
-     *
-     * @param action
-     *            new action
-     */
-    public void addUpdateAction(NetworkUpdateAction action) {
-        updateManager.addAction(action);
-    }
-
-    /**
-     * @return the updateManager
-     */
-    public NetworkUpdateManager getUpdateManager() {
-        return updateManager;
-    }
-
-    /**
      * Adds a list of network elements to this network. Used in copy / paste.
      *
      * @param toAdd
@@ -1615,8 +1423,8 @@ public class SpikingNeuralNetwork {
             if (object instanceof SpikingNeuron) {
                 SpikingNeuron neuron = (SpikingNeuron) object;
                 addNeuron(neuron);
-            } else if (object instanceof Synapse) {
-                Synapse synapse = (Synapse) object;
+            } else if (object instanceof SpikingSynapse) {
+                SpikingSynapse synapse = (SpikingSynapse) object;
                 addSynapse(synapse);
             } else if (object instanceof NetworkTextObject) {
                 addText((NetworkTextObject) object);
@@ -1672,7 +1480,7 @@ public class SpikingNeuralNetwork {
             group.setFrozen(freeze);
         }
         // Freeze loose synapses
-        for (Synapse synapse : this.getSynapseList()) {
+        for (SpikingSynapse synapse : this.getSynapseList()) {
             synapse.setFrozen(freeze);
         }
     }

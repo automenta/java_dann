@@ -23,10 +23,10 @@ import java.util.Collection;
 import java.util.List;
 
 import syncleus.dann.neural.spiking.SpikingNeuron;
-import syncleus.dann.neural.spiking.Synapse;
+import syncleus.dann.neural.spiking.SpikingSynapse;
 import syncleus.dann.neural.spiking.SynapseUpdateRule;
-import org.simbrain.util.SimbrainConstants.Polarity;
-import org.simbrain.util.randomizer.PolarizedRandomizer;
+import syncleus.dann.neural.spiking.util.Polarity;
+import syncleus.dann.neural.spiking.util.PolarizedRandomizer;
 
 /**
  * TODO.
@@ -64,7 +64,7 @@ public class ConnectionUtilities {
      * @throws IllegalArgumentException
      */
     public static void randomizeAndPolarizeSynapses(
-        Collection<Synapse> synapses, PolarizedRandomizer exciteRand,
+        Collection<SpikingSynapse> synapses, PolarizedRandomizer exciteRand,
         PolarizedRandomizer inhibRand, double excitatoryRatio)
         throws IllegalArgumentException {
         if (exciteRand.equals(inhibRand)) {
@@ -82,7 +82,7 @@ public class ConnectionUtilities {
             int inhibCount = synapses.size() - exciteCount;
             int remaining = synapses.size();
             boolean excitatory = false;
-            for (Synapse s : synapses) {
+            for (SpikingSynapse s : synapses) {
                 excitatory = shouldBeExcitatory(excitatoryRatio, exciteCount,
                     inhibCount, s);
                 // Set the strength based on the polarity.
@@ -114,7 +114,7 @@ public class ConnectionUtilities {
      * @param excitatoryRatio the ration of excitatory to inhibitory synapses.
      */
     public static void randomizeAndPolarizeSynapses(
-            Collection<Synapse> synapses, double excitatoryRatio) {
+            Collection<SpikingSynapse> synapses, double excitatoryRatio) {
         PolarizedRandomizer exciteRand = new PolarizedRandomizer(
                 Polarity.EXCITATORY);
         PolarizedRandomizer inhibRand = new PolarizedRandomizer(
@@ -129,7 +129,7 @@ public class ConnectionUtilities {
      * @param exciteRand
      * @param inhibRand
      */
-    public static void randomizeSynapses(Collection<Synapse> synapses,
+    public static void randomizeSynapses(Collection<SpikingSynapse> synapses,
         PolarizedRandomizer exciteRand, PolarizedRandomizer inhibRand) {
         if (exciteRand.equals(inhibRand)) {
             throw new IllegalArgumentException("Randomization has failed."
@@ -139,7 +139,7 @@ public class ConnectionUtilities {
             checkPolarityMatches(exciteRand, Polarity.EXCITATORY);
             checkPolarityMatches(inhibRand, Polarity.INHIBITORY);
             boolean excitatory = false;
-            for (Synapse s : synapses) {
+            for (SpikingSynapse s : synapses) {
                 excitatory = s.getStrength() > 0;
                 // Set the strength based on the polarity.
                 if (excitatory) {
@@ -161,9 +161,9 @@ public class ConnectionUtilities {
      * @param exciteRand
      */
     public static void randomizeExcitatorySynapses(
-        Collection<Synapse> synapses, PolarizedRandomizer exciteRand) {
+        Collection<SpikingSynapse> synapses, PolarizedRandomizer exciteRand) {
         checkPolarityMatches(exciteRand, Polarity.EXCITATORY);
-        for (Synapse s : synapses) {
+        for (SpikingSynapse s : synapses) {
             if (Polarity.EXCITATORY.equals(s.getSource().getPolarity())
                 || s.getStrength() > 0) {
                 s.setStrength(exciteRand != null ? exciteRand.getRandom()
@@ -182,9 +182,9 @@ public class ConnectionUtilities {
      * @param exciteRand
      */
     public static void randomizeExcitatorySynapsesUnsafe(
-        Collection<Synapse> synapses, PolarizedRandomizer exciteRand) {
+        Collection<SpikingSynapse> synapses, PolarizedRandomizer exciteRand) {
         checkPolarityMatches(exciteRand, Polarity.EXCITATORY);
-        for (Synapse s : synapses) {
+        for (SpikingSynapse s : synapses) {
             s.setStrength(exciteRand != null ? exciteRand.getRandom()
                 : DEFAULT_EXCITATORY_STRENGTH);
         }
@@ -198,9 +198,9 @@ public class ConnectionUtilities {
      * @param inhibRand
      */
     public static void randomizeInhibitorySynapses(
-        Collection<Synapse> synapses, PolarizedRandomizer inhibRand) {
+        Collection<SpikingSynapse> synapses, PolarizedRandomizer inhibRand) {
         checkPolarityMatches(inhibRand, Polarity.INHIBITORY);
-        for (Synapse s : synapses) {
+        for (SpikingSynapse s : synapses) {
             if (Polarity.INHIBITORY.equals(s.getSource().getPolarity())
                 || s.getStrength() < 0) {
                 s.setStrength(inhibRand != null ? inhibRand.getRandom()
@@ -219,9 +219,9 @@ public class ConnectionUtilities {
      * @param inhibRand
      */
     public static void randomizeInhibitorySynapsesUnsafe(
-        Collection<Synapse> synapses, PolarizedRandomizer inhibRand) {
+        Collection<SpikingSynapse> synapses, PolarizedRandomizer inhibRand) {
         checkPolarityMatches(inhibRand, Polarity.INHIBITORY);
-        for (Synapse s : synapses) {
+        for (SpikingSynapse s : synapses) {
             s.setStrength(inhibRand != null ? inhibRand.getRandom()
                 : DEFAULT_INHIBITORY_STRENGTH);
         }
@@ -232,10 +232,10 @@ public class ConnectionUtilities {
      * @param synapses
      * @return
      */
-    public static ArrayList<Synapse> getExcitatorySynapses(
-        Collection<Synapse> synapses) {
-        ArrayList<Synapse> exSyns = new ArrayList<Synapse>(synapses.size() / 2);
-        for (Synapse s : synapses) {
+    public static ArrayList<SpikingSynapse> getExcitatorySynapses(
+        Collection<SpikingSynapse> synapses) {
+        ArrayList<SpikingSynapse> exSyns = new ArrayList<SpikingSynapse>(synapses.size() / 2);
+        for (SpikingSynapse s : synapses) {
             if (s.getStrength() > 0 || Polarity.EXCITATORY.equals(s.getSource()
                 .getPolarity())) {
                 exSyns.add(s);
@@ -249,10 +249,10 @@ public class ConnectionUtilities {
      * @param synapses
      * @return
      */
-    public static ArrayList<Synapse> getInhibitorySynapses(
-        Collection<Synapse> synapses) {
-        ArrayList<Synapse> inSyns = new ArrayList<Synapse>(synapses.size() / 2);
-        for (Synapse s : synapses) {
+    public static ArrayList<SpikingSynapse> getInhibitorySynapses(
+        Collection<SpikingSynapse> synapses) {
+        ArrayList<SpikingSynapse> inSyns = new ArrayList<SpikingSynapse>(synapses.size() / 2);
+        for (SpikingSynapse s : synapses) {
             if (s.getStrength() < 0 || Polarity.INHIBITORY.equals(s.getSource()
                 .getPolarity())) {
                 inSyns.add(s);
@@ -278,7 +278,7 @@ public class ConnectionUtilities {
      * @param excitatoryRatio the ration of excitatory synapses (1 for all
      *            exctitatory)
      */
-    public static void polarizeSynapses(Collection<Synapse> synapses,
+    public static void polarizeSynapses(Collection<SpikingSynapse> synapses,
         double excitatoryRatio) {
         if (excitatoryRatio > 1 || excitatoryRatio < 0) {
             throw new IllegalArgumentException("Randomization had failed."
@@ -289,7 +289,7 @@ public class ConnectionUtilities {
             int inhibCount = synapses.size() - exciteCount;
             int remaining = synapses.size();
             boolean excitatory = false;
-            for (Synapse s : synapses) {
+            for (SpikingSynapse s : synapses) {
                 excitatory = shouldBeExcitatory(excitatoryRatio, exciteCount,
                     inhibCount, s);
                 // Set the strength based on the polarity.
@@ -320,8 +320,8 @@ public class ConnectionUtilities {
      * @param exTemplateSynapse
      * @param inTemplateSynapse
      */
-    public static void conformToTemplates(Collection<Synapse> synapses,
-        Synapse exTemplateSynapse, Synapse inTemplateSynapse) {
+    public static void conformToTemplates(Collection<SpikingSynapse> synapses,
+        SpikingSynapse exTemplateSynapse, SpikingSynapse inTemplateSynapse) {
         if (exTemplateSynapse.getStrength() <= 0) {
             throw new IllegalArgumentException("Excitatory template synapse" +
                 " must be excitatory (having strength > 0).");
@@ -330,7 +330,7 @@ public class ConnectionUtilities {
             throw new IllegalArgumentException("Inhibitory template synapse" +
                 " must be inhibitory (having strength < 0).");
         }
-        for (Synapse s : synapses) {
+        for (SpikingSynapse s : synapses) {
             if (s.getStrength() < 0) {
                 s.setStrength(inTemplateSynapse.getStrength());
                 s.setLearningRule(inTemplateSynapse.getLearningRule()
@@ -390,7 +390,7 @@ public class ConnectionUtilities {
      * @return
      */
     private static boolean shouldBeExcitatory(double excitatoryRatio,
-        int exciteCount, int inhibCount, Synapse s) {
+        int exciteCount, int inhibCount, SpikingSynapse s) {
         boolean excitatory = false;
         if (s.getSource().isPolarized()) {
             if (Polarity.EXCITATORY == s.getSource().getPolarity()) {
@@ -446,8 +446,8 @@ public class ConnectionUtilities {
      * @param synapses
      */
     public static void applyLearningRules(SynapseUpdateRule exciteRule,
-        SynapseUpdateRule inhibRule, List<Synapse> synapses) {
-        for (Synapse s : synapses) {
+        SynapseUpdateRule inhibRule, List<SpikingSynapse> synapses) {
+        for (SpikingSynapse s : synapses) {
             if (s.getStrength() < 0) {
                 s.setLearningRule(inhibRule);
             } else {

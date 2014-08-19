@@ -96,15 +96,11 @@ public class SimpleRealMatrix extends Array2DRowRealMatrix implements Cloneable,
     }
 
     /**
-     * Construct a matrix from a 2-D array.
-     *
-     * @param matrixElements Two-dimensional array of doubles.
-     * @throws IllegalArgumentException All rows must have the same length
-     * @see #constructWithCopy
+     * Construct a matrix from a 2-D array.  Wraps the array
      */
     public SimpleRealMatrix(final double[][] matrixElements) {
         super(matrixElements);
-        this.matrixElements = getData();
+        this.matrixElements = matrixElements; //== getData()
     }
     
     public SimpleRealMatrix(final boolean[][] boolMatrix) {

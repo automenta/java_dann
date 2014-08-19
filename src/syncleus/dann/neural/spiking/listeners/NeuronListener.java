@@ -19,7 +19,7 @@
 package syncleus.dann.neural.spiking.listeners;
 
 import syncleus.dann.neural.spiking.SpikingNeuron;
-import syncleus.dann.neural.spiking.NeuronUpdateRule;
+import syncleus.dann.neural.spiking.SpikingNeuronUpdateRule;
 
 /**
  * Listener interface for receiving events relating to neurons. Classes
@@ -40,7 +40,7 @@ public interface NeuronListener {
      *
      * @param networkEvent holds reference to old and new Neuron
      */
-    void neuronTypeChanged(NetworkEvent<NeuronUpdateRule> networkEvent);
+    void neuronTypeChanged(NetworkEvent<SpikingNeuronUpdateRule> networkEvent);
 
     /**
      * Notify this listener of a text labelchanged event.

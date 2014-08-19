@@ -23,7 +23,7 @@ import java.util.List;
 
 import syncleus.dann.neural.spiking.SpikingNeuralNetwork;
 import syncleus.dann.neural.spiking.SpikingNeuron;
-import syncleus.dann.neural.spiking.Synapse;
+import syncleus.dann.neural.spiking.SpikingSynapse;
 import syncleus.dann.neural.spiking.groups.NeuronGroup;
 import syncleus.dann.neural.spiking.groups.Subnetwork;
 import syncleus.dann.neural.spiking.trainers.Trainable;
@@ -77,7 +77,7 @@ public class CompetitiveNetwork extends Subnetwork implements Trainable {
         inputLayer.setClamped(true);
         this.connectNeuronGroups(inputLayer, competitive);
         // TODO: Check if all positive synapses was the intention
-        for (Synapse synapse : getSynapseGroup().getAllSynapses()) {
+        for (SpikingSynapse synapse : getSynapseGroup().getAllSynapses()) {
             synapse.setLowerBound(0);
         }
         layoutNetwork();

@@ -32,18 +32,18 @@ public interface NetworkUpdateAction {
      */
     public void invoke();
 
-    /**
-     * Provide a String description of this update method.
-     *
-     * @return the update description
-     */
-    public String getDescription();
-
-    /**
-     * Provide a longer description for tooltips, etc.
-     *
-     * @return the update description
-     */
-    public String getLongDescription();
+//    /**
+//     * Provide a String description of this update method.
+//     *
+//     * @return the update description
+//     */
+//    public String getDescription();
+//
+//    /**
+//     * Provide a longer description for tooltips, etc.
+//     *
+//     * @return the update description
+//     */
+//    public String getLongDescription();
 
 }

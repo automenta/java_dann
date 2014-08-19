@@ -18,7 +18,7 @@
  */
 package syncleus.dann.neural.spiking.listeners;
 
-import syncleus.dann.neural.spiking.Synapse;
+import syncleus.dann.neural.spiking.SpikingSynapse;
 import syncleus.dann.neural.spiking.SynapseUpdateRule;
 
 /**
@@ -34,21 +34,21 @@ public interface SynapseListener {
      *
      * @param networkEvent event
      */
-    void synapseRemoved(NetworkEvent<Synapse> networkEvent);
+    void synapseRemoved(NetworkEvent<SpikingSynapse> networkEvent);
 
     /**
      * Notify this listener of a synapse added event.
      *
      * @param networkEvent reference to new synapse
      */
-    void synapseAdded(NetworkEvent<Synapse> networkEvent);
+    void synapseAdded(NetworkEvent<SpikingSynapse> networkEvent);
 
     /**
      * Notify this listener that synapse's state changed.
      *
      * @param networkEvent reference to synapse whose state changed
      */
-    void synapseChanged(NetworkEvent<Synapse> networkEvent);
+    void synapseChanged(NetworkEvent<SpikingSynapse> networkEvent);
 
     /**
      * Invoked when a synapse's update rule changes.

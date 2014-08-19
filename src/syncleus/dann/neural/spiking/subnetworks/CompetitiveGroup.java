@@ -23,7 +23,7 @@ import java.util.Iterator;
 import syncleus.dann.neural.spiking.connections.ConnectNeurons;
 import syncleus.dann.neural.spiking.SpikingNeuralNetwork;
 import syncleus.dann.neural.spiking.SpikingNeuron;
-import syncleus.dann.neural.spiking.Synapse;
+import syncleus.dann.neural.spiking.SpikingSynapse;
 import syncleus.dann.neural.spiking.groups.NeuronGroup;
 import syncleus.dann.neural.spiking.groups.SynapseGroup;
 import syncleus.dann.neural.spiking.neuron_update_rules.LinearRule;
@@ -186,7 +186,7 @@ public class CompetitiveGroup extends NeuronGroup {
      *            winning neuron.
      */
     private void squireAlvarezWeightUpdate(final SpikingNeuron neuron) {
-        for (Synapse synapse : neuron.getFanIn()) {
+        for (SpikingSynapse synapse : neuron.getFanIn()) {
             double deltaw = learningRate
                     * synapse.getTarget().getActivation()
                     * (synapse.getSource().getActivation() - synapse
@@ -204,7 +204,7 @@ public class CompetitiveGroup extends NeuronGroup {
     private void rummelhartZipser(final SpikingNeuron neuron) {
         double sumOfInputs = neuron.getTotalInput();
         // Apply learning rule
-        for (Synapse synapse : neuron.getFanIn()) {
+        for (SpikingSynapse synapse : neuron.getFanIn()) {
             activation = synapse.getSource().getActivation();
 
             // Normalize the input values
@@ -224,7 +224,7 @@ public class CompetitiveGroup extends NeuronGroup {
      */
     private void decayAllSynapses() {
         for (SpikingNeuron n : getNeuronList()) {
-            for (Synapse synapse : n.getFanIn()) {
+            for (SpikingSynapse synapse : n.getFanIn()) {
                 synapse.decay(synpaseDecayPercent);
             }
         }
@@ -239,7 +239,7 @@ public class CompetitiveGroup extends NeuronGroup {
      */
     private void leakyLearning(final SpikingNeuron neuron) {
         double sumOfInputs = neuron.getTotalInput();
-        for (Synapse incoming : neuron.getFanIn()) {
+        for (SpikingSynapse incoming : neuron.getFanIn()) {
             activation = incoming.getSource().getActivation();
             if (normalizeInputs) {
                 if (sumOfInputs != 0) {
@@ -259,7 +259,7 @@ public class CompetitiveGroup extends NeuronGroup {
 
         for (SpikingNeuron n : getNeuronList()) {
             double normFactor = n.getSummedIncomingWeights();
-            for (Synapse s : n.getFanIn()) {
+            for (SpikingSynapse s : n.getFanIn()) {
                 s.setStrength(s.getStrength() / normFactor);
             }
         }
@@ -272,7 +272,7 @@ public class CompetitiveGroup extends NeuronGroup {
 
         double normFactor = getSummedIncomingWeights();
         for (SpikingNeuron n : getNeuronList()) {
-            for (Synapse s : n.getFanIn()) {
+            for (SpikingSynapse s : n.getFanIn()) {
                 s.setStrength(s.getStrength() / normFactor);
             }
         }
@@ -287,7 +287,7 @@ public class CompetitiveGroup extends NeuronGroup {
 
         for (Iterator<SpikingNeuron> i = getNeuronList().iterator(); i.hasNext();) {
             SpikingNeuron n = i.next();
-            for (Synapse s : n.getFanIn()) {
+            for (SpikingSynapse s : n.getFanIn()) {
                 s.randomize();
             }
         }

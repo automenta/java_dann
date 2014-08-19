@@ -24,7 +24,7 @@ import java.util.List;
 
 import syncleus.dann.neural.spiking.SpikingNeuralNetwork;
 import syncleus.dann.neural.spiking.SpikingNeuron;
-import syncleus.dann.neural.spiking.Synapse;
+import syncleus.dann.neural.spiking.SpikingSynapse;
 import syncleus.dann.neural.spiking.neuron_update_rules.LinearRule;
 import syncleus.dann.neural.spiking.synapse_update_rules.StaticSynapseRule;
 
@@ -128,7 +128,7 @@ public final class CascadingNetworkBuilder {
                     tempList.add(targetNeuron);
                     network.addNeuron(targetNeuron);
                     targetNeuron.setUpdatePriority(layerIndex);
-                    Synapse synapse = new Synapse(baseNeuron, targetNeuron,
+                    SpikingSynapse synapse = new SpikingSynapse(baseNeuron, targetNeuron,
                             new StaticSynapseRule());
                     network.addSynapse(synapse);
                 }

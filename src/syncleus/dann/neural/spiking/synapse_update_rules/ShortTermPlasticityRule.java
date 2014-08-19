@@ -19,7 +19,7 @@
 package syncleus.dann.neural.spiking.synapse_update_rules;
 
 import syncleus.dann.neural.spiking.SpikingNeuronUpdateRule;
-import syncleus.dann.neural.spiking.Synapse;
+import syncleus.dann.neural.spiking.SpikingSynapse;
 import syncleus.dann.neural.spiking.SynapseUpdateRule;
 
 /**
@@ -75,7 +75,7 @@ public class ShortTermPlasticityRule extends SynapseUpdateRule {
     private boolean activated = DEFAULT_ACTIVATED;
 
     @Override
-    public void init(Synapse synapse) {
+    public void init(SpikingSynapse synapse) {
     }
 
     @Override
@@ -95,7 +95,7 @@ public class ShortTermPlasticityRule extends SynapseUpdateRule {
     }
 
     @Override
-    public void update(Synapse synapse) {
+    public void update(SpikingSynapse synapse) {
         // Determine whether to activate short term dynamics
         if (synapse.getSource().getUpdateRule() instanceof SpikingNeuronUpdateRule) {
             if (((SpikingNeuronUpdateRule) synapse.getSource().getUpdateRule())

@@ -18,7 +18,7 @@
  */
 package syncleus.dann.neural.spiking.synapse_update_rules;
 
-import syncleus.dann.neural.spiking.Synapse;
+import syncleus.dann.neural.spiking.SpikingSynapse;
 import syncleus.dann.neural.spiking.SynapseUpdateRule;
 
 /**
@@ -30,7 +30,7 @@ public class StaticSynapseRule extends SynapseUpdateRule {
     public boolean clipped = false;
 
     @Override
-    public void init(Synapse synapse) {
+    public void init(SpikingSynapse synapse) {
         // TODO Auto-generated method stub
     }
 
@@ -41,7 +41,7 @@ public class StaticSynapseRule extends SynapseUpdateRule {
     }
 
     @Override
-    public void update(Synapse synapse) {
+    public void update(SpikingSynapse synapse) {
         // if (clipped) {
         // super.setStrength(Synapse(synapse.getStrength()));
         // }

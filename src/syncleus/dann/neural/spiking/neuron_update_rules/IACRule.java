@@ -20,19 +20,20 @@ package syncleus.dann.neural.spiking.neuron_update_rules;
 
 import syncleus.dann.neural.spiking.SpikingNeuralNetwork.TimeType;
 import syncleus.dann.neural.spiking.SpikingNeuron;
-import syncleus.dann.neural.spiking.NeuronUpdateRule;
-import syncleus.dann.neural.spiking.Synapse;
+import syncleus.dann.neural.spiking.SpikingNeuronUpdateRule;
+import syncleus.dann.neural.spiking.SpikingSynapse;
 import syncleus.dann.neural.spiking.neuron_update_rules.interfaces.BoundedUpdateRule;
 import syncleus.dann.neural.spiking.neuron_update_rules.interfaces.ClippableUpdateRule;
 import syncleus.dann.neural.spiking.neuron_update_rules.interfaces.NoisyUpdateRule;
-import org.simbrain.util.randomizer.Randomizer;
+import syncleus.dann.neural.spiking.util.Randomizer;
 
 /**
  * <b>IACNeuron</b> implements an Interactive Activation and Competition neuron.
  */
-public class IACRule extends NeuronUpdateRule implements BoundedUpdateRule,
+public class IACRule extends SpikingNeuronUpdateRule implements BoundedUpdateRule,
     ClippableUpdateRule, NoisyUpdateRule {
 
+    
     /** The Default upper bound. */
     private static final double DEFAULT_CEILING = 1.0;
 
@@ -89,7 +90,7 @@ public class IACRule extends NeuronUpdateRule implements BoundedUpdateRule,
         double val = inputType.getInput(neuron);
         double wtdSum = 0;
 
-        for (Synapse w : neuron.getFanIn()) {
+        for (SpikingSynapse w : neuron.getFanIn()) {
             SpikingNeuron source = w.getSource();
 
             if (source.getActivation() > 0) {
@@ -213,6 +214,7 @@ public class IACRule extends NeuronUpdateRule implements BoundedUpdateRule,
     /**
      * @return Returns the noiseGenerator.
      */
+    @Override
     public Randomizer getNoiseGenerator() {
         return noiseGenerator;
     }
@@ -220,6 +222,7 @@ public class IACRule extends NeuronUpdateRule implements BoundedUpdateRule,
     /**
      * @param noiseGenerator The noiseGenerator to set.
      */
+    @Override
     public void setNoiseGenerator(final Randomizer noiseGenerator) {
         this.noiseGenerator = noiseGenerator;
     }

@@ -19,7 +19,7 @@
 package syncleus.dann.neural.spiking.listeners;
 
 import syncleus.dann.neural.spiking.SpikingNeuron;
-import syncleus.dann.neural.spiking.NeuronUpdateRule;
+import syncleus.dann.neural.spiking.SpikingNeuronUpdateRule;
 
 /**
  * Adapter class for NeuronListener.
@@ -33,7 +33,7 @@ public class NeuronAdapter implements NeuronListener {
     }
 
     @Override
-    public void neuronTypeChanged(NetworkEvent<NeuronUpdateRule> networkEvent) {
+    public void neuronTypeChanged(NetworkEvent<SpikingNeuronUpdateRule> networkEvent) {
     }
 
     @Override

@@ -20,10 +20,10 @@ package syncleus.dann.neural.spiking.subnetworks;
 
 import syncleus.dann.neural.spiking.SpikingNeuralNetwork;
 import syncleus.dann.neural.spiking.SpikingNeuron;
-import syncleus.dann.neural.spiking.Synapse;
+import syncleus.dann.neural.spiking.SpikingSynapse;
 import syncleus.dann.neural.spiking.groups.NeuronGroup;
-import syncleus.dann.neural.spiking.layouts.HexagonalGridLayout;
-import syncleus.dann.neural.spiking.layouts.Layout;
+import syncleus.dann.learn.layouts.HexagonalGridLayout;
+import syncleus.dann.learn.layouts.Layout;
 import syncleus.dann.neural.spiking.neuron_update_rules.LinearRule;
 
 /**
@@ -119,7 +119,7 @@ public class SOMGroup extends NeuronGroup {
      */
     public void randomizeIncomingWeights() {
         for (SpikingNeuron n : getNeuronList()) {
-            for (Synapse s : n.getFanIn()) {
+            for (SpikingSynapse s : n.getFanIn()) {
                 s.setLowerBound(0);
                 s.setStrength(s.getUpperBound() * Math.random());
             }
@@ -132,7 +132,7 @@ public class SOMGroup extends NeuronGroup {
     public void recall() {
         winDistance = 0;
         SpikingNeuron winner = calculateWinner();
-        for (Synapse incoming : winner.getFanIn()) {
+        for (SpikingSynapse incoming : winner.getFanIn()) {
             incoming.getSource().setActivation(incoming.getStrength());
         }
 
@@ -187,7 +187,7 @@ public class SOMGroup extends NeuronGroup {
             physicalDistance = findPhysicalDistance(neuron, winner);
             // The center of the neuron is within the update region.
             if (physicalDistance <= neighborhoodSize) {
-                for (Synapse incoming : neuron.getFanIn()) {
+                for (SpikingSynapse incoming : neuron.getFanIn()) {
                     val = incoming.getStrength()
                             + alpha
                             * (incoming.getSource().getActivation() - incoming
@@ -233,7 +233,7 @@ public class SOMGroup extends NeuronGroup {
      */
     private double findDistance(final SpikingNeuron n) {
         double ret = 0;
-        for (Synapse incoming : n.getFanIn()) {
+        for (SpikingSynapse incoming : n.getFanIn()) {
             ret += Math.pow(incoming.getStrength()
                     - incoming.getSource().getActivation(), 2);
         }

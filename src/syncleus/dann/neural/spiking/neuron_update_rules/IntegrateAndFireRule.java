@@ -21,7 +21,7 @@ package syncleus.dann.neural.spiking.neuron_update_rules;
 import syncleus.dann.neural.spiking.SpikingNeuron;
 import syncleus.dann.neural.spiking.SpikingNeuronUpdateRule;
 import syncleus.dann.neural.spiking.neuron_update_rules.interfaces.NoisyUpdateRule;
-import org.simbrain.util.randomizer.Randomizer;
+import syncleus.dann.neural.spiking.util.Randomizer;
 
 /**
  * <b>IntegrateAndFireNeuron</b> implements an integrate and fire neuron.

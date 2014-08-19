@@ -18,7 +18,7 @@
  */
 package syncleus.dann.neural.spiking.synapse_update_rules;
 
-import syncleus.dann.neural.spiking.Synapse;
+import syncleus.dann.neural.spiking.SpikingSynapse;
 import syncleus.dann.neural.spiking.SynapseUpdateRule;
 
 /**
@@ -51,7 +51,7 @@ public class HebbianThresholdRule extends SynapseUpdateRule {
     private boolean useSlidingOutputThreshold = false;
 
     @Override
-    public void init(Synapse synapse) {
+    public void init(SpikingSynapse synapse) {
     }
 
     @Override
@@ -70,7 +70,7 @@ public class HebbianThresholdRule extends SynapseUpdateRule {
     }
 
     @Override
-    public void update(Synapse synapse) {
+    public void update(SpikingSynapse synapse) {
         double input = synapse.getSource().getActivation();
         double output = synapse.getTarget().getActivation();
 

@@ -19,6 +19,7 @@ package syncleus.dann.neural.spiking.groups;
 
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -26,14 +27,13 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import syncleus.dann.neural.spiking.SpikingNeuralNetwork;
 import syncleus.dann.neural.spiking.SpikingNeuron;
-import syncleus.dann.neural.spiking.NeuronUpdateRule;
-import syncleus.dann.neural.spiking.Synapse;
-import syncleus.dann.neural.spiking.layouts.GridLayout;
-import syncleus.dann.neural.spiking.layouts.Layout;
-import syncleus.dann.neural.spiking.layouts.LineLayout;
-import syncleus.dann.neural.spiking.layouts.LineLayout.LineOrientation;
+import syncleus.dann.neural.spiking.SpikingSynapse;
+import syncleus.dann.learn.layouts.GridLayout;
+import syncleus.dann.learn.layouts.Layout;
+import syncleus.dann.learn.layouts.LineLayout;
+import syncleus.dann.learn.layouts.LineLayout.LineOrientation;
+import syncleus.dann.neural.spiking.SpikingNeuronUpdateRule;
 import syncleus.dann.neural.spiking.neuron_update_rules.interfaces.BiasedUpdateRule;
-import org.simbrain.util.Utils;
 
 /**
  * A group of neurons. A primary abstraction for larger network structures.
@@ -208,7 +208,7 @@ public class NeuronGroup extends Group {
      * @param base
      *            the neuron update rule to set.
      */
-    public void setNeuronType(NeuronUpdateRule base) {
+    public void setNeuronType(SpikingNeuronUpdateRule base) {
         for (SpikingNeuron neuron : neuronList) {
             neuron.setUpdateRule(base.deepCopy());
         }
@@ -244,7 +244,7 @@ public class NeuronGroup extends Group {
      *            the synapse to check
      * @return true if it's attached to a neuron in this group
      */
-    public boolean inFanInOfSomeNode(final Synapse synapse) {
+    public boolean inFanInOfSomeNode(final SpikingSynapse synapse) {
         boolean ret = false;
         for (SpikingNeuron neuron : neuronList) {
             if (neuron.getFanIn().contains(synapse)) {
@@ -279,8 +279,8 @@ public class NeuronGroup extends Group {
      * 
      * @return incoming weights
      */
-    public List<Synapse> getIncomingWeights() {
-        List<Synapse> retList = new ArrayList<Synapse>();
+    public List<SpikingSynapse> getIncomingWeights() {
+        List<SpikingSynapse> retList = new ArrayList<SpikingSynapse>();
         for (SpikingNeuron neuron : this.getNeuronList()) {
             retList.addAll(neuron.getFanIn());
         }
@@ -292,8 +292,8 @@ public class NeuronGroup extends Group {
      * 
      * @return outgoing weights
      */
-    public List<Synapse> getOutgoingWeights() {
-        List<Synapse> retList = new ArrayList<Synapse>();
+    public List<SpikingSynapse> getOutgoingWeights() {
+        List<SpikingSynapse> retList = new ArrayList<SpikingSynapse>();
         for (SpikingNeuron neuron : this.getNeuronList()) {
             retList.addAll(neuron.getFanOut().values());
         }
@@ -335,7 +335,7 @@ public class NeuronGroup extends Group {
         neuronList.add(neuron);
         neuron.setParentGroup(this);
         if (getParentNetwork() != null) {
-            neuron.setId(getParentNetwork().getNeuronIdGenerator().getId());
+            
             if (fireEvent) {
                 getParentNetwork().fireNeuronAdded(neuron);
             }
@@ -368,7 +368,7 @@ public class NeuronGroup extends Group {
     @Override
     public String toString() {
         String ret = new String();
-        ret += ("Neuron Group [" + getLabel() + "] Neuron group with "
+        ret += ("Neuron Group [" + toString() + "] Neuron group with "
             + this.getNeuronList().size() + " neuron(s)\n");
         return ret;
     }
@@ -758,7 +758,7 @@ public class NeuronGroup extends Group {
      * Print activations as a vector.
      */
     public void printActivations() {
-        System.out.println(Utils.doubleArrayToString(SpikingNeuralNetwork
+        System.out.println(Arrays.toString(SpikingNeuralNetwork
             .getActivationVector(neuronList)));
     }
 

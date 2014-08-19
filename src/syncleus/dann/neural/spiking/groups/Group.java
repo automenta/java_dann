@@ -29,11 +29,6 @@ public abstract class Group {
     /** Reference to the network this group is a part of. */
     private final SpikingNeuralNetwork parentNetwork;
 
-    /** Name of this group. */
-    private String id;
-
-    /** Name of this group. Null strings lead to default labeling conventions. */
-    private String label;
 
     /**
      * Optional information about the current state of the group. For display in
@@ -94,16 +89,6 @@ public abstract class Group {
      */
     public abstract String getUpdateMethodDesecription();
 
-    @Override
-    public String toString() {
-        if (label != null) {
-            return label;
-        } else if (id != null) {
-            return id;
-        } else {
-            return super.toString();
-        }
-    }
 
     /**
      * @return the parent
@@ -112,36 +97,6 @@ public abstract class Group {
         return parentNetwork;
     }
 
-    /**
-     * @return the id
-     */
-    public String getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    /**
-     * @return the label
-     */
-    public String getLabel() {
-        return label;
-    }
-
-    /**
-     * @param label the label to set
-     */
-    public void setLabel(String label) {
-        this.label = label;
-        if (parentNetwork != null) {
-            parentNetwork.fireGroupParametersChanged(this);
-        }
-    }
 
     /**
      * @return the stateInfo

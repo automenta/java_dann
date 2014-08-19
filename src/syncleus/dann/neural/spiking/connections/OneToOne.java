@@ -18,7 +18,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import syncleus.dann.neural.spiking.SpikingNeuron;
-import syncleus.dann.neural.spiking.Synapse;
+import syncleus.dann.neural.spiking.SpikingSynapse;
 import syncleus.dann.neural.spiking.groups.SynapseGroup;
 import syncleus.dann.neural.spiking.util.OrientationComparator;
 
@@ -48,7 +48,7 @@ public class OneToOne implements ConnectNeurons {
      * @param targetNeurons
      * @return the new synapses
      */
-    public List<Synapse> connectOneToOne(List<SpikingNeuron> sourceNeurons, final List<SpikingNeuron> targetNeurons) {
+    public List<SpikingSynapse> connectOneToOne(List<SpikingNeuron> sourceNeurons, final List<SpikingNeuron> targetNeurons) {
         return connectOneToOne(sourceNeurons, targetNeurons, connectOrientation,
                 useBidirectionalConnections, true);
     }
@@ -73,9 +73,9 @@ public class OneToOne implements ConnectNeurons {
 
     @Override
     public void connectNeurons(SynapseGroup synGroup) {
-        List<Synapse> syns = connectOneToOne(synGroup.getSourceNeurons(),
+        List<SpikingSynapse> syns = connectOneToOne(synGroup.getSourceNeurons(),
                 synGroup.getTargetNeurons(), useBidirectionalConnections, false);
-        for (Synapse s : syns) {
+        for (SpikingSynapse s : syns) {
             synGroup.addNewSynapse(s);
         }
     }
@@ -88,7 +88,7 @@ public class OneToOne implements ConnectNeurons {
      * @param looseSynapses
      * @return
      */
-    public static List<Synapse> connectOneToOne(
+    public static List<SpikingSynapse> connectOneToOne(
             final List<SpikingNeuron> sourceNeurons, final List<SpikingNeuron> targetNeurons,
             final boolean useBidirectionalConnections,
             final boolean looseSynapses) {
@@ -141,7 +141,7 @@ public class OneToOne implements ConnectNeurons {
                     : OrientationComparator.Y_ORDER;
         }
 
-        ArrayList<Synapse> syns = new ArrayList<Synapse>();
+        ArrayList<SpikingSynapse> syns = new ArrayList<SpikingSynapse>();
 
         // TODO: Flags for which comparator to use, including no comparator
         // (Some users might want random but 1-1 couplings)
@@ -154,14 +154,14 @@ public class OneToOne implements ConnectNeurons {
             SpikingNeuron source = sources.next();
             if (targetsX.hasNext()) {
                 SpikingNeuron target = targetsX.next();
-                Synapse synapse = new Synapse(source, target);
+                SpikingSynapse synapse = new SpikingSynapse(source, target);
                 if (looseSynapses) {
                     source.getNetwork().addSynapse(synapse);
                 }
                 syns.add(synapse);
                 // Allow neurons to be connected back to source.
                 if (useBidirectionalConnections) {
-                    Synapse synapse2 = new Synapse(target, source);
+                    SpikingSynapse synapse2 = new SpikingSynapse(target, source);
                     if (looseSynapses) {
                         source.getNetwork().addSynapse(synapse);
                     }
@@ -184,13 +184,13 @@ public class OneToOne implements ConnectNeurons {
      * @param looseSynapses
      * @return
      */
-    public static List<Synapse> connectOneToOne(
+    public static List<SpikingSynapse> connectOneToOne(
             final List<SpikingNeuron> sourceNeurons, final List<SpikingNeuron> targetNeurons,
             final OrientationComparator connectOrientation,
             final boolean useBidirectionalConnections,
             final boolean looseSynapses) {
 
-        ArrayList<Synapse> syns = new ArrayList<Synapse>();
+        ArrayList<SpikingSynapse> syns = new ArrayList<SpikingSynapse>();
 
         // TODO: Flags for which comparator to use, including no comparator
         // (Some users might want random but 1-1 couplings)
@@ -203,14 +203,14 @@ public class OneToOne implements ConnectNeurons {
             SpikingNeuron source = sources.next();
             if (targetsX.hasNext()) {
                 SpikingNeuron target = targetsX.next();
-                Synapse synapse = new Synapse(source, target);
+                SpikingSynapse synapse = new SpikingSynapse(source, target);
                 if (looseSynapses) {
                     source.getNetwork().addSynapse(synapse);
                 }
                 syns.add(synapse);
                 // Allow neurons to be connected back to source.
                 if (useBidirectionalConnections) {
-                    Synapse synapse2 = new Synapse(target, source);
+                    SpikingSynapse synapse2 = new SpikingSynapse(target, source);
                     if (looseSynapses) {
                         source.getNetwork().addSynapse(synapse);
                     }

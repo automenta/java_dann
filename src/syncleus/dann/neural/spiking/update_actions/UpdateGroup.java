@@ -20,9 +20,6 @@ package syncleus.dann.neural.spiking.update_actions;
 
 import syncleus.dann.neural.spiking.NetworkUpdateAction;
 import syncleus.dann.neural.spiking.groups.Group;
-import syncleus.dann.neural.spiking.groups.NeuronGroup;
-import syncleus.dann.neural.spiking.groups.Subnetwork;
-import syncleus.dann.neural.spiking.groups.SynapseGroup;
 
 /**
  * Loose neurons (neurons not in groups) are updated in accordance with an
@@ -47,28 +44,28 @@ public class UpdateGroup implements NetworkUpdateAction {
         group.update();
     }
 
-    @Override
-    public String getDescription() {
-        String groupUpdateDescription = group.getUpdateMethodDesecription();
-        if (group instanceof Subnetwork) {
-            return "Subnetwork:" + group.getLabel() + " ("
-                    + groupUpdateDescription + ")";
-        } else if (group instanceof NeuronGroup) {
-            return "NeuronGroup:" + group.getLabel() + " ("
-                    + groupUpdateDescription + ")";
-        } else if (group instanceof SynapseGroup) {
-            return "SynapseGroup:" + group.getLabel() + " ("
-                    + groupUpdateDescription + ")";
-        } else {
-            return "Group:" + group.getLabel() + " (" + groupUpdateDescription
-                    + ")";
-        }
-    }
-
-    @Override
-    public String getLongDescription() {
-        return "Update " + group.getLabel();
-    }
+//    @Override
+//    public String getDescription() {
+//        String groupUpdateDescription = group.getUpdateMethodDesecription();
+//        if (group instanceof Subnetwork) {
+//            return "Subnetwork:" + group.getLabel() + " ("
+//                    + groupUpdateDescription + ")";
+//        } else if (group instanceof NeuronGroup) {
+//            return "NeuronGroup:" + group.getLabel() + " ("
+//                    + groupUpdateDescription + ")";
+//        } else if (group instanceof SynapseGroup) {
+//            return "SynapseGroup:" + group.getLabel() + " ("
+//                    + groupUpdateDescription + ")";
+//        } else {
+//            return "Group:" + group.getLabel() + " (" + groupUpdateDescription
+//                    + ")";
+//        }
+//    }
+//
+//    @Override
+//    public String getLongDescription() {
+//        return "Update " + group.getLabel();
+//    }
 
     /**
      * @return the group

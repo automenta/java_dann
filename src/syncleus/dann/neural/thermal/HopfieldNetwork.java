@@ -26,7 +26,7 @@ package syncleus.dann.neural.thermal;
 import syncleus.dann.data.Data;
 import syncleus.dann.data.specific.BiPolarNeuralData;
 import syncleus.dann.math.array.EngineArray;
-import syncleus.dann.math.matrix.BiPolarUtil;
+import syncleus.dann.math.BiPolarUtil;
 import syncleus.dann.math.matrix.MatrixMath;
 import syncleus.dann.math.matrix.SimpleRealMatrix;
 

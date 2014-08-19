@@ -19,7 +19,7 @@
 package syncleus.dann.neural.spiking.synapse_update_rules.spikeresponders;
 
 import syncleus.dann.neural.spiking.SpikingNeuronUpdateRule;
-import syncleus.dann.neural.spiking.Synapse;
+import syncleus.dann.neural.spiking.SpikingSynapse;
 
 /**
  * <b>Step</b>.
@@ -41,7 +41,7 @@ public class Step extends SpikeResponder {
     /**
      * {@inheritDoc}
      */
-    public void update(Synapse s) {
+    public void update(SpikingSynapse s) {
         if (((SpikingNeuronUpdateRule) s.getSource().getUpdateRule())
                 .hasSpiked()) {
             timer = responseDuration;

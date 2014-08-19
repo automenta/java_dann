@@ -24,12 +24,11 @@ import java.util.Random;
 import syncleus.dann.neural.spiking.SpikingNeuralNetwork.TimeType;
 import syncleus.dann.neural.spiking.SpikingNeuron;
 import syncleus.dann.neural.spiking.NeuronUpdateRule;
-import syncleus.dann.neural.spiking.Synapse;
+import syncleus.dann.neural.spiking.SpikingSynapse;
 import syncleus.dann.neural.spiking.SynapseUpdateRule;
 import syncleus.dann.neural.spiking.listeners.NetworkEvent;
 import syncleus.dann.neural.spiking.listeners.SynapseListener;
 import syncleus.dann.neural.spiking.neuron_update_rules.interfaces.BiasedUpdateRule;
-import org.simbrain.util.math.SimbrainMath;
 
 /**
  * <b>PointNeuron</b> from O'Reilley and Munakata, Computational Explorations in
@@ -40,10 +39,10 @@ public class PointNeuronRule extends NeuronUpdateRule implements
         SynapseListener, BiasedUpdateRule {
 
     /** Excitatory inputs for connected Synapses. */
-    private ArrayList<Synapse> excitatoryInputs = new ArrayList<Synapse>();
+    private ArrayList<SpikingSynapse> excitatoryInputs = new ArrayList<SpikingSynapse>();
 
     /** Inhibitory inputs for connected Synapses. */
-    private ArrayList<Synapse> inhibitoryInputs = new ArrayList<Synapse>();
+    private ArrayList<SpikingSynapse> inhibitoryInputs = new ArrayList<SpikingSynapse>();
 
     /** Time average constant for updating the net current field. (p. 43-44) */
     private double netTimeConstant = 0.7;
@@ -214,7 +213,7 @@ public class PointNeuronRule extends NeuronUpdateRule implements
         excitatoryInputs.clear();
         inhibitoryInputs.clear();
 
-        for (Synapse synapse : neuron.getFanIn()) {
+        for (SpikingSynapse synapse : neuron.getFanIn()) {
             addSynapseToList(synapse);
         }
     }
@@ -224,7 +223,7 @@ public class PointNeuronRule extends NeuronUpdateRule implements
      *
      * @param synapse synapse to add.
      */
-    private void addSynapseToList(Synapse synapse) {
+    private void addSynapseToList(SpikingSynapse synapse) {
         if (excitatoryInputs.contains(synapse)) {
             excitatoryInputs.remove(synapse);
         }
@@ -370,18 +369,18 @@ public class PointNeuronRule extends NeuronUpdateRule implements
         return (excitatoryTerm + leakTerm)
                 / (thresholdPotential - inhibitoryReversal);
     }
-
-    @Override
-    public String getToolTipText(final SpikingNeuron neuron) {
-        return "Activation: " + neuron.getActivation()
-                + "\n\nMembrane Potential: "
-                + SimbrainMath.roundDouble(membranePotential, 2)
-                + "\n\nNet Current: " + SimbrainMath.roundDouble(netCurrent, 2)
-                + "\n\nExcitatory current:  "
-                + SimbrainMath.roundDouble(excitatoryCurrent, 2)
-                + "\n \nLeak current: "
-                + SimbrainMath.roundDouble(leakCurrent, 2);
-    }
+//
+//    @Override
+//    public String getToolTipText(final SpikingNeuron neuron) {
+//        return "Activation: " + neuron.getActivation()
+//                + "\n\nMembrane Potential: "
+//                + SimbrainMath.roundDouble(membranePotential, 2)
+//                + "\n\nNet Current: " + (netCurrent, 2)
+//                + "\n\nExcitatory current:  "
+//                + SimbrainMath.roundDouble(excitatoryCurrent, 2)
+//                + "\n \nLeak current: "
+//                + SimbrainMath.roundDouble(leakCurrent, 2);
+//    }
 
     // TODO: Never Used Locally: Schedule for removal?
     // /**
@@ -414,7 +413,7 @@ public class PointNeuronRule extends NeuronUpdateRule implements
 
         double retVal = 0;
         if (excitatoryInputs.size() > 0) {
-            for (Synapse synapse : excitatoryInputs) {
+            for (SpikingSynapse synapse : excitatoryInputs) {
                 SpikingNeuron source = synapse.getSource();
                 // Will not work with spiking, or negative activations?
                 retVal += source.getActivation() * synapse.getStrength();
@@ -433,7 +432,7 @@ public class PointNeuronRule extends NeuronUpdateRule implements
 
         double retVal = 0;
         if (inhibitoryInputs.size() > 0) {
-            for (Synapse synapse : inhibitoryInputs) {
+            for (SpikingSynapse synapse : inhibitoryInputs) {
                 SpikingNeuron source = synapse.getSource();
                 // Will not work with spiking, or negative activations?
                 retVal += source.getActivation() * synapse.getStrength();
@@ -642,7 +641,7 @@ public class PointNeuronRule extends NeuronUpdateRule implements
     /**
      * @param excitatoryInputs the excitatoryInputs to set
      */
-    public void setExcitatoryInputs(ArrayList<Synapse> excitatoryInputs) {
+    public void setExcitatoryInputs(ArrayList<SpikingSynapse> excitatoryInputs) {
         this.excitatoryInputs = excitatoryInputs;
     }
 
@@ -733,8 +732,8 @@ public class PointNeuronRule extends NeuronUpdateRule implements
     /**
      * {@inheritDoc}
      */
-    public void synapseAdded(NetworkEvent<Synapse> networkEvent) {
-        Synapse synapse = networkEvent.getObject();
+    public void synapseAdded(NetworkEvent<SpikingSynapse> networkEvent) {
+        SpikingSynapse synapse = networkEvent.getObject();
         if (synapse.getTarget().getUpdateRule() == this) {
             addSynapseToList(synapse);
         }
@@ -743,8 +742,8 @@ public class PointNeuronRule extends NeuronUpdateRule implements
     /**
      * {@inheritDoc}
      */
-    public void synapseChanged(NetworkEvent<Synapse> networkEvent) {
-        Synapse synapse = networkEvent.getObject();
+    public void synapseChanged(NetworkEvent<SpikingSynapse> networkEvent) {
+        SpikingSynapse synapse = networkEvent.getObject();
         if (synapse.getTarget().getUpdateRule() == this) {
             addSynapseToList(synapse);
         }
@@ -753,8 +752,8 @@ public class PointNeuronRule extends NeuronUpdateRule implements
     /**
      * {@inheritDoc}
      */
-    public void synapseRemoved(NetworkEvent<Synapse> networkEvent) {
-        Synapse synapse = networkEvent.getObject();
+    public void synapseRemoved(NetworkEvent<SpikingSynapse> networkEvent) {
+        SpikingSynapse synapse = networkEvent.getObject();
         if (synapse.getTarget().getUpdateRule() == this) {
             if (excitatoryInputs.contains(synapse)) {
                 excitatoryInputs.remove(synapse);

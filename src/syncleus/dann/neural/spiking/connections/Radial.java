@@ -22,9 +22,9 @@ import java.util.Collection;
 import java.util.List;
 
 import syncleus.dann.neural.spiking.SpikingNeuron;
-import syncleus.dann.neural.spiking.Synapse;
+import syncleus.dann.neural.spiking.SpikingSynapse;
 import syncleus.dann.neural.spiking.groups.SynapseGroup;
-import org.simbrain.util.SimbrainConstants.Polarity;
+import syncleus.dann.neural.spiking.util.Polarity;
 
 /**
  * For each neuron, consider every neuron in an excitatory and inhibitory radius
@@ -78,7 +78,7 @@ public class Radial extends Sparse {
      */
     private double lambda = DEFAULT_LAMBDA;
 
-    private List<Synapse> removedList;
+    private List<SpikingSynapse> removedList;
 
     private SynapseGroup synapseGroup;
 
@@ -94,14 +94,14 @@ public class Radial extends Sparse {
      * @param loose
      * @return
      */
-    public static List<Synapse> connectRadialPolarized(
+    public static List<SpikingSynapse> connectRadialPolarized(
         final List<SpikingNeuron> source, final List<SpikingNeuron> target,
         double eeDistConst, double eiDistConst, double ieDistConst,
         double iiDistConst, double distConst, double lambda, boolean loose) {
         // Pre-allocating assuming that if one is using this as a connector
         // then they are probably not going to have greater than 25%
         // connectivity
-        List<Synapse> synapses = new ArrayList<Synapse>(source.size()
+        List<SpikingSynapse> synapses = new ArrayList<SpikingSynapse>(source.size()
             * target.size() / 4);
         for (SpikingNeuron src : source) {
             for (SpikingNeuron tar : target) {
@@ -134,7 +134,7 @@ public class Radial extends Sparse {
                         lambda);
                 }
                 if (randVal < probability) {
-                    Synapse s = new Synapse(src, tar);
+                    SpikingSynapse s = new SpikingSynapse(src, tar);
                     synapses.add(s);
                     if (loose) {
                         src.getNetwork().addSynapse(s);
@@ -154,13 +154,13 @@ public class Radial extends Sparse {
      * @param loose
      * @return
      */
-    public static List<Synapse> connectRadialNoPolarity(
+    public static List<SpikingSynapse> connectRadialNoPolarity(
         final List<SpikingNeuron> source, final List<SpikingNeuron> target, double distConst,
         double lambda, boolean loose) {
         // Pre-allocating assuming that if one is using this as a connector
         // then they are probably not going to have greater than 25%
         // connectivity
-        List<Synapse> synapses = new ArrayList<Synapse>(source.size()
+        List<SpikingSynapse> synapses = new ArrayList<SpikingSynapse>(source.size()
             * target.size() / 4);
         for (SpikingNeuron src : source) {
             for (SpikingNeuron tar : target) {
@@ -168,7 +168,7 @@ public class Radial extends Sparse {
                 double probability = calcConnectProb(src, tar, distConst,
                     lambda);
                 if (randVal < probability) {
-                    Synapse s = new Synapse(src, tar);
+                    SpikingSynapse s = new SpikingSynapse(src, tar);
                     synapses.add(s);
                     if (loose) {
                         src.getNetwork().addSynapse(s);
@@ -221,10 +221,10 @@ public class Radial extends Sparse {
         this.synapseGroup = synGroup;
         List<SpikingNeuron> source = synGroup.getSourceNeurons();
         List<SpikingNeuron> target = synGroup.getTargetNeurons();
-        List<Synapse> synapses = connectRadialPolarized(source, target,
+        List<SpikingSynapse> synapses = connectRadialPolarized(source, target,
             eeDistConst, eiDistConst, ieDistConst, iiDistConst, distConst,
             lambda, false);
-        for (Synapse s : synapses) {
+        for (SpikingSynapse s : synapses) {
             synGroup.addNewSynapse(s);
         }
         if (synGroup.isRecurrent()) {
@@ -351,7 +351,7 @@ public class Radial extends Sparse {
     }
 
     @Override
-    public Collection<Synapse> setConnectionDensity(double connectionDensity) {
+    public Collection<SpikingSynapse> setConnectionDensity(double connectionDensity) {
         // TODO Auto-generated method stub
         return null;
     }

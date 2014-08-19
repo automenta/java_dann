@@ -47,7 +47,6 @@ public class NeuronLayer extends NeuronGroup {
     public NeuronLayer(SpikingNeuralNetwork net, List<SpikingNeuron> neurons, LayerType type) {
         super(net, neurons);
         this.type = type;
-        setLabel(type.name() + " Layer");
     }
 
     /**

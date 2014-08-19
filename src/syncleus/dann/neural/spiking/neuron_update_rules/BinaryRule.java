@@ -22,12 +22,12 @@ import java.util.Random;
 
 import syncleus.dann.neural.spiking.SpikingNeuralNetwork.TimeType;
 import syncleus.dann.neural.spiking.SpikingNeuron;
-import syncleus.dann.neural.spiking.NeuronUpdateRule;
+import syncleus.dann.neural.spiking.SpikingNeuronUpdateRule;
 
 /**
  * <b>BinaryNeuron</b> takes one of two values.
  */
-public class BinaryRule extends NeuronUpdateRule {
+public class BinaryRule extends SpikingNeuronUpdateRule {
 
     private static final double DEFAULT_CEILING = 1.0;
 

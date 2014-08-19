@@ -27,6 +27,7 @@ import syncleus.dann.data.Data;
 /**
  * A SomBrain which uses exponential decay over time for the neighborhood
  * radius, neighborhood function, and learning rate.
+ * Note: if iterationsToConverge == 0, this runs continuously without reducing learningRate
  *
  * @author Jeffrey Phillips Freeman
  * @since 2.0

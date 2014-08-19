@@ -18,7 +18,8 @@
  */
 package syncleus.dann.neural.spiking.neuron_update_rules.interfaces;
 
-import org.simbrain.util.randomizer.Randomizer;
+import syncleus.dann.neural.spiking.util.Randomizer;
+
 
 /**
  * An interface which should be implemented by any neuron update rule that uses
@@ -42,6 +43,7 @@ public interface NoisyUpdateRule {
      * @param rand the generator to set
      */
     void setNoiseGenerator(Randomizer rand);
+    
 
     /**
      * Return true if add noise is turned on.

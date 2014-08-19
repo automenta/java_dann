@@ -26,7 +26,7 @@ package syncleus.dann.data.specific;
 import syncleus.dann.data.MutableData;
 import syncleus.dann.data.DataException;
 import syncleus.dann.math.cluster.Centroid;
-import syncleus.dann.math.matrix.BiPolarUtil;
+import syncleus.dann.math.BiPolarUtil;
 
 import java.io.Serializable;
 

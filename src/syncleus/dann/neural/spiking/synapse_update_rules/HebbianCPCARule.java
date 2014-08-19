@@ -18,7 +18,7 @@
  */
 package syncleus.dann.neural.spiking.synapse_update_rules;
 
-import syncleus.dann.neural.spiking.Synapse;
+import syncleus.dann.neural.spiking.SpikingSynapse;
 import syncleus.dann.neural.spiking.SynapseUpdateRule;
 
 /**
@@ -54,7 +54,7 @@ public class HebbianCPCARule extends SynapseUpdateRule {
     private double lambda = DEFAULT_LAMBDA;
 
     @Override
-    public void init(Synapse synapse) {
+    public void init(SpikingSynapse synapse) {
     }
 
     @Override
@@ -73,7 +73,7 @@ public class HebbianCPCARule extends SynapseUpdateRule {
     }
 
     @Override
-    public void update(Synapse synapse) {
+    public void update(SpikingSynapse synapse) {
         // Updates the synapse (see equation 4.18 in O'Reilly and Munakata).
 
         double input = synapse.getSource().getActivation();

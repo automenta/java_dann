@@ -13,13 +13,12 @@
 package syncleus.dann.neural.spiking.connections;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import syncleus.dann.neural.spiking.SpikingNeuron;
-import syncleus.dann.neural.spiking.Synapse;
+import syncleus.dann.neural.spiking.SpikingSynapse;
 import syncleus.dann.neural.spiking.groups.SynapseGroup;
-import org.simbrain.util.Utils;
 
 /**
  * Connect every source neuron to every target neuron.
@@ -79,10 +78,10 @@ public class AllToAll implements ConnectNeurons {
      * @param targetNeurons the target neurons
      * @return the new synapses
      */
-    public List<Synapse> connectAllToAll(List<SpikingNeuron> sourceNeurons,
+    public List<SpikingSynapse> connectAllToAll(List<SpikingNeuron> sourceNeurons,
             List<SpikingNeuron> targetNeurons) {
         return connectAllToAll(sourceNeurons, targetNeurons,
-                Utils.intersects(sourceNeurons, targetNeurons),
+                !Collections.disjoint(sourceNeurons, sourceNeurons),
                 selfConnectionAllowed, true);
     }
 
@@ -103,11 +102,11 @@ public class AllToAll implements ConnectNeurons {
      *            a synapse group
      * @return the synapses created.
      */
-    public static List<Synapse> connectAllToAll(
+    public static List<SpikingSynapse> connectAllToAll(
             final List<SpikingNeuron> sourceNeurons, final List<SpikingNeuron> targetNeurons,
             final boolean recurrent, final boolean allowSelfConnection,
             final boolean looseSynapses) {
-        ArrayList<Synapse> syns = new ArrayList<Synapse>(
+        ArrayList<SpikingSynapse> syns = new ArrayList<SpikingSynapse>(
                 (int) (targetNeurons.size() * sourceNeurons.size()));
         // Optimization: separately handle case where we have to worry about
         // avoiding self-connections, so an equals check is required.
@@ -115,7 +114,7 @@ public class AllToAll implements ConnectNeurons {
             for (SpikingNeuron source : sourceNeurons) {
                 for (SpikingNeuron target : targetNeurons) {
                     if (!(source.equals(target))) {
-                        Synapse s = new Synapse(source, target);
+                        SpikingSynapse s = new SpikingSynapse(source, target);
                         syns.add(s);
                     }
                 }
@@ -124,14 +123,14 @@ public class AllToAll implements ConnectNeurons {
             // The case where we don't need to worry about self-connections
             for (SpikingNeuron source : sourceNeurons) {
                 for (SpikingNeuron target : targetNeurons) {
-                    Synapse s = new Synapse(source, target);
+                    SpikingSynapse s = new SpikingSynapse(source, target);
                     syns.add(s);
                 }
             }
         }
         // If loose add directly to the network.
         if (looseSynapses) {
-            for (Synapse s : syns) {
+            for (SpikingSynapse s : syns) {
                 s.getSource().getNetwork().addSynapse(s);
             }
         }
@@ -147,14 +146,14 @@ public class AllToAll implements ConnectNeurons {
      *            connection class will be added.
      */
     public void connectNeurons(SynapseGroup synGroup) {
-        List<Synapse> syns = connectAllToAll(synGroup.getSourceNeurons(),
+        List<SpikingSynapse> syns = connectAllToAll(synGroup.getSourceNeurons(),
                 synGroup.getTargetNeurons(), synGroup.isRecurrent(),
                 selfConnectionAllowed, false);
         // Set the capacity of the synapse group's list to accommodate the
         // synapses this group will add.
         synGroup.preAllocateSynapses(synGroup.getSourceNeuronGroup().size()
                 * synGroup.getTargetNeuronGroup().size());
-        for (Synapse s : syns) {
+        for (SpikingSynapse s : syns) {
             synGroup.addNewSynapse(s);
         }
     }

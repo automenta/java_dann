@@ -21,9 +21,9 @@ package syncleus.dann.neural.spiking.connections;
 import java.util.List;
 
 import syncleus.dann.neural.spiking.SpikingNeuron;
-import syncleus.dann.neural.spiking.Synapse;
-import org.simbrain.util.SimbrainConstants.Polarity;
-import org.simbrain.util.randomizer.PolarizedRandomizer;
+import syncleus.dann.neural.spiking.SpikingSynapse;
+import syncleus.dann.neural.spiking.util.Polarity;
+import syncleus.dann.neural.spiking.util.PolarizedRandomizer;
 
 /**
  * Manage quick connection preferences, where a connection is applied using key
@@ -92,7 +92,7 @@ public class QuickConnectionManager {
      * @param target target neurons
      */
     public void applyCurrentConnection(List<SpikingNeuron> source, List<SpikingNeuron> target) {
-        List<Synapse> retList = null;
+        List<SpikingSynapse> retList = null;
         if (currentConnector == allToAll) {
             retList = ((AllToAll) currentConnector).connectAllToAll(source,
                     target);

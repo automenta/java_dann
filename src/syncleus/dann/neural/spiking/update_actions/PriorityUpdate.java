@@ -41,13 +41,13 @@ public class PriorityUpdate implements NetworkUpdateAction {
         network.updateAllSynapses();
     }
 
-    @Override
-    public String getDescription() {
-        return "Loose neurons (priority) and synapses";
-    }
-
-    @Override
-    public String getLongDescription() {
-        return "Priority update of loose items";
-    }
+//    @Override
+//    public String getDescription() {
+//        return "Loose neurons (priority) and synapses";
+//    }
+//
+//    @Override
+//    public String getLongDescription() {
+//        return "Priority update of loose items";
+//    }
 }

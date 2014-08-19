@@ -18,10 +18,10 @@
  */
 package syncleus.dann.neural.spiking.neuron_update_rules;
 
+import syncleus.dann.neural.spiking.util.Randomizer;
 import syncleus.dann.neural.spiking.SpikingNeuron;
 import syncleus.dann.neural.spiking.SpikingNeuronUpdateRule;
 import syncleus.dann.neural.spiking.neuron_update_rules.interfaces.NoisyUpdateRule;
-import org.simbrain.util.randomizer.Randomizer;
 
 /**
  * <b>IzhikevichNeuron</b>. Default values correspond to "tonic spiking". TODO:

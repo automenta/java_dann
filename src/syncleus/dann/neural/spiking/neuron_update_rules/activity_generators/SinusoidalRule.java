@@ -23,7 +23,7 @@ import syncleus.dann.neural.spiking.SpikingNeuron;
 import syncleus.dann.neural.spiking.NeuronUpdateRule;
 import syncleus.dann.neural.spiking.neuron_update_rules.interfaces.ActivityGenerator;
 import syncleus.dann.neural.spiking.neuron_update_rules.interfaces.BoundedUpdateRule;
-import org.simbrain.util.randomizer.Randomizer;
+import syncleus.dann.neural.spiking.util.Randomizer;
 
 /**
  * <b>SinusoidalNeuron</b> produces a sine wave; inputs are ignored.

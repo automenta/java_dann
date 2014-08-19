@@ -24,7 +24,7 @@ import java.util.Hashtable;
 import syncleus.dann.neural.spiking.SpikingNeuralNetwork;
 import syncleus.dann.neural.spiking.NetworkTextObject;
 import syncleus.dann.neural.spiking.SpikingNeuron;
-import syncleus.dann.neural.spiking.Synapse;
+import syncleus.dann.neural.spiking.SpikingSynapse;
 import syncleus.dann.neural.spiking.groups.NeuronGroup;
 
 /**
@@ -51,7 +51,7 @@ public class CopyPaste {
         ArrayList<Object> ret = new ArrayList<Object>();
         // Match new to old neurons for synapse adding
         Hashtable<SpikingNeuron, SpikingNeuron> neuronMappings = new Hashtable<SpikingNeuron, SpikingNeuron>();
-        ArrayList<Synapse> synapses = new ArrayList<Synapse>();
+        ArrayList<SpikingSynapse> synapses = new ArrayList<SpikingSynapse>();
 
         for (Object item : items) {
             if (item instanceof SpikingNeuron) {
@@ -59,9 +59,9 @@ public class CopyPaste {
                 SpikingNeuron newNeuron = new SpikingNeuron(newParent, oldNeuron);
                 ret.add(newNeuron);
                 neuronMappings.put(oldNeuron, newNeuron);
-            } else if (item instanceof Synapse) {
-                if (!isStranded((Synapse) item, items)) {
-                    synapses.add((Synapse) item);
+            } else if (item instanceof SpikingSynapse) {
+                if (!isStranded((SpikingSynapse) item, items)) {
+                    synapses.add((SpikingSynapse) item);
                 }
             } else if (item instanceof NetworkTextObject) {
                 NetworkTextObject text = ((NetworkTextObject) item);
@@ -76,9 +76,9 @@ public class CopyPaste {
         }
 
         // Copy synapses
-        for (Synapse synapse : synapses) {
+        for (SpikingSynapse synapse : synapses) {
             // Parent network for the new synapses inherited from neurons
-            Synapse newSynapse = new Synapse(neuronMappings.get(synapse
+            SpikingSynapse newSynapse = new SpikingSynapse(neuronMappings.get(synapse
                     .getSource()), neuronMappings.get(synapse.getTarget()),
                     synapse.getLearningRule().deepCopy(), synapse);
             ret.add(newSynapse);
@@ -95,7 +95,7 @@ public class CopyPaste {
      * @param allItems includes neurons to check
      * @return true if this synapse is stranded, false otherwise
      */
-    private static boolean isStranded(final Synapse synapse,
+    private static boolean isStranded(final SpikingSynapse synapse,
             final ArrayList<?> allItems) {
 
         // The list of checked neurons should include neurons in the list

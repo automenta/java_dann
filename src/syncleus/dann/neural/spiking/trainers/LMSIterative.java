@@ -20,7 +20,7 @@ package syncleus.dann.neural.spiking.trainers;
 
 import syncleus.dann.neural.spiking.SpikingNeuralNetwork;
 import syncleus.dann.neural.spiking.SpikingNeuron;
-import syncleus.dann.neural.spiking.Synapse;
+import syncleus.dann.neural.spiking.SpikingSynapse;
 import syncleus.dann.neural.spiking.neuron_update_rules.interfaces.BiasedUpdateRule;
 
 /**
@@ -86,7 +86,7 @@ public class LMSIterative extends IterableTrainer {
                 rmsError += (error * error); // TODO: Validate rmse
 
                 // Update weights
-                for (Synapse synapse : outputNeuron.getFanIn()) {
+                for (SpikingSynapse synapse : outputNeuron.getFanIn()) {
                     double deltaW = (learningRate * error * synapse.getSource()
                             .getActivation());
                     // System.out.println(Utils.round(deltaW,2) + "=" + error +

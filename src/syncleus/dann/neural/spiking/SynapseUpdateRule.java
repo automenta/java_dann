@@ -18,7 +18,6 @@
  */
 package syncleus.dann.neural.spiking;
 
-import org.simbrain.util.Utils;
 
 /**
  * A rule for updating a synapse. A learning rule.
@@ -36,14 +35,14 @@ public abstract class SynapseUpdateRule {
      *
      * @param synapse parent synapse
      */
-    public abstract void init(Synapse synapse);
+    public abstract void init(SpikingSynapse synapse);
 
     /**
      * Apply the update rule.
      *
      * @param synapse parent synapse
      */
-    public abstract void update(Synapse synapse);
+    public abstract void update(SpikingSynapse synapse);
 
     /**
      * Returns a deep copy of the update rule.
@@ -66,19 +65,19 @@ public abstract class SynapseUpdateRule {
      *
      * @param synapse reference to parent synapse
      */
-    public void clear(final Synapse synapse) {
+    public void clear(final SpikingSynapse synapse) {
         synapse.forceSetStrength(0); // TODO: Used?
     }
 
-    /**
-     * Returns string for tool tip or short description. Override to provide
-     * custom information.
-     *
-     * @param synapse reference to parent synapse
-     * @return tool tip text
-     */
-    public String getToolTipText(final Synapse synapse) {
-        return "(" + synapse.getId() + ") Strength: "
-                + Utils.round(synapse.getStrength(), MAX_DIGITS);
-    }
+//    /**
+//     * Returns string for tool tip or short description. Override to provide
+//     * custom information.
+//     *
+//     * @param synapse reference to parent synapse
+//     * @return tool tip text
+//     */
+//    public String getToolTipText(final Synapse synapse) {
+//        return "(" + synapse.getId() + ") Strength: "
+//                + Utils.round(synapse.getStrength(), MAX_DIGITS);
+//    }
 }

@@ -19,7 +19,7 @@
 package syncleus.dann.neural.spiking.synapse_update_rules.spikeresponders;
 
 import syncleus.dann.neural.spiking.SpikingNeuronUpdateRule;
-import syncleus.dann.neural.spiking.Synapse;
+import syncleus.dann.neural.spiking.SpikingSynapse;
 
 /**
  * <b>Probabilistic</b> spike responders produces a response with some
@@ -51,7 +51,7 @@ public class ProbabilisticResponder extends SpikeResponder {
     /**
      * {@inheritDoc}
      */
-    public void update(Synapse s) {
+    public void update(SpikingSynapse s) {
         if (((SpikingNeuronUpdateRule) s.getSource().getUpdateRule())
                 .hasSpiked()) {
             if (Math.random() > (1 - activationProbability)) {

@@ -19,7 +19,7 @@
 package syncleus.dann.neural.spiking.synapse_update_rules.spikeresponders;
 
 import syncleus.dann.neural.spiking.SpikingNeuronUpdateRule;
-import syncleus.dann.neural.spiking.Synapse;
+import syncleus.dann.neural.spiking.SpikingSynapse;
 
 /**
  * <b>RiseAndDecay</b>.
@@ -49,7 +49,7 @@ public class RiseAndDecay extends SpikeResponder {
     /**
      * {@inheritDoc}
      */
-    public void update(Synapse s) {
+    public void update(SpikingSynapse s) {
         double timeStep = s.getParentNetwork().getTimeStep();
         if (((SpikingNeuronUpdateRule) s.getSource().getUpdateRule())
                 .hasSpiked()) {

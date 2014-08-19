@@ -5,7 +5,6 @@ package syncleus.dann.neural.spiking.neuron_update_rules;
 
 import syncleus.dann.neural.spiking.SpikingNeuralNetwork.TimeType;
 import syncleus.dann.neural.spiking.SpikingNeuron;
-import syncleus.dann.neural.spiking.NeuronUpdateRule;
 import syncleus.dann.neural.spiking.SpikingNeuronUpdateRule;
 
 /**
@@ -287,10 +286,6 @@ public class HodgkinHuxleyRule extends SpikingNeuronUpdateRule {
         this.temp = temp;
     }
 
-    public NeuronUpdateRule deepCopy() {
-        // TODO
-        return null;
-    }
 
     @Override
     public String getDescription() {

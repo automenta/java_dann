@@ -21,7 +21,7 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package syncleus.dann.math.matrix;
+package syncleus.dann.math;
 
 /**
  * This class contains a number of utility methods used to work with bipolar

@@ -22,9 +22,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import syncleus.dann.math.matrix.SimpleRealMatrix;
 
-import org.simbrain.util.Utils;
-import org.simbrain.util.math.NumericMatrix;
 
 /**
  * Represents input data, target data, a way of iterating through it, a
@@ -131,19 +130,8 @@ public class TrainingSet {
      *
      * @return the data matrix containing this data.
      */
-    public NumericMatrix getInputDataMatrix() {
-        return new NumericMatrix() {
-
-            @Override
-            public void setData(double[][] data) {
-                setInputData(data);
-            }
-
-            @Override
-            public double[][] getData() {
-                return getInputData();
-            }
-        };
+    public SimpleRealMatrix getInputDataMatrix() {
+        return new SimpleRealMatrix(getInputData());
     }
 
     /**
@@ -151,19 +139,8 @@ public class TrainingSet {
      *
      * @return the data matrix containing this data.
      */
-    public NumericMatrix getTargetDataMatrix() {
-        return new NumericMatrix() {
-
-            @Override
-            public void setData(double[][] data) {
-                setTargetData(data);
-            }
-
-            @Override
-            public double[][] getData() {
-                return getTargetData();
-            }
-        };
+    public SimpleRealMatrix getTargetDataMatrix() {
+        return new SimpleRealMatrix(getTargetData());
     }
 
     /**
@@ -180,23 +157,22 @@ public class TrainingSet {
         this.percentValidation = percentValidation;
     }
 
-    /**
-     * Add a row of values to the input data table.
-     *
-     * @param newRow the new values to add.
-     */
-    public void addRow(double[] newRow) {
-        double[][] matActivations = new double[1][newRow.length];
-        matActivations[0] = newRow;
-
-        if (inputData == null) {
-            inputData = new double[1][newRow.length];
-            inputData = matActivations;
-        } else {
-            double newInputData[][] = Utils.concatenate(inputData,
-                    matActivations);
-            inputData = newInputData;
-        }
-    }
+//    /**
+//     * Add a row of values to the input data table.
+//     *
+//     * @param newRow the new values to add.
+//     */
+//    public void addRow(double[] newRow) {
+//        double[][] matActivations = new double[1][newRow.length];
+//        matActivations[0] = newRow;
+//
+//        if (inputData == null) {
+//            inputData = new double[1][newRow.length];
+//            inputData = matActivations;
+//        } else {
+//            double newInputData[][] = Utils.concatenate(inputData,matActivations);
+//            inputData = newInputData;
+//        }
+//    }
 
 }

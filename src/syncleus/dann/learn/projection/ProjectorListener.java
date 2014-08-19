@@ -16,38 +16,35 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package syncleus.dann.neural.spiking.layouts;
-
-import java.awt.geom.Point2D;
-import java.util.List;
-
-import syncleus.dann.neural.spiking.SpikingNeuron;
+package org.simbrain.util.projection;
 
 /**
- * Interface for all neuron layout managers, which arrange a set of neurons in
- * different ways.
+ * Classes with implement this interface fire events indicating changes in the
+ * status of a trainer.
  *
- * @author Jeff Yoshimi
+ * @author jyoshimi
  */
-public interface Layout {
+public interface ProjectorListener {
 
     /**
-     * Layout a list of neurons.
-     *
-     * @param neurons the list of neurons
+     * Fired when the projection method is changed.
      */
-    void layoutNeurons(List<SpikingNeuron> neurons);
+    void projectionMethodChanged();
 
     /**
-     * @return the name of this layout type
+     * Fired when a new datapoint is added to the projector.
      */
-    String getDescription();
+    void datapointAdded();
 
     /**
-     * Set the initial position.
-     *
-     * @param initialPoint initial position
+     * Fired when the the underlying data has been changed, e.g the projector
+     * has been reinitailzed, data reset, etc.
      */
-    void setInitialLocation(final Point2D initialPoint);
+    void projectorDataChanged();
+
+    /**
+     * Fired when the colors of some datapoints have changed but nothing else.
+     */
+    void projectorColorsChanged();
 
 }

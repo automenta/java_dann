@@ -19,7 +19,7 @@
 package syncleus.dann.neural.spiking.trainers;
 
 import syncleus.dann.neural.spiking.SpikingNeuron;
-import syncleus.dann.neural.spiking.Synapse;
+import syncleus.dann.neural.spiking.SpikingSynapse;
 import syncleus.dann.neural.spiking.subnetworks.Hopfield;
 import org.simbrain.util.math.SimbrainMath;
 
@@ -67,7 +67,7 @@ public class HopfieldTrainer extends Trainer {
             for (int i = 0; i < pattern.length; i++) {
                 for (int j = 0; j < pattern.length; j++) {
                     if (i != j) {
-                        Synapse s = neurons[i].getFanOut().get(neurons[j]);
+                        SpikingSynapse s = neurons[i].getFanOut().get(neurons[j]);
                         s.setStrength(s.getStrength() + pattern[i] * pattern[j]);
                     }
                 }

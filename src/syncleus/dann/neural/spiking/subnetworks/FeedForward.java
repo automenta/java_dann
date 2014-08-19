@@ -20,7 +20,7 @@ import java.util.List;
 import syncleus.dann.neural.spiking.connections.AllToAll;
 import syncleus.dann.neural.spiking.SpikingNeuralNetwork;
 import syncleus.dann.neural.spiking.SpikingNeuron;
-import syncleus.dann.neural.spiking.Synapse;
+import syncleus.dann.neural.spiking.SpikingSynapse;
 import syncleus.dann.neural.spiking.groups.NeuronGroup;
 import syncleus.dann.neural.spiking.groups.Subnetwork;
 import syncleus.dann.neural.spiking.groups.SynapseGroup;
@@ -78,11 +78,14 @@ public class FeedForward extends Subnetwork {
     public FeedForward(final SpikingNeuralNetwork network, int[] nodesPerLayer,
         Point2D initialPosition) {
         super(network);
-        LinearRule rule = new LinearRule();
-        SpikingNeuron neuron = new SpikingNeuron(network, rule);
-        rule.setIncrement(1); // For easier testing
-        rule.setLowerBound(0);
-        buildNetwork(network, nodesPerLayer, initialPosition, neuron);
+        try {
+            LinearRule rule = new LinearRule();
+        }
+        catch (Throwable t) { t.printStackTrace(); }
+//        SpikingNeuron neuron = new SpikingNeuron(network, rule);
+//        rule.setIncrement(1); // For easier testing
+//        rule.setLowerBound(0);
+//        buildNetwork(network, nodesPerLayer, initialPosition, neuron);
     }
 
     /**
@@ -102,7 +105,6 @@ public class FeedForward extends Subnetwork {
     private void buildNetwork(final SpikingNeuralNetwork network, int[] nodesPerLayer,
         Point2D initialPosition, final SpikingNeuron inputNeuronTemplate) {
 
-        setLabel("Layered Network");
 
         // Set up input layer
         List<SpikingNeuron> inputLayerNeurons = new ArrayList<SpikingNeuron>();
@@ -116,7 +118,7 @@ public class FeedForward extends Subnetwork {
         inputLayer.setLayoutBasedOnSize(initialPosition);
 
         // Prepare base synapse for connecting layers
-        Synapse synapse = Synapse.getTemplateSynapse(new StaticSynapseRule());
+        SpikingSynapse synapse = SpikingSynapse.getTemplateSynapse(new StaticSynapseRule());
         synapse.setLowerBound(-1);
         synapse.setUpperBound(1);
 
@@ -169,7 +171,6 @@ public class FeedForward extends Subnetwork {
     @Override
     public void addNeuronGroup(NeuronGroup group) {
         super.addNeuronGroup(group);
-        group.setLabel("Layer " + getNeuronGroupCount());
     }
 
     /**

@@ -20,18 +20,19 @@ package syncleus.dann.neural.spiking.neuron_update_rules;
 
 import syncleus.dann.neural.spiking.SpikingNeuralNetwork.TimeType;
 import syncleus.dann.neural.spiking.SpikingNeuron;
-import syncleus.dann.neural.spiking.NeuronUpdateRule;
+import syncleus.dann.neural.spiking.SpikingNeuronUpdateRule;
 import syncleus.dann.neural.spiking.neuron_update_rules.interfaces.BiasedUpdateRule;
 import syncleus.dann.neural.spiking.neuron_update_rules.interfaces.BoundedUpdateRule;
 import syncleus.dann.neural.spiking.neuron_update_rules.interfaces.ClippableUpdateRule;
 import syncleus.dann.neural.spiking.neuron_update_rules.interfaces.DifferentiableUpdateRule;
 import syncleus.dann.neural.spiking.neuron_update_rules.interfaces.NoisyUpdateRule;
-import org.simbrain.util.randomizer.Randomizer;
+import syncleus.dann.neural.spiking.util.Randomizer;
+
 
 /**
  * <b>LinearNeuron</b> is a standard linear neuron.
  */
-public class LinearRule extends NeuronUpdateRule implements BiasedUpdateRule,
+public class LinearRule extends SpikingNeuronUpdateRule implements BiasedUpdateRule,
     DifferentiableUpdateRule, BoundedUpdateRule, ClippableUpdateRule,
     NoisyUpdateRule {
 

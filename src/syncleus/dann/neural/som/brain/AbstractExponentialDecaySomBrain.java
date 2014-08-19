@@ -23,6 +23,15 @@ import syncleus.dann.neural.Synapse;
 
 import java.util.concurrent.ExecutorService;
 
+/**
+ * 
+ * Note: if iterationsToConverge == 0, this runs continuously without reducing learningRate
+ * @author me
+ * @param <IN>
+ * @param <ON>
+ * @param <N>
+ * @param <S> 
+ */
 public abstract class AbstractExponentialDecaySomBrain<IN extends SomInputNeuron, ON extends SomOutputNeuron, N extends SomNeuron, S extends Synapse<N>>
         extends AbstractSomBrain<IN, ON, N, S> {
     private static final long serialVersionUID = 12374098245721L;
@@ -58,7 +67,7 @@ public abstract class AbstractExponentialDecaySomBrain<IN extends SomInputNeuron
         return maxCrossSection / 2.0;
     }
 
-    private double getTimeConstant() {
+    public double getTimeConstant() {
         return (this.iterationsToConverge) / Math.log(this.getIntialRadius());
     }
 
@@ -86,6 +95,10 @@ public abstract class AbstractExponentialDecaySomBrain<IN extends SomInputNeuron
      */
     @Override
     protected double neighborhoodRadiusFunction() {
+        double tc = getTimeConstant();
+        if (tc == 0)
+            return getIntialRadius();
+        
         return this.getIntialRadius()
                 * Math.exp(-1.0 * this.getIterationsTrained()
                 / this.getTimeConstant());
@@ -99,9 +112,13 @@ public abstract class AbstractExponentialDecaySomBrain<IN extends SomInputNeuron
      */
     @Override
     protected double learningRateFunction() {
+        double tc = getTimeConstant();
+        if (tc == 0)
+            return initialLearningRate;
+        
         return this.initialLearningRate
                 * Math.exp(-1.0 * this.getIterationsTrained()
-                / this.getTimeConstant());
+                / tc);
     }
 
     @Override

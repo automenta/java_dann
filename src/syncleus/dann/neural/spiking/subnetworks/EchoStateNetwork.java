@@ -20,13 +20,13 @@ package syncleus.dann.neural.spiking.subnetworks;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
-
-import syncleus.dann.neural.spiking.connections.AllToAll;
-import syncleus.dann.neural.spiking.connections.Sparse;
+import syncleus.dann.neural.spiking.NeuronUpdateRule;
+import syncleus.dann.neural.spiking.util.Randomizer;
 import syncleus.dann.neural.spiking.SpikingNeuralNetwork;
 import syncleus.dann.neural.spiking.SpikingNeuralNetwork.TimeType;
 import syncleus.dann.neural.spiking.SpikingNeuron;
-import syncleus.dann.neural.spiking.NeuronUpdateRule;
+import syncleus.dann.neural.spiking.connections.AllToAll;
+import syncleus.dann.neural.spiking.connections.Sparse;
 import syncleus.dann.neural.spiking.groups.NeuronGroup;
 import syncleus.dann.neural.spiking.groups.Subnetwork;
 import syncleus.dann.neural.spiking.groups.SynapseGroup;
@@ -40,8 +40,7 @@ import syncleus.dann.neural.spiking.trainers.TrainingSet;
 import syncleus.dann.neural.spiking.util.NetworkLayoutManager;
 import syncleus.dann.neural.spiking.util.NetworkLayoutManager.Direction;
 import syncleus.dann.neural.spiking.util.SimnetUtils;
-import org.simbrain.util.math.SquashingFunction;
-import org.simbrain.util.randomizer.Randomizer;
+import syncleus.dann.neural.spiking.util.SquashingFunction;
 
 /**
  * Builds an Echo-State Network with options for all valid weight
@@ -94,8 +93,7 @@ public class EchoStateNetwork extends Subnetwork {
 
     /** Default TANH neurons for the reservoir */
     {
-        ((SigmoidalRule) reservoirNeuronType)
-            .setSquashFunctionType(SquashingFunction.TANH);
+        ((SigmoidalRule) reservoirNeuronType).setSquashFunctionType(SquashingFunction.TANH);
     }
 
     /** Initial position of network (from bottom left). */

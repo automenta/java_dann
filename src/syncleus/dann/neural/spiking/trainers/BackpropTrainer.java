@@ -23,7 +23,7 @@ import java.util.List;
 
 import syncleus.dann.neural.spiking.SpikingNeuralNetwork;
 import syncleus.dann.neural.spiking.SpikingNeuron;
-import syncleus.dann.neural.spiking.Synapse;
+import syncleus.dann.neural.spiking.SpikingSynapse;
 import syncleus.dann.neural.spiking.neuron_update_rules.interfaces.BiasedUpdateRule;
 import syncleus.dann.neural.spiking.neuron_update_rules.interfaces.DifferentiableUpdateRule;
 
@@ -54,7 +54,7 @@ public class BackpropTrainer extends IterableTrainer {
     private HashMap<SpikingNeuron, Double> errorMap;
 
     /** For storing weight deltas. */
-    private HashMap<Synapse, Double> weightDeltaMap;
+    private HashMap<SpikingSynapse, Double> weightDeltaMap;
 
     /** For storing bias deltas. */
     private HashMap<SpikingNeuron, Double> biasDeltaMap;
@@ -74,7 +74,7 @@ public class BackpropTrainer extends IterableTrainer {
         super(network);
         this.layers = layers;
         errorMap = new HashMap<SpikingNeuron, Double>();
-        weightDeltaMap = new HashMap<Synapse, Double>();
+        weightDeltaMap = new HashMap<SpikingSynapse, Double>();
         biasDeltaMap = new HashMap<SpikingNeuron, Double>();
         this.setIteration(0);
         mse = 0;
@@ -113,7 +113,7 @@ public class BackpropTrainer extends IterableTrainer {
             backpropagateError(network, row);
 
             // Update weights
-            for (Synapse synapse : weightDeltaMap.keySet()) {
+            for (SpikingSynapse synapse : weightDeltaMap.keySet()) {
                 // System.out.println(synapse.getId() + ":"
                 // + Utils.round(synapse.getStrength(), 2) + " + "
                 // + Utils.round(weightDeltaMap.get(synapse), 2));
@@ -168,7 +168,7 @@ public class BackpropTrainer extends IterableTrainer {
 
                     // Compute sum of fan-out errors on this neuron
                     double sumFanOutErrors = 0;
-                    for (Synapse synapse : hiddenLayerNeuron.getFanOut()
+                    for (SpikingSynapse synapse : hiddenLayerNeuron.getFanOut()
                             .values()) {
                         SpikingNeuron nextLayerNeuron = synapse.getTarget();
                         // TODO: Why do I need this check?
@@ -207,7 +207,7 @@ public class BackpropTrainer extends IterableTrainer {
         }
 
         // Compute and store weight deltas for the fan-in to this neuron
-        for (Synapse synapse : neuron.getFanIn()) {
+        for (SpikingSynapse synapse : neuron.getFanIn()) {
             double lastWeightDelta = 0;
             if (weightDeltaMap.get(synapse) != null) {
                 lastWeightDelta = weightDeltaMap.get(synapse);

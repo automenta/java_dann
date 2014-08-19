@@ -19,15 +19,11 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import org.ojalgo.access.Access2D.Builder;
-import org.ojalgo.matrix.BasicMatrix;
-import org.ojalgo.matrix.BasicMatrix.Factory;
-import org.ojalgo.matrix.PrimitiveMatrix;
-import org.ojalgo.scalar.ComplexNumber;
+import syncleus.dann.math.matrix.SimpleRealMatrix;
+import syncleus.dann.math.matrix.decomposition.EigenvalueDecomposition2;
 import syncleus.dann.neural.spiking.SpikingNeuralNetwork;
 import syncleus.dann.neural.spiking.SpikingNeuron;
-import syncleus.dann.neural.spiking.Synapse;
+import syncleus.dann.neural.spiking.SpikingSynapse;
 
 /**
  * <b>SimnetUtils</b> provides utility classes relating to Simbrain networks.
@@ -54,7 +50,7 @@ public class SimnetUtils {
 
         for (int i = 0; i < srcLayer.size(); i++) {
             for (int j = 0; j < targetLayer.size(); j++) {
-                Synapse s = SpikingNeuralNetwork.getSynapse(srcLayer.get(i),
+                SpikingSynapse s = SpikingNeuralNetwork.getSynapse(srcLayer.get(i),
                         targetLayer.get(j));
 
                 if (s != null) {
@@ -83,11 +79,11 @@ public class SimnetUtils {
             final List<SpikingNeuron> tar, final double[][] w) {
         for (int i = 0; i < src.size(); i++) {
             for (int j = 0; j < tar.size(); j++) {
-                Synapse s = SpikingNeuralNetwork.getSynapse(src.get(i), tar.get(j));
+                SpikingSynapse s = SpikingNeuralNetwork.getSynapse(src.get(i), tar.get(j));
                 if (s != null) {
                     s.forceSetStrength(w[i][j]);
                 } else {
-                    Synapse newSynapse = new Synapse(src.get(i), tar.get(j));
+                    SpikingSynapse newSynapse = new SpikingSynapse(src.get(i), tar.get(j));
                     newSynapse.forceSetStrength(w[i][j]);
                     newSynapse.getParentNetwork().addSynapse(newSynapse);
                 }
@@ -103,14 +99,14 @@ public class SimnetUtils {
      * @param targetLayer target neurons
      * @return the matrix of synapses.
      */
-    public static Synapse[][] getWeightMatrix(List<SpikingNeuron> srcLayer,
+    public static SpikingSynapse[][] getWeightMatrix(List<SpikingNeuron> srcLayer,
             List<SpikingNeuron> targetLayer) {
 
-        Synapse[][] ret = new Synapse[srcLayer.size()][targetLayer.size()];
+        SpikingSynapse[][] ret = new SpikingSynapse[srcLayer.size()][targetLayer.size()];
 
         for (int i = 0; i < srcLayer.size(); i++) {
             for (int j = 0; j < targetLayer.size(); j++) {
-                Synapse s = SpikingNeuralNetwork.getSynapse(srcLayer.get(i),
+                SpikingSynapse s = SpikingNeuralNetwork.getSynapse(srcLayer.get(i),
                         targetLayer.get(j));
 
                 if (s != null) {
@@ -136,7 +132,7 @@ public class SimnetUtils {
             double scalar) {
         for (SpikingNeuron source : src) {
             for (SpikingNeuron target : tar) {
-                Synapse weight = SpikingNeuralNetwork.getSynapse(source, target);
+                SpikingSynapse weight = SpikingNeuralNetwork.getSynapse(source, target);
                 if (weight != null) {
                     SpikingNeuralNetwork.getSynapse(source, target).forceSetStrength(
                             weight.getStrength() * scalar);
@@ -154,25 +150,13 @@ public class SimnetUtils {
      */
     public static double findMaxEig(double[][] weightMatrix) {
 
-        Factory<?> mf = PrimitiveMatrix.FACTORY;
-
-        Builder<?> tmpBuilder = mf.getBuilder(weightMatrix.length,
-                weightMatrix[0].length);
-        for (int i = 0; i < tmpBuilder.countRows(); i++) {
-            for (int j = 0; j < tmpBuilder.countColumns(); j++) {
-                tmpBuilder.set(i, j, weightMatrix[i][j]);
-            }
-        }
-
-        BasicMatrix mat = (BasicMatrix) tmpBuilder.build();
-
-        List<ComplexNumber> eigs = mat.getEigenvalues();
+        double[] reals = new EigenvalueDecomposition2(new SimpleRealMatrix(weightMatrix)).getRealEigenvalues();
 
         double maxEig = 0.0;
-        for (int i = 0, n = eigs.size(); i < n; i++) {
-            if (Math.abs(eigs.get(i).getReal()) > maxEig) {
-                maxEig = Math.abs(eigs.get(i).getReal());
-            }
+        for (int i = 0, n = reals.length; i < n; i++) {
+            double mr = Math.abs(reals[i]);
+            if (mr > maxEig)
+                maxEig = mr;
         }
 
         return maxEig;
@@ -277,7 +261,7 @@ public class SimnetUtils {
         boolean theNextLayerIsTheSourceLayer = false;
         // Populate next layer
         for (SpikingNeuron neuron : layerToCheck) {
-            for (Synapse synapse : neuron.getFanIn()) {
+            for (SpikingSynapse synapse : neuron.getFanIn()) {
                 SpikingNeuron sourceNeuron = synapse.getSource();
                 if (sourceLayer.contains(sourceNeuron)) {
                     theNextLayerIsTheSourceLayer = true;

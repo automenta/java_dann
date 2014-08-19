@@ -18,6 +18,7 @@
  */
 package syncleus.dann.neural.spiking;
 
+import syncleus.dann.neural.spiking.util.Polarity;
 import java.awt.Point;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
@@ -27,13 +28,13 @@ import java.util.List;
 import java.util.Map;
 
 import syncleus.dann.neural.spiking.SpikingNeuralNetwork.TimeType;
-import syncleus.dann.neural.spiking.NeuronUpdateRule.InputType;
+import syncleus.dann.neural.spiking.SpikingNeuronUpdateRule.InputType;
 import syncleus.dann.neural.spiking.groups.Group;
 import syncleus.dann.neural.spiking.neuron_update_rules.LinearRule;
 import syncleus.dann.neural.spiking.neuron_update_rules.interfaces.ActivityGenerator;
 import syncleus.dann.neural.spiking.neuron_update_rules.interfaces.BiasedUpdateRule;
 import syncleus.dann.neural.spiking.neuron_update_rules.interfaces.BoundedUpdateRule;
-import org.simbrain.util.SimbrainConstants.Polarity;
+
 
 /**
  * <b>Neuron</b> represents a node in the neural network. Most of the "logic" of
@@ -47,19 +48,14 @@ public class SpikingNeuron {
      * specified update rule will default to the rule specified here: Linear
      * with default parameters.
      */
-    public static final NeuronUpdateRule DEFAULT_UPDATE_RULE = new LinearRule();
+    public static final SpikingNeuronUpdateRule DEFAULT_UPDATE_RULE = new LinearRule();
 
     /**
      * The update method of this neuron, which corresponds to what kind of
      * neuron it is.
      */
-    private NeuronUpdateRule updateRule;
+    private SpikingNeuronUpdateRule updateRule;
 
-    /** A unique id for this neuron. */
-    private String id;
-
-    /** An optional String description associated with this neuron. */
-    private String label = "";
 
     /** Activation value of the neuron. The main state variable. */
     private double activation;
@@ -77,10 +73,10 @@ public class SpikingNeuron {
     private final SpikingNeuralNetwork parent;
 
     /** List of synapses this neuron attaches to. */
-    private Map<SpikingNeuron, Synapse> fanOut = new HashMap<SpikingNeuron, Synapse>();
+    private Map<SpikingNeuron, SpikingSynapse> fanOut = new HashMap<SpikingNeuron, SpikingSynapse>();
 
     /** List of synapses attaching to this neuron. */
-    private ArrayList<Synapse> fanIn = new ArrayList<Synapse>();
+    private ArrayList<SpikingSynapse> fanIn = new ArrayList<SpikingSynapse>();
 
     /** A marker for whether or not the update rule is an input generator. */
     private boolean generator;
@@ -162,7 +158,7 @@ public class SpikingNeuron {
      * @param updateRule
      *            the update method
      */
-    public SpikingNeuron(final SpikingNeuralNetwork parent, final NeuronUpdateRule updateRule) {
+    public SpikingNeuron(final SpikingNeuralNetwork parent, final SpikingNeuronUpdateRule updateRule) {
         this.parent = parent;
         setUpdateRule(updateRule);
     }
@@ -184,8 +180,7 @@ public class SpikingNeuron {
         setInputValue(n.getInputValue());
         setX(n.getX());
         setY(n.getY());
-        setUpdatePriority(n.getUpdatePriority());
-        setLabel(n.getLabel());
+        setUpdatePriority(n.getUpdatePriority());        
     }
 
     /**
@@ -203,8 +198,8 @@ public class SpikingNeuron {
      */
     public void postUnmarshallingInit() {
         // TODO: Add checks?
-        fanOut = new HashMap<SpikingNeuron, Synapse>();
-        fanIn = new ArrayList<Synapse>();
+        fanOut = new HashMap<SpikingNeuron, SpikingSynapse>();
+        fanIn = new ArrayList<SpikingSynapse>();
         // Todo: Backwards compatibility for before r3061. Maybe be removable
         // if all existing workspaces are replaced.
         if (updateRule instanceof SpikingNeuronUpdateRule) {
@@ -228,10 +223,11 @@ public class SpikingNeuron {
      *
      * @return the neuronUpdateRule
      */
-    public NeuronUpdateRule getUpdateRule() {
+    public SpikingNeuronUpdateRule getUpdateRule() {
         return updateRule;
     }
 
+    
     /**
      * Returns the current update rule's description (name).
      *
@@ -251,7 +247,7 @@ public class SpikingNeuron {
      */
     public void setUpdateRule(String name) {
         try {
-            NeuronUpdateRule newRule = (NeuronUpdateRule) Class.forName(
+            SpikingNeuronUpdateRule newRule = (SpikingNeuronUpdateRule) Class.forName(
                 "org.simbrain.network.neuron_update_rules." + name)
                 .newInstance();
             setUpdateRule(newRule);
@@ -271,10 +267,10 @@ public class SpikingNeuron {
      * @param updateRule
      *            the neuronUpdateRule to set
      */
-    public void setUpdateRule(final NeuronUpdateRule updateRule) {
-        NeuronUpdateRule oldRule = updateRule;
+    public void setUpdateRule(final SpikingNeuronUpdateRule updateRule) {
+        SpikingNeuronUpdateRule oldRule = updateRule;
         this.updateRule = updateRule;
-        for (Synapse s : getFanOut().values()) {
+        for (SpikingSynapse s : getFanOut().values()) {
             s.initSpikeResponder();
         }
         if (getNetwork() != null) {
@@ -331,34 +327,18 @@ public class SpikingNeuron {
         return activation;
     }
 
-    /**
-     * @return ID of neuron.
-     */
-    public String getId() {
-        return id;
-    }
-
-    /**
-     * Sets the id of the neuron.
-     *
-     * @param theName
-     *            Neuron id
-     */
-    public void setId(final String theName) {
-        id = theName;
-    }
 
     /**
      * @return an unmodifiable version of the fanIn list.
      */
-    public List<Synapse> getFanIn() {
+    public List<SpikingSynapse> getFanIn() {
         return Collections.unmodifiableList(fanIn);
     }
 
     /**
      * @return an unmodifiable version of the fanOut map.
      */
-    public Map<SpikingNeuron, Synapse> getFanOut() {
+    public Map<SpikingNeuron, SpikingSynapse> getFanOut() {
         return Collections.unmodifiableMap(fanOut);
     }
 
@@ -371,7 +351,7 @@ public class SpikingNeuron {
      *
      * @param s
      */
-    public void addEfferent(final Synapse synapse) {
+    public void addEfferent(final SpikingSynapse synapse) {
         if (fanOut != null) {
             if (fanOut.containsKey(synapse.getTarget())) {
                 getNetwork().removeSynapse(fanOut.get(synapse.getTarget()));
@@ -386,7 +366,7 @@ public class SpikingNeuron {
      * @param synapse
      *            the connection between this neuron and a target neuron
      */
-    public void removeEfferent(final Synapse synapse) {
+    public void removeEfferent(final SpikingSynapse synapse) {
         if (fanOut != null) {
             fanOut.remove(synapse.getTarget());
         }
@@ -399,7 +379,7 @@ public class SpikingNeuron {
      *
      * @param s
      */
-    public void addAfferent(final Synapse source) {
+    public void addAfferent(final SpikingSynapse source) {
         if (fanIn != null) {
             fanIn.add(source);
         }
@@ -411,7 +391,7 @@ public class SpikingNeuron {
      * @param synapse
      *            the connection between this neuron and a source neuron
      */
-    public void removeAfferent(final Synapse synapse) {
+    public void removeAfferent(final SpikingSynapse synapse) {
         if (fanIn != null) {
             fanIn.remove(synapse);
         }
@@ -427,7 +407,7 @@ public class SpikingNeuron {
      */
     public double getWeightedInputs() {
         double wtdSum = inputValue;
-        for (Synapse w : fanIn) {
+        for (SpikingSynapse w : fanIn) {
             wtdSum += w.getWeightedSum();
         }
         return wtdSum;
@@ -441,7 +421,7 @@ public class SpikingNeuron {
      */
     public double getSynapticInput() {
         double wtdSum = inputValue;
-        for (Synapse s : fanIn) {
+        for (SpikingSynapse s : fanIn) {
             wtdSum += s.getValue();
         }
         return wtdSum;
@@ -466,18 +446,18 @@ public class SpikingNeuron {
      * Sends relevant information about the network to standard output.
      */
     public void debug() {
-        System.out.println("neuron " + id);
+        System.out.println("neuron " + this);
         System.out.println("fan in");
 
         for (int i = 0; i < fanIn.size(); i++) {
-            Synapse tempRef = fanIn.get(i);
+            SpikingSynapse tempRef = fanIn.get(i);
             System.out.println("fanIn [" + i + "]:" + tempRef);
         }
 
         System.out.println("fan out");
 
         for (int i = 0; i < fanOut.size(); i++) {
-            Synapse tempRef = fanOut.get(i);
+            SpikingSynapse tempRef = fanOut.get(i);
             System.out.println("fanOut [" + i + "]:" + tempRef);
         }
     }
@@ -549,7 +529,7 @@ public class SpikingNeuron {
         double ret = 0;
 
         for (int i = 0; i < fanIn.size(); i++) {
-            Synapse tempRef = fanIn.get(i);
+            SpikingSynapse tempRef = fanIn.get(i);
             ret += tempRef.getStrength();
         }
 
@@ -567,7 +547,7 @@ public class SpikingNeuron {
     public int getNumberOfActiveInputs(final int threshold) {
         int numActiveLines = 0;
         // Determine number of active (greater than 0) input lines
-        for (Synapse incoming : fanIn) {
+        for (SpikingSynapse incoming : fanIn) {
             if (incoming.getSource().getActivation() > threshold) {
                 numActiveLines++;
             }
@@ -602,7 +582,7 @@ public class SpikingNeuron {
      *            the synapse to check.
      * @return true if synapse is connected, false otherwise.
      */
-    public boolean isConnected(final Synapse s) {
+    public boolean isConnected(final SpikingSynapse s) {
         return (fanIn.contains(s) || fanOut.get(s.getTarget()) != null);
     }
 
@@ -706,11 +686,11 @@ public class SpikingNeuron {
      * @return an element by element shallow copy of the synapses in this
      *         neuron's fanIn map.
      */
-    public List<Synapse> getFanInList() {
+    public List<SpikingSynapse> getFanInList() {
         // Pre-allocating for speed
-        List<Synapse> syns =
-            new ArrayList<Synapse>((int) (fanIn.size() / 0.75));
-        for (Synapse s : fanIn) {
+        List<SpikingSynapse> syns =
+            new ArrayList<SpikingSynapse>((int) (fanIn.size() / 0.75));
+        for (SpikingSynapse s : fanIn) {
             syns.add(s);
         }
         return syns;
@@ -724,11 +704,11 @@ public class SpikingNeuron {
      * @return an element by element shallow copy of the synapses in this
      *         neuron's fanOut map.
      */
-    public List<Synapse> getFanOutList() {
+    public List<SpikingSynapse> getFanOutList() {
         // Pre-allocating for speed
-        List<Synapse> syns = new ArrayList<Synapse>(
+        List<SpikingSynapse> syns = new ArrayList<SpikingSynapse>(
             (int) (fanOut.size() / 0.75));
-        for (Synapse s : fanOut.values()) {
+        for (SpikingSynapse s : fanOut.values()) {
             syns.add(s);
         }
         return syns;
@@ -739,9 +719,9 @@ public class SpikingNeuron {
      * structures.
      */
     public void deleteFanOut() {
-        List<Synapse> fanOutList = getFanOutList();
+        List<SpikingSynapse> fanOutList = getFanOutList();
         fanOut.clear();
-        for (Synapse s : fanOutList) {
+        for (SpikingSynapse s : fanOutList) {
             parent.removeSynapse(s);
         }
     }
@@ -751,16 +731,16 @@ public class SpikingNeuron {
      * structures.
      */
     public void deleteFanIn() {
-        List<Synapse> fanInList = getFanInList();
+        List<SpikingSynapse> fanInList = getFanInList();
         fanIn.clear();
-        for (Synapse synapse : fanInList) {
+        for (SpikingSynapse synapse : fanInList) {
             parent.removeSynapse(synapse);
         }
     }
 
     @Override
     public String toString() {
-        return "Neuron [" + getId() + "] " + getType() + "  Activation = "
+        return "Neuron " + getType() + "  Activation = "
             + this.getActivation() + "  Location = (" + this.x + ","
             + this.y + ")";
     }
@@ -770,16 +750,6 @@ public class SpikingNeuron {
      */
     public void clear() {
         updateRule.clear(this);
-    }
-
-    /**
-     * Forward to update rule's tool tip method, which returns string for tool
-     * tip or short description.
-     *
-     * @return tool tip text
-     */
-    public String getToolTipText() {
-        return updateRule.getToolTipText(this);
     }
 
     /**
@@ -836,21 +806,6 @@ public class SpikingNeuron {
         this.clamped = clamped;
     }
 
-    /**
-     * @return the label
-     */
-    public String getLabel() {
-        return label;
-    }
-
-    /**
-     * @param label
-     *            the label to set
-     */
-    public void setLabel(final String label) {
-        this.label = label;
-        this.getNetwork().fireNeuronLabelChanged(this);
-    }
 
     /**
      * Returns position as a 2-d point.
@@ -892,7 +847,7 @@ public class SpikingNeuron {
      * Randomize all synapses that attach to this neuron.
      */
     public void randomizeFanIn() {
-        for (Synapse synapse : getFanIn()) {
+        for (SpikingSynapse synapse : getFanIn()) {
             synapse.randomize();
         }
     }
@@ -901,7 +856,7 @@ public class SpikingNeuron {
      * Randomize all synapses that attach to this neuron.
      */
     public void randomizeFanOut() {
-        for (Synapse synapse : getFanOut().values()) {
+        for (SpikingSynapse synapse : getFanOut().values()) {
             synapse.randomize();
         }
     }
@@ -915,8 +870,8 @@ public class SpikingNeuron {
      * @return Returns a list of neuron update rules associated with a group of
      *         neurons
      */
-    public static List<NeuronUpdateRule> getRuleList(List<SpikingNeuron> neuronList) {
-        List<NeuronUpdateRule> ruleSet = new ArrayList<NeuronUpdateRule>();
+    public static List<SpikingNeuronUpdateRule> getRuleList(List<SpikingNeuron> neuronList) {
+        List<SpikingNeuronUpdateRule> ruleSet = new ArrayList<SpikingNeuronUpdateRule>();
 
         for (SpikingNeuron n : neuronList) {
             ruleSet.add(n.getUpdateRule());

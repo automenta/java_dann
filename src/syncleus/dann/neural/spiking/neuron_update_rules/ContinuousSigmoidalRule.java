@@ -20,8 +20,8 @@ package syncleus.dann.neural.spiking.neuron_update_rules;
 
 import syncleus.dann.neural.spiking.SpikingNeuralNetwork.TimeType;
 import syncleus.dann.neural.spiking.SpikingNeuron;
-import org.simbrain.util.math.SquashingFunction;
-import org.simbrain.util.randomizer.Randomizer;
+import syncleus.dann.neural.spiking.util.SquashingFunction;
+import syncleus.dann.neural.spiking.util.Randomizer;
 
 /**
  * <b>Continuous Sigmoidal Rule</b> provides various squashing function

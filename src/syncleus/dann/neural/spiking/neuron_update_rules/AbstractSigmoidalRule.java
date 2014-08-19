@@ -19,13 +19,14 @@
 package syncleus.dann.neural.spiking.neuron_update_rules;
 
 import syncleus.dann.neural.spiking.NeuronUpdateRule;
+import syncleus.dann.neural.spiking.util.Randomizer;
 import syncleus.dann.neural.spiking.neuron_update_rules.interfaces.BiasedUpdateRule;
 import syncleus.dann.neural.spiking.neuron_update_rules.interfaces.BoundedUpdateRule;
 import syncleus.dann.neural.spiking.neuron_update_rules.interfaces.DifferentiableUpdateRule;
 import syncleus.dann.neural.spiking.neuron_update_rules.interfaces.InvertibleUpdateRule;
 import syncleus.dann.neural.spiking.neuron_update_rules.interfaces.NoisyUpdateRule;
-import org.simbrain.util.math.SquashingFunction;
-import org.simbrain.util.randomizer.Randomizer;
+import syncleus.dann.neural.spiking.util.SquashingFunction;
+
 
 /**
  * 

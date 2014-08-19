@@ -18,7 +18,7 @@
  */
 package syncleus.dann.neural.spiking.listeners;
 
-import syncleus.dann.neural.spiking.Synapse;
+import syncleus.dann.neural.spiking.SpikingSynapse;
 import syncleus.dann.neural.spiking.SynapseUpdateRule;
 
 /**
@@ -29,15 +29,15 @@ import syncleus.dann.neural.spiking.SynapseUpdateRule;
 public class SynapseAdapter implements SynapseListener {
 
     @Override
-    public void synapseRemoved(NetworkEvent<Synapse> networkEvent) {
+    public void synapseRemoved(NetworkEvent<SpikingSynapse> networkEvent) {
     }
 
     @Override
-    public void synapseAdded(NetworkEvent<Synapse> networkEvent) {
+    public void synapseAdded(NetworkEvent<SpikingSynapse> networkEvent) {
     }
 
     @Override
-    public void synapseChanged(NetworkEvent<Synapse> networkEvent) {
+    public void synapseChanged(NetworkEvent<SpikingSynapse> networkEvent) {
     }
 
     @Override

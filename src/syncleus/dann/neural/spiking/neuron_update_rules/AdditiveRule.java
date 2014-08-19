@@ -21,8 +21,8 @@ package syncleus.dann.neural.spiking.neuron_update_rules;
 import syncleus.dann.neural.spiking.SpikingNeuralNetwork.TimeType;
 import syncleus.dann.neural.spiking.SpikingNeuron;
 import syncleus.dann.neural.spiking.NeuronUpdateRule;
-import syncleus.dann.neural.spiking.Synapse;
-import org.simbrain.util.randomizer.Randomizer;
+import syncleus.dann.neural.spiking.SpikingSynapse;
+import syncleus.dann.neural.spiking.util.Randomizer;
 
 /**
  * <b>AdditiveNeuron</b> See Haykin (2002), section 14.5. Used with continuous
@@ -73,7 +73,7 @@ public class AdditiveRule extends NeuronUpdateRule {
         double wtdSum = 0;
         if (neuron.getFanIn().size() > 0) {
             for (int j = 0; j < neuron.getFanIn().size(); j++) {
-                Synapse w = neuron.getFanIn().get(j);
+                SpikingSynapse w = neuron.getFanIn().get(j);
                 SpikingNeuron source = w.getSource();
                 wtdSum += (w.getStrength() * g(source.getActivation()));
             }

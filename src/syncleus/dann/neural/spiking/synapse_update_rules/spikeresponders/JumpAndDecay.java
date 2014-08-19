@@ -19,7 +19,7 @@
 package syncleus.dann.neural.spiking.synapse_update_rules.spikeresponders;
 
 import syncleus.dann.neural.spiking.SpikingNeuronUpdateRule;
-import syncleus.dann.neural.spiking.Synapse;
+import syncleus.dann.neural.spiking.SpikingSynapse;
 
 /**
  * <b>JumpAndDecay</b>.
@@ -50,7 +50,7 @@ public class JumpAndDecay extends SpikeResponder {
     /**
      * {@inheritDoc}
      */
-    public void update(final Synapse s) {
+    public void update(final SpikingSynapse s) {
         value = s.getPsr();
         if (((SpikingNeuronUpdateRule) s.getSource().getUpdateRule())
                 .hasSpiked()) {

@@ -23,7 +23,7 @@ import syncleus.dann.neural.spiking.SpikingNeuron;
 import syncleus.dann.neural.spiking.NeuronUpdateRule;
 import syncleus.dann.neural.spiking.neuron_update_rules.interfaces.BoundedUpdateRule;
 import syncleus.dann.neural.spiking.neuron_update_rules.interfaces.NoisyUpdateRule;
-import org.simbrain.util.randomizer.Randomizer;
+import syncleus.dann.neural.spiking.util.Randomizer;
 
 /**
  * <b>NakaRushtonNeuron</b> is a firing-rate based neuron which is intended to
@@ -259,15 +259,15 @@ public class NakaRushtonRule extends NeuronUpdateRule implements
         a = 0;
         s = 0;
     }
-
-    @Override
-    public String getToolTipText(SpikingNeuron neuron) {
-        if (useAdaptation) {
-            return "" + neuron.getActivation() + " A = " + a;
-        } else {
-            return super.getToolTipText(neuron);
-        }
-    }
+//
+//    @Override
+//    public String getToolTipText(SpikingNeuron neuron) {
+//        if (useAdaptation) {
+//            return "" + neuron.getActivation() + " A = " + a;
+//        } else {
+//            return super.getToolTipText(neuron);
+//        }
+//    }
 
     /**
      * Return the adaptation parameter.

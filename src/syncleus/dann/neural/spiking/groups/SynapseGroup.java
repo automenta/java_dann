@@ -18,18 +18,19 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import syncleus.dann.neural.Synapse;
 
 import syncleus.dann.neural.spiking.connections.AllToAll;
 import syncleus.dann.neural.spiking.connections.ConnectNeurons;
 import syncleus.dann.neural.spiking.connections.ConnectionUtilities;
 import syncleus.dann.neural.spiking.SpikingNeuralNetwork;
 import syncleus.dann.neural.spiking.SpikingNeuron;
-import syncleus.dann.neural.spiking.Synapse;
+import syncleus.dann.neural.spiking.SpikingSynapse;
 import syncleus.dann.neural.spiking.SynapseUpdateRule;
 import syncleus.dann.neural.spiking.synapse_update_rules.StaticSynapseRule;
 import syncleus.dann.neural.spiking.synapse_update_rules.spikeresponders.SpikeResponder;
-import org.simbrain.util.SimbrainConstants.Polarity;
-import org.simbrain.util.randomizer.PolarizedRandomizer;
+import syncleus.dann.neural.spiking.util.Polarity;
+import syncleus.dann.neural.spiking.util.PolarizedRandomizer;
 
 /**
  *
@@ -66,10 +67,10 @@ public class SynapseGroup extends Group {
         new AllToAll();
 
     /** A set containing all the excitatory (wt > 0) synapses in the group. */
-    private Set<Synapse> exSynapseSet = new HashSet<Synapse>();
+    private Set<SpikingSynapse> exSynapseSet = new HashSet<SpikingSynapse>();
 
     /** A set containing all the inhibitory (wt < 0) synapses in the group. */
-    private Set<Synapse> inSynapseSet = new HashSet<Synapse>();
+    private Set<SpikingSynapse> inSynapseSet = new HashSet<SpikingSynapse>();
 
     /** Reference to source neuron group. */
     private final NeuronGroup sourceNeuronGroup;
@@ -108,13 +109,13 @@ public class SynapseGroup extends Group {
      * A template synapse which can be edited to inform the group as to what
      * parameters a new "blank" excitatory synapse should be given.
      */
-    private Synapse excitatoryPrototype = Synapse.getTemplateSynapse();
+    private SpikingSynapse excitatoryPrototype = SpikingSynapse.getTemplateSynapse();
 
     /**
      * A template synapse which can be edited to inform the group as to what
      * parameters a new "blank" inhibitory synapse should be given.
      */
-    private Synapse inhibitoryPrototype = Synapse.getTemplateSynapse();
+    private SpikingSynapse inhibitoryPrototype = SpikingSynapse.getTemplateSynapse();
 
     /**
      * The randomizer governing excitatory synapses. If null new synapses are
@@ -335,9 +336,9 @@ public class SynapseGroup extends Group {
         }
         // Using /0.8 instead of /0.75 because expected number is _expected_
         // but not precisely known.
-        exSynapseSet = new HashSet<Synapse>((int) (expectedNumSynapses
+        exSynapseSet = new HashSet<SpikingSynapse>((int) (expectedNumSynapses
             * excitatoryRatio / 0.8));
-        inSynapseSet = new HashSet<Synapse>((int) (expectedNumSynapses
+        inSynapseSet = new HashSet<SpikingSynapse>((int) (expectedNumSynapses
             * (1 - excitatoryRatio) / 0.8));
     }
 
@@ -348,21 +349,21 @@ public class SynapseGroup extends Group {
      * be called to sort synapses into their appropriate sets.
      */
     public void revalidateSynapseSets() {
-        Iterator<Synapse> exIterator = exSynapseSet.iterator();
-        ArrayList<Synapse> exSwitches = new ArrayList<Synapse>(
+        Iterator<SpikingSynapse> exIterator = exSynapseSet.iterator();
+        ArrayList<SpikingSynapse> exSwitches = new ArrayList<SpikingSynapse>(
             exSynapseSet.size());
         while (exIterator.hasNext()) {
-            Synapse s = exIterator.next();
+            SpikingSynapse s = exIterator.next();
             if (s.getStrength() < 0) {
                 exSwitches.add(s);
                 exIterator.remove();
             }
         }
-        Iterator<Synapse> inIterator = inSynapseSet.iterator();
-        ArrayList<Synapse> inSwitches = new ArrayList<Synapse>(
+        Iterator<SpikingSynapse> inIterator = inSynapseSet.iterator();
+        ArrayList<SpikingSynapse> inSwitches = new ArrayList<SpikingSynapse>(
             inSynapseSet.size());
         while (inIterator.hasNext()) {
-            Synapse s = exIterator.next();
+            SpikingSynapse s = exIterator.next();
             if (s.getStrength() > 0) {
                 inSwitches.add(s);
                 inIterator.remove();
@@ -389,12 +390,12 @@ public class SynapseGroup extends Group {
         // and we know that either all the synapses are static or all the
         // synapses are frozen.
         if (!((exStatic || isExcitatoryFrozen()) && useGroupLevelSettings)) {
-            for (Synapse synapse : exSynapseSet) {
+            for (SpikingSynapse synapse : exSynapseSet) {
                 synapse.update();
             }
         }
         if (!((inStatic || isInhibitoryFrozen()) && useGroupLevelSettings)) {
-            for (Synapse synapse : inSynapseSet) {
+            for (SpikingSynapse synapse : inSynapseSet) {
                 synapse.update();
             }
         }
@@ -448,12 +449,9 @@ public class SynapseGroup extends Group {
     @Override
     public String toString() {
         String ret = new String();
-        ret += ("Synapse Group [" + getLabel() + "]. Contains " + this.size()
-            + " synapse(s)." + " Connects "
-            + getSourceNeuronGroup().getId() + " ("
-            + getSourceNeuronGroup().getLabel() + ")" + " to "
-            + getTargetNeuronGroup().getId() + " ("
-            + getTargetNeuronGroup().getLabel() + ")\n");
+        ret += ("Synapse Group [" + toString() + "]. Contains " + this.size()
+            + " synapse(s)." + " Connects "+
+            getSourceNeuronGroup().toString() +  "\n");
 
         return ret;
     }
@@ -503,7 +501,7 @@ public class SynapseGroup extends Group {
      * @param toDelete
      *            the synapse to delete
      */
-    public Synapse removeSynapse(Synapse toDelete) {
+    public SpikingSynapse removeSynapse(SpikingSynapse toDelete) {
         if (toDelete.getStrength() > 0) {
             exSynapseSet.remove(toDelete);
         } else {
@@ -524,7 +522,7 @@ public class SynapseGroup extends Group {
      * synapses in this group.
      */
     public void clear() {
-        for (Synapse toDelete : exSynapseSet) {
+        for (SpikingSynapse toDelete : exSynapseSet) {
             // Remove references to this synapse from parent neurons
             toDelete.getSource().removeEfferent(toDelete);
             toDelete.getTarget().removeAfferent(toDelete);
@@ -533,7 +531,7 @@ public class SynapseGroup extends Group {
             }
 
         }
-        for (Synapse toDelete : inSynapseSet) {
+        for (SpikingSynapse toDelete : inSynapseSet) {
             toDelete.getSource().removeEfferent(toDelete);
             toDelete.getTarget().removeAfferent(toDelete);
             if (isDisplaySynapses()) {
@@ -551,7 +549,7 @@ public class SynapseGroup extends Group {
      * synapse conform to the global parameters of this synapse group.
      * @param synapse
      */
-    public void addNewSynapse(final Synapse synapse) {
+    public void addNewSynapse(final SpikingSynapse synapse) {
         if (synapse.getSource().isPolarized()) {
             if (Polarity.EXCITATORY.equals(synapse.getSource().getPolarity())) {
                 addNewExcitatorySynapse(synapse);
@@ -575,8 +573,7 @@ public class SynapseGroup extends Group {
      *
      * @param synapse
      */
-    public void addNewExcitatorySynapse(final Synapse synapse) {
-        synapse.setId(getParentNetwork().getSynapseIdGenerator().getId());
+    public void addNewExcitatorySynapse(final SpikingSynapse synapse) {
         synapse.setParentGroup(this);
         if (exciteRand != null) {
             synapse.setStrength(exciteRand.getRandom());
@@ -601,8 +598,7 @@ public class SynapseGroup extends Group {
      *
      * @param synapse
      */
-    public void addNewInhibitorySynapse(final Synapse synapse) {
-        synapse.setId(getParentNetwork().getSynapseIdGenerator().getId());
+    public void addNewInhibitorySynapse(final SpikingSynapse synapse) {
         synapse.setParentGroup(this);
         if (inhibRand != null) {
             synapse.setStrength(inhibRand.getRandom());
@@ -641,7 +637,7 @@ public class SynapseGroup extends Group {
      * @param synapse
      *            synapse to add
      */
-    public void addSynapseUnsafe(final Synapse synapse) {
+    public void addSynapseUnsafe(final SpikingSynapse synapse) {
         if (synapse.getStrength() > 0) {
             addExcitatorySynapseUnsafe(synapse);
         }
@@ -656,11 +652,11 @@ public class SynapseGroup extends Group {
      * synapse could potentially be added to the excitatory set.
      * @param synapse the synapse to add.
      */
-    public void addExcitatorySynapseUnsafe(final Synapse synapse) {
+    public void addExcitatorySynapseUnsafe(final SpikingSynapse synapse) {
         exSynapseSet.add(synapse);
         excitatoryRatio = exSynapseSet.size() / (double) size();
         if (getParentNetwork() != null) {
-            synapse.setId(getParentNetwork().getSynapseIdGenerator().getId());
+            
             synapse.setParentGroup(this);
         }
     }
@@ -671,11 +667,10 @@ public class SynapseGroup extends Group {
      * synapse could potentially be added to the inhibitory set.
      * @param synapse the synapse to add.
      */
-    public void addInhibitorySynapseUnsafe(final Synapse synapse) {
+    public void addInhibitorySynapseUnsafe(final SpikingSynapse synapse) {
         inSynapseSet.add(synapse);
         excitatoryRatio = exSynapseSet.size() / (double) size();
         if (getParentNetwork() != null) {
-            synapse.setId(getParentNetwork().getSynapseIdGenerator().getId());
             synapse.setParentGroup(this);
         }
     }
@@ -684,8 +679,8 @@ public class SynapseGroup extends Group {
      * @return a flat list representation of all the synapses in this synapse
      *         group. This list is a defensive copy.
      */
-    public List<Synapse> getAllSynapses() {
-        ArrayList<Synapse> flatList = new ArrayList<Synapse>(size());
+    public List<SpikingSynapse> getAllSynapses() {
+        ArrayList<SpikingSynapse> flatList = new ArrayList<SpikingSynapse>(size());
         flatList.addAll(getExcitatorySynapses());
         flatList.addAll(getInhibitorySynapses());
         return flatList;
@@ -694,14 +689,14 @@ public class SynapseGroup extends Group {
     /**
      * @return the set of excitatory synapses
      */
-    public Set<Synapse> getExcitatorySynapses() {
+    public Set<SpikingSynapse> getExcitatorySynapses() {
         return Collections.unmodifiableSet(exSynapseSet);
     }
 
     /**
      * @return the set of inhibitory synapses
      */
-    public Set<Synapse> getInhibitorySynapses() {
+    public Set<SpikingSynapse> getInhibitorySynapses() {
         return Collections.unmodifiableSet(inSynapseSet);
     }
 
@@ -713,10 +708,10 @@ public class SynapseGroup extends Group {
     public double[] getWeightVector() {
         double[] retArray = new double[size()];
         int i = 0;
-        for (Synapse synapse : exSynapseSet) {
+        for (SpikingSynapse synapse : exSynapseSet) {
             retArray[i++] = synapse.getStrength();
         }
-        for (Synapse synapse : inSynapseSet) {
+        for (SpikingSynapse synapse : inSynapseSet) {
             retArray[i++] = synapse.getStrength();
         }
         return retArray;
@@ -728,7 +723,7 @@ public class SynapseGroup extends Group {
     public double[] getInhibitoryStrengths() {
         double[] retArray = new double[inSynapseSet.size()];
         int i = 0;
-        for (Synapse synapse : inSynapseSet) {
+        for (SpikingSynapse synapse : inSynapseSet) {
             retArray[i++] = synapse.getStrength();
         }
         return retArray;
@@ -740,7 +735,7 @@ public class SynapseGroup extends Group {
     public double[] getExcitatoryStrengths() {
         double[] retArray = new double[exSynapseSet.size()];
         int i = 0;
-        for (Synapse synapse : exSynapseSet) {
+        for (SpikingSynapse synapse : exSynapseSet) {
             retArray[i++] = synapse.getStrength();
         }
         return retArray;
@@ -755,7 +750,7 @@ public class SynapseGroup extends Group {
      * @param newWeight
      * @return
      */
-    public boolean setSynapseStrength(Synapse synapse, double newWeight) {
+    public boolean setSynapseStrength(SpikingSynapse synapse, double newWeight) {
         if (synapse.getStrength() >= 0 && exSynapseSet.contains(synapse)) {
             synapse.setStrength(newWeight);
             if (newWeight < 0) {
@@ -846,9 +841,9 @@ public class SynapseGroup extends Group {
             int numSwitch =
                 (int) ((this.excitatoryRatio * size()) - (excitatoryRatio
                 * size()));
-            Iterator<Synapse> setIterator = exSynapseSet.iterator();
+            Iterator<SpikingSynapse> setIterator = exSynapseSet.iterator();
             while (setIterator.hasNext()) {
-                Synapse s = setIterator.next();
+                SpikingSynapse s = setIterator.next();
                 if (!s.getSource().isPolarized() && numSwitch > 0) {
                     setIterator.remove();
                     if (inhibRand != null) {
@@ -875,9 +870,9 @@ public class SynapseGroup extends Group {
             int numSwitch =
                 (int) ((excitatoryRatio * size()) - (this.excitatoryRatio
                 * size()));
-            Iterator<Synapse> setIterator = inSynapseSet.iterator();
+            Iterator<SpikingSynapse> setIterator = inSynapseSet.iterator();
             while (setIterator.hasNext()) {
-                Synapse s = setIterator.next();
+                SpikingSynapse s = setIterator.next();
                 if (!s.getSource().isPolarized() && numSwitch > 0) {
                     setIterator.remove();
                     if (exciteRand != null) {
@@ -1082,14 +1077,14 @@ public class SynapseGroup extends Group {
             exSynapseSet.addAll(inSynapseSet);
             inSynapseSet.clear();
             excitatoryRatio = 1;
-            for (Synapse s : exSynapseSet) {
+            for (SpikingSynapse s : exSynapseSet) {
                 s.setStrength(value);
             }
         } else {
             inSynapseSet.addAll(exSynapseSet);
             exSynapseSet.clear();
             excitatoryRatio = 0;
-            for (Synapse s : inSynapseSet) {
+            for (SpikingSynapse s : inSynapseSet) {
                 s.setStrength(value);
             }
         }
@@ -1103,7 +1098,7 @@ public class SynapseGroup extends Group {
      */
     public void setAllExcitatoryStrengths(double value) {
         value = Math.abs(value);
-        for (Synapse s : exSynapseSet) {
+        for (SpikingSynapse s : exSynapseSet) {
             s.setStrength(value);
         }
     }
@@ -1116,7 +1111,7 @@ public class SynapseGroup extends Group {
      */
     public void setAllInhibitoryStrengths(double value) {
         value = -Math.abs(value);
-        for (Synapse s : inSynapseSet) {
+        for (SpikingSynapse s : inSynapseSet) {
             s.setStrength(value);
         }
     }
@@ -1128,10 +1123,10 @@ public class SynapseGroup extends Group {
      *            the delay to set
      */
     public void setDelay(final int delay) {
-        for (Synapse s : exSynapseSet) {
+        for (SpikingSynapse s : exSynapseSet) {
             s.setDelay(delay);
         }
-        for (Synapse s : inSynapseSet) {
+        for (SpikingSynapse s : inSynapseSet) {
             s.setDelay(delay);
         }
     }
@@ -1153,7 +1148,7 @@ public class SynapseGroup extends Group {
      */
     public void setExcitatoryEnabled(final boolean enabled) {
         excitatoryPrototype.setEnabled(enabled);
-        for (Synapse s : exSynapseSet) {
+        for (SpikingSynapse s : exSynapseSet) {
             s.setEnabled(enabled);
         }
     }
@@ -1164,7 +1159,7 @@ public class SynapseGroup extends Group {
      */
     public void setInhibitoryEnabled(final boolean enabled) {
         inhibitoryPrototype.setEnabled(enabled);
-        for (Synapse s : inSynapseSet) {
+        for (SpikingSynapse s : inSynapseSet) {
             s.setEnabled(enabled);
         }
     }
@@ -1188,7 +1183,7 @@ public class SynapseGroup extends Group {
      */
     public void setExcitatorySpikeResponders(final SpikeResponder responder) {
         excitatoryPrototype.setSpikeResponder(responder.deepCopy());
-        for (Synapse s : exSynapseSet) {
+        for (SpikingSynapse s : exSynapseSet) {
             s.setSpikeResponder(responder.deepCopy());
         }
     }
@@ -1201,7 +1196,7 @@ public class SynapseGroup extends Group {
      */
     public void setInhibitorySpikeResponders(final SpikeResponder responder) {
         inhibitoryPrototype.setSpikeResponder(responder.deepCopy());
-        for (Synapse s : inSynapseSet) {
+        for (SpikingSynapse s : inSynapseSet) {
             s.setSpikeResponder(responder.deepCopy());
         }
     }
@@ -1224,7 +1219,7 @@ public class SynapseGroup extends Group {
      */
     public void setExcitatoryFrozen(final boolean frozen) {
         excitatoryPrototype.setFrozen(frozen);
-        for (Synapse s : exSynapseSet) {
+        for (SpikingSynapse s : exSynapseSet) {
             s.setFrozen(frozen);
         }
     }
@@ -1236,7 +1231,7 @@ public class SynapseGroup extends Group {
      */
     public void setInhibitoryFrozen(final boolean frozen) {
         inhibitoryPrototype.setFrozen(frozen);
-        for (Synapse s : inSynapseSet) {
+        for (SpikingSynapse s : inSynapseSet) {
             s.setFrozen(frozen);
         }
     }
@@ -1262,9 +1257,9 @@ public class SynapseGroup extends Group {
         if (useGroupLevelSettings) {
             return excitatoryPrototype.isFrozen();
         }
-        Iterator<Synapse> exIter = exSynapseSet.iterator();
+        Iterator<SpikingSynapse> exIter = exSynapseSet.iterator();
         if (exIter.hasNext()) {
-            Synapse s = exIter.next();
+            SpikingSynapse s = exIter.next();
             if (!s.isFrozen()) {
                 return false; // Not _all_ the excitatory synapses are frozen
             } else {
@@ -1292,9 +1287,9 @@ public class SynapseGroup extends Group {
         if (useGroupLevelSettings) {
             return inhibitoryPrototype.isFrozen();
         }
-        Iterator<Synapse> inIter = inSynapseSet.iterator();
+        Iterator<SpikingSynapse> inIter = inSynapseSet.iterator();
         if (inIter.hasNext()) {
-            Synapse s = inIter.next();
+            SpikingSynapse s = inIter.next();
             if (!s.isFrozen()) {
                 return false; // Not _all_ the inhibitory synapses are frozen
             } else {
@@ -1326,9 +1321,9 @@ public class SynapseGroup extends Group {
         if (useGroupLevelSettings) {
             return excitatoryPrototype.isEnabled();
         }
-        Iterator<Synapse> exIter = exSynapseSet.iterator();
+        Iterator<SpikingSynapse> exIter = exSynapseSet.iterator();
         if (exIter.hasNext()) {
-            Synapse s = exIter.next();
+            SpikingSynapse s = exIter.next();
             if (!s.isEnabled()) {
                 return false; // Not _all_ the excitatory synapses are enabled
             } else {
@@ -1351,9 +1346,9 @@ public class SynapseGroup extends Group {
         if (useGroupLevelSettings) {
             return inhibitoryPrototype.isEnabled();
         }
-        Iterator<Synapse> inIter = inSynapseSet.iterator();
+        Iterator<SpikingSynapse> inIter = inSynapseSet.iterator();
         if (inIter.hasNext()) {
-            Synapse s = inIter.next();
+            SpikingSynapse s = inIter.next();
             if (!s.isEnabled()) {
                 return false; // Not _all_ the inhibitory synapses are enabled
             } else {
@@ -1375,8 +1370,8 @@ public class SynapseGroup extends Group {
      * many values call {@link #setAndConformToTemplateExcitatory(Synapse)}
      * @return
      */
-    public Synapse getExcitatoryPrototype() {
-        return Synapse.copyTemplateSynapse(excitatoryPrototype);
+    public SpikingSynapse getExcitatoryPrototype() {
+        return SpikingSynapse.copyTemplateSynapse(excitatoryPrototype);
     }
 
     /**
@@ -1386,22 +1381,22 @@ public class SynapseGroup extends Group {
      *
      * @return
      */
-    public Synapse getInhibitoryPrototype() {
-        return Synapse.copyTemplateSynapse(inhibitoryPrototype);
+    public SpikingSynapse getInhibitoryPrototype() {
+        return SpikingSynapse.copyTemplateSynapse(inhibitoryPrototype);
     }
 
     /**
      *
      * @param excitatoryPrototype
      */
-    public void setAndConformToTemplateExcitatory(Synapse excitatoryPrototype) {
+    public void setAndConformToTemplateExcitatory(SpikingSynapse excitatoryPrototype) {
         // Ignore strength... must be set separately
 
         // Upper bound
         double upperBound = excitatoryPrototype.getUpperBound();
         if (this.excitatoryPrototype.getUpperBound() != upperBound
             || !useGroupLevelSettings) {
-            for (Synapse s : exSynapseSet) {
+            for (SpikingSynapse s : exSynapseSet) {
                 s.setUpperBound(upperBound);
             }
             this.excitatoryPrototype.setUpperBound(upperBound);
@@ -1411,7 +1406,7 @@ public class SynapseGroup extends Group {
         double lowerBound = excitatoryPrototype.getLowerBound();
         if (this.excitatoryPrototype.getLowerBound() != lowerBound
             || !useGroupLevelSettings) {
-            for (Synapse s : exSynapseSet) {
+            for (SpikingSynapse s : exSynapseSet) {
                 s.setLowerBound(upperBound);
             }
             this.excitatoryPrototype.setLowerBound(upperBound);
@@ -1421,7 +1416,7 @@ public class SynapseGroup extends Group {
         double increment = excitatoryPrototype.getIncrement();
         if (this.excitatoryPrototype.getIncrement() != increment
             || !useGroupLevelSettings) {
-            for (Synapse s : exSynapseSet) {
+            for (SpikingSynapse s : exSynapseSet) {
                 s.setIncrement(increment);
             }
             this.excitatoryPrototype.setIncrement(increment);
@@ -1431,7 +1426,7 @@ public class SynapseGroup extends Group {
         boolean enabled = excitatoryPrototype.isEnabled();
         if (this.excitatoryPrototype.isEnabled() != enabled
             || !useGroupLevelSettings) {
-            for (Synapse s : exSynapseSet) {
+            for (SpikingSynapse s : exSynapseSet) {
                 s.setEnabled(enabled);
             }
             this.excitatoryPrototype.setEnabled(enabled);
@@ -1441,7 +1436,7 @@ public class SynapseGroup extends Group {
         int delay = excitatoryPrototype.getDelay();
         if (this.excitatoryPrototype.getDelay() != delay
             || !useGroupLevelSettings) {
-            for (Synapse s : exSynapseSet) {
+            for (SpikingSynapse s : exSynapseSet) {
                 s.setDelay(delay);
             }
             this.excitatoryPrototype.setDelay(delay);
@@ -1451,7 +1446,7 @@ public class SynapseGroup extends Group {
         boolean frozen = excitatoryPrototype.isFrozen();
         if (this.excitatoryPrototype.isFrozen() != frozen
             || !useGroupLevelSettings) {
-            for (Synapse s : exSynapseSet) {
+            for (SpikingSynapse s : exSynapseSet) {
                 s.setFrozen(frozen);
             }
             this.excitatoryPrototype.setFrozen(frozen);
@@ -1465,14 +1460,14 @@ public class SynapseGroup extends Group {
      *
      * @param inhibitoryPrototype
      */
-    public void setAndConformToTemplateInhibitory(Synapse inhibitoryPrototype) {
+    public void setAndConformToTemplateInhibitory(SpikingSynapse inhibitoryPrototype) {
         // Ignore strength... must be set separately
 
         // Upper bound
         double upperBound = inhibitoryPrototype.getUpperBound();
         if (this.inhibitoryPrototype.getUpperBound() != upperBound
             || !useGroupLevelSettings) {
-            for (Synapse s : inSynapseSet) {
+            for (SpikingSynapse s : inSynapseSet) {
                 s.setUpperBound(upperBound);
             }
             this.inhibitoryPrototype.setUpperBound(upperBound);
@@ -1482,7 +1477,7 @@ public class SynapseGroup extends Group {
         double lowerBound = inhibitoryPrototype.getLowerBound();
         if (this.inhibitoryPrototype.getLowerBound() != lowerBound
             || !useGroupLevelSettings) {
-            for (Synapse s : inSynapseSet) {
+            for (SpikingSynapse s : inSynapseSet) {
                 s.setLowerBound(upperBound);
             }
             this.inhibitoryPrototype.setLowerBound(upperBound);
@@ -1492,7 +1487,7 @@ public class SynapseGroup extends Group {
         double increment = inhibitoryPrototype.getIncrement();
         if (this.inhibitoryPrototype.getIncrement() != increment
             || !useGroupLevelSettings) {
-            for (Synapse s : inSynapseSet) {
+            for (SpikingSynapse s : inSynapseSet) {
                 s.setIncrement(increment);
             }
             this.inhibitoryPrototype.setIncrement(increment);
@@ -1502,7 +1497,7 @@ public class SynapseGroup extends Group {
         boolean enabled = inhibitoryPrototype.isEnabled();
         if (this.inhibitoryPrototype.isEnabled() != enabled
             || !useGroupLevelSettings) {
-            for (Synapse s : inSynapseSet) {
+            for (SpikingSynapse s : inSynapseSet) {
                 s.setEnabled(enabled);
             }
             this.inhibitoryPrototype.setEnabled(enabled);
@@ -1512,7 +1507,7 @@ public class SynapseGroup extends Group {
         int delay = inhibitoryPrototype.getDelay();
         if (this.inhibitoryPrototype.getDelay() != delay
             || !useGroupLevelSettings) {
-            for (Synapse s : inSynapseSet) {
+            for (SpikingSynapse s : inSynapseSet) {
                 s.setDelay(delay);
             }
             this.inhibitoryPrototype.setDelay(delay);
@@ -1522,7 +1517,7 @@ public class SynapseGroup extends Group {
         boolean frozen = inhibitoryPrototype.isFrozen();
         if (this.inhibitoryPrototype.isFrozen() != frozen
             || !useGroupLevelSettings) {
-            for (Synapse s : inSynapseSet) {
+            for (SpikingSynapse s : inSynapseSet) {
                 s.setFrozen(frozen);
             }
             this.inhibitoryPrototype.setFrozen(frozen);
@@ -1539,7 +1534,7 @@ public class SynapseGroup extends Group {
         if (useGroupLevelSettings || exSynapseSet.isEmpty()) {
             return excitatoryPrototype.getLearningRule();
         }
-        Iterator<Synapse> synIter = exSynapseSet.iterator();
+        Iterator<SpikingSynapse> synIter = exSynapseSet.iterator();
         SynapseUpdateRule sur = synIter.next().getLearningRule();
         while (synIter.hasNext()) {
             if (sur.getClass() != synIter.next().getLearningRule().getClass()) {
@@ -1556,7 +1551,7 @@ public class SynapseGroup extends Group {
      */
     public void setExcitatoryRule(SynapseUpdateRule excitatoryRule) {
         excitatoryPrototype.setLearningRule(excitatoryRule.deepCopy());
-        for (Synapse s : exSynapseSet) {
+        for (SpikingSynapse s : exSynapseSet) {
             s.setLearningRule(excitatoryRule.deepCopy());
         }
         exStatic = excitatoryRule instanceof StaticSynapseRule;
@@ -1569,7 +1564,7 @@ public class SynapseGroup extends Group {
         if (useGroupLevelSettings || inSynapseSet.isEmpty()) {
             return inhibitoryPrototype.getLearningRule();
         }
-        Iterator<Synapse> synIter = inSynapseSet.iterator();
+        Iterator<SpikingSynapse> synIter = inSynapseSet.iterator();
         SynapseUpdateRule sur = synIter.next().getLearningRule();
         while (synIter.hasNext()) {
             if (sur.getClass() != synIter.next().getLearningRule().getClass()) {
@@ -1587,7 +1582,7 @@ public class SynapseGroup extends Group {
      */
     public void setInhibitoryRule(SynapseUpdateRule inhibitoryRule) {
         inhibitoryPrototype.setLearningRule(inhibitoryRule.deepCopy());
-        for (Synapse s : inSynapseSet) {
+        for (SpikingSynapse s : inSynapseSet) {
             s.setLearningRule(inhibitoryRule.deepCopy());
         }
         inStatic = inhibitoryRule instanceof StaticSynapseRule;

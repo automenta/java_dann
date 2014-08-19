@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import syncleus.dann.neural.spiking.Synapse;
+import syncleus.dann.neural.spiking.SpikingSynapse;
 
 /**
  * <b>SpikeResponder</b>.
@@ -43,7 +43,7 @@ public abstract class SpikeResponder {
      * @param s
      *            the synapse being updated
      */
-    public abstract void update(final Synapse s);
+    public abstract void update(final SpikingSynapse s);
 
     /**
      * @return the name of the spike responder
@@ -68,10 +68,10 @@ public abstract class SpikeResponder {
      *         synapses
      */
     public static List<SpikeResponder> getResponderList(
-            Collection<Synapse> synapses) {
+            Collection<SpikingSynapse> synapses) {
         List<SpikeResponder> srList = new ArrayList<SpikeResponder>(
                 synapses.size());
-        for (Synapse s : synapses) {
+        for (SpikingSynapse s : synapses) {
             if (s.getSpikeResponder() != null) {
                 srList.add(s.getSpikeResponder());
             }

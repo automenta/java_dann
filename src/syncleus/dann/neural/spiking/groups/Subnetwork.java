@@ -21,8 +21,7 @@ import syncleus.dann.neural.spiking.connections.AllToAll;
 import syncleus.dann.neural.spiking.connections.ConnectNeurons;
 import syncleus.dann.neural.spiking.SpikingNeuralNetwork;
 import syncleus.dann.neural.spiking.SpikingNeuron;
-import syncleus.dann.neural.spiking.Synapse;
-import syncleus.dann.neural.spiking.trainers.Trainable;
+import syncleus.dann.neural.spiking.SpikingSynapse;
 
 /**
  * A collection of neuron groups and synapse groups which functions as a
@@ -56,7 +55,6 @@ public abstract class Subnetwork extends Group {
      */
     public Subnetwork(final SpikingNeuralNetwork net) {
         super(net);
-        setLabel("Subnetwork");
     }
 
     @Override
@@ -170,43 +168,16 @@ public abstract class Subnetwork extends Group {
      * @return the new group
      */
     public SynapseGroup connectNeuronGroups(NeuronGroup source,
-            NeuronGroup target, String sourceLabel, String targetLabel,
-            ConnectNeurons connection) {
+        NeuronGroup target, String sourceLabel, String targetLabel,
+        ConnectNeurons connection) {
+
         SynapseGroup newGroup = SynapseGroup.createSynapseGroup(source, target,
-                connection);
+            connection);
         addSynapseGroup(newGroup);
-        setSynapseGroupLabel(source, target, newGroup, sourceLabel, targetLabel);
-        return newGroup;
+        //setSynapseGroupLabel(source, target, newGroup, sourceLabel, targetLabel);
+        return newGroup;        
     }
 
-    /**
-     * Utility method for labeling synapse groups based on the neuron groups
-     * they connect. A forward arrow is used for feed-forward synapse groups, a
-     * circular arrow for recurrent synapse groups.
-     *
-     * @param source
-     *            source neuron group
-     * @param target
-     *            target neuron group
-     * @param sg
-     *            synapse group
-     * @param sourceLabel
-     *            source label
-     * @param targetLabel
-     *            target label
-     */
-    private void setSynapseGroupLabel(NeuronGroup source, NeuronGroup target,
-            final SynapseGroup sg, final String sourceLabel,
-            final String targetLabel) {
-        if (!source.equals(target)) {
-            sg.setLabel("Weights " + sourceLabel + " "
-                    + new Character('\u2192') + " " + targetLabel);
-        } else {
-            sg.setLabel("Weights " + sourceLabel + " "
-                    + new Character('\u21BA'));
-        }
-
-    }
 
     /**
      * Adds an already constructed synapse group to the subnetwork and provides
@@ -218,8 +189,7 @@ public abstract class Subnetwork extends Group {
         addSynapseGroup(synGrp);
         NeuronGroup source = synGrp.getSourceNeuronGroup();
         NeuronGroup target = synGrp.getTargetNeuronGroup();
-        setSynapseGroupLabel(source, target, synGrp, source.getLabel(),
-                target.getLabel());
+        //setSynapseGroupLabel(source, target, synGrp, source.getLabel(), target.getLabel());
     }
 
     /**
@@ -255,38 +225,6 @@ public abstract class Subnetwork extends Group {
      */
     public NeuronGroup getNeuronGroup(int index) {
         return neuronGroupList.get(index);
-    }
-
-    /**
-     * Find neuron group with a given label, or null if none found.
-     *
-     * @param label
-     *            label to search for.
-     * @return neurongroup with that label found, null otherwise
-     */
-    public NeuronGroup getNeuronGroupByLabel(final String label) {
-        for (NeuronGroup group : getNeuronGroupList()) {
-            if (group.getLabel().equalsIgnoreCase(label)) {
-                return group;
-            }
-        }
-        return null;
-    }
-
-    /**
-     * Find synapse group with a given label, or null if none found.
-     *
-     * @param label
-     *            label to search for.
-     * @return synapsegroup with that label found, null otherwise
-     */
-    public SynapseGroup getSynapseGroupByLabel(final String label) {
-        for (SynapseGroup group : getSynapseGroupList()) {
-            if (group.getLabel().equalsIgnoreCase(label)) {
-                return group;
-            }
-        }
-        return null;
     }
 
     /**
@@ -415,8 +353,8 @@ public abstract class Subnetwork extends Group {
      *
      * @return the flat synapse list.
      */
-    public List<Synapse> getFlatSynapseList() {
-        List<Synapse> ret = new ArrayList<Synapse>();
+    public List<SpikingSynapse> getFlatSynapseList() {
+        List<SpikingSynapse> ret = new ArrayList<SpikingSynapse>();
         for (SynapseGroup group : synapseGroupList) {
             ret.addAll(group.getAllSynapses());
         }
@@ -426,7 +364,7 @@ public abstract class Subnetwork extends Group {
     @Override
     public String toString() {
         String ret = new String();
-        ret += ("Subnetwork Group [" + getLabel() + "] Subnetwork with "
+        ret += ("Subnetwork Group [" + toString() + "] Subnetwork with "
                 + neuronGroupList.size() + " neuron group(s) and ");
         ret += (synapseGroupList.size() + " synapse group(s)");
         if ((getNeuronGroupCount() + getSynapseGroupCount()) > 0) {
@@ -448,29 +386,29 @@ public abstract class Subnetwork extends Group {
         return numMembers;
     }
 
-    /**
-     * Get long description for info box, formmated in html. Override for more
-     * detailed description.
-     *
-     * @return the long description.
-     */
-    public String getLongDescription() {
-        String ret = new String();
-        ret += ("<html>Subnetwork [" + getLabel() + "]<br>"
-                + "Subnetwork with " + neuronGroupList.size() + " neuron group(s) and ");
-        ret += (synapseGroupList.size() + " synapse group(s)");
-        if ((getNeuronGroupCount() + getSynapseGroupCount()) > 0) {
-            ret += "<br>";
-        }
-        for (NeuronGroup neuronGroup : neuronGroupList) {
-            ret += "Neuron Group:  " + neuronGroup.getLabel() + "<br>";
-        }
-        for (SynapseGroup synapseGroup : synapseGroupList) {
-            ret += "Synapse Group:   " + synapseGroup.getLabel() + "<br>";
-        }
-        ret += "</html>";
-        return ret;
-    }
+//    /**
+//     * Get long description for info box, formmated in html. Override for more
+//     * detailed description.
+//     *
+//     * @return the long description.
+//     */
+//    public String getLongDescription() {
+//        String ret = new String();
+//        ret += ("<html>Subnetwork [" + getLabel() + "]<br>"
+//                + "Subnetwork with " + neuronGroupList.size() + " neuron group(s) and ");
+//        ret += (synapseGroupList.size() + " synapse group(s)");
+//        if ((getNeuronGroupCount() + getSynapseGroupCount()) > 0) {
+//            ret += "<br>";
+//        }
+//        for (NeuronGroup neuronGroup : neuronGroupList) {
+//            ret += "Neuron Group:  " + neuronGroup.getLabel() + "<br>";
+//        }
+//        for (SynapseGroup synapseGroup : synapseGroupList) {
+//            ret += "Synapse Group:   " + synapseGroup.getLabel() + "<br>";
+//        }
+//        ret += "</html>";
+//        return ret;
+//    }
 
     /**
      * {@inheritDoc}
@@ -521,20 +459,20 @@ public abstract class Subnetwork extends Group {
         return "Unspecified";
     }
 
-    /**
-     * If this subnetwork is trainable, then add the current activation of the
-     * "input" neuron group to the input data of the training set. Assumes the
-     * input neuron group is that last in the list of neuron groups (as is the
-     * case with Hopfield, Competitive, and SOM). Only makes sense with
-     * unsupervised learning, since only input data (and no target data) are
-     * added.
-     */
-    public void addRowToTrainingSet() {
-        if (this instanceof Trainable) {
-            ((Trainable) this).getTrainingSet().addRow(
-                    getNeuronGroupList().get(getNeuronGroupList().size() - 1)
-                            .getActivations());
-        }
-    }
+//    /**
+//     * If this subnetwork is trainable, then add the current activation of the
+//     * "input" neuron group to the input data of the training set. Assumes the
+//     * input neuron group is that last in the list of neuron groups (as is the
+//     * case with Hopfield, Competitive, and SOM). Only makes sense with
+//     * unsupervised learning, since only input data (and no target data) are
+//     * added.
+//     */
+//    public void addRowToTrainingSet() {
+//        if (this instanceof Trainable) {
+//            ((Trainable) this).getTrainingSet().addRow(
+//                    getNeuronGroupList().get(getNeuronGroupList().size() - 1)
+//                            .getActivations());
+//        }
+//    }
 
 }
