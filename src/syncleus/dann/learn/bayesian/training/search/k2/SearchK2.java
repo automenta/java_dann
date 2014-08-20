@@ -26,7 +26,7 @@ package syncleus.dann.learn.bayesian.training.search.k2;
 import syncleus.dann.data.DataCase;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.learn.bayesian.BayesianEvent;
-import syncleus.dann.learn.bayesian.EncogBayesianNetwork;
+import syncleus.dann.learn.bayesian.BayesianNetworkEncog;
 import syncleus.dann.learn.bayesian.query.enumerate.EnumerationQuery;
 import syncleus.dann.learn.bayesian.training.TrainBayesian;
 import syncleus.dann.math.EncogMath;
@@ -48,7 +48,7 @@ public class SearchK2 implements BayesSearch {
     /**
      * The network to optimize.
      */
-    private EncogBayesianNetwork network;
+    private BayesianNetworkEncog network;
 
     /**
      * The trainer being used.
@@ -75,7 +75,7 @@ public class SearchK2 implements BayesSearch {
      */
     @Override
     public void init(final TrainBayesian theTrainer,
-                     final EncogBayesianNetwork theNetwork, final Dataset theData) {
+                     final BayesianNetworkEncog theNetwork, final Dataset theData) {
         this.network = theNetwork;
         this.data = theData;
         this.train = theTrainer;
@@ -144,7 +144,7 @@ public class SearchK2 implements BayesSearch {
      * @param desiredValue   The desired value.
      * @return The value N.
      */
-    public int calculateN(final EncogBayesianNetwork network,
+    public int calculateN(final BayesianNetworkEncog network,
                           final BayesianEvent event, final List<BayesianEvent> parents,
                           final int[] parentInstance, final int desiredValue) {
         int result = 0;
@@ -184,7 +184,7 @@ public class SearchK2 implements BayesSearch {
      * @param parentInstance The parent instance we are looking for.
      * @return The value N.
      */
-    public int calculateN(final EncogBayesianNetwork network,
+    public int calculateN(final BayesianNetworkEncog network,
                           final BayesianEvent event, final List<BayesianEvent> parents,
                           final int[] parentInstance) {
         int result = 0;
@@ -218,7 +218,7 @@ public class SearchK2 implements BayesSearch {
      * @param parents The parents.
      * @return The value for G.
      */
-    public double calculateG(final EncogBayesianNetwork network,
+    public double calculateG(final BayesianNetworkEncog network,
                              final BayesianEvent event, final List<BayesianEvent> parents) {
         double result = 1.0;
         final int r = event.getChoices().size();

@@ -24,12 +24,9 @@
 package syncleus.dann.learn.kmeans;
 
 import syncleus.dann.Clustering;
-import syncleus.dann.data.DataCase;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.math.VectorDistance;
 
-import java.util.ArrayList;
-import java.util.List;
 import syncleus.dann.data.DataCluster;
 import syncleus.dann.data.vector.VectorCluster;
 import syncleus.dann.data.vector.VectorData;
@@ -65,12 +62,12 @@ public class KMeansClustering<D extends VectorData> implements Clustering<D> {
      * @param theSet The dataset to cluster.
      */
     public KMeansClustering(final int theK, final Dataset<D> theSet, VectorDistance distance) {
-        final List<VectorData> list = new ArrayList<>();
-        for (final DataCase<D> pair : theSet) {
-            list.add(pair.getInput());
-        }
         this.k = theK;
-        this.kmeans = new KMeansUtil(this.k, list, distance);
+        this.kmeans = new KMeansUtil(this.k, theSet, distance);
+    }
+
+    public KMeansClustering(int numClusters, Dataset<D> data) {
+        this(numClusters, data, new VectorDistance.EuclideanVectorDistance());
     }
 
     /**

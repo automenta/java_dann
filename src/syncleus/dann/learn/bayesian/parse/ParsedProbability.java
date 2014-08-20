@@ -25,7 +25,7 @@ package syncleus.dann.learn.bayesian.parse;
 
 import syncleus.dann.learn.bayesian.BayesianError;
 import syncleus.dann.learn.bayesian.BayesianEvent;
-import syncleus.dann.learn.bayesian.EncogBayesianNetwork;
+import syncleus.dann.learn.bayesian.BayesianNetworkEncog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,7 +63,7 @@ public class ParsedProbability {
      * @param network The network.
      * @return The arguments.
      */
-    public int[] getArgs(final EncogBayesianNetwork network) {
+    public int[] getArgs(final BayesianNetworkEncog network) {
         final int[] result = new int[givenEvents.size()];
 
         for (int i = 0; i < givenEvents.size(); i++) {
@@ -99,7 +99,7 @@ public class ParsedProbability {
      * @param network The bayesian network.
      * @param result  The resulting probability.
      */
-    public void defineTruthTable(final EncogBayesianNetwork network,
+    public void defineTruthTable(final BayesianNetworkEncog network,
                                  final double result) {
 
         final ParsedEvent childParsed = getChildEvent();
@@ -132,7 +132,7 @@ public class ParsedProbability {
      *
      * @param network The network.
      */
-    public void defineRelationships(final EncogBayesianNetwork network) {
+    public void defineRelationships(final BayesianNetworkEncog network) {
         // define event relations, if they are not there already
         final ParsedEvent childParsed = getChildEvent();
         final BayesianEvent childEvent = network.requireEvent(childParsed

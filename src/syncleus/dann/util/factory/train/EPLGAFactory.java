@@ -46,7 +46,7 @@ public class EPLGAFactory {
 
         final PrgPopulation pop = (PrgPopulation) method;
 
-        final CalculateScore score = new TrainingSetScore(training);
+        final LearningScoring score = new TrainingSetScore(training);
         final TrainEA train = new TrainEA(pop, score);
         train.getRules().addRewriteRule(new RewriteConstants());
         train.getRules().addRewriteRule(new RewriteAlgebraic());

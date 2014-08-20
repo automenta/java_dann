@@ -26,7 +26,7 @@ package org.encog.ml.prg.train.rewrite;
 import junit.framework.Assert;
 import junit.framework.TestCase;
 
-import org.encog.ml.CalculateScore;
+import org.encog.ml.LearningScoring;
 import org.encog.ml.ea.score.adjust.ComplexityAdjustedScore;
 import org.encog.ml.ea.train.basic.TrainEA;
 import org.encog.ml.prg.EncogProgram;
@@ -46,7 +46,7 @@ public class TestRewriteAlgebraic extends TestCase {
 		EncogProgramContext context = new EncogProgramContext();
 		StandardExtensions.createNumericOperators(context);
 		PrgPopulation pop = new PrgPopulation(context,1);
-		CalculateScore score = new ZeroEvalScoreFunction();
+		LearningScoring score = new ZeroEvalScoreFunction();
 
 		TrainEA genetic = new TrainEA(pop, score);
 		genetic.setValidationMode(true);

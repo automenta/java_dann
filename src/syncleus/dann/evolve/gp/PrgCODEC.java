@@ -37,7 +37,7 @@ public class PrgCODEC implements GeneticCODEC {
      * {@inheritDoc}
      */
     @Override
-    public Learning decode(final Genome genome) {
+    public Learning geneDecode(final Genome genome) {
         return genome;
     }
 
@@ -45,7 +45,7 @@ public class PrgCODEC implements GeneticCODEC {
      * {@inheritDoc}
      */
     @Override
-    public Genome encode(final Learning phenotype) {
+    public Genome geneEncode(final Learning phenotype) {
         return (Genome) phenotype;
     }
 

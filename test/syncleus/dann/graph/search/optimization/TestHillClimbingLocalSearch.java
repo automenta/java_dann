@@ -20,7 +20,7 @@ package syncleus.dann.graph.search.optimization;
 
 import org.junit.Assert;
 import org.junit.Test;
-import syncleus.dann.graph.path.search.HillClimbingLocalSearch;
+import syncleus.dann.search.search.HillClimbingLocalSearch;
 import syncleus.dann.math.geometry.GraphGrid2D;
 import syncleus.dann.math.geometry.GraphGrid2D.GridNode;
 

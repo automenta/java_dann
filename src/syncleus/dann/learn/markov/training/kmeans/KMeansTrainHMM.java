@@ -29,7 +29,7 @@ import syncleus.dann.data.DataCase;
 import syncleus.dann.data.DataSequence;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.data.vector.VectorDataset;
-import syncleus.dann.learn.markov.HiddenMarkovModel;
+import syncleus.dann.learn.markov.HiddenMarkovModelEncog;
 import syncleus.dann.learn.markov.alog.ViterbiCalculator;
 import syncleus.dann.math.probablity.distributions.StateDistribution;
 import syncleus.dann.learn.kmeans.KMeansUtil;
@@ -38,10 +38,11 @@ import syncleus.dann.math.VectorDistance;
 import syncleus.dann.neural.flat.propagation.TrainingContinuation;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import syncleus.dann.data.Data;
+import syncleus.dann.data.vector.VectorCluster;
+import syncleus.dann.data.vector.VectorData;
 import syncleus.dann.learn.AbstractTraining.TrainingImplementationType;
 
 /**
@@ -60,16 +61,16 @@ public class KMeansTrainHMM<D extends Data> implements Training {
     private final int states;
     private final DataSequence<D> sequnces;
     private boolean done;
-    private final HiddenMarkovModel modelHMM;
+    private final HiddenMarkovModelEncog modelHMM;
     private int iteration;
-    private HiddenMarkovModel method;
+    private HiddenMarkovModelEncog method;
     private final DataSequence training;
 
-    public KMeansTrainHMM(final HiddenMarkovModel method, final DataSequence sequences) {
+    public KMeansTrainHMM(final HiddenMarkovModelEncog method, final DataSequence sequences) {
         this(method, sequences, new VectorDistance.EuclideanVectorDistance());
     }
             
-    public KMeansTrainHMM(final HiddenMarkovModel method, final DataSequence sequences, VectorDistance distanceFunc) {
+    public KMeansTrainHMM(final HiddenMarkovModelEncog method, final DataSequence sequences, VectorDistance distanceFunc) {
         this.method = method;
         this.modelHMM = method;
         this.sequnces = sequences;
@@ -130,7 +131,7 @@ public class KMeansTrainHMM<D extends Data> implements Training {
 
     @Override
     public void iteration() {
-        final HiddenMarkovModel hmm = this.modelHMM.cloneStructure();
+        final HiddenMarkovModelEncog hmm = this.modelHMM.cloneStructure();
 
         learnPi(hmm);
         learnTransition(hmm);
@@ -147,10 +148,9 @@ public class KMeansTrainHMM<D extends Data> implements Training {
 
     }
 
-    private void learnOpdf(final HiddenMarkovModel hmm) {
+    private void learnOpdf(final HiddenMarkovModelEncog hmm) {
         for (int i = 0; i < hmm.getStateCount(); i++) {
-            final Collection<DataCase> clusterObservations = this.clusters
-                    .cluster(i);
+            final VectorCluster clusterObservations = this.clusters.cluster(i);
 
             if (clusterObservations.size() < 1) {
                 final StateDistribution o = this.modelHMM
@@ -158,27 +158,27 @@ public class KMeansTrainHMM<D extends Data> implements Training {
                 hmm.setStateDistribution(i, o);
             } else {
                 final Dataset temp = new VectorDataset();
-                clusterObservations.stream().forEach(temp::add);
+                clusterObservations.getPoints().stream().forEach(temp::add);
                 hmm.getStateDistribution(i).fit(temp);
             }
         }
     }
 
-    private void learnPi(final HiddenMarkovModel hmm) {
+    private void learnPi(final HiddenMarkovModelEncog hmm) {
         final double[] pi = new double[this.states];
 
         for (int i = 0; i < this.states; i++) {
             pi[i] = 0.;
         }
 
-        this.sequnces.getSequences().stream().forEach((sequence) -> pi[this.clusters.cluster(sequence.get(0))]++);
+        this.sequnces.getSequences().stream().forEach((sequence) -> pi[this.clusters.cluster(new VectorData(sequence.get(0).getInput()))]++);
 
         for (int i = 0; i < this.states; i++) {
             hmm.setPi(i, pi[i] / this.sequnces.size());
         }
     }
 
-    private void learnTransition(final HiddenMarkovModel hmm) {
+    private void learnTransition(final HiddenMarkovModelEncog hmm) {
         for (int i = 0; i < hmm.getStateCount(); i++) {
             for (int j = 0; j < hmm.getStateCount(); j++) {
                 hmm.setTransitionProbability(i, j, 0.);
@@ -187,10 +187,10 @@ public class KMeansTrainHMM<D extends Data> implements Training {
 
         this.sequnces.getSequences().stream().filter((obsSeq) -> !(obsSeq.size() < 2)).forEach((obsSeq) -> {
             int first_state;
-            int second_state = this.clusters.cluster(obsSeq.get(0));
+            int second_state = this.clusters.cluster(new VectorData(obsSeq.get(0).getInput()));
             for (int i = 1; i < obsSeq.size(); i++) {
                 first_state = second_state;
-                second_state = this.clusters.cluster(obsSeq.get(i));
+                second_state = this.clusters.cluster(new VectorData(obsSeq.get(i).getInput()));
 
                 hmm.setTransitionProbability(
                         first_state,
@@ -220,7 +220,7 @@ public class KMeansTrainHMM<D extends Data> implements Training {
         }
     }
 
-    private boolean optimizeCluster(final HiddenMarkovModel hmm) {
+    private boolean optimizeCluster(final HiddenMarkovModelEncog hmm) {
         boolean modif = false;
 
         for (final Dataset obsSeq : this.sequnces.getSequences()) {
@@ -228,7 +228,7 @@ public class KMeansTrainHMM<D extends Data> implements Training {
             final int states[] = vc.stateSequence();
 
             for (int i = 0; i < states.length; i++) {
-                final DataCase o = obsSeq.get(i);
+                final VectorData o = new VectorData(obsSeq.get(i).getInputArray());
 
                 if (this.clusters.cluster(o) != states[i]) {
                     modif = true;
@@ -263,8 +263,8 @@ public class KMeansTrainHMM<D extends Data> implements Training {
     }
     
     static class Clusters<D extends Data> {
-        private final HashMap<DataCase<D>, Integer> clustersHash;
-        private final ArrayList<Collection<DataCase<D>>> clusters;
+        private final HashMap<VectorData, Integer> clustersHash;
+        private final ArrayList<VectorCluster> clusters;
 
         public Clusters(final int k, final Dataset<D> observations, VectorDistance distanceFunc) {
 
@@ -275,39 +275,39 @@ public class KMeansTrainHMM<D extends Data> implements Training {
             for (final DataCase<D> pair : observations) {
                 list.add(pair);
             }
-            final KMeansUtil<DataCase<D>> kmc = new KMeansUtil<>(k, list, distanceFunc);
+            final KMeansUtil<D> kmc = new KMeansUtil(k, list, distanceFunc);
             kmc.process();
 
             for (int i = 0; i < k; i++) {
-                final Collection<DataCase<D>> cluster = kmc.get(i);
+                final VectorCluster cluster = kmc.get(i);
                 this.clusters.add(cluster);
 
-                for (final DataCase element : cluster) {
+                for (final VectorData element : cluster.getPoints()) {
                     this.clustersHash.put(element, i);
                 }
             }
         }
 
-        public Collection<DataCase<D>> cluster(final int clusterNb) {
+        public VectorCluster cluster(final int clusterNb) {
             return this.clusters.get(clusterNb);
         }
 
-        public int cluster(final DataCase<D> o) {
+        public int cluster(VectorData o) {
             return this.clustersHash.get(o);
         }
 
-        public boolean isInCluster(final DataCase<D> o, final int x) {
+        public boolean isInCluster(final VectorData o, final int x) {
             return cluster(o) == x;
         }
 
-        public void put(final DataCase<D> o, final int clusterNb) {
+        public void put(final VectorData o, final int clusterNb) {
             this.clustersHash.put(o, clusterNb);
-            this.clusters.get(clusterNb).add(o);
+            this.clusters.get(clusterNb).addPoint(o);
         }
 
-        public void remove(final DataCase<D> o, final int clusterNb) {
+        public void remove(final VectorData o, final int clusterNb) {
             this.clustersHash.put(o, -1);
-            this.clusters.get(clusterNb).remove(o);
+            this.clusters.get(clusterNb).removePoint(o);
         }
     }
     

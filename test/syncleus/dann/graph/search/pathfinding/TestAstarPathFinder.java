@@ -21,8 +21,8 @@ package syncleus.dann.graph.search.pathfinding;
 import org.junit.Assert;
 import org.junit.Test;
 import syncleus.dann.graph.BidirectedEdge;
-import syncleus.dann.graph.path.pathfinding.AstarPathFinder;
-import syncleus.dann.graph.path.pathfinding.HeuristicPathCost;
+import syncleus.dann.search.pathfinding.AstarPathFinder;
+import syncleus.dann.search.pathfinding.HeuristicPathCost;
 import syncleus.dann.math.geometry.GraphGrid2D;
 import syncleus.dann.math.geometry.GraphGrid2D.GridNode;
 

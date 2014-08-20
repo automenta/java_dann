@@ -45,7 +45,7 @@ public class HyperNEATCODEC implements GeneticCODEC {
      * {@inheritDoc}
      */
     @Override
-    public Learning decode(final Genome genome) {
+    public Learning geneDecode(final Genome genome) {
         final NEATPopulation pop = (NEATPopulation) genome.getPopulation();
         final Substrate substrate = pop.getSubstrate();
         return decode(pop, substrate, genome);
@@ -126,7 +126,7 @@ public class HyperNEATCODEC implements GeneticCODEC {
     }
 
     @Override
-    public Genome encode(final Learning phenotype) {
+    public Genome geneEncode(final Learning phenotype) {
         throw new GeneticError(
                 "Encoding of a HyperNEAT network is not supported.");
     }

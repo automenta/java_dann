@@ -47,15 +47,20 @@ public class VectorData implements MutableData, Serializable, Cloneable {
      */
     private double[] data;
 
-    /**
-     * Construct this object with the specified data.
-     *
-     * @param d The data to construct this object with.
-     */
+//    /**
+//     * Construct this object with the specified data.
+//     *
+//     * @param d The data to construct this object with.
+//     */
+//    public VectorData(final double[] d) {
+//        this(d.length);
+//        System.arraycopy(d, 0, this.data, 0, d.length);
+//    }
+    
+    /** Wraps an array in VectorData without copy */
     public VectorData(final double[] d) {
-        this(d.length);
-        System.arraycopy(d, 0, this.data, 0, d.length);
-    }
+        this.data = d;
+    }    
     
     public VectorData(final Data d) {
         this(d.getData());

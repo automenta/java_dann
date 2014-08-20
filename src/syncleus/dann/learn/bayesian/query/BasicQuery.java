@@ -25,7 +25,7 @@ package syncleus.dann.learn.bayesian.query;
 
 import syncleus.dann.learn.bayesian.BayesianError;
 
-import syncleus.dann.learn.bayesian.EncogBayesianNetwork;
+import syncleus.dann.learn.bayesian.BayesianNetworkEncog;
 import syncleus.dann.learn.bayesian.EventType;
 import syncleus.dann.learn.bayesian.query.sample.EventState;
 
@@ -47,7 +47,7 @@ public abstract class BasicQuery implements BayesianQuery, Serializable {
     /**
      * The network to be queried.
      */
-    private final EncogBayesianNetwork network;
+    private final BayesianNetworkEncog network;
 
     /**
      * A mapping of the events to event states.
@@ -71,7 +71,7 @@ public abstract class BasicQuery implements BayesianQuery, Serializable {
      */
     private final List<BayesianEvent> outcomeEvents = new ArrayList<>();
 
-    public BasicQuery(final EncogBayesianNetwork theNetwork) {
+    public BasicQuery(final BayesianNetworkEncog theNetwork) {
         this.network = theNetwork;
         finalizeStructure();
     }
@@ -86,7 +86,7 @@ public abstract class BasicQuery implements BayesianQuery, Serializable {
      * {@inheritDoc}
      */
     @Override
-    public EncogBayesianNetwork getNetwork() {
+    public BayesianNetworkEncog getNetwork() {
         return network;
     }
 

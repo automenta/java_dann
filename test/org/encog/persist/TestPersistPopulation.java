@@ -30,7 +30,7 @@ import junit.framework.Assert;
 import junit.framework.TestCase;
 
 import org.encog.engine.network.activation.ActivationStep;
-import org.encog.ml.CalculateScore;
+import org.encog.ml.LearningScoring;
 import org.encog.ml.data.MLDataSet;
 import org.encog.ml.data.basic.BasicMLDataSet;
 import org.encog.ml.ea.population.Population;
@@ -52,7 +52,7 @@ public class TestPersistPopulation extends TestCase {
 	{
 		MLDataSet trainingSet = new BasicMLDataSet(XOR.XOR_INPUT, XOR.XOR_IDEAL);
 		
-		CalculateScore score = new TrainingSetScore(trainingSet);
+		LearningScoring score = new TrainingSetScore(trainingSet);
 		// train the neural network
 		ActivationStep step = new ActivationStep();
 		step.setCenter(0.5);
@@ -92,7 +92,7 @@ public class TestPersistPopulation extends TestCase {
 		
 		// see if the population can actually be used to train
 		MLDataSet trainingSet = new BasicMLDataSet(XOR.XOR_INPUT, XOR.XOR_IDEAL);		
-		CalculateScore score = new TrainingSetScore(trainingSet);
+		LearningScoring score = new TrainingSetScore(trainingSet);
 		EvolutionaryAlgorithm train = NEATUtil.constructNEATTrainer(pop, score);
 		train.iteration();
 

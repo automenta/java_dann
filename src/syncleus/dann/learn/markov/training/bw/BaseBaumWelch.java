@@ -27,7 +27,7 @@ import syncleus.dann.Learning;
 import syncleus.dann.Training;
 import syncleus.dann.data.DataSequence;
 import syncleus.dann.data.Dataset;
-import syncleus.dann.learn.markov.HiddenMarkovModel;
+import syncleus.dann.learn.markov.HiddenMarkovModelEncog;
 import syncleus.dann.learn.markov.alog.ForwardBackwardCalculator;
 import syncleus.dann.math.probablity.distributions.StateDistribution;
 import syncleus.dann.learn.strategy.Strategy;
@@ -56,10 +56,10 @@ import syncleus.dann.neural.flat.propagation.TrainingContinuation;
  */
 public abstract class BaseBaumWelch<D extends Data> implements Training {
     private int iterations;
-    private HiddenMarkovModel method;
+    private HiddenMarkovModelEncog method;
     private final DataSequence<D> training;
 
-    public BaseBaumWelch(final HiddenMarkovModel hmm,
+    public BaseBaumWelch(final HiddenMarkovModelEncog hmm,
                          final DataSequence<D> training) {
         this.method = hmm;
         this.training = training;
@@ -101,7 +101,7 @@ public abstract class BaseBaumWelch<D extends Data> implements Training {
     }
 
     public abstract double[][][] estimateXi(Dataset sequence,
-                                            ForwardBackwardCalculator fbc, HiddenMarkovModel hmm);
+                                            ForwardBackwardCalculator fbc, HiddenMarkovModelEncog hmm);
 
     @Override
     public void finishTraining() {
@@ -109,7 +109,7 @@ public abstract class BaseBaumWelch<D extends Data> implements Training {
     }
 
     public abstract ForwardBackwardCalculator generateForwardBackwardCalculator(
-            Dataset sequence, HiddenMarkovModel hmm);
+            Dataset sequence, HiddenMarkovModelEncog hmm);
 
     @Override
     public double getError() {
@@ -148,7 +148,7 @@ public abstract class BaseBaumWelch<D extends Data> implements Training {
 
     @Override
     public void iteration() {
-        HiddenMarkovModel nhmm;
+        HiddenMarkovModelEncog nhmm;
         try {
             nhmm = this.method.clone();
         } catch (final CloneNotSupportedException e) {

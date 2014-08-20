@@ -110,6 +110,16 @@ public class VectorDataset implements Serializable, Dataset<VectorData>, Cloneab
     public VectorDataset(final List<DataCase<VectorData>> theData) {
         this.data = theData;
     }
+    
+    /**
+     * Construct a data set from an input only
+     * @param input
+     * @param ideal 
+     */
+    public VectorDataset(final double[][] input) {
+        this(input, null);
+    }
+    
 
     /**
      * Construct a data set from an input and ideal array.

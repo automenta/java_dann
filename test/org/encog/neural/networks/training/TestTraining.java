@@ -25,7 +25,7 @@ package org.encog.neural.networks.training;
 
 import junit.framework.TestCase;
 
-import org.encog.ml.CalculateScore;
+import org.encog.ml.LearningScoring;
 import org.encog.ml.MLMethod;
 import org.encog.ml.MethodFactory;
 import org.encog.ml.data.MLDataSet;
@@ -106,7 +106,7 @@ public class TestTraining extends TestCase   {
 	{
 		MLDataSet trainingData = new BasicMLDataSet(XOR.XOR_INPUT,XOR.XOR_IDEAL);		
 		BasicNetwork network = NetworkUtil.createXORNetworkUntrained();
-		CalculateScore score = new TrainingSetScore(trainingData);
+		LearningScoring score = new TrainingSetScore(trainingData);
 		NeuralSimulatedAnnealing anneal = new NeuralSimulatedAnnealing(network,score,10,2,100);
 		NetworkUtil.testTraining(trainingData,anneal,0.01);
 	}
@@ -115,7 +115,7 @@ public class TestTraining extends TestCase   {
 	public void testMLMethodGenetic() throws Throwable
 	{
 		MLDataSet trainingData = new BasicMLDataSet(XOR.XOR_INPUT,XOR.XOR_IDEAL);		
-		CalculateScore score = new TrainingSetScore(trainingData);
+		LearningScoring score = new TrainingSetScore(trainingData);
 		MLMethodGeneticAlgorithm genetic = new MLMethodGeneticAlgorithm(new MethodFactory(){
 			@Override
 			public MLMethod factor() {

@@ -21,7 +21,7 @@ package syncleus.dann.graph.search.pathfinding;
 import org.junit.Assert;
 import org.junit.Test;
 import syncleus.dann.graph.BidirectedEdge;
-import syncleus.dann.graph.path.pathfinding.DijkstraPathFinder;
+import syncleus.dann.search.pathfinding.DijkstraPathFinder;
 import syncleus.dann.math.geometry.GraphGrid2D;
 import syncleus.dann.math.geometry.GraphGrid2D.GridNode;
 

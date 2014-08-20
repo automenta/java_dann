@@ -44,7 +44,7 @@ import syncleus.dann.neural.util.structure.NetworkCODEC;
  * score your neural network.
  * <p/>
  * If you would like to be more abstract, and not use a training set, you can
- * create your own implementation of the CalculateScore method. This class can
+ * create your own implementation of the LearningScoring method. This class can
  * then score the networks any way that you like.
  */
 public class NeuralSimulatedAnnealing extends AbstractTraining {
@@ -67,7 +67,7 @@ public class NeuralSimulatedAnnealing extends AbstractTraining {
     /**
      * Used to calculate the score.
      */
-    private final CalculateScore calculateScore;
+    private final LearningScoring calculateScore;
 
     /**
      * Construct a simulated annleaing trainer for a encodable MLMethod.
@@ -79,7 +79,7 @@ public class NeuralSimulatedAnnealing extends AbstractTraining {
      * @param cycles         The number of cycles in a training iteration.
      */
     public NeuralSimulatedAnnealing(final VectorEncodable network,
-                                    final CalculateScore calculateScore, final double startTemp,
+                                    final LearningScoring calculateScore, final double startTemp,
                                     final double stopTemp, final int cycles) {
         super(TrainingImplementationType.Iterative);
 
@@ -125,7 +125,7 @@ public class NeuralSimulatedAnnealing extends AbstractTraining {
     /**
      * @return The object used to calculate the score.
      */
-    public CalculateScore getCalculateScore() {
+    public LearningScoring getLearningScoring() {
         return this.calculateScore;
     }
 

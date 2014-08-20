@@ -27,7 +27,7 @@ import syncleus.dann.Learning;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.learn.AbstractTraining;
 import syncleus.dann.learn.bayesian.BayesianEvent;
-import syncleus.dann.learn.bayesian.EncogBayesianNetwork;
+import syncleus.dann.learn.bayesian.BayesianNetworkEncog;
 import syncleus.dann.learn.bayesian.training.estimator.BayesEstimator;
 import syncleus.dann.learn.bayesian.training.estimator.SimpleEstimator;
 import syncleus.dann.learn.bayesian.training.search.k2.BayesSearch;
@@ -102,7 +102,7 @@ public class TrainBayesian extends AbstractTraining {
     /**
      * The network to train.
      */
-    private final EncogBayesianNetwork network;
+    private final BayesianNetworkEncog network;
 
     /**
      * The maximum parents a node should have.
@@ -137,7 +137,7 @@ public class TrainBayesian extends AbstractTraining {
      * @param theData           The data to train.
      * @param theMaximumParents The max number of parents.
      */
-    public TrainBayesian(final EncogBayesianNetwork theNetwork,
+    public TrainBayesian(final BayesianNetworkEncog theNetwork,
                          final Dataset theData, final int theMaximumParents) {
         this(theNetwork, theData, theMaximumParents,
                 BayesianInit.InitNaiveBayes, new SearchK2(),
@@ -154,7 +154,7 @@ public class TrainBayesian extends AbstractTraining {
      * @param theSearch         The search method.
      * @param theEstimator      The estimation mehod.
      */
-    public TrainBayesian(final EncogBayesianNetwork theNetwork,
+    public TrainBayesian(final BayesianNetworkEncog theNetwork,
                          final Dataset theData, final int theMaximumParents,
                          final BayesianInit theInit, final BayesSearch theSearch,
                          final BayesEstimator theEstimator) {
@@ -321,7 +321,7 @@ public class TrainBayesian extends AbstractTraining {
     /**
      * @return the network
      */
-    public EncogBayesianNetwork getNetwork() {
+    public BayesianNetworkEncog getNetwork() {
         return network;
     }
 

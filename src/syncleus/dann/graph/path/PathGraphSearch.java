@@ -23,9 +23,9 @@
  */
 package syncleus.dann.graph.path;
 
-import syncleus.dann.graph.path.search.FrontierHolder;
-import syncleus.dann.graph.path.search.GraphSearch;
-import syncleus.dann.graph.path.search.SearchGoal;
+import syncleus.dann.search.search.FrontierHolder;
+import syncleus.dann.search.search.GraphSearch;
+import syncleus.dann.search.search.SearchGoal;
 
 import java.util.HashSet;
 import java.util.Set;

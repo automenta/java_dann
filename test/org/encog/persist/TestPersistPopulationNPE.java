@@ -29,7 +29,7 @@ import java.io.ByteArrayOutputStream;
 import junit.framework.Assert;
 import junit.framework.TestCase;
 
-import org.encog.ml.CalculateScore;
+import org.encog.ml.LearningScoring;
 import org.encog.ml.data.basic.BasicMLDataSet;
 import org.encog.ml.ea.population.Population;
 import org.encog.ml.ea.train.EvolutionaryAlgorithm;
@@ -44,7 +44,7 @@ public final class TestPersistPopulationNPE extends TestCase
 
 	public void testNPE() throws Exception
 	{
-		final CalculateScore score = new TrainingSetScore(new BasicMLDataSet(FAKE_DATA, FAKE_DATA));
+		final LearningScoring score = new TrainingSetScore(new BasicMLDataSet(FAKE_DATA, FAKE_DATA));
 
 		// create a new random population and train it
 		NEATPopulation pop = new NEATPopulation(FAKE_DATA[0].length, 1, 50);
@@ -75,7 +75,7 @@ public final class TestPersistPopulationNPE extends TestCase
 
 	public void testSaveRead() throws Exception
 	{
-		final CalculateScore score = new TrainingSetScore(new BasicMLDataSet(FAKE_DATA, FAKE_DATA));
+		final LearningScoring score = new TrainingSetScore(new BasicMLDataSet(FAKE_DATA, FAKE_DATA));
 		NEATPopulation pop = new NEATPopulation(FAKE_DATA[0].length, 1, 50);
 		pop.reset();
 		// create a new random population and train it

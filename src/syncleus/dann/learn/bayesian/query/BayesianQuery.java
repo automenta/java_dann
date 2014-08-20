@@ -24,7 +24,7 @@
 package syncleus.dann.learn.bayesian.query;
 
 import syncleus.dann.learn.bayesian.BayesianEvent;
-import syncleus.dann.learn.bayesian.EncogBayesianNetwork;
+import syncleus.dann.learn.bayesian.BayesianNetworkEncog;
 import syncleus.dann.learn.bayesian.EventType;
 import syncleus.dann.learn.bayesian.query.sample.EventState;
 
@@ -46,7 +46,7 @@ public interface BayesianQuery extends Cloneable {
     /**
      * @return The Bayesian network that we are using this query for.
      */
-    EncogBayesianNetwork getNetwork();
+    BayesianNetworkEncog getNetwork();
 
     /**
      * @return A mapping of events to event states.

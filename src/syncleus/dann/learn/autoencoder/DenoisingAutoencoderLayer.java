@@ -7,7 +7,7 @@ import syncleus.dann.neural.util.AbstractSynapse;
 import syncleus.dann.neural.Neuron;
 
 //TODO implement
-abstract public class DenoisingAutoencoderLayer extends BrainLayer<AutoencoderNeuron, AutoencoderSynapse> {
+abstract public class DenoisingAutoencoderLayer extends  BrainLayer<AutoencoderNeuron, AutoencoderSynapse> {
     private final DenoisingAutoencoder da;
 
     public static class AutoencoderSynapse extends AbstractSynapse<AutoencoderNeuron> {

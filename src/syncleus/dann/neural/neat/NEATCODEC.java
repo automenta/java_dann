@@ -63,7 +63,7 @@ public class NEATCODEC implements GeneticCODEC, Serializable {
      * {@inheritDoc}
      */
     @Override
-    public Learning decode(final Genome genome) {
+    public Learning geneDecode(final Genome genome) {
         final NEATGenome neatGenome = (NEATGenome) genome;
         final NEATPopulation pop = (NEATPopulation) neatGenome.getPopulation();
         final List<NEATNeuronGene> neuronsChromosome = neatGenome
@@ -119,7 +119,7 @@ public class NEATCODEC implements GeneticCODEC, Serializable {
      * @return Not used.
      */
     @Override
-    public Genome encode(final Learning phenotype) {
+    public Genome geneEncode(final Learning phenotype) {
         throw new GeneticError("Encoding of a NEAT network is not supported.");
     }
 

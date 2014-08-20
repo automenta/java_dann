@@ -25,7 +25,7 @@ package syncleus.dann.learn.markov.alog;
 
 import syncleus.dann.data.DataCase;
 import syncleus.dann.data.Dataset;
-import syncleus.dann.learn.markov.HiddenMarkovModel;
+import syncleus.dann.learn.markov.HiddenMarkovModelEncog;
 
 import java.util.EnumSet;
 import java.util.Iterator;
@@ -68,7 +68,7 @@ public class ForwardBackwardCalculator {
      * @param hmm  THe hidden markov model to use.
      */
     public ForwardBackwardCalculator(final Dataset oseq,
-                                     final HiddenMarkovModel hmm) {
+                                     final HiddenMarkovModelEncog hmm) {
         this(oseq, hmm, EnumSet.of(Computation.ALPHA));
     }
 
@@ -80,7 +80,7 @@ public class ForwardBackwardCalculator {
      * @param flags Flags, alpha or beta.
      */
     public ForwardBackwardCalculator(final Dataset oseq,
-                                     final HiddenMarkovModel hmm, final EnumSet<Computation> flags) {
+                                     final HiddenMarkovModelEncog hmm, final EnumSet<Computation> flags) {
         if (oseq.size() < 1) {
             throw new IllegalArgumentException("Empty sequence");
         }
@@ -134,7 +134,7 @@ public class ForwardBackwardCalculator {
      * @param hmm  The hidden markov model.
      * @param oseq The sequence.
      */
-    protected void computeAlpha(final HiddenMarkovModel hmm,
+    protected void computeAlpha(final HiddenMarkovModelEncog hmm,
                                 final Dataset oseq) {
         this.alpha = new double[oseq.size()][hmm.getStateCount()];
 
@@ -163,7 +163,7 @@ public class ForwardBackwardCalculator {
      * @param o   The element.
      * @param i   The state.
      */
-    protected void computeAlphaInit(final HiddenMarkovModel hmm,
+    protected void computeAlphaInit(final HiddenMarkovModelEncog hmm,
                                     final DataCase o, final int i) {
         this.alpha[0][i] = hmm.getPi(i)
                 * hmm.getStateDistribution(i).probability(o);
@@ -177,7 +177,7 @@ public class ForwardBackwardCalculator {
      * @param t   The alpha step.
      * @param j   Thr column.
      */
-    protected void computeAlphaStep(final HiddenMarkovModel hmm,
+    protected void computeAlphaStep(final HiddenMarkovModelEncog hmm,
                                     final DataCase o, final int t, final int j) {
         double sum = 0.;
 
@@ -194,7 +194,7 @@ public class ForwardBackwardCalculator {
      * @param hmm  The hidden markov model.
      * @param oseq The sequence.
      */
-    protected void computeBeta(final HiddenMarkovModel hmm, final Dataset oseq) {
+    protected void computeBeta(final HiddenMarkovModelEncog hmm, final Dataset oseq) {
         this.beta = new double[oseq.size()][hmm.getStateCount()];
 
         for (int i = 0; i < hmm.getStateCount(); i++) {
@@ -216,7 +216,7 @@ public class ForwardBackwardCalculator {
      * @param t   THe matrix row.
      * @param i   THe matrix column.
      */
-    protected void computeBetaStep(final HiddenMarkovModel hmm,
+    protected void computeBetaStep(final HiddenMarkovModelEncog hmm,
                                    final DataCase o, final int t, final int i) {
         double sum = 0.;
 
@@ -236,7 +236,7 @@ public class ForwardBackwardCalculator {
      * @param flags The flags.
      */
     private void computeProbability(final Dataset oseq,
-                                    final HiddenMarkovModel hmm, final EnumSet<Computation> flags) {
+                                    final HiddenMarkovModelEncog hmm, final EnumSet<Computation> flags) {
         this.probability = 0.;
 
         if (flags.contains(Computation.ALPHA)) {

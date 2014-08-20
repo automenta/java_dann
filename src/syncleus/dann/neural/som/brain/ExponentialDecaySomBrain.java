@@ -55,11 +55,15 @@ public final class ExponentialDecaySomBrain<IN extends SomInputNeuron, ON extend
         return super.clone(); //To change body of generated methods, choose Tools | Templates.
     }
 
+    public void compute(double[] d) { 
+        int size = getInputCount();
+        for (int i = 0; i < size; i++) {
+            setInput(i, d[i]);
+        }        
+    }
     public void compute(Data d) {
-        if (d.size()!=getInputCount())
+        if (d.size()<getInputCount())
             throw new RuntimeException(d + " has invalid data dimensions for " + this);
-        for (int i = 0; i < d.size(); i++) {
-            setInput(i, d.getData(i));
-        }
+        compute(d.getData());
     }
 }

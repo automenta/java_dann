@@ -37,6 +37,16 @@ import syncleus.dann.learn.ErrorLearning;
 import syncleus.dann.math.EncogUtility;
 
 import java.util.*;
+import syncleus.dann.evolve.gp.expvalue.ExpressionValue;
+import syncleus.dann.evolve.gp.expvalue.ValueType;
+import static syncleus.dann.evolve.gp.expvalue.ValueType.booleanType;
+import static syncleus.dann.evolve.gp.expvalue.ValueType.enumType;
+import static syncleus.dann.evolve.gp.expvalue.ValueType.floatingType;
+import static syncleus.dann.evolve.gp.expvalue.ValueType.intType;
+import static syncleus.dann.evolve.gp.expvalue.ValueType.stringType;
+import syncleus.dann.evolve.gp.extension.FunctionFactory;
+import syncleus.dann.evolve.gp.extension.StandardExtensions;
+import syncleus.dann.evolve.gp.train.PrgPopulation;
 
 /**
  * Holds an Encog Programming Language (EPL) program. A Encog program is

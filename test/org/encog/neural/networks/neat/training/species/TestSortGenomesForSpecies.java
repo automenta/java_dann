@@ -30,7 +30,7 @@ import java.util.List;
 import junit.framework.Assert;
 import junit.framework.TestCase;
 
-import org.encog.ml.CalculateScore;
+import org.encog.ml.LearningScoring;
 import org.encog.ml.data.MLDataSet;
 import org.encog.ml.data.basic.BasicMLDataSet;
 import org.encog.ml.ea.sort.SortGenomesForSpecies;
@@ -50,7 +50,7 @@ public class TestSortGenomesForSpecies extends TestCase {
 		MLDataSet trainingSet = new BasicMLDataSet(XOR.XOR_INPUT,XOR.XOR_IDEAL);
 		NEATPopulation pop = new NEATPopulation(2,1,100);
 		pop.reset();
-		CalculateScore score = new TrainingSetScore(trainingSet);
+		LearningScoring score = new TrainingSetScore(trainingSet);
 		final EvolutionaryAlgorithm train = NEATUtil.constructNEATTrainer(pop,score);
 				
 		NEATGenome genome1 = new NEATGenome();
@@ -77,7 +77,7 @@ public class TestSortGenomesForSpecies extends TestCase {
 		MLDataSet trainingSet = new BasicMLDataSet(XOR.XOR_INPUT,XOR.XOR_IDEAL);
 		NEATPopulation pop = new NEATPopulation(2,1,100);
 		pop.reset();
-		CalculateScore score = new TrainingSetScore(trainingSet);
+		LearningScoring score = new TrainingSetScore(trainingSet);
 		final EvolutionaryAlgorithm train = NEATUtil.constructNEATTrainer(pop,score);
 				
 		NEATGenome genome1 = new NEATGenome();

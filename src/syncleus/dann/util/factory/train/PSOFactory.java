@@ -56,7 +56,7 @@ public class PSOFactory {
         final int particles = holder.getInt(MLTrainFactory.PROPERTY_PARTICLES,
                 false, 20);
 
-        final CalculateScore score = new TrainingSetScore(training);
+        final LearningScoring score = new TrainingSetScore(training);
         final Randomizer randomizer = new NguyenWidrowRandomizer();
 
         final Training train = new NeuralPSO((VectorNeuralNetwork) method, randomizer,

@@ -11,6 +11,7 @@ import org.junit.Test;
 import syncleus.dann.data.random.UniformRandomData;
 import syncleus.dann.math.random.XORShiftRandom;
 import syncleus.dann.neural.spiking.subnetworks.FeedForward;
+import syncleus.dann.neural.spiking.subnetworks.Hopfield;
 
 /**
  *
@@ -24,13 +25,10 @@ public class TestSpikingNetwork {
         SpikingNeuralNetwork net = new SpikingNeuralNetwork();
         
         
-        /*Hopfield h = new Hopfield(net, 4);
-        net.addGroup(h);
-
-        h.randomize();*/
+        Hopfield h = new Hopfield(net, 4);
+        h.randomize();
         
         FeedForward h2 = new FeedForward(net, new int[] { 4, 3, 2}, new Point2D.Double());
-        net.addGroup(h2);
         
         net.randomizeNeurons();
         net.randomizeWeights();

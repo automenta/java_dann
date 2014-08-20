@@ -25,7 +25,7 @@ package syncleus.dann.learn.bayesian.query.enumerate;
 
 import syncleus.dann.learn.bayesian.BayesianError;
 import syncleus.dann.learn.bayesian.BayesianEvent;
-import syncleus.dann.learn.bayesian.EncogBayesianNetwork;
+import syncleus.dann.learn.bayesian.BayesianNetworkEncog;
 import syncleus.dann.learn.bayesian.EventType;
 import syncleus.dann.learn.bayesian.query.BasicQuery;
 import syncleus.dann.learn.bayesian.query.sample.EventState;
@@ -61,7 +61,7 @@ public class EnumerationQuery extends BasicQuery implements Serializable {
      *
      * @param theNetwork The Bayesian network to query.
      */
-    public EnumerationQuery(final EncogBayesianNetwork theNetwork) {
+    public EnumerationQuery(final BayesianNetworkEncog theNetwork) {
         super(theNetwork);
     }
 

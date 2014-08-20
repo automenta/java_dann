@@ -24,9 +24,10 @@
 package syncleus.dann.learn.kmeans;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import syncleus.dann.data.DataCluster;
+import syncleus.dann.data.Data;
+import syncleus.dann.data.DataCase;
+import syncleus.dann.data.Dataset;
 import syncleus.dann.data.vector.VectorCluster;
 import syncleus.dann.data.vector.VectorData;
 import syncleus.dann.math.VectorDistance;
@@ -36,7 +37,7 @@ import syncleus.dann.math.VectorDistance;
  *
  * @param <K> The type to cluster.
  */
-public class KMeansUtil {
+public class KMeansUtil<D extends Data> {
 
     /**
      * The clusters.
@@ -55,7 +56,7 @@ public class KMeansUtil {
      * @param theK        The number of clusters.
      * @param theElements The elements to cluster.
      */
-    public KMeansUtil(final int theK, final List<VectorData> theElements, VectorDistance distance) {
+    public KMeansUtil(final int theK, final List<DataCase<D>> theElements, VectorDistance distance) {
         this.k = theK;
         clusters = new ArrayList<>(theK);
         this.distanceFunc = distance;
@@ -63,13 +64,25 @@ public class KMeansUtil {
         initRandomClusters(theElements);
     }
 
+
     
+    public KMeansUtil(final int theK, final Dataset<D> theElements, VectorDistance distance) {
+        this.k = theK;
+        clusters = new ArrayList<>(theK);
+        this.distanceFunc = distance;
+        
+        List<DataCase<D>> l = new ArrayList(theElements.size());
+        for (DataCase<D> dd : theElements)
+            l.add(dd);
+        initRandomClusters(l);
+    }
+
     /**
      * Create random clusters.
      *
      * @param elements The elements to cluster.
      */
-    private void initRandomClusters(final List<VectorData> elements) {
+    private void initRandomClusters(final List<DataCase<D>>  elements) {
 
         int clusterIndex = 0;
         int elementIndex = 0;
@@ -78,26 +91,27 @@ public class KMeansUtil {
         // first simply fill out the clusters, until we run out of clusters
         while ((elementIndex < elements.size()) && (clusterIndex < k)
                 && (elements.size() - elementIndex > k - clusterIndex)) {
-            final VectorData element = elements.get(elementIndex);
-
+            final DataCase<D> element = elements.get(elementIndex);
+            final VectorData elementData = new VectorData(element.getInput());
+            
             boolean added = false;
 
             // if this element is identical to another, add it to this cluster
             for (int i = 0; i < clusterIndex; i++) {
-                final DataCluster<VectorData> cluster = clusters.get(i);
+                final VectorCluster cluster = clusters.get(i);
 
-                if (cluster.getCentroid().distance(element, distanceFunc) == 0) {
-                    cluster.addPoint(element);
-                    vectorSize = element.size();
+                if (cluster.getCentroid().distance(elementData, distanceFunc) == 0) {
+                    cluster.addPoint(elementData);
+                    vectorSize = elementData.size();
                     added = true;
                     break;
                 }
             }
 
             if (!added) {
-                VectorData nextElement = elements.get(elementIndex);
+                VectorData nextElement = new VectorData(elements.get(elementIndex).getInput());                
                 clusters.add(new VectorCluster(nextElement));
-                vectorSize = element.size();
+                vectorSize = elementData.size();
                 clusterIndex++;
             }
             elementIndex++;
@@ -105,7 +119,7 @@ public class KMeansUtil {
 
         // create
         while (clusterIndex < k && elementIndex < elements.size()) {
-            clusters.add(new VectorCluster(elements.get(elementIndex)));
+            clusters.add(new VectorCluster(new VectorData(elements.get(elementIndex).getInput())));
             vectorSize = elements.size();
             elementIndex++;
             clusterIndex++;
@@ -121,7 +135,7 @@ public class KMeansUtil {
         // otherwise, handle case where there were still unassigned elements
         // add them to the nearest clusters.
         while (elementIndex < elements.size()) {
-            final VectorData element = elements.get(elementIndex);
+            final VectorData element = new VectorData(elements.get(elementIndex).getInput());
             nearestCluster(element).addPoint(element);
             elementIndex++;
         }
@@ -189,8 +203,8 @@ public class KMeansUtil {
      * @param index The index to get.
      * @return The cluster.
      */
-    public Collection<VectorData> get(final int index) {
-        return clusters.get(index).getPoints();
+    public VectorCluster get(final int index) {
+        return clusters.get(index);
     }
 
     /**

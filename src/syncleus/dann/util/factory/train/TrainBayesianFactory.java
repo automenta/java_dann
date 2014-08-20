@@ -27,7 +27,7 @@ import syncleus.dann.Learning;
 import syncleus.dann.Training;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.learn.bayesian.BayesianError;
-import syncleus.dann.learn.bayesian.EncogBayesianNetwork;
+import syncleus.dann.learn.bayesian.BayesianNetworkEncog;
 import syncleus.dann.learn.bayesian.training.TrainBayesian;
 import syncleus.dann.learn.bayesian.training.estimator.BayesEstimator;
 import syncleus.dann.learn.bayesian.training.estimator.EstimatorNone;
@@ -91,7 +91,7 @@ public class TrainBayesianFactory {
             throw new BayesianError("Invalid init type: " + initStr);
         }
 
-        return new TrainBayesian((EncogBayesianNetwork) method, training,
+        return new TrainBayesian((BayesianNetworkEncog) method, training,
                 maxParents, init, search, estimator);
     }
 }

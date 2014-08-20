@@ -51,7 +51,7 @@ public abstract class AbstractPrgGenerator implements PrgGenerator,
     /**
      * An optional scoring function.
      */
-    private CalculateScore score = new ZeroEvalScoreFunction();
+    private LearningScoring score = new ZeroEvalScoreFunction();
 
     /**
      * The program context to use.
@@ -409,7 +409,7 @@ public abstract class AbstractPrgGenerator implements PrgGenerator,
     /**
      * @return the score
      */
-    public CalculateScore getScore() {
+    public LearningScoring getScore() {
         return this.score;
     }
 
@@ -460,7 +460,7 @@ public abstract class AbstractPrgGenerator implements PrgGenerator,
     /**
      * @param score the score to set
      */
-    public void setScore(final CalculateScore score) {
+    public void setScore(final LearningScoring score) {
         this.score = score;
     }
 

@@ -53,7 +53,7 @@ public class TestKMeans extends TestCase {
         
         //System.out.println("Input: " + set);
 
-        KMeansClustering<VectorData> kmeans = new KMeansClustering(2, set, new VectorDistance.EuclideanVectorDistance());
+        KMeansClustering kmeans = new KMeansClustering(2, set, new VectorDistance.EuclideanVectorDistance());
 
         kmeans.iteration();
         //Assert.assertEquals(37, (int)kmeans.getWCSS());
@@ -96,4 +96,36 @@ public class TestKMeans extends TestCase {
         
     }
 
+    public void testKMeansExample() {
+	/**
+	 * The data to be clustered.
+	 */
+	final double[][] DATA = { { 28, 15, 22 }, { 16, 15, 32 },
+			{ 32, 20, 44 }, { 1, 2, 3 }, { 3, 2, 1 } };
+
+        final VectorDataset set = new VectorDataset();
+
+        for (final double[] element : DATA) {
+                set.add(new VectorData(element));
+        }
+
+        final KMeansClustering<VectorData> kmeans = new KMeansClustering<VectorData>(2, set);
+
+        kmeans.iteration(100);
+        //System.out.println("Final WCSS: " + kmeans.getWCSS());
+
+        // Display the cluster
+        int i = 1;
+        for (final DataCluster cluster : kmeans.getClusters()) {
+                //System.out.println("*** Cluster " + (i++) + " ***");
+            
+                final Dataset ds = cluster.createDataSet();
+                //final DataCase pair = new VectorCase(ds.getInputSize(), ds.getIdealSize());
+                for (int j = 0; j < ds.getRecordCount(); j++) {
+                        DataCase pair = ds.getRecord(j);
+                        //System.out.println(Arrays.toString(pair.getInputArray()));
+
+                }
+        }
+    }
 }

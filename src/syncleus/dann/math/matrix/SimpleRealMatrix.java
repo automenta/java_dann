@@ -33,6 +33,7 @@ import syncleus.dann.math.random.RangeRandomizer;
 
 import java.io.Serializable;
 import java.util.Arrays;
+import org.apache.commons.math3.exception.OutOfRangeException;
 
 //TODO subclass http://commons.apache.org/proper/commons-math/javadocs/api-3.3/org/apache/commons/math3/linear/Array2DRowRealMatrix.html
 
@@ -226,6 +227,17 @@ public class SimpleRealMatrix extends Array2DRowRealMatrix implements Cloneable,
         return getColumnDimension();
     }
 
+    @Override
+    public double getEntry(int row, int column) throws OutOfRangeException {
+        return get(row, column);
+    }
+
+    @Override
+    public double setEntry(int row, int column, double value) throws OutOfRangeException {
+        set(row, column, value);
+        return value;
+    }
+    
     
     public double get(final int heightIndex, final int widthIndex) {
         return this.matrixElements[heightIndex][widthIndex];

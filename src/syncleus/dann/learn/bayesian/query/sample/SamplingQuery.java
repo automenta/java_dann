@@ -25,7 +25,7 @@ package syncleus.dann.learn.bayesian.query.sample;
 
 import syncleus.dann.learn.bayesian.BayesianError;
 import syncleus.dann.learn.bayesian.BayesianEvent;
-import syncleus.dann.learn.bayesian.EncogBayesianNetwork;
+import syncleus.dann.learn.bayesian.BayesianNetworkEncog;
 import syncleus.dann.learn.bayesian.query.BasicQuery;
 import syncleus.dann.math.Format;
 
@@ -76,7 +76,7 @@ public class SamplingQuery extends BasicQuery implements Serializable {
      *
      * @param theNetwork The network that will be queried.
      */
-    public SamplingQuery(final EncogBayesianNetwork theNetwork) {
+    public SamplingQuery(final BayesianNetworkEncog theNetwork) {
         super(theNetwork);
     }
 

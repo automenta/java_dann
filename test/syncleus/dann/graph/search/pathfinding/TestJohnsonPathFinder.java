@@ -22,7 +22,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import syncleus.dann.graph.BidirectedEdge;
 import syncleus.dann.graph.WeightedDirectedEdge;
-import syncleus.dann.graph.path.pathfinding.JohnsonPathFinder;
+import syncleus.dann.search.pathfinding.JohnsonPathFinder;
 import syncleus.dann.math.geometry.GraphGrid2D.GridNode;
 import syncleus.dann.math.geometry.WeightedDirectedGrid;
 

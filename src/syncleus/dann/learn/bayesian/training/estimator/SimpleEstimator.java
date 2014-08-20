@@ -26,7 +26,7 @@ package syncleus.dann.learn.bayesian.training.estimator;
 import syncleus.dann.data.DataCase;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.learn.bayesian.BayesianEvent;
-import syncleus.dann.learn.bayesian.EncogBayesianNetwork;
+import syncleus.dann.learn.bayesian.BayesianNetworkEncog;
 import syncleus.dann.learn.bayesian.training.TrainBayesian;
 
 import java.util.Iterator;
@@ -37,7 +37,7 @@ import java.util.Iterator;
 public class SimpleEstimator implements BayesEstimator {
 
     private Dataset data;
-    private EncogBayesianNetwork network;
+    private BayesianNetworkEncog network;
     private int index;
 
     /**
@@ -45,7 +45,7 @@ public class SimpleEstimator implements BayesEstimator {
      */
     @Override
     public void init(final TrainBayesian theTrainer,
-                     final EncogBayesianNetwork theNetwork, final Dataset theData) {
+                     final BayesianNetworkEncog theNetwork, final Dataset theData) {
         this.network = theNetwork;
         this.data = theData;
         this.index = 0;

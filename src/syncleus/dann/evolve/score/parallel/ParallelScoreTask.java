@@ -30,6 +30,7 @@ import syncleus.dann.evolve.score.AdjustScore;
 import syncleus.dann.evolve.train.basic.BasicEA;
 
 import java.util.List;
+import syncleus.dann.learn.LearningScoring;
 
 /**
  * An individual threadable task for the parallel score calculation.
@@ -44,7 +45,7 @@ public class ParallelScoreTask implements Runnable {
     /**
      * The score function.
      */
-    private final CalculateScore scoreFunction;
+    private final LearningScoring scoreFunction;
 
     /**
      * The score adjusters.
@@ -75,11 +76,11 @@ public class ParallelScoreTask implements Runnable {
      */
     @Override
     public void run() {
-        final Learning phenotype = this.owner.getCodec().decode(this.genome);
+        final Learning phenotype = this.owner.getCodec().geneDecode(this.genome);
         if (phenotype != null) {
             double score;
             try {
-                score = this.scoreFunction.calculateScore(phenotype);
+                score = this.scoreFunction.apply(phenotype);
             } catch (final EARuntimeError e) {
                 score = Double.NaN;
             }

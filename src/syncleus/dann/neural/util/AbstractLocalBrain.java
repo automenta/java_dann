@@ -359,8 +359,8 @@ public abstract class AbstractLocalBrain<IN extends InputNeuron, ON extends Outp
     }
     
     public void setCurrentInput(final double[] i) {        
-        if (i.length!=getInputNeurons().size()) {
-            throw new RuntimeException("wrong input dimension for " + this);
+        if (i.length<getInputNeurons().size()) {
+            throw new RuntimeException(i.length + " wrong input dimension for " + this.getInputNeurons().size() + " (" + this + ")");
         }
         
         int j = 0;

@@ -6,7 +6,7 @@ import junit.framework.Assert;
 import junit.framework.TestCase;
 
 import org.encog.Encog;
-import org.encog.ml.CalculateScore;
+import org.encog.ml.LearningScoring;
 import org.encog.ml.data.MLDataSet;
 import org.encog.ml.data.basic.BasicMLData;
 import org.encog.ml.data.basic.BasicMLDataPair;
@@ -38,7 +38,7 @@ public class TestNEAT extends TestCase {
 		pop.setInitialConnectionDensity(1.0);// not required, but speeds training
 		pop.reset();
 
-		CalculateScore score = new TrainingSetScore(buffer);
+		LearningScoring score = new TrainingSetScore(buffer);
 		// train the neural network
 		
 		final EvolutionaryAlgorithm train = NEATUtil.constructNEATTrainer(pop,score);
@@ -59,7 +59,7 @@ public class TestNEAT extends TestCase {
 		pop.setInitialConnectionDensity(1.0);// not required, but speeds training
 		pop.reset();
 
-		CalculateScore score = new TrainingSetScore(trainingSet);
+		LearningScoring score = new TrainingSetScore(trainingSet);
 		// train the neural network
 		
 		final EvolutionaryAlgorithm train = NEATUtil.constructNEATTrainer(pop,score);

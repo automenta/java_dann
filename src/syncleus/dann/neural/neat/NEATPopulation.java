@@ -509,7 +509,7 @@ public class NEATPopulation extends BasicPopulation implements Serializable,
     private void updateBestNetwork() {
         if (getBestGenome() != this.cachedBestGenome) {
             this.cachedBestGenome = getBestGenome();
-            this.bestNetwork = (NEATNetwork) getCODEC().decode(getBestGenome());
+            this.bestNetwork = (NEATNetwork) getCODEC().geneDecode(getBestGenome());
         }
     }
 

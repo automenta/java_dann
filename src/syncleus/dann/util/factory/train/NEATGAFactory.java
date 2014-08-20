@@ -43,7 +43,7 @@ public class NEATGAFactory {
     public Training create(final Learning method, final Dataset training,
                           final String argsStr) {
 
-        final CalculateScore score = new TrainingSetScore(training);
+        final LearningScoring score = new TrainingSetScore(training);
         final TrainEA train = NEATUtil.constructNEATTrainer(
                 (NEATPopulation) method, score);
 

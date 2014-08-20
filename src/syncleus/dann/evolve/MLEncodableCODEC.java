@@ -23,7 +23,6 @@
  */
 package syncleus.dann.evolve;
 
-import syncleus.dann.Learning;
 import syncleus.dann.data.VectorEncodable;
 import syncleus.dann.evolve.codec.GeneticCODEC;
 import syncleus.dann.evolve.genome.Genome;
@@ -44,7 +43,7 @@ public class MLEncodableCODEC implements GeneticCODEC, Serializable {
      * {@inheritDoc}
      */
     @Override
-    public Learning decode(final Genome genome) {
+    public VectorEncodable geneDecode(final Genome genome) {
         final MLMethodGenome genome2 = (MLMethodGenome) genome;
         genome2.decode();
         return genome2.getPhenotype();
@@ -54,9 +53,8 @@ public class MLEncodableCODEC implements GeneticCODEC, Serializable {
      * {@inheritDoc}
      */
     @Override
-    public Genome encode(final Learning phenotype) {
-        final VectorEncodable phenotype2 = (VectorEncodable) phenotype;
-        return new MLMethodGenome(phenotype2);
+    public Genome geneEncode(final VectorEncodable phenotype) {
+        return new MLMethodGenome(phenotype);
     }
 
 }

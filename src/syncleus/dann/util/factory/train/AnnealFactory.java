@@ -53,7 +53,7 @@ public class AnnealFactory {
                     "Invalid method type, requires BasicNetwork");
         }
 
-        final CalculateScore score = new TrainingSetScore(training);
+        final LearningScoring score = new TrainingSetScore(training);
 
         final Map<String, String> args = ArchitectureParse.parseParams(argsStr);
         final ParamsHolder holder = new ParamsHolder(args);

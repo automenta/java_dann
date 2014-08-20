@@ -26,7 +26,7 @@ package syncleus.dann.learn.bayesian.parse;
 import syncleus.dann.data.file.csv.CSVFormat;
 import syncleus.dann.data.language.SimpleParser;
 import syncleus.dann.learn.bayesian.BayesianError;
-import syncleus.dann.learn.bayesian.EncogBayesianNetwork;
+import syncleus.dann.learn.bayesian.BayesianNetworkEncog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +41,7 @@ public class ParseProbability {
      *
      * @param theNetwork THe network to parse for.
      */
-    public ParseProbability(final EncogBayesianNetwork theNetwork) {
+    public ParseProbability(final BayesianNetworkEncog theNetwork) {
     }
 
     /**
@@ -186,7 +186,7 @@ public class ParseProbability {
      * @return The parsed list.
      */
     public static List<ParsedProbability> parseProbabilityList(
-            final EncogBayesianNetwork network, final String line) {
+            final BayesianNetworkEncog network, final String line) {
         final List<ParsedProbability> result = new ArrayList<>();
 
         final StringBuilder prob = new StringBuilder();

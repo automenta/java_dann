@@ -25,7 +25,7 @@ package syncleus.dann.learn.markov.alog;
 
 import syncleus.dann.data.DataCase;
 import syncleus.dann.data.Dataset;
-import syncleus.dann.learn.markov.HiddenMarkovModel;
+import syncleus.dann.learn.markov.HiddenMarkovModelEncog;
 
 import java.util.Arrays;
 import java.util.EnumSet;
@@ -42,12 +42,12 @@ public class ForwardBackwardScaledCalculator extends ForwardBackwardCalculator {
     private double lnProbability;
 
     public ForwardBackwardScaledCalculator(final Dataset oseq,
-                                           final HiddenMarkovModel hmm) {
+                                           final HiddenMarkovModelEncog hmm) {
         this(oseq, hmm, EnumSet.of(Computation.ALPHA));
     }
 
     public ForwardBackwardScaledCalculator(final Dataset oseq,
-                                           final HiddenMarkovModel hmm, final EnumSet<Computation> flags) {
+                                           final HiddenMarkovModelEncog hmm, final EnumSet<Computation> flags) {
         if (oseq.size() < 1) {
             throw new IllegalArgumentException();
         }
@@ -65,7 +65,7 @@ public class ForwardBackwardScaledCalculator extends ForwardBackwardCalculator {
     }
 
     @Override
-    protected void computeAlpha(final HiddenMarkovModel hmm,
+    protected void computeAlpha(final HiddenMarkovModelEncog hmm,
                                 final Dataset oseq) {
         this.alpha = new double[oseq.size()][hmm.getStateCount()];
 
@@ -90,7 +90,7 @@ public class ForwardBackwardScaledCalculator extends ForwardBackwardCalculator {
     }
 
     @Override
-    protected void computeBeta(final HiddenMarkovModel hmm, final Dataset oseq) {
+    protected void computeBeta(final HiddenMarkovModelEncog hmm, final Dataset oseq) {
         this.beta = new double[oseq.size()][hmm.getStateCount()];
 
         for (int i = 0; i < hmm.getStateCount(); i++) {
@@ -106,7 +106,7 @@ public class ForwardBackwardScaledCalculator extends ForwardBackwardCalculator {
     }
 
     private void computeProbability(final Dataset oseq,
-                                    final HiddenMarkovModel hmm, final EnumSet<Computation> flags) {
+                                    final HiddenMarkovModelEncog hmm, final EnumSet<Computation> flags) {
         this.lnProbability = 0.;
 
         for (int t = 0; t < oseq.size(); t++) {

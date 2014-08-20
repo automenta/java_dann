@@ -25,7 +25,7 @@ package syncleus.dann.learn.markov.alog;
 
 import syncleus.dann.data.DataCase;
 import syncleus.dann.data.Dataset;
-import syncleus.dann.learn.markov.HiddenMarkovModel;
+import syncleus.dann.learn.markov.HiddenMarkovModelEncog;
 
 import java.util.Iterator;
 
@@ -46,7 +46,7 @@ public class ViterbiCalculator {
     private final int[] stateSequence;
     private double lnProbability;
 
-    public ViterbiCalculator(final Dataset oseq, final HiddenMarkovModel hmm) {
+    public ViterbiCalculator(final Dataset oseq, final HiddenMarkovModelEncog hmm) {
         if (oseq.size() < 1) {
             throw new IllegalArgumentException("Must not have empty sequence");
         }
@@ -94,7 +94,7 @@ public class ViterbiCalculator {
         }
     }
 
-    private void computeStep(final HiddenMarkovModel hmm, final DataCase o,
+    private void computeStep(final HiddenMarkovModelEncog hmm, final DataCase o,
                              final int t, final int j) {
         double minDelta = Double.MAX_VALUE;
         int min_psy = 0;

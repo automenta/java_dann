@@ -45,7 +45,7 @@ import syncleus.dann.evolve.train.basic.TrainEA;
  */
 public class NEATUtil {
     public static TrainEA constructNEATTrainer(
-            final CalculateScore calculateScore, final int inputCount,
+            final LearningScoring calculateScore, final int inputCount,
             final int outputCount, final int populationSize) {
         final NEATPopulation pop = new NEATPopulation(inputCount, outputCount,
                 populationSize);
@@ -61,7 +61,7 @@ public class NEATUtil {
      * @return The NEAT EA trainer.
      */
     public static TrainEA constructNEATTrainer(final NEATPopulation population,
-                                               final CalculateScore calculateScore) {
+                                               final LearningScoring calculateScore) {
         final TrainEA result = new TrainEA(population, calculateScore);
         result.setSpeciation(new OriginalNEATSpeciation());
 

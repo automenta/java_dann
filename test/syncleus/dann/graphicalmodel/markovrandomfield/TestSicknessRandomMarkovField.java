@@ -31,22 +31,22 @@ import java.util.Random;
 import java.util.Set;
 
 public class TestSicknessRandomMarkovField {
-    @XmlRootElement
+    
     private static enum BooleanState {
         TRUE, FALSE
     }
 
-    @XmlRootElement
+    
     private static enum SeasonState {
         WINTER, SUMMER, SPRING, FALL
     }
 
-    @XmlRootElement
+    
     private static enum AgeState {
         BABY, CHILD, TEENAGER, ADULT, SENIOR
     }
 
-    @XmlRootElement
+    
     private static enum FeverState {
         LOW, NONE, WARM, HOT
     }

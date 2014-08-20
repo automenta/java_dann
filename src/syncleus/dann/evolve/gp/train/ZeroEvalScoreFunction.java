@@ -38,7 +38,7 @@ import java.io.Serializable;
  * genome is valid and does not generate any obvious division by zero issues.
  * This allows a population generator to quickly eliminate some invalid genomes.
  */
-public class ZeroEvalScoreFunction implements CalculateScore, Serializable {
+public class ZeroEvalScoreFunction implements LearningScoring, Serializable {
 
     /**
      * The serial id.

@@ -24,7 +24,7 @@
 package syncleus.dann.learn.bayesian.training.estimator;
 
 import syncleus.dann.data.Dataset;
-import syncleus.dann.learn.bayesian.EncogBayesianNetwork;
+import syncleus.dann.learn.bayesian.BayesianNetworkEncog;
 import syncleus.dann.learn.bayesian.training.TrainBayesian;
 
 /**
@@ -40,7 +40,7 @@ public interface BayesEstimator {
      * @param theNetwork The network.
      * @param theData    The data.
      */
-    void init(TrainBayesian theTrainer, EncogBayesianNetwork theNetwork, Dataset theData);
+    void init(TrainBayesian theTrainer, BayesianNetworkEncog theNetwork, Dataset theData);
 
     /**
      * Perform an iteration.

@@ -56,6 +56,7 @@ public abstract class Group {
      */
     public Group(final SpikingNeuralNetwork net) {
         parentNetwork = net;
+        net.addGroup(this);
     }
 
     /**

@@ -26,7 +26,7 @@ package syncleus.dann.learn.markov.training.bw;
 import syncleus.dann.data.DataCase;
 import syncleus.dann.data.DataSequence;
 import syncleus.dann.data.Dataset;
-import syncleus.dann.learn.markov.HiddenMarkovModel;
+import syncleus.dann.learn.markov.HiddenMarkovModelEncog;
 import syncleus.dann.learn.markov.alog.ForwardBackwardCalculator;
 
 import java.util.Arrays;
@@ -50,7 +50,7 @@ import java.util.Iterator;
  * Society Newsletter, Dec. 2003.
  */
 public class TrainBaumWelch extends BaseBaumWelch {
-    public TrainBaumWelch(final HiddenMarkovModel hmm,
+    public TrainBaumWelch(final HiddenMarkovModelEncog hmm,
                           final DataSequence training) {
         super(hmm, training);
     }
@@ -83,7 +83,7 @@ public class TrainBaumWelch extends BaseBaumWelch {
 
     @Override
     public double[][][] estimateXi(final Dataset sequence,
-                                   final ForwardBackwardCalculator fbc, final HiddenMarkovModel hmm) {
+                                   final ForwardBackwardCalculator fbc, final HiddenMarkovModelEncog hmm) {
         if (sequence.size() <= 1) {
             throw new IllegalArgumentException(
                     "Must have more than one observation");
@@ -114,7 +114,7 @@ public class TrainBaumWelch extends BaseBaumWelch {
 
     @Override
     public ForwardBackwardCalculator generateForwardBackwardCalculator(
-            final Dataset sequence, final HiddenMarkovModel hmm) {
+            final Dataset sequence, final HiddenMarkovModelEncog hmm) {
         return new ForwardBackwardCalculator(sequence, hmm,
                 EnumSet.allOf(ForwardBackwardCalculator.Computation.class));
     }

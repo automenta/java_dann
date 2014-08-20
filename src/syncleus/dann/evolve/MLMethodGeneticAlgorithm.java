@@ -35,7 +35,11 @@ import syncleus.dann.evolve.sort.MaximizeScoreComp;
 import syncleus.dann.evolve.sort.MinimizeScoreComp;
 import syncleus.dann.evolve.species.Species;
 import syncleus.dann.evolve.train.basic.TrainEA;
+import syncleus.dann.learn.AbstractTraining;
+import syncleus.dann.learn.AbstractTraining.TrainingImplementationType;
+import syncleus.dann.learn.LearningScoring;
 import syncleus.dann.learn.MethodFactory;
+import syncleus.dann.neural.flat.propagation.TrainingContinuation;
 
 /**
  * Implements a genetic algorithm that allows an MLMethod that is encodable
@@ -52,10 +56,10 @@ import syncleus.dann.learn.MethodFactory;
  * score your neural network.
  * <p/>
  * If you would like to be more abstract, and not use a training set, you can
- * create your own implementation of the CalculateScore method. This class can
+ * create your own implementation of the LearningScoring method. This class can
  * then score the networks any way that you like.
  */
-public class MLMethodGeneticAlgorithm extends BasicTraining /*implements MultiThreadable*/ {
+public class MLMethodGeneticAlgorithm extends AbstractTraining /*implements MultiThreadable*/ {
 
     /**
      * Very simple class that implements a genetic algorithm.
@@ -75,7 +79,7 @@ public class MLMethodGeneticAlgorithm extends BasicTraining /*implements MultiTh
          * @param theScoreFunction The score function.
          */
         public MLMethodGeneticAlgorithmHelper(final Population thePopulation,
-                                              final CalculateScore theScoreFunction) {
+                                              final LearningScoring theScoreFunction) {
             super(thePopulation, theScoreFunction);
         }
     }
@@ -94,7 +98,7 @@ public class MLMethodGeneticAlgorithm extends BasicTraining /*implements MultiTh
      * @param populationSize   The population size.
      */
     public MLMethodGeneticAlgorithm(final MethodFactory phenotypeFactory,
-                                    final CalculateScore calculateScore, final int populationSize) {
+                                    final LearningScoring calculateScore, final int populationSize) {
         super(TrainingImplementationType.Iterative);
 
         // Create the population
@@ -156,7 +160,7 @@ public class MLMethodGeneticAlgorithm extends BasicTraining /*implements MultiTh
     @Override
     public Learning getMethod() {
         final Genome best = this.genetic.getBestGenome();
-        return this.genetic.getCODEC().decode(best);
+        return this.genetic.getCODEC().geneDecode(best);
     }
 
 	/*@Override

@@ -54,7 +54,7 @@ public class GeneticFactory {
                     "Invalid method type, requires an encodable MLMethod");
         }
 
-        final CalculateScore score = new TrainingSetScore(training);
+        final LearningScoring score = new TrainingSetScore(training);
 
         final Map<String, String> args = ArchitectureParse.parseParams(argsStr);
         final ParamsHolder holder = new ParamsHolder(args);

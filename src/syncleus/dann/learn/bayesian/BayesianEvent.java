@@ -106,7 +106,7 @@ public class BayesianEvent implements Serializable {
      * @param theLabel The label.
      */
     public BayesianEvent(final String theLabel) {
-        this(theLabel, EncogBayesianNetwork.CHOICES_TRUE_FALSE);
+        this(theLabel, BayesianNetworkEncog.CHOICES_TRUE_FALSE);
     }
 
     /**

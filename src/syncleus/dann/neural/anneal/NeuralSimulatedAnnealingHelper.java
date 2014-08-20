@@ -50,7 +50,7 @@ public class NeuralSimulatedAnnealingHelper extends SimulatedAnnealing<Double> {
      */
     public NeuralSimulatedAnnealingHelper(final NeuralSimulatedAnnealing owner) {
         this.owner = owner;
-        this.setShouldMinimize(this.owner.getCalculateScore().shouldMinimize());
+        this.setShouldMinimize(this.owner.getLearningScoring().shouldMinimize());
     }
 
     /**
@@ -60,7 +60,7 @@ public class NeuralSimulatedAnnealingHelper extends SimulatedAnnealing<Double> {
      */
     @Override
     public double calculateScore() {
-        return owner.getCalculateScore().calculateScore(this.owner.getMethod());
+        return owner.getLearningScoring().calculateScore(this.owner.getMethod());
     }
 
     /**

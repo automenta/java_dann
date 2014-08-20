@@ -28,7 +28,7 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 import syncleus.dann.learn.bayesian.BayesianChoice;
 import syncleus.dann.learn.bayesian.BayesianEvent;
-import syncleus.dann.learn.bayesian.EncogBayesianNetwork;
+import syncleus.dann.learn.bayesian.BayesianNetworkEncog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,13 +70,13 @@ public class BIFHandler extends DefaultHandler {
     /**
      * The network bing loaded.
      */
-    private final EncogBayesianNetwork network;
+    private final BayesianNetworkEncog network;
 
     /**
      * Constructor.
      */
     public BIFHandler() {
-        this.network = new EncogBayesianNetwork();
+        this.network = new BayesianNetworkEncog();
     }
 
     /**
@@ -235,7 +235,7 @@ public class BIFHandler extends DefaultHandler {
     /**
      * @return The network being parsed.
      */
-    public EncogBayesianNetwork getNetwork() {
+    public BayesianNetworkEncog getNetwork() {
         return network;
     }
 

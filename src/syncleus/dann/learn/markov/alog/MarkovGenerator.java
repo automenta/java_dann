@@ -28,7 +28,7 @@ import syncleus.dann.data.DataSequence;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.data.vector.VectorDataset;
 import syncleus.dann.data.vector.VectorSequence;
-import syncleus.dann.learn.markov.HiddenMarkovModel;
+import syncleus.dann.learn.markov.HiddenMarkovModelEncog;
 
 /**
  * This class is used to generate random sequences based on a Hidden Markov
@@ -36,10 +36,10 @@ import syncleus.dann.learn.markov.HiddenMarkovModel;
  * models.
  */
 public class MarkovGenerator {
-    private final HiddenMarkovModel hmm;
+    private final HiddenMarkovModelEncog hmm;
     private int currentState;
 
-    public MarkovGenerator(final HiddenMarkovModel hmm) {
+    public MarkovGenerator(final HiddenMarkovModelEncog hmm) {
         this.hmm = hmm;
         newSequence();
     }

@@ -14,7 +14,11 @@ import syncleus.dann.data.Data;
  * @author me
  */
 public interface VectorDistance extends DistanceFunction<Data>, org.apache.commons.math3.ml.distance.DistanceMeasure {
+
+    public static final VectorDistance EUCLIDEAN = new EuclideanVectorDistance();
+    //TODO add static versions for each subclass below
     
+
     /** @see http://commons.apache.org/proper/commons-math/javadocs/api-3.3/org/apache/commons/math3/ml/distance/DistanceMeasure.html */
     static abstract class ApacheVectorDistance implements VectorDistance {
         private final DistanceMeasure measure;
@@ -24,12 +28,12 @@ public interface VectorDistance extends DistanceFunction<Data>, org.apache.commo
         }
 
         @Override
-        public double compute(double[] a, double[] b) {
+        public double compute(final double[] a, final double[] b) {
             return measure.compute(a, b);
         }
         
         @Override
-        public double distance(Data a, Data b) {
+        public double distance(final Data a, final Data b) {
             return compute(a.getData(), b.getData());
         }        
         
@@ -39,6 +43,7 @@ public interface VectorDistance extends DistanceFunction<Data>, org.apache.commo
     public static class EuclideanVectorDistance extends ApacheVectorDistance {
         public EuclideanVectorDistance() {  super(new EuclideanDistance()); }        
     }
+    
     public static class ManhattanVectorDistance extends ApacheVectorDistance {
         public ManhattanVectorDistance() {  super(new ManhattanDistance()); }        
     }

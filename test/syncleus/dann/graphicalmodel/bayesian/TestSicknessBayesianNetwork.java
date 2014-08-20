@@ -18,6 +18,9 @@
  ******************************************************************************/
 package syncleus.dann.graphicalmodel.bayesian;
 
+import java.util.HashSet;
+import java.util.Random;
+import java.util.Set;
 import org.junit.Assert;
 import org.junit.Test;
 import syncleus.dann.graph.ImmutableDirectedEdge;
@@ -25,28 +28,23 @@ import syncleus.dann.learn.bayesian.MutableBayesianAdjacencyNetwork;
 import syncleus.dann.learn.graphical.GraphicalModelNode;
 import syncleus.dann.learn.graphical.SimpleGraphicalModelNode;
 
-import javax.xml.bind.annotation.XmlRootElement;
-import java.util.HashSet;
-import java.util.Random;
-import java.util.Set;
-
 public class TestSicknessBayesianNetwork {
-    @XmlRootElement
+    
     private static enum BooleanState {
         TRUE, FALSE
     }
 
-    @XmlRootElement
+    
     private static enum SeasonState {
         WINTER, SUMMER, SPRING, FALL
     }
 
-    @XmlRootElement
+    
     private static enum AgeState {
         BABY, CHILD, TEENAGER, ADULT, SENIOR
     }
 
-    @XmlRootElement
+    
     private static enum FeverState {
         LOW, NONE, WARM, HOT
     }
