@@ -5,7 +5,7 @@ import java.util.Map;
 
 import syncleus.dann.plan.agent.Action;
 import syncleus.dann.plan.reinforcement.PerceptStateReward;
-import aima.util.FrequencyCounter;
+import syncleus.dann.util.FrequencyCounter;
 
 /**
  * Artificial Intelligence A Modern Approach (3rd Edition): page 837.<br>

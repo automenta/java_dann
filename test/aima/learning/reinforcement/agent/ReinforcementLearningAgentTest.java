@@ -13,8 +13,8 @@ import syncleus.dann.solve.cellworld.CellWorldAction;
 import syncleus.dann.solve.cellworld.CellWorldFactory;
 import syncleus.dann.plan.reinforcement.agent.ReinforcementAgent;
 import syncleus.dann.plan.reinforcement.example.CellWorldEnvironment;
-import aima.probability.example.MDPFactory;
-import aima.util.JavaRandomizer;
+import example.probability.MDPFactory;
+import syncleus.dann.util.JavaRandomizer;
 
 public abstract class ReinforcementLearningAgentTest {
 

@@ -26,9 +26,9 @@ package syncleus.dann.learn.regression.gaussian;
 import syncleus.dann.RegressionLearning;
 import syncleus.dann.data.Data;
 import syncleus.dann.data.vector.VectorData;
-import syncleus.dann.math.matrix.MatrixMath;
-import syncleus.dann.math.matrix.RealMatrix;
-import syncleus.dann.math.matrix.SimpleRealMatrix;
+import syncleus.dann.data.matrix.MatrixMath;
+import syncleus.dann.data.matrix.RealMatrix;
+import syncleus.dann.data.matrix.SimpleRealMatrix;
 
 public class GaussianFitting<D extends Data> implements RegressionLearning<D> {
 

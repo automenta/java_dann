@@ -6,7 +6,7 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
-import aima.util.datastructure.FIFOQueue;
+import syncleus.dann.util.datastruct.FIFOQueue;
 
 /**
  * @author Ravi Mohan

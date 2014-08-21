@@ -3,7 +3,7 @@ package aima.test.core.unit.util.datastructure;
 import org.junit.Assert;
 import org.junit.Test;
 
-import aima.util.datastructure.XYLocation;
+import syncleus.dann.util.datastruct.XYLocation;
 
 /**
  * @author Ravi Mohan

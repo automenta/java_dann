@@ -1,7 +1,7 @@
 package syncleus.dann.solve.map;
 
 import syncleus.dann.plan.agent.Action;
-import aima.search.framework.StepCostFunction;
+import syncleus.dann.search.framework.StepCostFunction;
 
 /**
  * Implementation of StepCostFunction interface that uses the distance between

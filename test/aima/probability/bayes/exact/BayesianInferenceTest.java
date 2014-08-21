@@ -3,14 +3,14 @@ package aima.test.core.unit.probability.bayes.exact;
 import org.junit.Assert;
 import org.junit.Test;
 
-import aima.probability.CategoricalDistribution;
-import aima.probability.ProbabilityModel;
-import aima.probability.RandomVariable;
-import aima.probability.bayes.BayesInference;
-import aima.probability.bayes.BayesianNetwork;
-import aima.probability.example.BayesNetExampleFactory;
-import aima.probability.example.ExampleRV;
-import aima.probability.proposition.AssignmentProposition;
+import syncleus.dann.learn.probability.CategoricalDistribution;
+import syncleus.dann.learn.probability.ProbabilityModel;
+import syncleus.dann.learn.probability.RandomVariable;
+import syncleus.dann.learn.probability.bayes.BayesInference;
+import syncleus.dann.learn.probability.bayes.BayesianNetwork;
+import example.probability.BayesNetExampleFactory;
+import example.probability.ExampleRV;
+import syncleus.dann.learn.probability.proposition.AssignmentProposition;
 
 /**
  * 

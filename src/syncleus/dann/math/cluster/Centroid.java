@@ -23,7 +23,7 @@
  */
 package syncleus.dann.math.cluster;
 
-import syncleus.dann.math.VectorDistance;
+import syncleus.dann.data.vector.VectorDistance;
 
 /**
  * A centroid.

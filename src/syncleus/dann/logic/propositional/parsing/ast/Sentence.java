@@ -5,7 +5,7 @@ import java.util.List;
 
 import syncleus.dann.logic.io.aima.ParseTreeNode;
 import syncleus.dann.logic.propositional.parsing.PLVisitor;
-import aima.util.AimaUtil;
+import syncleus.dann.util.AimaUtil;
 
 /**
  * Artificial Intelligence A Modern Approach (3rd Edition): page 244.<br>

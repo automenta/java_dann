@@ -6,10 +6,10 @@ import org.junit.Test;
 
 import syncleus.dann.solve.tictactoe.TicTacToeGame;
 import syncleus.dann.solve.tictactoe.TicTacToeState;
-import aima.search.adversarial.AlphaBetaSearch;
-import aima.search.adversarial.IterativeDeepeningAlphaBetaSearch;
-import aima.search.adversarial.MinimaxSearch;
-import aima.util.datastructure.XYLocation;
+import syncleus.dann.search.adversarial.AlphaBetaSearch;
+import syncleus.dann.search.adversarial.IterativeDeepeningAlphaBetaSearch;
+import syncleus.dann.search.adversarial.MinimaxSearch;
+import syncleus.dann.util.datastruct.XYLocation;
 
 /**
  * @author Ruediger Lunde

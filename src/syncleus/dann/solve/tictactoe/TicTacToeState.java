@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import aima.util.datastructure.XYLocation;
+import syncleus.dann.util.datastruct.XYLocation;
 
 /**
  * A state of the Tic-tac-toe game is characterized by a board containing

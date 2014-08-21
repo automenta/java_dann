@@ -2,14 +2,14 @@ package aima.test.core.unit.probability;
 
 import org.junit.Assert;
 
-import aima.probability.CategoricalDistribution;
-import aima.probability.FiniteProbabilityModel;
-import aima.probability.domain.FiniteIntegerDomain;
-import aima.probability.example.ExampleRV;
-import aima.probability.proposition.AssignmentProposition;
-import aima.probability.proposition.ConjunctiveProposition;
-import aima.probability.proposition.EquivalentProposition;
-import aima.probability.proposition.IntegerSumProposition;
+import syncleus.dann.learn.probability.CategoricalDistribution;
+import syncleus.dann.learn.probability.FiniteProbabilityModel;
+import syncleus.dann.learn.probability.domain.FiniteIntegerDomain;
+import example.probability.ExampleRV;
+import syncleus.dann.learn.probability.proposition.AssignmentProposition;
+import syncleus.dann.learn.probability.proposition.ConjunctiveProposition;
+import syncleus.dann.learn.probability.proposition.EquivalentProposition;
+import syncleus.dann.learn.probability.proposition.IntegerSumProposition;
 
 public abstract class CommonFiniteProbabilityModelTests extends
 		CommonProbabilityModelTests {

@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 import syncleus.dann.plan.agent.Agent;
 import syncleus.dann.plan.agent.EnvironmentState;
-import aima.util.datastructure.Pair;
+import syncleus.dann.util.datastruct.Pair;
 
 /**
  * @author Ciaran O'Reilly

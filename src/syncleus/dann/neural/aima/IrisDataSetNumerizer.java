@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import syncleus.dann.attribute.aima.Example;
-import aima.util.datastructure.Pair;
+import syncleus.dann.attribute.aima.Attributes;
+import syncleus.dann.util.datastruct.Pair;
 
 /**
  * @author Ravi Mohan
@@ -13,7 +13,7 @@ import aima.util.datastructure.Pair;
  */
 public class IrisDataSetNumerizer implements Numerizer {
 
-	public Pair<List<Double>, List<Double>> numerize(Example e) {
+	public Pair<List<Double>, List<Double>> numerize(Attributes e) {
 		List<Double> input = new ArrayList<Double>();
 		List<Double> desiredOutput = new ArrayList<Double>();
 

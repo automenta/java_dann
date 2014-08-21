@@ -24,7 +24,6 @@
 package syncleus.dann.data.vector;
 
 import syncleus.dann.data.DataCase;
-import syncleus.dann.math.VectorDistance;
 import syncleus.dann.math.cluster.Centroid;
 
 /**

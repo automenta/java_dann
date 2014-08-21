@@ -30,7 +30,7 @@ import syncleus.dann.data.DataCase;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.data.vector.VectorCluster;
 import syncleus.dann.data.vector.VectorData;
-import syncleus.dann.math.VectorDistance;
+import syncleus.dann.data.vector.VectorDistance;
 
 /**
  * Generic KMeans clustering object.

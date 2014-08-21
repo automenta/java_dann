@@ -3,18 +3,18 @@ package syncleus.dann.logic.learn;
 import java.util.Iterator;
 import java.util.List;
 
-import syncleus.dann.attribute.aima.DataSet;
-import syncleus.dann.attribute.aima.Example;
-import syncleus.dann.attribute.aima.Learner;
+import syncleus.dann.attribute.aima.AttributeSamples;
+import syncleus.dann.attribute.aima.Attributes;
+import syncleus.dann.attribute.aima.AttributeLearning;
 import syncleus.dann.logic.inductive.ConstantDecisonTree;
 import syncleus.dann.logic.inductive.DecisionTree;
-import aima.util.AimaUtil;
+import syncleus.dann.util.AimaUtil;
 
 /**
  * @author Ravi Mohan
  * @author Mike Stampone
  */
-public class DecisionTreeLearner implements Learner {
+public class DecisionTreeLearner implements AttributeLearning {
 	private DecisionTree tree;
 
 	private String defaultValue;
@@ -40,22 +40,22 @@ public class DecisionTreeLearner implements Learner {
 	 *            a set of examples for constructing the decision tree
 	 */
 	@Override
-	public void train(DataSet ds) {
+	public void train(AttributeSamples ds) {
 		List<String> attributes = ds.getNonTargetAttributes();
 		this.tree = decisionTreeLearning(ds, attributes,
 				new ConstantDecisonTree(defaultValue));
 	}
 
 	@Override
-	public String predict(Example e) {
+	public String predict(Attributes e) {
 		return (String) tree.predict(e);
 	}
 
 	@Override
-	public int[] test(DataSet ds) {
+	public int[] test(AttributeSamples ds) {
 		int[] results = new int[] { 0, 0 };
 
-		for (Example e : ds.examples) {
+		for (Attributes e : ds.samples) {
 			if (e.targetValue().equals(tree.predict(e))) {
 				results[0] = results[0] + 1;
 			} else {
@@ -81,13 +81,13 @@ public class DecisionTreeLearner implements Learner {
 	// PRIVATE METHODS
 	//
 
-	private DecisionTree decisionTreeLearning(DataSet ds,
+	private DecisionTree decisionTreeLearning(AttributeSamples ds,
 			List<String> attributeNames, ConstantDecisonTree defaultTree) {
 		if (ds.size() == 0) {
 			return defaultTree;
 		}
 		if (allExamplesHaveSameClassification(ds)) {
-			return new ConstantDecisonTree(ds.getExample(0).targetValue());
+			return new ConstantDecisonTree(ds.get(0).targetValue());
 		}
 		if (attributeNames.size() == 0) {
 			return majorityValue(ds);
@@ -99,7 +99,7 @@ public class DecisionTreeLearner implements Learner {
 
 		List<String> values = ds.getPossibleAttributeValues(chosenAttribute);
 		for (String v : values) {
-			DataSet filtered = ds.matchingDataSet(chosenAttribute, v);
+			AttributeSamples filtered = ds.matchingDataSet(chosenAttribute, v);
 			List<String> newAttribs = AimaUtil.removeFrom(attributeNames,
 					chosenAttribute);
 			DecisionTree subTree = decisionTreeLearning(filtered, newAttribs, m);
@@ -110,13 +110,13 @@ public class DecisionTreeLearner implements Learner {
 		return tree;
 	}
 
-	private ConstantDecisonTree majorityValue(DataSet ds) {
-		Learner learner = new MajorityLearner();
+	private ConstantDecisonTree majorityValue(AttributeSamples ds) {
+		AttributeLearning learner = new MajorityLearner();
 		learner.train(ds);
-		return new ConstantDecisonTree(learner.predict(ds.getExample(0)));
+		return new ConstantDecisonTree(learner.predict(ds.get(0)));
 	}
 
-	private String chooseAttribute(DataSet ds, List<String> attributeNames) {
+	private String chooseAttribute(AttributeSamples ds, List<String> attributeNames) {
 		double greatestGain = 0.0;
 		String attributeWithGreatestGain = attributeNames.get(0);
 		for (String attr : attributeNames) {
@@ -130,11 +130,11 @@ public class DecisionTreeLearner implements Learner {
 		return attributeWithGreatestGain;
 	}
 
-	private boolean allExamplesHaveSameClassification(DataSet ds) {
-		String classification = ds.getExample(0).targetValue();
-		Iterator<Example> iter = ds.iterator();
+	private boolean allExamplesHaveSameClassification(AttributeSamples ds) {
+		String classification = ds.get(0).targetValue();
+		Iterator<Attributes> iter = ds.iterator();
 		while (iter.hasNext()) {
-			Example element = iter.next();
+			Attributes element = iter.next();
 			if (!(element.targetValue().equals(classification))) {
 				return false;
 			}

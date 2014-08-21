@@ -1,7 +1,7 @@
 package syncleus.dann.solve.eightpuzzle;
 
-import aima.search.framework.HeuristicFunction;
-import aima.util.datastructure.XYLocation;
+import syncleus.dann.search.framework.HeuristicFunction;
+import syncleus.dann.util.datastruct.XYLocation;
 
 /**
  * @author Ravi Mohan

@@ -1,5 +1,7 @@
 package syncleus.dann.math;
 
+import syncleus.dann.data.vector.Vector;
+
 /**
  * Vector with methods for modifying it directly
  */

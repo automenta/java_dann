@@ -40,7 +40,7 @@ import syncleus.dann.learn.kmeans.KMeansUtil;
 import syncleus.dann.learn.markov.HiddenMarkovModelEncog;
 import syncleus.dann.learn.markov.alog.ViterbiCalculator;
 import syncleus.dann.learn.strategy.Strategy;
-import syncleus.dann.math.VectorDistance;
+import syncleus.dann.data.vector.VectorDistance;
 import syncleus.dann.math.probablity.distributions.StateDistribution;
 import syncleus.dann.neural.flat.propagation.TrainingContinuation;
 

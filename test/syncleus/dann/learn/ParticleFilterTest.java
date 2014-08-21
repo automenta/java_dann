@@ -1,18 +1,18 @@
 package syncleus.dann.learn;
 
-import aima.probability.RandomVariable;
-import aima.probability.bayes.FiniteNode;
-import aima.probability.bayes.approx.ParticleFiltering;
-import aima.probability.bayes.impl.BayesNet;
-import aima.probability.bayes.impl.DynamicBayesNet;
-import aima.probability.bayes.impl.FullCPTNode;
+import syncleus.dann.learn.probability.RandomVariable;
+import syncleus.dann.learn.probability.bayes.FiniteNode;
+import syncleus.dann.learn.probability.bayes.approx.ParticleFiltering;
+import syncleus.dann.learn.probability.bayes.impl.BayesNet;
+import syncleus.dann.learn.probability.bayes.impl.DynamicBayesNet;
+import syncleus.dann.learn.probability.bayes.impl.FullCPTNode;
 import org.junit.Assert;
 import org.junit.Test;
 
-import aima.probability.example.DynamicBayesNetExampleFactory;
-import aima.probability.example.ExampleRV;
-import aima.probability.proposition.AssignmentProposition;
-import aima.util.MockRandomizer;
+import example.probability.DynamicBayesNetExampleFactory;
+import example.probability.ExampleRV;
+import syncleus.dann.learn.probability.proposition.AssignmentProposition;
+import syncleus.dann.util.MockRandomizer;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;

@@ -31,7 +31,7 @@ import syncleus.dann.learn.AbstractLearning;
 import syncleus.dann.learn.ErrorLearning;
 import syncleus.dann.learn.MLResettable;
 import syncleus.dann.math.array.EngineArray;
-import syncleus.dann.math.matrix.SimpleRealMatrix;
+import syncleus.dann.data.matrix.SimpleRealMatrix;
 import syncleus.dann.neural.som.encog.basic.BestMatchingUnit;
 
 /**

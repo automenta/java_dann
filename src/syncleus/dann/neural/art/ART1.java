@@ -27,8 +27,8 @@ import syncleus.dann.Classifying;
 import syncleus.dann.data.MutableData;
 import syncleus.dann.data.specific.BiPolarNeuralData;
 import syncleus.dann.learn.MLResettable;
-import syncleus.dann.math.matrix.RealMatrix;
-import syncleus.dann.math.matrix.SimpleRealMatrix;
+import syncleus.dann.data.matrix.RealMatrix;
+import syncleus.dann.data.matrix.SimpleRealMatrix;
 
 /**
  * Implements an ART1 neural network. An ART1 neural network is trained to

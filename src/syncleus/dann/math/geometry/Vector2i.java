@@ -6,7 +6,7 @@
 
 package syncleus.dann.math.geometry;
 
-import syncleus.dann.math.Vector;
+import syncleus.dann.data.vector.Vector;
 
 /**
  *

@@ -10,8 +10,8 @@ import syncleus.dann.logic.propositional.kb.data.Clause;
 import syncleus.dann.logic.propositional.parsing.ast.PropositionSymbol;
 import syncleus.dann.logic.propositional.visitors.ConvertToConjunctionOfClauses;
 import syncleus.dann.logic.propositional.visitors.SymbolCollector;
-import aima.util.datastructure.FIFOQueue;
-import aima.util.datastructure.Queue;
+import syncleus.dann.util.datastruct.FIFOQueue;
+import syncleus.dann.util.datastruct.Queue;
 
 /**
  * Artificial Intelligence A Modern Approach (3rd Edition): page 258.<br>

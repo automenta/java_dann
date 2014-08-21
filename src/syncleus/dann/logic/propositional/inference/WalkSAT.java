@@ -11,7 +11,7 @@ import java.util.Set;
 import syncleus.dann.logic.propositional.kb.data.Clause;
 import syncleus.dann.logic.propositional.kb.data.Model;
 import syncleus.dann.logic.propositional.parsing.ast.PropositionSymbol;
-import aima.util.SetOps;
+import syncleus.dann.util.SetOps;
 
 /**
  * Artificial Intelligence A Modern Approach (3rd Edition): page 263.<br>

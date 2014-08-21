@@ -3,13 +3,12 @@ package aima.test.core.unit.learning.framework;
 import java.util.ArrayList;
 import java.util.List;
 
-import syncleus.dann.attribute.aima.DataSetSpecification;
 
 /**
  * @author Ravi Mohan
  * 
  */
-public class MockDataSetSpecification extends DataSetSpecification {
+public class MockDataSetSpecification extends syncleus.dann.attribute.aima.AttributeSamples.Specification {
 
 	public MockDataSetSpecification(String targetAttributeName) {
 		setTarget(targetAttributeName);

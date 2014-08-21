@@ -3,7 +3,7 @@ package syncleus.dann.solve.connectfour;
 import java.util.ArrayList;
 import java.util.List;
 
-import aima.search.adversarial.Game;
+import syncleus.dann.search.adversarial.Game;
 
 /**
  * Provides an implementation of the ConnectFour game which can be used for

@@ -8,8 +8,8 @@ import syncleus.dann.plan.agent.Action;
 import syncleus.dann.solve.wumpusworld.action.Forward;
 import syncleus.dann.solve.wumpusworld.action.TurnLeft;
 import syncleus.dann.solve.wumpusworld.action.TurnRight;
-import aima.search.framework.ActionsFunction;
-import aima.search.framework.ResultFunction;
+import syncleus.dann.search.framework.ActionsFunction;
+import syncleus.dann.search.framework.ResultFunction;
 
 /**
  * Factory class for constructing functions for use in the Wumpus World environment.

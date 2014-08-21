@@ -2,8 +2,8 @@ package syncleus.dann.neural.aima;
 
 import java.util.List;
 
-import syncleus.dann.attribute.aima.Example;
-import aima.util.datastructure.Pair;
+import syncleus.dann.attribute.aima.Attributes;
+import syncleus.dann.util.datastruct.Pair;
 
 /**
  * A Numerizer understands how to convert an example from a particular data set
@@ -15,7 +15,7 @@ import aima.util.datastructure.Pair;
  * 
  */
 public interface Numerizer {
-	Pair<List<Double>, List<Double>> numerize(Example e);
+	Pair<List<Double>, List<Double>> numerize(Attributes e);
 
 	String denumerize(List<Double> outputValue);
 }

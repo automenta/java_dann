@@ -25,8 +25,8 @@ package syncleus.dann.neural.bam;
 
 import syncleus.dann.data.MutableData;
 import syncleus.dann.learn.AbstractLearning;
-import syncleus.dann.math.matrix.RealMatrix;
-import syncleus.dann.math.matrix.SimpleRealMatrix;
+import syncleus.dann.data.matrix.RealMatrix;
+import syncleus.dann.data.matrix.SimpleRealMatrix;
 import syncleus.dann.neural.util.NeuralDataMapping;
 
 /**

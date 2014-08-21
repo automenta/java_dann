@@ -32,7 +32,7 @@ import syncleus.dann.graph.Weighted;
 import syncleus.dann.graph.drawing.GraphDrawer;
 import syncleus.dann.graph.topological.Topography;
 import syncleus.dann.math.MutableVector;
-import syncleus.dann.math.Vector;
+import syncleus.dann.data.vector.Vector;
 
 /**
  * A Hyperassociative Map is a new type of algorithm that organizes an arbitrary

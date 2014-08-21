@@ -3,7 +3,7 @@ package syncleus.dann.solve.nqueens;
 import java.util.ArrayList;
 import java.util.List;
 
-import aima.util.datastructure.XYLocation;
+import syncleus.dann.util.datastruct.XYLocation;
 
 /**
  * Represents a quadratic board with a matrix of squares on which queens can be

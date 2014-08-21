@@ -18,6 +18,7 @@
  ******************************************************************************/
 package syncleus.dann.math;
 
+import syncleus.dann.data.vector.Vector;
 import java.util.ArrayList;
 import org.junit.Assert;
 import org.junit.Test;

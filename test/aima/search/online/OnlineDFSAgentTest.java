@@ -12,9 +12,9 @@ import syncleus.dann.solve.map.ExtendableMap;
 import syncleus.dann.solve.map.MapEnvironment;
 import syncleus.dann.solve.map.MapFunctionFactory;
 import syncleus.dann.solve.map.MapStepCostFunction;
-import aima.search.framework.DefaultGoalTest;
-import aima.search.online.OnlineDFSAgent;
-import aima.search.online.OnlineSearchProblem;
+import syncleus.dann.search.framework.DefaultGoalTest;
+import syncleus.dann.search.online.OnlineDFSAgent;
+import syncleus.dann.search.online.OnlineSearchProblem;
 
 public class OnlineDFSAgentTest {
 

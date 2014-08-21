@@ -3,7 +3,7 @@ package syncleus.dann.logic.knowledge;
 import java.util.ArrayList;
 import java.util.List;
 
-import syncleus.dann.attribute.aima.Example;
+import syncleus.dann.attribute.aima.Attributes;
 import syncleus.dann.logic.fol.Connectors;
 import syncleus.dann.logic.fol.parsing.ast.ConnectedSentence;
 import syncleus.dann.logic.fol.parsing.ast.Constant;
@@ -18,7 +18,7 @@ import syncleus.dann.logic.fol.parsing.ast.Term;
  */
 public class FOLExample {
 	private FOLDataSetDomain folDSDomain = null;
-	private Example example = null;
+	private Attributes example = null;
 	private int egNo = 0;
 	//
 	private Constant ithExampleConstant = null;
@@ -28,7 +28,7 @@ public class FOLExample {
 	//
 	// PUBLIC METHODS
 	//
-	public FOLExample(FOLDataSetDomain folDSDomain, Example example, int egNo) {
+	public FOLExample(FOLDataSetDomain folDSDomain, Attributes example, int egNo) {
 		this.folDSDomain = folDSDomain;
 		this.example = example;
 		this.egNo = egNo;

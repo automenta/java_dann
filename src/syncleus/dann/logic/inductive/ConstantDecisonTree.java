@@ -1,7 +1,7 @@
 package syncleus.dann.logic.inductive;
 
-import syncleus.dann.attribute.aima.Example;
-import aima.util.AimaUtil;
+import syncleus.dann.attribute.aima.Attributes;
+import syncleus.dann.util.AimaUtil;
 
 /**
  * @author Ravi Mohan
@@ -26,7 +26,7 @@ public class ConstantDecisonTree extends DecisionTree {
 	}
 
 	@Override
-	public Object predict(Example e) {
+	public Object predict(Attributes e) {
 		return value;
 	}
 

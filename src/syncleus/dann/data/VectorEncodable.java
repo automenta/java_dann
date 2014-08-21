@@ -23,7 +23,7 @@
  */
 package syncleus.dann.data;
 
-import syncleus.dann.math.Vector;
+import syncleus.dann.data.vector.Vector;
 
 /**
  * Defines a Machine Learning Method that can be encoded to a double array. This

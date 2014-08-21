@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import syncleus.dann.solve.nqueens.NQueensBoard;
 import syncleus.dann.solve.nqueens.NQueensGoalTest;
-import aima.util.datastructure.XYLocation;
+import syncleus.dann.util.datastruct.XYLocation;
 
 /**
  * @author Ravi Mohan

@@ -4,11 +4,11 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import aima.search.csp.Assignment;
-import aima.search.csp.BacktrackingStrategy;
-import aima.search.csp.CSP;
-import aima.search.csp.MapCSP;
-import aima.search.csp.MinConflictsStrategy;
+import syncleus.dann.search.csp.Assignment;
+import syncleus.dann.search.csp.BacktrackingStrategy;
+import syncleus.dann.search.csp.CSP;
+import syncleus.dann.search.csp.MapCSP;
+import syncleus.dann.search.csp.MinConflictsStrategy;
 
 /**
  * @author Ravi Mohan

@@ -16,15 +16,15 @@ import syncleus.dann.solve.map.MapFunctionFactory;
 import syncleus.dann.solve.map.MapStepCostFunction;
 import syncleus.dann.solve.map.SimplifiedRoadMapOfPartOfRomania;
 import syncleus.dann.solve.map.StraightLineDistanceHeuristicFunction;
-import aima.search.framework.DefaultGoalTest;
-import aima.search.framework.GraphSearch;
-import aima.search.framework.HeuristicFunction;
-import aima.search.framework.Problem;
-import aima.search.framework.QueueSearch;
-import aima.search.framework.Search;
-import aima.search.framework.SearchAgent;
-import aima.search.framework.TreeSearch;
-import aima.search.informed.AStarSearch;
+import syncleus.dann.search.framework.DefaultGoalTest;
+import syncleus.dann.search.framework.GraphSearch;
+import syncleus.dann.search.framework.HeuristicFunction;
+import syncleus.dann.search.framework.Problem;
+import syncleus.dann.search.framework.QueueSearch;
+import syncleus.dann.search.framework.Search;
+import syncleus.dann.search.framework.SearchAgent;
+import syncleus.dann.search.framework.TreeSearch;
+import syncleus.dann.search.informed.AStarSearch;
 
 public class AStarSearchTest {
 

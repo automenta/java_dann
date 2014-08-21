@@ -6,11 +6,11 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
-import aima.probability.CategoricalDistribution;
-import aima.probability.example.ExampleRV;
-import aima.probability.example.HMMExampleFactory;
-import aima.probability.hmm.exact.FixedLagSmoothing;
-import aima.probability.proposition.AssignmentProposition;
+import syncleus.dann.learn.probability.CategoricalDistribution;
+import example.probability.ExampleRV;
+import example.probability.HMMExampleFactory;
+import syncleus.dann.learn.probability.hmm.exact.FixedLagSmoothing;
+import syncleus.dann.learn.probability.proposition.AssignmentProposition;
 
 /**
  * 

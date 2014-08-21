@@ -3,7 +3,7 @@ package aima.test.core.unit.util.math;
 import org.junit.Assert;
 import org.junit.Test;
 
-import aima.util.math.MixedRadixNumber;
+import syncleus.dann.util.MixedRadixNumber;
 
 /**
  * @author Ciaran O'Reilly

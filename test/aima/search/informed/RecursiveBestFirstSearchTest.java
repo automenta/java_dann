@@ -12,10 +12,10 @@ import syncleus.dann.solve.map.Map;
 import syncleus.dann.solve.map.MapAgent;
 import syncleus.dann.solve.map.MapEnvironment;
 import syncleus.dann.solve.map.SimplifiedRoadMapOfPartOfRomania;
-import aima.search.framework.HeuristicFunction;
-import aima.search.informed.AStarEvaluationFunction;
-import aima.search.informed.RecursiveBestFirstSearch;
-import aima.util.datastructure.Point2D;
+import syncleus.dann.search.framework.HeuristicFunction;
+import syncleus.dann.search.informed.AStarEvaluationFunction;
+import syncleus.dann.search.informed.RecursiveBestFirstSearch;
+import syncleus.dann.util.datastruct.Point2D;
 
 /**
  * @author Ciaran O'Reilly

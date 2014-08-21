@@ -2,15 +2,15 @@ package aima.test.core.unit.probability;
 
 import org.junit.Assert;
 
-import aima.probability.ProbabilityModel;
-import aima.probability.domain.FiniteIntegerDomain;
-import aima.probability.example.ExampleRV;
-import aima.probability.proposition.AssignmentProposition;
-import aima.probability.proposition.ConjunctiveProposition;
-import aima.probability.proposition.DisjunctiveProposition;
-import aima.probability.proposition.EquivalentProposition;
-import aima.probability.proposition.IntegerSumProposition;
-import aima.probability.proposition.SubsetProposition;
+import syncleus.dann.learn.probability.ProbabilityModel;
+import syncleus.dann.learn.probability.domain.FiniteIntegerDomain;
+import example.probability.ExampleRV;
+import syncleus.dann.learn.probability.proposition.AssignmentProposition;
+import syncleus.dann.learn.probability.proposition.ConjunctiveProposition;
+import syncleus.dann.learn.probability.proposition.DisjunctiveProposition;
+import syncleus.dann.learn.probability.proposition.EquivalentProposition;
+import syncleus.dann.learn.probability.proposition.IntegerSumProposition;
+import syncleus.dann.learn.probability.proposition.SubsetProposition;
 
 /**
  * @author Ciaran O'Reilly

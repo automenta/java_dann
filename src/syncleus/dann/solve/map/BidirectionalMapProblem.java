@@ -1,8 +1,8 @@
 package syncleus.dann.solve.map;
 
-import aima.search.framework.BidirectionalProblem;
-import aima.search.framework.DefaultGoalTest;
-import aima.search.framework.Problem;
+import syncleus.dann.search.framework.BidirectionalProblem;
+import syncleus.dann.search.framework.DefaultGoalTest;
+import syncleus.dann.search.framework.Problem;
 
 /**
  * @author Ciaran O'Reilly

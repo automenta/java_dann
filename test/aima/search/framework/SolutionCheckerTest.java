@@ -12,12 +12,12 @@ import syncleus.dann.solve.map.Map;
 import syncleus.dann.solve.map.MapFunctionFactory;
 import syncleus.dann.solve.map.MapStepCostFunction;
 import syncleus.dann.solve.map.SimplifiedRoadMapOfPartOfRomania;
-import aima.search.framework.GraphSearch;
-import aima.search.framework.Problem;
-import aima.search.framework.Search;
-import aima.search.framework.SearchAgent;
-import aima.search.framework.SolutionChecker;
-import aima.search.uninformed.BreadthFirstSearch;
+import syncleus.dann.search.framework.GraphSearch;
+import syncleus.dann.search.framework.Problem;
+import syncleus.dann.search.framework.Search;
+import syncleus.dann.search.framework.SearchAgent;
+import syncleus.dann.search.framework.SolutionChecker;
+import syncleus.dann.search.uninformed.BreadthFirstSearch;
 
 public class SolutionCheckerTest {
 

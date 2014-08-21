@@ -6,11 +6,11 @@ import syncleus.dann.plan.agent.Action;
 import syncleus.dann.plan.agent.Percept;
 import syncleus.dann.plan.agent.impl.AbstractAgent;
 import syncleus.dann.plan.agent.impl.NoOpAction;
-import aima.search.framework.PerceptToStateFunction;
-import aima.search.nondeterministic.AndOrSearch;
-import aima.search.nondeterministic.IfStateThenPlan;
-import aima.search.nondeterministic.NondeterministicProblem;
-import aima.search.nondeterministic.Plan;
+import syncleus.dann.search.framework.PerceptToStateFunction;
+import syncleus.dann.search.nondeterministic.AndOrSearch;
+import syncleus.dann.search.nondeterministic.IfStateThenPlan;
+import syncleus.dann.search.nondeterministic.NondeterministicProblem;
+import syncleus.dann.search.nondeterministic.Plan;
 
 /**
  * This agent traverses the NondeterministicVacuumEnvironment using a

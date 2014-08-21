@@ -5,12 +5,12 @@ import java.util.Map;
 import org.junit.Assert;
 import org.junit.Test;
 
-import aima.probability.RandomVariable;
-import aima.probability.bayes.BayesianNetwork;
-import aima.probability.bayes.approx.PriorSample;
-import aima.probability.example.BayesNetExampleFactory;
-import aima.probability.example.ExampleRV;
-import aima.util.MockRandomizer;
+import syncleus.dann.learn.probability.RandomVariable;
+import syncleus.dann.learn.probability.bayes.BayesianNetwork;
+import syncleus.dann.learn.probability.bayes.approx.PriorSample;
+import example.probability.BayesNetExampleFactory;
+import example.probability.ExampleRV;
+import syncleus.dann.util.MockRandomizer;
 
 /**
  * 

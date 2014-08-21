@@ -2,11 +2,11 @@ package aima.test.core.unit.probability.full;
 
 import org.junit.Test;
 
-import aima.probability.example.FullJointDistributionBurglaryAlarmModel;
-import aima.probability.example.FullJointDistributionMeningitisStiffNeckModel;
-import aima.probability.example.FullJointDistributionPairFairDiceModel;
-import aima.probability.example.FullJointDistributionToothacheCavityCatchModel;
-import aima.probability.example.FullJointDistributionToothacheCavityCatchWeatherModel;
+import example.probability.FullJointDistributionBurglaryAlarmModel;
+import example.probability.FullJointDistributionMeningitisStiffNeckModel;
+import example.probability.FullJointDistributionPairFairDiceModel;
+import example.probability.FullJointDistributionToothacheCavityCatchModel;
+import example.probability.FullJointDistributionToothacheCavityCatchWeatherModel;
 import aima.test.core.unit.probability.CommonFiniteProbabilityModelTests;
 
 public class FullJointProbabilityModelTest extends

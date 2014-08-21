@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import org.junit.Assert;
 import org.junit.Test;
 
-import syncleus.dann.attribute.aima.DataSet;
+import syncleus.dann.attribute.aima.AttributeSamples;
 import aima.learning.framework.DataSetFactory;
 import syncleus.dann.logic.inductive.DLTest;
 import syncleus.dann.logic.inductive.DLTestFactory;
@@ -25,7 +25,7 @@ public class LearnerTest {
 	@Test
 	public void testMajorityLearner() throws Exception {
 		MajorityLearner learner = new MajorityLearner();
-		DataSet ds = DataSetFactory.getRestaurantDataSet();
+		AttributeSamples ds = DataSetFactory.getRestaurantDataSet();
 		learner.train(ds);
 		int[] result = learner.test(ds);
 		Assert.assertEquals(6, result[0]);
@@ -36,58 +36,58 @@ public class LearnerTest {
 	public void testDefaultUsedWhenTrainingDataSetHasNoExamples()
 			throws Exception {
 		// tests RecursionBaseCase#1
-		DataSet ds = DataSetFactory.getRestaurantDataSet();
+		AttributeSamples ds = DataSetFactory.getRestaurantDataSet();
 		DecisionTreeLearner learner = new DecisionTreeLearner();
 
-		DataSet ds2 = ds.emptyDataSet();
+		AttributeSamples ds2 = ds.emptyDataSet();
 		Assert.assertEquals(0, ds2.size());
 
 		learner.train(ds2);
 		Assert.assertEquals("Unable To Classify",
-				learner.predict(ds.getExample(0)));
+				learner.predict(ds.get(0)));
 	}
 
 	@Test
 	public void testClassificationReturnedWhenAllExamplesHaveTheSameClassification()
 			throws Exception {
 		// tests RecursionBaseCase#2
-		DataSet ds = DataSetFactory.getRestaurantDataSet();
+		AttributeSamples ds = DataSetFactory.getRestaurantDataSet();
 		DecisionTreeLearner learner = new DecisionTreeLearner();
 
-		DataSet ds2 = ds.emptyDataSet();
+		AttributeSamples ds2 = ds.emptyDataSet();
 
 		// all 3 examples have the same classification (willWait = yes)
-		ds2.add(ds.getExample(0));
-		ds2.add(ds.getExample(2));
-		ds2.add(ds.getExample(3));
+		ds2.add(ds.get(0));
+		ds2.add(ds.get(2));
+		ds2.add(ds.get(3));
 
 		learner.train(ds2);
-		Assert.assertEquals("Yes", learner.predict(ds.getExample(0)));
+		Assert.assertEquals("Yes", learner.predict(ds.get(0)));
 	}
 
 	@Test
 	public void testMajorityReturnedWhenAttributesToExamineIsEmpty()
 			throws Exception {
 		// tests RecursionBaseCase#2
-		DataSet ds = DataSetFactory.getRestaurantDataSet();
+		AttributeSamples ds = DataSetFactory.getRestaurantDataSet();
 		DecisionTreeLearner learner = new DecisionTreeLearner();
 
-		DataSet ds2 = ds.emptyDataSet();
+		AttributeSamples ds2 = ds.emptyDataSet();
 
 		// 3 examples have classification = "yes" and one ,"no"
-		ds2.add(ds.getExample(0));
-		ds2.add(ds.getExample(1));// "no"
-		ds2.add(ds.getExample(2));
-		ds2.add(ds.getExample(3));
+		ds2.add(ds.get(0));
+		ds2.add(ds.get(1));// "no"
+		ds2.add(ds.get(2));
+		ds2.add(ds.get(3));
 		ds2.setSpecification(new MockDataSetSpecification("will_wait"));
 
 		learner.train(ds2);
-		Assert.assertEquals("Yes", learner.predict(ds.getExample(1)));
+		Assert.assertEquals("Yes", learner.predict(ds.get(1)));
 	}
 
 	@Test
 	public void testInducedTreeClassifiesDataSetCorrectly() throws Exception {
-		DataSet ds = DataSetFactory.getRestaurantDataSet();
+		AttributeSamples ds = DataSetFactory.getRestaurantDataSet();
 		DecisionTreeLearner learner = new DecisionTreeLearner();
 		learner.train(ds);
 		int[] result = learner.test(ds);
@@ -101,12 +101,12 @@ public class LearnerTest {
 		// tests first base case of DL Learner
 		DecisionListLearner learner = new DecisionListLearner("Yes", "No",
 				new MockDLTestFactory(null));
-		DataSet ds = DataSetFactory.getRestaurantDataSet();
-		DataSet empty = ds.emptyDataSet();
+		AttributeSamples ds = DataSetFactory.getRestaurantDataSet();
+		AttributeSamples empty = ds.emptyDataSet();
 		learner.train(empty);
-		Assert.assertEquals("No", learner.predict(ds.getExample(0)));
-		Assert.assertEquals("No", learner.predict(ds.getExample(1)));
-		Assert.assertEquals("No", learner.predict(ds.getExample(2)));
+		Assert.assertEquals("No", learner.predict(ds.get(0)));
+		Assert.assertEquals("No", learner.predict(ds.get(1)));
+		Assert.assertEquals("No", learner.predict(ds.get(2)));
 	}
 
 	@Test
@@ -115,15 +115,15 @@ public class LearnerTest {
 		// tests second base case of DL Learner
 		DecisionListLearner learner = new DecisionListLearner("Yes", "No",
 				new MockDLTestFactory(new ArrayList<DLTest>()));
-		DataSet ds = DataSetFactory.getRestaurantDataSet();
+		AttributeSamples ds = DataSetFactory.getRestaurantDataSet();
 		learner.train(ds);
 		Assert.assertEquals(DecisionListLearner.FAILURE,
-				learner.predict(ds.getExample(0)));
+				learner.predict(ds.get(0)));
 	}
 
 	@Test
 	public void testDecisionListTestRunOnRestaurantDataSet() throws Exception {
-		DataSet ds = DataSetFactory.getRestaurantDataSet();
+		AttributeSamples ds = DataSetFactory.getRestaurantDataSet();
 		DecisionListLearner learner = new DecisionListLearner("Yes", "No",
 				new DLTestFactory());
 		learner.train(ds);
@@ -135,7 +135,7 @@ public class LearnerTest {
 
 	@Test
 	public void testCurrentBestLearnerOnRestaurantDataSet() throws Exception {
-		DataSet ds = DataSetFactory.getRestaurantDataSet();
+		AttributeSamples ds = DataSetFactory.getRestaurantDataSet();
 		CurrentBestLearner learner = new CurrentBestLearner("Yes");
 		learner.train(ds);
 

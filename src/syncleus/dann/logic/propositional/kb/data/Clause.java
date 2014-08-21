@@ -8,7 +8,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 import syncleus.dann.logic.propositional.parsing.ast.PropositionSymbol;
-import aima.util.SetOps;
+import syncleus.dann.util.SetOps;
 
 /**
  * Artificial Intelligence A Modern Approach (3rd Edition): page 253.<br>

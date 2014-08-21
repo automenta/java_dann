@@ -2,8 +2,8 @@ package syncleus.dann.solve.tictactoe;
 
 import java.util.List;
 
-import aima.search.adversarial.Game;
-import aima.util.datastructure.XYLocation;
+import syncleus.dann.search.adversarial.Game;
+import syncleus.dann.util.datastruct.XYLocation;
 
 /**
  * Provides an implementation of the Tic-tac-toe game which can be used for

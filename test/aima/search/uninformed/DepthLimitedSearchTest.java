@@ -9,10 +9,10 @@ import syncleus.dann.plan.agent.Action;
 import syncleus.dann.solve.nqueens.NQueensBoard;
 import syncleus.dann.solve.nqueens.NQueensFunctionFactory;
 import syncleus.dann.solve.nqueens.NQueensGoalTest;
-import aima.search.framework.Problem;
-import aima.search.framework.Search;
-import aima.search.framework.SearchAgent;
-import aima.search.uninformed.DepthLimitedSearch;
+import syncleus.dann.search.framework.Problem;
+import syncleus.dann.search.framework.Search;
+import syncleus.dann.search.framework.SearchAgent;
+import syncleus.dann.search.uninformed.DepthLimitedSearch;
 
 public class DepthLimitedSearchTest {
 

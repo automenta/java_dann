@@ -33,7 +33,7 @@ import java.util.concurrent.Future;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import syncleus.dann.graph.AbstractBidirectedAdjacencyGraph;
-import syncleus.dann.math.Vector;
+import syncleus.dann.data.vector.Vector;
 import syncleus.dann.neural.Synapse;
 import syncleus.dann.neural.som.SOMBrain;
 import syncleus.dann.neural.util.AbstractLocalBrain;

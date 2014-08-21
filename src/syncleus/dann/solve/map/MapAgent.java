@@ -10,9 +10,9 @@ import syncleus.dann.plan.agent.Percept;
 import syncleus.dann.plan.agent.State;
 import syncleus.dann.plan.agent.impl.DynamicPercept;
 import syncleus.dann.plan.agent.impl.DynamicState;
-import aima.search.framework.Problem;
-import aima.search.framework.Search;
-import aima.search.framework.SimpleProblemSolvingAgent;
+import syncleus.dann.search.framework.Problem;
+import syncleus.dann.search.framework.Search;
+import syncleus.dann.search.framework.SimpleProblemSolvingAgent;
 
 /**
  * @author Ciaran O'Reilly

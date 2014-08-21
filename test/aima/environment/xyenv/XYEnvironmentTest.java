@@ -10,7 +10,7 @@ import syncleus.dann.plan.agent.EnvironmentObject;
 import syncleus.dann.plan.agent.impl.AbstractAgent;
 import syncleus.dann.solve.xyenv.Wall;
 import syncleus.dann.solve.xyenv.XYEnvironment;
-import aima.util.datastructure.XYLocation;
+import syncleus.dann.util.datastruct.XYLocation;
 import aima.test.core.unit.agent.impl.MockAgent;
 
 /**

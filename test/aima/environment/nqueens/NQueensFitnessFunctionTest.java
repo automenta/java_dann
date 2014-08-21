@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import syncleus.dann.solve.nqueens.NQueensBoard;
 import syncleus.dann.solve.nqueens.NQueensFitnessFunction;
-import aima.search.local.Individual;
+import syncleus.dann.search.local.Individual;
 
 /**
  * @author Ciaran O'Reilly

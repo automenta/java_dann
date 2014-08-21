@@ -13,8 +13,8 @@ import syncleus.dann.solve.wumpusworld.AgentPosition;
 import syncleus.dann.solve.wumpusworld.action.Forward;
 import syncleus.dann.solve.wumpusworld.action.TurnLeft;
 import syncleus.dann.solve.wumpusworld.action.TurnRight;
-import aima.search.framework.ActionsFunction;
-import aima.search.framework.ResultFunction;
+import syncleus.dann.search.framework.ActionsFunction;
+import syncleus.dann.search.framework.ResultFunction;
 
 /**
  * 

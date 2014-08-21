@@ -1,7 +1,7 @@
 package syncleus.dann.solve.nqueens;
 
 import syncleus.dann.plan.agent.impl.DynamicAction;
-import aima.util.datastructure.XYLocation;
+import syncleus.dann.util.datastruct.XYLocation;
 
 /**
  * Queens can be placed, removed, and moved. For movements, a vertical direction

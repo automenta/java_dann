@@ -20,7 +20,7 @@ package syncleus.dann.graph.drawing;
 
 import java.util.Map;
 import syncleus.dann.graph.Graph;
-import syncleus.dann.math.Vector;
+import syncleus.dann.data.vector.Vector;
 
 // TODO use optimizer approach
 

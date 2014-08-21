@@ -7,8 +7,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import aima.search.csp.Assignment;
-import aima.search.csp.Variable;
+import syncleus.dann.search.csp.Assignment;
+import syncleus.dann.search.csp.Variable;
 
 /**
  * @author Ravi Mohan

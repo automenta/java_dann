@@ -1,8 +1,8 @@
 package syncleus.dann.neural.aima;
 
-import aima.util.AimaUtil;
-import syncleus.dann.math.Vector;
-import syncleus.dann.math.matrix.Matrix;
+import syncleus.dann.util.AimaUtil;
+import syncleus.dann.data.vector.Vector;
+import syncleus.dann.data.matrix.Matrix;
 
 /**
  * Artificial Intelligence A Modern Approach (3rd Edition): page 729<br>

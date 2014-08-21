@@ -1,6 +1,6 @@
 package syncleus.dann.solve.map;
 
-import aima.search.framework.HeuristicFunction;
+import syncleus.dann.search.framework.HeuristicFunction;
 
 /**
  * This class extends heuristic functions in two ways: It maintains a goal and a

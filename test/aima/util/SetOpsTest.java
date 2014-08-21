@@ -7,7 +7,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import aima.util.SetOps;
+import syncleus.dann.util.SetOps;
 
 /**
  * @author Ravi Mohan

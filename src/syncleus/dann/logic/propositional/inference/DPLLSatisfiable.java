@@ -16,9 +16,9 @@ import syncleus.dann.logic.propositional.parsing.ast.PropositionSymbol;
 import syncleus.dann.logic.propositional.parsing.ast.Sentence;
 import syncleus.dann.logic.propositional.visitors.ConvertToConjunctionOfClauses;
 import syncleus.dann.logic.propositional.visitors.SymbolCollector;
-import aima.util.SetOps;
-import aima.util.AimaUtil;
-import aima.util.datastructure.Pair;
+import syncleus.dann.util.SetOps;
+import syncleus.dann.util.AimaUtil;
+import syncleus.dann.util.datastruct.Pair;
 
 /**
  * Artificial Intelligence A Modern Approach (3rd Edition): page 261.<br>

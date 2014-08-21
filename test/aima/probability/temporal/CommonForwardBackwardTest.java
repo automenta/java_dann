@@ -5,13 +5,13 @@ import java.util.List;
 
 import org.junit.Assert;
 
-import aima.probability.CategoricalDistribution;
-import aima.probability.example.ExampleRV;
-import aima.probability.proposition.AssignmentProposition;
-import aima.probability.temporal.BackwardStepInference;
-import aima.probability.temporal.ForwardBackwardInference;
-import aima.probability.temporal.ForwardStepInference;
-import aima.probability.util.ProbabilityTable;
+import syncleus.dann.learn.probability.CategoricalDistribution;
+import example.probability.ExampleRV;
+import syncleus.dann.learn.probability.proposition.AssignmentProposition;
+import syncleus.dann.learn.probability.temporal.BackwardStepInference;
+import syncleus.dann.learn.probability.temporal.ForwardBackwardInference;
+import syncleus.dann.learn.probability.temporal.ForwardStepInference;
+import syncleus.dann.learn.probability.ProbabilityTable;
 
 /**
  * 

@@ -10,8 +10,8 @@ import org.junit.Test;
 import syncleus.dann.plan.agent.Action;
 import syncleus.dann.solve.nqueens.NQueensBoard;
 import syncleus.dann.solve.nqueens.NQueensFunctionFactory;
-import aima.search.framework.ActionsFunction;
-import aima.search.framework.ResultFunction;
+import syncleus.dann.search.framework.ActionsFunction;
+import syncleus.dann.search.framework.ResultFunction;
 
 /**
  * @author Ravi Mohan

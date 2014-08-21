@@ -32,7 +32,7 @@ import syncleus.dann.logic.fol.parsing.ast.QuantifiedSentence;
 import syncleus.dann.logic.fol.parsing.ast.Term;
 import syncleus.dann.logic.fol.parsing.ast.TermEquality;
 import syncleus.dann.logic.fol.parsing.ast.Variable;
-import aima.util.math.MixedRadixNumber;
+import syncleus.dann.util.MixedRadixNumber;
 
 /**
  * A Clause: A disjunction of literals.

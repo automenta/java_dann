@@ -7,9 +7,9 @@ import java.util.Set;
 import syncleus.dann.plan.agent.Action;
 import syncleus.dann.plan.agent.Percept;
 import syncleus.dann.plan.agent.impl.DynamicPercept;
-import aima.search.framework.ActionsFunction;
-import aima.search.framework.PerceptToStateFunction;
-import aima.search.framework.ResultFunction;
+import syncleus.dann.search.framework.ActionsFunction;
+import syncleus.dann.search.framework.PerceptToStateFunction;
+import syncleus.dann.search.framework.ResultFunction;
 
 /**
  * @author Ciaran O'Reilly

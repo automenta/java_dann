@@ -1,6 +1,6 @@
 package syncleus.dann.solve.map;
 
-import aima.util.datastructure.Point2D;
+import syncleus.dann.util.datastruct.Point2D;
 
 /**
  * @author Ruediger Lunde

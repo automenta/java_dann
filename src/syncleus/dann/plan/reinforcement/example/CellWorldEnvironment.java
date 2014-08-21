@@ -10,8 +10,8 @@ import syncleus.dann.plan.agent.Percept;
 import syncleus.dann.plan.agent.impl.AbstractEnvironment;
 import syncleus.dann.solve.cellworld.Cell;
 import syncleus.dann.solve.cellworld.CellWorldAction;
-import aima.probability.mdp.TransitionProbabilityFunction;
-import aima.util.Randomizer;
+import syncleus.dann.learn.probability.mdp.TransitionProbabilityFunction;
+import syncleus.dann.util.Randomizer;
 
 /**
  * Implementation of the Cell World Environment, supporting the execution of

@@ -8,7 +8,7 @@ import syncleus.dann.plan.agent.Action;
 import syncleus.dann.plan.agent.AgentProgram;
 import syncleus.dann.plan.agent.Percept;
 import syncleus.dann.plan.agent.impl.NoOpAction;
-import aima.util.datastructure.Table;
+import syncleus.dann.util.datastruct.Table;
 
 /**
  * Artificial Intelligence A Modern Approach (3rd Edition): Figure 2.7, page 47.<br>

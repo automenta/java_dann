@@ -25,7 +25,7 @@ package syncleus.dann.neural.som.encog.basic;
 
 import syncleus.dann.data.Data;
 import syncleus.dann.math.BoundMath;
-import syncleus.dann.math.matrix.RealMatrix;
+import syncleus.dann.data.matrix.RealMatrix;
 import syncleus.dann.neural.som.SOMEncog;
 
 /**

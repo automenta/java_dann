@@ -2,7 +2,7 @@ package aima.test.core.unit.probability.bayes.exact;
 
 import org.junit.Before;
 
-import aima.probability.bayes.exact.EnumerationAsk;
+import syncleus.dann.learn.probability.bayes.exact.EnumerationAsk;
 
 /**
  * 

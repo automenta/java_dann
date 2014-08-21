@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import syncleus.dann.math.Vector3i;
+import syncleus.dann.data.vector.Vector3i;
 
 /**
  * 3D Grid Mesh aka Grid3D

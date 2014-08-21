@@ -8,7 +8,7 @@ import syncleus.dann.logic.propositional.kb.data.Model;
 import syncleus.dann.logic.propositional.parsing.ast.PropositionSymbol;
 import syncleus.dann.logic.propositional.parsing.ast.Sentence;
 import syncleus.dann.logic.propositional.visitors.SymbolCollector;
-import aima.util.AimaUtil;
+import syncleus.dann.util.AimaUtil;
 
 /**
  * Artificial Intelligence A Modern Approach (3rd Edition): Figure 7.10, page

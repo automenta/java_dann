@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import syncleus.dann.plan.agent.Action;
-import aima.search.framework.ActionsFunction;
+import syncleus.dann.search.framework.ActionsFunction;
 
 /**
  * Specifies the actions available to the agent at state s

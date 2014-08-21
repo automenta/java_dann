@@ -7,7 +7,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import aima.util.datastructure.Table;
+import syncleus.dann.util.datastruct.Table;
 
 /**
  * @author Ravi Mohan

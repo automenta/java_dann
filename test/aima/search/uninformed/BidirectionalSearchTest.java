@@ -11,7 +11,7 @@ import syncleus.dann.plan.agent.EnvironmentView;
 import syncleus.dann.solve.map.ExtendableMap;
 import syncleus.dann.solve.map.MapAgent;
 import syncleus.dann.solve.map.MapEnvironment;
-import aima.search.uninformed.BidirectionalSearch;
+import syncleus.dann.search.uninformed.BidirectionalSearch;
 
 /**
  * @author Ciaran O'Reilly

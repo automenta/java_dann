@@ -7,13 +7,13 @@ import java.util.Set;
 
 import syncleus.dann.plan.agent.Action;
 import syncleus.dann.plan.reinforcement.PerceptStateReward;
-import aima.probability.mdp.ActionsFunction;
-import aima.probability.mdp.PolicyEvaluation;
-import aima.probability.mdp.RewardFunction;
-import aima.probability.mdp.TransitionProbabilityFunction;
-import aima.probability.mdp.impl.MDP;
-import aima.util.FrequencyCounter;
-import aima.util.datastructure.Pair;
+import syncleus.dann.learn.probability.mdp.ActionsFunction;
+import syncleus.dann.learn.probability.mdp.PolicyEvaluation;
+import syncleus.dann.learn.probability.mdp.RewardFunction;
+import syncleus.dann.learn.probability.mdp.TransitionProbabilityFunction;
+import syncleus.dann.learn.probability.mdp.impl.MDP;
+import syncleus.dann.util.FrequencyCounter;
+import syncleus.dann.util.datastruct.Pair;
 
 /**
  * Artificial Intelligence A Modern Approach (3rd Edition): page 834.<br>

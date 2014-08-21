@@ -12,7 +12,7 @@ import syncleus.dann.plan.agent.EnvironmentState;
 import syncleus.dann.plan.agent.Percept;
 import syncleus.dann.plan.agent.impl.AbstractEnvironment;
 import syncleus.dann.plan.agent.impl.DynamicPercept;
-import aima.util.datastructure.XYLocation;
+import syncleus.dann.util.datastruct.XYLocation;
 
 /**
  * @author Ravi Mohan

@@ -3,9 +3,9 @@ package syncleus.dann.logic.learn;
 import java.util.ArrayList;
 import java.util.List;
 
-import syncleus.dann.attribute.aima.DataSet;
-import syncleus.dann.attribute.aima.Example;
-import syncleus.dann.attribute.aima.Learner;
+import syncleus.dann.attribute.aima.AttributeSamples;
+import syncleus.dann.attribute.aima.Attributes;
+import syncleus.dann.attribute.aima.AttributeLearning;
 import syncleus.dann.logic.knowledge.CurrentBestLearning;
 import syncleus.dann.logic.knowledge.FOLDataSetDomain;
 import syncleus.dann.logic.knowledge.FOLExample;
@@ -18,7 +18,7 @@ import syncleus.dann.logic.fol.kb.FOLKnowledgeBase;
  * @author Ciaran O'Reilly
  * 
  */
-public class CurrentBestLearner implements Learner {
+public class CurrentBestLearner implements AttributeLearning {
 	private String trueGoalValue = null;
 	private FOLDataSetDomain folDSDomain = null;
 	private FOLKnowledgeBase kb = null;
@@ -33,11 +33,11 @@ public class CurrentBestLearner implements Learner {
 
 	//
 	// START-Learner
-	public void train(DataSet ds) {
+	public void train(AttributeSamples ds) {
 		folDSDomain = new FOLDataSetDomain(ds.specification, trueGoalValue);
 		List<FOLExample> folExamples = new ArrayList<FOLExample>();
 		int egNo = 1;
-		for (Example e : ds.examples) {
+		for (Attributes e : ds.samples) {
 			folExamples.add(new FOLExample(folDSDomain, e, egNo));
 			egNo++;
 		}
@@ -51,7 +51,7 @@ public class CurrentBestLearner implements Learner {
 		currentBestHypothesis = cbl.currentBestLearning(folExamples);
 	}
 
-	public String predict(Example e) {
+	public String predict(Attributes e) {
 		String prediction = "~" + e.targetValue();
 		if (null != currentBestHypothesis) {
 			FOLExample etp = new FOLExample(folDSDomain, e, 0);
@@ -73,10 +73,10 @@ public class CurrentBestLearner implements Learner {
 		return prediction;
 	}
 
-	public int[] test(DataSet ds) {
+	public int[] test(AttributeSamples ds) {
 		int[] results = new int[] { 0, 0 };
 
-		for (Example e : ds.examples) {
+		for (Attributes e : ds.samples) {
 			if (e.targetValue().equals(predict(e))) {
 				results[0] = results[0] + 1;
 			} else {

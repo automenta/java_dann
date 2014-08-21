@@ -3,8 +3,8 @@ package aima.test.core.unit.probability.temporal.generic;
 import org.junit.Before;
 import org.junit.Test;
 
-import aima.probability.example.GenericTemporalModelFactory;
-import aima.probability.temporal.generic.ForwardBackward;
+import example.probability.GenericTemporalModelFactory;
+import syncleus.dann.learn.probability.temporal.generic.ForwardBackward;
 import aima.test.core.unit.probability.temporal.CommonForwardBackwardTest;
 
 /**

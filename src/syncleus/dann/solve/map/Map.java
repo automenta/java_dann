@@ -2,7 +2,7 @@ package syncleus.dann.solve.map;
 
 import java.util.List;
 
-import aima.util.datastructure.Point2D;
+import syncleus.dann.util.datastruct.Point2D;
 
 /**
  * Provides a general interface for maps.

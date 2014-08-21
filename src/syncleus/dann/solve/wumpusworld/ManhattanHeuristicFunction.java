@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import aima.search.framework.HeuristicFunction;
+import syncleus.dann.search.framework.HeuristicFunction;
 
 /**
  * Heuristic for calculating the Manhattan distance between two rooms within a Wumpus World cave.

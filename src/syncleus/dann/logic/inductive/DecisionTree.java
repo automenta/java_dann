@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 
-import syncleus.dann.attribute.aima.DataSet;
-import syncleus.dann.attribute.aima.Example;
-import aima.util.AimaUtil;
+import syncleus.dann.attribute.aima.AttributeSamples;
+import syncleus.dann.attribute.aima.Attributes;
+import syncleus.dann.util.AimaUtil;
 
 /**
  * @author Ravi Mohan
@@ -36,7 +36,7 @@ public class DecisionTree {
 		nodes.put(attributeValue, tree);
 	}
 
-	public Object predict(Example e) {
+	public Object predict(Attributes e) {
 		String attrValue = e.getAttributeValueAsString(attributeName);
 		if (nodes.containsKey(attrValue)) {
 			return nodes.get(attrValue).predict(e);
@@ -46,7 +46,7 @@ public class DecisionTree {
 		}
 	}
 
-	public static DecisionTree getStumpFor(DataSet ds, String attributeName,
+	public static DecisionTree getStumpFor(AttributeSamples ds, String attributeName,
 			String attributeValue, String returnValueIfMatched,
 			List<String> unmatchedValues, String returnValueIfUnmatched) {
 		DecisionTree dt = new DecisionTree(attributeName);
@@ -57,7 +57,7 @@ public class DecisionTree {
 		return dt;
 	}
 
-	public static List<DecisionTree> getStumpsFor(DataSet ds,
+	public static List<DecisionTree> getStumpsFor(AttributeSamples ds,
 			String returnValueIfMatched, String returnValueIfUnmatched) {
 		List<String> attributes = ds.getNonTargetAttributes();
 		List<DecisionTree> trees = new ArrayList<DecisionTree>();

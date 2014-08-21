@@ -3,7 +3,7 @@ package aima.test.core.unit.learning.inductive;
 import org.junit.Assert;
 import org.junit.Test;
 
-import syncleus.dann.attribute.aima.DataSet;
+import syncleus.dann.attribute.aima.AttributeSamples;
 import aima.learning.framework.DataSetFactory;
 import syncleus.dann.logic.inductive.DLTest;
 import syncleus.dann.logic.inductive.DecisionList;
@@ -18,29 +18,29 @@ public class DecisionListTest {
 	public void testDecisonListWithNoTestsReturnsDefaultValue()
 			throws Exception {
 		DecisionList dlist = new DecisionList("Yes", "No");
-		DataSet ds = DataSetFactory.getRestaurantDataSet();
-		Assert.assertEquals("No", dlist.predict(ds.getExample(0)));
+		AttributeSamples ds = DataSetFactory.getRestaurantDataSet();
+		Assert.assertEquals("No", dlist.predict(ds.get(0)));
 	}
 
 	@Test
 	public void testDecisionListWithSingleTestReturnsTestValueIfTestSuccessful()
 			throws Exception {
 		DecisionList dlist = new DecisionList("Yes", "No");
-		DataSet ds = DataSetFactory.getRestaurantDataSet();
+		AttributeSamples ds = DataSetFactory.getRestaurantDataSet();
 
 		DLTest test = new DLTest();
 		test.add("type", "French");
 
 		dlist.add(test, "test1success");
 
-		Assert.assertEquals("test1success", dlist.predict(ds.getExample(0)));
+		Assert.assertEquals("test1success", dlist.predict(ds.get(0)));
 	}
 
 	@Test
 	public void testDecisionListFallsThruToNextTestIfOneDoesntMatch()
 			throws Exception {
 		DecisionList dlist = new DecisionList("Yes", "No");
-		DataSet ds = DataSetFactory.getRestaurantDataSet();
+		AttributeSamples ds = DataSetFactory.getRestaurantDataSet();
 
 		DLTest test1 = new DLTest();
 		test1.add("type", "Thai"); // doesn't match first example
@@ -50,14 +50,14 @@ public class DecisionListTest {
 		test2.add("type", "French");
 		dlist.add(test2, "test2success");// matches first example
 
-		Assert.assertEquals("test2success", dlist.predict(ds.getExample(0)));
+		Assert.assertEquals("test2success", dlist.predict(ds.get(0)));
 	}
 
 	@Test
 	public void testDecisionListFallsThruToDefaultIfNoTestMatches()
 			throws Exception {
 		DecisionList dlist = new DecisionList("Yes", "No");
-		DataSet ds = DataSetFactory.getRestaurantDataSet();
+		AttributeSamples ds = DataSetFactory.getRestaurantDataSet();
 
 		DLTest test1 = new DLTest();
 		test1.add("type", "Thai"); // doesn't match first example
@@ -67,7 +67,7 @@ public class DecisionListTest {
 		test2.add("type", "Burger");
 		dlist.add(test2, "test2success");// doesn't match first example
 
-		Assert.assertEquals("No", dlist.predict(ds.getExample(0)));
+		Assert.assertEquals("No", dlist.predict(ds.get(0)));
 	}
 
 	@Test
@@ -84,7 +84,7 @@ public class DecisionListTest {
 	public void testDecisionListMerge() throws Exception {
 		DecisionList dlist1 = new DecisionList("Yes", "No");
 		DecisionList dlist2 = new DecisionList("Yes", "No");
-		DataSet ds = DataSetFactory.getRestaurantDataSet();
+		AttributeSamples ds = DataSetFactory.getRestaurantDataSet();
 
 		DLTest test1 = new DLTest();
 		test1.add("type", "Thai"); // doesn't match first example
@@ -95,6 +95,6 @@ public class DecisionListTest {
 		dlist2.add(test2, "test2success");// matches first example
 
 		DecisionList dlist3 = dlist1.mergeWith(dlist2);
-		Assert.assertEquals("test2success", dlist3.predict(ds.getExample(0)));
+		Assert.assertEquals("test2success", dlist3.predict(ds.get(0)));
 	}
 }

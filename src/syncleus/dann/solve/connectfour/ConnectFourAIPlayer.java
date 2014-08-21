@@ -3,8 +3,8 @@ package syncleus.dann.solve.connectfour;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import aima.search.adversarial.Game;
-import aima.search.adversarial.IterativeDeepeningAlphaBetaSearch;
+import syncleus.dann.search.adversarial.Game;
+import syncleus.dann.search.adversarial.IterativeDeepeningAlphaBetaSearch;
 
 /**
  * Implements an iterative deepening Minimax search with alpha-beta pruning and

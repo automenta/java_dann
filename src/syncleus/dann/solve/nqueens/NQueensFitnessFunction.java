@@ -6,10 +6,10 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
-import aima.search.framework.GoalTest;
-import aima.search.local.FitnessFunction;
-import aima.search.local.Individual;
-import aima.util.datastructure.XYLocation;
+import syncleus.dann.search.framework.GoalTest;
+import syncleus.dann.search.local.FitnessFunction;
+import syncleus.dann.search.local.Individual;
+import syncleus.dann.util.datastruct.XYLocation;
 
 /**
  * A class whose purpose is to evaluate the fitness of NQueen individuals and to

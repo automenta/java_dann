@@ -2,7 +2,7 @@ package syncleus.dann.logic.propositional.parsing.ast;
 
 import java.util.Set;
 
-import aima.util.AimaUtil;
+import syncleus.dann.util.AimaUtil;
 
 /**
  * Artificial Intelligence A Modern Approach (3rd Edition): page 244.<br>

@@ -5,7 +5,7 @@ import java.util.Set;
 import syncleus.dann.logic.propositional.parsing.PLVisitor;
 import syncleus.dann.logic.propositional.parsing.ast.ComplexSentence;
 import syncleus.dann.logic.propositional.parsing.ast.PropositionSymbol;
-import aima.util.SetOps;
+import syncleus.dann.util.SetOps;
 
 /**
  * Super class of Visitors that are "read only" and gather information from an

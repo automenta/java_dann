@@ -21,7 +21,7 @@ package syncleus.dann.learn.markov.chain;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import syncleus.dann.math.matrix.RealMatrix;
+import syncleus.dann.data.matrix.RealMatrix;
 
 public interface MarkovChain<S> {
     int getOrder();

@@ -3,7 +3,7 @@ package aima.test.core.unit.search.local;
 import org.junit.Assert;
 import org.junit.Test;
 
-import aima.search.local.SimulatedAnnealingSearch;
+import syncleus.dann.search.local.SimulatedAnnealingSearch;
 
 public class SimulatedAnnealingSearchTest {
 

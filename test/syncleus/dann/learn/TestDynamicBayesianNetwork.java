@@ -6,17 +6,17 @@
 
 package syncleus.dann.learn;
 
-import aima.probability.CategoricalDistribution;
-import aima.probability.RandomVariable;
-import aima.probability.bayes.DynamicBayesianNetwork;
-import aima.probability.bayes.FiniteNode;
-import aima.probability.bayes.approx.LikelihoodWeighting;
-import aima.probability.bayes.approx.ParticleFiltering;
-import aima.probability.bayes.impl.BayesNet;
-import aima.probability.bayes.impl.DynamicBayesNet;
-import aima.probability.bayes.impl.FullCPTNode;
-import aima.probability.example.ExampleRV;
-import aima.probability.proposition.AssignmentProposition;
+import syncleus.dann.learn.probability.CategoricalDistribution;
+import syncleus.dann.learn.probability.RandomVariable;
+import syncleus.dann.learn.probability.bayes.DynamicBayesianNetwork;
+import syncleus.dann.learn.probability.bayes.FiniteNode;
+import syncleus.dann.learn.probability.bayes.approx.LikelihoodWeighting;
+import syncleus.dann.learn.probability.bayes.approx.ParticleFiltering;
+import syncleus.dann.learn.probability.bayes.impl.BayesNet;
+import syncleus.dann.learn.probability.bayes.impl.DynamicBayesNet;
+import syncleus.dann.learn.probability.bayes.impl.FullCPTNode;
+import example.probability.ExampleRV;
+import syncleus.dann.learn.probability.proposition.AssignmentProposition;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;

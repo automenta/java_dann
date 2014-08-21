@@ -5,7 +5,7 @@ import java.util.Set;
 
 import syncleus.dann.plan.agent.Action;
 import syncleus.dann.plan.agent.Agent;
-import aima.search.nondeterministic.ResultsFunction;
+import syncleus.dann.search.nondeterministic.ResultsFunction;
 
 /**
  * Returns possible results

@@ -5,7 +5,7 @@ import java.util.List;
 
 import syncleus.dann.plan.agent.Action;
 import syncleus.dann.plan.agent.impl.DynamicAction;
-import aima.util.datastructure.XYLocation;
+import syncleus.dann.util.datastruct.XYLocation;
 
 /**
  * @author Ravi Mohan

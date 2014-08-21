@@ -10,9 +10,9 @@ import syncleus.dann.solve.cellworld.Cell;
 import syncleus.dann.solve.cellworld.CellWorld;
 import syncleus.dann.solve.cellworld.CellWorldAction;
 import syncleus.dann.solve.cellworld.CellWorldFactory;
-import aima.probability.example.MDPFactory;
-import aima.probability.mdp.MarkovDecisionProcess;
-import aima.probability.mdp.search.ValueIteration;
+import example.probability.MDPFactory;
+import syncleus.dann.learn.probability.mdp.MarkovDecisionProcess;
+import syncleus.dann.learn.probability.mdp.search.ValueIteration;
 
 /**
  * @author Ravi Mohan

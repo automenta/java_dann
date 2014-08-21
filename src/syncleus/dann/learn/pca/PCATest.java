@@ -7,7 +7,7 @@ package pca;
 
 import java.awt.image.BufferedImage;
 import syncleus.dann.data.image.ImageData;
-import syncleus.dann.math.matrix.Matrix;
+import syncleus.dann.data.matrix.Matrix;
 
 /**
  *

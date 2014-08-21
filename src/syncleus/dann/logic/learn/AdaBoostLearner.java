@@ -3,38 +3,38 @@ package syncleus.dann.logic.learn;
 import java.util.Hashtable;
 import java.util.List;
 
-import syncleus.dann.attribute.aima.DataSet;
-import syncleus.dann.attribute.aima.Example;
-import syncleus.dann.attribute.aima.Learner;
-import aima.util.AimaUtil;
-import aima.util.datastructure.Table;
+import syncleus.dann.attribute.aima.AttributeSamples;
+import syncleus.dann.attribute.aima.Attributes;
+import syncleus.dann.attribute.aima.AttributeLearning;
+import syncleus.dann.util.AimaUtil;
+import syncleus.dann.util.datastruct.Table;
 
 /**
  * @author Ravi Mohan
  * 
  */
-public class AdaBoostLearner implements Learner {
+public class AdaBoostLearner implements AttributeLearning {
 
-	private List<Learner> learners;
+	private List<AttributeLearning> learners;
 
-	private DataSet dataSet;
+	private AttributeSamples dataSet;
 
 	private double[] exampleWeights;
 
-	private Hashtable<Learner, Double> learnerWeights;
+	private Hashtable<AttributeLearning, Double> learnerWeights;
 
-	public AdaBoostLearner(List<Learner> learners, DataSet ds) {
+	public AdaBoostLearner(List<AttributeLearning> learners, AttributeSamples ds) {
 		this.learners = learners;
 		this.dataSet = ds;
 
-		initializeExampleWeights(ds.examples.size());
+		initializeExampleWeights(ds.samples.size());
 		initializeHypothesisWeights(learners.size());
 	}
 
-	public void train(DataSet ds) {
-		initializeExampleWeights(ds.examples.size());
+	public void train(AttributeSamples ds) {
+		initializeExampleWeights(ds.samples.size());
 
-		for (Learner learner : learners) {
+		for (AttributeLearning learner : learners) {
 			learner.train(ds);
 
 			double error = calculateError(ds, learner);
@@ -50,14 +50,14 @@ public class AdaBoostLearner implements Learner {
 		}
 	}
 
-	public String predict(Example e) {
+	public String predict(Attributes e) {
 		return weightedMajority(e);
 	}
 
-	public int[] test(DataSet ds) {
+	public int[] test(AttributeSamples ds) {
 		int[] results = new int[] { 0, 0 };
 
-		for (Example e : ds.examples) {
+		for (Attributes e : ds.samples) {
 			if (e.targetValue().equals(predict(e))) {
 				results[0] = results[0] + 1;
 			} else {
@@ -71,17 +71,17 @@ public class AdaBoostLearner implements Learner {
 	// PRIVATE METHODS
 	//
 
-	private String weightedMajority(Example e) {
+	private String weightedMajority(Attributes e) {
 		List<String> targetValues = dataSet.getPossibleAttributeValues(dataSet
 				.getTargetAttributeName());
 
-		Table<String, Learner, Double> table = createTargetValueLearnerTable(
+		Table<String, AttributeLearning, Double> table = createTargetValueLearnerTable(
 				targetValues, e);
 		return getTargetValueWithTheMaximumVotes(targetValues, table);
 	}
 
-	private Table<String, Learner, Double> createTargetValueLearnerTable(
-			List<String> targetValues, Example e) {
+	private Table<String, AttributeLearning, Double> createTargetValueLearnerTable(
+			List<String> targetValues, Attributes e) {
 		// create a table with target-attribute values as rows and learners as
 		// columns and cells containing the weighted votes of each Learner for a
 		// target value
@@ -89,15 +89,15 @@ public class AdaBoostLearner implements Learner {
 		// Yes 0.83 0.5 0
 		// No 0 0 0.6
 
-		Table<String, Learner, Double> table = new Table<String, Learner, Double>(
+		Table<String, AttributeLearning, Double> table = new Table<String, AttributeLearning, Double>(
 				targetValues, learners);
 		// initialize table
-		for (Learner l : learners) {
+		for (AttributeLearning l : learners) {
 			for (String s : targetValues) {
 				table.set(s, l, 0.0);
 			}
 		}
-		for (Learner learner : learners) {
+		for (AttributeLearning learner : learners) {
 			String predictedValue = learner.predict(e);
 			for (String v : targetValues) {
 				if (predictedValue.equals(v)) {
@@ -110,7 +110,7 @@ public class AdaBoostLearner implements Learner {
 	}
 
 	private String getTargetValueWithTheMaximumVotes(List<String> targetValues,
-			Table<String, Learner, Double> table) {
+			Table<String, AttributeLearning, Double> table) {
 		String targetValueWithMaxScore = targetValues.get(0);
 		double score = scoreOfValue(targetValueWithMaxScore, table, learners);
 		for (String value : targetValues) {
@@ -141,16 +141,16 @@ public class AdaBoostLearner implements Learner {
 					"cannot initialize Ensemble learning with Zero Learners");
 		}
 
-		learnerWeights = new Hashtable<Learner, Double>();
-		for (Learner le : learners) {
+		learnerWeights = new Hashtable<AttributeLearning, Double>();
+		for (AttributeLearning le : learners) {
 			learnerWeights.put(le, 1.0);
 		}
 	}
 
-	private double calculateError(DataSet ds, Learner l) {
+	private double calculateError(AttributeSamples ds, AttributeLearning l) {
 		double error = 0.0;
-		for (int i = 0; i < ds.examples.size(); i++) {
-			Example e = ds.getExample(i);
+		for (int i = 0; i < ds.samples.size(); i++) {
+			Attributes e = ds.get(i);
 			if (!(l.predict(e).equals(e.targetValue()))) {
 				error = error + exampleWeights[i];
 			}
@@ -158,10 +158,10 @@ public class AdaBoostLearner implements Learner {
 		return error;
 	}
 
-	private void adjustExampleWeights(DataSet ds, Learner l, double error) {
+	private void adjustExampleWeights(AttributeSamples ds, AttributeLearning l, double error) {
 		double epsilon = error / (1.0 - error);
-		for (int j = 0; j < ds.examples.size(); j++) {
-			Example e = ds.getExample(j);
+		for (int j = 0; j < ds.samples.size(); j++) {
+			Attributes e = ds.get(j);
 			if ((l.predict(e).equals(e.targetValue()))) {
 				exampleWeights[j] = exampleWeights[j] * epsilon;
 			}
@@ -170,9 +170,9 @@ public class AdaBoostLearner implements Learner {
 	}
 
 	private double scoreOfValue(String targetValue,
-			Table<String, Learner, Double> table, List<Learner> learners) {
+			Table<String, AttributeLearning, Double> table, List<AttributeLearning> learners) {
 		double score = 0.0;
-		for (Learner l : learners) {
+		for (AttributeLearning l : learners) {
 			score += table.get(targetValue, l);
 		}
 		return score;

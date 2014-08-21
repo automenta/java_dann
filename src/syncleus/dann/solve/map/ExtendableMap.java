@@ -4,9 +4,9 @@ import java.util.Collections;
 import java.util.Hashtable;
 import java.util.List;
 
-import aima.util.AimaUtil;
-import aima.util.datastructure.LabeledGraph;
-import aima.util.datastructure.Point2D;
+import syncleus.dann.util.AimaUtil;
+import syncleus.dann.util.datastruct.LabeledGraph;
+import syncleus.dann.util.datastruct.Point2D;
 
 /**
  * Implements a map with locations, distance labeled links between the

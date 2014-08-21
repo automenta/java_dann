@@ -7,11 +7,11 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import aima.search.csp.CSP;
-import aima.search.csp.Constraint;
-import aima.search.csp.Domain;
-import aima.search.csp.NotEqualConstraint;
-import aima.search.csp.Variable;
+import syncleus.dann.search.csp.CSP;
+import syncleus.dann.search.csp.Constraint;
+import syncleus.dann.search.csp.Domain;
+import syncleus.dann.search.csp.NotEqualConstraint;
+import syncleus.dann.search.csp.Variable;
 
 /**
  * @author Ruediger Lunde

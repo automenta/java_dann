@@ -14,12 +14,12 @@ import syncleus.dann.solve.map.SimplifiedRoadMapOfPartOfRomania;
 import syncleus.dann.solve.nqueens.NQueensBoard;
 import syncleus.dann.solve.nqueens.NQueensFunctionFactory;
 import syncleus.dann.solve.nqueens.NQueensGoalTest;
-import aima.search.framework.DefaultGoalTest;
-import aima.search.framework.Problem;
-import aima.search.framework.QueueSearch;
-import aima.search.framework.Search;
-import aima.search.framework.SearchAgent;
-import aima.search.uninformed.UniformCostSearch;
+import syncleus.dann.search.framework.DefaultGoalTest;
+import syncleus.dann.search.framework.Problem;
+import syncleus.dann.search.framework.QueueSearch;
+import syncleus.dann.search.framework.Search;
+import syncleus.dann.search.framework.SearchAgent;
+import syncleus.dann.search.uninformed.UniformCostSearch;
 
 /**
  * @author Ciaran O'Reilly

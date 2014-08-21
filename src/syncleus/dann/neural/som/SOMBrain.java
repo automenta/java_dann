@@ -20,7 +20,7 @@ package syncleus.dann.neural.som;
 
 import java.util.Map;
 import java.util.Set;
-import syncleus.dann.math.Vector;
+import syncleus.dann.data.vector.Vector;
 import syncleus.dann.neural.Brain;
 import syncleus.dann.neural.Synapse;
 import syncleus.dann.neural.som.brain.SomInputNeuron;

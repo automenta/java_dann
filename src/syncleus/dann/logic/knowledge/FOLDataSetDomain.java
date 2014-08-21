@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-import syncleus.dann.attribute.aima.DataSetSpecification;
+import syncleus.dann.attribute.aima.AttributeSamples;
 import syncleus.dann.logic.fol.domain.FOLDomain;
 
 /**
@@ -18,7 +18,7 @@ public class FOLDataSetDomain extends FOLDomain {
 	private static Pattern allowableCharactersRegEx = Pattern
 			.compile("[^a-zA-Z_$0-9]");
 	//
-	private DataSetSpecification dataSetSpecification;
+	private AttributeSamples.Specification dataSetSpecification;
 	private String trueGoalValue = null;
 	// Default example prefix, see pg679 of AIMA
 	private String examplePrefix = "X";
@@ -29,7 +29,7 @@ public class FOLDataSetDomain extends FOLDomain {
 	//
 	// PUBLIC METHODS
 	//
-	public FOLDataSetDomain(DataSetSpecification dataSetSpecification,
+	public FOLDataSetDomain(AttributeSamples.Specification dataSetSpecification,
 			String trueGoalValue) {
 		this.dataSetSpecification = dataSetSpecification;
 		this.trueGoalValue = trueGoalValue;

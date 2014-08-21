@@ -2,9 +2,9 @@ package syncleus.dann.logic.learn;
 
 import java.util.List;
 
-import syncleus.dann.attribute.aima.DataSet;
-import syncleus.dann.attribute.aima.Example;
-import syncleus.dann.attribute.aima.Learner;
+import syncleus.dann.attribute.aima.AttributeSamples;
+import syncleus.dann.attribute.aima.Attributes;
+import syncleus.dann.attribute.aima.AttributeLearning;
 import syncleus.dann.logic.inductive.DLTest;
 import syncleus.dann.logic.inductive.DLTestFactory;
 import syncleus.dann.logic.inductive.DecisionList;
@@ -13,7 +13,7 @@ import syncleus.dann.logic.inductive.DecisionList;
  * @author Ravi Mohan
  * @author Mike Stampone
  */
-public class DecisionListLearner implements Learner {
+public class DecisionListLearner implements AttributeLearning {
 	public static final String FAILURE = "Failure";
 
 	private DecisionList decisionList;
@@ -39,12 +39,12 @@ public class DecisionListLearner implements Learner {
 	 *            a set of examples for constructing the decision list
 	 */
 	@Override
-	public void train(DataSet ds) {
+	public void train(AttributeSamples ds) {
 		this.decisionList = decisionListLearning(ds);
 	}
 
 	@Override
-	public String predict(Example e) {
+	public String predict(Attributes e) {
 		if (decisionList == null) {
 			throw new RuntimeException(
 					"learner has not been trained with dataset yet!");
@@ -53,10 +53,10 @@ public class DecisionListLearner implements Learner {
 	}
 
 	@Override
-	public int[] test(DataSet ds) {
+	public int[] test(AttributeSamples ds) {
 		int[] results = new int[] { 0, 0 };
 
-		for (Example e : ds.examples) {
+		for (Attributes e : ds.samples) {
 			if (e.targetValue().equals(decisionList.predict(e))) {
 				results[0] = results[0] + 1;
 			} else {
@@ -81,7 +81,7 @@ public class DecisionListLearner implements Learner {
 	//
 	// PRIVATE METHODS
 	//
-	private DecisionList decisionListLearning(DataSet ds) {
+	private DecisionList decisionListLearning(AttributeSamples ds) {
 		if (ds.size() == 0) {
 			return new DecisionList(positive, negative);
 		}
@@ -93,15 +93,15 @@ public class DecisionListLearner implements Learner {
 		}
 		// at this point there is a test that classifies some subset of examples
 		// with the same target value
-		DataSet matched = test.matchedExamples(ds);
+		AttributeSamples matched = test.matchedExamples(ds);
 		DecisionList list = new DecisionList(positive, negative);
-		list.add(test, matched.getExample(0).targetValue());
+		list.add(test, matched.get(0).targetValue());
 		return list.mergeWith(decisionListLearning(test.unmatchedExamples(ds)));
 	}
 
-	private DLTest getValidTest(List<DLTest> possibleTests, DataSet ds) {
+	private DLTest getValidTest(List<DLTest> possibleTests, AttributeSamples ds) {
 		for (DLTest test : possibleTests) {
-			DataSet matched = test.matchedExamples(ds);
+			AttributeSamples matched = test.matchedExamples(ds);
 			if (!(matched.size() == 0)) {
 				if (allExamplesHaveSameTargetValue(matched)) {
 					return test;
@@ -112,10 +112,10 @@ public class DecisionListLearner implements Learner {
 		return null;
 	}
 
-	private boolean allExamplesHaveSameTargetValue(DataSet matched) {
+	private boolean allExamplesHaveSameTargetValue(AttributeSamples matched) {
 		// assumes at least i example in dataset
-		String targetValue = matched.getExample(0).targetValue();
-		for (Example e : matched.examples) {
+		String targetValue = matched.get(0).targetValue();
+		for (Attributes e : matched.samples) {
 			if (!(e.targetValue().equals(targetValue))) {
 				return false;
 			}

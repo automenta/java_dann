@@ -8,7 +8,7 @@ import org.junit.Test;
 import syncleus.dann.logic.propositional.kb.data.Clause;
 import syncleus.dann.logic.propositional.kb.data.Literal;
 import syncleus.dann.logic.propositional.parsing.ast.PropositionSymbol;
-import aima.util.AimaUtil;
+import syncleus.dann.util.AimaUtil;
 
 /**
  * 

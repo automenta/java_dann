@@ -3,10 +3,10 @@ package aima.test.core.unit.probability.bayes.impl;
 import org.junit.Assert;
 import org.junit.Test;
 
-import aima.probability.ProbabilityModel;
-import aima.probability.bayes.impl.CPT;
-import aima.probability.domain.BooleanDomain;
-import aima.probability.util.RandVar;
+import syncleus.dann.learn.probability.ProbabilityModel;
+import syncleus.dann.learn.probability.bayes.impl.CPT;
+import syncleus.dann.learn.probability.domain.BooleanDomain;
+import syncleus.dann.learn.probability.RandVar;
 
 public class CPTTest {
 	public static final double DELTA_THRESHOLD = ProbabilityModel.DEFAULT_ROUNDING_THRESHOLD;

@@ -7,7 +7,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import aima.util.AimaUtil;
+import syncleus.dann.util.AimaUtil;
 
 /**
  * @author Ravi Mohan

@@ -8,7 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import syncleus.dann.solve.eightpuzzle.EightPuzzleBoard;
-import aima.util.datastructure.XYLocation;
+import syncleus.dann.util.datastruct.XYLocation;
 
 /**
  * @author Ravi Mohan

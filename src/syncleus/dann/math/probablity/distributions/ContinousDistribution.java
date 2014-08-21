@@ -31,10 +31,10 @@ import syncleus.dann.data.Dataset;
 import syncleus.dann.data.vector.VectorCase;
 import syncleus.dann.data.vector.VectorData;
 import syncleus.dann.math.array.EngineArray;
-import syncleus.dann.math.matrix.MatrixMath;
-import syncleus.dann.math.matrix.RealMatrix;
-import syncleus.dann.math.matrix.SimpleRealMatrix;
-import syncleus.dann.math.matrix.decomposition.CholeskyDecomposition2;
+import syncleus.dann.data.matrix.MatrixMath;
+import syncleus.dann.data.matrix.RealMatrix;
+import syncleus.dann.data.matrix.SimpleRealMatrix;
+import syncleus.dann.data.matrix.decomposition.CholeskyDecomposition2;
 
 /**
  * A continuous distribution represents an infinite range of choices between two

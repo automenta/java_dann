@@ -6,7 +6,7 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
-import aima.util.datastructure.LIFOQueue;
+import syncleus.dann.util.datastruct.LIFOQueue;
 
 /**
  * @author Ravi Mohan

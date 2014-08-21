@@ -12,9 +12,9 @@ import syncleus.dann.solve.vacuum.VacuumEnvironmentState;
 import syncleus.dann.solve.vacuum.VacuumWorldActions;
 import syncleus.dann.solve.vacuum.VacuumWorldGoalTest;
 import syncleus.dann.solve.vacuum.VacuumWorldResults;
-import aima.search.framework.DefaultStepCostFunction;
-import aima.search.nondeterministic.NondeterministicProblem;
-import aima.search.nondeterministic.Path;
+import syncleus.dann.search.framework.DefaultStepCostFunction;
+import syncleus.dann.search.nondeterministic.NondeterministicProblem;
+import syncleus.dann.search.nondeterministic.Path;
 
 /**
  * Tests the AND-OR search algorithm using the erratic vacuum world of page 133,

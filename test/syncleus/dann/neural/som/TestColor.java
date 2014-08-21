@@ -24,7 +24,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import org.junit.Assert;
 import org.junit.Test;
-import syncleus.dann.math.Vector;
+import syncleus.dann.data.vector.Vector;
 import syncleus.dann.neural.som.brain.ExponentialDecaySomBrain;
 
 public class TestColor {

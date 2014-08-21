@@ -5,7 +5,7 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
-import aima.search.framework.Node;
+import syncleus.dann.search.framework.Node;
 
 /**
  * @author Ravi Mohan

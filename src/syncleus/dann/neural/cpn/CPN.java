@@ -32,8 +32,8 @@ import syncleus.dann.learn.ErrorLearning;
 import syncleus.dann.learn.MLResettable;
 import syncleus.dann.math.EncogMath;
 import syncleus.dann.math.EncogUtility;
-import syncleus.dann.math.matrix.RealMatrix;
-import syncleus.dann.math.matrix.SimpleRealMatrix;
+import syncleus.dann.data.matrix.RealMatrix;
+import syncleus.dann.data.matrix.SimpleRealMatrix;
 import syncleus.dann.math.random.ConsistentRandomizer;
 
 /**

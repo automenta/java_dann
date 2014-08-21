@@ -2,11 +2,11 @@ package aima.test.core.unit.probability.bayes.model;
 
 import org.junit.Test;
 
-import aima.probability.bayes.BayesInference;
-import aima.probability.bayes.exact.EliminationAsk;
-import aima.probability.bayes.exact.EnumerationAsk;
-import aima.probability.bayes.model.FiniteBayesModel;
-import aima.probability.example.BayesNetExampleFactory;
+import syncleus.dann.learn.probability.bayes.BayesInference;
+import syncleus.dann.learn.probability.bayes.exact.EliminationAsk;
+import syncleus.dann.learn.probability.bayes.exact.EnumerationAsk;
+import syncleus.dann.learn.probability.bayes.model.FiniteBayesModel;
+import example.probability.BayesNetExampleFactory;
 import aima.test.core.unit.probability.CommonFiniteProbabilityModelTests;
 
 public class FiniteBayesModelTest extends CommonFiniteProbabilityModelTests {

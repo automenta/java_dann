@@ -1,6 +1,6 @@
 package syncleus.dann.solve.nqueens;
 
-import aima.search.framework.HeuristicFunction;
+import syncleus.dann.search.framework.HeuristicFunction;
 
 /**
  * Estimates the distance to goal by the number of attacking pairs of queens on

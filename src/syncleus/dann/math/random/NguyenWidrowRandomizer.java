@@ -24,7 +24,7 @@
 package syncleus.dann.math.random;
 
 import syncleus.dann.Learning;
-import syncleus.dann.math.matrix.SimpleRealMatrix;
+import syncleus.dann.data.matrix.SimpleRealMatrix;
 import syncleus.dann.neural.VectorNeuralNetwork;
 import syncleus.dann.neural.util.activation.EncogActivationFunction;
 

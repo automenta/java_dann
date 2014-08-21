@@ -15,7 +15,7 @@ import syncleus.dann.logic.propositional.kb.data.Clause;
 import syncleus.dann.logic.propositional.parsing.PLParser;
 import syncleus.dann.logic.propositional.parsing.ast.Sentence;
 import syncleus.dann.logic.propositional.visitors.ConvertToConjunctionOfClauses;
-import aima.util.SetOps;
+import syncleus.dann.util.SetOps;
 import java.util.Arrays;
 
 /**

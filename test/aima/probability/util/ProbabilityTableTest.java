@@ -7,12 +7,12 @@ import java.util.Map;
 import org.junit.Assert;
 import org.junit.Test;
 
-import aima.probability.ProbabilityModel;
-import aima.probability.RandomVariable;
-import aima.probability.domain.BooleanDomain;
-import aima.probability.proposition.AssignmentProposition;
-import aima.probability.util.ProbabilityTable;
-import aima.probability.util.RandVar;
+import syncleus.dann.learn.probability.ProbabilityModel;
+import syncleus.dann.learn.probability.RandomVariable;
+import syncleus.dann.learn.probability.domain.BooleanDomain;
+import syncleus.dann.learn.probability.proposition.AssignmentProposition;
+import syncleus.dann.learn.probability.ProbabilityTable;
+import syncleus.dann.learn.probability.RandVar;
 
 public class ProbabilityTableTest {
 	public static final double DELTA_THRESHOLD = ProbabilityModel.DEFAULT_ROUNDING_THRESHOLD;

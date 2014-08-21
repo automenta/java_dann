@@ -26,7 +26,7 @@ package syncleus.dann.neural.cpn;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Map;
-import syncleus.dann.math.matrix.RealMatrix;
+import syncleus.dann.data.matrix.RealMatrix;
 
 /**
  * Persist a CPN network.

@@ -6,14 +6,13 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
-import syncleus.dann.attribute.aima.DataSet;
+import syncleus.dann.attribute.aima.AttributeSamples;
 import aima.learning.framework.DataSetFactory;
-import syncleus.dann.attribute.aima.DataSetSpecification;
-import syncleus.dann.attribute.aima.Example;
+import syncleus.dann.attribute.aima.Attributes;
 import syncleus.dann.neural.aima.IrisDataSetNumerizer;
 import syncleus.dann.neural.aima.Numerizer;
 import syncleus.dann.neural.aima.RabbitEyeDataSet;
-import aima.util.datastructure.Pair;
+import syncleus.dann.util.datastruct.Pair;
 
 /**
  * @author Ravi Mohan
@@ -22,7 +21,7 @@ import aima.util.datastructure.Pair;
 public class DataSetTest {
 	private static final String YES = "Yes";
 
-	DataSetSpecification spec;
+	syncleus.dann.attribute.aima.AttributeSamples.Specification spec;
 
 	@Test
 	public void testNormalizationOfFileBasedDataProducesCorrectMeanStdDevAndNormalizedValues()
@@ -66,10 +65,10 @@ public class DataSetTest {
 	@Test
 	public void testLoadsDatasetFile() throws Exception {
 
-		DataSet ds = DataSetFactory.getRestaurantDataSet();
+		AttributeSamples ds = DataSetFactory.getRestaurantDataSet();
 		Assert.assertEquals(12, ds.size());
 
-		Example first = ds.getExample(0);
+		Attributes first = ds.get(0);
 		Assert.assertEquals(YES, first.getAttributeValueAsString("alternate"));
 		Assert.assertEquals("$$$", first.getAttributeValueAsString("price"));
 		Assert.assertEquals("0-10",
@@ -86,16 +85,16 @@ public class DataSetTest {
 	@Test
 	public void testLoadsIrisDataSetWithNumericAndStringAttributes()
 			throws Exception {
-		DataSet ds = DataSetFactory.getIrisDataSet();
-		Example first = ds.getExample(0);
+		AttributeSamples ds = DataSetFactory.getIrisDataSet();
+		Attributes first = ds.get(0);
 		Assert.assertEquals("5.1",
 				first.getAttributeValueAsString("sepal_length"));
 	}
 
 	@Test
 	public void testNonDestructiveRemoveExample() throws Exception {
-		DataSet ds1 = DataSetFactory.getRestaurantDataSet();
-		DataSet ds2 = ds1.removeExample(ds1.getExample(0));
+		AttributeSamples ds1 = DataSetFactory.getRestaurantDataSet();
+		AttributeSamples ds2 = ds1.remove(ds1.get(0));
 		Assert.assertEquals(12, ds1.size());
 		Assert.assertEquals(11, ds2.size());
 	}
@@ -103,8 +102,8 @@ public class DataSetTest {
 	@Test
 	public void testNumerizesAndDeNumerizesIrisDataSetExample1()
 			throws Exception {
-		DataSet ds = DataSetFactory.getIrisDataSet();
-		Example first = ds.getExample(0);
+		AttributeSamples ds = DataSetFactory.getIrisDataSet();
+		Attributes first = ds.get(0);
 		Numerizer n = new IrisDataSetNumerizer();
 		Pair<List<Double>, List<Double>> io = n.numerize(first);
 
@@ -118,8 +117,8 @@ public class DataSetTest {
 	@Test
 	public void testNumerizesAndDeNumerizesIrisDataSetExample2()
 			throws Exception {
-		DataSet ds = DataSetFactory.getIrisDataSet();
-		Example first = ds.getExample(51);
+		AttributeSamples ds = DataSetFactory.getIrisDataSet();
+		Attributes first = ds.get(51);
 		Numerizer n = new IrisDataSetNumerizer();
 		Pair<List<Double>, List<Double>> io = n.numerize(first);
 
@@ -133,8 +132,8 @@ public class DataSetTest {
 	@Test
 	public void testNumerizesAndDeNumerizesIrisDataSetExample3()
 			throws Exception {
-		DataSet ds = DataSetFactory.getIrisDataSet();
-		Example first = ds.getExample(100);
+		AttributeSamples ds = DataSetFactory.getIrisDataSet();
+		Attributes first = ds.get(100);
 		Numerizer n = new IrisDataSetNumerizer();
 		Pair<List<Double>, List<Double>> io = n.numerize(first);
 

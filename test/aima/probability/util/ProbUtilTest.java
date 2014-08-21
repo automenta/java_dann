@@ -6,11 +6,11 @@ import java.util.Map;
 import org.junit.Assert;
 import org.junit.Test;
 
-import aima.probability.RandomVariable;
-import aima.probability.domain.ArbitraryTokenDomain;
-import aima.probability.domain.BooleanDomain;
-import aima.probability.util.ProbUtil;
-import aima.probability.util.RandVar;
+import syncleus.dann.learn.probability.RandomVariable;
+import syncleus.dann.learn.probability.domain.ArbitraryTokenDomain;
+import syncleus.dann.learn.probability.domain.BooleanDomain;
+import syncleus.dann.learn.probability.ProbUtil;
+import syncleus.dann.learn.probability.RandVar;
 
 public class ProbUtilTest {
 

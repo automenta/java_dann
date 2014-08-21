@@ -3,8 +3,8 @@ package aima.test.core.unit.probability.hmm.exact;
 import org.junit.Before;
 import org.junit.Test;
 
-import aima.probability.example.HMMExampleFactory;
-import aima.probability.hmm.exact.HMMForwardBackwardConstantSpace;
+import example.probability.HMMExampleFactory;
+import syncleus.dann.learn.probability.hmm.exact.HMMForwardBackwardConstantSpace;
 import aima.test.core.unit.probability.temporal.CommonForwardBackwardTest;
 
 /**

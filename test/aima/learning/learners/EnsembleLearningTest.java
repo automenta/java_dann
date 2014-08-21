@@ -6,9 +6,9 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
-import syncleus.dann.attribute.aima.DataSet;
+import syncleus.dann.attribute.aima.AttributeSamples;
 import aima.learning.framework.DataSetFactory;
-import syncleus.dann.attribute.aima.Learner;
+import syncleus.dann.attribute.aima.AttributeLearning;
 import syncleus.dann.logic.inductive.DecisionTree;
 import syncleus.dann.logic.learn.AdaBoostLearner;
 import syncleus.dann.logic.learn.StumpLearner;
@@ -24,9 +24,9 @@ public class EnsembleLearningTest {
 	@Test
 	public void testAdaBoostEnablesCollectionOfStumpsToClassifyDataSetAccurately()
 			throws Exception {
-		DataSet ds = DataSetFactory.getRestaurantDataSet();
+		AttributeSamples ds = DataSetFactory.getRestaurantDataSet();
 		List<DecisionTree> stumps = DecisionTree.getStumpsFor(ds, YES, "No");
-		List<Learner> learners = new ArrayList<Learner>();
+		List<AttributeLearning> learners = new ArrayList<AttributeLearning>();
 		for (Object stump : stumps) {
 			DecisionTree sl = (DecisionTree) stump;
 			StumpLearner stumpLearner = new StumpLearner(sl, "No");

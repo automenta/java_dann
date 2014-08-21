@@ -1,6 +1,6 @@
 package syncleus.dann.solve.eightpuzzle;
 
-import aima.search.framework.GoalTest;
+import syncleus.dann.search.framework.GoalTest;
 
 /**
  * @author Ravi Mohan

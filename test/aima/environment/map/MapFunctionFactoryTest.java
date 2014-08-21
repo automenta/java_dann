@@ -10,8 +10,8 @@ import syncleus.dann.plan.agent.Action;
 import syncleus.dann.solve.map.ExtendableMap;
 import syncleus.dann.solve.map.MapFunctionFactory;
 import syncleus.dann.solve.map.MoveToAction;
-import aima.search.framework.ActionsFunction;
-import aima.search.framework.ResultFunction;
+import syncleus.dann.search.framework.ActionsFunction;
+import syncleus.dann.search.framework.ResultFunction;
 
 /**
  * @author Ciaran O'Reilly
