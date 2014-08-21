@@ -23,7 +23,7 @@
  */
 package syncleus.dann.evolve.codec;
 
-import syncleus.dann.Learning;
+import syncleus.dann.evolve.MLMethodPhenotype;
 import syncleus.dann.evolve.genome.Genome;
 
 /**
@@ -36,15 +36,15 @@ public class GenomeAsPhenomeCODEC implements GeneticCODEC {
      * {@inheritDoc}
      */
     @Override
-    public Learning geneDecode(final Genome genome) {
-        return genome;
+    public MLMethodPhenotype geneDecode(final Genome genome) {
+        return (MLMethodPhenotype) genome;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Genome geneEncode(final Learning phenotype) {
+    public Genome geneEncode(final MLMethodPhenotype phenotype) {
         return (Genome) phenotype;
     }
 

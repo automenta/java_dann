@@ -30,6 +30,12 @@ import syncleus.dann.evolve.train.EvolutionaryAlgorithm;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import syncleus.dann.evolve.gp.EncogProgram;
+import syncleus.dann.evolve.gp.EncogProgramContext;
+import syncleus.dann.evolve.gp.ProgramNode;
+import syncleus.dann.evolve.gp.expvalue.ValueType;
+import syncleus.dann.evolve.gp.generator.PrgGenerator;
+import syncleus.dann.evolve.gp.generator.PrgGrowGenerator;
 
 /**
  * Perform a type-safe subtree mutation. The mutation point is chosen randomly,

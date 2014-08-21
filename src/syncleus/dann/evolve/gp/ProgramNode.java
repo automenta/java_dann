@@ -27,6 +27,8 @@ import syncleus.dann.graph.tree.TreeNode;
 import syncleus.dann.graph.tree.basic.BasicTreeNode;
 
 import java.io.Serializable;
+import syncleus.dann.evolve.gp.expvalue.ExpressionValue;
+import syncleus.dann.evolve.gp.extension.ProgramExtensionTemplate;
 
 /**
  * Represents a program node in an EPL program.

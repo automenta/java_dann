@@ -28,6 +28,8 @@ import syncleus.dann.data.MutableData;
 import syncleus.dann.data.vector.VectorData;
 
 import java.io.Serializable;
+import syncleus.dann.evolve.gp.EncogProgram;
+import syncleus.dann.learn.ScoreLearning;
 
 /**
  * This is a very simple evaluation function that simply passes in all zeros for
@@ -38,7 +40,7 @@ import java.io.Serializable;
  * genome is valid and does not generate any obvious division by zero issues.
  * This allows a population generator to quickly eliminate some invalid genomes.
  */
-public class ZeroEvalScoreFunction implements LearningScoring, Serializable {
+public class ZeroEvalScoreFunction implements ScoreLearning, Serializable {
 
     /**
      * The serial id.
@@ -49,13 +51,13 @@ public class ZeroEvalScoreFunction implements LearningScoring, Serializable {
      * {@inheritDoc}
      */
     @Override
-    public double calculateScore(final Learning genome) {
+    public Double apply(final Learning genome) {
         final EncogProgram prg = (EncogProgram) genome;
         final PrgPopulation pop = (PrgPopulation) prg.getPopulation();
         final MutableData inputData = new VectorData(pop.getContext()
                 .getDefinedVariables().size());
         prg.compute(inputData);
-        return 0;
+        return 0d;
     }
 
     /**

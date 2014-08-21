@@ -23,6 +23,9 @@
  */
 package syncleus.dann.evolve.gp.species;
 
+import syncleus.dann.evolve.gp.EncogProgram;
+import syncleus.dann.evolve.gp.ProgramNode;
+
 /**
  * Compare two Encog programs for speciation. Count the nodes that are the
  * different, the higher the compare value, the more different two genomes are.

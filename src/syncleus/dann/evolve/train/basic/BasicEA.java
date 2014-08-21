@@ -51,7 +51,7 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
-import syncleus.dann.learn.LearningScoring;
+import syncleus.dann.learn.ScoreLearning;
 
 /**
  * Provides a basic implementation of a multi-threaded Evolutionary Algorithm.
@@ -104,7 +104,7 @@ public class BasicEA implements EvolutionaryAlgorithm, /* MultiThreadable,
     /**
      * The score calculation function.
      */
-    private final LearningScoring scoreFunction;
+    private final ScoreLearning scoreFunction;
 
     /**
      * The selection operator.
@@ -217,7 +217,7 @@ public class BasicEA implements EvolutionaryAlgorithm, /* MultiThreadable,
      * @param theScoreFunction The score function.
      */
     public BasicEA(final Population thePopulation,
-                   final LearningScoring theScoreFunction) {
+                   final ScoreLearning theScoreFunction) {
 
         this.population = thePopulation;
         this.scoreFunction = theScoreFunction;
@@ -485,7 +485,7 @@ public class BasicEA implements EvolutionaryAlgorithm, /* MultiThreadable,
      * {@inheritDoc}
      */
     @Override
-    public LearningScoring getScoreFunction() {
+    public ScoreLearning getScoreFunction() {
         return this.scoreFunction;
     }
 

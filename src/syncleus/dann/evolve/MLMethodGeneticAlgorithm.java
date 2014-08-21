@@ -23,8 +23,6 @@
  */
 package syncleus.dann.evolve;
 
-import syncleus.dann.Learning;
-import syncleus.dann.data.VectorEncodable;
 import syncleus.dann.evolve.crossover.Splice;
 import syncleus.dann.evolve.genome.Genome;
 import syncleus.dann.evolve.mutate.MutatePerturb;
@@ -37,7 +35,7 @@ import syncleus.dann.evolve.species.Species;
 import syncleus.dann.evolve.train.basic.TrainEA;
 import syncleus.dann.learn.AbstractTraining;
 import syncleus.dann.learn.AbstractTraining.TrainingImplementationType;
-import syncleus.dann.learn.LearningScoring;
+import syncleus.dann.learn.ScoreLearning;
 import syncleus.dann.learn.MethodFactory;
 import syncleus.dann.neural.flat.propagation.TrainingContinuation;
 
@@ -79,7 +77,7 @@ public class MLMethodGeneticAlgorithm extends AbstractTraining /*implements Mult
          * @param theScoreFunction The score function.
          */
         public MLMethodGeneticAlgorithmHelper(final Population thePopulation,
-                                              final LearningScoring theScoreFunction) {
+                                              final ScoreLearning theScoreFunction) {
             super(thePopulation, theScoreFunction);
         }
     }
@@ -97,8 +95,8 @@ public class MLMethodGeneticAlgorithm extends AbstractTraining /*implements Mult
      * @param calculateScore   The score calculation object.
      * @param populationSize   The population size.
      */
-    public MLMethodGeneticAlgorithm(final MethodFactory phenotypeFactory,
-                                    final LearningScoring calculateScore, final int populationSize) {
+    public MLMethodGeneticAlgorithm(final MethodFactory<MLMethodPhenotype> phenotypeFactory,
+                                    final ScoreLearning calculateScore, final int populationSize) {
         super(TrainingImplementationType.Iterative);
 
         // Create the population
@@ -106,8 +104,7 @@ public class MLMethodGeneticAlgorithm extends AbstractTraining /*implements Mult
         final Species defaultSpecies = population.createSpecies();
 
         for (int i = 0; i < population.getPopulationSize(); i++) {
-            final VectorEncodable chromosomeNetwork = (VectorEncodable) phenotypeFactory
-                    .factor();
+            final MLMethodPhenotype chromosomeNetwork = phenotypeFactory.factor();
             final MLMethodGenome genome = new MLMethodGenome(chromosomeNetwork);
             defaultSpecies.add(genome);
         }
@@ -158,7 +155,7 @@ public class MLMethodGeneticAlgorithm extends AbstractTraining /*implements Mult
      * {@inheritDoc}
      */
     @Override
-    public Learning getMethod() {
+    public MLMethodPhenotype getMethod() {
         final Genome best = this.genetic.getBestGenome();
         return this.genetic.getCODEC().geneDecode(best);
     }

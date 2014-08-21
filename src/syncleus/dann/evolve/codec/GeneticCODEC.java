@@ -23,7 +23,7 @@
  */
 package syncleus.dann.evolve.codec;
 
-import syncleus.dann.data.VectorEncodable;
+import syncleus.dann.evolve.MLMethodPhenotype;
 import syncleus.dann.evolve.genome.Genome;
 
 /**
@@ -40,7 +40,7 @@ public interface GeneticCODEC {
      * @param genome The genome to decode.
      * @return The phenome.
      */
-    VectorEncodable geneDecode(Genome genome);
+    MLMethodPhenotype geneDecode(Genome genome);
 
     /**
      * Attempt to build a genome from a phenome. Note: not all CODEC's support
@@ -49,5 +49,5 @@ public interface GeneticCODEC {
      * @param phenotype The phenotype.
      * @return The genome.
      */
-    Genome geneEncode(VectorEncodable phenotype);
+    Genome geneEncode(MLMethodPhenotype phenotype);
 }

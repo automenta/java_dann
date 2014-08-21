@@ -24,6 +24,8 @@
 package syncleus.dann.evolve.gp.generator;
 
 import java.util.Random;
+import syncleus.dann.evolve.gp.EncogProgram;
+import syncleus.dann.evolve.gp.train.PrgPopulation;
 
 /**
  * Used to thread the generation process.

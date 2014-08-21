@@ -25,6 +25,10 @@ package syncleus.dann.evolve.gp.generator;
 
 import java.util.List;
 import java.util.Random;
+import syncleus.dann.evolve.gp.EncogProgram;
+import syncleus.dann.evolve.gp.EncogProgramContext;
+import syncleus.dann.evolve.gp.ProgramNode;
+import syncleus.dann.evolve.gp.expvalue.ValueType;
 
 /**
  * The full generator works by creating program trees that do not stop

@@ -277,7 +277,7 @@ public class BasicSpecies implements Serializable, Species {
     public String toString() {
         final StringBuilder result = new StringBuilder();
         result.append("[BasicSpecies: score=");
-        result.append(Format.formatDouble(getBestScore(), 2));
+        result.append(getBestScore());
         result.append(", members=");
         result.append(this.members.size());
         result.append(", age=");

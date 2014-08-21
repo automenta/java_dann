@@ -31,6 +31,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import syncleus.dann.evolve.gp.expvalue.ExpressionValue;
+import syncleus.dann.evolve.gp.expvalue.ValueType;
+import syncleus.dann.evolve.gp.extension.FunctionFactory;
+import syncleus.dann.evolve.gp.extension.StandardExtensions;
 
 /**
  * Every EncogProgram must belong to a context. When programs are in a

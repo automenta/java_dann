@@ -29,6 +29,9 @@ import syncleus.dann.evolve.exception.EACompileError;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import syncleus.dann.evolve.gp.EncogProgramContext;
+import syncleus.dann.evolve.gp.ProgramNode;
+import syncleus.dann.evolve.gp.expvalue.ValueType;
 
 /**
  * A basic template.

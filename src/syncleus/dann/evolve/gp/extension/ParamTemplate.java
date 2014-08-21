@@ -30,6 +30,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import syncleus.dann.evolve.gp.expvalue.ValueType;
 
 /**
  * Provides a template for parameters to the opcodes. This defines the accepted

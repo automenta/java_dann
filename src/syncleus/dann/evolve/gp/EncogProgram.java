@@ -37,6 +37,9 @@ import syncleus.dann.learn.ErrorLearning;
 import syncleus.dann.math.EncogUtility;
 
 import java.util.*;
+import org.encog.parse.expression.common.ParseCommonExpression;
+import org.encog.parse.expression.epl.ParseEPL;
+import syncleus.dann.data.Data;
 import syncleus.dann.evolve.gp.expvalue.ExpressionValue;
 import syncleus.dann.evolve.gp.expvalue.ValueType;
 import static syncleus.dann.evolve.gp.expvalue.ValueType.booleanType;
@@ -47,6 +50,9 @@ import static syncleus.dann.evolve.gp.expvalue.ValueType.stringType;
 import syncleus.dann.evolve.gp.extension.FunctionFactory;
 import syncleus.dann.evolve.gp.extension.StandardExtensions;
 import syncleus.dann.evolve.gp.train.PrgPopulation;
+import syncleus.dann.util.expression.common.RenderCommonExpression;
+import syncleus.dann.util.expression.epl.RenderEPL;
+import syncleus.dann.util.expression.rpn.RenderRPN;
 
 /**
  * Holds an Encog Programming Language (EPL) program. A Encog program is
@@ -232,7 +238,7 @@ public class EncogProgram extends BasicGenome implements RegressionLearning, Err
      * @return A single numer MLData.
      */
     @Override
-    public MutableData compute(final MutableData input) {
+    public Data compute(final Data input) {
         if (input.size() != getInputCount()) {
             throw new EACompileError("Invalid input count.");
         }

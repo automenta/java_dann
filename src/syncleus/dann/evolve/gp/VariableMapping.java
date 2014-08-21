@@ -24,6 +24,7 @@
 package syncleus.dann.evolve.gp;
 
 import java.io.Serializable;
+import syncleus.dann.evolve.gp.expvalue.ValueType;
 
 /**
  * A variable mapping defines the type for each of the variables in an Encog

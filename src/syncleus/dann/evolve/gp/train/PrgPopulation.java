@@ -24,10 +24,13 @@
 package syncleus.dann.evolve.gp.train;
 
 import syncleus.dann.RegressionLearning;
-import syncleus.dann.data.MutableData;
+import syncleus.dann.data.Data;
 import syncleus.dann.evolve.genome.Genome;
+import syncleus.dann.evolve.gp.EncogProgram;
+import syncleus.dann.evolve.gp.EncogProgramContext;
 import syncleus.dann.evolve.population.BasicPopulation;
 import syncleus.dann.evolve.species.Species;
+import syncleus.dann.util.expression.common.RenderCommonExpression;
 
 /**
  * A population that contains EncogProgram's. The primary difference between
@@ -66,7 +69,7 @@ public class PrgPopulation extends BasicPopulation implements RegressionLearning
      * @param input The input to the
      */
     @Override
-    public MutableData compute(final MutableData input) {
+    public Data compute(final Data input) {
         final EncogProgram best = (EncogProgram) getBestGenome();
         return best.compute(input);
     }

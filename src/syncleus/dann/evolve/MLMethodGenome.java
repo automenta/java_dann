@@ -23,7 +23,6 @@
  */
 package syncleus.dann.evolve;
 
-import syncleus.dann.data.VectorEncodable;
 import syncleus.dann.evolve.genome.DoubleArrayGenome;
 
 /**
@@ -41,14 +40,14 @@ public class MLMethodGenome extends DoubleArrayGenome {
     /**
      * The phenome.
      */
-    private VectorEncodable phenotype;
+    private MLMethodPhenotype phenotype;
 
     /**
      * Construct a neural genome.
      *
      * @param thePhenotype The phenotype to use.
      */
-    public MLMethodGenome(final VectorEncodable thePhenotype) {
+    public MLMethodGenome(final MLMethodPhenotype thePhenotype) {
         super(thePhenotype.encodedArrayLength());
         this.phenotype = thePhenotype;
         this.phenotype.encodeToArray(getData());
@@ -64,14 +63,14 @@ public class MLMethodGenome extends DoubleArrayGenome {
     /**
      * @return the phenotype
      */
-    public VectorEncodable getPhenotype() {
+    public MLMethodPhenotype getPhenotype() {
         return this.phenotype;
     }
 
     /**
      * @param phenotype the phenotype to set
      */
-    public void setPhenotype(final VectorEncodable phenotype) {
+    public void setPhenotype(final MLMethodPhenotype phenotype) {
         this.phenotype = phenotype;
     }
 }

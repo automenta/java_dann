@@ -24,6 +24,9 @@
 package syncleus.dann.evolve.gp.train.rewrite;
 
 import syncleus.dann.evolve.genome.Genome;
+import syncleus.dann.evolve.gp.EncogProgram;
+import syncleus.dann.evolve.gp.ProgramNode;
+import syncleus.dann.evolve.gp.expvalue.ExpressionValue;
 import syncleus.dann.evolve.rules.RewriteRule;
 import syncleus.dann.math.EncogMath;
 

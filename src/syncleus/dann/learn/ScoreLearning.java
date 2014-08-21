@@ -32,7 +32,7 @@ import syncleus.dann.Learning;
  * seeking a high or a low score, depending on the value the shouldMinimize
  * method returns.
  */
-public interface LearningScoring extends Function<Learning, Double> {
+public interface ScoreLearning extends Function<Learning, Double> {
 
     /**
      * Calculate this network's score.

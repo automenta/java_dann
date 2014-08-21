@@ -24,7 +24,7 @@
 package syncleus.dann.learn.fitness;
 
 
-import syncleus.dann.learn.LearningScoring;
+import syncleus.dann.learn.ScoreLearning;
 
 import java.io.Serializable;
 
@@ -45,7 +45,7 @@ public class FitnessObjective implements Serializable {
     /**
      * The score function.
      */
-    private final LearningScoring score;
+    private final ScoreLearning score;
 
     /**
      * Construct the fitness objective.
@@ -53,7 +53,7 @@ public class FitnessObjective implements Serializable {
      * @param weight The weight.
      * @param score  The score.
      */
-    public FitnessObjective(final double weight, final LearningScoring score) {
+    public FitnessObjective(final double weight, final ScoreLearning score) {
         super();
         this.weight = weight;
         this.score = score;
@@ -69,7 +69,7 @@ public class FitnessObjective implements Serializable {
     /**
      * @return the score
      */
-    public LearningScoring getScore() {
+    public ScoreLearning getScore() {
         return score;
     }
 }

@@ -27,7 +27,7 @@ import syncleus.dann.Learning;
 import syncleus.dann.RegressionLearning;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.data.buffer.BufferedMLDataSet;
-import syncleus.dann.learn.LearningScoring;
+import syncleus.dann.learn.ScoreLearning;
 import syncleus.dann.math.EncogUtility;
 
 /**
@@ -35,7 +35,7 @@ import syncleus.dann.math.EncogUtility;
  * annealing or genetic algorithms just as you would any other training set
  * based training method. The method must support regression (MLRegression).
  */
-public class TrainingSetScore implements LearningScoring {
+public class TrainingSetScore implements ScoreLearning {
 
     /**
      * The training set.

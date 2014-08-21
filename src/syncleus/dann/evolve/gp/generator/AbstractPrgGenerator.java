@@ -23,13 +23,6 @@
  */
 package syncleus.dann.evolve.gp.generator;
 
-import org.encog.ml.prg.EncogProgram;
-import org.encog.ml.prg.EncogProgramContext;
-import org.encog.ml.prg.ProgramNode;
-import org.encog.ml.prg.expvalue.ValueType;
-import org.encog.ml.prg.extension.ProgramExtensionTemplate;
-import org.encog.ml.prg.train.PrgPopulation;
-import org.encog.ml.prg.train.ZeroEvalScoreFunction;
 import syncleus.dann.evolve.GeneticError;
 import syncleus.dann.evolve.exception.EACompileError;
 import syncleus.dann.evolve.exception.EARuntimeError;
@@ -42,6 +35,15 @@ import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import org.encog.util.concurrency.MultiThreadable;
+import syncleus.dann.evolve.gp.EncogProgram;
+import syncleus.dann.evolve.gp.EncogProgramContext;
+import syncleus.dann.evolve.gp.ProgramNode;
+import syncleus.dann.evolve.gp.expvalue.ValueType;
+import syncleus.dann.evolve.gp.extension.ProgramExtensionTemplate;
+import syncleus.dann.evolve.gp.train.PrgPopulation;
+import syncleus.dann.evolve.gp.train.ZeroEvalScoreFunction;
+import syncleus.dann.learn.ScoreLearning;
 
 /**
  * The abstract base for Full and Grow program generation.
@@ -51,7 +53,7 @@ public abstract class AbstractPrgGenerator implements PrgGenerator,
     /**
      * An optional scoring function.
      */
-    private LearningScoring score = new ZeroEvalScoreFunction();
+    private ScoreLearning score = new ZeroEvalScoreFunction();
 
     /**
      * The program context to use.
@@ -158,7 +160,7 @@ public abstract class AbstractPrgGenerator implements PrgGenerator,
             double s;
             try {
                 tries--;
-                s = this.score.calculateScore(result);
+                s = this.score.apply(result);
             } catch (final EARuntimeError e) {
                 s = Double.NaN;
             }
@@ -409,7 +411,7 @@ public abstract class AbstractPrgGenerator implements PrgGenerator,
     /**
      * @return the score
      */
-    public LearningScoring getScore() {
+    public ScoreLearning getScore() {
         return this.score;
     }
 
@@ -460,7 +462,7 @@ public abstract class AbstractPrgGenerator implements PrgGenerator,
     /**
      * @param score the score to set
      */
-    public void setScore(final LearningScoring score) {
+    public void setScore(final ScoreLearning score) {
         this.score = score;
     }
 

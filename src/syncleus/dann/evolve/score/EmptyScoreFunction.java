@@ -26,12 +26,12 @@ package syncleus.dann.evolve.score;
 import syncleus.dann.Learning;
 
 import java.io.Serializable;
-import syncleus.dann.learn.LearningScoring;
+import syncleus.dann.learn.ScoreLearning;
 
 /**
  * An empty score function. Simply returns zero as the score, always.
  */
-public class EmptyScoreFunction implements LearningScoring, Serializable {
+public class EmptyScoreFunction implements ScoreLearning, Serializable {
 
     /**
      * Serial ID.

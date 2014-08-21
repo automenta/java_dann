@@ -35,7 +35,7 @@ import syncleus.dann.evolve.sort.GenomeComparator;
 import syncleus.dann.evolve.species.Speciation;
 
 import java.util.List;
-import syncleus.dann.learn.LearningScoring;
+import syncleus.dann.learn.ScoreLearning;
 
 /**
  * This interface defines the basic functionality of an Evolutionary Algorithm.
@@ -143,7 +143,7 @@ public interface EvolutionaryAlgorithm {
     /**
      * @return The score function.
      */
-    LearningScoring getScoreFunction();
+    ScoreLearning getScoreFunction();
 
     /**
      * @return The selection operator. Used to choose genomes.

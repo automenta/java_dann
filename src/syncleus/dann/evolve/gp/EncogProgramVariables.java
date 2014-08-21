@@ -31,6 +31,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import syncleus.dann.evolve.gp.expvalue.ExpressionValue;
 
 /**
  * This class stores the actual variable values for an Encog Program. The

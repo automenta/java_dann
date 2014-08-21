@@ -28,6 +28,16 @@ import syncleus.dann.math.random.RangeRandomizer;
 
 import java.util.List;
 import java.util.Random;
+import syncleus.dann.evolve.gp.EncogProgramContext;
+import syncleus.dann.evolve.gp.ProgramNode;
+import syncleus.dann.evolve.gp.expvalue.EvaluateExpr;
+import syncleus.dann.evolve.gp.expvalue.ExpressionValue;
+import syncleus.dann.evolve.gp.expvalue.ValueType;
+import static syncleus.dann.evolve.gp.expvalue.ValueType.booleanType;
+import static syncleus.dann.evolve.gp.expvalue.ValueType.enumType;
+import static syncleus.dann.evolve.gp.expvalue.ValueType.floatingType;
+import static syncleus.dann.evolve.gp.expvalue.ValueType.intType;
+import static syncleus.dann.evolve.gp.expvalue.ValueType.stringType;
 
 /**
  * This class defines the standard opcodes for Encog programs.

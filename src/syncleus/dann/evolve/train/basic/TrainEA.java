@@ -33,7 +33,7 @@ import syncleus.dann.learn.strategy.Strategy;
 import java.util.ArrayList;
 import java.util.List;
 import syncleus.dann.learn.AbstractTraining.TrainingImplementationType;
-import syncleus.dann.learn.LearningScoring;
+import syncleus.dann.learn.ScoreLearning;
 import syncleus.dann.neural.flat.propagation.TrainingContinuation;
 import syncleus.dann.neural.util.TrainingSetScore;
 
@@ -54,7 +54,7 @@ public class TrainEA extends BasicEA implements Training {
      * @param theScoreFunction The score function.
      */
     public TrainEA(final Population thePopulation,
-                   final LearningScoring theScoreFunction) {
+                   final ScoreLearning theScoreFunction) {
         super(thePopulation, theScoreFunction);
     }
 

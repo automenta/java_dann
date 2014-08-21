@@ -35,7 +35,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import org.encog.util.concurrency.MultiThreadable;
-import syncleus.dann.learn.LearningScoring;
+import syncleus.dann.learn.ScoreLearning;
 
 /**
  * This class is used to calculate the scores for an entire population. This is
@@ -55,7 +55,7 @@ public class ParallelScore implements MultiThreadable {
     /**
      * The scoring function.
      */
-    private final LearningScoring scoreFunction;
+    private final ScoreLearning scoreFunction;
 
     /**
      * The score adjuster.
@@ -83,7 +83,7 @@ public class ParallelScore implements MultiThreadable {
      */
     public ParallelScore(final Population thePopulation,
                          final GeneticCODEC theCODEC, final List<AdjustScore> theAdjusters,
-                         final LearningScoring theScoreFunction, final int theThreadCount) {
+                         final ScoreLearning theScoreFunction, final int theThreadCount) {
         this.codec = theCODEC;
         this.population = thePopulation;
         this.scoreFunction = theScoreFunction;
@@ -101,7 +101,7 @@ public class ParallelScore implements MultiThreadable {
     /**
      * @return the scoreFunction
      */
-    public LearningScoring getScoreFunction() {
+    public ScoreLearning getScoreFunction() {
         return scoreFunction;
     }
 

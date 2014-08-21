@@ -30,6 +30,10 @@ import syncleus.dann.evolve.train.EvolutionaryAlgorithm;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import syncleus.dann.evolve.gp.EncogProgram;
+import syncleus.dann.evolve.gp.EncogProgramContext;
+import syncleus.dann.evolve.gp.ProgramNode;
+import syncleus.dann.evolve.gp.expvalue.ValueType;
 
 /**
  * Perform a type-safe subtree crossover. The crossover points will be chosen

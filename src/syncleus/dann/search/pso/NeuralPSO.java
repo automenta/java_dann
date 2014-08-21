@@ -27,7 +27,7 @@ import org.encog.util.concurrency.TaskGroup;
 import syncleus.dann.Learning;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.learn.AbstractTraining;
-import syncleus.dann.learn.LearningScoring;
+import syncleus.dann.learn.ScoreLearning;
 import syncleus.dann.math.VectorAlgebra;
 import syncleus.dann.math.random.NguyenWidrowRandomizer;
 import syncleus.dann.math.random.Randomizer;
@@ -53,7 +53,7 @@ public class NeuralPSO extends AbstractTraining {
 
     protected boolean m_multiThreaded = true;
     protected VectorAlgebra m_va;
-    protected LearningScoring m_calculateScore;
+    protected ScoreLearning m_calculateScore;
     protected Randomizer m_randomizer;
 
     // Swarm state and memories.
@@ -121,7 +121,7 @@ public class NeuralPSO extends AbstractTraining {
      * @param populationSize the swarm size.
      */
     public NeuralPSO(final VectorNeuralNetwork network, final Randomizer randomizer,
-                     final LearningScoring calculateScore, final int populationSize) {
+                     final ScoreLearning calculateScore, final int populationSize) {
         super(TrainingImplementationType.Iterative);
         // initialisation of the member variables
         m_populationSize = populationSize;

@@ -30,7 +30,7 @@ import syncleus.dann.evolve.score.AdjustScore;
 import syncleus.dann.evolve.train.basic.BasicEA;
 
 import java.util.List;
-import syncleus.dann.learn.LearningScoring;
+import syncleus.dann.learn.ScoreLearning;
 
 /**
  * An individual threadable task for the parallel score calculation.
@@ -45,7 +45,7 @@ public class ParallelScoreTask implements Runnable {
     /**
      * The score function.
      */
-    private final LearningScoring scoreFunction;
+    private final ScoreLearning scoreFunction;
 
     /**
      * The score adjusters.

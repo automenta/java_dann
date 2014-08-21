@@ -24,7 +24,7 @@
 package syncleus.dann.learn.fitness;
 
 import syncleus.dann.Learning;
-import syncleus.dann.learn.LearningScoring;
+import syncleus.dann.learn.ScoreLearning;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -33,7 +33,7 @@ import java.util.List;
 /**
  * A multi-objective fitness function.
  */
-public class MultiObjectiveFitness implements LearningScoring, Serializable {
+public class MultiObjectiveFitness implements ScoreLearning, Serializable {
 
     /**
      * The serial id.
@@ -57,7 +57,7 @@ public class MultiObjectiveFitness implements LearningScoring, Serializable {
      * @param fitnessFunction The fitness function.
      */
     public void addObjective(final double weight,
-                             final LearningScoring fitnessFunction) {
+                             final ScoreLearning fitnessFunction) {
         if (this.objectives.isEmpty()) {
             this.min = fitnessFunction.shouldMinimize();
         } else {
