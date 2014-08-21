@@ -25,7 +25,7 @@ package syncleus.dann.plan.grid2d;
 
 import java.util.Set;
 import syncleus.dann.math.geometry.Angle;
-import syncleus.dann.plan.AgentPolicy;
+import syncleus.dann.plan.ActionPolicy;
 import syncleus.dann.plan.DiscreteActionProblem;
 import syncleus.dann.plan.DiscreteActionSolution;
 import syncleus.dann.plan.SuccessorState;
@@ -33,7 +33,7 @@ import syncleus.dann.plan.SuccessorState;
 public class BasicAgent implements DiscreteActionSolution<Angle,BasicState> {
 
     private BasicState currentState;
-    private AgentPolicy<Angle,BasicState> policy;
+    private ActionPolicy<Angle,BasicState> policy;
     private BasicDiscreteActionProblem world;
     private boolean first = true;
 

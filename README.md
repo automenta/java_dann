@@ -7,4 +7,4 @@
  * Elsy QLearning
  * Hai
  * DeepLearning.net Tutorials
- 
+ * AIMA
