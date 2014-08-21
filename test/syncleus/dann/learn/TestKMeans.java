@@ -30,7 +30,6 @@ import syncleus.dann.data.DataCluster;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.data.vector.VectorData;
 import syncleus.dann.data.vector.VectorDataset;
-
 import syncleus.dann.learn.kmeans.KMeansClustering;
 import syncleus.dann.math.VectorDistance;
 

@@ -5,9 +5,9 @@
  */
 package pca;
 
-import syncleus.dann.data.image.ImageData;
 import Jama.Matrix;
 import java.awt.image.BufferedImage;
+import syncleus.dann.data.image.ImageData;
 
 /**
  *

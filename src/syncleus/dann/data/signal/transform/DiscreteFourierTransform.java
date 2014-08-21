@@ -18,13 +18,12 @@
  ******************************************************************************/
 package syncleus.dann.data.signal.transform;
 
-import syncleus.dann.math.ComplexNumber;
-import syncleus.dann.math.statistics.Averages;
-
 import java.util.Collections;
 import java.util.NavigableMap;
 import java.util.SortedMap;
 import java.util.TreeMap;
+import syncleus.dann.math.ComplexNumber;
+import syncleus.dann.math.statistics.Averages;
 
 /**
  * A DiscreteFourierTransform is a Fourier transform that operates on a discrete

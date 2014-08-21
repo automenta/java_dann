@@ -23,27 +23,26 @@
  */
 package syncleus.dann.learn.markov.training.kmeans;
 
-import syncleus.dann.Learning;
-import syncleus.dann.Training;
-import syncleus.dann.data.DataCase;
-import syncleus.dann.data.DataSequence;
-import syncleus.dann.data.Dataset;
-import syncleus.dann.data.vector.VectorDataset;
-import syncleus.dann.learn.markov.HiddenMarkovModelEncog;
-import syncleus.dann.learn.markov.alog.ViterbiCalculator;
-import syncleus.dann.math.probablity.distributions.StateDistribution;
-import syncleus.dann.learn.kmeans.KMeansUtil;
-import syncleus.dann.learn.strategy.Strategy;
-import syncleus.dann.math.VectorDistance;
-import syncleus.dann.neural.flat.propagation.TrainingContinuation;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import syncleus.dann.Learning;
+import syncleus.dann.Training;
 import syncleus.dann.data.Data;
+import syncleus.dann.data.DataCase;
+import syncleus.dann.data.DataSequence;
+import syncleus.dann.data.Dataset;
 import syncleus.dann.data.vector.VectorCluster;
 import syncleus.dann.data.vector.VectorData;
+import syncleus.dann.data.vector.VectorDataset;
 import syncleus.dann.learn.AbstractTraining.TrainingImplementationType;
+import syncleus.dann.learn.kmeans.KMeansUtil;
+import syncleus.dann.learn.markov.HiddenMarkovModelEncog;
+import syncleus.dann.learn.markov.alog.ViterbiCalculator;
+import syncleus.dann.learn.strategy.Strategy;
+import syncleus.dann.math.VectorDistance;
+import syncleus.dann.math.probablity.distributions.StateDistribution;
+import syncleus.dann.neural.flat.propagation.TrainingContinuation;
 
 /**
  * Train a Hidden Markov Model (HMM) with the KMeans algorithm. Makes use of

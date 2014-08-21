@@ -23,7 +23,7 @@
  */
 package org.encog.examples.neural.forest;
 
-import org.encog.EncogError;
+import org.encog.RuntimeException;
 import org.encog.ml.data.buffer.BufferedMLDataSet;
 import org.encog.neural.networks.BasicNetwork;
 import org.encog.persist.EncogDirectoryPersistence;
@@ -43,7 +43,7 @@ public class TrainNetwork {
 		BasicNetwork network  = null;
 		
 		if( !config.getTrainedNetworkFile().exists() ) {
-			throw new EncogError("Can't find neural network file, please generate data");
+			throw new RuntimeException("Can't find neural network file, please generate data");
 		}
 		
 		network = (BasicNetwork)EncogDirectoryPersistence.loadObject(config.getTrainedNetworkFile());

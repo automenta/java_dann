@@ -18,10 +18,15 @@
  ******************************************************************************/
 package syncleus.dann.learn.bayesian;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import syncleus.dann.graph.DirectedEdge;
 import syncleus.dann.learn.graphical.GraphicalModelNode;
-
-import java.util.*;
 
 public class ImmutableBayesianAdjacencyNetwork<N extends GraphicalModelNode, E extends DirectedEdge<N>>
         extends AbstractBayesianAdjacencyNetwork<N, E> {

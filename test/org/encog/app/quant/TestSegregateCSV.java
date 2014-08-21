@@ -29,10 +29,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-
 import junit.framework.Assert;
 import junit.framework.TestCase;
-
 import org.encog.app.analyst.csv.segregate.SegregateCSV;
 import org.encog.app.analyst.csv.segregate.SegregateTargetPercent;
 import org.encog.util.csv.CSVFormat;

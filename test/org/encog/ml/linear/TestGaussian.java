@@ -24,9 +24,7 @@
 package org.encog.ml.linear;
 
 import java.util.Arrays;
-
 import junit.framework.TestCase;
-
 import org.encog.ml.data.MLData;
 import org.encog.ml.data.MLDataPair;
 import org.encog.ml.data.MLDataSet;

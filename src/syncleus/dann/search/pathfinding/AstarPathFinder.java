@@ -18,12 +18,17 @@
  ******************************************************************************/
 package syncleus.dann.search.pathfinding;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.PriorityQueue;
+import java.util.Set;
 import syncleus.dann.graph.Edge;
 import syncleus.dann.graph.Graph;
 import syncleus.dann.graph.Weighted;
 import syncleus.dann.graph.path.PathFinder;
-
-import java.util.*;
 
 public class AstarPathFinder<N, E extends Edge<N>> implements PathFinder<N, E> {
     private final class PathedStep implements Comparable<PathedStep> {

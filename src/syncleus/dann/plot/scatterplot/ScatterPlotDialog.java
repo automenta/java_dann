@@ -5,14 +5,12 @@ import java.awt.Paint;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JColorChooser;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-
 import org.jfree.chart.JFreeChart;
 import org.simbrain.util.LabelledItemPanel;
 import org.simbrain.util.StandardDialog;

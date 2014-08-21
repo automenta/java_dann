@@ -18,10 +18,9 @@
  ******************************************************************************/
 package syncleus.dann.neural.feedforward.graph;
 
-import syncleus.dann.neural.Synapse;
-
 import java.util.List;
 import java.util.Set;
+import syncleus.dann.neural.Synapse;
 
 public interface FeedforwardBackpropBrain<IN extends InputBackpropNeuron, ON extends OutputBackpropNeuron, N extends BackpropNeuron, S extends Synapse<N>>
         extends BackpropBrain<IN, ON, N, S> {

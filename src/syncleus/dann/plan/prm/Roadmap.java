@@ -17,18 +17,18 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 package prpvis.struc;
 
-import java.util.List;
-import java.util.LinkedList;
-import java.util.Map;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.SortedSet;
-import java.util.HashSet;
 import java.util.TreeSet;
-import java.util.Comparator;
-import java.util.regex.*;
-
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import prpvis.core.Debugging;
 
 /**
@@ -626,7 +626,7 @@ public class Roadmap
           AStarNode n2=(AStarNode)o2;
           //NOTE: It is important that the following difference is computed
           //like this and not as  n1.dS+n1.eS-n2.dS-n2.eS, because of
-          //the $¤%@!!# FPU imprecision
+          //the $ï¿½%@!!# FPU imprecision
           double d=((n1.distanceFromStart+n1.estimatedDistanceToGoal)
                                -
                     (n2.distanceFromStart+n2.estimatedDistanceToGoal));

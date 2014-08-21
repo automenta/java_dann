@@ -24,7 +24,6 @@
 package org.encog.neural.prune;
 
 import junit.framework.TestCase;
-
 import org.encog.ml.data.basic.BasicMLData;
 import org.encog.neural.flat.FlatNetwork;
 import org.encog.neural.networks.BasicNetwork;

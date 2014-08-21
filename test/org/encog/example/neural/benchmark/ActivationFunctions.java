@@ -24,7 +24,6 @@
 package org.encog.examples.neural.benchmark;
 
 import org.encog.Encog;
-import org.encog.engine.network.activation.ActivationLinear;
 import org.encog.engine.network.activation.ActivationSigmoid;
 import org.encog.engine.network.activation.ActivationTANH;
 import org.encog.ml.data.MLDataSet;

@@ -22,7 +22,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
-
 import syncleus.dann.neural.spiking.groups.SynapseGroup;
 import syncleus.dann.neural.spiking.synapse_update_rules.StaticSynapseRule;
 import syncleus.dann.neural.spiking.synapse_update_rules.spikeresponders.JumpAndDecay;

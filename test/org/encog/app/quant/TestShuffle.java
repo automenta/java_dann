@@ -31,9 +31,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
-
 import junit.framework.TestCase;
-
 import org.encog.app.analyst.csv.shuffle.ShuffleCSV;
 import org.encog.util.csv.CSVFormat;
 import org.junit.Assert;

@@ -18,17 +18,15 @@
  ******************************************************************************/
 package syncleus.dann.graphicalmodel.markovrandomfield;
 
+import java.util.HashSet;
+import java.util.Random;
+import java.util.Set;
 import org.junit.Assert;
 import org.junit.Test;
 import syncleus.dann.graph.ImmutableUndirectedEdge;
 import syncleus.dann.learn.graphical.GraphicalModelNode;
 import syncleus.dann.learn.graphical.SimpleGraphicalModelNode;
 import syncleus.dann.learn.markovrandomfield.MutableMarkovRandomFieldAdjacencyGraph;
-
-import javax.xml.bind.annotation.XmlRootElement;
-import java.util.HashSet;
-import java.util.Random;
-import java.util.Set;
 
 public class TestSicknessRandomMarkovField {
     

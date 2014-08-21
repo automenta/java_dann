@@ -23,11 +23,10 @@
  */
 package syncleus.dann.evolve.gp.train;
 
+import java.io.Serializable;
 import syncleus.dann.Learning;
 import syncleus.dann.data.MutableData;
 import syncleus.dann.data.vector.VectorData;
-
-import java.io.Serializable;
 import syncleus.dann.evolve.gp.EncogProgram;
 import syncleus.dann.learn.ScoreLearning;
 

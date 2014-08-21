@@ -6,14 +6,14 @@
 package syncleus.dann.data.image.filter.impl;
 
 import imagepreprocessing.helper.PreprocessingHelper;
-import syncleus.dann.data.image.filter.IParametersPanel;
-import syncleus.dann.data.image.filter.ImageFilter;
 import imagepreprocessing.view.panels.MedianPanel;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.Serializable;
 import java.util.Arrays;
 import javax.swing.JPanel;
+import syncleus.dann.data.image.filter.IParametersPanel;
+import syncleus.dann.data.image.filter.ImageFilter;
 
 /**
  * Median filter is used for noise reduction on the grayscale image. The filter 

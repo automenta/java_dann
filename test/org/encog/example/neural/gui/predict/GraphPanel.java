@@ -27,9 +27,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
-
 import javax.swing.JPanel;
-
 import org.encog.mathutil.EncogMath;
 import org.encog.ml.data.MLData;
 import org.encog.ml.data.basic.BasicMLData;

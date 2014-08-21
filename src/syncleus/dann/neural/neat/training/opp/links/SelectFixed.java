@@ -23,11 +23,10 @@
  */
 package syncleus.dann.neural.neat.training.opp.links;
 
-import syncleus.dann.evolve.train.EvolutionaryAlgorithm;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import syncleus.dann.evolve.train.EvolutionaryAlgorithm;
 
 /**
  * Select a fixed number of link genes. If the genome does not have enough links

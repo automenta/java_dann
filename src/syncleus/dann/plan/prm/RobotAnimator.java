@@ -17,7 +17,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 package prpvis.core;
 
-import prpvis.struc.*;
+import prpvis.struc.PolyPoly;
+import prpvis.struc.RobotOrientation;
 
 /**
 * <p>Classes that implement this interface can generate intermediate steps for moving a

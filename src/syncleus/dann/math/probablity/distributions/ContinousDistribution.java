@@ -23,6 +23,9 @@
  */
 package syncleus.dann.math.probablity.distributions;
 
+import java.util.Arrays;
+import java.util.Random;
+import syncleus.dann.data.Data;
 import syncleus.dann.data.DataCase;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.data.vector.VectorCase;
@@ -32,10 +35,6 @@ import syncleus.dann.math.matrix.MatrixMath;
 import syncleus.dann.math.matrix.RealMatrix;
 import syncleus.dann.math.matrix.SimpleRealMatrix;
 import syncleus.dann.math.matrix.decomposition.CholeskyDecomposition2;
-
-import java.util.Arrays;
-import java.util.Random;
-import syncleus.dann.data.Data;
 
 /**
  * A continuous distribution represents an infinite range of choices between two

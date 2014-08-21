@@ -24,7 +24,6 @@
 package org.encog.examples.neural.forest;
 
 import java.io.File;
-
 import org.encog.StatusReportable;
 import org.encog.util.normalize.DataNormalization;
 import org.encog.util.normalize.input.InputField;

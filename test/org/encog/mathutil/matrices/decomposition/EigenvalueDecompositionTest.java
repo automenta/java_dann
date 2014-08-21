@@ -23,11 +23,10 @@
  */
 package org.encog.mathutil.matrices.decomposition;
 
+import org.encog.mathutil.matrices.Matrix;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-
-import org.encog.mathutil.matrices.Matrix;
 import org.junit.Test;
 
 /**

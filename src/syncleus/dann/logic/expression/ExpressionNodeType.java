@@ -21,7 +21,7 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package syncleus.dann.util.expression;
+package syncleus.dann.logic.expression;
 
 public enum ExpressionNodeType {
 	ConstVal,

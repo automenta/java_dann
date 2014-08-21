@@ -18,16 +18,23 @@
  ******************************************************************************/
 package syncleus.dann.neural.util;
 
-import syncleus.dann.graph.AbstractBidirectedAdjacencyGraph;
-import syncleus.dann.graph.topological.StrongConnectivityOptimizedGraph;
-import syncleus.dann.util.UnexpectedDannError;
-
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import syncleus.dann.data.DoubleArray;
+import syncleus.dann.graph.AbstractBidirectedAdjacencyGraph;
+import syncleus.dann.graph.topological.StrongConnectivityOptimizedGraph;
 import syncleus.dann.neural.Brain;
 import syncleus.dann.neural.Neuron;
 import syncleus.dann.neural.Synapse;
+import syncleus.dann.util.UnexpectedDannError;
 
 // TODO refactor this to be a generic following the pattern of its parent classes. Specifically to use Mutable graph type.
 

@@ -6,7 +6,12 @@
 
 package syncleus.dann.math;
 
-import org.apache.commons.math3.ml.distance.*;
+import org.apache.commons.math3.ml.distance.CanberraDistance;
+import org.apache.commons.math3.ml.distance.ChebyshevDistance;
+import org.apache.commons.math3.ml.distance.DistanceMeasure;
+import org.apache.commons.math3.ml.distance.EarthMoversDistance;
+import org.apache.commons.math3.ml.distance.EuclideanDistance;
+import org.apache.commons.math3.ml.distance.ManhattanDistance;
 import syncleus.dann.data.Data;
 
 /**

@@ -23,10 +23,14 @@
  */
 package syncleus.dann.neural.freeform;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import syncleus.dann.Classifying;
 import syncleus.dann.RegressionLearning;
-import syncleus.dann.data.MutableData;
 import syncleus.dann.data.Dataset;
+import syncleus.dann.data.MutableData;
 import syncleus.dann.data.VectorEncodable;
 import syncleus.dann.data.vector.VectorData;
 import syncleus.dann.learn.AbstractLearning;
@@ -37,8 +41,7 @@ import syncleus.dann.math.EncogMath;
 import syncleus.dann.math.EncogUtility;
 import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.math.random.ConsistentRandomizer;
-import syncleus.dann.neural.util.activation.ActivationTANH;
-import syncleus.dann.neural.util.activation.EncogActivationFunction;
+import syncleus.dann.neural.VectorNeuralNetwork;
 import syncleus.dann.neural.freeform.basic.BasicActivationSummationFactory;
 import syncleus.dann.neural.freeform.basic.BasicFreeformConnectionFactory;
 import syncleus.dann.neural.freeform.basic.BasicFreeformLayerFactory;
@@ -49,13 +52,9 @@ import syncleus.dann.neural.freeform.factory.FreeformNeuronFactory;
 import syncleus.dann.neural.freeform.factory.InputSummationFactory;
 import syncleus.dann.neural.freeform.task.ConnectionTask;
 import syncleus.dann.neural.freeform.task.NeuronTask;
-import syncleus.dann.neural.VectorNeuralNetwork;
+import syncleus.dann.neural.util.activation.ActivationTANH;
+import syncleus.dann.neural.util.activation.EncogActivationFunction;
 import syncleus.dann.util.ObjectCloner;
-
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 /**
  * Implements a freefrom neural network. A freeform neural network can represent

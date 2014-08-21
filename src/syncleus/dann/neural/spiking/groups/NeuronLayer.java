@@ -18,7 +18,6 @@
 package syncleus.dann.neural.spiking.groups;
 
 import java.util.List;
-
 import syncleus.dann.neural.spiking.SpikingNeuralNetwork;
 import syncleus.dann.neural.spiking.SpikingNeuron;
 

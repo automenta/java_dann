@@ -18,9 +18,12 @@
  ******************************************************************************/
 package syncleus.dann.data.state;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 import syncleus.dann.learn.graphical.GraphicalModelNode;
-
-import java.util.*;
 
 public class EvidenceMap<S> extends
         HashMap<Map<GraphicalModelNode, Object>, StateEvidence<S>> {

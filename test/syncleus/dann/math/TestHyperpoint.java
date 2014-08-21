@@ -18,10 +18,9 @@
  ******************************************************************************/
 package syncleus.dann.math;
 
+import java.util.ArrayList;
 import org.junit.Assert;
 import org.junit.Test;
-
-import java.util.ArrayList;
 
 public class TestHyperpoint {
     private static final double TEST_ACCEPTABLE_ERROR = 0.00001d;

@@ -23,21 +23,20 @@
  */
 package syncleus.dann.neural.flat;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import syncleus.dann.data.DataCase;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.math.EncogMath;
 import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.math.statistics.ErrorCalculation;
+import syncleus.dann.neural.VectorNeuralNetwork;
 import syncleus.dann.neural.util.activation.ActivationLinear;
 import syncleus.dann.neural.util.activation.ActivationSigmoid;
 import syncleus.dann.neural.util.activation.ActivationTANH;
 import syncleus.dann.neural.util.activation.EncogActivationFunction;
-import syncleus.dann.neural.VectorNeuralNetwork;
-
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * Implements a flat (vector based) neural network in the Encog Engine. This is

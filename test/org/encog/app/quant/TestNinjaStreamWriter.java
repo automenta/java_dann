@@ -27,10 +27,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.GregorianCalendar;
-
 import junit.framework.Assert;
 import junit.framework.TestCase;
-
 import org.encog.app.quant.ninja.NinjaStreamWriter;
 import org.encog.util.csv.CSVFormat;
 

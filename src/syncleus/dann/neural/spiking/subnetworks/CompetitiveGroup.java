@@ -19,13 +19,10 @@
 package syncleus.dann.neural.spiking.subnetworks;
 
 import java.util.Iterator;
-
-import syncleus.dann.neural.spiking.connections.ConnectNeurons;
 import syncleus.dann.neural.spiking.SpikingNeuralNetwork;
 import syncleus.dann.neural.spiking.SpikingNeuron;
 import syncleus.dann.neural.spiking.SpikingSynapse;
 import syncleus.dann.neural.spiking.groups.NeuronGroup;
-import syncleus.dann.neural.spiking.groups.SynapseGroup;
 import syncleus.dann.neural.spiking.neuron_update_rules.LinearRule;
 
 /**

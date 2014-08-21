@@ -18,12 +18,11 @@
  ******************************************************************************/
 package syncleus.dann.learn.naive.bayes;
 
+import java.util.Locale;
+import java.util.Set;
 import syncleus.dann.data.language.parsing.WordParser;
 import syncleus.dann.data.language.parsing.stem.StemmingWordParser;
 import syncleus.dann.learn.naive.FeatureExtractor;
-
-import java.util.Locale;
-import java.util.Set;
 
 /**
  * A StemmingLanguageNaiveBayesClassifier uses Bayes' theorem to classify word

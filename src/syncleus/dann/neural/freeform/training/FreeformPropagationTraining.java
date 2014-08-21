@@ -25,21 +25,20 @@ package syncleus.dann.neural.freeform.training;
  */
 
 
-import syncleus.dann.Learning;
-import syncleus.dann.data.MutableData;
-import syncleus.dann.data.DataCase;
-import syncleus.dann.data.Dataset;
-import syncleus.dann.learn.AbstractTraining;
-import syncleus.dann.math.statistics.ErrorCalculation;
-import syncleus.dann.neural.util.activation.ActivationSigmoid;
-import syncleus.dann.neural.freeform.FreeformConnection;
-import syncleus.dann.neural.freeform.FreeformNetwork;
-import syncleus.dann.neural.freeform.FreeformNeuron;
-
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
+import syncleus.dann.Learning;
 import syncleus.dann.data.Data;
+import syncleus.dann.data.DataCase;
+import syncleus.dann.data.Dataset;
+import syncleus.dann.data.MutableData;
+import syncleus.dann.learn.AbstractTraining;
+import syncleus.dann.math.statistics.ErrorCalculation;
+import syncleus.dann.neural.freeform.FreeformConnection;
+import syncleus.dann.neural.freeform.FreeformNetwork;
+import syncleus.dann.neural.freeform.FreeformNeuron;
+import syncleus.dann.neural.util.activation.ActivationSigmoid;
 
 /**
  * Provides basic propagation functions to other trainers.

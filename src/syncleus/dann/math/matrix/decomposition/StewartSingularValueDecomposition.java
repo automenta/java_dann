@@ -22,13 +22,12 @@
  */
 package syncleus.dann.math.matrix.decomposition;
 
-import syncleus.dann.math.RealNumber;
-import syncleus.dann.math.matrix.RealMatrix;
-import syncleus.dann.math.matrix.SimpleRealMatrix;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import syncleus.dann.math.RealNumber;
+import syncleus.dann.math.matrix.RealMatrix;
+import syncleus.dann.math.matrix.SimpleRealMatrix;
 
 /**
  * Singular Value Decomposition.

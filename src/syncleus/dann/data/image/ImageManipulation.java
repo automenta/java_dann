@@ -11,7 +11,6 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
-import java.awt.image.IndexColorModel;
 
 /**
  * Class which is used to prepare data set for Neuroph training.

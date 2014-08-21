@@ -2,7 +2,6 @@ package org.encog.examples.neural.analyst;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.encog.app.analyst.AnalystFileFormat;
 import org.encog.app.analyst.EncogAnalyst;
 import org.encog.app.analyst.script.prop.ScriptProperties;

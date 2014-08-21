@@ -24,7 +24,6 @@
 package org.encog.util.normalize;
 
 import junit.framework.TestCase;
-
 import org.encog.NullStatusReportable;
 import org.encog.neural.data.basic.BasicNeuralDataSet;
 import org.encog.util.SerializeRoundTrip;

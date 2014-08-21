@@ -1,10 +1,14 @@
 package syncleus.dann.plan.qlearning.elsy;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import syncleus.dann.math.Randoms;
 import syncleus.dann.math.Sigmoids;
 import syncleus.dann.neural.Brain;
-
-import java.io.*;
 
 /**
  * Main class of the framework, contains the whole Connectionist Q-learning

@@ -23,12 +23,11 @@
  */
 package syncleus.dann.data.sparse;
 
-import syncleus.dann.data.MutableData;
+import java.io.Serializable;
 import syncleus.dann.data.DataException;
+import syncleus.dann.data.MutableData;
 import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.math.cluster.Centroid;
-
-import java.io.Serializable;
 
 public class SparseMLData implements MutableData, Serializable, Cloneable {
 

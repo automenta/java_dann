@@ -23,9 +23,8 @@
  */
 package syncleus.dann.math.rbf;
 
-import syncleus.dann.math.ArrayToScalarFunction;
-
 import java.io.Serializable;
+import syncleus.dann.math.ArrayToScalarFunction;
 
 /**
  * A multi-dimension RBF.

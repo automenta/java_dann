@@ -21,24 +21,25 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package org.encog.ml.prg.train.rewrite;
+package syncleus.dann.evolve.train.rewrite;
 
 import junit.framework.Assert;
 import junit.framework.TestCase;
-
-import org.encog.ml.LearningScoring;
-import org.encog.ml.ea.score.adjust.ComplexityAdjustedScore;
-import org.encog.ml.ea.train.basic.TrainEA;
-import org.encog.ml.prg.EncogProgram;
-import org.encog.ml.prg.EncogProgramContext;
-import org.encog.ml.prg.PrgCODEC;
-import org.encog.ml.prg.expvalue.DivisionByZeroError;
-import org.encog.ml.prg.extension.StandardExtensions;
-import org.encog.ml.prg.opp.SubtreeCrossover;
-import org.encog.ml.prg.opp.SubtreeMutation;
-import org.encog.ml.prg.train.PrgPopulation;
-import org.encog.ml.prg.train.ZeroEvalScoreFunction;
-import org.encog.parse.expression.common.RenderCommonExpression;
+import syncleus.dann.evolve.gp.EncogProgram;
+import syncleus.dann.evolve.gp.EncogProgramContext;
+import syncleus.dann.evolve.gp.PrgCODEC;
+import syncleus.dann.evolve.gp.expvalue.DivisionByZeroError;
+import syncleus.dann.evolve.gp.extension.StandardExtensions;
+import syncleus.dann.evolve.gp.opp.SubtreeCrossover;
+import syncleus.dann.evolve.gp.opp.SubtreeMutation;
+import syncleus.dann.evolve.gp.train.PrgPopulation;
+import syncleus.dann.evolve.gp.train.ZeroEvalScoreFunction;
+import syncleus.dann.evolve.gp.train.rewrite.RewriteAlgebraic;
+import syncleus.dann.evolve.gp.train.rewrite.RewriteConstants;
+import syncleus.dann.evolve.score.adjust.ComplexityAdjustedScore;
+import syncleus.dann.evolve.train.basic.TrainEA;
+import syncleus.dann.learn.ScoreLearning;
+import syncleus.dann.logic.expression.common.RenderCommonExpression;
 
 public class TestRewriteAlgebraic extends TestCase {
 	
@@ -46,7 +47,7 @@ public class TestRewriteAlgebraic extends TestCase {
 		EncogProgramContext context = new EncogProgramContext();
 		StandardExtensions.createNumericOperators(context);
 		PrgPopulation pop = new PrgPopulation(context,1);
-		LearningScoring score = new ZeroEvalScoreFunction();
+		ScoreLearning score = new ZeroEvalScoreFunction();
 
 		TrainEA genetic = new TrainEA(pop, score);
 		genetic.setValidationMode(true);

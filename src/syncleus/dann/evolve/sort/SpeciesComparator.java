@@ -23,10 +23,9 @@
  */
 package syncleus.dann.evolve.sort;
 
+import java.util.Comparator;
 import syncleus.dann.evolve.species.Species;
 import syncleus.dann.evolve.train.EvolutionaryAlgorithm;
-
-import java.util.Comparator;
 
 /**
  * This comparator is used to compare two species. This is done by comparing the

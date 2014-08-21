@@ -23,12 +23,11 @@
  */
 package syncleus.dann.graph.path;
 
+import java.util.HashSet;
+import java.util.Set;
 import syncleus.dann.search.search.FrontierHolder;
 import syncleus.dann.search.search.GraphSearch;
 import syncleus.dann.search.search.SearchGoal;
-
-import java.util.HashSet;
-import java.util.Set;
 
 public abstract class PathGraphSearch implements GraphSearch {
 

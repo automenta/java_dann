@@ -29,8 +29,6 @@ import syncleus.dann.learn.bayesian.BayesianEvent;
 import syncleus.dann.learn.bayesian.BayesianNetworkEncog;
 import syncleus.dann.learn.bayesian.training.TrainBayesian;
 
-import java.util.Iterator;
-
 /**
  * A simple probability estimator.
  */

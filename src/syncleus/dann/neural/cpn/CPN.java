@@ -24,8 +24,8 @@
 package syncleus.dann.neural.cpn;
 
 import syncleus.dann.RegressionLearning;
-import syncleus.dann.data.MutableData;
 import syncleus.dann.data.Dataset;
+import syncleus.dann.data.MutableData;
 import syncleus.dann.data.vector.VectorData;
 import syncleus.dann.learn.AbstractLearning;
 import syncleus.dann.learn.ErrorLearning;

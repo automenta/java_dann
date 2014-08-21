@@ -23,13 +23,12 @@
  */
 package syncleus.dann.evolve.opp.selection;
 
+import java.io.Serializable;
+import java.util.Random;
 import syncleus.dann.evolve.genome.Genome;
 import syncleus.dann.evolve.species.Species;
 import syncleus.dann.evolve.train.EvolutionaryAlgorithm;
 import syncleus.dann.evolve.train.basic.BasicEA;
-
-import java.io.Serializable;
-import java.util.Random;
 
 /**
  * Tournament select can be used to select a fit (or unfit) genome from a

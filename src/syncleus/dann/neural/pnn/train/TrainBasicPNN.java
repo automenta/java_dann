@@ -24,9 +24,9 @@
 package syncleus.dann.neural.pnn.train;
 
 import syncleus.dann.Learning;
-import syncleus.dann.data.MutableData;
 import syncleus.dann.data.DataCase;
 import syncleus.dann.data.Dataset;
+import syncleus.dann.data.MutableData;
 import syncleus.dann.data.vector.VectorCase;
 import syncleus.dann.data.vector.VectorData;
 import syncleus.dann.data.vector.VectorDataset;

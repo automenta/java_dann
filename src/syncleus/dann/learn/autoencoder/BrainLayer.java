@@ -1,11 +1,13 @@
 package syncleus.dann.learn.autoencoder;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Stream;
 import syncleus.dann.graph.ImplicitGraph;
 import syncleus.dann.neural.Neuron;
 import syncleus.dann.neural.Synapse;
-
-import java.util.*;
-import java.util.stream.Stream;
 
 /**
  *

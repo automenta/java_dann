@@ -25,14 +25,12 @@ package org.encog.examples.neural.persist;
 
 import java.io.File;
 import java.io.IOException;
-
 import org.encog.Encog;
 import org.encog.mathutil.randomize.ConsistentRandomizer;
 import org.encog.ml.data.MLDataSet;
 import org.encog.ml.data.basic.BasicMLDataSet;
 import org.encog.ml.train.MLTrain;
 import org.encog.neural.networks.BasicNetwork;
-import org.encog.neural.networks.layers.BasicLayer;
 import org.encog.neural.networks.training.propagation.resilient.ResilientPropagation;
 import org.encog.util.obj.SerializeObject;
 import org.encog.util.simple.EncogUtility;

@@ -23,9 +23,12 @@
  */
 package syncleus.dann.data.buffer.codec;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import syncleus.dann.data.DataException;
-
-import java.sql.*;
 
 /**
  * A CODEC that is designed to read data from an SQL source. This is a read-only

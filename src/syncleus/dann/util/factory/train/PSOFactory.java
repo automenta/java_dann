@@ -23,6 +23,7 @@
  */
 package syncleus.dann.util.factory.train;
 
+import java.util.Map;
 import syncleus.dann.Learning;
 import syncleus.dann.Training;
 import syncleus.dann.data.Dataset;
@@ -31,8 +32,6 @@ import syncleus.dann.math.random.Randomizer;
 import syncleus.dann.neural.VectorNeuralNetwork;
 import syncleus.dann.util.factory.MLTrainFactory;
 import syncleus.dann.util.factory.parse.ArchitectureParse;
-
-import java.util.Map;
 
 /**
  * A factory for quick propagation training.

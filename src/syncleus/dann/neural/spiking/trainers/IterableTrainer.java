@@ -16,7 +16,6 @@ package syncleus.dann.neural.spiking.trainers;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
 import org.simbrain.util.propertyeditor.ComboBoxWrapper;
 
 /**

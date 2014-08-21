@@ -18,10 +18,9 @@
  ******************************************************************************/
 package syncleus.dann.neural.util;
 
-import syncleus.dann.graph.AbstractDirectedEdge;
-
 import java.util.List;
 import java.util.Random;
+import syncleus.dann.graph.AbstractDirectedEdge;
 import syncleus.dann.graph.WeightedEdge;
 import syncleus.dann.neural.Synapse;
 

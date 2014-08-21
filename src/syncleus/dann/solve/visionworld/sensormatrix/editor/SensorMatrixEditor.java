@@ -19,7 +19,6 @@
 package syncleus.dann.solve.visionworld.sensormatrix.editor;
 
 import java.awt.Component;
-
 import syncleus.dann.solve.visionworld.Filter;
 import syncleus.dann.solve.visionworld.SensorMatrix;
 

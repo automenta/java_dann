@@ -18,13 +18,11 @@
  */
 package org.simbrain.plot.barchart;
 
+import com.thoughtworks.xstream.XStream;
 import java.awt.Color;
 import java.awt.EventQueue;
-
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.simbrain.plot.ChartModel;
-
-import com.thoughtworks.xstream.XStream;
 
 /**
  * Data for a JFreeChart pie chart.

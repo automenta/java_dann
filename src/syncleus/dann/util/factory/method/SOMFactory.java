@@ -23,11 +23,10 @@
  */
 package syncleus.dann.util.factory.method;
 
+import java.util.List;
 import syncleus.dann.Learning;
 import syncleus.dann.util.factory.parse.ArchitectureLayer;
 import syncleus.dann.util.factory.parse.ArchitectureParse;
-
-import java.util.List;
 
 /**
  * A factory that is used to produce self-organizing maps.

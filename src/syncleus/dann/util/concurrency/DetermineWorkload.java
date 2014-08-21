@@ -25,8 +25,7 @@ package org.encog.util.concurrency;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import org.encog.EncogError;
+import org.encog.RuntimeException;
 import org.encog.mathutil.IntRange;
 
 /**
@@ -65,7 +64,7 @@ public class DetermineWorkload {
 	public DetermineWorkload(final int threads, final int workloadSize) {
 
 		if( workloadSize==0) {
-			throw new EncogError("Workload is of size zero.");
+			throw new RuntimeException("Workload is of size zero.");
 		}
 		
 		this.workloadSize = workloadSize;

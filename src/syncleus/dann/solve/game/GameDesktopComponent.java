@@ -1,9 +1,7 @@
 package syncleus.dann.solve.game;
 
 import java.awt.GridLayout;
-
 import javax.swing.SwingUtilities;
-
 import org.simbrain.util.genericframe.GenericFrame;
 import org.simbrain.workspace.gui.GuiComponent;
 import syncleus.dann.solve.game.tictactoe.TicTacToeGui;

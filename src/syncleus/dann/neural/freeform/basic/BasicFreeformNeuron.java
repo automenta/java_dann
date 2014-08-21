@@ -23,13 +23,12 @@
  */
 package syncleus.dann.neural.freeform.basic;
 
-import syncleus.dann.neural.freeform.FreeformNeuron;
-import syncleus.dann.neural.freeform.InputSummation;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import syncleus.dann.neural.freeform.FreeformConnection;
+import syncleus.dann.neural.freeform.FreeformNeuron;
+import syncleus.dann.neural.freeform.InputSummation;
 
 
 /**

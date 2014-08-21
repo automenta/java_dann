@@ -21,23 +21,25 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package org.encog.ml.prg;
+package syncleus.dann.evolve.species;
 
 import junit.framework.Assert;
 import junit.framework.TestCase;
+import syncleus.dann.evolve.gp.EncogProgram;
+import syncleus.dann.evolve.gp.species.CompareEncogProgram;
+import syncleus.dann.math.EncogMath;
 
-public class TestEncogProgram extends TestCase {
-	public void testSize() {
-		EncogProgram expression = new EncogProgram("1");
-		Assert.assertEquals(1, expression.getRootNode().size());
-		
-		expression = new EncogProgram("1+1");
-		Assert.assertEquals(3, expression.getRootNode().size());
-		
-		expression = new EncogProgram("1+1+1");
-		Assert.assertEquals(5, expression.getRootNode().size());
-		
-		expression = new EncogProgram("(sin(x)+cos(x))/2");
-		Assert.assertEquals(7, expression.getRootNode().size());
+public class TestCompareEncogProgram extends TestCase {
+	
+	public double eval(String prg1, String prg2) {
+		EncogProgram expression1 = new EncogProgram(prg1);
+		EncogProgram expression2 = new EncogProgram(prg2);
+		CompareEncogProgram comp = new CompareEncogProgram();
+		return comp.compare(expression1, expression2);
+	}
+	
+	
+	public void testSingle() {
+		Assert.assertEquals(2.0, eval("1+x","x+1"), EncogMath.DEFAULT_EPSILON);
 	}
 }

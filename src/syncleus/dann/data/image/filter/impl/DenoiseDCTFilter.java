@@ -7,13 +7,13 @@
 package syncleus.dann.data.image.filter.impl;
 
 import imagepreprocessing.helper.PreprocessingHelper;
-import syncleus.dann.data.image.filter.ImageFilter;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.Serializable;
 import java.text.DecimalFormat;
+import syncleus.dann.data.image.filter.ImageFilter;
 
 /**
  *

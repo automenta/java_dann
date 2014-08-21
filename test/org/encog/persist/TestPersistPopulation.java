@@ -25,10 +25,8 @@ package org.encog.persist;
 
 import java.io.File;
 import java.io.IOException;
-
 import junit.framework.Assert;
 import junit.framework.TestCase;
-
 import org.encog.engine.network.activation.ActivationStep;
 import org.encog.ml.LearningScoring;
 import org.encog.ml.data.MLDataSet;

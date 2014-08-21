@@ -18,10 +18,9 @@
  ******************************************************************************/
 package syncleus.dann.math.matrix.decomposition;
 
+import java.util.List;
 import syncleus.dann.math.RealNumber;
 import syncleus.dann.math.matrix.RealMatrix;
-
-import java.util.List;
 
 public interface EigenvalueDecomposition extends Decomposition<RealMatrix> {
     RealMatrix getBlockDiagonalMatrix();

@@ -19,9 +19,7 @@
 package syncleus.dann.solve.visionworld.filter.editor;
 
 import java.awt.Component;
-
 import javax.swing.JPanel;
-
 import syncleus.dann.solve.visionworld.Filter;
 import syncleus.dann.solve.visionworld.filter.PixelAccumulator;
 

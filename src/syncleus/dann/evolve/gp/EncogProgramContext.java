@@ -23,14 +23,13 @@
  */
 package syncleus.dann.evolve.gp;
 
-import syncleus.dann.data.file.csv.CSVFormat;
-import syncleus.dann.evolve.exception.EARuntimeError;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import syncleus.dann.data.file.csv.CSVFormat;
+import syncleus.dann.evolve.exception.EARuntimeError;
 import syncleus.dann.evolve.gp.expvalue.ExpressionValue;
 import syncleus.dann.evolve.gp.expvalue.ValueType;
 import syncleus.dann.evolve.gp.extension.FunctionFactory;

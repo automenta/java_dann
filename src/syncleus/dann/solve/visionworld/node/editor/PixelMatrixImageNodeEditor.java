@@ -19,7 +19,6 @@
 package syncleus.dann.solve.visionworld.node.editor;
 
 import java.awt.Component;
-
 import syncleus.dann.solve.visionworld.node.PixelMatrixImageNode;
 
 /**

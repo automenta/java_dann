@@ -18,16 +18,15 @@
  ******************************************************************************/
 package syncleus.dann.graph.drawing.hyperassociativemap;
 
-import syncleus.dann.neural.Synapse;
-import syncleus.dann.neural.feedforward.graph.BackpropNeuron;
-import syncleus.dann.neural.feedforward.graph.BackpropStaticNeuron;
-import syncleus.dann.neural.feedforward.graph.InputBackpropNeuron;
-import syncleus.dann.neural.feedforward.graph.OutputBackpropNeuron;
-import syncleus.dann.neural.feedforward.graph.FeedforwardBackpropBrain;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
+import syncleus.dann.neural.Synapse;
+import syncleus.dann.neural.feedforward.graph.BackpropNeuron;
+import syncleus.dann.neural.feedforward.graph.BackpropStaticNeuron;
+import syncleus.dann.neural.feedforward.graph.FeedforwardBackpropBrain;
+import syncleus.dann.neural.feedforward.graph.InputBackpropNeuron;
+import syncleus.dann.neural.feedforward.graph.OutputBackpropNeuron;
 
 public class LayeredBrainHyperassociativeMap
         extends

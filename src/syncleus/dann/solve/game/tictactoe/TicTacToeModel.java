@@ -2,7 +2,6 @@ package syncleus.dann.solve.game.tictactoe;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import syncleus.dann.solve.game.GameModel;
 
 /**

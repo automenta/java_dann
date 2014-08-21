@@ -23,9 +23,8 @@
  */
 package syncleus.dann.evolve.gp.expvalue;
 
-import syncleus.dann.evolve.exception.EARuntimeError;
-
 import java.io.Serializable;
+import syncleus.dann.evolve.exception.EARuntimeError;
 
 /**
  * An EncogProgram expression value. These is how Encog stores variables and

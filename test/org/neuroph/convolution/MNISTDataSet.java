@@ -2,7 +2,6 @@ package org.neuroph.samples.convolution;
 
 import java.io.IOException;
 import java.util.List;
-
 import org.neuroph.core.data.DataSet;
 import org.neuroph.core.data.DataSetRow;
 

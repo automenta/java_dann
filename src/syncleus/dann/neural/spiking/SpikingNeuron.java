@@ -18,7 +18,6 @@
  */
 package syncleus.dann.neural.spiking;
 
-import syncleus.dann.neural.spiking.util.Polarity;
 import java.awt.Point;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
@@ -26,7 +25,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import syncleus.dann.neural.spiking.SpikingNeuralNetwork.TimeType;
 import syncleus.dann.neural.spiking.SpikingNeuronUpdateRule.InputType;
 import syncleus.dann.neural.spiking.groups.Group;
@@ -34,6 +32,7 @@ import syncleus.dann.neural.spiking.neuron_update_rules.LinearRule;
 import syncleus.dann.neural.spiking.neuron_update_rules.interfaces.ActivityGenerator;
 import syncleus.dann.neural.spiking.neuron_update_rules.interfaces.BiasedUpdateRule;
 import syncleus.dann.neural.spiking.neuron_update_rules.interfaces.BoundedUpdateRule;
+import syncleus.dann.neural.spiking.util.Polarity;
 
 
 /**

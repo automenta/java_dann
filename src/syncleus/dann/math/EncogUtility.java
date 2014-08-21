@@ -24,10 +24,15 @@
 package syncleus.dann.math;
 
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import syncleus.dann.Classifying;
 import syncleus.dann.Learning;
 import syncleus.dann.RegressionLearning;
 import syncleus.dann.Training;
+import syncleus.dann.data.Data;
 import syncleus.dann.data.DataCase;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.data.buffer.BufferedMLDataSet;
@@ -40,24 +45,18 @@ import syncleus.dann.data.file.csv.ReadCSV;
 import syncleus.dann.data.specific.CSVNeuralDataSet;
 import syncleus.dann.data.vector.VectorData;
 import syncleus.dann.learn.MLContext;
-import syncleus.dann.neural.svm.SVM;
-import syncleus.dann.neural.svm.train.SVMTrain;
 import syncleus.dann.math.statistics.ErrorCalculation;
-import syncleus.dann.neural.util.activation.ActivationSigmoid;
-import syncleus.dann.neural.util.activation.ActivationTANH;
-import syncleus.dann.neural.freeform.FreeformNetwork;
-import syncleus.dann.neural.freeform.training.FreeformResilientPropagation;
 import syncleus.dann.neural.VectorNeuralNetwork;
-import syncleus.dann.neural.util.ContainsFlat;
+import syncleus.dann.neural.feedforward.FeedForwardPattern;
 import syncleus.dann.neural.flat.propagation.Propagation;
 import syncleus.dann.neural.flat.propagation.resilient.ResilientPropagation;
-import syncleus.dann.neural.feedforward.FeedForwardPattern;
-
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-import syncleus.dann.data.Data;
+import syncleus.dann.neural.freeform.FreeformNetwork;
+import syncleus.dann.neural.freeform.training.FreeformResilientPropagation;
+import syncleus.dann.neural.svm.SVM;
+import syncleus.dann.neural.svm.train.SVMTrain;
+import syncleus.dann.neural.util.ContainsFlat;
+import syncleus.dann.neural.util.activation.ActivationSigmoid;
+import syncleus.dann.neural.util.activation.ActivationTANH;
 
 /**
  * General utility class for Encog. Provides for some common Encog procedures.

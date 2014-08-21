@@ -25,7 +25,6 @@ package org.encog.neural.networks.structure;
 
 import junit.framework.Assert;
 import junit.framework.TestCase;
-
 import org.encog.neural.networks.BasicNetwork;
 import org.encog.util.EngineArray;
 import org.encog.util.simple.EncogUtility;

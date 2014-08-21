@@ -23,13 +23,12 @@
  */
 package syncleus.dann.learn.bayesian.parse;
 
+import java.util.ArrayList;
+import java.util.List;
 import syncleus.dann.data.file.csv.CSVFormat;
 import syncleus.dann.data.language.SimpleParser;
 import syncleus.dann.learn.bayesian.BayesianError;
 import syncleus.dann.learn.bayesian.BayesianNetworkEncog;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Used to parse probability strings for the Bayes networks.

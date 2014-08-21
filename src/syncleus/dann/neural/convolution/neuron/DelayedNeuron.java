@@ -19,8 +19,8 @@ package org.neuroph.nnet.comp.neuron;
 import java.util.ArrayList;
 import java.util.List;
 import org.neuroph.core.Neuron;
-import syncleus.dann.neural.util.input.InputFunction;
 import org.neuroph.core.transfer.TransferFunction;
+import syncleus.dann.neural.util.input.InputFunction;
 
 /**
  * Provides behaviour for neurons with delayed output.

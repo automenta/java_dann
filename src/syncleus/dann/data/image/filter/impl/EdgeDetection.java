@@ -5,11 +5,10 @@
  */
 package syncleus.dann.data.image.filter.impl;
 
-import syncleus.dann.data.image.filter.ImageFilter;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.Serializable;
+import syncleus.dann.data.image.filter.ImageFilter;
 
 
 

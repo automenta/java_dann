@@ -23,14 +23,13 @@
  */
 package syncleus.dann.util.concurrency.job;
 
+import java.util.ArrayList;
+import java.util.List;
 import syncleus.dann.Training;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.learn.strategy.Strategy;
 import syncleus.dann.learn.strategy.end.EndTrainingStrategy;
 import syncleus.dann.neural.VectorNeuralNetwork;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Base class for all concurrent training jobs.

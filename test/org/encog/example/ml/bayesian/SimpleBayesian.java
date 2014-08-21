@@ -27,7 +27,6 @@ import org.encog.ml.bayesian.BayesianEvent;
 import org.encog.ml.bayesian.BayesianNetwork;
 import org.encog.ml.bayesian.EventType;
 import org.encog.ml.bayesian.query.enumerate.EnumerationQuery;
-import org.encog.ml.bayesian.query.sample.SamplingQuery;
 
 public class SimpleBayesian {
 	public static void main(String[] args) {

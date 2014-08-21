@@ -19,14 +19,13 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import syncleus.dann.neural.Synapse;
-
-import syncleus.dann.neural.spiking.connections.AllToAll;
-import syncleus.dann.neural.spiking.connections.ConnectNeurons;
-import syncleus.dann.neural.spiking.connections.ConnectionUtilities;
 import syncleus.dann.neural.spiking.SpikingNeuralNetwork;
 import syncleus.dann.neural.spiking.SpikingNeuron;
 import syncleus.dann.neural.spiking.SpikingSynapse;
 import syncleus.dann.neural.spiking.SynapseUpdateRule;
+import syncleus.dann.neural.spiking.connections.AllToAll;
+import syncleus.dann.neural.spiking.connections.ConnectNeurons;
+import syncleus.dann.neural.spiking.connections.ConnectionUtilities;
 import syncleus.dann.neural.spiking.synapse_update_rules.StaticSynapseRule;
 import syncleus.dann.neural.spiking.synapse_update_rules.spikeresponders.SpikeResponder;
 import syncleus.dann.neural.spiking.util.Polarity;

@@ -23,10 +23,10 @@
  */
 package syncleus.dann.neural.rbf;
 
-import syncleus.dann.neural.util.PatternError;
-import syncleus.dann.neural.NeuralNetworkPattern;
 import syncleus.dann.Learning;
 import syncleus.dann.math.rbf.RBFEnum;
+import syncleus.dann.neural.NeuralNetworkPattern;
+import syncleus.dann.neural.util.PatternError;
 import syncleus.dann.neural.util.activation.EncogActivationFunction;
 
 /**

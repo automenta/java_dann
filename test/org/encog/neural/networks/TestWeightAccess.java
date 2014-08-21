@@ -25,7 +25,6 @@ package org.encog.neural.networks;
 
 import junit.framework.Assert;
 import junit.framework.TestCase;
-
 import org.encog.mathutil.randomize.FanInRandomizer;
 import org.encog.mathutil.randomize.RangeRandomizer;
 import org.encog.util.EngineArray;

@@ -23,11 +23,10 @@
  */
 package syncleus.dann.neural.freeform.basic;
 
-import syncleus.dann.neural.util.activation.EncogActivationFunction;
+import java.io.Serializable;
 import syncleus.dann.neural.freeform.InputSummation;
 import syncleus.dann.neural.freeform.factory.InputSummationFactory;
-
-import java.io.Serializable;
+import syncleus.dann.neural.util.activation.EncogActivationFunction;
 
 /**
  * A factory to create BasicFactivationSUmmation objects.

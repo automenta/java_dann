@@ -24,7 +24,6 @@
 package org.encog.examples.neural.benchmark;
 
 import java.util.Arrays;
-
 import org.encog.mathutil.error.ErrorCalculation;
 import org.encog.mathutil.error.ErrorCalculationMode;
 import org.encog.mathutil.randomize.RangeRandomizer;

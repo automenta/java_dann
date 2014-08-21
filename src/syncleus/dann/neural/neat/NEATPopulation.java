@@ -23,9 +23,11 @@
  */
 package syncleus.dann.neural.neat;
 
+import java.io.Serializable;
+import java.util.Random;
 import syncleus.dann.RegressionLearning;
-import syncleus.dann.data.MutableData;
 import syncleus.dann.data.Dataset;
+import syncleus.dann.data.MutableData;
 import syncleus.dann.evolve.codec.GeneticCODEC;
 import syncleus.dann.evolve.genome.Genome;
 import syncleus.dann.evolve.population.BasicPopulation;
@@ -35,9 +37,6 @@ import syncleus.dann.math.random.RandomFactory;
 import syncleus.dann.neural.util.activation.ActivationSteepenedSigmoid;
 import syncleus.dann.neural.util.activation.EncogActivationFunction;
 import syncleus.dann.util.ChooseObject;
-
-import java.io.Serializable;
-import java.util.Random;
 
 /**
  * A population for a NEAT or HyperNEAT system. This population holds the

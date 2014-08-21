@@ -54,22 +54,20 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 package prpvis.struc;
 
-import java.util.List;
+import java.util.Arrays;
 import java.util.Collection;
-import java.util.Vector;
-import java.util.LinkedList;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
-import java.util.HashMap;
-import java.util.Set;
-import java.util.HashSet;
 import java.util.NoSuchElementException;
-import java.util.Arrays;
-import java.util.Comparator;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import prpvis.core.Debugging;
 import prpvis.core.InvariantViolationException;
 

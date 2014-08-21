@@ -4,8 +4,6 @@
  */
 package syncleus.dann.plan.navigate;
 
-import syncleus.dann.plan.navigate.SimpleObstacle;
-
 import java.util.ArrayList;
 import java.util.List;
 

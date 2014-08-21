@@ -23,11 +23,10 @@
  */
 package syncleus.dann.search.search;
 
-import syncleus.dann.graph.path.BasicPath;
-import syncleus.dann.graph.path.PathNode;
-
 import java.util.ArrayList;
 import java.util.List;
+import syncleus.dann.graph.path.BasicPath;
+import syncleus.dann.graph.path.PathNode;
 
 public class FrontierHolder {
 

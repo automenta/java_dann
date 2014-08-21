@@ -18,13 +18,18 @@
  ******************************************************************************/
 package syncleus.dann.math.geometry;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Stream;
 import syncleus.dann.graph.AbstractBidirectedAdjacencyGraph;
 import syncleus.dann.graph.SimpleWeightedDirectedEdge;
 import syncleus.dann.graph.WeightedDirectedEdge;
 import syncleus.dann.math.geometry.GraphGrid2D.GridNode;
-
-import java.util.*;
-import java.util.stream.Stream;
 
 public class WeightedDirectedGrid
         extends

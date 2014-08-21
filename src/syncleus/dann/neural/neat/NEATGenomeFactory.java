@@ -23,10 +23,9 @@
  */
 package syncleus.dann.neural.neat;
 
-import syncleus.dann.evolve.genome.GenomeFactory;
-
 import java.util.List;
 import java.util.Random;
+import syncleus.dann.evolve.genome.GenomeFactory;
 
 /**
  * This interface defines additional methods defined to create NEAT genomes. It

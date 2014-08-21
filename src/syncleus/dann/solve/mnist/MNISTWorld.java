@@ -8,7 +8,6 @@ package syncleus.dann.solve.mnist;
 
 import becca.core.BeccaAgent;
 import becca.core.DABeccaAgent;
-import static becca.core.Util.printArray;
 import becca.test.Simulation;
 import becca.test.World;
 import java.io.IOException;

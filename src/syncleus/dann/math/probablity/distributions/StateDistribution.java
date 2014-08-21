@@ -23,11 +23,10 @@
  */
 package syncleus.dann.math.probablity.distributions;
 
-import syncleus.dann.data.DataCase;
-import syncleus.dann.data.Dataset;
-
 import java.io.Serializable;
 import syncleus.dann.data.Data;
+import syncleus.dann.data.DataCase;
+import syncleus.dann.data.Dataset;
 import syncleus.dann.data.vector.VectorCase;
 import syncleus.dann.math.probablity.ProbabilityFunction;
 

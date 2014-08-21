@@ -20,12 +20,12 @@ package syncleus.dann.neural.spiking.neuron_update_rules;
 
 
 import syncleus.dann.neural.spiking.SpikingNeuronUpdateRule;
-import syncleus.dann.neural.spiking.util.Randomizer;
 import syncleus.dann.neural.spiking.neuron_update_rules.interfaces.BiasedUpdateRule;
 import syncleus.dann.neural.spiking.neuron_update_rules.interfaces.BoundedUpdateRule;
 import syncleus.dann.neural.spiking.neuron_update_rules.interfaces.DifferentiableUpdateRule;
 import syncleus.dann.neural.spiking.neuron_update_rules.interfaces.InvertibleUpdateRule;
 import syncleus.dann.neural.spiking.neuron_update_rules.interfaces.NoisyUpdateRule;
+import syncleus.dann.neural.spiking.util.Randomizer;
 import syncleus.dann.neural.spiking.util.SquashingFunction;
 
 

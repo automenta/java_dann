@@ -9,30 +9,28 @@ import java.awt.image.WritableRaster;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
-
 import javax.imageio.ImageIO;
-
-import org.neuroph.nnet.comp.layer.ConvolutionalLayer;
-import org.neuroph.nnet.ConvolutionalNetwork;
-import org.neuroph.nnet.comp.ConvolutionalUtils;
-import org.neuroph.nnet.comp.layer.FeatureMapsLayer;
-import org.neuroph.nnet.comp.layer.InputMapsLayer;
-import org.neuroph.nnet.comp.Kernel;
-import org.neuroph.nnet.comp.layer.Layer2D;
-import org.neuroph.nnet.comp.layer.PoolingLayer;
-import syncleus.dann.neural.feedforward.backpropagation.ConvolutionalBackpropagation;
 import org.neuroph.core.Layer;
 import org.neuroph.core.Neuron;
 import org.neuroph.core.data.DataSet;
 import org.neuroph.core.data.DataSetRow;
 import org.neuroph.core.events.LearningEvent;
 import org.neuroph.core.events.LearningEventListener;
-import syncleus.dann.neural.util.input.WeightedSum;
+import org.neuroph.nnet.ConvolutionalNetwork;
+import org.neuroph.nnet.comp.ConvolutionalUtils;
+import org.neuroph.nnet.comp.Kernel;
+import org.neuroph.nnet.comp.layer.ConvolutionalLayer;
+import org.neuroph.nnet.comp.layer.FeatureMapsLayer;
+import org.neuroph.nnet.comp.layer.InputMapsLayer;
+import org.neuroph.nnet.comp.layer.Layer2D;
+import org.neuroph.nnet.comp.layer.PoolingLayer;
 import org.neuroph.nnet.comp.neuron.BiasNeuron;
-import syncleus.dann.neural.feedforward.backpropagation.BackPropagationNeuroph;
 import org.neuroph.util.ConnectionFactory;
 import org.neuroph.util.NeuronProperties;
 import org.neuroph.util.TransferFunctionType;
+import syncleus.dann.neural.feedforward.backpropagation.BackPropagationNeuroph;
+import syncleus.dann.neural.feedforward.backpropagation.ConvolutionalBackpropagation;
+import syncleus.dann.neural.util.input.WeightedSum;
 
 /**
  * Konvolucioni parametri

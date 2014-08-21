@@ -1,9 +1,8 @@
 package syncleus.dann;
 
-import syncleus.dann.plan.State;
-
 import java.util.Queue;
 import java.util.Set;
+import syncleus.dann.plan.State;
 
 /**
  * Abstract definition of a problem in terms of a set of goals (with assigned probabilities)

@@ -18,15 +18,14 @@
  ******************************************************************************/
 package syncleus.dann.graph.search.pathfinding;
 
+import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 import syncleus.dann.graph.BidirectedEdge;
 import syncleus.dann.graph.DirectedEdge;
-import syncleus.dann.search.pathfinding.FloydWarshallPathFinder;
 import syncleus.dann.math.geometry.DirectedGraphGrid2D;
 import syncleus.dann.math.geometry.GraphGrid2D.GridNode;
-
-import java.util.List;
+import syncleus.dann.search.pathfinding.FloydWarshallPathFinder;
 
 public class TestFloydWarshallPathFinder {
     private static final double INF = Double.POSITIVE_INFINITY;

@@ -25,8 +25,6 @@ package org.encog.ml.data.folded;
 
 import junit.framework.Assert;
 import junit.framework.TestCase;
-
-import org.encog.Encog;
 import org.encog.ml.data.MLDataPair;
 import org.encog.ml.data.MLDataSet;
 import org.encog.ml.data.basic.BasicMLDataPair;
@@ -67,7 +65,7 @@ public class TestFoldedDataSet extends TestCase {
 			int actualCount = 0;
 			for(MLDataPair pair: foldedDataSet) {
 				actualCount++;
-				Assert.assertEquals(parentIndex, pair.getIdeal().getData(0), Encog.DEFAULT_DOUBLE_EQUAL);
+				Assert.assertEquals(parentIndex, pair.getIdeal().getData(0), EncogMath.DEFAULT_EPSILON);
 				parentIndex++;
 			}
 			Assert.assertEquals(expectedCount, actualCount);

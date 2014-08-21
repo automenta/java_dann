@@ -23,11 +23,10 @@
  */
 package syncleus.dann.neural.neat.training.opp;
 
+import java.util.Random;
 import syncleus.dann.evolve.genome.Genome;
 import syncleus.dann.math.random.RangeRandomizer;
 import syncleus.dann.neural.util.activation.EncogActivationFunction;
-
-import java.util.Random;
 
 /**
  * Mutate a genome by adding a new node. To do this a random link is chosen. The

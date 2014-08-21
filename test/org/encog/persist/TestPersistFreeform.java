@@ -25,9 +25,7 @@ package org.encog.persist;
 
 import java.io.File;
 import java.io.IOException;
-
 import junit.framework.TestCase;
-
 import org.encog.neural.freeform.FreeformNetwork;
 import org.encog.neural.networks.XOR;
 import org.encog.util.TempDir;

@@ -23,19 +23,18 @@
  */
 package syncleus.dann.learn.markov.training.bw;
 
-import syncleus.dann.Learning;
-import syncleus.dann.Training;
-import syncleus.dann.data.DataSequence;
-import syncleus.dann.data.Dataset;
-import syncleus.dann.learn.markov.HiddenMarkovModelEncog;
-import syncleus.dann.learn.markov.alog.ForwardBackwardCalculator;
-import syncleus.dann.math.probablity.distributions.StateDistribution;
-import syncleus.dann.learn.strategy.Strategy;
-
 import java.util.Arrays;
 import java.util.List;
+import syncleus.dann.Learning;
+import syncleus.dann.Training;
 import syncleus.dann.data.Data;
+import syncleus.dann.data.DataSequence;
+import syncleus.dann.data.Dataset;
 import syncleus.dann.learn.AbstractTraining.TrainingImplementationType;
+import syncleus.dann.learn.markov.HiddenMarkovModelEncog;
+import syncleus.dann.learn.markov.alog.ForwardBackwardCalculator;
+import syncleus.dann.learn.strategy.Strategy;
+import syncleus.dann.math.probablity.distributions.StateDistribution;
 import syncleus.dann.neural.flat.propagation.TrainingContinuation;
 
 /**

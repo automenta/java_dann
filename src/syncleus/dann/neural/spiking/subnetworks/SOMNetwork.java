@@ -20,7 +20,6 @@ package syncleus.dann.neural.spiking.subnetworks;
 
 import java.awt.geom.Point2D;
 import java.util.List;
-
 import syncleus.dann.neural.spiking.SpikingNeuralNetwork;
 import syncleus.dann.neural.spiking.SpikingNeuron;
 import syncleus.dann.neural.spiking.groups.NeuronGroup;

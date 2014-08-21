@@ -18,12 +18,11 @@
  ******************************************************************************/
 package syncleus.dann.graph;
 
-import syncleus.dann.graph.context.ContextGraphElement;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import syncleus.dann.graph.context.ContextGraphElement;
 
 public class MutableDirectedAdjacencyGraph<N, E extends DirectedEdge<N>>
         extends AbstractDirectedAdjacencyGraph<N, E> implements

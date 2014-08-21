@@ -23,13 +23,17 @@
  */
 package syncleus.dann.neural.neat.training;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
 import syncleus.dann.evolve.genome.BasicGenome;
 import syncleus.dann.evolve.genome.Genome;
 import syncleus.dann.math.random.RangeRandomizer;
 import syncleus.dann.neural.util.activation.EncogActivationFunction;
-
-import java.io.Serializable;
-import java.util.*;
 
 /**
  * Implements a NEAT genome. This is a "blueprint" for creating a neural

@@ -26,7 +26,6 @@ package syncleus.dann.learn;
 import junit.framework.Assert;
 import junit.framework.TestCase;
 import syncleus.dann.data.DataSequence;
-
 import syncleus.dann.learn.markov.HiddenMarkovModelEncog;
 import syncleus.dann.learn.markov.alog.KullbackLeiblerDistanceCalculator;
 import syncleus.dann.learn.markov.alog.MarkovGenerator;

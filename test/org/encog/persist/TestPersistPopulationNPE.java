@@ -25,10 +25,8 @@ package org.encog.persist;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-
 import junit.framework.Assert;
 import junit.framework.TestCase;
-
 import org.encog.ml.LearningScoring;
 import org.encog.ml.data.basic.BasicMLDataSet;
 import org.encog.ml.ea.population.Population;

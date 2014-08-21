@@ -25,10 +25,8 @@ package org.encog.persist;
 
 import java.io.File;
 import java.io.IOException;
-
 import junit.framework.Assert;
 import junit.framework.TestCase;
-
 import org.encog.ml.bayesian.BayesianEvent;
 import org.encog.ml.bayesian.BayesianNetwork;
 import org.encog.util.TempDir;

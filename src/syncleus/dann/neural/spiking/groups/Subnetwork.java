@@ -16,12 +16,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
-
-import syncleus.dann.neural.spiking.connections.AllToAll;
-import syncleus.dann.neural.spiking.connections.ConnectNeurons;
 import syncleus.dann.neural.spiking.SpikingNeuralNetwork;
 import syncleus.dann.neural.spiking.SpikingNeuron;
 import syncleus.dann.neural.spiking.SpikingSynapse;
+import syncleus.dann.neural.spiking.connections.AllToAll;
+import syncleus.dann.neural.spiking.connections.ConnectNeurons;
 
 /**
  * A collection of neuron groups and synapse groups which functions as a

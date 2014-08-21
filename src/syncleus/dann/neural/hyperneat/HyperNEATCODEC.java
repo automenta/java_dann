@@ -23,6 +23,9 @@
  */
 package syncleus.dann.neural.hyperneat;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import syncleus.dann.Learning;
 import syncleus.dann.data.MutableData;
 import syncleus.dann.data.vector.VectorData;
@@ -31,10 +34,6 @@ import syncleus.dann.evolve.codec.GeneticCODEC;
 import syncleus.dann.evolve.genome.Genome;
 import syncleus.dann.neural.util.activation.ActivationSteepenedSigmoid;
 import syncleus.dann.neural.util.activation.EncogActivationFunction;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 public class HyperNEATCODEC implements GeneticCODEC {
 

@@ -35,11 +35,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
-
 import javax.imageio.ImageIO;
-
 import org.encog.Encog;
-import org.encog.EncogError;
+import org.encog.RuntimeException;
 import org.encog.ml.data.MLData;
 import org.encog.ml.data.basic.BasicMLData;
 import org.encog.ml.train.strategy.ResetStrategy;
@@ -163,7 +161,7 @@ public class ImageNeuralNetwork {
 	public void executeLine() throws IOException {
 		final int index = this.line.indexOf(':');
 		if (index == -1) {
-			throw new EncogError("Invalid command: " + this.line);
+			throw new RuntimeException("Invalid command: " + this.line);
 		}
 
 		final String command = this.line.substring(0, index).toLowerCase()
@@ -175,7 +173,7 @@ public class ImageNeuralNetwork {
 			final String arg = tok.nextToken();
 			final int index2 = arg.indexOf(':');
 			if (index2 == -1) {
-				throw new EncogError("Invalid command: " + this.line);
+				throw new RuntimeException("Invalid command: " + this.line);
 			}
 			final String key = arg.substring(0, index2).toLowerCase().trim();
 			final String value = arg.substring(index2 + 1).trim();
@@ -188,7 +186,7 @@ public class ImageNeuralNetwork {
 	private String getArg(final String name) {
 		final String result = this.args.get(name);
 		if (result == null) {
-			throw new EncogError("Missing argument " + name + " on line: "
+			throw new RuntimeException("Missing argument " + name + " on line: "
 					+ this.line);
 		}
 		return result;

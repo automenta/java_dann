@@ -25,13 +25,11 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Paint;
 import java.awt.Stroke;
-
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableCellRenderer;
-
 import org.piccolo2d.extras.util.PFixedWidthStroke;
 import org.simbrain.util.Utils;
 import syncleus.dann.solve.visionworld.PixelMatrix;

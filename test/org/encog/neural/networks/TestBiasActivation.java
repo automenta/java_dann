@@ -23,11 +23,8 @@
  */
 package org.encog.neural.networks;
 
-import syncleus.dann.neural.NetworkUtil;
 import junit.framework.Assert;
 import junit.framework.TestCase;
-
-import org.encog.Encog;
 import org.encog.engine.network.activation.ActivationSigmoid;
 import org.encog.ml.data.MLDataSet;
 import org.encog.ml.data.basic.BasicMLDataSet;
@@ -37,6 +34,7 @@ import org.encog.neural.networks.layers.BasicLayer;
 import org.encog.neural.networks.layers.Layer;
 import org.encog.neural.networks.structure.NetworkCODEC;
 import org.encog.neural.networks.training.propagation.resilient.ResilientPropagation;
+import syncleus.dann.neural.NetworkUtil;
 
 public class TestBiasActivation extends TestCase {
 	
@@ -105,8 +103,8 @@ public class TestBiasActivation extends TestCase {
 		double[] w2 = NetworkCODEC.networkToArray(network2);
 		double[] w3 = NetworkCODEC.networkToArray(network3);
 		
-		Assert.assertTrue(Math.abs(w1[0]-w2[0])>Encog.DEFAULT_DOUBLE_EQUAL);
-		Assert.assertTrue(Math.abs(w2[0]-w3[0])>Encog.DEFAULT_DOUBLE_EQUAL);
+		Assert.assertTrue(Math.abs(w1[0]-w2[0])>EncogMath.DEFAULT_EPSILON);
+		Assert.assertTrue(Math.abs(w2[0]-w3[0])>EncogMath.DEFAULT_EPSILON);
 		
 	}
 }

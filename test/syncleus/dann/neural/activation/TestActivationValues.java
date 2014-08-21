@@ -18,16 +18,16 @@
  ******************************************************************************/
 package syncleus.dann.neural.activation;
 
-import syncleus.dann.neural.util.activation.HyperbolicSecantActivationFunction;
-import syncleus.dann.neural.util.activation.SineActivationFunction;
-import syncleus.dann.neural.util.activation.IdentityActivationFunction;
-import syncleus.dann.neural.util.activation.GausianActivationFunction;
-import syncleus.dann.neural.util.activation.HyperbolicTangentActivationFunction;
-import syncleus.dann.neural.util.activation.AbstractActivationFunction;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Test;
+import syncleus.dann.neural.util.activation.AbstractActivationFunction;
+import syncleus.dann.neural.util.activation.GausianActivationFunction;
+import syncleus.dann.neural.util.activation.HyperbolicSecantActivationFunction;
+import syncleus.dann.neural.util.activation.HyperbolicTangentActivationFunction;
+import syncleus.dann.neural.util.activation.IdentityActivationFunction;
+import syncleus.dann.neural.util.activation.SineActivationFunction;
 
 public class TestActivationValues {
     private static final Logger LOGGER = LogManager

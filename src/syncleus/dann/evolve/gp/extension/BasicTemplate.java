@@ -23,12 +23,11 @@
  */
 package syncleus.dann.evolve.gp.extension;
 
-import syncleus.dann.data.language.SimpleParser;
-import syncleus.dann.evolve.exception.EACompileError;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import syncleus.dann.data.language.SimpleParser;
+import syncleus.dann.evolve.exception.EACompileError;
 import syncleus.dann.evolve.gp.EncogProgramContext;
 import syncleus.dann.evolve.gp.ProgramNode;
 import syncleus.dann.evolve.gp.expvalue.ValueType;

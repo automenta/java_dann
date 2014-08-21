@@ -23,13 +23,12 @@
  */
 package syncleus.dann.evolve.gp.generator;
 
-import syncleus.dann.evolve.population.PopulationGenerator;
-
 import java.util.List;
 import java.util.Random;
 import syncleus.dann.evolve.gp.EncogProgram;
 import syncleus.dann.evolve.gp.ProgramNode;
 import syncleus.dann.evolve.gp.expvalue.ValueType;
+import syncleus.dann.evolve.population.PopulationGenerator;
 
 /**
  * Generate a random Encog Program.

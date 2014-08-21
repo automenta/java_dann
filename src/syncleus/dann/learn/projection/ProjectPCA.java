@@ -18,10 +18,9 @@
  */
 package org.simbrain.util.projection;
 
-import java.util.Arrays;
-
 import Jama.EigenvalueDecomposition;
 import Jama.Matrix;
+import java.util.Arrays;
 
 /**
  * <B>ProjectPCA</B> Projects the high-dimensional dataset along its two

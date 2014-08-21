@@ -18,20 +18,19 @@
  ******************************************************************************/
 package syncleus.dann.neural.backprop;
 
-import syncleus.dann.neural.feedforward.graph.SimpleOutputBackpropNeuron;
-import org.junit.Assert;
-import org.junit.Test;
-import syncleus.dann.neural.util.InputNeuron;
-import syncleus.dann.neural.util.OutputNeuron;
-import syncleus.dann.neural.util.activation.DannActivationFunction;
-import syncleus.dann.neural.util.activation.SineActivationFunction;
-import syncleus.dann.neural.feedforward.FullyConnectedFeedforwardBrain;
-import syncleus.dann.util.DannException;
-
 import java.util.ArrayList;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
+import org.junit.Assert;
+import org.junit.Test;
+import syncleus.dann.neural.feedforward.FullyConnectedFeedforwardBrain;
+import syncleus.dann.neural.feedforward.graph.SimpleOutputBackpropNeuron;
+import syncleus.dann.neural.util.InputNeuron;
+import syncleus.dann.neural.util.OutputNeuron;
+import syncleus.dann.neural.util.activation.DannActivationFunction;
+import syncleus.dann.neural.util.activation.SineActivationFunction;
+import syncleus.dann.util.DannException;
 
 /**
  * An example main class that shows using dANN to solve an XOR problem. An XOR

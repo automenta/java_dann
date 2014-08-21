@@ -3,7 +3,6 @@ package org.encog.examples.neural.predict.sunspot;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
-
 import org.encog.Encog;
 import org.encog.bot.BotUtil;
 import org.encog.ml.MLMethod;

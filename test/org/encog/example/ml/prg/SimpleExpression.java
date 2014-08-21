@@ -24,7 +24,6 @@
 package org.encog.examples.ml.prg;
 
 import java.util.Random;
-
 import org.encog.Encog;
 import org.encog.mathutil.EncogFunction;
 import org.encog.ml.data.MLDataSet;

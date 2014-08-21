@@ -18,8 +18,8 @@
  ******************************************************************************/
 package syncleus.dann.neural;
 
-import syncleus.dann.neural.util.structure.InvalidConnectionTypeDannException;
 import org.junit.Test;
+import syncleus.dann.neural.util.structure.InvalidConnectionTypeDannException;
 
 public class TestInvalidConnectionTypeDannException {
     @Test(expected = InvalidConnectionTypeDannException.class)

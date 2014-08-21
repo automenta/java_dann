@@ -23,12 +23,11 @@
  */
 package syncleus.dann.plan;
 
-import syncleus.dann.solve.Grid2DMotionProblem;
-import syncleus.dann.math.geometry.GridState;
-import syncleus.dann.plan.grid2d.AbstractProbability;
-
 import java.util.Set;
 import java.util.TreeSet;
+import syncleus.dann.math.geometry.GridState;
+import syncleus.dann.plan.grid2d.AbstractProbability;
+import syncleus.dann.solve.Grid2DMotionProblem;
 
 public class DeterministicProbability extends AbstractProbability {
 

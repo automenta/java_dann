@@ -26,7 +26,6 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.AbstractAction;
 import javax.swing.AbstractListModel;
 import javax.swing.Action;
@@ -40,7 +39,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
 import syncleus.dann.solve.visionworld.Filter;
 import syncleus.dann.solve.visionworld.PixelMatrix;
 import syncleus.dann.solve.visionworld.SensorMatrix;

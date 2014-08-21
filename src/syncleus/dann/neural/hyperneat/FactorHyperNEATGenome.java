@@ -23,10 +23,9 @@
  */
 package syncleus.dann.neural.hyperneat;
 
-import syncleus.dann.evolve.genome.Genome;
-
 import java.util.List;
 import java.util.Random;
+import syncleus.dann.evolve.genome.Genome;
 
 /**
  * Create a Genome for use with HyperNEAT.

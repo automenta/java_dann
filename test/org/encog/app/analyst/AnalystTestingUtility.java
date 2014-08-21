@@ -24,9 +24,7 @@
 package org.encog.app.analyst;
 
 import java.io.File;
-
 import junit.framework.Assert;
-
 import org.encog.app.analyst.report.AnalystReport;
 import org.encog.app.analyst.script.DataField;
 import org.encog.app.analyst.script.normalize.AnalystField;

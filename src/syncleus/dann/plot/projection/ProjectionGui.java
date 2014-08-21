@@ -29,7 +29,6 @@ import java.awt.event.FocusEvent;
 import java.awt.geom.Ellipse2D;
 import java.util.Map.Entry;
 import java.util.concurrent.Executors;
-
 import javax.swing.Action;
 import javax.swing.Box;
 import javax.swing.DefaultComboBoxModel;
@@ -43,7 +42,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
-
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;

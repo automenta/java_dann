@@ -18,12 +18,11 @@
  ******************************************************************************/
 package syncleus.dann.neural.feedforward.graph;
 
+import java.util.concurrent.ExecutorService;
 import syncleus.dann.graph.AbstractBidirectedAdjacencyGraph;
+import syncleus.dann.neural.Synapse;
 import syncleus.dann.neural.util.NeuronGroup;
 import syncleus.dann.neural.util.SimpleSynapse;
-import syncleus.dann.neural.Synapse;
-
-import java.util.concurrent.ExecutorService;
 
 // TODO rename bad camel-casing
 public abstract class AbstractFullyConnectedFeedforwardBrain<IN extends InputBackpropNeuron, ON extends OutputBackpropNeuron, N extends BackpropNeuron, S extends Synapse<N>>

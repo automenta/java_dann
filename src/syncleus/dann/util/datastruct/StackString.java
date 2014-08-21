@@ -21,30 +21,48 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package org.encog.ml.prg.train;
+package syncleus.dann.util.datastruct;
 
-import java.util.Random;
 
-import junit.framework.TestCase;
-
-import org.encog.ml.prg.EncogProgram;
-import org.encog.ml.prg.EncogProgramContext;
-import org.encog.ml.prg.extension.StandardExtensions;
-import org.encog.ml.prg.generator.PrgGrowGenerator;
-import org.encog.parse.expression.common.RenderCommonExpression;
-
-public class TestGenerate extends TestCase {
-
-	public void testDepth() {
-		EncogProgramContext context = new EncogProgramContext();
-		context.defineVariable("x");
-		
-		StandardExtensions.createAll(context);
-		
-		PrgGrowGenerator rnd = new PrgGrowGenerator(context,2);
-		EncogProgram prg = rnd.generate(new Random());
-		RenderCommonExpression render = new RenderCommonExpression();
-		String str = render.render(prg);
-		System.out.println(str);
+public class StackString {
+	private String[] stack;
+	private int head = 0;
+	
+	public StackString(int size) {
+		this.stack = new String[size];
 	}
+	
+	public boolean isEmpty() {
+		return this.head == 0;
+	}
+	
+	public void push(String str) {
+		if( this.head==this.stack.length) {
+			throw new RuntimeException("Stack overflow");
+		}
+		this.stack[this.head++] = str;
+	}
+	
+	public String pop() {
+		if( this.head==0 ) {
+			throw new RuntimeException("Stack is empty");
+		}
+		return this.stack[--this.head];
+	}
+	
+	public int size() {
+		return this.head;
+	}
+	
+	public String toString() {
+		StringBuilder result = new StringBuilder();
+		result.append("[StackString: ");
+		for(int i=head-1;i>=0;i--) {
+			result.append(this.stack[i]);
+			result.append(" ");
+		}
+		result.append("]");
+		return result.toString();
+	}
+	
 }

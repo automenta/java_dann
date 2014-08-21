@@ -23,9 +23,8 @@
  */
 package syncleus.dann.evolve.score;
 
-import syncleus.dann.Learning;
-
 import java.io.Serializable;
+import syncleus.dann.Learning;
 import syncleus.dann.learn.ScoreLearning;
 
 /**

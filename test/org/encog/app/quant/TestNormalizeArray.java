@@ -25,7 +25,6 @@ package org.encog.app.quant;
 
 import junit.framework.Assert;
 import junit.framework.TestCase;
-
 import org.encog.util.arrayutil.NormalizeArray;
 
 public class TestNormalizeArray extends TestCase {

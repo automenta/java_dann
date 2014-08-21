@@ -18,8 +18,8 @@
  ******************************************************************************/
 package syncleus.dann.neural.som.brain;
 
-import syncleus.dann.neural.util.AbstractInputNeuron;
 import syncleus.dann.neural.Brain;
+import syncleus.dann.neural.util.AbstractInputNeuron;
 
 public abstract class AbstractSomInputNeuron extends AbstractInputNeuron
         implements SomInputNeuron {

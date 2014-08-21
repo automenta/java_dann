@@ -26,8 +26,8 @@ package syncleus.dann.math.matrix.hessian;
 import syncleus.dann.data.DataCase;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.math.array.EngineArray;
-import syncleus.dann.neural.util.activation.EncogActivationFunction;
 import syncleus.dann.neural.flat.FlatNetwork;
+import syncleus.dann.neural.util.activation.EncogActivationFunction;
 
 /**
  * A threaded worker that is used to calculate the first derivatives of the

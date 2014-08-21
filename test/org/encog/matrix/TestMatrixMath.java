@@ -24,7 +24,6 @@
 package org.encog.matrix;
 
 import junit.framework.TestCase;
-
 import syncleus.dann.math.matrix.Matrix;
 import syncleus.dann.math.matrix.MatrixMath;
 

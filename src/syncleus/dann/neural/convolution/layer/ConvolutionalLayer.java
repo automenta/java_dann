@@ -16,13 +16,13 @@
 
 package org.neuroph.nnet.comp.layer;
 
-import org.neuroph.nnet.comp.Kernel;
 import org.neuroph.core.Neuron;
 import org.neuroph.core.Weight;
-import syncleus.dann.neural.util.input.WeightedSum;
+import org.neuroph.nnet.comp.Kernel;
 import org.neuroph.util.ConnectionFactory;
 import org.neuroph.util.NeuronProperties;
 import org.neuroph.util.TransferFunctionType;
+import syncleus.dann.neural.util.input.WeightedSum;
 
 /**
  * Convolutional layer is a special type of layer, used in convolutional neural

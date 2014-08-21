@@ -24,7 +24,6 @@
 package org.encog.neural.freeform;
 
 import junit.framework.TestCase;
-
 import org.encog.ml.LearningScoring;
 import org.encog.ml.MLMethod;
 import org.encog.ml.MethodFactory;
@@ -34,11 +33,11 @@ import org.encog.ml.genetic.MLMethodGeneticAlgorithm;
 import org.encog.ml.train.MLTrain;
 import org.encog.neural.freeform.training.FreeformBackPropagation;
 import org.encog.neural.freeform.training.FreeformResilientPropagation;
-import syncleus.dann.neural.NetworkUtil;
 import org.encog.neural.networks.XOR;
 import org.encog.neural.networks.training.TrainingSetScore;
 import org.encog.neural.networks.training.anneal.NeuralSimulatedAnnealing;
 import org.junit.Test;
+import syncleus.dann.neural.NetworkUtil;
 
 public class TestFreeformTraining extends TestCase {
 	

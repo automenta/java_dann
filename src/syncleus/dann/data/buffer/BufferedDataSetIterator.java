@@ -23,11 +23,10 @@
  */
 package syncleus.dann.data.buffer;
 
+import java.util.Iterator;
 import syncleus.dann.data.DataCase;
 import syncleus.dann.data.DataException;
 import syncleus.dann.data.vector.VectorCase;
-
-import java.util.Iterator;
 
 /**
  * An iterator for the BufferedNeuralDataSet.

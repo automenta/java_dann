@@ -23,12 +23,11 @@
  */
 package syncleus.dann.plan.grid2d;
 
+import java.util.HashMap;
+import java.util.Map;
 import syncleus.dann.math.Format;
 import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.plan.State;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class BasicState implements State {
 

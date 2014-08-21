@@ -25,7 +25,6 @@ package org.encog.parse.expression.rpn;
 
 import junit.framework.Assert;
 import junit.framework.TestCase;
-
 import org.encog.ml.prg.EncogProgram;
 
 public class TestRenderRPN extends TestCase {

@@ -23,8 +23,8 @@
  */
 package syncleus.dann.neural.util.layer;
 
-import syncleus.dann.neural.util.activation.EncogActivationFunction;
 import syncleus.dann.neural.VectorNeuralNetwork;
+import syncleus.dann.neural.util.activation.EncogActivationFunction;
 
 /**
  * This interface defines all necessary methods for a neural network layer.

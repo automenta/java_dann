@@ -24,9 +24,7 @@
 package org.encog.parse.tags.read;
 
 import java.io.ByteArrayInputStream;
-
 import junit.framework.TestCase;
-
 import org.junit.Assert;
 
 public class TestXMLRead extends TestCase {

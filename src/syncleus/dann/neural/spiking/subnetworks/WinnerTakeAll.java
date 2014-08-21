@@ -19,7 +19,6 @@
 package syncleus.dann.neural.spiking.subnetworks;
 
 import java.util.Random;
-
 import syncleus.dann.neural.spiking.SpikingNeuralNetwork;
 import syncleus.dann.neural.spiking.SpikingNeuron;
 import syncleus.dann.neural.spiking.groups.NeuronGroup;

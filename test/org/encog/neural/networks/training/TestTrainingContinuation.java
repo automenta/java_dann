@@ -24,17 +24,16 @@
 package org.encog.neural.networks.training;
 
 import junit.framework.TestCase;
-
 import org.encog.ml.data.MLDataSet;
 import org.encog.ml.data.basic.BasicMLDataSet;
 import org.encog.neural.networks.BasicNetwork;
-import syncleus.dann.neural.NetworkUtil;
 import org.encog.neural.networks.XOR;
 import org.encog.neural.networks.structure.NetworkCODEC;
 import org.encog.neural.networks.training.propagation.TrainingContinuation;
 import org.encog.neural.networks.training.propagation.back.Backpropagation;
 import org.encog.neural.networks.training.propagation.resilient.ResilientPropagation;
 import org.junit.Assert;
+import syncleus.dann.neural.NetworkUtil;
 
 public class TestTrainingContinuation extends TestCase {
 	public void testContRPROP()

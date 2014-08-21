@@ -24,11 +24,7 @@
 package org.encog.bot.browse;
 
 import java.net.URL;
-
 import junit.framework.TestCase;
-
-import org.encog.bot.browse.range.Form;
-import org.encog.bot.browse.range.Input;
 import org.junit.Assert;
 import org.junit.Test;
 

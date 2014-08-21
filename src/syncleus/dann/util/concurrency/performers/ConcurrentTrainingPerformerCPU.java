@@ -23,9 +23,8 @@
  */
 package syncleus.dann.util.concurrency.performers;
 
-import syncleus.dann.Training;
-
 import java.util.concurrent.atomic.AtomicBoolean;
+import syncleus.dann.Training;
 
 /**
  * This performer allows jobs to be performed by the CPU.

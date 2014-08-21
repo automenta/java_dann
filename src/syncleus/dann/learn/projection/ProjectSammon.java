@@ -19,7 +19,6 @@
 package org.simbrain.util.projection;
 
 import java.util.ArrayList;
-
 import org.simbrain.util.SimbrainPreferences;
 import org.simbrain.util.SimbrainPreferences.PropertyNotFoundException;
 

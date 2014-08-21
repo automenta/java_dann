@@ -23,11 +23,10 @@
  */
 package syncleus.dann.neural.neat;
 
-import syncleus.dann.evolve.genome.Genome;
-
 import java.io.Serializable;
 import java.util.List;
 import java.util.Random;
+import syncleus.dann.evolve.genome.Genome;
 
 /**
  * This factory is used to create NEATGenomes.

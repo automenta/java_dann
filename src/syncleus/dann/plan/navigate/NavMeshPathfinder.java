@@ -1,12 +1,11 @@
 package syncleus.dann.plan.navigate;
 
+import java.util.ArrayList;
+import java.util.List;
 import syncleus.dann.math.geometry.Line2D;
 import syncleus.dann.math.geometry.Line2D.LineIntersect;
 import syncleus.dann.math.geometry.Path;
 import syncleus.dann.math.geometry.Path.Waypoint;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class NavMeshPathfinder {
 

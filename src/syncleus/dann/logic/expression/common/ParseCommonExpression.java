@@ -21,7 +21,7 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package org.encog.parse.expression.common;
+package syncleus.dann.logic.expression.common;
 
 
 import syncleus.dann.data.language.SimpleParser;
@@ -33,6 +33,7 @@ import syncleus.dann.evolve.gp.extension.BasicTemplate;
 import syncleus.dann.evolve.gp.extension.NodeType;
 import syncleus.dann.evolve.gp.extension.ProgramExtensionTemplate;
 import syncleus.dann.evolve.gp.extension.StandardExtensions;
+import syncleus.dann.util.datastruct.StackObject;
 
 /**
  * This class is used to process a common format equation (in-fix) into the tree

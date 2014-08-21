@@ -23,23 +23,21 @@
  */
 package syncleus.dann.evolve.gp;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+import syncleus.dann.logic.expression.common.ParseCommonExpression;
 import syncleus.dann.RegressionLearning;
-import syncleus.dann.data.MutableData;
+import syncleus.dann.data.Data;
 import syncleus.dann.data.Dataset;
+import syncleus.dann.data.MutableData;
 import syncleus.dann.data.vector.VectorData;
 import syncleus.dann.evolve.exception.EACompileError;
 import syncleus.dann.evolve.exception.EARuntimeError;
 import syncleus.dann.evolve.genome.BasicGenome;
 import syncleus.dann.evolve.genome.Genome;
-import syncleus.dann.graph.tree.traverse.tasks.TaskGetNodeIndex;
-import syncleus.dann.graph.tree.traverse.tasks.TaskReplaceNode;
-import syncleus.dann.learn.ErrorLearning;
-import syncleus.dann.math.EncogUtility;
-
-import java.util.*;
-import org.encog.parse.expression.common.ParseCommonExpression;
-import org.encog.parse.expression.epl.ParseEPL;
-import syncleus.dann.data.Data;
 import syncleus.dann.evolve.gp.expvalue.ExpressionValue;
 import syncleus.dann.evolve.gp.expvalue.ValueType;
 import static syncleus.dann.evolve.gp.expvalue.ValueType.booleanType;
@@ -50,9 +48,14 @@ import static syncleus.dann.evolve.gp.expvalue.ValueType.stringType;
 import syncleus.dann.evolve.gp.extension.FunctionFactory;
 import syncleus.dann.evolve.gp.extension.StandardExtensions;
 import syncleus.dann.evolve.gp.train.PrgPopulation;
-import syncleus.dann.util.expression.common.RenderCommonExpression;
-import syncleus.dann.util.expression.epl.RenderEPL;
-import syncleus.dann.util.expression.rpn.RenderRPN;
+import syncleus.dann.graph.tree.traverse.tasks.TaskGetNodeIndex;
+import syncleus.dann.graph.tree.traverse.tasks.TaskReplaceNode;
+import syncleus.dann.learn.ErrorLearning;
+import syncleus.dann.math.EncogUtility;
+import syncleus.dann.logic.expression.common.RenderCommonExpression;
+import syncleus.dann.logic.expression.epl.ParseEPL;
+import syncleus.dann.logic.expression.epl.RenderEPL;
+import syncleus.dann.logic.expression.rpn.RenderRPN;
 
 /**
  * Holds an Encog Programming Language (EPL) program. A Encog program is

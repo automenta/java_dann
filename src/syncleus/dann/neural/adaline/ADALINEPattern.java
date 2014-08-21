@@ -23,13 +23,13 @@
  */
 package syncleus.dann.neural.adaline;
 
-import syncleus.dann.neural.NeuralNetworkPattern;
 import syncleus.dann.Learning;
 import syncleus.dann.math.random.RangeRandomizer;
-import syncleus.dann.neural.util.activation.ActivationLinear;
-import syncleus.dann.neural.util.activation.EncogActivationFunction;
+import syncleus.dann.neural.NeuralNetworkPattern;
 import syncleus.dann.neural.VectorNeuralNetwork;
 import syncleus.dann.neural.util.PatternError;
+import syncleus.dann.neural.util.activation.ActivationLinear;
+import syncleus.dann.neural.util.activation.EncogActivationFunction;
 import syncleus.dann.neural.util.layer.BasicLayer;
 import syncleus.dann.neural.util.layer.Layer;
 

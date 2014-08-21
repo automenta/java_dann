@@ -19,12 +19,10 @@
 package org.simbrain.plot.timeseries;
 
 import java.awt.BorderLayout;
-
 import javax.swing.Action;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-
 import org.simbrain.plot.actions.PlotActionManager;
 import org.simbrain.util.genericframe.GenericFrame;
 import org.simbrain.util.widgets.ShowHelpAction;

@@ -25,7 +25,6 @@ package org.encog.util.obj;
 
 import junit.framework.Assert;
 import junit.framework.TestCase;
-
 import org.encog.engine.network.activation.ActivationSigmoid;
 
 public class TestReflectionUtil extends TestCase {

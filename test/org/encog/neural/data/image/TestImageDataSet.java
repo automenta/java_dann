@@ -28,11 +28,8 @@ import java.awt.Graphics;
 import java.awt.HeadlessException;
 import java.awt.Image;
 import java.util.Iterator;
-
 import javax.swing.JFrame;
-
 import junit.framework.TestCase;
-
 import org.encog.ml.data.MLData;
 import org.encog.ml.data.MLDataPair;
 import org.encog.ml.data.basic.BasicMLData;

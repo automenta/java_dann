@@ -24,9 +24,7 @@
 package org.encog.ensemble.bagging;
 
 import java.util.ArrayList;
-
 import junit.framework.TestCase;
-
 import org.encog.engine.network.activation.ActivationSigmoid;
 import org.encog.ensemble.EnsembleTrainFactory;
 import org.encog.ensemble.aggregator.MajorityVoting;

@@ -16,10 +16,7 @@
 
 package syncleus.dann.neural.misc;
 
-import java.util.Vector;
-
 import org.neuroph.core.Connection;
-import org.neuroph.core.NeuralNetwork;
 import org.neuroph.core.data.DataSet;
 import org.neuroph.core.learning.UnsupervisedLearning;
 import org.neuroph.nnet.comp.layer.CompetitiveLayer;

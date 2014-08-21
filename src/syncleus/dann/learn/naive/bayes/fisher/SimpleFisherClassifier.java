@@ -18,13 +18,12 @@
  ******************************************************************************/
 package syncleus.dann.learn.naive.bayes.fisher;
 
-import syncleus.dann.learn.naive.FeatureExtractor;
-import syncleus.dann.learn.naive.bayes.SimpleNaiveBayesClassifier;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import syncleus.dann.learn.naive.FeatureExtractor;
+import syncleus.dann.learn.naive.bayes.SimpleNaiveBayesClassifier;
 
 /**
  * A SimpleFisherClassifier is a basic implementation of a FisherClassifier.

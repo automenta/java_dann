@@ -23,11 +23,9 @@
  */
 package syncleus.dann.evolve.gp.extension;
 
-import syncleus.dann.evolve.exception.EARuntimeError;
-import syncleus.dann.math.random.RangeRandomizer;
-
 import java.util.List;
 import java.util.Random;
+import syncleus.dann.evolve.exception.EARuntimeError;
 import syncleus.dann.evolve.gp.EncogProgramContext;
 import syncleus.dann.evolve.gp.ProgramNode;
 import syncleus.dann.evolve.gp.expvalue.EvaluateExpr;
@@ -38,6 +36,7 @@ import static syncleus.dann.evolve.gp.expvalue.ValueType.enumType;
 import static syncleus.dann.evolve.gp.expvalue.ValueType.floatingType;
 import static syncleus.dann.evolve.gp.expvalue.ValueType.intType;
 import static syncleus.dann.evolve.gp.expvalue.ValueType.stringType;
+import syncleus.dann.math.random.RangeRandomizer;
 
 /**
  * This class defines the standard opcodes for Encog programs.

@@ -19,7 +19,6 @@
 package syncleus.dann.solve.visionworld.filter;
 
 import java.awt.image.BufferedImage;
-
 import syncleus.dann.solve.visionworld.Filter;
 
 /**

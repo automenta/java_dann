@@ -25,7 +25,6 @@ package org.encog.parse.expression.epl;
 
 import junit.framework.Assert;
 import junit.framework.TestCase;
-
 import org.encog.ml.prg.EncogProgram;
 
 public class TestRenderEPL extends TestCase {

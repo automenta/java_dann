@@ -24,7 +24,6 @@
 package org.encog.neural.networks.training;
 
 import junit.framework.TestCase;
-
 import org.encog.ml.train.strategy.Greedy;
 import org.encog.ml.train.strategy.HybridStrategy;
 import org.encog.ml.train.strategy.ResetStrategy;

@@ -23,11 +23,10 @@
  */
 package syncleus.dann.data.folded;
 
-import syncleus.dann.data.MutableData;
+import java.util.Iterator;
 import syncleus.dann.data.DataCase;
 import syncleus.dann.data.Dataset;
-
-import java.util.Iterator;
+import syncleus.dann.data.MutableData;
 
 /**
  * A folded data set allows you to "fold" the data into several equal(or nearly

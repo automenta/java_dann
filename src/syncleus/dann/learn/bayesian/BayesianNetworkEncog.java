@@ -23,10 +23,18 @@
  */
 package syncleus.dann.learn.bayesian;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import syncleus.dann.Classifying;
-import syncleus.dann.data.MutableData;
+import syncleus.dann.data.Data;
 import syncleus.dann.data.DataCase;
 import syncleus.dann.data.Dataset;
+import syncleus.dann.data.MutableData;
 import syncleus.dann.data.file.csv.CSVFormat;
 import syncleus.dann.learn.AbstractLearning;
 import syncleus.dann.learn.ErrorLearning;
@@ -38,10 +46,6 @@ import syncleus.dann.learn.bayesian.query.BayesianQuery;
 import syncleus.dann.learn.bayesian.query.enumerate.EnumerationQuery;
 import syncleus.dann.learn.bayesian.query.sample.EventState;
 import syncleus.dann.math.array.EngineArray;
-
-import java.io.Serializable;
-import java.util.*;
-import syncleus.dann.data.Data;
 
 /**
  * The Bayesian Network is a machine learning method that is based on

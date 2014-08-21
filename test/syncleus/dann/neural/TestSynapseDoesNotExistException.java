@@ -18,8 +18,8 @@
  ******************************************************************************/
 package syncleus.dann.neural;
 
-import syncleus.dann.neural.util.structure.SynapseDoesNotExistDannException;
 import org.junit.Test;
+import syncleus.dann.neural.util.structure.SynapseDoesNotExistDannException;
 
 public class TestSynapseDoesNotExistException {
     @Test(expected = SynapseDoesNotExistDannException.class)

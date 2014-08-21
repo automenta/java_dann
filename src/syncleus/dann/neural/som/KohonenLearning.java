@@ -17,17 +17,15 @@
 package syncleus.dann.neural.som;
 
 import java.util.Iterator;
-
 import org.neuroph.core.Connection;
 import org.neuroph.core.Layer;
 import org.neuroph.core.NeuralNetwork;
 import org.neuroph.core.Neuron;
-import org.neuroph.core.events.LearningEvent;
-import org.neuroph.core.learning.LearningRule;
-import org.neuroph.core.data.DataSetRow;
 import org.neuroph.core.data.DataSet;
+import org.neuroph.core.data.DataSetRow;
+import org.neuroph.core.events.LearningEvent;
 import org.neuroph.core.events.LearningEventType;
-import org.neuroph.nnet.Kohonen;
+import org.neuroph.core.learning.LearningRule;
 
 /**
  * Learning algorithm for Kohonen network.

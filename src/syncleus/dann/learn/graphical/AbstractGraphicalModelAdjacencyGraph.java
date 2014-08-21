@@ -18,11 +18,16 @@
  ******************************************************************************/
 package syncleus.dann.learn.graphical;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import syncleus.dann.graph.AbstractBidirectedAdjacencyGraph;
 import syncleus.dann.graph.BidirectedEdge;
 import syncleus.dann.graph.Graph;
-
-import java.util.*;
 
 public abstract class AbstractGraphicalModelAdjacencyGraph<N extends GraphicalModelNode, E extends BidirectedEdge<N>>
         extends AbstractBidirectedAdjacencyGraph<N, E> implements

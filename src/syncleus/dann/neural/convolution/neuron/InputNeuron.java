@@ -17,8 +17,6 @@
 package org.neuroph.nnet.comp.neuron;
 
 import org.neuroph.core.Neuron;
-import syncleus.dann.neural.util.input.WeightedSum;
-import org.neuroph.core.transfer.Linear;
 
 /**
  * Provides input neuron behaviour - neuron with input extranaly set, which just

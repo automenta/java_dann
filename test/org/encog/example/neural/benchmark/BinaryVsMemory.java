@@ -24,7 +24,6 @@
 package org.encog.examples.neural.benchmark;
 
 import java.io.File;
-
 import org.encog.Encog;
 import org.encog.ml.data.MLDataPair;
 import org.encog.ml.data.basic.BasicMLDataPair;

@@ -26,9 +26,7 @@ package org.encog.examples.neural.neat.boxes;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.Random;
-
 import javax.swing.JPanel;
-
 import org.encog.mathutil.IntPair;
 import org.encog.neural.hyperneat.HyperNEATCODEC;
 import org.encog.neural.hyperneat.substrate.Substrate;

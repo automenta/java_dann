@@ -24,7 +24,6 @@
 package org.encog.parse.tags.write;
 
 import java.io.ByteArrayOutputStream;
-
 import junit.framework.Assert;
 import junit.framework.TestCase;
 

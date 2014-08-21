@@ -18,12 +18,16 @@
  ******************************************************************************/
 package syncleus.dann.evolve.wavelets;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
+import java.util.SortedSet;
+import java.util.TreeSet;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import syncleus.dann.evolve.MutableInteger;
 import syncleus.dann.util.UnexpectedDannError;
-
-import java.util.*;
 
 public abstract class AbstractKey implements Cloneable {
     private Map<Integer, Boolean> points;

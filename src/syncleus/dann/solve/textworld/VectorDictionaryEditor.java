@@ -23,9 +23,7 @@ import java.awt.FlowLayout;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-
 import javax.swing.JPanel;
-
 import org.simbrain.util.StandardDialog;
 import org.simbrain.util.Utils;
 import org.simbrain.util.table.SimbrainJTable;

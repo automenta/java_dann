@@ -21,17 +21,19 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package syncleus.dann.util.expression.rpn;
+package syncleus.dann.logic.expression.epl;
 
+import syncleus.dann.data.file.csv.CSVFormat;
 import syncleus.dann.evolve.gp.EncogProgram;
 import syncleus.dann.evolve.gp.ProgramNode;
-import syncleus.dann.util.expression.CommonRender;
-import syncleus.dann.util.expression.ExpressionNodeType;
+import syncleus.dann.evolve.gp.expvalue.ValueType;
+import syncleus.dann.math.EncogMath;
+import syncleus.dann.logic.expression.CommonRender;
 
-public class RenderRPN extends CommonRender {
+public class RenderEPL extends CommonRender {
 	private EncogProgram program;
 
-	public RenderRPN() {
+	public RenderEPL() {
 	}
 
 	public String render(final EncogProgram theProgram) {
@@ -39,44 +41,39 @@ public class RenderRPN extends CommonRender {
 		return renderNode(this.program.getRootNode());
 	}
 	
-	private String handleConst(ProgramNode node) {
-		return node.getData()[0].toStringValue();
-	}
-	
-	private String handleVar(ProgramNode node) {
-		int varIndex = (int)node.getData()[0].toIntValue();
-		return this.program.getVariables().getVariableName(varIndex);
-	}
-	
-	
-
 	private String renderNode(ProgramNode node) {
 		StringBuilder result = new StringBuilder();
-		
-		ExpressionNodeType t = this.determineNodeType(node);
-		
+
 		for(int i=0;i<node.getChildNodes().size();i++) {
 			ProgramNode childNode = node.getChildNode(i);
-			if( result.length()>0 ) {
-				result.append(" ");
-			}
 			result.append(renderNode(childNode));
 		}
-
-		if( result.length()>0 ) {
-			result.append(" ");
-		}
 		
-		if( t==ExpressionNodeType.ConstVal ) {
-			result.append(handleConst(node));
-		} else if( t==ExpressionNodeType.Variable ) {
-			result.append(handleVar(node));
-		} else if( t==ExpressionNodeType.Function || t==ExpressionNodeType.Operator) {
-			result.append('[');
-			result.append(node.getName());
-			
-			result.append(']');
+		result.append('[');
+		result.append(node.getName());
+		result.append(':');
+		result.append(node.getTemplate().getChildNodeCount());
+		
+		for(int i=0;i<node.getTemplate().getDataSize();i++) {
+			result.append(':');
+			ValueType t = node.getData()[i].getExpressionType();
+			if( t==ValueType.booleanType) {
+				result.append(node.getData()[i].toBooleanValue()?'t':'f');
+			} else if( t==ValueType.floatingType) {
+				result.append(CSVFormat.EG_FORMAT.format(node.getData()[i].toFloatValue(), EncogMath.DEFAULT_PRECISION));
+			} else if( t==ValueType.intType) {
+				result.append(node.getData()[i].toIntValue());
+			} else if( t==ValueType.enumType) {
+				result.append(node.getData()[i].getEnumType());
+				result.append("#");
+				result.append(node.getData()[i].toIntValue());
+			} else if( t==ValueType.stringType) {
+				result.append("\"");
+				result.append(node.getData()[i].toStringValue());
+				result.append("\"");
+			}
 		}
+		result.append(']');
 				
 		return result.toString().trim();
 	}

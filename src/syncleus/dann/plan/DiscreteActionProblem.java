@@ -23,9 +23,8 @@
  */
 package syncleus.dann.plan;
 
-import syncleus.dann.Problem;
-
 import java.util.List;
+import syncleus.dann.Problem;
 
 /*
  * Abstract definition of a problem; solution instances try to solve it

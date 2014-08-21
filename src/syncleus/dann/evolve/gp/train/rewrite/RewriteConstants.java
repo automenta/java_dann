@@ -28,7 +28,6 @@ import syncleus.dann.evolve.gp.EncogProgram;
 import syncleus.dann.evolve.gp.ProgramNode;
 import syncleus.dann.evolve.gp.expvalue.ExpressionValue;
 import syncleus.dann.evolve.rules.RewriteRule;
-import syncleus.dann.math.EncogMath;
 
 /**
  * Rewrite any parts of the tree that are constant with a simple constant value.
@@ -117,8 +116,10 @@ public class RewriteConstants implements RewriteRule {
                             new ProgramNode[]{});
 
             // is it an integer?
-            if (Math.abs(ck - ck) < EncogMath.DEFAULT_EPSILON) {
-                result.getData()[0] = new ExpressionValue((long) ck);
+            //if (Math.abs(ck - ck) < EncogMath.DEFAULT_EPSILON) {
+            long rounded = ((long)Math.round(ck));
+            if ( rounded == ck) {
+                result.getData()[0] = new ExpressionValue(rounded);
             } else {
                 result.getData()[0] = v;
             }

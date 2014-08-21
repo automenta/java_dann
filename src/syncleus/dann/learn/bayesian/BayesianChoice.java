@@ -23,10 +23,9 @@
  */
 package syncleus.dann.learn.bayesian;
 
+import java.io.Serializable;
 import syncleus.dann.data.file.csv.CSVFormat;
 import syncleus.dann.math.EncogMath;
-
-import java.io.Serializable;
 
 /**
  * A choice in a Bayesian network. Choices can be either discrete or continuous.

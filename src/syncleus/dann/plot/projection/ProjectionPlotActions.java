@@ -15,10 +15,8 @@ package org.simbrain.plot.projection;
 
 import java.awt.event.ActionEvent;
 import java.io.File;
-
 import javax.swing.AbstractAction;
 import javax.swing.Action;
-
 import org.simbrain.resource.ResourceManager;
 import org.simbrain.util.SFileChooser;
 

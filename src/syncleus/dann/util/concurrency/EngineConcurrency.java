@@ -112,7 +112,7 @@ public class EngineConcurrency implements MultiThreadable {
 	 */
 	public void checkError() {
 		if (this.threadError != null) {
-			throw new EncogError(this.threadError);
+			throw new RuntimeException(this.threadError);
 		}
 	}
 
@@ -157,7 +157,7 @@ public class EngineConcurrency implements MultiThreadable {
 			if (this.threadError != null) {
 				final Throwable t = this.threadError;
 				this.threadError = null;
-				throw new EncogError(t);
+				throw new RuntimeException(t);
 			}
 
 			final PoolItem item = new PoolItem(task, group);
@@ -195,7 +195,7 @@ public class EngineConcurrency implements MultiThreadable {
 				this.executor.awaitTermination(timeout, TimeUnit.SECONDS);
 				this.executor = null;
 			} catch (final InterruptedException e) {
-				throw new EncogError(e);
+				throw new RuntimeException(e);
 			}
 		}
 	}

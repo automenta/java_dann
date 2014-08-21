@@ -25,7 +25,6 @@ package org.encog.ml.data.basic;
 
 import junit.framework.Assert;
 import junit.framework.TestCase;
-
 import org.encog.ml.data.MLDataPair;
 
 public class TestBasicMLSequenceSet extends TestCase {

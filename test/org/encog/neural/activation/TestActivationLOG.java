@@ -24,7 +24,6 @@
 package org.encog.neural.activation;
 
 import junit.framework.TestCase;
-
 import org.encog.engine.network.activation.ActivationLOG;
 import org.junit.Assert;
 import org.junit.Test;

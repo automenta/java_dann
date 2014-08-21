@@ -21,33 +21,28 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package org.encog.ml.prg.train.rewrite;
+package syncleus.dann.evolve.train;
 
-import junit.framework.Assert;
+import java.util.Random;
 import junit.framework.TestCase;
+import syncleus.dann.evolve.gp.EncogProgram;
+import syncleus.dann.evolve.gp.EncogProgramContext;
+import syncleus.dann.evolve.gp.extension.StandardExtensions;
+import syncleus.dann.evolve.gp.generator.PrgGrowGenerator;
+import syncleus.dann.logic.expression.common.RenderCommonExpression;
 
-import org.encog.ml.prg.EncogProgram;
-import org.encog.parse.expression.common.RenderCommonExpression;
+public class TestGenerate extends TestCase {
 
-public class TestRewriteConstants extends TestCase {
-	
-	public void eval(String start, String expect) {
-		EncogProgram expression = new EncogProgram(start);
+	public void testDepth() {
+		EncogProgramContext context = new EncogProgramContext();
+		context.defineVariable("x");
+		
+		StandardExtensions.createAll(context);
+		
+		PrgGrowGenerator rnd = new PrgGrowGenerator(context,2);
+		EncogProgram prg = rnd.generate(new Random());
 		RenderCommonExpression render = new RenderCommonExpression();
-		RewriteConstants rewrite = new RewriteConstants();
-		rewrite.rewrite(expression);
-		Assert.assertEquals(expect, render.render(expression));
-	}
-
-	public void testFull() {
-		eval("1+2","3");
-		eval("1+2+3","6");
-		eval("1+2+3+4","10");
-	}
-	
-	public void testPartial() {
-		eval("1+x","(1+x)");
-		eval("1+2+x","(3+x)");
-		eval("1.0/2.0+x","(0.5+x)");
+		String str = render.render(prg);
+		System.out.println(str);
 	}
 }

@@ -25,9 +25,7 @@ package org.encog.examples.neural.gui.som;
 
 import java.awt.Color;
 import java.awt.Graphics;
-
 import javax.swing.JPanel;
-
 import org.encog.mathutil.matrices.Matrix;
 
 public class MapPanel extends JPanel {

@@ -26,14 +26,12 @@ import java.awt.event.ActionListener;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Random;
-
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
-
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;

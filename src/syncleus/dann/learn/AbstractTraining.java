@@ -23,14 +23,13 @@
  */
 package syncleus.dann.learn;
 
+import java.util.ArrayList;
+import java.util.List;
 import syncleus.dann.Training;
+import syncleus.dann.data.Data;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.learn.strategy.Strategy;
 import syncleus.dann.learn.strategy.end.EndTrainingStrategy;
-
-import java.util.ArrayList;
-import java.util.List;
-import syncleus.dann.data.Data;
 
 /**
  * An abstract class that implements basic training for most training

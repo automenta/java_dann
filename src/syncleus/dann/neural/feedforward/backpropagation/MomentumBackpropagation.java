@@ -15,7 +15,6 @@
  */
 package syncleus.dann.neural.feedforward.backpropagation;
 
-import syncleus.dann.neural.feedforward.backpropagation.BackPropagationNeuroph;
 import org.neuroph.core.Connection;
 import org.neuroph.core.Layer;
 import org.neuroph.core.Neuron;

@@ -23,13 +23,12 @@
  */
 package syncleus.dann.evolve.gp.extension;
 
-import syncleus.dann.evolve.exception.EACompileError;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import syncleus.dann.evolve.exception.EACompileError;
 import syncleus.dann.evolve.gp.EncogProgram;
 import syncleus.dann.evolve.gp.EncogProgramContext;
 import syncleus.dann.evolve.gp.ProgramNode;

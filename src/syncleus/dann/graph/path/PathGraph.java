@@ -23,14 +23,13 @@
  */
 package syncleus.dann.graph.path;
 
-import syncleus.dann.graph.DirectedGraph;
-import syncleus.dann.graph.Graph;
-import syncleus.dann.graph.WeightedDirectedEdge;
-
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
+import syncleus.dann.graph.DirectedGraph;
+import syncleus.dann.graph.Graph;
+import syncleus.dann.graph.WeightedDirectedEdge;
 
 /**
  * Graph with an API optimized for pathfinding/searching

@@ -23,12 +23,16 @@
  */
 package syncleus.dann.plan.grid2d;
 
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Queue;
+import java.util.Set;
 import syncleus.dann.plan.ActionProbability;
 import syncleus.dann.plan.DiscreteActionProblem;
 import syncleus.dann.plan.DiscreteActionSolution;
 import syncleus.dann.plan.State;
-
-import java.util.*;
 
 public abstract class BasicDiscreteActionProblem<A, S extends State> implements DiscreteActionProblem<A,S> {
     private final List<A> actions = new ArrayList<>();

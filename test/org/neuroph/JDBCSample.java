@@ -16,10 +16,10 @@
 
 package org.neuroph.samples;
 
-import java.sql.Connection;
 import java.io.FileNotFoundException;
-import java.sql.DriverManager;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
 import org.neuroph.nnet.MultiLayerPerceptron;
 import org.neuroph.util.io.JDBCInputAdapter;

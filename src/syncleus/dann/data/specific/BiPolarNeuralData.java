@@ -23,12 +23,11 @@
  */
 package syncleus.dann.data.specific;
 
-import syncleus.dann.data.MutableData;
-import syncleus.dann.data.DataException;
-import syncleus.dann.math.cluster.Centroid;
-import syncleus.dann.math.BiPolarUtil;
-
 import java.io.Serializable;
+import syncleus.dann.data.DataException;
+import syncleus.dann.data.MutableData;
+import syncleus.dann.math.BiPolarUtil;
+import syncleus.dann.math.cluster.Centroid;
 
 /**
  * A NeuralData implementation designed to work with bipolar data. Bipolar data

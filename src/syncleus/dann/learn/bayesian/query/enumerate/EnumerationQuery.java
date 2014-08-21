@@ -23,6 +23,9 @@
  */
 package syncleus.dann.learn.bayesian.query.enumerate;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import syncleus.dann.learn.bayesian.BayesianError;
 import syncleus.dann.learn.bayesian.BayesianEvent;
 import syncleus.dann.learn.bayesian.BayesianNetworkEncog;
@@ -32,10 +35,6 @@ import syncleus.dann.learn.bayesian.query.sample.EventState;
 import syncleus.dann.learn.bayesian.table.TableLine;
 import syncleus.dann.math.EncogMath;
 import syncleus.dann.math.Format;
-
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * An enumeration query allows probabilistic queries on a Bayesian network.

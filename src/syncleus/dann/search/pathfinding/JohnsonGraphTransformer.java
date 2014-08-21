@@ -18,12 +18,17 @@
  ******************************************************************************/
 package syncleus.dann.search.pathfinding;
 
-import syncleus.dann.graph.*;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import syncleus.dann.graph.BidirectedGraph;
+import syncleus.dann.graph.Graph;
+import syncleus.dann.graph.ImmutableWeightedDirectedEdge;
+import syncleus.dann.graph.MutableDirectedAdjacencyGraph;
+import syncleus.dann.graph.SimpleWeightedDirectedEdge;
+import syncleus.dann.graph.Weighted;
+import syncleus.dann.graph.WeightedDirectedEdge;
 
 public class JohnsonGraphTransformer<N> implements
         GraphTransformer<BidirectedGraph<N, ? extends WeightedDirectedEdge<N>>> {

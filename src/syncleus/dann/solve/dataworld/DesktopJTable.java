@@ -20,7 +20,6 @@ package syncleus.dann.solve.dataworld;
 
 import javax.swing.JMenu;
 import javax.swing.JPopupMenu;
-
 import org.simbrain.util.table.NumericTable;
 import org.simbrain.util.table.SimbrainJTable;
 import org.simbrain.workspace.PotentialConsumer;

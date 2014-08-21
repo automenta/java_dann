@@ -23,6 +23,13 @@
  */
 package syncleus.dann.evolve.train.basic;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import syncleus.dann.Learning;
 import syncleus.dann.evolve.codec.GeneticCODEC;
 import syncleus.dann.evolve.codec.GenomeAsPhenomeCODEC;
@@ -36,22 +43,18 @@ import syncleus.dann.evolve.rules.BasicRuleHolder;
 import syncleus.dann.evolve.rules.RuleHolder;
 import syncleus.dann.evolve.score.AdjustScore;
 import syncleus.dann.evolve.score.parallel.ParallelScore;
-import syncleus.dann.evolve.sort.*;
+import syncleus.dann.evolve.sort.GenomeComparator;
+import syncleus.dann.evolve.sort.MaximizeAdjustedScoreComp;
+import syncleus.dann.evolve.sort.MaximizeScoreComp;
+import syncleus.dann.evolve.sort.MinimizeAdjustedScoreComp;
+import syncleus.dann.evolve.sort.MinimizeScoreComp;
 import syncleus.dann.evolve.species.SingleSpeciation;
 import syncleus.dann.evolve.species.Speciation;
 import syncleus.dann.evolve.species.Species;
 import syncleus.dann.evolve.train.EvolutionaryAlgorithm;
 import syncleus.dann.learn.MLContext;
-import syncleus.dann.math.random.RandomFactory;
-
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 import syncleus.dann.learn.ScoreLearning;
+import syncleus.dann.math.random.RandomFactory;
 
 /**
  * Provides a basic implementation of a multi-threaded Evolutionary Algorithm.

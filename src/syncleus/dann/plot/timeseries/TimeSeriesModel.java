@@ -18,11 +18,10 @@
  */
 package org.simbrain.plot.timeseries;
 
+import com.thoughtworks.xstream.XStream;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 import org.simbrain.plot.ChartModel;
-
-import com.thoughtworks.xstream.XStream;
 
 /**
  * Data model for a time series plot.

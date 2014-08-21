@@ -23,10 +23,9 @@
  */
 package syncleus.dann.neural.neat.training.opp;
 
+import java.util.Random;
 import syncleus.dann.evolve.genome.Genome;
 import syncleus.dann.math.random.RangeRandomizer;
-
-import java.util.Random;
 
 /**
  * Mutate a genome by removing a random link. Do not remove links from genomes

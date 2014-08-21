@@ -18,14 +18,12 @@
  */
 package syncleus.dann.solve.textworld;
 
+import com.thoughtworks.xstream.XStream;
 import java.util.LinkedHashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import org.simbrain.util.Utils;
 import org.simbrain.util.propertyeditor.ComboBoxWrapper;
-
-import com.thoughtworks.xstream.XStream;
 
 /**
  * <b>ReaderWorld</b> parses the text in the underlying text world by letter or

@@ -23,12 +23,11 @@
  */
 package syncleus.dann.neural.freeform.basic;
 
+import java.io.Serializable;
 import syncleus.dann.neural.freeform.FreeformContextNeuron;
 import syncleus.dann.neural.freeform.FreeformNeuron;
 import syncleus.dann.neural.freeform.InputSummation;
 import syncleus.dann.neural.freeform.factory.FreeformNeuronFactory;
-
-import java.io.Serializable;
 
 /**
  * A factory to create BasicFreeformNeuron objects.

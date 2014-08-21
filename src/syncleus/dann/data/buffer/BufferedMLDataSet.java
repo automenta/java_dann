@@ -23,18 +23,17 @@
  */
 package syncleus.dann.data.buffer;
 
-import syncleus.dann.data.MutableData;
-import syncleus.dann.data.DataCase;
-import syncleus.dann.data.DataException;
-import syncleus.dann.data.Dataset;
-import syncleus.dann.data.vector.VectorCase;
-import syncleus.dann.data.vector.VectorDataset;
-
 import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import syncleus.dann.data.DataCase;
+import syncleus.dann.data.DataException;
+import syncleus.dann.data.Dataset;
+import syncleus.dann.data.MutableData;
+import syncleus.dann.data.vector.VectorCase;
+import syncleus.dann.data.vector.VectorDataset;
 
 /**
  * This class is not memory based, so very long files can be used, without

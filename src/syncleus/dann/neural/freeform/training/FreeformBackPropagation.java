@@ -23,12 +23,11 @@
  */
 package syncleus.dann.neural.freeform.training;
 
+import java.io.Serializable;
 import syncleus.dann.data.Dataset;
+import syncleus.dann.neural.flat.propagation.TrainingContinuation;
 import syncleus.dann.neural.freeform.FreeformConnection;
 import syncleus.dann.neural.freeform.FreeformNetwork;
-import syncleus.dann.neural.flat.propagation.TrainingContinuation;
-
-import java.io.Serializable;
 
 /**
  * Perform backpropagation for a freeform neural network.

@@ -23,14 +23,13 @@
  */
 package syncleus.dann.neural.util.prune;
 
+import java.util.ArrayList;
+import java.util.List;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.data.buffer.BufferedMLDataSet;
 import syncleus.dann.learn.strategy.StopTrainingStrategy;
-import syncleus.dann.neural.VectorNeuralNetwork;
 import syncleus.dann.neural.NeuralNetworkPattern;
-
-import java.util.ArrayList;
-import java.util.List;
+import syncleus.dann.neural.VectorNeuralNetwork;
 
 /**
  * This class is used to help determine the optimal configuration for the hidden

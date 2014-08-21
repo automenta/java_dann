@@ -23,10 +23,9 @@
  */
 package syncleus.dann.evolve.sort;
 
+import java.util.Comparator;
 import syncleus.dann.evolve.genome.Genome;
 import syncleus.dann.evolve.train.EvolutionaryAlgorithm;
-
-import java.util.Comparator;
 
 /**
  * Sort the gnomes for species. Sort first by score, second by birth generation.

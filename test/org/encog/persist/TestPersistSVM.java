@@ -25,10 +25,8 @@ package org.encog.persist;
 
 import java.io.File;
 import java.io.IOException;
-
 import junit.framework.Assert;
 import junit.framework.TestCase;
-
 import org.encog.ml.data.MLDataSet;
 import org.encog.ml.data.basic.BasicMLDataSet;
 import org.encog.ml.svm.KernelType;

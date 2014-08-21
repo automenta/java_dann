@@ -18,12 +18,12 @@
  */
 package syncleus.dann.neural.spiking.subnetworks;
 
+import syncleus.dann.learn.layouts.HexagonalGridLayout;
+import syncleus.dann.learn.layouts.Layout;
 import syncleus.dann.neural.spiking.SpikingNeuralNetwork;
 import syncleus.dann.neural.spiking.SpikingNeuron;
 import syncleus.dann.neural.spiking.SpikingSynapse;
 import syncleus.dann.neural.spiking.groups.NeuronGroup;
-import syncleus.dann.learn.layouts.HexagonalGridLayout;
-import syncleus.dann.learn.layouts.Layout;
 import syncleus.dann.neural.spiking.neuron_update_rules.LinearRule;
 
 /**

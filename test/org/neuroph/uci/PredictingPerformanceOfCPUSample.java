@@ -22,10 +22,10 @@ import org.neuroph.core.data.DataSetRow;
 import org.neuroph.core.events.LearningEvent;
 import org.neuroph.core.events.LearningEventListener;
 import org.neuroph.nnet.MultiLayerPerceptron;
-import syncleus.dann.neural.feedforward.backpropagation.BackPropagationNeuroph;
-import syncleus.dann.neural.feedforward.backpropagation.MomentumBackpropagation;
 import org.neuroph.util.data.norm.MaxNormalizer;
 import org.neuroph.util.data.norm.Normalizer;
+import syncleus.dann.neural.feedforward.backpropagation.BackPropagationNeuroph;
+import syncleus.dann.neural.feedforward.backpropagation.MomentumBackpropagation;
 
 /*
  * @author Ivana Bajovic

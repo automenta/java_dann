@@ -26,14 +26,14 @@ package syncleus.dann.neural.svm.train;
 import syncleus.dann.Learning;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.learn.AbstractTraining;
-import syncleus.dann.neural.svm.SVM;
-import syncleus.dann.neural.svm.svm;
-import syncleus.dann.neural.svm.svm_parameter;
-import syncleus.dann.neural.svm.svm_problem;
 import syncleus.dann.math.EncogMath;
 import syncleus.dann.math.Format;
 import syncleus.dann.math.statistics.ErrorCalculation;
 import syncleus.dann.neural.flat.propagation.TrainingContinuation;
+import syncleus.dann.neural.svm.SVM;
+import syncleus.dann.neural.svm.svm;
+import syncleus.dann.neural.svm.svm_parameter;
+import syncleus.dann.neural.svm.svm_problem;
 
 /**
  * Provides training for Support Vector Machine networks.

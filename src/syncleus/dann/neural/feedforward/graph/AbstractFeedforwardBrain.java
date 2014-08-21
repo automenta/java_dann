@@ -18,17 +18,20 @@
  ******************************************************************************/
 package syncleus.dann.neural.feedforward.graph;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.concurrent.ExecutorService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import syncleus.dann.graph.AbstractBidirectedAdjacencyGraph;
-import syncleus.dann.neural.util.AbstractLocalBrain;
-import syncleus.dann.neural.Neuron;
-import syncleus.dann.neural.util.NeuronGroup;
-import syncleus.dann.neural.Synapse;
-
-import java.util.*;
-import java.util.concurrent.ExecutorService;
 import syncleus.dann.data.DoubleArray;
+import syncleus.dann.graph.AbstractBidirectedAdjacencyGraph;
+import syncleus.dann.neural.Neuron;
+import syncleus.dann.neural.Synapse;
+import syncleus.dann.neural.util.AbstractLocalBrain;
+import syncleus.dann.neural.util.NeuronGroup;
 
 public abstract class AbstractFeedforwardBrain<IN extends InputBackpropNeuron, ON extends OutputBackpropNeuron, N extends BackpropNeuron, S extends Synapse<N>>
         extends AbstractLocalBrain<IN, ON, N, S> implements

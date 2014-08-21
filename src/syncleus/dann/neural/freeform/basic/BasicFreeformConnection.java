@@ -23,10 +23,9 @@
  */
 package syncleus.dann.neural.freeform.basic;
 
-import syncleus.dann.neural.freeform.FreeformNeuron;
-
 import java.io.Serializable;
 import syncleus.dann.neural.freeform.FreeformConnection;
+import syncleus.dann.neural.freeform.FreeformNeuron;
 
 /**
  * A basic freeform connection.

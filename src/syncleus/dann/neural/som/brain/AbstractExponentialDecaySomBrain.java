@@ -18,10 +18,9 @@
  ******************************************************************************/
 package syncleus.dann.neural.som.brain;
 
+import java.util.concurrent.ExecutorService;
 import syncleus.dann.graph.AbstractBidirectedAdjacencyGraph;
 import syncleus.dann.neural.Synapse;
-
-import java.util.concurrent.ExecutorService;
 
 /**
  * 

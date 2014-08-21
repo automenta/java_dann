@@ -20,7 +20,6 @@ package syncleus.dann.neural.spiking.trainers;
 
 import java.util.HashMap;
 import java.util.List;
-
 import syncleus.dann.neural.spiking.SpikingNeuralNetwork;
 import syncleus.dann.neural.spiking.SpikingNeuron;
 import syncleus.dann.neural.spiking.SpikingSynapse;

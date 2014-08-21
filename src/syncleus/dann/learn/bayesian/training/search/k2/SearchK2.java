@@ -23,6 +23,8 @@
  */
 package syncleus.dann.learn.bayesian.training.search.k2;
 
+import java.util.ArrayList;
+import java.util.List;
 import syncleus.dann.data.DataCase;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.learn.bayesian.BayesianEvent;
@@ -30,10 +32,6 @@ import syncleus.dann.learn.bayesian.BayesianNetworkEncog;
 import syncleus.dann.learn.bayesian.query.enumerate.EnumerationQuery;
 import syncleus.dann.learn.bayesian.training.TrainBayesian;
 import syncleus.dann.math.EncogMath;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 
 /**
  * Search for optimal Bayes structure with K2.

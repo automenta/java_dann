@@ -24,9 +24,9 @@
 package syncleus.dann.neural.misc;
 
 import syncleus.dann.Learning;
-import syncleus.dann.data.MutableData;
 import syncleus.dann.data.DataCase;
 import syncleus.dann.data.Dataset;
+import syncleus.dann.data.MutableData;
 import syncleus.dann.data.vector.VectorCase;
 import syncleus.dann.data.vector.VectorData;
 import syncleus.dann.learn.AbstractTraining;
@@ -36,9 +36,9 @@ import syncleus.dann.math.matrix.hessian.ComputeHessian;
 import syncleus.dann.math.matrix.hessian.HessianCR;
 import syncleus.dann.math.statistics.ErrorCalculation;
 import syncleus.dann.neural.VectorNeuralNetwork;
-import syncleus.dann.neural.util.structure.NetworkCODEC;
-import syncleus.dann.neural.util.TrainingError;
 import syncleus.dann.neural.flat.propagation.TrainingContinuation;
+import syncleus.dann.neural.util.TrainingError;
+import syncleus.dann.neural.util.structure.NetworkCODEC;
 
 /**
  * Trains a neural network using a Levenberg Marquardt algorithm (LMA). This

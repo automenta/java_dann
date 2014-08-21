@@ -4,10 +4,9 @@
  */
 package syncleus.dann.plan.navigate;
 
-import syncleus.dann.math.geometry.Path.Waypoint;
-
 import java.util.ArrayList;
 import java.util.List;
+import syncleus.dann.math.geometry.Path.Waypoint;
 
 /**
  * Debug nformation from a pathfinding search.

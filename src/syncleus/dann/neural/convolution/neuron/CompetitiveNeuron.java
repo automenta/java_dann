@@ -17,10 +17,9 @@
 package org.neuroph.nnet.comp.neuron;
 
 import java.util.Arrays;
-
 import org.neuroph.core.Connection;
-import syncleus.dann.neural.util.input.InputFunction;
 import org.neuroph.core.transfer.TransferFunction;
+import syncleus.dann.neural.util.input.InputFunction;
 
 /**
  * Provides neuron behaviour specific for competitive neurons which are used in

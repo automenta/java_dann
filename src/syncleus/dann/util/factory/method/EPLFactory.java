@@ -23,13 +23,12 @@
  */
 package syncleus.dann.util.factory.method;
 
-import syncleus.dann.Learning;
-import syncleus.dann.util.factory.MLMethodFactory;
-import syncleus.dann.util.factory.parse.ArchitectureParse;
-
 import java.util.Map;
 import java.util.Random;
 import java.util.StringTokenizer;
+import syncleus.dann.Learning;
+import syncleus.dann.util.factory.MLMethodFactory;
+import syncleus.dann.util.factory.parse.ArchitectureParse;
 
 public class EPLFactory {
     /**

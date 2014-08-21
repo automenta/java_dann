@@ -23,15 +23,14 @@
  */
 package syncleus.dann.util.factory.method;
 
+import java.util.List;
 import syncleus.dann.Learning;
-import syncleus.dann.neural.util.activation.ActivationLinear;
 import syncleus.dann.neural.VectorNeuralNetwork;
+import syncleus.dann.neural.util.activation.ActivationLinear;
 import syncleus.dann.neural.util.layer.BasicLayer;
 import syncleus.dann.util.factory.MLActivationFactory;
 import syncleus.dann.util.factory.parse.ArchitectureLayer;
 import syncleus.dann.util.factory.parse.ArchitectureParse;
-
-import java.util.List;
 
 /**
  * A factor to create feedforward networks.

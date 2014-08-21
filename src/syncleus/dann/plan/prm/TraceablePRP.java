@@ -17,16 +17,12 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 package prpvis.core;
 
-import java.util.List;
-import java.util.LinkedList;
 import java.util.Iterator;
-import java.util.Comparator;
-import java.util.Collections;
-
-import prpvis.struc.*;
-import prpvis.core.Debugging;
-import prpvis.core.PRP;
-import prpvis.ui.RoadmapDisplayInfo;
+import java.util.LinkedList;
+import java.util.List;
+import prpvis.struc.PolyPoly;
+import prpvis.struc.Roadmap;
+import prpvis.struc.RobotOrientation;
 
 /**
 * <p>This class implements the Probabilistic Roadmap Planner (PRP) in a 

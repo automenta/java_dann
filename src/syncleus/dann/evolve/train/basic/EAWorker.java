@@ -23,13 +23,12 @@
  */
 package syncleus.dann.evolve.train.basic;
 
+import java.util.Random;
+import java.util.concurrent.Callable;
 import syncleus.dann.evolve.exception.EARuntimeError;
 import syncleus.dann.evolve.genome.Genome;
 import syncleus.dann.evolve.opp.EvolutionaryOperator;
 import syncleus.dann.evolve.species.Species;
-
-import java.util.Random;
-import java.util.concurrent.Callable;
 
 /**
  * A worker thread for an Evolutionary Algorithm.

@@ -23,10 +23,9 @@
  */
 package syncleus.dann.evolve.gp.train;
 
+import java.io.Serializable;
 import syncleus.dann.evolve.genome.Genome;
 import syncleus.dann.evolve.genome.GenomeFactory;
-
-import java.io.Serializable;
 import syncleus.dann.evolve.gp.EncogProgram;
 import syncleus.dann.evolve.gp.EncogProgramContext;
 import syncleus.dann.evolve.gp.EncogProgramVariables;

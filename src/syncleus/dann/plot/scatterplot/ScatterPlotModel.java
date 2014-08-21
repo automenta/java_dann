@@ -18,16 +18,14 @@
  */
 package org.simbrain.plot.scatterplot;
 
+import com.thoughtworks.xstream.XStream;
 import java.awt.Color;
 import java.awt.Paint;
 import java.util.LinkedList;
 import java.util.List;
-
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 import org.simbrain.plot.ChartModel;
-
-import com.thoughtworks.xstream.XStream;
 
 /**
  * Model for a JFreeChart Scatter plot.

@@ -23,14 +23,13 @@
  */
 package syncleus.dann.util.factory.method;
 
+import java.util.List;
 import syncleus.dann.Learning;
 import syncleus.dann.neural.svm.KernelType;
 import syncleus.dann.neural.svm.SVM;
 import syncleus.dann.neural.svm.SVMType;
 import syncleus.dann.util.factory.parse.ArchitectureLayer;
 import syncleus.dann.util.factory.parse.ArchitectureParse;
-
-import java.util.List;
 
 /**
  * A factory that is used to create support vector machines (SVM).

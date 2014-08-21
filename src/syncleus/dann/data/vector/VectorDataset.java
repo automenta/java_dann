@@ -23,15 +23,14 @@
  */
 package syncleus.dann.data.vector;
 
-import syncleus.dann.data.DataCase;
-import syncleus.dann.data.Dataset;
-import syncleus.dann.math.array.EngineArray;
-import syncleus.dann.util.ObjectCloner;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import syncleus.dann.data.DataCase;
+import syncleus.dann.data.Dataset;
+import syncleus.dann.math.array.EngineArray;
+import syncleus.dann.util.ObjectCloner;
 
 /**
  * Stores data in an ArrayList. This class is memory based, so large enough

@@ -23,11 +23,10 @@
  */
 package syncleus.dann.math;
 
-import syncleus.dann.math.geometry.TrigonometricAlgebraic;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import syncleus.dann.math.geometry.TrigonometricAlgebraic;
 
 
 //TODO subclass http://commons.apache.org/proper/commons-math/javadocs/api-3.3/org/apache/commons/math3/complex/Complex.html

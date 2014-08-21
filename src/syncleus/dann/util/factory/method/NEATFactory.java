@@ -23,12 +23,11 @@
  */
 package syncleus.dann.util.factory.method;
 
+import java.util.Map;
 import syncleus.dann.Learning;
 import syncleus.dann.util.factory.MLActivationFactory;
 import syncleus.dann.util.factory.MLMethodFactory;
 import syncleus.dann.util.factory.parse.ArchitectureParse;
-
-import java.util.Map;
 
 /**
  * A factor to create feedforward networks.

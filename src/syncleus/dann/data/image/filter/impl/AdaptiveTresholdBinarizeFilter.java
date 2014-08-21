@@ -7,13 +7,13 @@
 package syncleus.dann.data.image.filter.impl;
 
 import imagepreprocessing.helper.PreprocessingHelper;
-import syncleus.dann.data.image.filter.IParametersPanel;
-import syncleus.dann.data.image.filter.ImageFilter;
 import imagepreprocessing.view.panels.AdaptiveTresholdBinarizePanel;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.Serializable;
 import javax.swing.JPanel;
+import syncleus.dann.data.image.filter.IParametersPanel;
+import syncleus.dann.data.image.filter.ImageFilter;
 
 /**
 * Adaptive threshold binarization filter is primarily used for binarizing images 

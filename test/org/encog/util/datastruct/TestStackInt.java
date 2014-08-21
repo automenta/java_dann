@@ -25,8 +25,7 @@ package org.encog.util.datastruct;
 
 import junit.framework.Assert;
 import junit.framework.TestCase;
-
-import org.encog.EncogError;
+import org.encog.RuntimeException;
 
 public class TestStackInt extends TestCase {
 	
@@ -99,7 +98,7 @@ public class TestStackInt extends TestCase {
 			stack.pop();
 			stack.pop();
 			Assert.assertFalse(true);
-		} catch (EncogError e) {
+		} catch (RuntimeException e) {
 			// error expected
 		}
 	}
@@ -111,7 +110,7 @@ public class TestStackInt extends TestCase {
 			stack.push(0);
 			stack.push(0);
 			Assert.assertFalse(true);
-		} catch (EncogError e) {
+		} catch (RuntimeException e) {
 			// error expected
 		}
 	}

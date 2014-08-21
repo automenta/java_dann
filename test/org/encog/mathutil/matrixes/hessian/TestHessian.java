@@ -24,10 +24,8 @@
 package org.encog.mathutil.matrixes.hessian;
 
 import java.util.Arrays;
-
 import junit.framework.Assert;
 import junit.framework.TestCase;
-
 import org.encog.engine.network.activation.ActivationSigmoid;
 import org.encog.mathutil.matrices.hessian.ComputeHessian;
 import org.encog.mathutil.matrices.hessian.HessianCR;

@@ -24,9 +24,6 @@
 package syncleus.dann.math.matrix;
 
 import junit.framework.TestCase;
-import syncleus.dann.math.matrix.MatrixMath;
-import syncleus.dann.math.matrix.RealMatrix;
-import syncleus.dann.math.matrix.SimpleRealMatrix;
 
 
 public class TestMatrix extends TestCase {

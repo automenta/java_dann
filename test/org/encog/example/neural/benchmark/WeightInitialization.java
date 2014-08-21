@@ -30,7 +30,6 @@ import org.encog.mathutil.randomize.NguyenWidrowRandomizer;
 import org.encog.mathutil.randomize.Randomizer;
 import org.encog.mathutil.randomize.RangeRandomizer;
 import org.encog.ml.data.MLDataSet;
-import org.encog.ml.data.basic.BasicMLDataSet;
 import org.encog.neural.networks.BasicNetwork;
 import org.encog.neural.networks.training.propagation.resilient.ResilientPropagation;
 import org.encog.util.benchmark.EncoderTrainingFactory;

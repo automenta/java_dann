@@ -18,11 +18,10 @@
  ******************************************************************************/
 package syncleus.dann.learn.dynamicgraphical;
 
+import java.util.Set;
 import syncleus.dann.graph.BidirectedEdge;
 import syncleus.dann.graph.Graph;
 import syncleus.dann.learn.graphical.AbstractGraphicalModelAdjacencyGraph;
-
-import java.util.Set;
 
 public abstract class AbstractDynamicGraphicalModel<N extends DynamicGraphicalModelNode, E extends BidirectedEdge<N>>
         extends AbstractGraphicalModelAdjacencyGraph<N, E> implements

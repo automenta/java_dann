@@ -23,18 +23,17 @@
  */
 package syncleus.dann.data.vector;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import syncleus.dann.data.DataCase;
 import syncleus.dann.data.DataException;
 import syncleus.dann.data.DataSequence;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.math.array.EngineArray;
-import syncleus.dann.util.ObjectCloner;
-
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 import syncleus.dann.math.cluster.Centroid;
+import syncleus.dann.util.ObjectCloner;
 
 /**
  * A basic implementation of the MLSequenceSet.

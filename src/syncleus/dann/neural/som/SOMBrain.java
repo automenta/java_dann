@@ -18,15 +18,14 @@
  ******************************************************************************/
 package syncleus.dann.neural.som;
 
+import java.util.Map;
+import java.util.Set;
 import syncleus.dann.math.Vector;
 import syncleus.dann.neural.Brain;
 import syncleus.dann.neural.Synapse;
 import syncleus.dann.neural.som.brain.SomInputNeuron;
 import syncleus.dann.neural.som.brain.SomNeuron;
 import syncleus.dann.neural.som.brain.SomOutputNeuron;
-
-import java.util.Map;
-import java.util.Set;
 
 /** SOM implemented as a Graph */
 public interface SOMBrain<IN extends SomInputNeuron, ON extends SomOutputNeuron, N extends SomNeuron, S extends Synapse<N>>

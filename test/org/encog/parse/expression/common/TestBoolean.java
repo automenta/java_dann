@@ -25,7 +25,6 @@ package org.encog.parse.expression.common;
 
 import junit.framework.Assert;
 import junit.framework.TestCase;
-
 import org.encog.ml.prg.EncogProgram;
 
 public class TestBoolean extends TestCase {

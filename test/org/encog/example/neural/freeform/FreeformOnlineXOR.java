@@ -30,7 +30,6 @@ import org.encog.ml.data.basic.BasicMLDataSet;
 import org.encog.neural.freeform.FreeformLayer;
 import org.encog.neural.freeform.FreeformNetwork;
 import org.encog.neural.freeform.training.FreeformBackPropagation;
-import org.encog.neural.freeform.training.FreeformResilientPropagation;
 import org.encog.util.simple.EncogUtility;
 
 

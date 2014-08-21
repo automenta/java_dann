@@ -26,7 +26,6 @@ package org.encog.util.csv;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-
 import junit.framework.Assert;
 import junit.framework.TestCase;
 

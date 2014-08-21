@@ -18,8 +18,8 @@
  ******************************************************************************/
 package syncleus.dann.neural.som.brain;
 
-import syncleus.dann.neural.util.AbstractNeuron;
 import syncleus.dann.neural.Brain;
+import syncleus.dann.neural.util.AbstractNeuron;
 import syncleus.dann.neural.util.activation.AbstractActivationFunction;
 import syncleus.dann.neural.util.activation.SqrtActivationFunction;
 

@@ -18,10 +18,9 @@
  ******************************************************************************/
 package syncleus.dann.learn.naive;
 
-import syncleus.dann.data.language.parsing.stem.StemmingWordParser;
-
 import java.util.Locale;
 import java.util.Set;
+import syncleus.dann.data.language.parsing.stem.StemmingWordParser;
 
 /**
  * A StemmingLanguageNaiveClassifier separates words into items based on their

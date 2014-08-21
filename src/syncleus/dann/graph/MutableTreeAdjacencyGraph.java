@@ -18,13 +18,12 @@
  ******************************************************************************/
 package syncleus.dann.graph;
 
-import syncleus.dann.graph.context.ContextGraphElement;
-import syncleus.dann.graph.tree.Trees;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import syncleus.dann.graph.context.ContextGraphElement;
+import syncleus.dann.graph.tree.Trees;
 
 public class MutableTreeAdjacencyGraph<N, E extends BidirectedEdge<N>> extends
         AbstractTreeAdjacencyGraph<N, E> implements MutableTreeGraph<N, E> {

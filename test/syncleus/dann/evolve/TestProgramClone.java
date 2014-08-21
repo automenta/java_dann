@@ -21,12 +21,13 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package org.encog.ml.prg;
+package syncleus.dann.evolve;
 
 import junit.framework.Assert;
 import junit.framework.TestCase;
-
-import org.encog.parse.expression.common.RenderCommonExpression;
+import syncleus.dann.evolve.gp.EncogProgram;
+import syncleus.dann.evolve.gp.EncogProgramContext;
+import syncleus.dann.logic.expression.common.RenderCommonExpression;
 
 public class TestProgramClone extends TestCase {
 	

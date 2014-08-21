@@ -25,7 +25,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JLabel;
@@ -41,7 +40,6 @@ import javax.swing.KeyStroke;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
-
 import org.simbrain.util.LabelledItemPanel;
 import org.simbrain.util.genericframe.GenericFrame;
 import org.simbrain.workspace.gui.GuiComponent;

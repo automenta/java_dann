@@ -1,7 +1,5 @@
 package org.neuroph.contrib.norm;
 
-import java.util.List;
-
 import org.neuroph.core.data.DataSet;
 import org.neuroph.core.data.DataSetRow;
 import org.neuroph.util.data.norm.Normalizer;

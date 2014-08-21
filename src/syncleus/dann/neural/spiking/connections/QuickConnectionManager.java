@@ -19,7 +19,6 @@
 package syncleus.dann.neural.spiking.connections;
 
 import java.util.List;
-
 import syncleus.dann.neural.spiking.SpikingNeuron;
 import syncleus.dann.neural.spiking.SpikingSynapse;
 import syncleus.dann.neural.spiking.util.Polarity;

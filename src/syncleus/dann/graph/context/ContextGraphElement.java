@@ -18,9 +18,8 @@
  ******************************************************************************/
 package syncleus.dann.graph.context;
 
-import syncleus.dann.graph.Graph;
-
 import java.util.Set;
+import syncleus.dann.graph.Graph;
 
 public interface ContextGraphElement<G extends Graph<?, ?>> {
     boolean isAllowingMultipleGraphs();

@@ -18,12 +18,11 @@
  ******************************************************************************/
 package syncleus.dann.graph;
 
-import syncleus.dann.graph.cycle.CycleFinder;
-import syncleus.dann.graph.cycle.ExhaustiveDepthFirstSearchCycleFinder;
-
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import syncleus.dann.graph.cycle.CycleFinder;
+import syncleus.dann.graph.cycle.ExhaustiveDepthFirstSearchCycleFinder;
 
 public abstract class AbstractWalk<N, E extends Edge<N>> implements Walk<N, E> {
     protected boolean verify(final List<N> nodeSteps, final List<E> edgeSteps) {

@@ -23,14 +23,13 @@
  */
 package syncleus.dann.neural.neat.training.opp;
 
-import syncleus.dann.evolve.genome.Genome;
-import syncleus.dann.evolve.opp.EvolutionaryOperator;
-import syncleus.dann.evolve.train.EvolutionaryAlgorithm;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+import syncleus.dann.evolve.genome.Genome;
+import syncleus.dann.evolve.opp.EvolutionaryOperator;
+import syncleus.dann.evolve.train.EvolutionaryAlgorithm;
 
 /**
  * Crossover is performed by mixing the link genes between the parents to

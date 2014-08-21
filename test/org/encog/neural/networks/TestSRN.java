@@ -24,7 +24,6 @@
 package org.encog.neural.networks;
 
 import junit.framework.TestCase;
-
 import org.encog.ml.data.MLDataSet;
 import org.encog.neural.networks.training.propagation.resilient.ResilientPropagation;
 import org.encog.neural.pattern.ElmanPattern;

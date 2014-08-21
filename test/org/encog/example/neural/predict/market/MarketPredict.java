@@ -24,7 +24,6 @@
 package org.encog.examples.neural.predict.market;
 
 import java.io.File;
-
 import org.encog.Encog;
 
 

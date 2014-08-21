@@ -19,7 +19,6 @@
 package syncleus.dann.neural.spiking.listeners;
 
 import java.util.EventObject;
-
 import syncleus.dann.neural.spiking.SpikingNeuralNetwork;
 
 /**

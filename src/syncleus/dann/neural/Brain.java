@@ -18,11 +18,10 @@
  ******************************************************************************/
 package syncleus.dann.neural;
 
+import java.util.Set;
+import syncleus.dann.graph.DirectedGraph;
 import syncleus.dann.neural.util.InputNeuron;
 import syncleus.dann.neural.util.OutputNeuron;
-import syncleus.dann.graph.DirectedGraph;
-
-import java.util.Set;
 
 /**
  * Represents a single artificial brain typically belonging to a single

@@ -23,9 +23,8 @@
  */
 package syncleus.dann.neural.neat.training;
 
-import syncleus.dann.neural.util.activation.EncogActivationFunction;
-
 import java.io.Serializable;
+import syncleus.dann.neural.util.activation.EncogActivationFunction;
 
 /**
  * Implements a NEAT neuron gene.

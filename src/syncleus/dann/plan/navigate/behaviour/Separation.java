@@ -5,7 +5,6 @@
 package syncleus.dann.plan.navigate.behaviour;
 
 import com.jme3.ai.steering.Obstacle;
-
 import java.util.List;
 
 /**

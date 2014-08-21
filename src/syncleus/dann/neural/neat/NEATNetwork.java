@@ -23,17 +23,16 @@
  */
 package syncleus.dann.neural.neat;
 
+import java.io.Serializable;
+import java.util.List;
 import syncleus.dann.RegressionLearning;
-import syncleus.dann.data.MutableData;
 import syncleus.dann.data.Dataset;
+import syncleus.dann.data.MutableData;
 import syncleus.dann.data.vector.VectorData;
 import syncleus.dann.learn.ErrorLearning;
 import syncleus.dann.math.EncogUtility;
 import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.neural.util.activation.EncogActivationFunction;
-
-import java.io.Serializable;
-import java.util.List;
 
 /**
  * NEAT networks relieve the programmer of the need to define the hidden layer

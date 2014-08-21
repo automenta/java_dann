@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.Semaphore;
-
 import syncleus.dann.solve.threedee.Sensor;
 import syncleus.dann.solve.visionworld.SensorMatrix;
 import syncleus.dann.solve.visionworld.VisionWorldComponent;

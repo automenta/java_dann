@@ -24,8 +24,8 @@
 package syncleus.dann.neural.rbf;
 
 import syncleus.dann.RegressionLearning;
-import syncleus.dann.data.MutableData;
 import syncleus.dann.data.Dataset;
+import syncleus.dann.data.MutableData;
 import syncleus.dann.data.VectorEncodable;
 import syncleus.dann.data.vector.VectorData;
 import syncleus.dann.learn.AbstractLearning;
@@ -35,7 +35,11 @@ import syncleus.dann.math.EncogUtility;
 import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.math.random.ConsistentRandomizer;
 import syncleus.dann.math.random.RangeRandomizer;
-import syncleus.dann.math.rbf.*;
+import syncleus.dann.math.rbf.GaussianFunction;
+import syncleus.dann.math.rbf.InverseMultiquadricFunction;
+import syncleus.dann.math.rbf.MultiquadricFunction;
+import syncleus.dann.math.rbf.RBFEnum;
+import syncleus.dann.math.rbf.RadialBasisFunction;
 import syncleus.dann.neural.util.ContainsFlat;
 
 /**
@@ -89,7 +93,7 @@ public class RBFNetwork extends AbstractLearning implements ErrorLearning, Regre
             // try this
             setRBFCentersAndWidthsEqualSpacing(-1, 1, t, volumeNeuronWidth,
                     false);
-        } catch (final EncogError ex) {
+        } catch (final RuntimeException ex) {
             // if we have the wrong number of hidden neurons, try this
             randomizeRBFCentersAndWidths(-1, 1, t);
         }

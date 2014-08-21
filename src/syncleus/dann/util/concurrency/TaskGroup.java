@@ -26,8 +26,7 @@ package org.encog.util.concurrency;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
-
-import org.encog.EncogError;
+import org.encog.RuntimeException;
 
 /**
  * A task group is a group of tasks that you would like to execute at once. You
@@ -130,7 +129,7 @@ public class TaskGroup {
 						this.mightBeDone.await();
 					}
 				} catch (InterruptedException e) {
-					throw new EncogError(e);
+					throw new RuntimeException(e);
 				}
 			} finally {
 				this.accessLock.unlock();

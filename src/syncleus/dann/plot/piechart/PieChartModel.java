@@ -18,10 +18,9 @@
  */
 package org.simbrain.plot.piechart;
 
+import com.thoughtworks.xstream.XStream;
 import org.jfree.data.general.DefaultPieDataset;
 import org.simbrain.plot.ChartModel;
-
-import com.thoughtworks.xstream.XStream;
 
 /**
  * Model data for pie charts.

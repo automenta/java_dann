@@ -1,10 +1,8 @@
 package org.encog.ml.data.auto;
 
-import org.encog.Encog;
-import org.junit.Test;
-
 import junit.framework.Assert;
 import junit.framework.TestCase;
+import org.junit.Test;
 
 public class TestAutoFloatColumn extends TestCase {
 	@Test

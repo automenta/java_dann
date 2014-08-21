@@ -24,7 +24,6 @@
 package org.encog.examples.neural.persist;
 
 import java.io.File;
-
 import org.encog.Encog;
 import org.encog.mathutil.randomize.ConsistentRandomizer;
 import org.encog.ml.data.MLDataSet;

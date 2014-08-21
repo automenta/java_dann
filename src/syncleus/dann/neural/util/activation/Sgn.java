@@ -18,7 +18,6 @@ package syncleus.dann.neural.util.activation;
 
 import java.io.Serializable;
 import java.util.Properties;
-
 import org.neuroph.util.TransferFunctionType;
 
 /**

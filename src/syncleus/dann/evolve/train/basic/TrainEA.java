@@ -23,17 +23,16 @@
  */
 package syncleus.dann.evolve.train.basic;
 
+import java.util.ArrayList;
+import java.util.List;
 import syncleus.dann.Learning;
 import syncleus.dann.Training;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.evolve.exception.EAError;
 import syncleus.dann.evolve.population.Population;
-import syncleus.dann.learn.strategy.Strategy;
-
-import java.util.ArrayList;
-import java.util.List;
 import syncleus.dann.learn.AbstractTraining.TrainingImplementationType;
 import syncleus.dann.learn.ScoreLearning;
+import syncleus.dann.learn.strategy.Strategy;
 import syncleus.dann.neural.flat.propagation.TrainingContinuation;
 import syncleus.dann.neural.util.TrainingSetScore;
 

@@ -19,7 +19,6 @@
 package syncleus.dann.solve.visionworld.filter.editor;
 
 import java.awt.Component;
-
 import syncleus.dann.solve.visionworld.Filter;
 
 /**

@@ -18,11 +18,18 @@
  ******************************************************************************/
 package syncleus.dann.learn.markov.chain;
 
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Random;
+import java.util.Set;
 import syncleus.dann.math.matrix.RealMatrix;
 import syncleus.dann.math.matrix.SimpleRealMatrix;
-
-import java.util.*;
-import java.util.Map.Entry;
 
 public class SimpleMarkovChain<S> extends AbstractMarkovChain<S> {
     private final RealMatrix transitionProbabilityMatrix;

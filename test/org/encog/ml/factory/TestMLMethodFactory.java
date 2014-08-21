@@ -25,8 +25,7 @@ package org.encog.ml.factory;
 
 import junit.framework.Assert;
 import junit.framework.TestCase;
-
-import org.encog.EncogError;
+import org.encog.RuntimeException;
 import org.encog.engine.network.activation.ActivationLinear;
 import org.encog.engine.network.activation.ActivationTANH;
 import org.encog.ml.svm.SVM;
@@ -62,7 +61,7 @@ public class TestMLMethodFactory extends TestCase {
 		try {
 			factory.create(t, a, 2, 1);
 			Assert.assertTrue(false);
-		} catch(EncogError e) {
+		} catch(RuntimeException e) {
 			// good
 		}
 	}

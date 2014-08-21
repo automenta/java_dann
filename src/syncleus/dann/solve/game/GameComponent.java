@@ -1,7 +1,6 @@
 package syncleus.dann.solve.game;
 
 import java.io.OutputStream;
-
 import org.simbrain.workspace.WorkspaceComponent;
 import syncleus.dann.solve.game.tictactoe.TicTacToeModel;
 

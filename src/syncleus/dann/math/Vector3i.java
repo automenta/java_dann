@@ -1,8 +1,7 @@
 package syncleus.dann.math;
 
-import syncleus.dann.math.geometry.Vector3;
-
 import java.io.Serializable;
+import syncleus.dann.math.geometry.Vector3;
 
 /**
  * 3-dimensional vector of integers

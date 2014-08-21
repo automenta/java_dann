@@ -23,10 +23,9 @@
  */
 package syncleus.dann.neural.neat.training.opp.links;
 
+import java.util.Random;
 import syncleus.dann.evolve.train.EvolutionaryAlgorithm;
 import syncleus.dann.math.random.RangeRandomizer;
-
-import java.util.Random;
 
 /**
  * Mutate weight links by reseting the weight to an entirely new value. The

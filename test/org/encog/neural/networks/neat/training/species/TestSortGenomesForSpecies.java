@@ -26,10 +26,8 @@ package org.encog.neural.networks.neat.training.species;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
 import junit.framework.Assert;
 import junit.framework.TestCase;
-
 import org.encog.ml.LearningScoring;
 import org.encog.ml.data.MLDataSet;
 import org.encog.ml.data.basic.BasicMLDataSet;

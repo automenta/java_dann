@@ -27,9 +27,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-
 import javax.swing.JPanel;
-
 import org.encog.ml.data.specific.BiPolarNeuralData;
 import org.encog.neural.thermal.HopfieldNetwork;
 import org.encog.util.EngineArray;

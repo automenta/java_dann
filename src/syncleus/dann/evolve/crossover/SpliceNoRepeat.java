@@ -23,15 +23,14 @@
  */
 package syncleus.dann.evolve.crossover;
 
+import java.util.HashSet;
+import java.util.Random;
+import java.util.Set;
 import syncleus.dann.evolve.GeneticError;
 import syncleus.dann.evolve.genome.Genome;
 import syncleus.dann.evolve.genome.IntegerArrayGenome;
 import syncleus.dann.evolve.opp.EvolutionaryOperator;
 import syncleus.dann.evolve.train.EvolutionaryAlgorithm;
-
-import java.util.HashSet;
-import java.util.Random;
-import java.util.Set;
 
 /**
  * A simple cross over where genes are simply "spliced". Genes are not allowed

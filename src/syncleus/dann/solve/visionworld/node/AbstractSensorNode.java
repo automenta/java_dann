@@ -26,10 +26,8 @@ import java.awt.Stroke;
 import java.awt.event.ActionEvent;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
-
 import javax.swing.AbstractAction;
 import javax.swing.JPopupMenu;
-
 import org.piccolo2d.PCanvas;
 import org.piccolo2d.PNode;
 import org.piccolo2d.event.PBasicInputEventHandler;

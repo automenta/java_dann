@@ -6,11 +6,11 @@
 package syncleus.dann.data.image.filter.impl;
 
 import imagepreprocessing.helper.PreprocessingHelper;
-import syncleus.dann.data.image.filter.ImageFilter;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.Serializable;
 import java.util.LinkedList;
+import syncleus.dann.data.image.filter.ImageFilter;
 
 /**
  * Erase Black border filter removes black border from the image. It assumes

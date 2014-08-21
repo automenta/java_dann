@@ -24,20 +24,18 @@ package syncleus.dann.neural.spiking.trainers;
 //import java.util.ArrayList;
 //import java.util.Collections;
 
+import Jama.Matrix;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-
 import org.ojalgo.access.Access2D.Builder;
 import org.ojalgo.matrix.BasicMatrix;
 import org.ojalgo.matrix.BasicMatrix.Factory;
 import org.ojalgo.matrix.PrimitiveMatrix;
+import org.simbrain.util.math.Matrices;
+import org.simbrain.util.propertyeditor.ComboBoxWrapper;
 import syncleus.dann.neural.spiking.SpikingNeuron;
 import syncleus.dann.neural.spiking.neuron_update_rules.SigmoidalRule;
 import syncleus.dann.neural.spiking.util.SimnetUtils;
-import org.simbrain.util.math.Matrices;
-import org.simbrain.util.propertyeditor.ComboBoxWrapper;
-
-import Jama.Matrix;
 
 /**
  * Offline/Batch Learning with least mean squares.

@@ -29,8 +29,8 @@ import syncleus.dann.data.vector.VectorCase;
 import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.math.error.ErrorFunction;
 import syncleus.dann.math.statistics.ErrorCalculation;
-import syncleus.dann.neural.util.activation.EncogActivationFunction;
 import syncleus.dann.neural.flat.FlatNetwork;
+import syncleus.dann.neural.util.activation.EncogActivationFunction;
 
 /**
  * Worker class for the mulithreaded training of flat networks.

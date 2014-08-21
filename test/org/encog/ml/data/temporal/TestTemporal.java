@@ -24,9 +24,7 @@
 package org.encog.ml.data.temporal;
 
 import java.util.Iterator;
-
 import junit.framework.TestCase;
-
 import org.encog.engine.network.activation.ActivationTANH;
 import org.encog.ml.data.MLDataPair;
 import org.encog.ml.data.temporal.TemporalDataDescription.Type;

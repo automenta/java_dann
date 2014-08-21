@@ -25,13 +25,11 @@ package org.encog.examples.ml.bayesian.words;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.encog.mathutil.probability.CalcProbability;
 import org.encog.ml.bayesian.BayesianEvent;
 import org.encog.ml.bayesian.BayesianNetwork;
 import org.encog.ml.bayesian.EventType;
 import org.encog.ml.bayesian.query.enumerate.EnumerationQuery;
-import org.encog.util.Format;
 import org.encog.util.text.BagOfWords;
 
 public class BayesianWordAnalyzer {

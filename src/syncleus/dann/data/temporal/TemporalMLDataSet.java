@@ -23,18 +23,17 @@
  */
 package syncleus.dann.data.temporal;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
 import syncleus.dann.data.DataCase;
 import syncleus.dann.data.language.time.TimeSpan;
 import syncleus.dann.data.language.time.TimeUnit;
 import syncleus.dann.data.vector.VectorCase;
 import syncleus.dann.data.vector.VectorData;
 import syncleus.dann.data.vector.VectorDataset;
-
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
 
 /**
  * This class implements a temporal neural data set. A temporal neural dataset

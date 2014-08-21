@@ -18,10 +18,9 @@
  ******************************************************************************/
 package syncleus.dann.attribute.hat;
 
+import java.util.Set;
 import syncleus.dann.graph.DirectedEdge;
 import syncleus.dann.graph.MutableTreeAdjacencyGraph;
-
-import java.util.Set;
 
 // TODO we need to handle clone and cloneAdd and similar methods differently since the nodes here must know which graph it belongs to
 public class MutableAttributeTreeAdjacencyGraph<N extends AbstractHierarchicalAttributePool<T>, E extends DirectedEdge<N>, T>

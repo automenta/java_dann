@@ -26,7 +26,6 @@ package org.encog.examples.ml.bayesian;
 import org.encog.ml.bayesian.BayesianNetwork;
 import org.encog.ml.bayesian.training.BayesianInit;
 import org.encog.ml.bayesian.training.TrainBayesian;
-import org.encog.ml.bayesian.training.search.k2.SearchK2;
 import org.encog.ml.data.MLDataSet;
 import org.encog.ml.data.basic.BasicMLDataSet;
 

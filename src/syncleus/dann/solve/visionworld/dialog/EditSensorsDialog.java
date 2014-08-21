@@ -29,7 +29,6 @@ import java.awt.event.ActionListener;
 import java.util.Collection;
 import java.util.SortedSet;
 import java.util.TreeSet;
-
 import javax.swing.AbstractAction;
 import javax.swing.AbstractListModel;
 import javax.swing.Action;
@@ -43,7 +42,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
 import syncleus.dann.solve.visionworld.Filter;
 import syncleus.dann.solve.visionworld.Sensor;
 import syncleus.dann.solve.visionworld.filter.editor.FilterEditor;

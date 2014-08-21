@@ -18,13 +18,18 @@
  ******************************************************************************/
 package syncleus.dann.evolve.wavelets;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Random;
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import syncleus.dann.math.wave.WaveMultidimensionalFunction;
 import syncleus.dann.math.wave.wavelet.CombinedWaveletFunction;
 import syncleus.dann.util.UnexpectedDannError;
-
-import java.util.*;
 
 public class SignalProcessingWavelet implements
         Comparable<SignalProcessingWavelet>, Cloneable {

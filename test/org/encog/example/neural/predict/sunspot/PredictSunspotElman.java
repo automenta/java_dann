@@ -24,7 +24,6 @@
 package org.encog.examples.neural.predict.sunspot;
 
 import java.text.NumberFormat;
-
 import org.encog.engine.network.activation.ActivationSigmoid;
 import org.encog.ml.data.MLData;
 import org.encog.ml.data.MLDataSet;

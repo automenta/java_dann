@@ -34,11 +34,11 @@ import syncleus.dann.learn.OutputLearning;
 import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.math.error.ErrorFunction;
 import syncleus.dann.math.error.LinearErrorFunction;
+import syncleus.dann.neural.flat.FlatNetwork;
+import syncleus.dann.neural.pnn.BasicPNN;
+import syncleus.dann.neural.util.ContainsFlat;
 import syncleus.dann.neural.util.activation.ActivationSigmoid;
 import syncleus.dann.neural.util.activation.EncogActivationFunction;
-import syncleus.dann.neural.flat.FlatNetwork;
-import syncleus.dann.neural.util.ContainsFlat;
-import syncleus.dann.neural.pnn.BasicPNN;
 
 /**
  * Implements basic functionality that is needed by each of the propagation

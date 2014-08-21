@@ -23,18 +23,17 @@
  */
 package syncleus.dann.neural.pnn;
 
-import syncleus.dann.data.MutableData;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.List;
+import java.util.Map;
 import syncleus.dann.data.DataCase;
+import syncleus.dann.data.MutableData;
 import syncleus.dann.data.file.csv.CSVFormat;
 import syncleus.dann.data.vector.VectorCase;
 import syncleus.dann.data.vector.VectorData;
 import syncleus.dann.data.vector.VectorDataset;
 import syncleus.dann.math.array.EngineArray;
-
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Persist a PNN.

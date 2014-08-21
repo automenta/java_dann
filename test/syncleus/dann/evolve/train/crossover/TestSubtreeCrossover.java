@@ -21,14 +21,13 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package org.encog.ml.prg.train.crossover;
+package syncleus.dann.evolve.train.crossover;
 
 import junit.framework.Assert;
 import junit.framework.TestCase;
-
-import org.encog.ml.prg.EncogProgram;
-import org.encog.ml.prg.ProgramNode;
-import org.encog.parse.expression.common.RenderCommonExpression;
+import syncleus.dann.evolve.gp.EncogProgram;
+import syncleus.dann.evolve.gp.ProgramNode;
+import syncleus.dann.logic.expression.common.RenderCommonExpression;
 
 public class TestSubtreeCrossover extends TestCase {
 	public void testCrossoverOperation() {

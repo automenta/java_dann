@@ -24,7 +24,6 @@
 package org.encog.app.analyst;
 
 import junit.framework.TestCase;
-
 import org.encog.app.analyst.wizard.WizardMethodType;
 
 public class TestEncogAnalyst extends TestCase {

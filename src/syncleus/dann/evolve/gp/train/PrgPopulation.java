@@ -30,7 +30,7 @@ import syncleus.dann.evolve.gp.EncogProgram;
 import syncleus.dann.evolve.gp.EncogProgramContext;
 import syncleus.dann.evolve.population.BasicPopulation;
 import syncleus.dann.evolve.species.Species;
-import syncleus.dann.util.expression.common.RenderCommonExpression;
+import syncleus.dann.logic.expression.common.RenderCommonExpression;
 
 /**
  * A population that contains EncogProgram's. The primary difference between

@@ -22,10 +22,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
-
 import org.apache.log4j.Logger;
 import org.simbrain.util.table.NumericTable;
 import org.simbrain.workspace.AttributeType;

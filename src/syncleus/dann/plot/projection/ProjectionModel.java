@@ -18,8 +18,8 @@
  */
 package org.simbrain.plot.projection;
 
+import com.thoughtworks.xstream.XStream;
 import java.awt.EventQueue;
-
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 import org.simbrain.plot.ChartModel;
@@ -29,8 +29,6 @@ import org.simbrain.util.projection.NTree;
 import org.simbrain.util.projection.ProjectionMethod;
 import org.simbrain.util.projection.Projector;
 import org.simbrain.util.projection.ProjectorListener;
-
-import com.thoughtworks.xstream.XStream;
 
 /**
  * Main data for a projection chart.

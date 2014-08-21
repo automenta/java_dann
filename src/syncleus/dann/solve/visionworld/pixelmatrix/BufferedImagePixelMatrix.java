@@ -25,7 +25,6 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-
 import syncleus.dann.solve.visionworld.PixelMatrix;
 import syncleus.dann.solve.visionworld.ReceptiveField;
 

@@ -32,9 +32,9 @@ import syncleus.dann.math.VectorAlgebra;
 import syncleus.dann.math.random.NguyenWidrowRandomizer;
 import syncleus.dann.math.random.Randomizer;
 import syncleus.dann.neural.VectorNeuralNetwork;
-import syncleus.dann.neural.util.structure.NetworkCODEC;
-import syncleus.dann.neural.util.TrainingSetScore;
 import syncleus.dann.neural.flat.propagation.TrainingContinuation;
+import syncleus.dann.neural.util.TrainingSetScore;
+import syncleus.dann.neural.util.structure.NetworkCODEC;
 import syncleus.dann.util.concurrency.EngineConcurrency;
 
 /**

@@ -21,36 +21,31 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
+package syncleus.dann.util.datastruct;
 
+import syncleus.dann.math.array.EngineArray;
 
-package syncleus.dann.util.expression;
-
-import syncleus.dann.evolve.gp.ProgramNode;
-
-/**
- * Common functions for some renders.
- */
-public class CommonRender {
-	public ExpressionNodeType determineNodeType(ProgramNode node) {
-
-		if (node.getName().equals("#const")) {
-			return ExpressionNodeType.ConstVal;
-		}  
-			
-		if (node.getName().equals("#var")) {
-			return ExpressionNodeType.Variable;
-		} 
-		
-		if( node.getChildNodes().size()!=2 ) {
-			return ExpressionNodeType.Function;
-		}
-		
-		String name = node.getName();
-		
-		if( !Character.isLetterOrDigit(name.charAt(0)) ) {
-			return ExpressionNodeType.Operator;			
-		}
-		
-		return ExpressionNodeType.Function;		
+public class WindowInt {
+	private int[] data;
+	
+	public WindowInt(int size) {
+		this.data = new int[size];
+	}
+	
+	public int size() {
+		return this.data.length;
+	}
+	
+	public void shift() {
+		EngineArray.arrayCopy(this.data, 0, this.data, 1, size()-1);
+	}
+	
+	public void add(int i) {
+		shift();
+		data[0] = i;
+	}
+	
+	public int[] getData() {
+		return this.data;
 	}
 }

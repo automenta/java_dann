@@ -1,11 +1,10 @@
 package org.neuroph.samples.convolution;
 
 import java.util.PriorityQueue;
-import syncleus.dann.neural.feedforward.backpropagation.ConvolutionalBackpropagation;
-
 import org.neuroph.core.NeuralNetwork;
 import org.neuroph.core.data.DataSet;
 import org.neuroph.core.data.DataSetRow;
+import syncleus.dann.neural.feedforward.backpropagation.ConvolutionalBackpropagation;
 
 public class ModelMetric {
 

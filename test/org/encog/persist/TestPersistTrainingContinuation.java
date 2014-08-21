@@ -24,10 +24,8 @@
 package org.encog.persist;
 
 import java.io.File;
-
 import junit.framework.Assert;
 import junit.framework.TestCase;
-
 import org.encog.ml.data.MLDataSet;
 import org.encog.neural.networks.BasicNetwork;
 import org.encog.neural.networks.XOR;

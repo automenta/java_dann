@@ -1,9 +1,8 @@
 package syncleus.dann.math.geometry;
 
-import syncleus.dann.math.geometry.Path.Waypoint;
-
 import java.util.ArrayList;
 import java.util.Iterator;
+import syncleus.dann.math.geometry.Path.Waypoint;
 
 /**
  * NavigationPath is a collection of waypoints that define a movement path for

@@ -24,7 +24,6 @@
 package org.encog.neural.networks.training.concurrent;
 
 import junit.framework.TestCase;
-
 import org.encog.ml.train.strategy.end.EndMaxErrorStrategy;
 import org.encog.neural.networks.XOR;
 import org.encog.neural.networks.training.concurrent.jobs.BPROPJob;

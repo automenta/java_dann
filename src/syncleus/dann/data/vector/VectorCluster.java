@@ -24,10 +24,9 @@
 package syncleus.dann.data.vector;
 
 import java.util.ArrayList;
+import java.util.List;
 import syncleus.dann.data.DataCluster;
 import syncleus.dann.math.cluster.Centroid;
-
-import java.util.List;
 
 /**
  * Holds a cluster of MLData items that have been clustered by the

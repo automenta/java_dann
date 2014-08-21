@@ -24,9 +24,9 @@
 package syncleus.dann.neural.cpn.training;
 
 import syncleus.dann.Learning;
-import syncleus.dann.data.MutableData;
 import syncleus.dann.data.DataCase;
 import syncleus.dann.data.Dataset;
+import syncleus.dann.data.MutableData;
 import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.math.statistics.ErrorCalculation;
 

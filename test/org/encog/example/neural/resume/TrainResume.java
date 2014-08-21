@@ -25,12 +25,10 @@ package org.encog.examples.neural.resume;
 
 import java.io.File;
 import java.util.Arrays;
-
 import org.encog.Encog;
 import org.encog.mathutil.randomize.ConsistentRandomizer;
 import org.encog.ml.data.MLDataSet;
 import org.encog.ml.data.basic.BasicMLDataSet;
-import org.encog.ml.train.strategy.RequiredImprovementStrategy;
 import org.encog.neural.networks.BasicNetwork;
 import org.encog.neural.networks.training.propagation.TrainingContinuation;
 import org.encog.neural.networks.training.propagation.resilient.ResilientPropagation;

@@ -23,13 +23,12 @@
  */
 package syncleus.dann.evolve.population;
 
+import java.io.Serializable;
+import java.util.List;
 import syncleus.dann.Learning;
 import syncleus.dann.evolve.genome.Genome;
 import syncleus.dann.evolve.genome.GenomeFactory;
 import syncleus.dann.evolve.species.Species;
-
-import java.io.Serializable;
-import java.util.List;
 
 /**
  * Defines a population of genomes.

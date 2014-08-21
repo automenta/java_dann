@@ -18,18 +18,22 @@
  ******************************************************************************/
 package syncleus.dann.graph.tree.mst;
 
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.Set;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Test;
-import syncleus.dann.graph.*;
+import syncleus.dann.graph.BidirectedEdge;
+import syncleus.dann.graph.Graph;
+import syncleus.dann.graph.ImmutableAdjacencyGraph;
+import syncleus.dann.graph.ImmutableTreeAdjacencyGraph;
+import syncleus.dann.graph.ImmutableUndirectedEdge;
+import syncleus.dann.graph.TreeGraph;
 import syncleus.dann.graph.cycle.ColoredDepthFirstSearchDetector;
 import syncleus.dann.graph.cycle.CycleDetector;
 import syncleus.dann.graph.topological.Topography;
-
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.Set;
 
 public class TestKruskalMinimumSpanningTreeFinder {
     private static final Logger LOGGER = LogManager

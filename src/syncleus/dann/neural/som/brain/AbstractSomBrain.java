@@ -18,24 +18,29 @@
  ******************************************************************************/
 package syncleus.dann.neural.som.brain;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import syncleus.dann.graph.AbstractBidirectedAdjacencyGraph;
-import syncleus.dann.math.Vector;
-import syncleus.dann.neural.util.AbstractLocalBrain;
-import syncleus.dann.neural.util.InputNeuron;
-import syncleus.dann.neural.util.SimpleSynapse;
-import syncleus.dann.neural.Synapse;
-import syncleus.dann.neural.som.SOMBrain;
-import syncleus.dann.util.UnexpectedDannError;
-import syncleus.dann.util.UnexpectedInterruptedException;
-
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import syncleus.dann.graph.AbstractBidirectedAdjacencyGraph;
+import syncleus.dann.math.Vector;
+import syncleus.dann.neural.Synapse;
+import syncleus.dann.neural.som.SOMBrain;
+import syncleus.dann.neural.util.AbstractLocalBrain;
+import syncleus.dann.neural.util.InputNeuron;
+import syncleus.dann.neural.util.SimpleSynapse;
+import syncleus.dann.util.UnexpectedDannError;
+import syncleus.dann.util.UnexpectedInterruptedException;
 
 /**
  * A SomBrain acts as the parent class for all brains that use traditional SOM

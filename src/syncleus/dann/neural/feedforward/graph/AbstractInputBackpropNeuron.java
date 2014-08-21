@@ -18,8 +18,8 @@
  ******************************************************************************/
 package syncleus.dann.neural.feedforward.graph;
 
-import syncleus.dann.neural.util.AbstractInputNeuron;
 import syncleus.dann.neural.Brain;
+import syncleus.dann.neural.util.AbstractInputNeuron;
 
 public abstract class AbstractInputBackpropNeuron extends AbstractInputNeuron
         implements InputBackpropNeuron {

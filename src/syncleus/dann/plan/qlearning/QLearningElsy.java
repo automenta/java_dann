@@ -1,12 +1,11 @@
 package syncleus.dann.plan.qlearning;
 
+import java.util.Arrays;
 import syncleus.dann.plan.DiscreteActionProblem;
 import syncleus.dann.plan.DiscreteActionSolution;
 import syncleus.dann.plan.State;
 import syncleus.dann.plan.qlearning.elsy.QBrain;
 import syncleus.dann.plan.qlearning.elsy.QPerception;
-
-import java.util.Arrays;
 
 /** Adapted from: http://elsy.gdan.pl/index.php , package pl.gdan.elsy */
 public class QLearningElsy<A> implements DiscreteActionSolution<A> {

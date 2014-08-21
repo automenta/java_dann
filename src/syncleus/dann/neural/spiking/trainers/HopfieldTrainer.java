@@ -18,10 +18,10 @@
  */
 package syncleus.dann.neural.spiking.trainers;
 
+import org.simbrain.util.math.SimbrainMath;
 import syncleus.dann.neural.spiking.SpikingNeuron;
 import syncleus.dann.neural.spiking.SpikingSynapse;
 import syncleus.dann.neural.spiking.subnetworks.Hopfield;
-import org.simbrain.util.math.SimbrainMath;
 
 /**
  * Trainer for a Hopfield network.

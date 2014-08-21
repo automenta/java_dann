@@ -18,10 +18,9 @@
  ******************************************************************************/
 package syncleus.dann.learn;
 
-import syncleus.dann.Classifying;
-
 import java.util.Map;
 import java.util.Set;
+import syncleus.dann.Classifying;
 
 /**
  * Groups a set of items, I, into members of group C.

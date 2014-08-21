@@ -24,7 +24,6 @@
 package org.encog.examples.neural.neat.boxes;
 
 import java.util.Random;
-
 import org.encog.mathutil.IntPair;
 
 /**

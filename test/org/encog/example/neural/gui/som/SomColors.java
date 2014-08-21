@@ -25,9 +25,7 @@ package org.encog.examples.neural.gui.som;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.swing.JFrame;
-
 import org.encog.mathutil.randomize.RangeRandomizer;
 import org.encog.mathutil.rbf.RBFEnum;
 import org.encog.ml.data.MLData;

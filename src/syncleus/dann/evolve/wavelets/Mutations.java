@@ -18,9 +18,8 @@
  ******************************************************************************/
 package syncleus.dann.evolve.wavelets;
 
-import syncleus.dann.evolve.MutableDouble;
-
 import java.util.Random;
+import syncleus.dann.evolve.MutableDouble;
 
 public final class Mutations {
     private static final Random RANDOM = new Random();

@@ -21,7 +21,6 @@ package syncleus.dann.neural.spiking.synapse_update_rules.spikeresponders;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-
 import syncleus.dann.neural.spiking.SpikingSynapse;
 
 /**

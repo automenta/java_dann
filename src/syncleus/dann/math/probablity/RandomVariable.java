@@ -23,9 +23,8 @@
  */
 package syncleus.dann.math.probablity;
 
-import syncleus.dann.learn.bayesian.BayesianNetworkEncog;
-
 import java.io.Serializable;
+import syncleus.dann.learn.bayesian.BayesianNetworkEncog;
 
 public class RandomVariable implements Serializable {
 

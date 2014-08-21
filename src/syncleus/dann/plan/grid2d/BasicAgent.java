@@ -23,10 +23,12 @@
  */
 package syncleus.dann.plan.grid2d;
 
-import syncleus.dann.math.geometry.Angle;
-import syncleus.dann.plan.*;
-
 import java.util.Set;
+import syncleus.dann.math.geometry.Angle;
+import syncleus.dann.plan.AgentPolicy;
+import syncleus.dann.plan.DiscreteActionProblem;
+import syncleus.dann.plan.DiscreteActionSolution;
+import syncleus.dann.plan.SuccessorState;
 
 public class BasicAgent implements DiscreteActionSolution<Angle,BasicState> {
 

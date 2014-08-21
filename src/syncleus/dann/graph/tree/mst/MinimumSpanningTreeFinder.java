@@ -18,10 +18,9 @@
  ******************************************************************************/
 package syncleus.dann.graph.tree.mst;
 
+import java.util.Set;
 import syncleus.dann.graph.Edge;
 import syncleus.dann.graph.Graph;
-
-import java.util.Set;
 
 /**
  * @param <N> The node type

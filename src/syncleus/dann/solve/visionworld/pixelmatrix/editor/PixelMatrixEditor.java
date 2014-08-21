@@ -19,7 +19,6 @@
 package syncleus.dann.solve.visionworld.pixelmatrix.editor;
 
 import java.awt.Component;
-
 import syncleus.dann.solve.visionworld.PixelMatrix;
 
 /**

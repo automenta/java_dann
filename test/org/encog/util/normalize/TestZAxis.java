@@ -25,7 +25,6 @@ package org.encog.util.normalize;
 
 import junit.framework.Assert;
 import junit.framework.TestCase;
-
 import org.encog.NullStatusReportable;
 import org.encog.util.SerializeRoundTrip;
 import org.encog.util.normalize.input.InputField;

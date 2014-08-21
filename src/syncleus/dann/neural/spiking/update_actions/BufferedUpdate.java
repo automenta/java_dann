@@ -18,8 +18,8 @@
  */
 package syncleus.dann.neural.spiking.update_actions;
 
-import syncleus.dann.neural.spiking.SpikingNeuralNetwork;
 import syncleus.dann.neural.spiking.NetworkUpdateAction;
+import syncleus.dann.neural.spiking.SpikingNeuralNetwork;
 
 /**
  * Buffered update of loose items (neurons and synapses), i.e. items not in

@@ -20,7 +20,6 @@ package org.simbrain.util.projection;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.simbrain.network.trainers.ErrorListener;
 
 /**

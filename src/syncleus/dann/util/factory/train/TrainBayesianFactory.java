@@ -23,6 +23,7 @@
  */
 package syncleus.dann.util.factory.train;
 
+import java.util.Map;
 import syncleus.dann.Learning;
 import syncleus.dann.Training;
 import syncleus.dann.data.Dataset;
@@ -37,8 +38,6 @@ import syncleus.dann.learn.bayesian.training.search.k2.BayesSearch;
 import syncleus.dann.learn.bayesian.training.search.k2.SearchK2;
 import syncleus.dann.util.factory.MLTrainFactory;
 import syncleus.dann.util.factory.parse.ArchitectureParse;
-
-import java.util.Map;
 
 public class TrainBayesianFactory {
     /**

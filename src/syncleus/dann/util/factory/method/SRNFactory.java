@@ -23,12 +23,11 @@
  */
 package syncleus.dann.util.factory.method;
 
+import java.util.List;
 import syncleus.dann.Learning;
 import syncleus.dann.math.rbf.RBFEnum;
 import syncleus.dann.util.factory.parse.ArchitectureLayer;
 import syncleus.dann.util.factory.parse.ArchitectureParse;
-
-import java.util.List;
 
 /**
  * A factory that creates simple recurrent neural networks (SRN's), i.e. Elmann

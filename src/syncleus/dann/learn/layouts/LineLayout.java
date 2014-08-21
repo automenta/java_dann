@@ -20,7 +20,6 @@ package syncleus.dann.learn.layouts;
 
 import java.awt.geom.Point2D;
 import java.util.List;
-
 import syncleus.dann.neural.spiking.SpikingNeuron;
 
 /**

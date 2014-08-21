@@ -24,7 +24,6 @@
 package org.encog.ml.linear;
 
 import junit.framework.TestCase;
-
 import org.encog.ml.data.MLDataSet;
 import org.encog.ml.data.basic.BasicMLDataSet;
 import org.encog.ml.fitting.linear.LinearRegression;

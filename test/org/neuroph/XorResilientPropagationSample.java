@@ -22,8 +22,8 @@ import org.neuroph.core.data.DataSet;
 import org.neuroph.core.data.DataSetRow;
 import org.neuroph.core.learning.SupervisedLearning;
 import org.neuroph.nnet.MultiLayerPerceptron;
-import syncleus.dann.neural.feedforward.backpropagation.ResilientPropagation;
 import org.neuroph.util.TransferFunctionType;
+import syncleus.dann.neural.feedforward.backpropagation.ResilientPropagation;
 
 /**
  * This sample trains Multi Layer Perceptron network using Resilient Propagation

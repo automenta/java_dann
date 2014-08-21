@@ -23,15 +23,14 @@
  */
 package syncleus.dann.neural.neat;
 
-import syncleus.dann.data.file.csv.CSVFormat;
-import syncleus.dann.evolve.species.BasicSpecies;
-import syncleus.dann.evolve.species.Species;
-import syncleus.dann.neural.util.activation.EncogActivationFunction;
-
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.List;
 import java.util.Map;
+import syncleus.dann.data.file.csv.CSVFormat;
+import syncleus.dann.evolve.species.BasicSpecies;
+import syncleus.dann.evolve.species.Species;
+import syncleus.dann.neural.util.activation.EncogActivationFunction;
 
 /**
  * Persist a NEAT or HyperNEAT network.

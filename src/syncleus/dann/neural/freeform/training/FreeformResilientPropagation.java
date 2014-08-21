@@ -23,15 +23,14 @@
  */
 package syncleus.dann.neural.freeform.training;
 
-import syncleus.dann.data.MutableData;
+import java.io.Serializable;
 import syncleus.dann.data.Dataset;
+import syncleus.dann.data.MutableData;
 import syncleus.dann.math.EncogMath;
-import syncleus.dann.neural.freeform.FreeformConnection;
-import syncleus.dann.neural.freeform.FreeformNetwork;
 import syncleus.dann.neural.flat.propagation.TrainingContinuation;
 import syncleus.dann.neural.flat.propagation.resilient.RPROPConst;
-
-import java.io.Serializable;
+import syncleus.dann.neural.freeform.FreeformConnection;
+import syncleus.dann.neural.freeform.FreeformNetwork;
 
 public class FreeformResilientPropagation extends FreeformPropagationTraining<MutableData> implements Serializable {
 

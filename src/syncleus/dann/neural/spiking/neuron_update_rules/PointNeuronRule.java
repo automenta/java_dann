@@ -20,7 +20,6 @@ package syncleus.dann.neural.spiking.neuron_update_rules;
 
 import java.util.ArrayList;
 import java.util.Random;
-
 import syncleus.dann.neural.spiking.SpikingNeuralNetwork.TimeType;
 import syncleus.dann.neural.spiking.SpikingNeuron;
 import syncleus.dann.neural.spiking.SpikingNeuronUpdateRule;

@@ -18,15 +18,14 @@
  ******************************************************************************/
 package syncleus.dann.neural.feedforward.graph;
 
+import java.util.HashMap;
+import java.util.Map;
 import syncleus.dann.graph.DirectedEdge;
-import syncleus.dann.neural.util.AbstractActivationNeuron;
 import syncleus.dann.neural.Brain;
 import syncleus.dann.neural.Neuron;
 import syncleus.dann.neural.Synapse;
+import syncleus.dann.neural.util.AbstractActivationNeuron;
 import syncleus.dann.neural.util.activation.DannActivationFunction;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public abstract class AbstractBackpropNeuron extends AbstractActivationNeuron
         implements BackpropNeuron {

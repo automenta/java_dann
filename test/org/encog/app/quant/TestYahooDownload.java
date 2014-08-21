@@ -28,9 +28,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.GregorianCalendar;
-
 import junit.framework.TestCase;
-
 import org.encog.app.quant.loader.yahoo.YahooDownload;
 import org.encog.util.csv.CSVFormat;
 import org.junit.Assert;

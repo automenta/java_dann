@@ -1,10 +1,9 @@
 package syncleus.dann.neural.feedforward.backpropagation;
 
-import org.neuroph.nnet.comp.layer.ConvolutionalLayer;
-import org.neuroph.nnet.comp.layer.Layer2D;
 import org.neuroph.core.Layer;
 import org.neuroph.core.Neuron;
-import syncleus.dann.neural.feedforward.backpropagation.BackPropagationNeuroph;
+import org.neuroph.nnet.comp.layer.ConvolutionalLayer;
+import org.neuroph.nnet.comp.layer.Layer2D;
 
 public class ConvolutionalBackpropagation extends BackPropagationNeuroph {
 

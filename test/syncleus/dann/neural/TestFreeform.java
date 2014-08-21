@@ -27,11 +27,9 @@ import junit.framework.Assert;
 import junit.framework.TestCase;
 import syncleus.dann.Training;
 import syncleus.dann.data.vector.VectorDataset;
-
-
-import syncleus.dann.neural.util.activation.ActivationSigmoid;
 import syncleus.dann.neural.freeform.FreeformNetwork;
 import syncleus.dann.neural.freeform.training.FreeformResilientPropagation;
+import syncleus.dann.neural.util.activation.ActivationSigmoid;
 import syncleus.dann.neural.util.layer.BasicLayer;
 
 public class TestFreeform extends TestCase {

@@ -7,15 +7,13 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-
-import org.neuroph.nnet.comp.layer.Layer2D;
-import org.neuroph.nnet.comp.Kernel;
 import org.neuroph.core.Connection;
 import org.neuroph.core.Neuron;
+import org.neuroph.nnet.comp.Kernel;
+import org.neuroph.nnet.comp.layer.Layer2D;
 import org.neuroph.nnet.comp.neuron.BiasNeuron;
 
 public class WeightVisualiser {

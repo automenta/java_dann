@@ -25,7 +25,6 @@ package org.encog.matrix;
 
 import junit.framework.Assert;
 import junit.framework.TestCase;
-
 import org.encog.mathutil.matrices.Matrix;
 import org.encog.mathutil.matrices.decomposition.CholeskyDecomposition;
 import org.encog.mathutil.matrices.decomposition.EigenvalueDecomposition;

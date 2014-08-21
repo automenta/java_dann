@@ -27,9 +27,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
-
 import junit.framework.TestCase;
-
 import org.encog.ml.data.specific.CSVNeuralDataSet;
 import org.encog.neural.networks.XOR;
 

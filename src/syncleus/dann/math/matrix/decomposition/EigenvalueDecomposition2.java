@@ -23,11 +23,10 @@
  */
 package syncleus.dann.math.matrix.decomposition;
 
+import java.util.Arrays;
 import syncleus.dann.math.EncogMath;
 import syncleus.dann.math.matrix.RealMatrix;
 import syncleus.dann.math.matrix.SimpleRealMatrix;
-
-import java.util.Arrays;
 
 /**
  * Eigenvalues and eigenvectors of a real matrix.

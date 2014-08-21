@@ -1,17 +1,16 @@
 package syncleus.dann.data.auto;
 
-import syncleus.dann.data.MutableData;
-import syncleus.dann.data.DataCase;
-import syncleus.dann.data.Dataset;
-import syncleus.dann.data.file.csv.CSVFormat;
-import syncleus.dann.data.file.csv.ReadCSV;
-import syncleus.dann.data.vector.VectorCase;
-import syncleus.dann.data.vector.VectorData;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import syncleus.dann.data.DataCase;
+import syncleus.dann.data.Dataset;
+import syncleus.dann.data.MutableData;
+import syncleus.dann.data.file.csv.CSVFormat;
+import syncleus.dann.data.file.csv.ReadCSV;
+import syncleus.dann.data.vector.VectorCase;
+import syncleus.dann.data.vector.VectorData;
 
 public class AutoFloatDataSet implements Serializable, Dataset {
 

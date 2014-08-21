@@ -18,10 +18,9 @@
  ******************************************************************************/
 package syncleus.dann.math.matrix.decomposition;
 
+import java.util.List;
 import syncleus.dann.math.RealNumber;
 import syncleus.dann.math.matrix.RealMatrix;
-
-import java.util.List;
 
 /**
  * Singular Value Decomposition.

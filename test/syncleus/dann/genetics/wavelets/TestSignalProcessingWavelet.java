@@ -18,6 +18,9 @@
  ******************************************************************************/
 package syncleus.dann.genetics.wavelets;
 
+import java.util.ArrayList;
+import java.util.Random;
+import java.util.TreeMap;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Assert;
@@ -25,10 +28,6 @@ import org.junit.Test;
 import syncleus.dann.evolve.wavelets.SignalProcessingWavelet;
 import syncleus.dann.evolve.wavelets.SignalProcessingWavelet.GlobalSignalConcentration;
 import syncleus.dann.math.ParameterizedFunction;
-
-import java.util.ArrayList;
-import java.util.Random;
-import java.util.TreeMap;
 
 public class TestSignalProcessingWavelet {
     private static final Random RANDOM = new Random();

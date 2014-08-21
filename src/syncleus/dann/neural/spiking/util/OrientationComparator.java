@@ -19,7 +19,6 @@ package syncleus.dann.neural.spiking.util;
 
 import java.util.Comparator;
 import java.util.List;
-
 import syncleus.dann.neural.spiking.SpikingNeuron;
 
 /**

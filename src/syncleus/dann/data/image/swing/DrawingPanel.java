@@ -33,14 +33,6 @@ import javax.swing.JPanel;
 import org.neuroph.imgrec.ImageUtilities;
 
 
-import org.neuroph.imgrec.image.Image;
-import org.neuroph.imgrec.image.ImageFactory;
-import org.neuroph.imgrec.image.ImageJ2SE;
-import org.neuroph.netbeans.project.CurrentProject;
-import org.openide.util.Exceptions;
-import org.openide.util.Lookup;
-
-
 /**
  *
  * This class is used to draw letters on, it also contains the methods that are used to

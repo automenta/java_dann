@@ -25,9 +25,7 @@ package org.encog.neural.data.sql;
 
 import java.sql.Connection;
 import java.sql.Statement;
-
 import junit.framework.TestCase;
-
 import org.encog.ml.data.MLDataSet;
 import org.encog.neural.networks.XOR;
 import org.encog.platformspecific.j2se.data.SQLNeuralDataSet;

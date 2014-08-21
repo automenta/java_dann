@@ -24,9 +24,7 @@
 package org.encog.bot;
 
 import java.net.URL;
-
 import junit.framework.TestCase;
-
 import org.junit.Assert;
 
 public class TestBotUtil extends TestCase {

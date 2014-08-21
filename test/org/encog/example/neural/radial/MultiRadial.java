@@ -27,7 +27,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Random;
-
 import org.encog.Encog;
 import org.encog.mathutil.rbf.RBFEnum;
 import org.encog.ml.data.MLData;

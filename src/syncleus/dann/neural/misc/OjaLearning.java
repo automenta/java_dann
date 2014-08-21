@@ -16,9 +16,9 @@
 
 package syncleus.dann.neural.misc;
 
-import syncleus.dann.neural.hebbian.UnsupervisedHebbianLearning;
 import org.neuroph.core.Connection;
 import org.neuroph.core.Neuron;
+import syncleus.dann.neural.hebbian.UnsupervisedHebbianLearning;
 
 /**
  * Oja learning rule wich is a modification of unsupervised hebbian learning.

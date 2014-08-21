@@ -23,12 +23,11 @@
  */
 package syncleus.dann.data.market.loader;
 
-import syncleus.dann.data.market.MarketDataType;
-import syncleus.dann.data.market.TickerSymbol;
-
 import java.util.Date;
 import java.util.EnumMap;
 import java.util.Map;
+import syncleus.dann.data.market.MarketDataType;
+import syncleus.dann.data.market.TickerSymbol;
 
 /**
  * This class contains market data that was loaded for a specific ticker symbol

@@ -24,7 +24,6 @@
 package org.encog.neural.networks.training.competitive.neighborhood;
 
 import junit.framework.TestCase;
-
 import org.encog.mathutil.rbf.GaussianFunction;
 import org.encog.mathutil.rbf.RadialBasisFunction;
 import org.encog.neural.som.training.basic.neighborhood.NeighborhoodBubble;

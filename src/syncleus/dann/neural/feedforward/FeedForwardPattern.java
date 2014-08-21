@@ -23,15 +23,14 @@
  */
 package syncleus.dann.neural.feedforward;
 
-import syncleus.dann.neural.NeuralNetworkPattern;
-import syncleus.dann.Learning;
-import syncleus.dann.neural.util.activation.EncogActivationFunction;
-import syncleus.dann.neural.VectorNeuralNetwork;
-import syncleus.dann.neural.util.layer.BasicLayer;
-import syncleus.dann.neural.util.layer.Layer;
-
 import java.util.ArrayList;
 import java.util.List;
+import syncleus.dann.Learning;
+import syncleus.dann.neural.NeuralNetworkPattern;
+import syncleus.dann.neural.VectorNeuralNetwork;
+import syncleus.dann.neural.util.activation.EncogActivationFunction;
+import syncleus.dann.neural.util.layer.BasicLayer;
+import syncleus.dann.neural.util.layer.Layer;
 
 /**
  * Used to create feedforward neural networks. A feedforward network has an

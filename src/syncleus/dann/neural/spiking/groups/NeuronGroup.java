@@ -24,15 +24,14 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
-
-import syncleus.dann.neural.spiking.SpikingNeuralNetwork;
-import syncleus.dann.neural.spiking.SpikingNeuron;
-import syncleus.dann.neural.spiking.SpikingSynapse;
 import syncleus.dann.learn.layouts.GridLayout;
 import syncleus.dann.learn.layouts.Layout;
 import syncleus.dann.learn.layouts.LineLayout;
 import syncleus.dann.learn.layouts.LineLayout.LineOrientation;
+import syncleus.dann.neural.spiking.SpikingNeuralNetwork;
+import syncleus.dann.neural.spiking.SpikingNeuron;
 import syncleus.dann.neural.spiking.SpikingNeuronUpdateRule;
+import syncleus.dann.neural.spiking.SpikingSynapse;
 import syncleus.dann.neural.spiking.neuron_update_rules.interfaces.BiasedUpdateRule;
 
 /**

@@ -23,12 +23,11 @@
  */
 package syncleus.dann.util;
 
-import syncleus.dann.math.random.RandomChoice;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import syncleus.dann.math.random.RandomChoice;
 
 /**
  * This class is used to choose between several objects with a specified probability.

@@ -1,7 +1,6 @@
 package syncleus.dann.solve.visionworld.filter;
 
 import java.awt.image.BufferedImage;
-
 import org.apache.log4j.Logger;
 import syncleus.dann.solve.visionworld.Filter;
 

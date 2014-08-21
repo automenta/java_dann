@@ -24,9 +24,7 @@
 package org.encog.bot.html;
 
 import java.io.ByteArrayInputStream;
-
 import junit.framework.TestCase;
-
 import org.encog.parse.PeekableInputStream;
 
 public class TestPeekableInputStream extends TestCase {

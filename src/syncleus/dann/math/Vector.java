@@ -19,10 +19,9 @@
 package syncleus.dann.math;
 
 import java.io.Serializable;
-import org.apache.commons.math3.linear.ArrayRealVector;
-
 import java.util.Collection;
 import java.util.List;
+import org.apache.commons.math3.linear.ArrayRealVector;
 import syncleus.dann.data.DoubleArray;
 
 /**

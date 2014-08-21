@@ -6,10 +6,10 @@
 package syncleus.dann.data.image.filter.impl;
 
 import imagepreprocessing.helper.PreprocessingHelper;
-import syncleus.dann.data.image.filter.ImageFilter;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.Serializable;
+import syncleus.dann.data.image.filter.ImageFilter;
 
 /**
  * Otsu binarize filter serves to dynamically determine the threshold based on 

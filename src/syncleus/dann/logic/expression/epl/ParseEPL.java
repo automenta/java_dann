@@ -21,11 +21,9 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package org.encog.parse.expression.epl;
+package syncleus.dann.logic.expression.epl;
 
 import java.util.StringTokenizer;
-
-
 import syncleus.dann.data.file.csv.CSVFormat;
 import syncleus.dann.data.language.SimpleParser;
 import syncleus.dann.evolve.exception.EACompileError;
@@ -34,6 +32,7 @@ import syncleus.dann.evolve.gp.ProgramNode;
 import syncleus.dann.evolve.gp.expvalue.ExpressionValue;
 import syncleus.dann.evolve.gp.extension.EncogOpcodeRegistry;
 import syncleus.dann.evolve.gp.extension.ProgramExtensionTemplate;
+import syncleus.dann.util.datastruct.StackObject;
 
 /**
  * Parse an EPL string.

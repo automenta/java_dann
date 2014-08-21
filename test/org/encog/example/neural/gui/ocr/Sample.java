@@ -25,7 +25,6 @@ package org.encog.examples.neural.gui.ocr;
 
 import java.awt.Color;
 import java.awt.Graphics;
-
 import javax.swing.JPanel;
 
 /**

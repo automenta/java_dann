@@ -23,17 +23,20 @@
  */
 package syncleus.dann.math.matrix;
 
+import java.io.Serializable;
+import java.util.Arrays;
+import org.apache.commons.math3.exception.OutOfRangeException;
 import org.apache.commons.math3.linear.Array2DRowRealMatrix;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import syncleus.dann.math.EncogMath;
 import syncleus.dann.math.RealNumber;
-import syncleus.dann.math.matrix.decomposition.*;
+import syncleus.dann.math.matrix.decomposition.DoolittleLuDecomposition;
+import syncleus.dann.math.matrix.decomposition.HouseholderQrDecomposition;
+import syncleus.dann.math.matrix.decomposition.LuDecomposition2;
+import syncleus.dann.math.matrix.decomposition.QrDecomposition2;
+import syncleus.dann.math.matrix.decomposition.StewartSingularValueDecomposition;
 import syncleus.dann.math.random.RangeRandomizer;
-
-import java.io.Serializable;
-import java.util.Arrays;
-import org.apache.commons.math3.exception.OutOfRangeException;
 
 //TODO subclass http://commons.apache.org/proper/commons-math/javadocs/api-3.3/org/apache/commons/math3/linear/Array2DRowRealMatrix.html
 

@@ -21,7 +21,6 @@ import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 import syncleus.dann.neural.spiking.NeuronUpdateRule;
-import syncleus.dann.neural.spiking.util.Randomizer;
 import syncleus.dann.neural.spiking.SpikingNeuralNetwork;
 import syncleus.dann.neural.spiking.SpikingNeuralNetwork.TimeType;
 import syncleus.dann.neural.spiking.SpikingNeuron;
@@ -39,6 +38,7 @@ import syncleus.dann.neural.spiking.trainers.TrainerListener;
 import syncleus.dann.neural.spiking.trainers.TrainingSet;
 import syncleus.dann.neural.spiking.util.NetworkLayoutManager;
 import syncleus.dann.neural.spiking.util.NetworkLayoutManager.Direction;
+import syncleus.dann.neural.spiking.util.Randomizer;
 import syncleus.dann.neural.spiking.util.SimnetUtils;
 import syncleus.dann.neural.spiking.util.SquashingFunction;
 

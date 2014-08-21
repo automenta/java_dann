@@ -24,7 +24,6 @@ import java.awt.Graphics2D;
 import java.awt.Paint;
 import java.awt.Stroke;
 import java.awt.geom.Rectangle2D;
-
 import org.piccolo2d.PNode;
 import org.piccolo2d.extras.util.PFixedWidthStroke;
 import org.piccolo2d.util.PPaintContext;

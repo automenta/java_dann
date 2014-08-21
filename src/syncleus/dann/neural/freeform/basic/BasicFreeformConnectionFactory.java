@@ -23,11 +23,10 @@
  */
 package syncleus.dann.neural.freeform.basic;
 
-import syncleus.dann.neural.freeform.FreeformNeuron;
-import syncleus.dann.neural.freeform.factory.FreeformConnectionFactory;
-
 import java.io.Serializable;
 import syncleus.dann.neural.freeform.FreeformConnection;
+import syncleus.dann.neural.freeform.FreeformNeuron;
+import syncleus.dann.neural.freeform.factory.FreeformConnectionFactory;
 
 /*
  * A factory that creates basic freeform connection objects.

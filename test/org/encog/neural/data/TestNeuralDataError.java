@@ -24,9 +24,7 @@
 package org.encog.neural.data;
 
 import java.awt.Graphics;
-
 import junit.framework.TestCase;
-
 import org.encog.ml.data.MLDataError;
 
 public class TestNeuralDataError extends TestCase {

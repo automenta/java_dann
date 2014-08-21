@@ -20,12 +20,10 @@ package syncleus.dann.solve.visionworld;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-
 import javax.swing.Action;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JToolBar;
-
 import org.simbrain.util.genericframe.GenericFrame;
 import org.simbrain.workspace.gui.GuiComponent;
 import syncleus.dann.solve.visionworld.filter.PixelAccumulator;

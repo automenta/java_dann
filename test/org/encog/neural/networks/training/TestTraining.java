@@ -24,7 +24,6 @@
 package org.encog.neural.networks.training;
 
 import junit.framework.TestCase;
-
 import org.encog.ml.LearningScoring;
 import org.encog.ml.MLMethod;
 import org.encog.ml.MethodFactory;
@@ -33,7 +32,6 @@ import org.encog.ml.data.basic.BasicMLDataSet;
 import org.encog.ml.genetic.MLMethodGeneticAlgorithm;
 import org.encog.ml.train.MLTrain;
 import org.encog.neural.networks.BasicNetwork;
-import syncleus.dann.neural.NetworkUtil;
 import org.encog.neural.networks.XOR;
 import org.encog.neural.networks.training.anneal.NeuralSimulatedAnnealing;
 import org.encog.neural.networks.training.lma.LevenbergMarquardtTraining;
@@ -46,6 +44,7 @@ import org.encog.neural.pnn.BasicPNN;
 import org.encog.neural.pnn.PNNKernelType;
 import org.encog.neural.pnn.PNNOutputMode;
 import org.junit.Test;
+import syncleus.dann.neural.NetworkUtil;
 
 public class TestTraining extends TestCase   {
 

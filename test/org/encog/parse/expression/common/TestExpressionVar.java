@@ -25,27 +25,25 @@ package org.encog.parse.expression.common;
 
 import junit.framework.Assert;
 import junit.framework.TestCase;
-
-import org.encog.Encog;
 import org.encog.ml.prg.EncogProgram;
 
 public class TestExpressionVar extends TestCase {
 	public void testAssignment() {
 		EncogProgram expression = new EncogProgram("a");
 		expression.getVariables().setVariable("a",5);
-		Assert.assertEquals(5,expression.evaluate().toFloatValue(),Encog.DEFAULT_DOUBLE_EQUAL);
+		Assert.assertEquals(5,expression.evaluate().toFloatValue(),EncogMath.DEFAULT_EPSILON);
 	}
 	
 	public void testNegAssignment() {
 		EncogProgram expression = new EncogProgram("-a");
 		expression.getVariables().setVariable("a",5);
-		Assert.assertEquals(-5,expression.evaluate().toFloatValue(),Encog.DEFAULT_DOUBLE_EQUAL);
+		Assert.assertEquals(-5,expression.evaluate().toFloatValue(),EncogMath.DEFAULT_EPSILON);
 	}
 	
 	public void test2NegAssignment() {
 		EncogProgram expression = new EncogProgram("--a");
 		expression.getVariables().setVariable("a",5);
-		Assert.assertEquals(5,expression.evaluate().toFloatValue(),Encog.DEFAULT_DOUBLE_EQUAL);
+		Assert.assertEquals(5,expression.evaluate().toFloatValue(),EncogMath.DEFAULT_EPSILON);
 	}
 	
 	public void testAssignment2() {
@@ -53,7 +51,7 @@ public class TestExpressionVar extends TestCase {
 		expression.getVariables().setVariable("aa",1);
 		expression.getVariables().setVariable("bbb",2);
 		expression.getVariables().setVariable("cccc",3);
-		Assert.assertEquals(9,expression.evaluate().toFloatValue(),Encog.DEFAULT_DOUBLE_EQUAL);
+		Assert.assertEquals(9,expression.evaluate().toFloatValue(),EncogMath.DEFAULT_EPSILON);
 	}
 	
 	public void testAssignment3() {
@@ -61,7 +59,7 @@ public class TestExpressionVar extends TestCase {
 		expression.getVariables().setVariable("v1",1);
 		expression.getVariables().setVariable("v2",2);
 		expression.getVariables().setVariable("v3",3);
-		Assert.assertEquals(6,expression.evaluate().toFloatValue(),Encog.DEFAULT_DOUBLE_EQUAL);
+		Assert.assertEquals(6,expression.evaluate().toFloatValue(),EncogMath.DEFAULT_EPSILON);
 	}
 	
 	public void testVarComplex() {

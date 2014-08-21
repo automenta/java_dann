@@ -3,8 +3,8 @@ package syncleus.dann.learn.autoencoder;
 
 import syncleus.dann.learn.autoencoder.DenoisingAutoencoderLayer.AutoencoderNeuron;
 import syncleus.dann.learn.autoencoder.DenoisingAutoencoderLayer.AutoencoderSynapse;
-import syncleus.dann.neural.util.AbstractSynapse;
 import syncleus.dann.neural.Neuron;
+import syncleus.dann.neural.util.AbstractSynapse;
 
 //TODO implement
 abstract public class DenoisingAutoencoderLayer extends  BrainLayer<AutoencoderNeuron, AutoencoderSynapse> {

@@ -20,11 +20,9 @@ package org.simbrain.plot.timeseries;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
-
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;

@@ -23,13 +23,12 @@
  */
 package syncleus.dann.neural.util.structure;
 
+import java.util.ArrayList;
+import java.util.List;
 import syncleus.dann.math.Format;
 import syncleus.dann.math.NumericRange;
 import syncleus.dann.math.array.EngineArray;
 import syncleus.dann.neural.VectorNeuralNetwork;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Allows the weights and bias values of the neural network to be analyzed.

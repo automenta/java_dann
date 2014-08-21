@@ -19,10 +19,8 @@
 package org.simbrain.plot.timeseries;
 
 import java.awt.event.ActionEvent;
-
 import javax.swing.AbstractAction;
 import javax.swing.Action;
-
 import org.simbrain.resource.ResourceManager;
 
 /**

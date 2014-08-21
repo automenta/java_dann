@@ -20,9 +20,8 @@ package syncleus.dann.neural.spiking.util;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
-
-import syncleus.dann.neural.spiking.SpikingNeuralNetwork;
 import syncleus.dann.neural.spiking.NetworkTextObject;
+import syncleus.dann.neural.spiking.SpikingNeuralNetwork;
 import syncleus.dann.neural.spiking.SpikingNeuron;
 import syncleus.dann.neural.spiking.SpikingSynapse;
 import syncleus.dann.neural.spiking.groups.NeuronGroup;

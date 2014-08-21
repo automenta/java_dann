@@ -18,11 +18,10 @@
  ******************************************************************************/
 package syncleus.dann.neural.som.brain;
 
-import syncleus.dann.graph.AbstractBidirectedAdjacencyGraph;
-import syncleus.dann.neural.Synapse;
-
 import java.util.concurrent.ExecutorService;
 import syncleus.dann.data.Data;
+import syncleus.dann.graph.AbstractBidirectedAdjacencyGraph;
+import syncleus.dann.neural.Synapse;
 
 /**
  * A SomBrain which uses exponential decay over time for the neighborhood

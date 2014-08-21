@@ -23,12 +23,11 @@
  */
 package syncleus.dann.learn.fitness;
 
-import syncleus.dann.Learning;
-import syncleus.dann.learn.ScoreLearning;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import syncleus.dann.Learning;
+import syncleus.dann.learn.ScoreLearning;
 
 /**
  * A multi-objective fitness function.

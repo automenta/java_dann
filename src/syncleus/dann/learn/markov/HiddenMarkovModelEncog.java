@@ -23,6 +23,8 @@
  */
 package syncleus.dann.learn.markov;
 
+import java.io.Serializable;
+import java.util.Iterator;
 import syncleus.dann.StateSequenceLearning;
 import syncleus.dann.data.DataCase;
 import syncleus.dann.data.Dataset;
@@ -33,9 +35,6 @@ import syncleus.dann.learn.markov.alog.ViterbiCalculator;
 import syncleus.dann.math.probablity.distributions.ContinousDistribution;
 import syncleus.dann.math.probablity.distributions.DiscreteDistribution;
 import syncleus.dann.math.probablity.distributions.StateDistribution;
-
-import java.io.Serializable;
-import java.util.Iterator;
 
 /**
  * A Hidden Markov Model (HMM) is a Machine Learning Method that allows for

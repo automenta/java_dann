@@ -26,9 +26,9 @@ package syncleus.dann.neural.flat.propagation.resilient;
 import syncleus.dann.data.Dataset;
 import syncleus.dann.math.EncogMath;
 import syncleus.dann.math.array.EngineArray;
-import syncleus.dann.neural.util.ContainsFlat;
 import syncleus.dann.neural.flat.propagation.Propagation;
 import syncleus.dann.neural.flat.propagation.TrainingContinuation;
+import syncleus.dann.neural.util.ContainsFlat;
 
 /**
  * One problem with the backpropagation algorithm is that the magnitude of the

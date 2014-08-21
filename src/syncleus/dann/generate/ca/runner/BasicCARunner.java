@@ -23,12 +23,11 @@
  */
 package syncleus.dann.generate.ca.runner;
 
+import java.util.ArrayList;
+import java.util.List;
 import syncleus.dann.generate.ca.program.CAProgram;
 import syncleus.dann.generate.ca.universe.Universe;
 import syncleus.dann.generate.ca.universe.UniverseListener;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class BasicCARunner implements CARunner, Runnable {
     private Universe universe;

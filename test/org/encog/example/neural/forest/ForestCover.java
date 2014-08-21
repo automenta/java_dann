@@ -25,7 +25,6 @@ package org.encog.examples.neural.forest;
 
 import java.io.File;
 import java.io.IOException;
-
 import org.encog.Encog;
 import org.encog.neural.networks.BasicNetwork;
 import org.encog.persist.EncogDirectoryPersistence;

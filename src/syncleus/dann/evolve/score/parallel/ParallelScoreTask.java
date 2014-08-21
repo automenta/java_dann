@@ -23,13 +23,12 @@
  */
 package syncleus.dann.evolve.score.parallel;
 
+import java.util.List;
 import syncleus.dann.Learning;
 import syncleus.dann.evolve.exception.EARuntimeError;
 import syncleus.dann.evolve.genome.Genome;
 import syncleus.dann.evolve.score.AdjustScore;
 import syncleus.dann.evolve.train.basic.BasicEA;
-
-import java.util.List;
 import syncleus.dann.learn.ScoreLearning;
 
 /**

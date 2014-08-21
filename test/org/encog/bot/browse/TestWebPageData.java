@@ -24,7 +24,6 @@
 package org.encog.bot.browse;
 
 import junit.framework.TestCase;
-
 import org.encog.bot.browse.range.DocumentRange;
 import org.encog.bot.browse.range.Link;
 import org.encog.bot.dataunit.TagDataUnit;

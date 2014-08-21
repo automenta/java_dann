@@ -18,11 +18,10 @@
  ******************************************************************************/
 package syncleus.dann.graph.context;
 
-import syncleus.dann.graph.Edge;
-import syncleus.dann.graph.Graph;
-
 import java.util.HashSet;
 import java.util.Set;
+import syncleus.dann.graph.Edge;
+import syncleus.dann.graph.Graph;
 
 public abstract class AbstractSignalContextNode<N, E extends Edge<N>, S>
 		extends AbstractContextNode<N, E, Graph<N, E>> implements

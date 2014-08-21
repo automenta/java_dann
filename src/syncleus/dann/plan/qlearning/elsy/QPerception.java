@@ -1,10 +1,9 @@
 package syncleus.dann.plan.qlearning.elsy;
 
+import java.io.Serializable;
 import syncleus.dann.math.Randoms;
 import syncleus.dann.math.Sigmoids;
 import syncleus.dann.neural.Brain;
-
-import java.io.Serializable;
 
 /**
  * Used to prepare input for the Brain.

@@ -25,7 +25,6 @@ package org.encog.ml.graph;
 
 import junit.framework.Assert;
 import junit.framework.TestCase;
-
 import org.encog.ml.graph.search.AStarSearch;
 import org.encog.ml.graph.search.BreadthFirstSearch;
 import org.encog.ml.graph.search.DepthFirstSearch;

@@ -22,7 +22,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.simbrain.plot.ChartListener;
 import org.simbrain.util.projection.DataPoint;
 import org.simbrain.util.projection.DataPointColored;

@@ -1,13 +1,12 @@
 package syncleus.dann.learn.autoencoder;
 
 
-import syncleus.dann.AutoAssociating;
-import syncleus.dann.data.Dataset;
-import syncleus.dann.learn.ErrorLearning;
-
 import java.util.Arrays;
 import java.util.Random;
+import syncleus.dann.AutoAssociating;
 import syncleus.dann.data.Data;
+import syncleus.dann.data.Dataset;
+import syncleus.dann.learn.ErrorLearning;
 
 public class DenoisingAutoencoder<D extends Data> implements AutoAssociating<D>, ErrorLearning<D> {
 

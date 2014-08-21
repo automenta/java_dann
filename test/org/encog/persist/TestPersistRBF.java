@@ -24,9 +24,7 @@
 package org.encog.persist;
 
 import java.io.File;
-
 import junit.framework.TestCase;
-
 import org.encog.mathutil.rbf.RBFEnum;
 import org.encog.ml.data.MLDataSet;
 import org.encog.neural.networks.XOR;

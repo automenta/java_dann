@@ -18,9 +18,8 @@
  ******************************************************************************/
 package syncleus.dann.graph.path;
 
-import syncleus.dann.graph.Edge;
-
 import java.util.List;
+import syncleus.dann.graph.Edge;
 
 // TODO implement optimizer approach
 

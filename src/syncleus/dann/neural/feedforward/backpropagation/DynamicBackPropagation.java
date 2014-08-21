@@ -16,7 +16,6 @@
 
 package syncleus.dann.neural.feedforward.backpropagation;
 
-import org.neuroph.core.NeuralNetwork;
 import org.neuroph.core.data.DataSet;
 
 

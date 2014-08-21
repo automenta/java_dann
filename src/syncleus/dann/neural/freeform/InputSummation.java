@@ -23,9 +23,8 @@
  */
 package syncleus.dann.neural.freeform;
 
-import syncleus.dann.neural.util.activation.EncogActivationFunction;
-
 import java.util.List;
+import syncleus.dann.neural.util.activation.EncogActivationFunction;
 
 /**
  * Specifies how the inputs to a neuron are to be summed.

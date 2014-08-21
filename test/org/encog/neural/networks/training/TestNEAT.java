@@ -1,10 +1,8 @@
 package org.encog.neural.networks.training;
 
 import java.io.File;
-
 import junit.framework.Assert;
 import junit.framework.TestCase;
-
 import org.encog.Encog;
 import org.encog.ml.LearningScoring;
 import org.encog.ml.data.MLDataSet;
@@ -18,7 +16,6 @@ import org.encog.neural.neat.NEATPopulation;
 import org.encog.neural.neat.NEATUtil;
 import org.encog.neural.networks.XOR;
 import org.encog.util.TempDir;
-import org.encog.util.simple.EncogUtility;
 
 public class TestNEAT extends TestCase {
 	public final TempDir TEMP_DIR = new TempDir();

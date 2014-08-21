@@ -18,16 +18,15 @@
  ******************************************************************************/
 package syncleus.dann.graph;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import syncleus.dann.graph.context.AbstractContextGraphElement;
 import syncleus.dann.graph.context.ContextNode;
 import syncleus.dann.util.UnexpectedDannError;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 
 public abstract class AbstractEdge<N> extends
         AbstractContextGraphElement<Graph<N, ?>> implements Edge<N> {

@@ -1,11 +1,10 @@
 package syncleus.dann.plan.navigate;
 
-import syncleus.dann.math.geometry.Line2D;
-import syncleus.dann.math.geometry.Plane;
-
 import java.io.IOException;
 import java.nio.FloatBuffer;
 import java.util.ArrayList;
+import syncleus.dann.math.geometry.Line2D;
+import syncleus.dann.math.geometry.Plane;
 
 /**
  * A NavigationMesh is a collection of NavigationCells used to control object

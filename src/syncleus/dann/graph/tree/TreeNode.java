@@ -23,9 +23,8 @@
  */
 package syncleus.dann.graph.tree;
 
-import syncleus.dann.graph.DirectedEdge;
-
 import java.util.List;
+import syncleus.dann.graph.DirectedEdge;
 
 /**
  * A node for a tree.

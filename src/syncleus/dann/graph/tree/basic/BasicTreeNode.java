@@ -23,16 +23,15 @@
  */
 package syncleus.dann.graph.tree.basic;
 
-import syncleus.dann.graph.DirectedEdge;
-import syncleus.dann.graph.Graph;
-import syncleus.dann.graph.tree.TreeNode;
-import syncleus.dann.graph.tree.traverse.tasks.TaskCountNodes;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Stream;
+import syncleus.dann.graph.DirectedEdge;
+import syncleus.dann.graph.Graph;
+import syncleus.dann.graph.tree.TreeNode;
+import syncleus.dann.graph.tree.traverse.tasks.TaskCountNodes;
 
 public class BasicTreeNode implements TreeNode, Serializable {
     private final List<TreeNode> childNodes = new ArrayList<>();

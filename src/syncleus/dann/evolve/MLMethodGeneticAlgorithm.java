@@ -35,8 +35,8 @@ import syncleus.dann.evolve.species.Species;
 import syncleus.dann.evolve.train.basic.TrainEA;
 import syncleus.dann.learn.AbstractTraining;
 import syncleus.dann.learn.AbstractTraining.TrainingImplementationType;
-import syncleus.dann.learn.ScoreLearning;
 import syncleus.dann.learn.MethodFactory;
+import syncleus.dann.learn.ScoreLearning;
 import syncleus.dann.neural.flat.propagation.TrainingContinuation;
 
 /**

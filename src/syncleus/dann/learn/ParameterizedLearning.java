@@ -23,9 +23,8 @@
  */
 package syncleus.dann.learn;
 
-import syncleus.dann.Learning;
-
 import java.util.Map;
+import syncleus.dann.Learning;
 
 /**
  * Defines a Machine Learning Method that holds properties.

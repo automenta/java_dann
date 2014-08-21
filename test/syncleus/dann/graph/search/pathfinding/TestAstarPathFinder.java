@@ -18,15 +18,14 @@
  ******************************************************************************/
 package syncleus.dann.graph.search.pathfinding;
 
+import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 import syncleus.dann.graph.BidirectedEdge;
-import syncleus.dann.search.pathfinding.AstarPathFinder;
-import syncleus.dann.search.pathfinding.HeuristicPathCost;
 import syncleus.dann.math.geometry.GraphGrid2D;
 import syncleus.dann.math.geometry.GraphGrid2D.GridNode;
-
-import java.util.List;
+import syncleus.dann.search.pathfinding.AstarPathFinder;
+import syncleus.dann.search.pathfinding.HeuristicPathCost;
 
 public class TestAstarPathFinder {
     private static final double INF = Double.POSITIVE_INFINITY;

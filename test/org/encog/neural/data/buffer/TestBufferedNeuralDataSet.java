@@ -24,9 +24,7 @@
 package org.encog.neural.data.buffer;
 
 import java.io.File;
-
 import junit.framework.TestCase;
-
 import org.encog.ml.data.basic.BasicMLData;
 import org.encog.ml.data.buffer.BufferedMLDataSet;
 import org.encog.neural.networks.XOR;

@@ -14,7 +14,6 @@
 package syncleus.dann.neural.spiking.subnetworks;
 
 import java.awt.geom.Point2D;
-
 import syncleus.dann.neural.spiking.SpikingNeuralNetwork;
 import syncleus.dann.neural.spiking.SpikingNeuron;
 import syncleus.dann.neural.spiking.neuron_update_rules.LinearRule;

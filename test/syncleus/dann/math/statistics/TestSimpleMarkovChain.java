@@ -18,15 +18,21 @@
  ******************************************************************************/
 package syncleus.dann.math.statistics;
 
-import syncleus.dann.learn.markov.chain.MarkovChainEvidence;
-import syncleus.dann.learn.markov.chain.MarkovChain;
-import syncleus.dann.learn.markov.chain.SimpleMarkovChain;
+import java.util.ArrayList;
+import java.util.EnumMap;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+import java.util.Set;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Test;
-
-import java.util.*;
+import syncleus.dann.learn.markov.chain.MarkovChain;
+import syncleus.dann.learn.markov.chain.MarkovChainEvidence;
+import syncleus.dann.learn.markov.chain.SimpleMarkovChain;
 import syncleus.dann.learn.markov.chain.SimpleMarkovChainEvidence;
 
 public class TestSimpleMarkovChain {

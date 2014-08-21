@@ -23,12 +23,11 @@
  */
 package syncleus.dann.util.factory.parse;
 
-import syncleus.dann.data.language.SimpleParser;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import syncleus.dann.data.language.SimpleParser;
 
 /**
  * This class is used to parse a Encog architecture string.

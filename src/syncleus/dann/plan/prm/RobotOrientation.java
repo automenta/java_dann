@@ -17,9 +17,9 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 package prpvis.struc;
 
-import java.util.regex.*;
 import java.util.Random;
-
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import prpvis.core.Debugging;
 
 /**

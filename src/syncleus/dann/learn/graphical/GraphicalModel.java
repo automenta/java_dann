@@ -18,11 +18,10 @@
  ******************************************************************************/
 package syncleus.dann.learn.graphical;
 
-import syncleus.dann.graph.BidirectedEdge;
-import syncleus.dann.graph.Graph;
-
 import java.util.Set;
 import org.apache.commons.math3.util.Pair;
+import syncleus.dann.graph.BidirectedEdge;
+import syncleus.dann.graph.Graph;
 import syncleus.dann.learn.graphical.GraphicalModel.InfluencedGoals;
 import syncleus.dann.math.probablity.ProbabilityFunction;
 

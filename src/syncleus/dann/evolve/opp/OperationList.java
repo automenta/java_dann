@@ -24,10 +24,9 @@
 package syncleus.dann.evolve.opp;
 
 
+import java.util.Random;
 import syncleus.dann.util.ChooseObject;
 import syncleus.dann.util.ObjectHolder;
-
-import java.util.Random;
 
 /**
  * This class holds a list of evolutionary operators. Each operator is given a

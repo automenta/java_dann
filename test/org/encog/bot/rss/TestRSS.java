@@ -24,7 +24,6 @@
 package org.encog.bot.rss;
 
 import java.net.URL;
-
 import junit.framework.TestCase;
 
 

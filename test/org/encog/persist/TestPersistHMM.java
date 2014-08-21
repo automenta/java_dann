@@ -25,10 +25,8 @@ package org.encog.persist;
 
 import java.io.File;
 import java.io.IOException;
-
 import junit.framework.Assert;
 import junit.framework.TestCase;
-
 import org.encog.ml.hmm.HiddenMarkovModel;
 import org.encog.ml.hmm.alog.KullbackLeiblerDistanceCalculator;
 import org.encog.ml.hmm.distributions.ContinousDistribution;

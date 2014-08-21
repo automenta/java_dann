@@ -23,10 +23,9 @@
  */
 package syncleus.dann.math.matrix.decomposition;
 
+import java.io.Serializable;
 import syncleus.dann.math.matrix.RealMatrix;
 import syncleus.dann.math.matrix.SimpleRealMatrix;
-
-import java.io.Serializable;
 
 /**
  * Cholesky Decomposition.

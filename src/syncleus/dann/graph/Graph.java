@@ -18,13 +18,12 @@
  ******************************************************************************/
 package syncleus.dann.graph;
 
-import syncleus.dann.graph.context.ContextReporter;
-
 import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import syncleus.dann.graph.context.ContextReporter;
 
 // TODO consider making all nodes extend from a connectable interface so you can embed other graphs as nodes if they too are connectable.
 

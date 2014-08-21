@@ -16,11 +16,9 @@
 
 package org.neuroph.nnet.comp.layer;
 
-import org.neuroph.nnet.comp.Kernel;
-import java.util.Arrays;
-
 import org.neuroph.core.Layer;
 import org.neuroph.core.Neuron;
+import org.neuroph.nnet.comp.Kernel;
 import org.neuroph.util.NeuronProperties;
 import org.neuroph.util.NeurophArrayList;
 

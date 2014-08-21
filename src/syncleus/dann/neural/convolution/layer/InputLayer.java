@@ -16,10 +16,10 @@
 
 package org.neuroph.nnet.comp.layer;
 
-import org.neuroph.nnet.comp.neuron.InputNeuron;
 import org.neuroph.core.Layer;
 import org.neuroph.core.Neuron;
 import org.neuroph.core.transfer.Linear;
+import org.neuroph.nnet.comp.neuron.InputNeuron;
 import org.neuroph.util.NeuronFactory;
 import org.neuroph.util.NeuronProperties;
 

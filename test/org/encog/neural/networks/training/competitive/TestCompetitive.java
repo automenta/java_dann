@@ -24,7 +24,6 @@
 package org.encog.neural.networks.training.competitive;
 
 import junit.framework.TestCase;
-
 import org.encog.mathutil.matrices.Matrix;
 import org.encog.ml.data.MLData;
 import org.encog.ml.data.MLDataSet;

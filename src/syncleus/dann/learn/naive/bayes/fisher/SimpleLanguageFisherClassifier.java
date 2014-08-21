@@ -18,12 +18,11 @@
  ******************************************************************************/
 package syncleus.dann.learn.naive.bayes.fisher;
 
+import java.util.Locale;
+import java.util.Set;
 import syncleus.dann.data.language.parsing.BasicWordParser;
 import syncleus.dann.data.language.parsing.WordParser;
 import syncleus.dann.learn.naive.FeatureExtractor;
-
-import java.util.Locale;
-import java.util.Set;
 
 /**
  * A SimpleLanguageFisherClassifier classifies words as a

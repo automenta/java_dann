@@ -23,19 +23,18 @@
  */
 package syncleus.dann.evolve.gp.generator;
 
-import syncleus.dann.evolve.GeneticError;
-import syncleus.dann.evolve.exception.EACompileError;
-import syncleus.dann.evolve.exception.EARuntimeError;
-import syncleus.dann.evolve.population.Population;
-import syncleus.dann.evolve.species.Species;
-import syncleus.dann.math.random.BasicRandomFactory;
-import syncleus.dann.math.random.RandomFactory;
-
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Random;
+import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import org.encog.util.concurrency.MultiThreadable;
+import syncleus.dann.evolve.GeneticError;
+import syncleus.dann.evolve.exception.EACompileError;
+import syncleus.dann.evolve.exception.EARuntimeError;
 import syncleus.dann.evolve.gp.EncogProgram;
 import syncleus.dann.evolve.gp.EncogProgramContext;
 import syncleus.dann.evolve.gp.ProgramNode;
@@ -43,7 +42,11 @@ import syncleus.dann.evolve.gp.expvalue.ValueType;
 import syncleus.dann.evolve.gp.extension.ProgramExtensionTemplate;
 import syncleus.dann.evolve.gp.train.PrgPopulation;
 import syncleus.dann.evolve.gp.train.ZeroEvalScoreFunction;
+import syncleus.dann.evolve.population.Population;
+import syncleus.dann.evolve.species.Species;
 import syncleus.dann.learn.ScoreLearning;
+import syncleus.dann.math.random.BasicRandomFactory;
+import syncleus.dann.math.random.RandomFactory;
 
 /**
  * The abstract base for Full and Grow program generation.

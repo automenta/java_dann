@@ -24,11 +24,9 @@
 package org.encog.examples.neural.predict.market;
 
 import java.io.File;
-
 import org.encog.Encog;
 import org.encog.ml.data.MLDataSet;
 import org.encog.neural.networks.BasicNetwork;
-import org.encog.neural.networks.training.propagation.resilient.ResilientPropagation;
 import org.encog.persist.EncogDirectoryPersistence;
 import org.encog.util.simple.EncogUtility;
 

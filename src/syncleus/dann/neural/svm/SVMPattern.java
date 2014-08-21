@@ -23,12 +23,9 @@
  */
 package syncleus.dann.neural.svm;
 
-import syncleus.dann.neural.util.PatternError;
-import syncleus.dann.neural.NeuralNetworkPattern;
 import syncleus.dann.Learning;
-import syncleus.dann.neural.svm.KernelType;
-import syncleus.dann.neural.svm.SVM;
-import syncleus.dann.neural.svm.SVMType;
+import syncleus.dann.neural.NeuralNetworkPattern;
+import syncleus.dann.neural.util.PatternError;
 import syncleus.dann.neural.util.activation.EncogActivationFunction;
 
 /**

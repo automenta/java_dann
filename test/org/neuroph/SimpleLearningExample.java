@@ -1,12 +1,12 @@
 package org.neuroph.samples.convolution;
 
-import org.neuroph.nnet.comp.layer.ConvolutionalLayer;
+import org.neuroph.core.data.DataSet;
 import org.neuroph.nnet.ConvolutionalNetwork;
 import org.neuroph.nnet.comp.ConvolutionalUtils;
-import org.neuroph.nnet.comp.layer.InputMapsLayer;
 import org.neuroph.nnet.comp.Kernel;
+import org.neuroph.nnet.comp.layer.ConvolutionalLayer;
+import org.neuroph.nnet.comp.layer.InputMapsLayer;
 import org.neuroph.nnet.comp.layer.Layer2D;
-import org.neuroph.core.data.DataSet;
 import org.neuroph.util.NeuralNetworkFactory;
 
 public class SimpleLearningExample {

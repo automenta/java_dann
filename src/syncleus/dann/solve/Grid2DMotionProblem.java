@@ -23,14 +23,13 @@
  */
 package syncleus.dann.solve;
 
-import syncleus.dann.math.EncogMath;
-import syncleus.dann.plan.State;
-import syncleus.dann.plan.grid2d.BasicDiscreteActionProblem;
-
 import java.util.ArrayList;
 import java.util.List;
+import syncleus.dann.math.EncogMath;
 import syncleus.dann.math.geometry.Angle;
 import syncleus.dann.math.geometry.GridState;
+import syncleus.dann.plan.State;
+import syncleus.dann.plan.grid2d.BasicDiscreteActionProblem;
 
 /** Discrete action problem involving motion in a 2D grid */
 public class Grid2DMotionProblem extends BasicDiscreteActionProblem {    

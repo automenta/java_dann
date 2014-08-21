@@ -24,7 +24,6 @@
 package org.encog.examples.neural.cross;
 
 import java.text.NumberFormat;
-
 import org.encog.Encog;
 import org.encog.ml.data.MLData;
 import org.encog.ml.data.MLDataSet;

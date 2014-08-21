@@ -23,18 +23,17 @@
  */
 package syncleus.dann.evolve.score.parallel;
 
+import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+import org.encog.util.concurrency.MultiThreadable;
 import syncleus.dann.evolve.GeneticError;
 import syncleus.dann.evolve.codec.GeneticCODEC;
 import syncleus.dann.evolve.genome.Genome;
 import syncleus.dann.evolve.population.Population;
 import syncleus.dann.evolve.score.AdjustScore;
 import syncleus.dann.evolve.species.Species;
-
-import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
-import org.encog.util.concurrency.MultiThreadable;
 import syncleus.dann.learn.ScoreLearning;
 
 /**

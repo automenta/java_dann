@@ -16,11 +16,10 @@ package syncleus.dann.neural.spiking.subnetworks;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
-
-import syncleus.dann.neural.spiking.connections.AllToAll;
 import syncleus.dann.neural.spiking.SpikingNeuralNetwork;
 import syncleus.dann.neural.spiking.SpikingNeuron;
 import syncleus.dann.neural.spiking.SpikingSynapse;
+import syncleus.dann.neural.spiking.connections.AllToAll;
 import syncleus.dann.neural.spiking.groups.NeuronGroup;
 import syncleus.dann.neural.spiking.groups.SpikingInputs;
 import syncleus.dann.neural.spiking.groups.Subnetwork;

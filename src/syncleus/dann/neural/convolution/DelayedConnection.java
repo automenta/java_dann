@@ -16,9 +16,9 @@
 
 package org.neuroph.nnet.comp;
 
-import org.neuroph.nnet.comp.neuron.DelayedNeuron;
 import org.neuroph.core.Connection;
 import org.neuroph.core.Neuron;
+import org.neuroph.nnet.comp.neuron.DelayedNeuron;
 
 /**
  * Represents the connection between neurons which can delay signal.

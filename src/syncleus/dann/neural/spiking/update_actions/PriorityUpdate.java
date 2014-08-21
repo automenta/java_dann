@@ -13,8 +13,8 @@
  */
 package syncleus.dann.neural.spiking.update_actions;
 
-import syncleus.dann.neural.spiking.SpikingNeuralNetwork;
 import syncleus.dann.neural.spiking.NetworkUpdateAction;
+import syncleus.dann.neural.spiking.SpikingNeuralNetwork;
 
 /**
  * Loose neurons (neurons not in groups) are updated in accordance with an

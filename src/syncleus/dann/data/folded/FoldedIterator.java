@@ -23,10 +23,9 @@
  */
 package syncleus.dann.data.folded;
 
+import java.util.Iterator;
 import syncleus.dann.data.DataCase;
 import syncleus.dann.data.DataException;
-
-import java.util.Iterator;
 
 /**
  * Used to iterate over a folded data set.

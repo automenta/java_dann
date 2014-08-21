@@ -21,14 +21,14 @@
  * and trademarks visit:
  * http://www.heatonresearch.com/copyright
  */
-package syncleus.dann.util.expression.common;
+package syncleus.dann.logic.expression.common;
 
 import syncleus.dann.evolve.gp.EncogProgram;
 import syncleus.dann.evolve.gp.ProgramNode;
-import syncleus.dann.util.expression.CommonRender;
-import static syncleus.dann.util.expression.ExpressionNodeType.ConstVal;
-import static syncleus.dann.util.expression.ExpressionNodeType.Operator;
-import static syncleus.dann.util.expression.ExpressionNodeType.Variable;
+import syncleus.dann.logic.expression.CommonRender;
+import static syncleus.dann.logic.expression.ExpressionNodeType.ConstVal;
+import static syncleus.dann.logic.expression.ExpressionNodeType.Operator;
+import static syncleus.dann.logic.expression.ExpressionNodeType.Variable;
 
 /**
  * Render a common expression.

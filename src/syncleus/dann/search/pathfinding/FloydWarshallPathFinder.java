@@ -18,16 +18,15 @@
  ******************************************************************************/
 package syncleus.dann.search.pathfinding;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import syncleus.dann.graph.Edge;
 import syncleus.dann.graph.Graph;
 import syncleus.dann.graph.Weighted;
 import syncleus.dann.graph.WeightedEdge;
 import syncleus.dann.graph.path.PathFinder;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class FloydWarshallPathFinder<N, E extends Edge<N>> implements
         PathFinder<N, E> {

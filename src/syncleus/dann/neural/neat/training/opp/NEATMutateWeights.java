@@ -23,10 +23,9 @@
  */
 package syncleus.dann.neural.neat.training.opp;
 
-import syncleus.dann.evolve.genome.Genome;
-
 import java.util.List;
 import java.util.Random;
+import syncleus.dann.evolve.genome.Genome;
 
 /**
  * Mutate the weights of a genome. A method is select the links for mutation.

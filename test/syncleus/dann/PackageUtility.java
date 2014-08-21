@@ -1,9 +1,5 @@
 package syncleus.dann;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import syncleus.dann.util.DannError;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -12,6 +8,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.jar.JarEntry;
 import java.util.jar.JarInputStream;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import syncleus.dann.util.DannError;
 
 public abstract class PackageUtility {
     private static final Logger LOGGER = LogManager

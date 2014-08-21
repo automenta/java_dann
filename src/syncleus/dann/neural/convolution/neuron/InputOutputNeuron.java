@@ -17,8 +17,8 @@
 package org.neuroph.nnet.comp.neuron;
 
 import org.neuroph.core.Neuron;
-import syncleus.dann.neural.util.input.InputFunction;
 import org.neuroph.core.transfer.TransferFunction;
+import syncleus.dann.neural.util.input.InputFunction;
 
 /**
  * Provides behaviour specific for neurons which act as input and the output

@@ -24,14 +24,14 @@
 package syncleus.dann.neural.adaline;
 
 import syncleus.dann.Learning;
-import syncleus.dann.data.MutableData;
 import syncleus.dann.data.DataCase;
 import syncleus.dann.data.Dataset;
+import syncleus.dann.data.MutableData;
 import syncleus.dann.learn.AbstractTraining;
 import syncleus.dann.math.statistics.ErrorCalculation;
 import syncleus.dann.neural.VectorNeuralNetwork;
-import syncleus.dann.neural.util.LearningRate;
 import syncleus.dann.neural.flat.propagation.TrainingContinuation;
+import syncleus.dann.neural.util.LearningRate;
 
 /**
  * Train an ADALINE neural network.

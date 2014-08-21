@@ -23,13 +23,12 @@
  */
 package syncleus.dann.learn.bayesian.query.sample;
 
+import java.io.Serializable;
 import syncleus.dann.learn.bayesian.BayesianError;
 import syncleus.dann.learn.bayesian.BayesianEvent;
 import syncleus.dann.learn.bayesian.EventType;
 import syncleus.dann.math.EncogMath;
 import syncleus.dann.math.Format;
-
-import java.io.Serializable;
 
 /**
  * Holds the state of an event during a query. This allows the event to actually

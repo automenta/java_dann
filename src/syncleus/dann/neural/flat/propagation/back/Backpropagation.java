@@ -24,12 +24,12 @@
 package syncleus.dann.neural.flat.propagation.back;
 
 import syncleus.dann.data.Dataset;
+import syncleus.dann.neural.flat.propagation.Propagation;
+import syncleus.dann.neural.flat.propagation.TrainingContinuation;
 import syncleus.dann.neural.util.ContainsFlat;
 import syncleus.dann.neural.util.LearningRate;
 import syncleus.dann.neural.util.Momentum;
 import syncleus.dann.neural.util.TrainingError;
-import syncleus.dann.neural.flat.propagation.Propagation;
-import syncleus.dann.neural.flat.propagation.TrainingContinuation;
 import syncleus.dann.neural.util.strategy.SmartLearningRate;
 import syncleus.dann.neural.util.strategy.SmartMomentum;
 

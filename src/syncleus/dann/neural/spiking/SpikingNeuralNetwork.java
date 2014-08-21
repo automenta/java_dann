@@ -28,10 +28,12 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import syncleus.dann.data.Data;
-
+import syncleus.dann.neural.Neuron;
+import syncleus.dann.neural.Synapse;
 import syncleus.dann.neural.spiking.connections.ConnectNeurons;
 import syncleus.dann.neural.spiking.groups.Group;
 import syncleus.dann.neural.spiking.groups.NeuronGroup;
+import syncleus.dann.neural.spiking.groups.SpikingInputs;
 import syncleus.dann.neural.spiking.groups.Subnetwork;
 import syncleus.dann.neural.spiking.groups.SynapseGroup;
 import syncleus.dann.neural.spiking.listeners.GroupListener;
@@ -41,10 +43,6 @@ import syncleus.dann.neural.spiking.listeners.NeuronListener;
 import syncleus.dann.neural.spiking.listeners.SynapseListener;
 import syncleus.dann.neural.spiking.listeners.TextListener;
 import syncleus.dann.neural.spiking.neuron_update_rules.interfaces.BiasedUpdateRule;
-
-import syncleus.dann.neural.Neuron;
-import syncleus.dann.neural.Synapse;
-import syncleus.dann.neural.spiking.groups.SpikingInputs;
 
 /**
  * <b>Network</b> provides core neural network functionality and is the the main

@@ -26,9 +26,7 @@ package org.encog.persist;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-
 import junit.framework.Assert;
-
 import org.encog.ml.ea.genome.Genome;
 import org.encog.ml.ea.species.Species;
 import org.encog.ml.prg.EncogProgram;

@@ -18,16 +18,16 @@ package org.neuroph.samples;
 
 import java.util.Arrays;
 import org.neuroph.core.NeuralNetwork;
-import org.neuroph.core.events.LearningEvent;
-import org.neuroph.core.events.LearningEventListener;
 import org.neuroph.core.data.DataSet;
 import org.neuroph.core.data.DataSetRow;
+import org.neuroph.core.events.LearningEvent;
+import org.neuroph.core.events.LearningEventListener;
 import org.neuroph.core.events.LearningEventType;
 import org.neuroph.core.learning.LearningRule;
 import org.neuroph.nnet.MultiLayerPerceptron;
+import org.neuroph.util.TransferFunctionType;
 import syncleus.dann.neural.feedforward.backpropagation.BackPropagationNeuroph;
 import syncleus.dann.neural.feedforward.backpropagation.MomentumBackpropagation;
-import org.neuroph.util.TransferFunctionType;
 
 /**
  * This sample shows how to create, train, save and load simple Multi Layer Perceptron for the XOR problem.
