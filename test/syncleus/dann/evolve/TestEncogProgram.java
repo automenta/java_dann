@@ -25,7 +25,7 @@ package syncleus.dann.evolve;
 
 import junit.framework.Assert;
 import junit.framework.TestCase;
-import syncleus.dann.evolve.gp.EncogProgram;
+import syncleus.dann.logic.epl.EncogProgram;
 
 public class TestEncogProgram extends TestCase {
 	public void testSize() {

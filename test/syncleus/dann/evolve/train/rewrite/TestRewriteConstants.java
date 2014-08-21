@@ -25,9 +25,9 @@ package syncleus.dann.evolve.train.rewrite;
 
 import junit.framework.Assert;
 import junit.framework.TestCase;
-import syncleus.dann.evolve.gp.EncogProgram;
+import syncleus.dann.logic.epl.EncogProgram;
 import syncleus.dann.evolve.gp.train.rewrite.RewriteConstants;
-import syncleus.dann.logic.expression.common.RenderCommonExpression;
+import syncleus.dann.logic.io.common.RenderCommonExpression;
 
 public class TestRewriteConstants extends TestCase {
 	

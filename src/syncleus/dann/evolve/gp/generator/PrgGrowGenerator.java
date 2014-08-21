@@ -25,10 +25,10 @@ package syncleus.dann.evolve.gp.generator;
 
 import java.util.List;
 import java.util.Random;
-import syncleus.dann.evolve.gp.EncogProgram;
-import syncleus.dann.evolve.gp.EncogProgramContext;
-import syncleus.dann.evolve.gp.ProgramNode;
-import syncleus.dann.evolve.gp.expvalue.ValueType;
+import syncleus.dann.logic.epl.EncogProgram;
+import syncleus.dann.logic.epl.EncogProgramContext;
+import syncleus.dann.logic.epl.ProgramNode;
+import syncleus.dann.logic.epl.ValueType;
 
 /**
  * The grow generator creates a random program by choosing a random node from

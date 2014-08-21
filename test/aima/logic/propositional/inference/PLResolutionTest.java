@@ -1,6 +1,5 @@
 package aima.test.core.unit.logic.propositional.inference;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Set;
 
@@ -17,6 +16,7 @@ import syncleus.dann.logic.propositional.parsing.PLParser;
 import syncleus.dann.logic.propositional.parsing.ast.Sentence;
 import syncleus.dann.logic.propositional.visitors.ConvertToConjunctionOfClauses;
 import aima.util.SetOps;
+import java.util.Arrays;
 
 /**
  * @author Ravi Mohan

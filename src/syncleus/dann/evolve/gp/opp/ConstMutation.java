@@ -25,11 +25,11 @@ package syncleus.dann.evolve.gp.opp;
 
 import java.util.Random;
 import syncleus.dann.evolve.genome.Genome;
-import syncleus.dann.evolve.gp.EncogProgram;
-import syncleus.dann.evolve.gp.EncogProgramContext;
-import syncleus.dann.evolve.gp.ProgramNode;
-import syncleus.dann.evolve.gp.expvalue.ExpressionValue;
-import syncleus.dann.evolve.gp.extension.StandardExtensions;
+import syncleus.dann.logic.epl.EncogProgram;
+import syncleus.dann.logic.epl.EncogProgramContext;
+import syncleus.dann.logic.epl.ProgramNode;
+import syncleus.dann.logic.epl.ExpressionValue;
+import syncleus.dann.logic.epl.StandardExtensions;
 import syncleus.dann.evolve.opp.EvolutionaryOperator;
 import syncleus.dann.evolve.train.EvolutionaryAlgorithm;
 

@@ -5,11 +5,11 @@ import java.util.List;
 
 import javax.lang.model.SourceVersion;
 
-import syncleus.dann.logic.common.Lexer;
-import syncleus.dann.logic.common.LogicTokenTypes;
-import syncleus.dann.logic.common.Parser;
-import syncleus.dann.logic.common.ParserException;
-import syncleus.dann.logic.common.Token;
+import syncleus.dann.logic.io.aima.Lexer;
+import syncleus.dann.logic.io.aima.LogicTokenTypes;
+import syncleus.dann.logic.io.aima.Parser;
+import syncleus.dann.logic.io.aima.ParserException;
+import syncleus.dann.logic.io.aima.Token;
 import syncleus.dann.logic.propositional.parsing.ast.ComplexSentence;
 import syncleus.dann.logic.propositional.parsing.ast.Connective;
 import syncleus.dann.logic.propositional.parsing.ast.Sentence;

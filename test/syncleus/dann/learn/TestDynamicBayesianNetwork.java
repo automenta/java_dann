@@ -6,11 +6,77 @@
 
 package syncleus.dann.learn;
 
+import aima.probability.CategoricalDistribution;
+import aima.probability.RandomVariable;
+import aima.probability.bayes.DynamicBayesianNetwork;
+import aima.probability.bayes.FiniteNode;
+import aima.probability.bayes.approx.LikelihoodWeighting;
+import aima.probability.bayes.approx.ParticleFiltering;
+import aima.probability.bayes.impl.BayesNet;
+import aima.probability.bayes.impl.DynamicBayesNet;
+import aima.probability.bayes.impl.FullCPTNode;
+import aima.probability.example.ExampleRV;
+import aima.probability.proposition.AssignmentProposition;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+import org.junit.Assert;
+import org.junit.Test;
+
 /**
  *
  * @author me
  */
 public class TestDynamicBayesianNetwork {
+    
+	@Test
+	public void test_AIMA3e_Fig15_18() {
+		
+		
+                                
+                FullCPTNode cause1 = new FullCPTNode(ExampleRV.RAIN_tm1_RV, new double[]{0.5, 0.5});
+                FullCPTNode cause = new FullCPTNode(ExampleRV.RAIN_tm1_RV, new double[]{0.5, 0.5});
+                FiniteNode effect = new FullCPTNode(ExampleRV.RAIN_t_RV, new double[]{0.7, 0.3, 0.3, 0.7}, cause);
+                
+                FiniteNode umbrealla_t = new FullCPTNode(ExampleRV.UMBREALLA_t_RV, new double[]{0.9, 0.1, 0.2, 0.8}, effect);
+                
+                Map<RandomVariable, RandomVariable> transition = 
+                        new HashMap<RandomVariable, RandomVariable>();
+                
+                transition.put(ExampleRV.RAIN_tm1_RV, ExampleRV.RAIN_t_RV);
+                
+                Set<RandomVariable> evidence = new HashSet<RandomVariable>();
+                evidence.add(ExampleRV.UMBREALLA_t_RV);
+        
+                DynamicBayesianNetwork net = new DynamicBayesNet(new BayesNet(cause1), transition, evidence, cause);
+                
+                
+                
+                
+                int N = 10;
+                
+		ParticleFiltering pf = new ParticleFiltering(N,	net);
+                
+                LikelihoodWeighting w = new LikelihoodWeighting();
+                
+		AssignmentProposition[] e = new AssignmentProposition[] { new AssignmentProposition(
+				ExampleRV.UMBREALLA_t_RV, false) };
+
+		AssignmentProposition[][] S = pf.particleFiltering(e);
+                
+                CategoricalDistribution likelihood = w.ask(new RandomVariable[] { ExampleRV.RAIN_t_RV }, e, net, N);
+                
+                //System.out.println(likelihood);
+
+		Assert.assertEquals(N, S.length);
+		for (int i = 0; i < N; i++) {
+			Assert.assertEquals(1, S[i].length);
+			AssignmentProposition ap = S[i][0];
+			//System.out.println(ap.getTermVariable() + " " + ap.getValue());
+		}
+
+	}
     
     
 // package com.bayesserver.examples;

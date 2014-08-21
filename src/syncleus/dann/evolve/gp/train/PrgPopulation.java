@@ -26,11 +26,11 @@ package syncleus.dann.evolve.gp.train;
 import syncleus.dann.RegressionLearning;
 import syncleus.dann.data.Data;
 import syncleus.dann.evolve.genome.Genome;
-import syncleus.dann.evolve.gp.EncogProgram;
-import syncleus.dann.evolve.gp.EncogProgramContext;
+import syncleus.dann.logic.epl.EncogProgram;
+import syncleus.dann.logic.epl.EncogProgramContext;
 import syncleus.dann.evolve.population.BasicPopulation;
 import syncleus.dann.evolve.species.Species;
-import syncleus.dann.logic.expression.common.RenderCommonExpression;
+import syncleus.dann.logic.io.common.RenderCommonExpression;
 
 /**
  * A population that contains EncogProgram's. The primary difference between

@@ -3,8 +3,8 @@ package syncleus.dann.logic.fol.parsing;
 import java.util.ArrayList;
 import java.util.List;
 
-import syncleus.dann.logic.common.LogicTokenTypes;
-import syncleus.dann.logic.common.Token;
+import syncleus.dann.logic.io.aima.LogicTokenTypes;
+import syncleus.dann.logic.io.aima.Token;
 import syncleus.dann.logic.fol.domain.FOLDomain;
 import syncleus.dann.logic.fol.parsing.ast.ConnectedSentence;
 import syncleus.dann.logic.fol.parsing.ast.Constant;

@@ -25,11 +25,11 @@ package syncleus.dann.evolve.train;
 
 import java.util.Random;
 import junit.framework.TestCase;
-import syncleus.dann.evolve.gp.EncogProgram;
-import syncleus.dann.evolve.gp.EncogProgramContext;
-import syncleus.dann.evolve.gp.extension.StandardExtensions;
+import syncleus.dann.logic.epl.EncogProgram;
+import syncleus.dann.logic.epl.EncogProgramContext;
+import syncleus.dann.logic.epl.StandardExtensions;
 import syncleus.dann.evolve.gp.generator.PrgGrowGenerator;
-import syncleus.dann.logic.expression.common.RenderCommonExpression;
+import syncleus.dann.logic.io.common.RenderCommonExpression;
 
 public class TestGenerate extends TestCase {
 

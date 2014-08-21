@@ -25,7 +25,7 @@ package syncleus.dann.evolve.species;
 
 import junit.framework.Assert;
 import junit.framework.TestCase;
-import syncleus.dann.evolve.gp.EncogProgram;
+import syncleus.dann.logic.epl.EncogProgram;
 import syncleus.dann.evolve.gp.species.CompareEncogProgram;
 import syncleus.dann.math.EncogMath;
 

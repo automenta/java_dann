@@ -25,9 +25,9 @@ package syncleus.dann.evolve.train.crossover;
 
 import junit.framework.Assert;
 import junit.framework.TestCase;
-import syncleus.dann.evolve.gp.EncogProgram;
-import syncleus.dann.evolve.gp.ProgramNode;
-import syncleus.dann.logic.expression.common.RenderCommonExpression;
+import syncleus.dann.logic.epl.EncogProgram;
+import syncleus.dann.logic.epl.ProgramNode;
+import syncleus.dann.logic.io.common.RenderCommonExpression;
 
 public class TestSubtreeCrossover extends TestCase {
 	public void testCrossoverOperation() {

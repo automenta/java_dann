@@ -25,9 +25,9 @@ package syncleus.dann.evolve;
 
 import junit.framework.Assert;
 import junit.framework.TestCase;
-import syncleus.dann.evolve.gp.EncogProgram;
-import syncleus.dann.evolve.gp.EncogProgramContext;
-import syncleus.dann.logic.expression.common.RenderCommonExpression;
+import syncleus.dann.logic.epl.EncogProgram;
+import syncleus.dann.logic.epl.EncogProgramContext;
+import syncleus.dann.logic.io.common.RenderCommonExpression;
 
 public class TestProgramClone extends TestCase {
 	

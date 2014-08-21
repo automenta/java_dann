@@ -24,7 +24,7 @@
 package syncleus.dann.evolve.gp.species;
 
 import syncleus.dann.evolve.genome.Genome;
-import syncleus.dann.evolve.gp.EncogProgram;
+import syncleus.dann.logic.epl.EncogProgram;
 import syncleus.dann.evolve.species.ThresholdSpeciation;
 
 /**

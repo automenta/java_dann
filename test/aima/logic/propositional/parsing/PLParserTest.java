@@ -4,9 +4,9 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import syncleus.dann.logic.common.LexerException;
-import syncleus.dann.logic.common.LogicTokenTypes;
-import syncleus.dann.logic.common.ParserException;
+import syncleus.dann.logic.io.aima.LexerException;
+import syncleus.dann.logic.io.aima.LogicTokenTypes;
+import syncleus.dann.logic.io.aima.ParserException;
 import syncleus.dann.logic.propositional.parsing.PLParser;
 import syncleus.dann.logic.propositional.parsing.ast.Sentence;
 

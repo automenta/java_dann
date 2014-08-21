@@ -23,17 +23,27 @@ public class RandVar implements RandomVariable, TermProposition {
 	private Set<RandomVariable> scope = new HashSet<RandomVariable>();
 
 	public RandVar(String name, Domain domain) {
-		ProbUtil.checkValidRandomVariableName(name);
-		if (null == domain) {
-			throw new IllegalArgumentException(
-					"Domain of RandomVariable must be specified.");
-		}
-
-		this.name = name;
-		this.domain = domain;
-		this.scope.add(this);
+            this(name, domain, null);
 	}
 
+        public RandVar(String name, Domain domain, Set<RandomVariable> scope) {
+            ProbUtil.checkValidRandomVariableName(name);
+            if (null == domain) {
+                    throw new IllegalArgumentException(
+                                    "Domain of RandomVariable must be specified.");
+            }
+
+            this.name = name;
+            this.domain = domain;
+            
+            if (scope == null) {
+                this.scope = new HashSet();
+                this.scope.add(this);
+            }
+            else {            
+                this.scope = scope;
+            }
+        }
 	//
 	// START-RandomVariable
 	@Override
@@ -100,4 +110,9 @@ public class RandVar implements RandomVariable, TermProposition {
 	public String toString() {
 		return getName();
 	}
+        
+        @Override
+        public RandVar clone() {
+            return new RandVar(name, domain, scope); //scope?            
+        }
 }

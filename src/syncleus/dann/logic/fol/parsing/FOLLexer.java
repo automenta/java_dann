@@ -3,10 +3,10 @@ package syncleus.dann.logic.fol.parsing;
 import java.util.HashSet;
 import java.util.Set;
 
-import syncleus.dann.logic.common.Lexer;
-import syncleus.dann.logic.common.LexerException;
-import syncleus.dann.logic.common.LogicTokenTypes;
-import syncleus.dann.logic.common.Token;
+import syncleus.dann.logic.io.aima.Lexer;
+import syncleus.dann.logic.io.aima.LexerException;
+import syncleus.dann.logic.io.aima.LogicTokenTypes;
+import syncleus.dann.logic.io.aima.Token;
 import syncleus.dann.logic.fol.Connectors;
 import syncleus.dann.logic.fol.Quantifiers;
 import syncleus.dann.logic.fol.domain.FOLDomain;

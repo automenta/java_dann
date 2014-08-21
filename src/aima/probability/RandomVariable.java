@@ -11,7 +11,7 @@ import aima.probability.domain.Domain;
  * 
  * @author Ciaran O'Reilly
  */
-public interface RandomVariable {
+public interface RandomVariable  {
 	/**
 	 * 
 	 * @return the name used to uniquely identify this variable.
@@ -23,4 +23,6 @@ public interface RandomVariable {
 	 * @return the Set of possible values the Random Variable can take on.
 	 */
 	Domain getDomain();
+        
+        RandomVariable clone();
 }

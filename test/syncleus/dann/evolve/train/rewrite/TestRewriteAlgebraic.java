@@ -25,11 +25,11 @@ package syncleus.dann.evolve.train.rewrite;
 
 import junit.framework.Assert;
 import junit.framework.TestCase;
-import syncleus.dann.evolve.gp.EncogProgram;
-import syncleus.dann.evolve.gp.EncogProgramContext;
+import syncleus.dann.logic.epl.EncogProgram;
+import syncleus.dann.logic.epl.EncogProgramContext;
 import syncleus.dann.evolve.gp.PrgCODEC;
-import syncleus.dann.evolve.gp.expvalue.DivisionByZeroError;
-import syncleus.dann.evolve.gp.extension.StandardExtensions;
+import syncleus.dann.logic.epl.DivisionByZeroError;
+import syncleus.dann.logic.epl.StandardExtensions;
 import syncleus.dann.evolve.gp.opp.SubtreeCrossover;
 import syncleus.dann.evolve.gp.opp.SubtreeMutation;
 import syncleus.dann.evolve.gp.train.PrgPopulation;
@@ -39,7 +39,7 @@ import syncleus.dann.evolve.gp.train.rewrite.RewriteConstants;
 import syncleus.dann.evolve.score.adjust.ComplexityAdjustedScore;
 import syncleus.dann.evolve.train.basic.TrainEA;
 import syncleus.dann.learn.ScoreLearning;
-import syncleus.dann.logic.expression.common.RenderCommonExpression;
+import syncleus.dann.logic.io.common.RenderCommonExpression;
 
 public class TestRewriteAlgebraic extends TestCase {
 	

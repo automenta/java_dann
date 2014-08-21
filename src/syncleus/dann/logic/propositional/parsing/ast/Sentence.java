@@ -3,7 +3,7 @@ package syncleus.dann.logic.propositional.parsing.ast;
 import java.util.Arrays;
 import java.util.List;
 
-import syncleus.dann.logic.common.ParseTreeNode;
+import syncleus.dann.logic.io.aima.ParseTreeNode;
 import syncleus.dann.logic.propositional.parsing.PLVisitor;
 import aima.util.AimaUtil;
 

@@ -15,10 +15,17 @@ import aima.probability.bayes.Node;
  * @author Ravi Mohan
  */
 public abstract class AbstractNode implements Node {
-	private RandomVariable variable = null;
-	private Set<Node> parents = null;
-	private Set<Node> children = null;
+	protected RandomVariable variable = null;
+	protected Set<Node> parents = null;
+	protected Set<Node> children = null;
 
+        
+        protected AbstractNode(RandomVariable var, Set<Node> parents, Set<Node> children) {
+            this.variable = var;
+            this.parents = parents;
+            this.children = children;            
+        }
+        
 	public AbstractNode(RandomVariable var) {
 		this(var, (Node[]) null);
 	}
@@ -120,4 +127,6 @@ public abstract class AbstractNode implements Node {
 
 		children = Collections.unmodifiableSet(children);
 	}
+        
+        //abstract public void clone();
 }

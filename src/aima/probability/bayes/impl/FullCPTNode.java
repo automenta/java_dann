@@ -5,6 +5,7 @@ import aima.probability.bayes.ConditionalProbabilityDistribution;
 import aima.probability.bayes.ConditionalProbabilityTable;
 import aima.probability.bayes.FiniteNode;
 import aima.probability.bayes.Node;
+import java.util.Set;
 
 /**
  * Default implementation of the FiniteNode interface that uses a fully
@@ -15,8 +16,13 @@ import aima.probability.bayes.Node;
  * 
  */
 public class FullCPTNode extends AbstractNode implements FiniteNode {
-	private ConditionalProbabilityTable cpt = null;
+	protected ConditionalProbabilityTable cpt = null;
 
+        protected FullCPTNode(RandomVariable var, Set<Node> parents, Set<Node> children, ConditionalProbabilityTable cpt) {
+            super(var, parents, children);
+            this.cpt = cpt;
+        }
+     
 	public FullCPTNode(RandomVariable var, double[] distribution) {
 		this(var, distribution, (Node[]) null);
 	}
@@ -33,6 +39,16 @@ public class FullCPTNode extends AbstractNode implements FiniteNode {
 		cpt = new CPT(var, values, conditionedOn);
 	}
 
+        @Override
+        public FullCPTNode clone() {
+            //return new FullCPTNode(variable.clone(), getParents().clone(), getChildren().clone(), cpt.clone());
+            return new FullCPTNode(variable.clone(), getParents(), getChildren(), cpt);
+        }
+
+        
+        
+        
+        
 	//
 	// START-Node
 	@Override

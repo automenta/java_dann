@@ -27,7 +27,7 @@ import java.io.Serializable;
 import syncleus.dann.Learning;
 import syncleus.dann.data.MutableData;
 import syncleus.dann.data.vector.VectorData;
-import syncleus.dann.evolve.gp.EncogProgram;
+import syncleus.dann.logic.epl.EncogProgram;
 import syncleus.dann.learn.ScoreLearning;
 
 /**

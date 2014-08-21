@@ -24,8 +24,8 @@
 package syncleus.dann.evolve.gp.opp;
 
 import java.util.List;
-import syncleus.dann.evolve.gp.ProgramNode;
-import syncleus.dann.evolve.gp.expvalue.ValueType;
+import syncleus.dann.logic.epl.ProgramNode;
+import syncleus.dann.logic.epl.ValueType;
 
 /**
  * The level holder class is passed down as a tree is mutated. The level holder

@@ -2,7 +2,7 @@ package syncleus.dann.logic.fol.parsing.ast;
 
 import java.util.List;
 
-import syncleus.dann.logic.common.ParseTreeNode;
+import syncleus.dann.logic.io.aima.ParseTreeNode;
 import syncleus.dann.logic.fol.parsing.FOLVisitor;
 
 /**
