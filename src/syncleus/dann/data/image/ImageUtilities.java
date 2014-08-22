@@ -26,7 +26,6 @@ import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
-import org.neuroph.imgrec.image.Image;
 
 /**
  * Contains various utility methods used for OCR.
@@ -225,9 +224,9 @@ public class ImageUtilities {
         return resizedImage;
     }
 
-    public static Image resizeImage(Image image, int width, int height) {
-        return image.resize(width, height);
-    }    
+//    public static Image resizeImage(Image image, int width, int height) {
+//        return image.resize(width, height);
+//    }    
     
     /**
      * Crops (returns subimage) of specified input image at specified points.
@@ -297,14 +296,14 @@ public class ImageUtilities {
      * @param imagesData data map with characters as keys and charcter images as values
      * @return data map with characters as keys and image rgb data as values
      */
-    public static Map<String, FractionRgbData> getFractionRgbDataForImages(HashMap<String, BufferedImage> imagesData) {
+    public static Map<String, RGBImageData> getFractionRgbDataForImages(HashMap<String, BufferedImage> imagesData) {
 
-        Map<String, FractionRgbData> rgbDataMap = new HashMap<String, FractionRgbData>();
+        Map<String, RGBImageData> rgbDataMap = new HashMap<String, RGBImageData>();
 
         for (String imageName : imagesData.keySet()) {
             StringTokenizer st = new StringTokenizer(imageName, ".");
             BufferedImage image = imagesData.get(imageName);
-            rgbDataMap.put(st.nextToken(), new FractionRgbData(image));
+            rgbDataMap.put(st.nextToken(), new RGBImageData(image));
         }
 
         return rgbDataMap;

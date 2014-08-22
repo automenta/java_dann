@@ -6,7 +6,7 @@
 package pca;
 
 import java.awt.image.BufferedImage;
-import syncleus.dann.data.image.ImageData;
+import syncleus.dann.data.image.GrayscaleImageData;
 import syncleus.dann.data.matrix.Matrix;
 
 /**
@@ -23,12 +23,12 @@ public class PCATest {
      */
     public static BufferedImage getImage(BufferedImage image,int rank) {
         
-        double[][] niz = ImageData.convertTo2DArray(image);
+        double[][] niz = GrayscaleImageData.convertTo2DArray(image);
         Matrix A = Matrix.constructWithCopy(niz);
         PCA pca = new PCA(A);
         pca.pca();
         Matrix B = pca.recreateOriginalDataFromPrincipalComponents(rank);
-        BufferedImage bi = ImageData.imageFromArray(B.getArray());
+        BufferedImage bi = GrayscaleImageData.imageFromArray(B.getArray());
         return bi;
 
        

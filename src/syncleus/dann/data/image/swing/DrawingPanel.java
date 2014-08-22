@@ -27,8 +27,6 @@ import java.awt.Point;
 import java.awt.RenderingHints;
 import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import org.neuroph.imgrec.ImageUtilities;
 
@@ -151,31 +149,31 @@ public BufferedImage getDrawnLetter() throws Exception{
 
     public void saveDrawnLetter(String letter) throws Exception {
 
-        prepareImage();
-        try {
-            int upperCoordinate = getUpperCoordinate();
-            int bottomCoordinate = getBottomCoordinate(upperCoordinate);
-            int leftCoordinate = getLeftCoordinate(upperCoordinate, bottomCoordinate);
-            int rightCoordinate = getRightCoordinate(upperCoordinate, bottomCoordinate, leftCoordinate);
-
-            // extractvletter from image and normalize
-            BufferedImage subImage = reSizingImage(image.getSubimage(leftCoordinate, upperCoordinate,
-                    rightCoordinate - leftCoordinate, bottomCoordinate - upperCoordinate));
-             subImage = ImageUtilities.blackAndLightGrayCleaning(subImage);
-            
-//            ImageJ2SE neurophSubImage = (ImageJ2SE) ImageFactory.createImage(subImage.getWidth(), subImage.getHeight(), subImage.getType());
-//            neurophSubImage.setBufferedImage(subImage);
-//            neurophSubImage = (ImageJ2SE) ocrUtil.blackAndLightGrayCleaning(neurophSubImage);
-         
-            
-            int fileNumber = numberOfFiles(letter) + 1;
-
-            // ovde puca ak ofolder Letters/Training Set nije kreiran - resenje: kreirati folder u aktuelnom projektu i to bas na ovommestu!
-            String imageDir = TreeManager.getPath() + "/"; // get path to directory with letter images
-            ImageIO.write(subImage, "PNG", new File(imageDir + letter.toUpperCase() + "_" + fileNumber + ".png"));
-        } catch (Exception ex) {
-            throw new RuntimeException(ex.getMessage());
-        }
+//        prepareImage();
+//        try {
+//            int upperCoordinate = getUpperCoordinate();
+//            int bottomCoordinate = getBottomCoordinate(upperCoordinate);
+//            int leftCoordinate = getLeftCoordinate(upperCoordinate, bottomCoordinate);
+//            int rightCoordinate = getRightCoordinate(upperCoordinate, bottomCoordinate, leftCoordinate);
+//
+//            // extractvletter from image and normalize
+//            BufferedImage subImage = reSizingImage(image.getSubimage(leftCoordinate, upperCoordinate,
+//                    rightCoordinate - leftCoordinate, bottomCoordinate - upperCoordinate));
+//             subImage = ImageUtilities.blackAndLightGrayCleaning(subImage);
+//            
+////            ImageJ2SE neurophSubImage = (ImageJ2SE) ImageFactory.createImage(subImage.getWidth(), subImage.getHeight(), subImage.getType());
+////            neurophSubImage.setBufferedImage(subImage);
+////            neurophSubImage = (ImageJ2SE) ocrUtil.blackAndLightGrayCleaning(neurophSubImage);
+//         
+//            
+//            int fileNumber = numberOfFiles(letter) + 1;
+//
+//            // ovde puca ak ofolder Letters/Training Set nije kreiran - resenje: kreirati folder u aktuelnom projektu i to bas na ovommestu!
+//            String imageDir = TreeManager.getPath() + "/"; // get path to directory with letter images
+//            ImageIO.write(subImage, "PNG", new File(imageDir + letter.toUpperCase() + "_" + fileNumber + ".png"));
+//        } catch (Exception ex) {
+//            throw new RuntimeException(ex.getMessage());
+//        }
     }
 
     /**
@@ -186,15 +184,16 @@ public BufferedImage getDrawnLetter() throws Exception{
      * @return the number of allready existing letters
      */
     public static int numberOfFiles(String letter) {
-        File f = new File(TreeManager.getPath()); // "Letters/Training Set/"
-        File[] files = f.listFiles();
-        int numberOfFiles = 0;
-        for (int i = 0; i < files.length; i++) {
-            if(files[i].getName().startsWith(letter)) {
-                numberOfFiles++;
-            }
-        }
-        return numberOfFiles;
+//        File f = new File(TreeManager.getPath()); // "Letters/Training Set/"
+//        File[] files = f.listFiles();
+//        int numberOfFiles = 0;
+//        for (int i = 0; i < files.length; i++) {
+//            if(files[i].getName().startsWith(letter)) {
+//                numberOfFiles++;
+//            }
+//        }
+//        return numberOfFiles;
+        return 0;
     }
 
     /**

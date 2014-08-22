@@ -29,7 +29,7 @@ import java.util.StringTokenizer;
 import org.neuroph.core.NeuralNetwork;
 import org.neuroph.core.data.DataSet;
 import org.neuroph.imgrec.ColorMode;
-import org.neuroph.imgrec.FractionRgbData;
+import org.neuroph.imgrec.RGBImageData;
 import org.neuroph.imgrec.ImageRecognitionHelper;
 import org.neuroph.imgrec.ImageUtilities;
 import org.neuroph.imgrec.image.Dimension;
@@ -89,14 +89,14 @@ public class OcrHelper extends ImageRecognitionHelper {
         Collections.sort(imageLabels);
         
         // get RGB image data - map chars and their their rgb data
-        Map<String, FractionRgbData> imageRgbData = ImageUtilities.getFractionRgbDataForImages(charImageMap);
+        Map<String, RGBImageData> imageRgbData = ImageUtilities.getFractionRgbDataForImages(charImageMap);
                        
         // also put junk all black and white image in training set (for black n whit emode)
         BufferedImage allWhite = new BufferedImage(scaleToDim.getWidth(), scaleToDim.getHeight(), BufferedImage.TYPE_INT_RGB);
         Graphics g = allWhite.getGraphics();
         g.setColor(Color.WHITE);
         g.fillRect(0, 0, allWhite.getWidth(), allWhite.getHeight());
-        imageRgbData.put("allWhite", new FractionRgbData(allWhite));
+        imageRgbData.put("allWhite", new RGBImageData(allWhite));
         
 //        BufferedImage allBlack = new BufferedImage(charDimension.getWidth(), charDimension.getHeight(), BufferedImage.TYPE_INT_RGB);
 //        g = allBlack.getGraphics();

@@ -20,7 +20,7 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
-import org.neuroph.imgrec.FractionRgbData;
+import org.neuroph.imgrec.RGBImageData;
 import org.neuroph.imgrec.image.Image;
 import org.neuroph.imgrec.image.ImageFactory;
 
@@ -269,14 +269,14 @@ public class OcrUtils {
      * @param imagesData data map with characters as keys and charcter images as values
      * @return data map with characters as keys and image rgb data as values
      */
-    public static Map<String, FractionRgbData> getFractionRgbDataForImages(HashMap<String, Image> imagesData) {
+    public static Map<String, RGBImageData> getFractionRgbDataForImages(HashMap<String, Image> imagesData) {
 
-        Map<String, FractionRgbData> rgbDataMap = new HashMap<String, FractionRgbData>();
+        Map<String, RGBImageData> rgbDataMap = new HashMap<String, RGBImageData>();
 
         for (String character : imagesData.keySet()) {
             StringTokenizer st = new StringTokenizer(character, ".");
             Image image = imagesData.get(character);
-            rgbDataMap.put(st.nextToken(), new FractionRgbData(image));
+            rgbDataMap.put(st.nextToken(), new RGBImageData(image));
         }
 
         return rgbDataMap;

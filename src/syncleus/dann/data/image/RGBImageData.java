@@ -16,11 +16,10 @@
 
 package org.neuroph.imgrec;
 
+import java.awt.Color;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.util.Arrays;
-import org.neuroph.imgrec.image.Color;
-import org.neuroph.imgrec.image.Image;
-import org.neuroph.imgrec.image.ImageJ2SE;
 
 
 /**
@@ -41,7 +40,7 @@ import org.neuroph.imgrec.image.ImageJ2SE;
  * @author Jon Tait
  *
  */
-public class FractionRgbData
+public class RGBImageData
 {
         /**
          * Image width
@@ -77,7 +76,7 @@ public class FractionRgbData
          * Creates rgb data for the specified image.
          * @param img image to cretae rgb data for
          */
-	public FractionRgbData(Image img)
+	public RGBImageData(Image img)
 	{
 		width = img.getWidth();
 		height = img.getHeight();
@@ -90,7 +89,7 @@ public class FractionRgbData
 		populateRGBArrays(img);
 	}
         
-	public FractionRgbData(BufferedImage img) {
+	public RGBImageData(BufferedImage img) {
             this(new ImageJ2SE(img));
 	}        
 
@@ -201,10 +200,10 @@ public class FractionRgbData
 	@Override
 	public boolean equals(Object obj)
 	{
-		if(obj == null || !(obj instanceof FractionRgbData)) {
+		if(obj == null || !(obj instanceof RGBImageData)) {
 			return false;
 		}
-		FractionRgbData other = (FractionRgbData) obj;
+		RGBImageData other = (RGBImageData) obj;
 		return Arrays.equals(flattenedRgbValues, other.getFlattenedRgbValues());
 	}
 	

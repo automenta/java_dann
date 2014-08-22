@@ -14,7 +14,7 @@ import java.awt.image.WritableRaster;
  *
  * @author Sanja
  */
-public class ImageData {
+public class GrayscaleImageData {
 
     /**
      * Converts image to 2D array where every filed is one pixel, number of rows

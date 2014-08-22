@@ -50,13 +50,18 @@ public class JImagePanel extends JPanel {
     public JImagePanel() {
         super();
     }
+    public JImagePanel(BufferedImage i) {
+        super();
+        setImage(i);
+    }
 
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         try {
-       //     g.drawImage(resize(image, X, Y), (getWidth()-X)/2, (getHeight()-Y)/2, null);
-                 g.drawImage(image, 0, 0, null);
+            //g.drawImage(resize(image, X, Y), (getWidth()-X)/2, (getHeight()-Y)/2, null);            
+            g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
+       //          g.drawImage(image, 0, 0, null);
         } catch (NullPointerException e) {}
     }
 
@@ -72,6 +77,11 @@ public class JImagePanel extends JPanel {
             this.image = img;
             repaint();
         } catch (IOException ex) { }
+    }
+    
+    public void setImage(BufferedImage img) {
+        this.image = img;
+        repaint();
     }
 
     /**
