@@ -2,7 +2,7 @@ package aima.test.core.unit.learning.inductive;
 
 import java.util.List;
 
-import syncleus.dann.attribute.aima.AttributeSamples;
+import syncleus.dann.data.feature.aima.AttributeSamples;
 import syncleus.dann.logic.inductive.DLTest;
 import syncleus.dann.logic.inductive.DLTestFactory;
 

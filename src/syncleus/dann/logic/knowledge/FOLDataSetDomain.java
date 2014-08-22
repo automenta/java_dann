@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-import syncleus.dann.attribute.aima.AttributeSamples;
+import syncleus.dann.data.feature.aima.AttributeSamples;
 import syncleus.dann.logic.fol.domain.FOLDomain;
 
 /**

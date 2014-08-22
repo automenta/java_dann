@@ -1,7 +1,7 @@
 package syncleus.dann.neural.aima;
 
 import aima.learning.neural.NNDataSet;
-import syncleus.dann.attribute.aima.AttributeSamples;
+import syncleus.dann.data.feature.aima.AttributeSamples;
 import aima.util.math.Matrix;
 import aima.util.math.Vector;
 

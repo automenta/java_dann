@@ -2,7 +2,7 @@ package syncleus.dann.neural.aima;
 
 import java.util.List;
 
-import syncleus.dann.attribute.aima.Attributes;
+import syncleus.dann.data.feature.aima.Features;
 import syncleus.dann.util.datastruct.Pair;
 
 /**
@@ -15,7 +15,7 @@ import syncleus.dann.util.datastruct.Pair;
  * 
  */
 public interface Numerizer {
-	Pair<List<Double>, List<Double>> numerize(Attributes e);
+	Pair<List<Double>, List<Double>> numerize(Features e);
 
 	String denumerize(List<Double> outputValue);
 }

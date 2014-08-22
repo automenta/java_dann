@@ -3,9 +3,9 @@ package syncleus.dann.logic.learn;
 import java.util.Hashtable;
 import java.util.List;
 
-import syncleus.dann.attribute.aima.AttributeSamples;
-import syncleus.dann.attribute.aima.Attributes;
-import syncleus.dann.attribute.aima.AttributeLearning;
+import syncleus.dann.data.feature.aima.AttributeSamples;
+import syncleus.dann.data.feature.aima.Features;
+import syncleus.dann.data.feature.aima.AttributeLearning;
 import syncleus.dann.util.AimaUtil;
 import syncleus.dann.util.datastruct.Table;
 
@@ -50,14 +50,14 @@ public class AdaBoostLearner implements AttributeLearning {
 		}
 	}
 
-	public String predict(Attributes e) {
+	public String predict(Features e) {
 		return weightedMajority(e);
 	}
 
 	public int[] test(AttributeSamples ds) {
 		int[] results = new int[] { 0, 0 };
 
-		for (Attributes e : ds.samples) {
+		for (Features e : ds.samples) {
 			if (e.targetValue().equals(predict(e))) {
 				results[0] = results[0] + 1;
 			} else {
@@ -71,7 +71,7 @@ public class AdaBoostLearner implements AttributeLearning {
 	// PRIVATE METHODS
 	//
 
-	private String weightedMajority(Attributes e) {
+	private String weightedMajority(Features e) {
 		List<String> targetValues = dataSet.getPossibleAttributeValues(dataSet
 				.getTargetAttributeName());
 
@@ -81,7 +81,7 @@ public class AdaBoostLearner implements AttributeLearning {
 	}
 
 	private Table<String, AttributeLearning, Double> createTargetValueLearnerTable(
-			List<String> targetValues, Attributes e) {
+			List<String> targetValues, Features e) {
 		// create a table with target-attribute values as rows and learners as
 		// columns and cells containing the weighted votes of each Learner for a
 		// target value
@@ -150,7 +150,7 @@ public class AdaBoostLearner implements AttributeLearning {
 	private double calculateError(AttributeSamples ds, AttributeLearning l) {
 		double error = 0.0;
 		for (int i = 0; i < ds.samples.size(); i++) {
-			Attributes e = ds.get(i);
+			Features e = ds.get(i);
 			if (!(l.predict(e).equals(e.targetValue()))) {
 				error = error + exampleWeights[i];
 			}
@@ -161,7 +161,7 @@ public class AdaBoostLearner implements AttributeLearning {
 	private void adjustExampleWeights(AttributeSamples ds, AttributeLearning l, double error) {
 		double epsilon = error / (1.0 - error);
 		for (int j = 0; j < ds.samples.size(); j++) {
-			Attributes e = ds.get(j);
+			Features e = ds.get(j);
 			if ((l.predict(e).equals(e.targetValue()))) {
 				exampleWeights[j] = exampleWeights[j] * epsilon;
 			}

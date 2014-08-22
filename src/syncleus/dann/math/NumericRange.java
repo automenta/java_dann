@@ -23,7 +23,7 @@
  */
 package syncleus.dann.math;
 
-import java.util.List;
+import java.util.stream.StreamSupport;
 
 /**
  * A numeric range has a high, low, mean, root-mean-square, standard deviation,
@@ -65,28 +65,34 @@ public class NumericRange {
      */
     private final int samples;
 
+
+    
     /**
      * Create a numeric range from a list of values.
      *
      * @param values The values to calculate for.
      */
-    public NumericRange(final List<Double> values) {
+    public NumericRange(final Iterable<Double> values) {
 
-        double assignedHigh = 0;
-        double assignedLow = 0;
+        double assignedHigh = Double.NEGATIVE_INFINITY;
+        double assignedLow = Double.POSITIVE_INFINITY;
         double total = 0;
         double rmsTotal = 0;
 
         // get the mean and other 1-pass values.
 
+        int samples = 0;
         for (final double d : values) {
-            assignedHigh = Math.max(assignedHigh, d);
-            assignedLow = Math.min(assignedLow, d);
+            if (d > assignedHigh)
+                assignedHigh = d;
+            if (d < assignedLow)
+                assignedLow = d;
             total += d;
             rmsTotal += d * d;
+            samples++;
         }
+        this.samples = samples;
 
-        this.samples = values.size();
         this.high = assignedHigh;
         this.low = assignedLow;
         this.mean = total / this.samples;
@@ -95,7 +101,8 @@ public class NumericRange {
         // now get the standard deviation
         double devTotal = 0;
 
-        devTotal = values.stream().map((d) -> Math.pow(d - this.mean, 2)).reduce(devTotal, (accumulator, _item) -> accumulator + _item);
+        
+        devTotal = StreamSupport.stream(values.spliterator(), false).map((d) -> Math.pow(d - this.mean, 2)).reduce(devTotal, (accumulator, _item) -> accumulator + _item);
         this.standardDeviation = Math.sqrt(devTotal / this.samples);
     }
 

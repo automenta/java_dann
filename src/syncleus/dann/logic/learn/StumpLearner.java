@@ -1,6 +1,6 @@
 package syncleus.dann.logic.learn;
 
-import syncleus.dann.attribute.aima.AttributeSamples;
+import syncleus.dann.data.feature.aima.AttributeSamples;
 import syncleus.dann.logic.inductive.DecisionTree;
 
 /**

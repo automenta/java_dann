@@ -6,9 +6,9 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
-import syncleus.dann.attribute.aima.AttributeSamples;
+import syncleus.dann.data.feature.aima.AttributeSamples;
 import aima.learning.framework.DataSetFactory;
-import syncleus.dann.attribute.aima.Attributes;
+import syncleus.dann.data.feature.aima.Features;
 import syncleus.dann.neural.aima.IrisDataSetNumerizer;
 import syncleus.dann.neural.aima.Numerizer;
 import syncleus.dann.neural.aima.RabbitEyeDataSet;
@@ -21,7 +21,7 @@ import syncleus.dann.util.datastruct.Pair;
 public class DataSetTest {
 	private static final String YES = "Yes";
 
-	syncleus.dann.attribute.aima.AttributeSamples.Specification spec;
+	syncleus.dann.data.feature.aima.AttributeSamples.Specification spec;
 
 	@Test
 	public void testNormalizationOfFileBasedDataProducesCorrectMeanStdDevAndNormalizedValues()
@@ -68,7 +68,7 @@ public class DataSetTest {
 		AttributeSamples ds = DataSetFactory.getRestaurantDataSet();
 		Assert.assertEquals(12, ds.size());
 
-		Attributes first = ds.get(0);
+		Features first = ds.get(0);
 		Assert.assertEquals(YES, first.getAttributeValueAsString("alternate"));
 		Assert.assertEquals("$$$", first.getAttributeValueAsString("price"));
 		Assert.assertEquals("0-10",
@@ -86,7 +86,7 @@ public class DataSetTest {
 	public void testLoadsIrisDataSetWithNumericAndStringAttributes()
 			throws Exception {
 		AttributeSamples ds = DataSetFactory.getIrisDataSet();
-		Attributes first = ds.get(0);
+		Features first = ds.get(0);
 		Assert.assertEquals("5.1",
 				first.getAttributeValueAsString("sepal_length"));
 	}
@@ -103,7 +103,7 @@ public class DataSetTest {
 	public void testNumerizesAndDeNumerizesIrisDataSetExample1()
 			throws Exception {
 		AttributeSamples ds = DataSetFactory.getIrisDataSet();
-		Attributes first = ds.get(0);
+		Features first = ds.get(0);
 		Numerizer n = new IrisDataSetNumerizer();
 		Pair<List<Double>, List<Double>> io = n.numerize(first);
 
@@ -118,7 +118,7 @@ public class DataSetTest {
 	public void testNumerizesAndDeNumerizesIrisDataSetExample2()
 			throws Exception {
 		AttributeSamples ds = DataSetFactory.getIrisDataSet();
-		Attributes first = ds.get(51);
+		Features first = ds.get(51);
 		Numerizer n = new IrisDataSetNumerizer();
 		Pair<List<Double>, List<Double>> io = n.numerize(first);
 
@@ -133,7 +133,7 @@ public class DataSetTest {
 	public void testNumerizesAndDeNumerizesIrisDataSetExample3()
 			throws Exception {
 		AttributeSamples ds = DataSetFactory.getIrisDataSet();
-		Attributes first = ds.get(100);
+		Features first = ds.get(100);
 		Numerizer n = new IrisDataSetNumerizer();
 		Pair<List<Double>, List<Double>> io = n.numerize(first);
 

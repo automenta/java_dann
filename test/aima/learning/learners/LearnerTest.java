@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import org.junit.Assert;
 import org.junit.Test;
 
-import syncleus.dann.attribute.aima.AttributeSamples;
+import syncleus.dann.data.feature.aima.AttributeSamples;
 import aima.learning.framework.DataSetFactory;
 import syncleus.dann.logic.inductive.DLTest;
 import syncleus.dann.logic.inductive.DLTestFactory;

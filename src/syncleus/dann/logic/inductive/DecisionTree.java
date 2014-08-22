@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 
-import syncleus.dann.attribute.aima.AttributeSamples;
-import syncleus.dann.attribute.aima.Attributes;
+import syncleus.dann.data.feature.aima.AttributeSamples;
+import syncleus.dann.data.feature.aima.Features;
 import syncleus.dann.util.AimaUtil;
 
 /**
@@ -36,7 +36,7 @@ public class DecisionTree {
 		nodes.put(attributeValue, tree);
 	}
 
-	public Object predict(Attributes e) {
+	public Object predict(Features e) {
 		String attrValue = e.getAttributeValueAsString(attributeName);
 		if (nodes.containsKey(attrValue)) {
 			return nodes.get(attrValue).predict(e);

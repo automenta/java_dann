@@ -3,9 +3,9 @@ package syncleus.dann.logic.learn;
 import java.util.ArrayList;
 import java.util.List;
 
-import syncleus.dann.attribute.aima.AttributeSamples;
-import syncleus.dann.attribute.aima.Attributes;
-import syncleus.dann.attribute.aima.AttributeLearning;
+import syncleus.dann.data.feature.aima.AttributeSamples;
+import syncleus.dann.data.feature.aima.Features;
+import syncleus.dann.data.feature.aima.AttributeLearning;
 import syncleus.dann.logic.knowledge.CurrentBestLearning;
 import syncleus.dann.logic.knowledge.FOLDataSetDomain;
 import syncleus.dann.logic.knowledge.FOLExample;
@@ -37,7 +37,7 @@ public class CurrentBestLearner implements AttributeLearning {
 		folDSDomain = new FOLDataSetDomain(ds.specification, trueGoalValue);
 		List<FOLExample> folExamples = new ArrayList<FOLExample>();
 		int egNo = 1;
-		for (Attributes e : ds.samples) {
+		for (Features e : ds.samples) {
 			folExamples.add(new FOLExample(folDSDomain, e, egNo));
 			egNo++;
 		}
@@ -51,7 +51,7 @@ public class CurrentBestLearner implements AttributeLearning {
 		currentBestHypothesis = cbl.currentBestLearning(folExamples);
 	}
 
-	public String predict(Attributes e) {
+	public String predict(Features e) {
 		String prediction = "~" + e.targetValue();
 		if (null != currentBestHypothesis) {
 			FOLExample etp = new FOLExample(folDSDomain, e, 0);
@@ -76,7 +76,7 @@ public class CurrentBestLearner implements AttributeLearning {
 	public int[] test(AttributeSamples ds) {
 		int[] results = new int[] { 0, 0 };
 
-		for (Attributes e : ds.samples) {
+		for (Features e : ds.samples) {
 			if (e.targetValue().equals(predict(e))) {
 				results[0] = results[0] + 1;
 			} else {

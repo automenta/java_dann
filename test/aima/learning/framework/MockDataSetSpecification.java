@@ -8,7 +8,7 @@ import java.util.List;
  * @author Ravi Mohan
  * 
  */
-public class MockDataSetSpecification extends syncleus.dann.attribute.aima.AttributeSamples.Specification {
+public class MockDataSetSpecification extends syncleus.dann.data.feature.aima.AttributeSamples.Specification {
 
 	public MockDataSetSpecification(String targetAttributeName) {
 		setTarget(targetAttributeName);

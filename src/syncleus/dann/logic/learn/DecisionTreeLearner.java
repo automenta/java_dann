@@ -3,9 +3,9 @@ package syncleus.dann.logic.learn;
 import java.util.Iterator;
 import java.util.List;
 
-import syncleus.dann.attribute.aima.AttributeSamples;
-import syncleus.dann.attribute.aima.Attributes;
-import syncleus.dann.attribute.aima.AttributeLearning;
+import syncleus.dann.data.feature.aima.AttributeSamples;
+import syncleus.dann.data.feature.aima.Features;
+import syncleus.dann.data.feature.aima.AttributeLearning;
 import syncleus.dann.logic.inductive.ConstantDecisonTree;
 import syncleus.dann.logic.inductive.DecisionTree;
 import syncleus.dann.util.AimaUtil;
@@ -47,7 +47,7 @@ public class DecisionTreeLearner implements AttributeLearning {
 	}
 
 	@Override
-	public String predict(Attributes e) {
+	public String predict(Features e) {
 		return (String) tree.predict(e);
 	}
 
@@ -55,7 +55,7 @@ public class DecisionTreeLearner implements AttributeLearning {
 	public int[] test(AttributeSamples ds) {
 		int[] results = new int[] { 0, 0 };
 
-		for (Attributes e : ds.samples) {
+		for (Features e : ds.samples) {
 			if (e.targetValue().equals(tree.predict(e))) {
 				results[0] = results[0] + 1;
 			} else {
@@ -132,9 +132,9 @@ public class DecisionTreeLearner implements AttributeLearning {
 
 	private boolean allExamplesHaveSameClassification(AttributeSamples ds) {
 		String classification = ds.get(0).targetValue();
-		Iterator<Attributes> iter = ds.iterator();
+		Iterator<Features> iter = ds.iterator();
 		while (iter.hasNext()) {
-			Attributes element = iter.next();
+			Features element = iter.next();
 			if (!(element.targetValue().equals(classification))) {
 				return false;
 			}

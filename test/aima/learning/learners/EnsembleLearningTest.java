@@ -6,9 +6,9 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
-import syncleus.dann.attribute.aima.AttributeSamples;
+import syncleus.dann.data.feature.aima.AttributeSamples;
 import aima.learning.framework.DataSetFactory;
-import syncleus.dann.attribute.aima.AttributeLearning;
+import syncleus.dann.data.feature.aima.AttributeLearning;
 import syncleus.dann.logic.inductive.DecisionTree;
 import syncleus.dann.logic.learn.AdaBoostLearner;
 import syncleus.dann.logic.learn.StumpLearner;

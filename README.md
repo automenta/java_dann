@@ -8,3 +8,7 @@
  * Hai
  * DeepLearning.net Tutorials
  * AIMA
+ * SPMF
+ * OpenTLDAndroid
+ 
+ 

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 
-import syncleus.dann.attribute.aima.Attributes;
+import syncleus.dann.data.feature.aima.Features;
 
 /**
  * @author Ravi Mohan
@@ -24,7 +24,7 @@ public class DecisionList {
 		testOutcomes = new Hashtable<DLTest, String>();
 	}
 
-	public String predict(Attributes example) {
+	public String predict(Features example) {
 		if (tests.size() == 0) {
 			return negative;
 		}

@@ -5,9 +5,9 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
-import syncleus.dann.attribute.aima.AttributeSamples;
+import syncleus.dann.data.feature.aima.AttributeSamples;
 import aima.learning.framework.DataSetFactory;
-import syncleus.dann.attribute.aima.Attributes;
+import syncleus.dann.data.feature.aima.Features;
 import syncleus.dann.logic.inductive.DLTest;
 import syncleus.dann.logic.inductive.DLTestFactory;
 
@@ -28,7 +28,7 @@ public class DLTestTest {
 	@Test
 	public void testDLTestMatchSucceedsWithMatchedExample() throws Exception {
 		AttributeSamples ds = DataSetFactory.getRestaurantDataSet();
-		Attributes e = ds.get(0);
+		Features e = ds.get(0);
 		DLTest test = new DLTest();
 		test.add("type", "French");
 		Assert.assertTrue(test.matches(e));
@@ -37,7 +37,7 @@ public class DLTestTest {
 	@Test
 	public void testDLTestMatchFailsOnMismatchedExample() throws Exception {
 		AttributeSamples ds = DataSetFactory.getRestaurantDataSet();
-		Attributes e = ds.get(0);
+		Features e = ds.get(0);
 		DLTest test = new DLTest();
 		test.add("type", "Thai");
 		Assert.assertFalse(test.matches(e));
@@ -47,7 +47,7 @@ public class DLTestTest {
 	public void testDLTestMatchesEvenOnMismatchedTargetAttributeValue()
 			throws Exception {
 		AttributeSamples ds = DataSetFactory.getRestaurantDataSet();
-		Attributes e = ds.get(0);
+		Features e = ds.get(0);
 		DLTest test = new DLTest();
 		test.add("type", "French");
 		Assert.assertTrue(test.matches(e));

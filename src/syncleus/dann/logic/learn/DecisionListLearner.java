@@ -2,9 +2,9 @@ package syncleus.dann.logic.learn;
 
 import java.util.List;
 
-import syncleus.dann.attribute.aima.AttributeSamples;
-import syncleus.dann.attribute.aima.Attributes;
-import syncleus.dann.attribute.aima.AttributeLearning;
+import syncleus.dann.data.feature.aima.AttributeSamples;
+import syncleus.dann.data.feature.aima.Features;
+import syncleus.dann.data.feature.aima.AttributeLearning;
 import syncleus.dann.logic.inductive.DLTest;
 import syncleus.dann.logic.inductive.DLTestFactory;
 import syncleus.dann.logic.inductive.DecisionList;
@@ -44,7 +44,7 @@ public class DecisionListLearner implements AttributeLearning {
 	}
 
 	@Override
-	public String predict(Attributes e) {
+	public String predict(Features e) {
 		if (decisionList == null) {
 			throw new RuntimeException(
 					"learner has not been trained with dataset yet!");
@@ -56,7 +56,7 @@ public class DecisionListLearner implements AttributeLearning {
 	public int[] test(AttributeSamples ds) {
 		int[] results = new int[] { 0, 0 };
 
-		for (Attributes e : ds.samples) {
+		for (Features e : ds.samples) {
 			if (e.targetValue().equals(decisionList.predict(e))) {
 				results[0] = results[0] + 1;
 			} else {
@@ -115,7 +115,7 @@ public class DecisionListLearner implements AttributeLearning {
 	private boolean allExamplesHaveSameTargetValue(AttributeSamples matched) {
 		// assumes at least i example in dataset
 		String targetValue = matched.get(0).targetValue();
-		for (Attributes e : matched.samples) {
+		for (Features e : matched.samples) {
 			if (!(e.targetValue().equals(targetValue))) {
 				return false;
 			}

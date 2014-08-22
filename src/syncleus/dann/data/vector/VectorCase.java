@@ -170,11 +170,15 @@ public class VectorCase implements DataCase<VectorData>, Serializable {
         builder.append(':');
         builder.append("Input:");
         builder.append(getInput());
-        builder.append("Ideal:");
-        builder.append(getIdeal());
+        if (getIdeal()!=null) {
+            builder.append("Ideal:");
+            builder.append(getIdeal());
+        }
         builder.append(',');
-        builder.append("Significance:");
-        builder.append(Format.formatPercent(this.significance));
+        if (this.significance!=1.0) {
+            builder.append("Significance:");
+            builder.append(Format.formatPercent(this.significance));
+        }
         builder.append(']');
         return builder.toString();
     }

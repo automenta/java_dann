@@ -3,7 +3,7 @@ package syncleus.dann.logic.inductive;
 import java.util.ArrayList;
 import java.util.List;
 
-import syncleus.dann.attribute.aima.AttributeSamples;
+import syncleus.dann.data.feature.aima.AttributeSamples;
 
 /**
  * @author Ravi Mohan
