@@ -3,8 +3,7 @@ package syncleus.dann.logic.inductive;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
-
-import syncleus.dann.data.feature.aima.AttributeSamples;
+import syncleus.dann.data.feature.aima.FeatureDataset;
 import syncleus.dann.data.feature.aima.Features;
 import syncleus.dann.util.AimaUtil;
 
@@ -37,7 +36,7 @@ public class DecisionTree {
 	}
 
 	public Object predict(Features e) {
-		String attrValue = e.getAttributeValueAsString(attributeName);
+		String attrValue = e.getFeatureValueAsString(attributeName);
 		if (nodes.containsKey(attrValue)) {
 			return nodes.get(attrValue).predict(e);
 		} else {
@@ -46,7 +45,7 @@ public class DecisionTree {
 		}
 	}
 
-	public static DecisionTree getStumpFor(AttributeSamples ds, String attributeName,
+	public static DecisionTree getStumpFor(FeatureDataset ds, String attributeName,
 			String attributeValue, String returnValueIfMatched,
 			List<String> unmatchedValues, String returnValueIfUnmatched) {
 		DecisionTree dt = new DecisionTree(attributeName);
@@ -57,9 +56,9 @@ public class DecisionTree {
 		return dt;
 	}
 
-	public static List<DecisionTree> getStumpsFor(AttributeSamples ds,
+	public static List<DecisionTree> getStumpsFor(FeatureDataset ds,
 			String returnValueIfMatched, String returnValueIfUnmatched) {
-		List<String> attributes = ds.getNonTargetAttributes();
+		List<String> attributes = ds.getNonTargetFeatures();
 		List<DecisionTree> trees = new ArrayList<DecisionTree>();
 		for (String attribute : attributes) {
 			List<String> values = ds.getPossibleAttributeValues(attribute);

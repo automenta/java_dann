@@ -6,7 +6,7 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
-import syncleus.dann.data.feature.aima.AttributeSamples;
+import syncleus.dann.data.feature.aima.FeatureDataset;
 import aima.learning.framework.DataSetFactory;
 import syncleus.dann.logic.inductive.DecisionTree;
 import syncleus.dann.logic.learn.DecisionTreeLearner;
@@ -44,7 +44,7 @@ public class DecisionTreeTest {
 	@Test
 	public void testStumpCreationForSpecifiedAttributeValuePair()
 			throws Exception {
-		AttributeSamples ds = DataSetFactory.getRestaurantDataSet();
+		FeatureDataset ds = DataSetFactory.getRestaurantDataSet();
 		List<String> unmatchedValues = new ArrayList<String>();
 		unmatchedValues.add(NO);
 		DecisionTree dt = DecisionTree.getStumpFor(ds, "alternate", YES, YES,
@@ -54,7 +54,7 @@ public class DecisionTreeTest {
 
 	@Test
 	public void testStumpCreationForDataSet() throws Exception {
-		AttributeSamples ds = DataSetFactory.getRestaurantDataSet();
+		FeatureDataset ds = DataSetFactory.getRestaurantDataSet();
 		List<DecisionTree> dt = DecisionTree.getStumpsFor(ds, YES,
 				"Unable to classify");
 		Assert.assertEquals(26, dt.size());
@@ -62,7 +62,7 @@ public class DecisionTreeTest {
 
 	@Test
 	public void testStumpPredictionForDataSet() throws Exception {
-		AttributeSamples ds = DataSetFactory.getRestaurantDataSet();
+		FeatureDataset ds = DataSetFactory.getRestaurantDataSet();
 
 		List<String> unmatchedValues = new ArrayList<String>();
 		unmatchedValues.add(NO);

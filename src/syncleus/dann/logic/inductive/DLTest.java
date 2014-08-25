@@ -1,8 +1,7 @@
 package syncleus.dann.logic.inductive;
 
 import java.util.Hashtable;
-
-import syncleus.dann.data.feature.aima.AttributeSamples;
+import syncleus.dann.data.feature.aima.FeatureDataset;
 import syncleus.dann.data.feature.aima.Features;
 
 /**
@@ -25,7 +24,7 @@ public class DLTest {
 
 	public boolean matches(Features e) {
 		for (String key : attrValues.keySet()) {
-			if (!(attrValues.get(key).equals(e.getAttributeValueAsString(key)))) {
+			if (!(attrValues.get(key).equals(e.getFeatureValueAsString(key)))) {
 				return false;
 			}
 		}
@@ -33,8 +32,8 @@ public class DLTest {
 		// return e.targetValue().equals(targetValue);
 	}
 
-	public AttributeSamples matchedExamples(AttributeSamples ds) {
-		AttributeSamples matched = ds.emptyDataSet();
+	public FeatureDataset matchedExamples(FeatureDataset ds) {
+		FeatureDataset matched = ds.emptyDataSet();
 		for (Features e : ds.samples) {
 			if (matches(e)) {
 				matched.add(e);
@@ -43,8 +42,8 @@ public class DLTest {
 		return matched;
 	}
 
-	public AttributeSamples unmatchedExamples(AttributeSamples ds) {
-		AttributeSamples unmatched = ds.emptyDataSet();
+	public FeatureDataset unmatchedExamples(FeatureDataset ds) {
+		FeatureDataset unmatched = ds.emptyDataSet();
 		for (Features e : ds.samples) {
 			if (!(matches(e))) {
 				unmatched.add(e);

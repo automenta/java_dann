@@ -5,8 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
-
-import syncleus.dann.data.feature.aima.AttributeSamples;
+import syncleus.dann.data.feature.aima.FeatureDataset;
 import syncleus.dann.logic.fol.domain.FOLDomain;
 
 /**
@@ -18,7 +17,7 @@ public class FOLDataSetDomain extends FOLDomain {
 	private static Pattern allowableCharactersRegEx = Pattern
 			.compile("[^a-zA-Z_$0-9]");
 	//
-	private AttributeSamples.Specification dataSetSpecification;
+	private FeatureDataset.Specification dataSetSpecification;
 	private String trueGoalValue = null;
 	// Default example prefix, see pg679 of AIMA
 	private String examplePrefix = "X";
@@ -29,7 +28,7 @@ public class FOLDataSetDomain extends FOLDomain {
 	//
 	// PUBLIC METHODS
 	//
-	public FOLDataSetDomain(AttributeSamples.Specification dataSetSpecification,
+	public FOLDataSetDomain(FeatureDataset.Specification dataSetSpecification,
 			String trueGoalValue) {
 		this.dataSetSpecification = dataSetSpecification;
 		this.trueGoalValue = trueGoalValue;
@@ -103,7 +102,7 @@ public class FOLDataSetDomain extends FOLDomain {
 		// Ensure the target predicate is included
 		addPredicate(getFOLName(dataSetSpecification.getTarget()));
 		// Create the descriptive predicates
-		for (String saName : dataSetSpecification.getNamesOfStringAttributes()) {
+		for (String saName : dataSetSpecification.getNamesOfStringFeatures()) {
 			if (dataSetSpecification.getTarget().equals(saName)) {
 				// Don't add the target to the descriptive predicates
 				continue;

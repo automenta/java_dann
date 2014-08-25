@@ -4,12 +4,12 @@ package syncleus.dann.data.feature.aima;
  * @author Ravi Mohan
  * 
  */
-public class NumericAttributeSpecification implements AttributeSpecification {
+public class NumberFeatureSpec implements FeatureSpec {
 
 	// a simple attribute representing a number represented as a double .
 	private String name;
 
-	public NumericAttributeSpecification(String name) {
+	public NumberFeatureSpec(String name) {
 		this.name = name;
 	}
 
@@ -22,11 +22,11 @@ public class NumericAttributeSpecification implements AttributeSpecification {
 		}
 	}
 
-	public String getAttributeName() {
+	public String getFeatureName() {
 		return name;
 	}
 
-	public Feature createAttribute(String rawValue) {
-		return new NumericAttribute(Double.parseDouble(rawValue), this);
+	public Feature newFeature(String rawValue) {
+		return new NumberFeature(Double.parseDouble(rawValue), this);
 	}
 }

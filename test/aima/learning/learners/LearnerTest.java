@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import org.junit.Assert;
 import org.junit.Test;
 
-import syncleus.dann.data.feature.aima.AttributeSamples;
+import syncleus.dann.data.feature.aima.FeatureDataset;
 import aima.learning.framework.DataSetFactory;
 import syncleus.dann.logic.inductive.DLTest;
 import syncleus.dann.logic.inductive.DLTestFactory;
@@ -25,7 +25,7 @@ public class LearnerTest {
 	@Test
 	public void testMajorityLearner() throws Exception {
 		MajorityLearner learner = new MajorityLearner();
-		AttributeSamples ds = DataSetFactory.getRestaurantDataSet();
+		FeatureDataset ds = DataSetFactory.getRestaurantDataSet();
 		learner.train(ds);
 		int[] result = learner.test(ds);
 		Assert.assertEquals(6, result[0]);
@@ -36,10 +36,10 @@ public class LearnerTest {
 	public void testDefaultUsedWhenTrainingDataSetHasNoExamples()
 			throws Exception {
 		// tests RecursionBaseCase#1
-		AttributeSamples ds = DataSetFactory.getRestaurantDataSet();
+		FeatureDataset ds = DataSetFactory.getRestaurantDataSet();
 		DecisionTreeLearner learner = new DecisionTreeLearner();
 
-		AttributeSamples ds2 = ds.emptyDataSet();
+		FeatureDataset ds2 = ds.emptyDataSet();
 		Assert.assertEquals(0, ds2.size());
 
 		learner.train(ds2);
@@ -51,10 +51,10 @@ public class LearnerTest {
 	public void testClassificationReturnedWhenAllExamplesHaveTheSameClassification()
 			throws Exception {
 		// tests RecursionBaseCase#2
-		AttributeSamples ds = DataSetFactory.getRestaurantDataSet();
+		FeatureDataset ds = DataSetFactory.getRestaurantDataSet();
 		DecisionTreeLearner learner = new DecisionTreeLearner();
 
-		AttributeSamples ds2 = ds.emptyDataSet();
+		FeatureDataset ds2 = ds.emptyDataSet();
 
 		// all 3 examples have the same classification (willWait = yes)
 		ds2.add(ds.get(0));
@@ -69,10 +69,10 @@ public class LearnerTest {
 	public void testMajorityReturnedWhenAttributesToExamineIsEmpty()
 			throws Exception {
 		// tests RecursionBaseCase#2
-		AttributeSamples ds = DataSetFactory.getRestaurantDataSet();
+		FeatureDataset ds = DataSetFactory.getRestaurantDataSet();
 		DecisionTreeLearner learner = new DecisionTreeLearner();
 
-		AttributeSamples ds2 = ds.emptyDataSet();
+		FeatureDataset ds2 = ds.emptyDataSet();
 
 		// 3 examples have classification = "yes" and one ,"no"
 		ds2.add(ds.get(0));
@@ -87,7 +87,7 @@ public class LearnerTest {
 
 	@Test
 	public void testInducedTreeClassifiesDataSetCorrectly() throws Exception {
-		AttributeSamples ds = DataSetFactory.getRestaurantDataSet();
+		FeatureDataset ds = DataSetFactory.getRestaurantDataSet();
 		DecisionTreeLearner learner = new DecisionTreeLearner();
 		learner.train(ds);
 		int[] result = learner.test(ds);
@@ -101,8 +101,8 @@ public class LearnerTest {
 		// tests first base case of DL Learner
 		DecisionListLearner learner = new DecisionListLearner("Yes", "No",
 				new MockDLTestFactory(null));
-		AttributeSamples ds = DataSetFactory.getRestaurantDataSet();
-		AttributeSamples empty = ds.emptyDataSet();
+		FeatureDataset ds = DataSetFactory.getRestaurantDataSet();
+		FeatureDataset empty = ds.emptyDataSet();
 		learner.train(empty);
 		Assert.assertEquals("No", learner.predict(ds.get(0)));
 		Assert.assertEquals("No", learner.predict(ds.get(1)));
@@ -115,7 +115,7 @@ public class LearnerTest {
 		// tests second base case of DL Learner
 		DecisionListLearner learner = new DecisionListLearner("Yes", "No",
 				new MockDLTestFactory(new ArrayList<DLTest>()));
-		AttributeSamples ds = DataSetFactory.getRestaurantDataSet();
+		FeatureDataset ds = DataSetFactory.getRestaurantDataSet();
 		learner.train(ds);
 		Assert.assertEquals(DecisionListLearner.FAILURE,
 				learner.predict(ds.get(0)));
@@ -123,7 +123,7 @@ public class LearnerTest {
 
 	@Test
 	public void testDecisionListTestRunOnRestaurantDataSet() throws Exception {
-		AttributeSamples ds = DataSetFactory.getRestaurantDataSet();
+		FeatureDataset ds = DataSetFactory.getRestaurantDataSet();
 		DecisionListLearner learner = new DecisionListLearner("Yes", "No",
 				new DLTestFactory());
 		learner.train(ds);
@@ -135,7 +135,7 @@ public class LearnerTest {
 
 	@Test
 	public void testCurrentBestLearnerOnRestaurantDataSet() throws Exception {
-		AttributeSamples ds = DataSetFactory.getRestaurantDataSet();
+		FeatureDataset ds = DataSetFactory.getRestaurantDataSet();
 		CurrentBestLearner learner = new CurrentBestLearner("Yes");
 		learner.train(ds);
 

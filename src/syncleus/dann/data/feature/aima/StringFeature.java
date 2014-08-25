@@ -4,12 +4,12 @@ package syncleus.dann.data.feature.aima;
  * @author Ravi Mohan
  * 
  */
-public class StringAttribute implements Feature {
-	private StringAttributeSpecification spec;
+public class StringFeature implements Feature {
+	private StringFeatureSpec spec;
 
 	private String value;
 
-	public StringAttribute(String value, StringAttributeSpecification spec) {
+	public StringFeature(String value, StringFeatureSpec spec) {
 		this.spec = spec;
 		this.value = value;
 	}
@@ -19,6 +19,6 @@ public class StringAttribute implements Feature {
 	}
 
 	public String name() {
-		return spec.getAttributeName().trim();
+		return spec.getFeatureName().trim();
 	}
 }

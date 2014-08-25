@@ -12,8 +12,8 @@ import syncleus.dann.util.AimaUtil;
  * @author Ravi Mohan
  * 
  */
-public class AttributeSamples {
-	protected AttributeSamples() {
+public class FeatureDataset {
+	protected FeatureDataset() {
 
 	}
 
@@ -21,7 +21,7 @@ public class AttributeSamples {
 
 	public Specification specification;
 
-	public AttributeSamples(Specification spec) {
+	public FeatureDataset(Specification spec) {
 		samples = new LinkedList<Features>();
 		this.specification = spec;
 	}
@@ -40,8 +40,8 @@ public class AttributeSamples {
 
 
 
-	public AttributeSamples remove(Features e) {
-		AttributeSamples ds = new AttributeSamples(specification);
+	public FeatureDataset remove(Features e) {
+		FeatureDataset ds = new FeatureDataset(specification);
 		for (Features eg : samples) {
 			if (!(e.equals(eg))) {
 				ds.add(eg);
@@ -73,14 +73,14 @@ public class AttributeSamples {
 		return AimaUtil.information(data);
 	}
 
-	public Hashtable<String, AttributeSamples> splitByAttribute(String attributeName) {
-		Hashtable<String, AttributeSamples> results = new Hashtable<String, AttributeSamples>();
+	public Hashtable<String, FeatureDataset> splitByAttribute(String attributeName) {
+		Hashtable<String, FeatureDataset> results = new Hashtable<String, FeatureDataset>();
 		for (Features e : samples) {
 			String val = e.getFeatureValueAsString(attributeName);
 			if (results.containsKey(val)) {
 				results.get(val).add(e);
 			} else {
-				AttributeSamples ds = new AttributeSamples(specification);
+				FeatureDataset ds = new FeatureDataset(specification);
 				ds.add(e);
 				results.put(val, ds);
 			}
@@ -89,7 +89,7 @@ public class AttributeSamples {
 	}
 
 	public double calculateGainFor(String parameterName) {
-		Hashtable<String, AttributeSamples> hash = splitByAttribute(parameterName);
+		Hashtable<String, FeatureDataset> hash = splitByAttribute(parameterName);
 		double totalSize = samples.size();
 		double remainder = 0.0;
 		for (String parameterValue : hash.keySet()) {
@@ -109,7 +109,7 @@ public class AttributeSamples {
 		if ((o == null) || (this.getClass() != o.getClass())) {
 			return false;
 		}
-		AttributeSamples other = (AttributeSamples) o;
+		FeatureDataset other = (FeatureDataset) o;
 		return samples.equals(other.samples);
 	}
 
@@ -122,8 +122,8 @@ public class AttributeSamples {
 		return samples.iterator();
 	}
 
-	public AttributeSamples copy() {
-		AttributeSamples ds = new AttributeSamples(specification);
+	public FeatureDataset copy() {
+		FeatureDataset ds = new FeatureDataset(specification);
 		for (Features e : samples) {
 			ds.add(e);
 		}
@@ -138,8 +138,8 @@ public class AttributeSamples {
 		return specification.getTarget();
 	}
 
-	public AttributeSamples emptyDataSet() {
-		return new AttributeSamples(specification);
+	public FeatureDataset emptyDataSet() {
+		return new FeatureDataset(specification);
 	}
 
 	/**
@@ -155,8 +155,8 @@ public class AttributeSamples {
 		return specification.getPossibleAttributeValues(attributeName);
 	}
 
-	public AttributeSamples matchingDataSet(String attributeName, String attributeValue) {
-		AttributeSamples ds = new AttributeSamples(specification);
+	public FeatureDataset matchingDataSet(String attributeName, String attributeValue) {
+		FeatureDataset ds = new FeatureDataset(specification);
 		for (Features e : samples) {
 			if (e.getFeatureValueAsString(attributeName).equals(
 					attributeValue)) {
@@ -176,19 +176,19 @@ public class AttributeSamples {
      */
     public static class Specification {
 
-        List<AttributeSpecification> attributeSpecifications;
+        List<FeatureSpec> attributeSpecifications;
         private String targetAttribute;
 
         public Specification() {
             super();
-            this.attributeSpecifications = new ArrayList<AttributeSpecification>();
+            this.attributeSpecifications = new ArrayList<FeatureSpec>();
         }
 
         public boolean isValid(List<String> uncheckedFeatures) {
             if (attributeSpecifications.size() != uncheckedFeatures.size()) {
                 throw new RuntimeException("size mismatch specsize = " + attributeSpecifications.size() + " attrbutes size = " + uncheckedFeatures.size());
             }
-            Iterator<AttributeSpecification> attributeSpecIter = attributeSpecifications.iterator();
+            Iterator<FeatureSpec> attributeSpecIter = attributeSpecifications.iterator();
             Iterator<String> valueIter = uncheckedFeatures.iterator();
             while (valueIter.hasNext() && attributeSpecIter.hasNext()) {
                 if (!(attributeSpecIter.next().isValid(valueIter.next()))) {
@@ -206,9 +206,9 @@ public class AttributeSamples {
         }
 
         public List<String> getPossibleAttributeValues(String attributeName) {
-            for (AttributeSpecification as : attributeSpecifications) {
-                if (as.getAttributeName().equals(attributeName)) {
-                    return ((StringAttributeSpecification) as).possibleAttributeValues();
+            for (FeatureSpec as : attributeSpecifications) {
+                if (as.getFeatureName().equals(attributeName)) {
+                    return ((StringFeatureSpec) as).possibleAttributeValues();
                 }
             }
             throw new RuntimeException("No such attribute" + attributeName);
@@ -216,14 +216,14 @@ public class AttributeSamples {
 
         public List<String> getAttributeNames() {
             List<String> names = new ArrayList<String>();
-            for (AttributeSpecification as : attributeSpecifications) {
-                names.add(as.getAttributeName());
+            for (FeatureSpec as : attributeSpecifications) {
+                names.add(as.getFeatureName());
             }
             return names;
         }
 
         public void defineStringAttribute(String name, String[] attributeValues) {
-            attributeSpecifications.add(new StringAttributeSpecification(name, attributeValues));
+            attributeSpecifications.add(new StringFeatureSpec(name, attributeValues));
             setTarget(name); // target defaults to last column added
         }
 
@@ -235,9 +235,9 @@ public class AttributeSamples {
             this.targetAttribute = target;
         }
 
-        public AttributeSpecification getAttributeSpecFor(String name) {
-            for (AttributeSpecification spec : attributeSpecifications) {
-                if (spec.getAttributeName().equals(name)) {
+        public FeatureSpec getAttributeSpecFor(String name) {
+            for (FeatureSpec spec : attributeSpecifications) {
+                if (spec.getFeatureName().equals(name)) {
                     return spec;
                 }
             }
@@ -245,14 +245,14 @@ public class AttributeSamples {
         }
 
         public void defineNumericAttribute(String name) {
-            attributeSpecifications.add(new NumericAttributeSpecification(name));
+            attributeSpecifications.add(new NumberFeatureSpec(name));
         }
 
         public List<String> getNamesOfStringFeatures() {
             List<String> names = new ArrayList<String>();
-            for (AttributeSpecification spec : attributeSpecifications) {
-                if (spec instanceof StringAttributeSpecification) {
-                    names.add(spec.getAttributeName());
+            for (FeatureSpec spec : attributeSpecifications) {
+                if (spec instanceof StringFeatureSpec) {
+                    names.add(spec.getFeatureName());
                 }
             }
             return names;

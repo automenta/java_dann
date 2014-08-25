@@ -3,7 +3,7 @@ package aima.test.core.unit.learning.inductive;
 import org.junit.Assert;
 import org.junit.Test;
 
-import syncleus.dann.data.feature.aima.AttributeSamples;
+import syncleus.dann.data.feature.aima.FeatureDataset;
 import aima.learning.framework.DataSetFactory;
 import syncleus.dann.logic.inductive.DLTest;
 import syncleus.dann.logic.inductive.DecisionList;
@@ -18,7 +18,7 @@ public class DecisionListTest {
 	public void testDecisonListWithNoTestsReturnsDefaultValue()
 			throws Exception {
 		DecisionList dlist = new DecisionList("Yes", "No");
-		AttributeSamples ds = DataSetFactory.getRestaurantDataSet();
+		FeatureDataset ds = DataSetFactory.getRestaurantDataSet();
 		Assert.assertEquals("No", dlist.predict(ds.get(0)));
 	}
 
@@ -26,7 +26,7 @@ public class DecisionListTest {
 	public void testDecisionListWithSingleTestReturnsTestValueIfTestSuccessful()
 			throws Exception {
 		DecisionList dlist = new DecisionList("Yes", "No");
-		AttributeSamples ds = DataSetFactory.getRestaurantDataSet();
+		FeatureDataset ds = DataSetFactory.getRestaurantDataSet();
 
 		DLTest test = new DLTest();
 		test.add("type", "French");
@@ -40,7 +40,7 @@ public class DecisionListTest {
 	public void testDecisionListFallsThruToNextTestIfOneDoesntMatch()
 			throws Exception {
 		DecisionList dlist = new DecisionList("Yes", "No");
-		AttributeSamples ds = DataSetFactory.getRestaurantDataSet();
+		FeatureDataset ds = DataSetFactory.getRestaurantDataSet();
 
 		DLTest test1 = new DLTest();
 		test1.add("type", "Thai"); // doesn't match first example
@@ -57,7 +57,7 @@ public class DecisionListTest {
 	public void testDecisionListFallsThruToDefaultIfNoTestMatches()
 			throws Exception {
 		DecisionList dlist = new DecisionList("Yes", "No");
-		AttributeSamples ds = DataSetFactory.getRestaurantDataSet();
+		FeatureDataset ds = DataSetFactory.getRestaurantDataSet();
 
 		DLTest test1 = new DLTest();
 		test1.add("type", "Thai"); // doesn't match first example
@@ -84,7 +84,7 @@ public class DecisionListTest {
 	public void testDecisionListMerge() throws Exception {
 		DecisionList dlist1 = new DecisionList("Yes", "No");
 		DecisionList dlist2 = new DecisionList("Yes", "No");
-		AttributeSamples ds = DataSetFactory.getRestaurantDataSet();
+		FeatureDataset ds = DataSetFactory.getRestaurantDataSet();
 
 		DLTest test1 = new DLTest();
 		test1.add("type", "Thai"); // doesn't match first example

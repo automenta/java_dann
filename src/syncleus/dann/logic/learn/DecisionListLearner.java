@@ -2,9 +2,9 @@ package syncleus.dann.logic.learn;
 
 import java.util.List;
 
-import syncleus.dann.data.feature.aima.AttributeSamples;
+import syncleus.dann.data.feature.aima.FeatureDataset;
 import syncleus.dann.data.feature.aima.Features;
-import syncleus.dann.data.feature.aima.AttributeLearning;
+import syncleus.dann.data.feature.aima.FeatureLearning;
 import syncleus.dann.logic.inductive.DLTest;
 import syncleus.dann.logic.inductive.DLTestFactory;
 import syncleus.dann.logic.inductive.DecisionList;
@@ -13,7 +13,7 @@ import syncleus.dann.logic.inductive.DecisionList;
  * @author Ravi Mohan
  * @author Mike Stampone
  */
-public class DecisionListLearner implements AttributeLearning {
+public class DecisionListLearner implements FeatureLearning {
 	public static final String FAILURE = "Failure";
 
 	private DecisionList decisionList;
@@ -39,7 +39,7 @@ public class DecisionListLearner implements AttributeLearning {
 	 *            a set of examples for constructing the decision list
 	 */
 	@Override
-	public void train(AttributeSamples ds) {
+	public void train(FeatureDataset ds) {
 		this.decisionList = decisionListLearning(ds);
 	}
 
@@ -53,7 +53,7 @@ public class DecisionListLearner implements AttributeLearning {
 	}
 
 	@Override
-	public int[] test(AttributeSamples ds) {
+	public int[] test(FeatureDataset ds) {
 		int[] results = new int[] { 0, 0 };
 
 		for (Features e : ds.samples) {
@@ -81,7 +81,7 @@ public class DecisionListLearner implements AttributeLearning {
 	//
 	// PRIVATE METHODS
 	//
-	private DecisionList decisionListLearning(AttributeSamples ds) {
+	private DecisionList decisionListLearning(FeatureDataset ds) {
 		if (ds.size() == 0) {
 			return new DecisionList(positive, negative);
 		}
@@ -93,15 +93,15 @@ public class DecisionListLearner implements AttributeLearning {
 		}
 		// at this point there is a test that classifies some subset of examples
 		// with the same target value
-		AttributeSamples matched = test.matchedExamples(ds);
+		FeatureDataset matched = test.matchedExamples(ds);
 		DecisionList list = new DecisionList(positive, negative);
 		list.add(test, matched.get(0).targetValue());
 		return list.mergeWith(decisionListLearning(test.unmatchedExamples(ds)));
 	}
 
-	private DLTest getValidTest(List<DLTest> possibleTests, AttributeSamples ds) {
+	private DLTest getValidTest(List<DLTest> possibleTests, FeatureDataset ds) {
 		for (DLTest test : possibleTests) {
-			AttributeSamples matched = test.matchedExamples(ds);
+			FeatureDataset matched = test.matchedExamples(ds);
 			if (!(matched.size() == 0)) {
 				if (allExamplesHaveSameTargetValue(matched)) {
 					return test;
@@ -112,7 +112,7 @@ public class DecisionListLearner implements AttributeLearning {
 		return null;
 	}
 
-	private boolean allExamplesHaveSameTargetValue(AttributeSamples matched) {
+	private boolean allExamplesHaveSameTargetValue(FeatureDataset matched) {
 		// assumes at least i example in dataset
 		String targetValue = matched.get(0).targetValue();
 		for (Features e : matched.samples) {

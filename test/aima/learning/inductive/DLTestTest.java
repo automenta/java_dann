@@ -5,7 +5,7 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
-import syncleus.dann.data.feature.aima.AttributeSamples;
+import syncleus.dann.data.feature.aima.FeatureDataset;
 import aima.learning.framework.DataSetFactory;
 import syncleus.dann.data.feature.aima.Features;
 import syncleus.dann.logic.inductive.DLTest;
@@ -19,7 +19,7 @@ public class DLTestTest {
 
 	@Test
 	public void testDecisionList() throws Exception {
-		AttributeSamples ds = DataSetFactory.getRestaurantDataSet();
+		FeatureDataset ds = DataSetFactory.getRestaurantDataSet();
 		List<DLTest> dlTests = new DLTestFactory()
 				.createDLTestsWithAttributeCount(ds, 1);
 		Assert.assertEquals(26, dlTests.size());
@@ -27,7 +27,7 @@ public class DLTestTest {
 
 	@Test
 	public void testDLTestMatchSucceedsWithMatchedExample() throws Exception {
-		AttributeSamples ds = DataSetFactory.getRestaurantDataSet();
+		FeatureDataset ds = DataSetFactory.getRestaurantDataSet();
 		Features e = ds.get(0);
 		DLTest test = new DLTest();
 		test.add("type", "French");
@@ -36,7 +36,7 @@ public class DLTestTest {
 
 	@Test
 	public void testDLTestMatchFailsOnMismatchedExample() throws Exception {
-		AttributeSamples ds = DataSetFactory.getRestaurantDataSet();
+		FeatureDataset ds = DataSetFactory.getRestaurantDataSet();
 		Features e = ds.get(0);
 		DLTest test = new DLTest();
 		test.add("type", "Thai");
@@ -46,7 +46,7 @@ public class DLTestTest {
 	@Test
 	public void testDLTestMatchesEvenOnMismatchedTargetAttributeValue()
 			throws Exception {
-		AttributeSamples ds = DataSetFactory.getRestaurantDataSet();
+		FeatureDataset ds = DataSetFactory.getRestaurantDataSet();
 		Features e = ds.get(0);
 		DLTest test = new DLTest();
 		test.add("type", "French");
@@ -56,14 +56,14 @@ public class DLTestTest {
 	@Test
 	public void testDLTestReturnsMatchedAndUnmatchedExamplesCorrectly()
 			throws Exception {
-		AttributeSamples ds = DataSetFactory.getRestaurantDataSet();
+		FeatureDataset ds = DataSetFactory.getRestaurantDataSet();
 		DLTest test = new DLTest();
 		test.add("type", "Burger");
 
-		AttributeSamples matched = test.matchedExamples(ds);
+		FeatureDataset matched = test.matchedExamples(ds);
 		Assert.assertEquals(4, matched.size());
 
-		AttributeSamples unmatched = test.unmatchedExamples(ds);
+		FeatureDataset unmatched = test.unmatchedExamples(ds);
 		Assert.assertEquals(8, unmatched.size());
 	}
 }

@@ -5,7 +5,7 @@ import java.util.Hashtable;
 import org.junit.Assert;
 import org.junit.Test;
 
-import syncleus.dann.data.feature.aima.AttributeSamples;
+import syncleus.dann.data.feature.aima.FeatureDataset;
 import aima.learning.framework.DataSetFactory;
 import syncleus.dann.util.AimaUtil;
 
@@ -27,7 +27,7 @@ public class InformationAndGainTest {
 
 	@Test
 	public void testBasicDataSetInformationCalculation() throws Exception {
-		AttributeSamples ds = DataSetFactory.getRestaurantDataSet();
+		FeatureDataset ds = DataSetFactory.getRestaurantDataSet();
 		double infoForTargetAttribute = ds.getInformationFor();// this should
 		// be the
 		// generic
@@ -37,8 +37,8 @@ public class InformationAndGainTest {
 
 	@Test
 	public void testDataSetSplit() throws Exception {
-		AttributeSamples ds = DataSetFactory.getRestaurantDataSet();
-		Hashtable<String, AttributeSamples> hash = ds.splitByAttribute("patrons");// this
+		FeatureDataset ds = DataSetFactory.getRestaurantDataSet();
+		Hashtable<String, FeatureDataset> hash = ds.splitByAttribute("patrons");// this
 		// should
 		// be
 		// the
@@ -52,7 +52,7 @@ public class InformationAndGainTest {
 
 	@Test
 	public void testGainCalculation() throws Exception {
-		AttributeSamples ds = DataSetFactory.getRestaurantDataSet();
+		FeatureDataset ds = DataSetFactory.getRestaurantDataSet();
 		double gain = ds.calculateGainFor("patrons");
 		Assert.assertEquals(0.541, gain, 0.001);
 		gain = ds.calculateGainFor("type");

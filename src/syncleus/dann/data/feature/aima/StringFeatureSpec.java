@@ -7,18 +7,18 @@ import java.util.List;
  * @author Ravi Mohan
  * 
  */
-public class StringAttributeSpecification implements AttributeSpecification {
+public class StringFeatureSpec implements FeatureSpec {
 	String attributeName;
 
 	List<String> attributePossibleValues;
 
-	public StringAttributeSpecification(String attributeName,
+	public StringFeatureSpec(String attributeName,
 			List<String> attributePossibleValues) {
 		this.attributeName = attributeName;
 		this.attributePossibleValues = attributePossibleValues;
 	}
 
-	public StringAttributeSpecification(String attributeName,
+	public StringFeatureSpec(String attributeName,
 			String[] attributePossibleValues) {
 		this(attributeName, Arrays.asList(attributePossibleValues));
 	}
@@ -30,7 +30,7 @@ public class StringAttributeSpecification implements AttributeSpecification {
 	/**
 	 * @return Returns the attributeName.
 	 */
-	public String getAttributeName() {
+	public String getFeatureName() {
 		return attributeName;
 	}
 
@@ -38,7 +38,7 @@ public class StringAttributeSpecification implements AttributeSpecification {
 		return attributePossibleValues;
 	}
 
-	public Feature createAttribute(String rawValue) {
-		return new StringAttribute(rawValue, this);
+	public Feature newFeature(String rawValue) {
+		return new StringFeature(rawValue, this);
 	}
 }

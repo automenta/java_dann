@@ -1,7 +1,7 @@
 package syncleus.dann.neural.aima;
 
 import aima.learning.neural.NNDataSet;
-import syncleus.dann.data.feature.aima.AttributeSamples;
+import syncleus.dann.data.feature.aima.FeatureDataset;
 import aima.util.math.Matrix;
 import aima.util.math.Vector;
 
@@ -108,7 +108,7 @@ public class FeedForwardNeuralNetwork implements FunctionApproximator {
 		return result;
 	}
 
-	public void testOn(AttributeSamples ds) {
+	public void testOn(FeatureDataset ds) {
 		// TODO Auto-generated method stub
 	}
 

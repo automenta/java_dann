@@ -1,6 +1,6 @@
 package syncleus.dann.logic.learn;
 
-import syncleus.dann.data.feature.aima.AttributeSamples;
+import syncleus.dann.data.feature.aima.FeatureDataset;
 import syncleus.dann.logic.inductive.DecisionTree;
 
 /**
@@ -14,7 +14,7 @@ public class StumpLearner extends DecisionTreeLearner {
 	}
 
 	@Override
-	public void train(AttributeSamples ds) {
+	public void train(FeatureDataset ds) {
 		// System.out.println("Stump learner training");
 		// do nothing the stump is not inferred from the dataset
 	}

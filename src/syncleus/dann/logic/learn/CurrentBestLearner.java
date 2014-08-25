@@ -3,9 +3,9 @@ package syncleus.dann.logic.learn;
 import java.util.ArrayList;
 import java.util.List;
 
-import syncleus.dann.data.feature.aima.AttributeSamples;
+import syncleus.dann.data.feature.aima.FeatureDataset;
 import syncleus.dann.data.feature.aima.Features;
-import syncleus.dann.data.feature.aima.AttributeLearning;
+import syncleus.dann.data.feature.aima.FeatureLearning;
 import syncleus.dann.logic.knowledge.CurrentBestLearning;
 import syncleus.dann.logic.knowledge.FOLDataSetDomain;
 import syncleus.dann.logic.knowledge.FOLExample;
@@ -18,7 +18,7 @@ import syncleus.dann.logic.fol.kb.FOLKnowledgeBase;
  * @author Ciaran O'Reilly
  * 
  */
-public class CurrentBestLearner implements AttributeLearning {
+public class CurrentBestLearner implements FeatureLearning {
 	private String trueGoalValue = null;
 	private FOLDataSetDomain folDSDomain = null;
 	private FOLKnowledgeBase kb = null;
@@ -33,7 +33,7 @@ public class CurrentBestLearner implements AttributeLearning {
 
 	//
 	// START-Learner
-	public void train(AttributeSamples ds) {
+	public void train(FeatureDataset ds) {
 		folDSDomain = new FOLDataSetDomain(ds.specification, trueGoalValue);
 		List<FOLExample> folExamples = new ArrayList<FOLExample>();
 		int egNo = 1;
@@ -73,7 +73,7 @@ public class CurrentBestLearner implements AttributeLearning {
 		return prediction;
 	}
 
-	public int[] test(AttributeSamples ds) {
+	public int[] test(FeatureDataset ds) {
 		int[] results = new int[] { 0, 0 };
 
 		for (Features e : ds.samples) {

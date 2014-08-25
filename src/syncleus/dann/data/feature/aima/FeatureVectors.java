@@ -11,18 +11,18 @@ import syncleus.dann.data.vector.VectorDataset;
  * Collects a set of numeric attributes to a list of vectors
  * TODO parameter for default value when data element missing
  */
-public class AttributeVectors extends VectorDataset {
+public class FeatureVectors extends VectorDataset {
 
     public final Map<String, Integer> fields = new HashMap();
     public final List<Features> items = new ArrayList();
     
-    public AttributeVectors() {
+    public FeatureVectors() {
         super();
         
         
     }
 
-    public AttributeVectors(Collection<? extends Features> states) {
+    public FeatureVectors(Collection<? extends Features> states) {
         this();
         for (Features a : states)
             add(a);
@@ -31,7 +31,7 @@ public class AttributeVectors extends VectorDataset {
     public void add(Features a) {
         //TODO use entryset
         for (String k : a.attributes.keySet()) {
-            if (a.attributes.get(k) instanceof NumericAttribute)
+            if (a.attributes.get(k) instanceof NumberFeature)
                 if (!fields.containsKey(k)) fields.put(k, fields.size());
         }
         

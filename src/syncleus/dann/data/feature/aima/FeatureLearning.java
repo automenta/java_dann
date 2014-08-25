@@ -4,8 +4,8 @@ package syncleus.dann.data.feature.aima;
  * @author Ravi Mohan
  * 
  */
-public interface AttributeLearning {
-	void train(AttributeSamples ds);
+public interface FeatureLearning {
+	void train(FeatureDataset ds);
 
 	/**
 	 * Returns the outcome predicted for the specified example
@@ -25,5 +25,5 @@ public interface AttributeLearning {
 	 * 
 	 * @return the accuracy of the hypothesis on the specified set of examples
 	 */
-	int[] test(AttributeSamples ds);
+	int[] test(FeatureDataset ds);
 }

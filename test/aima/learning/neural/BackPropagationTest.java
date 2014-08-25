@@ -3,7 +3,7 @@ package aima.test.core.unit.learning.neural;
 import org.junit.Assert;
 import org.junit.Test;
 
-import syncleus.dann.data.feature.aima.AttributeSamples;
+import syncleus.dann.data.feature.aima.FeatureDataset;
 import aima.learning.framework.DataSetFactory;
 import syncleus.dann.neural.aima.BackPropLearning;
 import syncleus.dann.neural.aima.FeedForwardNeuralNetwork;
@@ -121,7 +121,7 @@ public class BackPropagationTest {
 
 	@Test
 	public void testDataSetPopulation() throws Exception {
-		AttributeSamples irisDataSet = DataSetFactory.getIrisDataSet();
+		FeatureDataset irisDataSet = DataSetFactory.getIrisDataSet();
 		Numerizer numerizer = new IrisDataSetNumerizer();
 		NNDataSet innds = new IrisNNDataSet();
 
@@ -145,7 +145,7 @@ public class BackPropagationTest {
 
 	@Test
 	public void testPerceptron() throws Exception {
-		AttributeSamples irisDataSet = DataSetFactory.getIrisDataSet();
+		FeatureDataset irisDataSet = DataSetFactory.getIrisDataSet();
 		Numerizer numerizer = new IrisDataSetNumerizer();
 		NNDataSet innds = new IrisNNDataSet();
 

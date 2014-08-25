@@ -5,12 +5,12 @@ import java.util.Arrays;
 /**
  * LERP Updates the vector with a momentum parameter
  */
-public class LERPMomentumData implements Data {
+public class MomentumVectorData implements Data {
 
     protected final double[] currentData;
     public final double[] targetData;
 
-    public LERPMomentumData(int dimension) {
+    public MomentumVectorData(int dimension) {
         this.currentData = new double[dimension];
         this.targetData = new double[dimension];
     }

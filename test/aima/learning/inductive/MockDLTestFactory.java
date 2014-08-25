@@ -2,7 +2,7 @@ package aima.test.core.unit.learning.inductive;
 
 import java.util.List;
 
-import syncleus.dann.data.feature.aima.AttributeSamples;
+import syncleus.dann.data.feature.aima.FeatureDataset;
 import syncleus.dann.logic.inductive.DLTest;
 import syncleus.dann.logic.inductive.DLTestFactory;
 
@@ -19,7 +19,7 @@ public class MockDLTestFactory extends DLTestFactory {
 	}
 
 	@Override
-	public List<DLTest> createDLTestsWithAttributeCount(AttributeSamples ds, int i) {
+	public List<DLTest> createDLTestsWithAttributeCount(FeatureDataset ds, int i) {
 		return tests;
 	}
 }

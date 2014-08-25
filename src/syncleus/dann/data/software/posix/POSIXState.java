@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import syncleus.dann.data.DataCase;
-import syncleus.dann.data.feature.aima.AttributeVectorsNormalized;
+import syncleus.dann.data.feature.aima.NormalizedFeatureVectors;
 import syncleus.dann.data.feature.aima.Features;
 import syncleus.dann.data.vector.FourierVectorDataset;
 import syncleus.dann.data.vector.VectorData;
@@ -50,7 +50,7 @@ public class POSIXState extends Features {
             Thread.sleep(100);
         }
         
-        AttributeVectorsNormalized n = new AttributeVectorsNormalized(states);
+        NormalizedFeatureVectors n = new NormalizedFeatureVectors(states);
         VectorDataset d = n.toDataset();
         System.out.println(n.fields);
         for (DataCase<VectorData> c : d.getData()) {

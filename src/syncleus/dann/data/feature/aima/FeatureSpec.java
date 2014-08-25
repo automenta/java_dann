@@ -4,11 +4,11 @@ package syncleus.dann.data.feature.aima;
  * @author Ravi Mohan
  * 
  */
-public interface AttributeSpecification {
+public interface FeatureSpec {
 
 	boolean isValid(String string);
 
-	String getAttributeName();
+	String getFeatureName();
 
-	Feature createAttribute(String rawValue);
+	Feature newFeature(String rawValue);
 }

@@ -2,10 +2,9 @@ package syncleus.dann.logic.learn;
 
 import java.util.Iterator;
 import java.util.List;
-
-import syncleus.dann.data.feature.aima.AttributeSamples;
+import syncleus.dann.data.feature.aima.FeatureDataset;
+import syncleus.dann.data.feature.aima.FeatureLearning;
 import syncleus.dann.data.feature.aima.Features;
-import syncleus.dann.data.feature.aima.AttributeLearning;
 import syncleus.dann.logic.inductive.ConstantDecisonTree;
 import syncleus.dann.logic.inductive.DecisionTree;
 import syncleus.dann.util.AimaUtil;
@@ -14,7 +13,7 @@ import syncleus.dann.util.AimaUtil;
  * @author Ravi Mohan
  * @author Mike Stampone
  */
-public class DecisionTreeLearner implements AttributeLearning {
+public class DecisionTreeLearner implements FeatureLearning {
 	private DecisionTree tree;
 
 	private String defaultValue;
@@ -40,8 +39,8 @@ public class DecisionTreeLearner implements AttributeLearning {
 	 *            a set of examples for constructing the decision tree
 	 */
 	@Override
-	public void train(AttributeSamples ds) {
-		List<String> attributes = ds.getNonTargetAttributes();
+	public void train(FeatureDataset ds) {
+		List<String> attributes = ds.getNonTargetFeatures();
 		this.tree = decisionTreeLearning(ds, attributes,
 				new ConstantDecisonTree(defaultValue));
 	}
@@ -52,7 +51,7 @@ public class DecisionTreeLearner implements AttributeLearning {
 	}
 
 	@Override
-	public int[] test(AttributeSamples ds) {
+	public int[] test(FeatureDataset ds) {
 		int[] results = new int[] { 0, 0 };
 
 		for (Features e : ds.samples) {
@@ -81,7 +80,7 @@ public class DecisionTreeLearner implements AttributeLearning {
 	// PRIVATE METHODS
 	//
 
-	private DecisionTree decisionTreeLearning(AttributeSamples ds,
+	private DecisionTree decisionTreeLearning(FeatureDataset ds,
 			List<String> attributeNames, ConstantDecisonTree defaultTree) {
 		if (ds.size() == 0) {
 			return defaultTree;
@@ -99,7 +98,7 @@ public class DecisionTreeLearner implements AttributeLearning {
 
 		List<String> values = ds.getPossibleAttributeValues(chosenAttribute);
 		for (String v : values) {
-			AttributeSamples filtered = ds.matchingDataSet(chosenAttribute, v);
+			FeatureDataset filtered = ds.matchingDataSet(chosenAttribute, v);
 			List<String> newAttribs = AimaUtil.removeFrom(attributeNames,
 					chosenAttribute);
 			DecisionTree subTree = decisionTreeLearning(filtered, newAttribs, m);
@@ -110,13 +109,13 @@ public class DecisionTreeLearner implements AttributeLearning {
 		return tree;
 	}
 
-	private ConstantDecisonTree majorityValue(AttributeSamples ds) {
-		AttributeLearning learner = new MajorityLearner();
+	private ConstantDecisonTree majorityValue(FeatureDataset ds) {
+		FeatureLearning learner = new MajorityLearner();
 		learner.train(ds);
 		return new ConstantDecisonTree(learner.predict(ds.get(0)));
 	}
 
-	private String chooseAttribute(AttributeSamples ds, List<String> attributeNames) {
+	private String chooseAttribute(FeatureDataset ds, List<String> attributeNames) {
 		double greatestGain = 0.0;
 		String attributeWithGreatestGain = attributeNames.get(0);
 		for (String attr : attributeNames) {
@@ -130,7 +129,7 @@ public class DecisionTreeLearner implements AttributeLearning {
 		return attributeWithGreatestGain;
 	}
 
-	private boolean allExamplesHaveSameClassification(AttributeSamples ds) {
+	private boolean allExamplesHaveSameClassification(FeatureDataset ds) {
 		String classification = ds.get(0).targetValue();
 		Iterator<Features> iter = ds.iterator();
 		while (iter.hasNext()) {

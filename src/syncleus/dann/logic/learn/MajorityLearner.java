@@ -3,20 +3,20 @@ package syncleus.dann.logic.learn;
 import java.util.ArrayList;
 import java.util.List;
 
-import syncleus.dann.data.feature.aima.AttributeSamples;
+import syncleus.dann.data.feature.aima.FeatureDataset;
 import syncleus.dann.data.feature.aima.Features;
-import syncleus.dann.data.feature.aima.AttributeLearning;
+import syncleus.dann.data.feature.aima.FeatureLearning;
 import syncleus.dann.util.AimaUtil;
 
 /**
  * @author Ravi Mohan
  * 
  */
-public class MajorityLearner implements AttributeLearning {
+public class MajorityLearner implements FeatureLearning {
 
 	private String result;
 
-	public void train(AttributeSamples ds) {
+	public void train(FeatureDataset ds) {
 		List<String> targets = new ArrayList<String>();
 		for (Features e : ds.samples) {
 			targets.add(e.targetValue());
@@ -28,7 +28,7 @@ public class MajorityLearner implements AttributeLearning {
 		return result;
 	}
 
-	public int[] test(AttributeSamples ds) {
+	public int[] test(FeatureDataset ds) {
 		int[] results = new int[] { 0, 0 };
 
 		for (Features e : ds.samples) {

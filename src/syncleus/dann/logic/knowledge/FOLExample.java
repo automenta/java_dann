@@ -2,7 +2,6 @@ package syncleus.dann.logic.knowledge;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import syncleus.dann.data.feature.aima.Features;
 import syncleus.dann.logic.fol.Connectors;
 import syncleus.dann.logic.fol.parsing.ast.ConnectedSentence;
@@ -64,7 +63,7 @@ public class FOLExample {
 		// Create the classification sentence
 		classification = new Predicate(folDSDomain.getGoalPredicateName(),
 				terms);
-		if (!example.getAttributeValueAsString(
+		if (!example.getFeatureValueAsString(
 				folDSDomain.getDataSetTargetName()).equals(
 				folDSDomain.getTrueGoalValue())) {
 			// if not true then needs to be a Not sentence
@@ -84,13 +83,13 @@ public class FOLExample {
 			Sentence part = null;
 			if (folDSDomain.isMultivalued(dname)) {
 				terms.add(new Constant(folDSDomain.getFOLName(example
-						.getAttributeValueAsString(dname))));
+						.getFeatureValueAsString(dname))));
 				part = new Predicate(foldDName, terms);
 			} else {
 				part = new Predicate(foldDName, terms);
 				// Need to determine if false
 				if (!folDSDomain.getTrueGoalValue().equals(
-						example.getAttributeValueAsString(dname))) {
+						example.getFeatureValueAsString(dname))) {
 					part = new NotSentence(part);
 				}
 			}

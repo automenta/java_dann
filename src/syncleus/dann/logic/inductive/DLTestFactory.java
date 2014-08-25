@@ -2,8 +2,7 @@ package syncleus.dann.logic.inductive;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import syncleus.dann.data.feature.aima.AttributeSamples;
+import syncleus.dann.data.feature.aima.FeatureDataset;
 
 /**
  * @author Ravi Mohan
@@ -11,13 +10,13 @@ import syncleus.dann.data.feature.aima.AttributeSamples;
  */
 public class DLTestFactory {
 
-	public List<DLTest> createDLTestsWithAttributeCount(AttributeSamples ds, int i) {
+	public List<DLTest> createDLTestsWithAttributeCount(FeatureDataset ds, int i) {
 		if (i != 1) {
 			throw new RuntimeException(
 					"For now DLTests with only 1 attribute can be craeted , not"
 							+ i);
 		}
-		List<String> nonTargetAttributes = ds.getNonTargetAttributes();
+		List<String> nonTargetAttributes = ds.getNonTargetFeatures();
 		List<DLTest> tests = new ArrayList<DLTest>();
 		for (String ntAttribute : nonTargetAttributes) {
 			List<String> ntaValues = ds.getPossibleAttributeValues(ntAttribute);

@@ -15,11 +15,11 @@ import syncleus.dann.math.NumericRange;
  *
  * @author me
  */
-public class AttributeVectorsNormalized extends AttributeVectors {
+public class NormalizedFeatureVectors extends FeatureVectors {
 
     public final List<NumericRange> ranges = new ArrayList();
 
-    public AttributeVectorsNormalized(Collection<? extends Features> states) {
+    public NormalizedFeatureVectors(Collection<? extends Features> states) {
         super(states);
     }
     

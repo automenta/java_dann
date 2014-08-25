@@ -29,7 +29,7 @@ public class Features {
             attributes.put(attr, value);
         }
         public void set(String attr, double v) {
-            NumericAttribute av = new NumericAttribute(v, new NumericAttributeSpecification(attr));
+            NumberFeature av = new NumberFeature(v, new NumberFeatureSpec(attr));
             attributes.put(attr, av);
         }
         /*
@@ -100,11 +100,11 @@ public class Features {
 
 	public double getFeatureValueAsDouble(String attributeName) {
 		Feature attribute = attributes.get(attributeName);
-		if (attribute == null || !(attribute instanceof NumericAttribute)) {
+		if (attribute == null || !(attribute instanceof NumberFeature)) {
 			throw new RuntimeException(
 					"cannot return numerical value for non numeric attribute");
 		}
-		return ((NumericAttribute) attribute).valueAsDouble();
+		return ((NumberFeature) attribute).valueAsDouble();
 	}
 
 	@Override
@@ -138,12 +138,12 @@ public class Features {
 		HashMap<String, Feature> numerizedExampleData = new HashMap<String, Feature>();
 		for (String key : attributes.keySet()) {
 			Feature attribute = attributes.get(key);
-			if (attribute instanceof StringAttribute) {
+			if (attribute instanceof StringFeature) {
 				int correspondingNumber = attrValueToNumber.get(key).get(
 						attribute.valueAsString());
-				NumericAttributeSpecification spec = new NumericAttributeSpecification(
+				NumberFeatureSpec spec = new NumberFeatureSpec(
 						key);
-				numerizedExampleData.put(key, new NumericAttribute(
+				numerizedExampleData.put(key, new NumberFeature(
 						correspondingNumber, spec));
 			} else {// Numeric Feature
 				numerizedExampleData.put(key, attribute);
