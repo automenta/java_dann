@@ -1,6 +1,7 @@
 package syncleus.dann.data.feature.aima;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,7 +22,7 @@ public class AttributeVectors extends VectorDataset {
         
     }
 
-    public AttributeVectors(List<? extends Features> states) {
+    public AttributeVectors(Collection<? extends Features> states) {
         this();
         for (Features a : states)
             add(a);

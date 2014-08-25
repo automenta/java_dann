@@ -16,7 +16,7 @@ public class MutableVector extends Vector {
     }
 
     public MutableVector(final Vector v) {
-        this(v.data);
+        this(v.getData());
     }
 
     public void set(final double coordinate, final int dimension) {
@@ -47,7 +47,7 @@ public class MutableVector extends Vector {
             throw new IllegalArgumentException("absolutePoint can not be null!");
         }
 
-        final double[] absoluteCoords = absolutePoint.data;
+        final double[] absoluteCoords = absolutePoint.getData();
 
         if (absoluteCoords.length != data.length) {
             throw new IllegalArgumentException(
@@ -64,14 +64,14 @@ public class MutableVector extends Vector {
      * same as Add, but modifies this vector
      */
     public void plus(final Vector pointToAdd) {
-        final double pc[] = pointToAdd.data;
+        final double pc[] = pointToAdd.getData();
         for (int coordIndex = 0; coordIndex < data.length; coordIndex++) {
             data[coordIndex] += pc[coordIndex];
         }
     }
 
     public void set(final Vector align) {
-        System.arraycopy(align.data, 0, data, 0,
+        System.arraycopy(align.getData(), 0, data, 0,
                 data.length);
     }
 

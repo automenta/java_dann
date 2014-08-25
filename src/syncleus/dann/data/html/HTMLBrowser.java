@@ -14,7 +14,6 @@ import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import netscape.javascript.JSObject;
-import org.w3c.dom.Document;
 
  
 public class HTMLBrowser extends Application {
@@ -24,7 +23,7 @@ public class HTMLBrowser extends Application {
  
         WebView view = new WebView();
         WebEngine engine = view.getEngine();
-        engine.load("http://localhost:8080/");
+        engine.load("http://enenews.com");
         root.getChildren().add(view);
         
         Scene scene = new Scene(root, 800, 600);
@@ -64,7 +63,7 @@ public class HTMLBrowser extends Application {
                                 "else A = A.concat(deepText(node));"+
                                 "node= node.nextSibling;"+
                                 "} } return A; } deepText(document.body).map(function(e) { "+
-                            "var rect = e.parentElement.getClientRects()[0]; return [ e.textContent.trim(), rect.top, rect.bottom, rect.left, rect.right ];  }); ";
+                            "var rect = e.parentElement.getClientRects()[0]; return [ e.textContent.trim(), rect!=null ? rect.right - rect.left : 0, rect!=null ? rect.bottom - rect.top : 0 ];  }); ";
                             //wholeText,length,data,previousSibling,parentNode,lastChild,baseURI,firstChild,nodeValue,textContent,nodeType,nodeName,prefix,childNodes,nextSibling,ownerDocument,namespaceURI,localName,parentElement
                             
                             
@@ -77,14 +76,8 @@ public class HTMLBrowser extends Application {
                     }
                 }
             });
-          
-          
-        Thread.sleep(100);
-        
-        Document d = engine.getDocument();
-        for (Node n : getAllNodes(view)) {
-            System.out.println(n);
-        }
+
+
         
     }
  

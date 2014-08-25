@@ -7,6 +7,7 @@
 package syncleus.dann.data.feature.aima;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import syncleus.dann.math.NumericRange;
 
@@ -18,7 +19,7 @@ public class AttributeVectorsNormalized extends AttributeVectors {
 
     public final List<NumericRange> ranges = new ArrayList();
 
-    public AttributeVectorsNormalized(List<? extends Features> states) {
+    public AttributeVectorsNormalized(Collection<? extends Features> states) {
         super(states);
     }
     
