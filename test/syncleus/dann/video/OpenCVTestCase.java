@@ -16,18 +16,17 @@
 
 package syncleus.dann.video;
 
-import syncleus.dann.data.video.TLDUtil;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicBoolean;
 import junit.framework.TestCase;
-
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.core.Point;
 import org.opencv.core.Size;
 import syncleus.dann.data.video.ParamsClassifiers;
 import syncleus.dann.data.video.PatchGenerator;
+import syncleus.dann.data.video.TLDUtil;
 import syncleus.dann.data.video.TLDUtil.Pair;
 import syncleus.dann.data.video.TLDUtil.RNG;
 
@@ -86,19 +85,19 @@ public abstract class OpenCVTestCase extends TestCase {
 	public static class DummyParamsClassifier extends ParamsClassifiers {
             private int nstructs;
             private int structSize;
-		DummyParamsClassifier(int nstructs, int structSize) {
+		public DummyParamsClassifier(int nstructs, int structSize) {
 			this.nstructs = nstructs;
 			this.structSize = structSize;
 		}
 		
-		DummyParamsClassifier(float valid, float ncc_thesame, float pos_thr_nn, float neg_thr_nn){
+		public DummyParamsClassifier(float valid, float ncc_thesame, float pos_thr_nn, float neg_thr_nn){
 			this.valid = valid;
 			this.ncc_thesame = ncc_thesame;
 			this.pos_thr_nn = pos_thr_nn;
 			this.neg_thr_nn = neg_thr_nn;
 		}
-	} 	
-	
+        }
+        
 	
 	
 	protected void log(List<Pair<int[], Integer>> ferns){

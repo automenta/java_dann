@@ -21,7 +21,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
-
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.core.Point;
@@ -214,9 +213,9 @@ public class TLDUtil {
 	
 	
 	public static final class NNConfStruct {
-		final IsinStruct isin;
-		final float relativeSimilarity;
-		final float conservativeSimilarity;
+		public final IsinStruct isin;
+		public final float relativeSimilarity;
+		public final float conservativeSimilarity;
 		
 		
 		public NNConfStruct(IsinStruct isin, float relativeSimilarity, float conservativeSimilarity) {

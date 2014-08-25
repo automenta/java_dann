@@ -344,6 +344,13 @@ public class VectorDataset implements Serializable, Dataset<VectorData>, Cloneab
         return data.toString();
     }
 
-    
+    /** returns all values of a particular input; a cross-section of the dataset */
+    public double[] getInputs(int input) {
+        double[] d = new double[data.size()];
+        for (int i = 0; i < data.size(); i++) {
+            d[i] = data.get(i).getInput().getData(input);
+        }
+        return d;
+    }
     
 }

@@ -1,9 +1,9 @@
 package syncleus.dann.data.random;
 
 import java.util.Random;
-import syncleus.dann.data.AbstractLERPMomentumData;
+import syncleus.dann.data.LERPMomentumData;
 
-public class UniformRandomData extends AbstractLERPMomentumData {
+public class UniformRandomData extends LERPMomentumData {
     private double min;
     private double max;
     private Random random;

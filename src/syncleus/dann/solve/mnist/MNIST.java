@@ -14,6 +14,9 @@ import java.util.zip.GZIPInputStream;
  * @author Gabe Johnson <johnsogg@cmu.edu>
  */
 public class MNIST {
+    public int numCols;
+    public int numRows;
+
 
     public static class MNISTImage {
         public final byte label;
@@ -68,6 +71,10 @@ public class MNIST {
      * @throws IOException
      */
     public MNIST(String path, int maxImages, int maxDigit) throws IOException {
+        this(path, maxImages, maxDigit, 0);        
+    }
+    
+    public MNIST(String path, int maxImages, int maxDigit, int imageOffset) throws IOException {
         
         images = new ArrayList(maxImages);
         
@@ -86,8 +93,8 @@ public class MNIST {
         }
         int numLabels = labelStream.readInt();
         int numImages = imageStream.readInt();
-        int numRows = imageStream.readInt();
-        int numCols = imageStream.readInt();
+        numRows = imageStream.readInt();
+        numCols = imageStream.readInt();
         if (numLabels != numImages) {
             System.err.println("Image file and label file do not contain the same number of entries.");
             System.err.println("  Label file contains: " + numLabels);
@@ -135,6 +142,22 @@ public class MNIST {
         System.out.println("Read " + numLabelsRead + " samples in " + minutes + " m " + seconds + " s ");
     }
 
+    public double[][] getLabelVectors(boolean notEmpty) {
+        
+        double[][] d = new double[images.size()][10];
+        
+        if (notEmpty) {
+            for (int i = 0; i < images.size(); i++) {
+                byte l = images.get(i).label;
+
+                d[i][l] = 1.0;
+            }    
+        }
+        
+        return d;
+        
+    }
+    
     public double[][] getImageVectors() {
         double[][] v = new double[images.size()][];
         for (int i = 0; i < images.size(); i++) {

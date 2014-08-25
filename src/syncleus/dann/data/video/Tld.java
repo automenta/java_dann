@@ -25,7 +25,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
-
 import org.opencv.core.Core;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
@@ -35,9 +34,6 @@ import org.opencv.core.Rect;
 import org.opencv.core.Scalar;
 import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
-
-
-
 import syncleus.dann.data.video.Parameters.ParamsTld;
 import syncleus.dann.data.video.TLDUtil.DefaultRNG;
 import syncleus.dann.data.video.TLDUtil.NNConfStruct;
@@ -49,9 +45,9 @@ public class Tld {
 	private static final int MAX_DETECTED = 100;
 	
 	
-	ParamsTld _params;
-	FernEnsembleClassifier _classifierFern;
-	NNClassifier _classifierNN;
+	protected ParamsTld _params;
+	public FernEnsembleClassifier _classifierFern;
+	public final NNClassifier _classifierNN;
 	private final LKTracker _tracker = new LKTracker();
 	private PatchGenerator _patchGenerator; // FIXME UNUSED, why !?
 	private final RNG _rng = new DefaultRNG();
@@ -68,8 +64,8 @@ public class Tld {
 	private float _var; // variance of the initial patch/box. Will be used by the 1st stage of the classifier.
 	
 	// Training data
-	Mat _pExample = new Mat(); // positive NN example
-	final List<Pair<int[], Boolean>> _pFerns = new ArrayList<Pair<int[], Boolean>>();	//positive ferns <allFernsHashCodes, true>
+	public final Mat _pExample = new Mat(); // positive NN example
+	public final List<Pair<int[], Boolean>> _pFerns = new ArrayList<Pair<int[], Boolean>>();	//positive ferns <allFernsHashCodes, true>
 	private final List<Mat> _pPatterns = new ArrayList<Mat>(); //positive patches to display
 	private List<Mat> _nExamples;
 
@@ -85,19 +81,19 @@ public class Tld {
 	Grid _grid;
 	  
 	
-	public Tld(Properties parameters){
-		_params = new ParamsTld(parameters);
-		_classifierFern = new FernEnsembleClassifier(parameters);
-		_classifierNN = new NNClassifier(parameters);
+        public Tld(ParamsTld params) {
+                _params = params;
+		_classifierFern = new FernEnsembleClassifier(params.props);
+		_classifierNN = new NNClassifier(params.props);
 		_patchGenerator = new PatchGenerator(0, 0, _params.noise_init, true, 1 - _params.scale_init, 1 + _params.scale_init,
 				-_params.angle_init * Math.PI / 180f, _params.angle_init * Math.PI / 180f, 
 				-_params.angle_init * Math.PI / 180f, _params.angle_init * Math.PI / 180f);
 	
 		_pExample.create(_params.patch_size, _params.patch_size, CvType.CV_64F);
-	}
-
-	public Tld() {
-		// for TESTING only
+            
+        }
+	public Tld(Properties parameters){
+		this(new ParamsTld(parameters));
 	}
 
 	public void init(Mat frame1, Rect trackedBox) {
@@ -649,7 +645,7 @@ public class Tld {
 	 * - Positive fern features (pFerns) 
 	 * - Positive NN examples (pExample)
 	 */
-	void generatePositiveData(final Mat frame, final int numWarps, final Grid aGrid) {
+	public void generatePositiveData(final Mat frame, final int numWarps, final Grid aGrid) {
 		resizeZeroMeanStdev(frame.submat(aGrid.getBestBox()), _pExample, _params.patch_size);
 		//Get Fern features on warped patches
 		final Mat img = new Mat();

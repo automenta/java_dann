@@ -22,8 +22,8 @@ public class Parameters {
 	protected final Properties props;
 	
 	public static class ParamsTld extends Parameters{
-		int min_win;
-		int patch_size;
+		protected int min_win;
+		protected int patch_size;
 		
 		// initial parameters for positive examples
 		int num_closest_init;

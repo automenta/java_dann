@@ -1,12 +1,14 @@
+package syncleus.dann.learn.autoencoder;
+
 import java.util.Random;
 
 public class HiddenLayer {
 	public int N;
-	public int n_in;
-	public int n_out;
-	public double[][] W;
-	public double[] b;
-	public Random rng;
+	final public int n_in;
+	final public int n_out;
+	final public double[][] W;
+	final public double[] b;
+	final public Random rng;
 	
 	public double uniform(double min, double max) {
 		return rng.nextDouble() * (max - min) + min;
@@ -57,7 +59,7 @@ public class HiddenLayer {
 		else this.b = b;
 	}
 	
-	public double output(int[] input, double[] w, double b) {
+	public double output(final double[] input, final double[] w, final double b) {
 		double linear_output = 0.0;
 		for(int j=0; j<n_in; j++) {
 			linear_output += w[j] * input[j];
@@ -66,7 +68,7 @@ public class HiddenLayer {
 		return sigmoid(linear_output);
 	}
 	
-	public void sample_h_given_v(int[] input, int[] sample) {
+	public void sample_h_given_v(final double[] input, final double[] sample) {
 		for(int i=0; i<n_out; i++) {
 			sample[i] = binomial(1, output(input, W[i], b[i]));
 		}

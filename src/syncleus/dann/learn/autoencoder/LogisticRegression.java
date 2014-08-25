@@ -1,3 +1,4 @@
+package syncleus.dann.learn.autoencoder;
 
 public class LogisticRegression {
 	public int N;
@@ -15,7 +16,7 @@ public class LogisticRegression {
 		b = new double[this.n_out];
 	}
 	
-	public void train(int[] x, int[] y, double lr) {
+	public void train(double[] x, double[] y, double lr) {
 		double[] p_y_given_x = new double[n_out];
 		double[] dy = new double[n_out];
 		
@@ -59,7 +60,7 @@ public class LogisticRegression {
 		}
 	}
 	
-	public void predict(int[] x, double[] y) {
+	public void predict(double[] x, double[] y) {
 		for(int i=0; i<n_out; i++) {
 			y[i] = 0;
 			for(int j=0; j<n_in; j++) {

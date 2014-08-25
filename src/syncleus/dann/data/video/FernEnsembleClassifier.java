@@ -18,33 +18,28 @@ package syncleus.dann.data.video;
 
 import java.util.List;
 import java.util.Properties;
-
 import org.opencv.core.Mat;
 import org.opencv.core.Size;
-
-import android.util.Log;
-
-import syncleus.dann.data.video.ParamsClassifiers;
 import syncleus.dann.data.video.TLDUtil.Pair;
 import syncleus.dann.data.video.TLDUtil.RNG;
 
 
-class FernEnsembleClassifier {
+public class FernEnsembleClassifier {
 	ParamsClassifiers params;
 	private Fern[] ferns;
 	
 //	final List<Mat> pExamples = new ArrayList<Mat>();
 //	final List<Mat> nExamples = new ArrayList<Mat>();
 
-	FernEnsembleClassifier(){
+	public FernEnsembleClassifier(){
 	}
 	
-	FernEnsembleClassifier(Properties props) {
+	public FernEnsembleClassifier(Properties props) {
 		params = new ParamsClassifiers(props);
 	}
 
 
-	void init(Size[] scales, RNG rng){
+	public void init(Size[] scales, RNG rng){
 		ferns = new Fern[params.numFerns];
 		for(int i=0; i<ferns.length; i++){
 			ferns[i] = new Fern(params.numFeaturesPerFern, scales, rng);
@@ -197,7 +192,7 @@ class FernEnsembleClassifier {
 			final int pos1 = y1 * cols + x1;
 			final int pos2 = y2 * cols + x2;
 			if(pos1 >= patch.length || pos2 >= patch.length) {
-				Log.w(TLDUtil.TAG, "Bad patch of size: " + patch.length + " cols: " + cols + " to compare Feature: " + this.toString());
+				System.out.println("Bad patch of size: " + patch.length + " cols: " + cols + " to compare Feature: " + this.toString());
 				return 0;
 			}
 			

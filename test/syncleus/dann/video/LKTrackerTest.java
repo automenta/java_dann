@@ -16,17 +16,13 @@
 
 package syncleus.dann.video;
 
-import syncleus.dann.data.video.LKTracker;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 import org.opencv.core.Mat;
 import org.opencv.core.Point;
 import org.opencv.imgproc.Imgproc;
-
-import android.util.Log;
-
+import syncleus.dann.data.video.LKTracker;
 import syncleus.dann.data.video.TLDUtil.Pair;
 
 public class LKTrackerTest extends OpenCVTestCase{
@@ -48,8 +44,10 @@ public class LKTrackerTest extends OpenCVTestCase{
 		Imgproc.cvtColor(img2, img2, Imgproc.COLOR_RGB2GRAY);
 
 		Pair<Point[], Point[]> result = new LKTracker().track(img1, img2, toPoints(LAST_POINTS_IN));
-Log.i(UtilTest.TAG, Arrays.asList(result.first).toString());
-Log.i(UtilTest.TAG, Arrays.asList(result.second).toString());
+                
+                System.out.println(Arrays.asList(result.first).toString());
+                System.out.println(Arrays.asList(result.second).toString());
+                
 		assertNotNull("The tracking is broken, can't even return a non null result !", result);
 		for(int i=0; i<result.first.length; i++){
 			assertEquals("Last points OUT, different for index: " + i, new Point(LAST_POINTS_OUT[i]), result.first[i]);

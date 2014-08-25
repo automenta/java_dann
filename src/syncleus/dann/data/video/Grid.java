@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
-
 import org.opencv.core.Mat;
 import org.opencv.core.Rect;
 import org.opencv.core.Size;
@@ -31,17 +30,17 @@ public class Grid implements Iterable<BoundingBox>{
 	
 	private static final float SHIFT = 0.1f;
 	private static final float[] SCALES = {
-	  			0.16151f, 0.19381f, 0.23257f, 0.27908f, 0.33490f, 0.40188f, 0.48225f,
+             		0.16151f, 0.19381f, 0.23257f, 0.27908f, 0.33490f, 0.40188f, 0.48225f,
 	  			0.57870f, 0.69444f, 0.83333f, 1f, 1.20000f, 1.44000f, 1.72800f,
 	  			2.07360f, 2.48832f, 2.98598f, 3.58318f, 4.29982f, 5.15978f, 6.19174f};	
 	
 	
-	final List<BoundingBox> grid = new ArrayList<BoundingBox>();
-	private final List<Size> trackedBoxScales = new ArrayList<Size>();
-	final List<BoundingBox> goodBoxes = new ArrayList<BoundingBox>();	//bboxes with overlap > GOOD_OVERLAP
-	final private List<BoundingBox> badBoxes = new ArrayList<BoundingBox>();	//bboxes with overlap < BAD_OVERLAP
-	BoundingBox bbHull = new BoundingBox(); // hull of good_boxes
-	BoundingBox bestBox; // maximum overlapping bbox
+	public final List<BoundingBox> grid = new ArrayList<BoundingBox>();
+	public final List<Size> trackedBoxScales = new ArrayList<Size>();
+	public final List<BoundingBox> goodBoxes = new ArrayList<BoundingBox>();	//bboxes with overlap > GOOD_OVERLAP
+	public final List<BoundingBox> badBoxes = new ArrayList<BoundingBox>();	//bboxes with overlap < BAD_OVERLAP
+	public BoundingBox bbHull = new BoundingBox(); // hull of good_boxes
+	public BoundingBox bestBox; // maximum overlapping bbox
 	
 	public Grid(){
 	}

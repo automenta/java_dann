@@ -18,7 +18,6 @@ package syncleus.dann.data.video;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfByte;
@@ -29,12 +28,9 @@ import org.opencv.core.Size;
 import org.opencv.core.TermCriteria;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.video.Video;
-
-import android.util.Log;
-
 import syncleus.dann.data.video.TLDUtil.Pair;
 
-class LKTracker {
+public class LKTracker {
 	private static final int MAX_COUNT = 20;
 	private static final double EPSILON = 0.03;
 	private static final Size WINDOW_SIZE = new Size(4, 4);
@@ -47,7 +43,7 @@ class LKTracker {
 	
 
 	
-	LKTracker(){
+	public LKTracker(){
 		termCriteria = new TermCriteria(TermCriteria.COUNT + TermCriteria.EPS, MAX_COUNT, EPSILON);
 	}
 	
@@ -55,7 +51,7 @@ class LKTracker {
 	/**
 	 * @return Pair of new, FILTERED, last and current POINTS, or null if it hasn't managed to track anything.
 	 */
-	Pair<Point[], Point[]> track(final Mat lastImg, final Mat currentImg, Point[] lastPoints){
+	public Pair<Point[], Point[]> track(final Mat lastImg, final Mat currentImg, Point[] lastPoints){
 		final int size = lastPoints.length;
 		final MatOfPoint2f currentPointsMat = new MatOfPoint2f();
 		final MatOfPoint2f pointsFBMat = new MatOfPoint2f();
@@ -157,7 +153,7 @@ class LKTracker {
 		return size > 0 ? new Pair<Point[], Point[]>(filteredLastPoints2.toArray(new Point[size]), filteredCurrentPoints2.toArray(new Point[size])) : null;
 	}
 	
-	float getMedianErrFB(){
+	public float getMedianErrFB(){
 		return errFBMed;
 	}
 }

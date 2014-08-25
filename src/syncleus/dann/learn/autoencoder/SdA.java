@@ -1,3 +1,5 @@
+package syncleus.dann.learn.autoencoder;
+
 import java.util.Random;
 
 public class SdA {
@@ -7,7 +9,7 @@ public class SdA {
 	public int n_outs;
 	public int n_layers;
 	public HiddenLayer[] sigmoid_layers;
-	public dA[] dA_layers;
+	public DenoisingAutoencoder[] dA_layers;
 	public LogisticRegression log_layer;
 	public Random rng;
 
@@ -25,7 +27,7 @@ public class SdA {
 		this.n_layers = n_layers;
 		
 		this.sigmoid_layers = new HiddenLayer[n_layers];
-		this.dA_layers = new dA[n_layers];
+		this.dA_layers = new DenoisingAutoencoder[n_layers];
 
 		if(rng == null)	this.rng = new Random(1234);
 		else this.rng = rng;		
@@ -42,17 +44,18 @@ public class SdA {
 			this.sigmoid_layers[i] = new HiddenLayer(this.N, input_size, this.hidden_layer_sizes[i], null, null, rng);
 			
 			// construct dA_layer
-			this.dA_layers[i] = new dA(this.N, input_size, this.hidden_layer_sizes[i], this.sigmoid_layers[i].W, this.sigmoid_layers[i].b, null, rng);
+			this.dA_layers[i] = new DenoisingAutoencoder(input_size, this.hidden_layer_sizes[i], this.sigmoid_layers[i].W, this.sigmoid_layers[i].b, null, rng);
+                        
 		}
 		
 		// layer for output using LogisticRegression
 		this.log_layer = new LogisticRegression(this.N, this.hidden_layer_sizes[this.n_layers-1], this.n_outs);
 	}
 	
-	public void pretrain(int[][] train_X, double lr, double corruption_level, int epochs) {
-		int[] layer_input = new int[0];
+	public void pretrain(double[][] train_X, double lr, double corruption_level, int epochs) {
+		double[] layer_input = new double[0];
 		int prev_layer_input_size;
-		int[] prev_layer_input;
+		double[] prev_layer_input;
 				
 		for(int i=0; i<n_layers; i++) {  // layer-wise			
 			for(int epoch=0; epoch<epochs; epoch++) {  // training epochs
@@ -61,16 +64,16 @@ public class SdA {
 					for(int l=0; l<=i; l++) {
 						
 						if(l == 0) {
-							layer_input = new int[n_ins];
+							layer_input = new double[n_ins];
 							for(int j=0; j<n_ins; j++) layer_input[j] = train_X[n][j];
 						} else {
 							if(l == 1) prev_layer_input_size = n_ins;
 							else prev_layer_input_size = hidden_layer_sizes[l-2];
 							
-							prev_layer_input = new int[prev_layer_input_size];
+							prev_layer_input = new double[prev_layer_input_size];
 							for(int j=0; j<prev_layer_input_size; j++) prev_layer_input[j] = layer_input[j];
 							
-							layer_input = new int[hidden_layer_sizes[l-1]];
+							layer_input = new double[hidden_layer_sizes[l-1]];
 							
 							sigmoid_layers[l-1].sample_h_given_v(prev_layer_input, layer_input);
 						}
@@ -82,10 +85,10 @@ public class SdA {
 		}
 	}
 		
-	public void finetune(int[][] train_X, int[][] train_Y, double lr, int epochs) {
-		int[] layer_input = new int[0];
+	public void finetune(double[][] train_X, double[][] train_Y, double lr, int epochs) {
+		double[] layer_input = new double[0];
 		// int prev_layer_input_size;
-		int[] prev_layer_input = new int[0];
+		double[] prev_layer_input = new double[0];
 		
 		for(int epoch=0; epoch<epochs; epoch++) {
 			for(int n=0; n<N; n++) {
@@ -93,14 +96,14 @@ public class SdA {
 				// layer input
 				for(int i=0; i<n_layers; i++) {
 					if(i == 0) {
-						prev_layer_input = new int[n_ins];
+						prev_layer_input = new double[n_ins];
 						for(int j=0; j<n_ins; j++) prev_layer_input[j] = train_X[n][j];
 					} else {
-						prev_layer_input = new int[hidden_layer_sizes[i-1]];
+						prev_layer_input = new double[hidden_layer_sizes[i-1]];
 						for(int j=0; j<hidden_layer_sizes[i-1]; j++) prev_layer_input[j] = layer_input[j];
 					}
 					
-					layer_input = new int[hidden_layer_sizes[i]];
+					layer_input = new double[hidden_layer_sizes[i]];
 					sigmoid_layers[i].sample_h_given_v(prev_layer_input, layer_input);
 				}
 				
@@ -110,7 +113,7 @@ public class SdA {
 		}
 	}
 	
-	public void predict(int[] x, double[] y) {
+	public void predict(double[] x, double[] y) {
 		double[] layer_input = new double[0];
 		// int prev_layer_input_size;
 		double[] prev_layer_input = new double[n_ins];
@@ -168,7 +171,7 @@ public class SdA {
 		int n_layers = hidden_layer_sizes.length;
 		
 		// training data
-		int[][] train_X = {
+		double[][] train_X = {
 			{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 			{0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 			{1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -181,7 +184,7 @@ public class SdA {
 			{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1}
 		};
 
-		int[][] train_Y = {
+		double[][] train_Y = {
 			{1, 0},
 			{1, 0},
 			{1, 0},
@@ -205,7 +208,7 @@ public class SdA {
 		
 
 		// test data
-		int[][] test_X = {
+		double[][] test_X = {
 			{1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 			{1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 			{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1},

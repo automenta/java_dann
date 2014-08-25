@@ -16,12 +16,14 @@
 
 package syncleus.dann.video;
 
-import syncleus.dann.data.video.Tld;
-import syncleus.dann.data.video.BoundingBox;
-import syncleus.dann.data.video.TLDUtil;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.core.Size;
+import syncleus.dann.data.video.BoundingBox;
+import syncleus.dann.data.video.Grid;
+import syncleus.dann.data.video.Parameters.ParamsTld;
+import syncleus.dann.data.video.TLDUtil;
+import syncleus.dann.data.video.Tld;
 
 
 
@@ -45,9 +47,9 @@ public class TldTest extends OpenCVTestCase {
 		
 		final Mat img = getSimpleMat();
 		// manual init
-		final Tld tld = new Tld();
-		tld._params = new DummyParamsTld(1, patch_size);
+		final Tld tld = new Tld(new DummyParamsTld(1, patch_size));
 		Mat pattern = new Mat(patch_size, patch_size, CvType.CV_64F);
+                
 		final double stdev = tld.getPattern(img, pattern);
 		
 		final float[] patternF = TLDUtil.getFloatArray(pattern);
@@ -75,8 +77,7 @@ public class TldTest extends OpenCVTestCase {
 		final Mat img = getSimpleMat();
 	
 		// manual init
-		final Tld tld = new Tld();
-		tld._params = new DummyParamsTld(min_win, patch_size);
+		final Tld tld = new Tld(new DummyParamsTld(min_win, patch_size));
 
 		tld._pExample.create(patch_size, patch_size, CvType.CV_64F);
 		
@@ -86,10 +87,8 @@ public class TldTest extends OpenCVTestCase {
 		grid.goodBoxes.add(best_box);
 		grid.grid.add(best_box);
 		
-		final Size[] scales = new Size[]{new Size(2, 2)};
-		tld._classifier = new FerNNClassifier();
-		tld._classifier.params = new DummyParamsClassifier(nstructs, structSize);
-		tld._classifier.prepare(scales, new DummyRNG());
+		final Size[] scales = new Size[]{new Size(2, 2)};		
+		tld._classifierFern.init(scales, new DummyRNG());
 		
 		//tld.patchGenerator = new DummyPatchGenerator();
 

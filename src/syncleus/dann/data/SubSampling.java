@@ -18,7 +18,8 @@ package org.neuroph.util.data.sample;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import org.neuroph.core.data.DataSet;
+import syncleus.dann.data.Dataset;
+import syncleus.dann.data.vector.VectorDataset;
 
 /**
  * This class provides subsampling of a data set, and creates two subsets of a
@@ -26,16 +27,16 @@ import org.neuroph.core.data.DataSet;
  * 
  * @author Zoran Sevarac <sevarac@gmail.com>
  */
-public class SubSampling implements Sampling {
+public class SubSampling /*implements Sampling*/ {
     int percent;
 
     public SubSampling(int percent) {
         this.percent = percent;
     }
            
-    @Override
-    public DataSet[] sample(DataSet dataSet) {
-        DataSet[] subSets = new DataSet[2];
+    //@Override
+    public Dataset[] sample(Dataset dataSet) {
+        Dataset[] subSets = new Dataset[2];
 
         // create array of random idxs
         ArrayList<Integer> randoms = new ArrayList<>();
@@ -46,22 +47,22 @@ public class SubSampling implements Sampling {
         Collections.shuffle(randoms);
 
         int inputSize = dataSet.getInputSize();
-        int outputSize = dataSet.getOutputSize();
+        int outputSize = dataSet.getIdealSize();
                 
         // create sample data set
-        subSets[0] = new DataSet(inputSize, outputSize);
+        subSets[0] = new VectorDataset(/*inputSize, outputSize*/);
         int trainingElementsCount = dataSet.size() * percent / 100;
         for (int i = 0; i < trainingElementsCount; i++) {
             int idx = randoms.get(i);
-            subSets[0].addRow(dataSet.getRowAt(idx));
+            subSets[0].add(dataSet.getRecord(idx));
         }
 
         // create rest of rows to data set
-        subSets[1] = new DataSet(inputSize, outputSize);
+        subSets[1] = new VectorDataset(/*inputSize, outputSize*/);
         int testElementsCount = dataSet.size() - trainingElementsCount;
         for (int i = 0; i < testElementsCount; i++) {
             int idx = randoms.get(trainingElementsCount + i);
-            subSets[1].addRow(dataSet.getRowAt(idx));
+            subSets[1].add(dataSet.getRecord(idx));
         }
 
         return subSets;  

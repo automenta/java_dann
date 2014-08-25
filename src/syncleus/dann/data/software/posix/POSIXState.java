@@ -11,9 +11,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import syncleus.dann.data.DataCase;
 import syncleus.dann.data.feature.aima.AttributeVectorsNormalized;
 import syncleus.dann.data.feature.aima.Features;
-import syncleus.dann.data.DataCase;
+import syncleus.dann.data.vector.FourierVectorDataset;
 import syncleus.dann.data.vector.VectorData;
 import syncleus.dann.data.vector.VectorDataset;
 
@@ -55,6 +56,8 @@ public class POSIXState extends Features {
         for (DataCase<VectorData> c : d.getData()) {
             System.out.println(c);
         }
+        
+        FourierVectorDataset f = new FourierVectorDataset(d);
     }
     
     

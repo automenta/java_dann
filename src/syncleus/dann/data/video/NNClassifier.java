@@ -1,19 +1,11 @@
 package syncleus.dann.data.video;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Properties;
-
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.imgproc.Imgproc;
-
-import android.util.Log;
-
-import syncleus.dann.data.video.ParamsClassifiers;
-import syncleus.dann.data.video.Tld.DetectionStruct;
 import syncleus.dann.data.video.TLDUtil.IsinStruct;
 import syncleus.dann.data.video.TLDUtil.NNConfStruct;
 
@@ -23,19 +15,22 @@ import syncleus.dann.data.video.TLDUtil.NNConfStruct;
  * 
  */
 public class NNClassifier {
-	ParamsClassifiers params;
+	protected ParamsClassifiers params;
 	
-	final List<Mat> pExamples = new ArrayList<Mat>();
-	final List<Mat> nExamples = new ArrayList<Mat>();
+	public final List<Mat> pExamples = new ArrayList<Mat>();
+	public final List<Mat> nExamples = new ArrayList<Mat>();
 	
-	NNClassifier(Properties props) {
+	public NNClassifier(Properties props) {
 		params = new ParamsClassifiers(props);
+	}
+        public NNClassifier(ParamsClassifiers pc) {
+		params = pc;
 	}
 	
 	/**
 	 * OUTPUT (updates) : pExamples, nExamples
 	 */
-	void trainNN(final Mat pExampleIn, final List<Mat> nExamplesIn){
+	public void trainNN(final Mat pExampleIn, final List<Mat> nExamplesIn){
 		NNConfStruct nnConf = nnConf(pExampleIn);
 		if(nnConf.relativeSimilarity <= params.pos_thr_nn){
 			if(nnConf.isin == null || nnConf.isin.idxPosSet < 0){
@@ -60,9 +55,9 @@ public class NNClassifier {
 	 * @param example NN patch
 	 * @return Relative Similarity (rsconf), Conservative Similarity (csconf), In pos. set|Id pos set|In neg. set (isin)
 	 */
-	NNConfStruct nnConf(final Mat example) {
+	public NNConfStruct nnConf(final Mat example) {
 		if(example == null){
-			Log.e(TLDUtil.TAG, "NNClass.nnConf() - Null example received, stop here");
+			System.out.println("NNClass.nnConf() - Null example received, stop here");
 			return new NNConfStruct(null, 0, 0);
 		}
 		if(pExamples.isEmpty()){
@@ -124,7 +119,7 @@ public class NNClassifier {
 	 * Updates  NN threshold in case the negative threshold are above them.
 	 * The Pos threshold has to be > to the negative one.
 	 */
-	void evaluateThreshold(final List<Mat> nExamplesTest){
+	public void evaluateThreshold(final List<Mat> nExamplesTest){
 		for(Mat ex : nExamplesTest){
 			final NNConfStruct nnConf = nnConf(ex);
 			if(nnConf.relativeSimilarity > params.pos_thr_nn){
@@ -139,11 +134,11 @@ public class NNClassifier {
 	
 	
 	
-	float getNNThreshold(){
+	public float getNNThreshold(){
 		return params.pos_thr_nn;
 	}
 	
-	float getNNThresholdValid(){
+	public float getNNThresholdValid(){
 		return params.pos_thr_nn_valid;
 	}
 }
